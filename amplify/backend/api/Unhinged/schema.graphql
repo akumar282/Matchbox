@@ -1,3 +1,10 @@
+type TagsModel @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  tag: String
+  postmodelID: ID! @index(name: "byPostModel")
+  usermodelID: ID! @index(name: "byUserModel")
+}
+
 type BlackListedPosts @model @auth(rules: [{allow: public}]) {
   id: ID!
   post_id: String
@@ -10,15 +17,18 @@ type SavedPosts @model @auth(rules: [{allow: public}]) {
   usermodelID: ID! @index(name: "byUserModel")
 }
 
-type PostMode @model @auth(rules: [{allow: public}]) {
+type PostModel @model @auth(rules: [{allow: public}]) {
   id: ID!
   usermodelID: ID! @index(name: "byUserModel")
+  TagsModels: [TagsModel] @hasMany(indexName: "byPostModel", fields: ["id"])
 }
 
 type UserModel @model @auth(rules: [{allow: public}]) {
   id: ID!
   user_name: String
-  UsersPosts: [PostMode] @hasMany(indexName: "byUserModel", fields: ["id"])
-  UsersSavedPosts: [SavedPosts] @hasMany(indexName: "byUserModel", fields: ["id"])
-  UsersBlackListedPosts: [BlackListedPosts] @hasMany(indexName: "byUserModel", fields: ["id"])
+  UsersPosts: [PostModel] @hasMany(indexName: "byUserModel", fields: ["id"])
+  UsersSavedPosts: [PostModel] @hasMany(indexName: "byUserModel", fields: ["id"])
+  UsersBlackListedPosts: [PostModel] @hasMany(indexName: "byUserModel", fields: ["id"])
+  TagsModelsToUser: [TagsModel] @hasMany(indexName: "byUserModel", fields: ["id"])
 }
+ 

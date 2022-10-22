@@ -4,11 +4,12 @@ import { schema } from './schema';
 
 
 
-const { BlackListedPosts, SavedPosts, PostMode, UserModel } = initSchema(schema);
+const { TagsModel, BlackListedPosts, SavedPosts, PostModel, UserModel } = initSchema(schema);
 
 export {
+  TagsModel,
   BlackListedPosts,
   SavedPosts,
-  PostMode,
+  PostModel,
   UserModel
 };

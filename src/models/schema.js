@@ -1,5 +1,96 @@
 export const schema = {
     "models": {
+        "TagsModel": {
+            "name": "TagsModel",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "tag": {
+                    "name": "tag",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "postmodelID": {
+                    "name": "postmodelID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "usermodelID": {
+                    "name": "usermodelID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "TagsModels",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPostModel",
+                        "fields": [
+                            "postmodelID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUserModel",
+                        "fields": [
+                            "usermodelID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "BlackListedPosts": {
             "name": "BlackListedPosts",
             "fields": {
@@ -150,8 +241,8 @@ export const schema = {
                 }
             ]
         },
-        "PostMode": {
-            "name": "PostMode",
+        "PostModel": {
+            "name": "PostModel",
             "fields": {
                 "id": {
                     "name": "id",
@@ -166,6 +257,20 @@ export const schema = {
                     "type": "ID",
                     "isRequired": true,
                     "attributes": []
+                },
+                "TagsModels": {
+                    "name": "TagsModels",
+                    "isArray": true,
+                    "type": {
+                        "model": "TagsModel"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "postmodelID"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -185,7 +290,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "PostModes",
+            "pluralName": "PostModels",
             "attributes": [
                 {
                     "type": "model",
@@ -239,7 +344,7 @@ export const schema = {
                     "name": "UsersPosts",
                     "isArray": true,
                     "type": {
-                        "model": "PostMode"
+                        "model": "PostModel"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -253,7 +358,7 @@ export const schema = {
                     "name": "UsersSavedPosts",
                     "isArray": true,
                     "type": {
-                        "model": "SavedPosts"
+                        "model": "PostModel"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -267,7 +372,21 @@ export const schema = {
                     "name": "UsersBlackListedPosts",
                     "isArray": true,
                     "type": {
-                        "model": "BlackListedPosts"
+                        "model": "PostModel"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "usermodelID"
+                    }
+                },
+                "TagsModelsToUser": {
+                    "name": "TagsModelsToUser",
+                    "isArray": true,
+                    "type": {
+                        "model": "TagsModel"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -323,5 +442,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.2.0",
-    "version": "341efc38818c84ec1ad0368fec2c0493"
+    "version": "62373675667f232911c1f417619b305a"
 };
