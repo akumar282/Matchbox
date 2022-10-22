@@ -1,12 +1,18 @@
 import * as query from '../graphql'
+
+import { PostModel } from '../models'
+import { TagsModel } from '../models'
+import { UserModel } from '../models'
+
 import { DataStore } from 'aws-amplify'
 
 async function getPostsByTags(...tags) {
-    // const post = DataStore.query(PostModel)
+        
+    let tag = tags[0]
 
-    const post = DataStore.query(PostModel, (c) => c.title("contains", "java"))
+    const post = DataStore.query(PostModel, (c) => c.tag.tag("contains", tag))
 }
 
 async function getBlackListedPosts() {
-    
+
 }
