@@ -1,18 +1,23 @@
 import * as query from '../graphql'
 
-import { PostModel } from '../models'
-import { TagsModel } from '../models'
-import { UserModel } from '../models'
+import { PostModel, TagsModel, UserModel } from '../models'
 
 import { DataStore } from 'aws-amplify'
 
-async function getPostsByTags(...tags) {
+export async function getPostsByTags(...tags) {
+
+    const posts = DataStore.query(PostModel)
+    posts = JSON.parse(posts)
+
+    // filter for every tag
+    for (let tag of tags) 
+    {
+        let filteredPosts = posts.filter(post => post.tag.tag === tag)
+        if (filteredPosts.length < 10) return posts // not enough results; stop removing posts
+        posts = filteredPosts
+    }
+    
+    return posts
         
-    let tag = tags[0]
-
-    const post = DataStore.query(PostModel, (c) => c.tag.tag("contains", tag))
 }
 
-async function getBlackListedPosts() {
-
-}
