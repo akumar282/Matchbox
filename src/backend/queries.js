@@ -5,7 +5,7 @@ import isTag from './tags'
 
 export async function getPostsByTags(...tags) {
 
-    const posts = DataStore.query(PostModel)
+    let posts = DataStore.query(PostModel)
     posts = JSON.parse(posts)
 
     // filter for every tag

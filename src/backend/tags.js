@@ -6,7 +6,7 @@ const DEV_TYPE = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {
 const TYPE_LIST = [{track: "Enviornmental"}, {track: "Connectivity"}, {track: ""}, {track: "Communication"}, {track: "Education"}, {track: "Entertainment"}];
 */
 
-const tags = ["C#", "C", "C++", "Java", "Python", "TypeScript", "HTML/CSS", "Kotlin", "Swift", "Ruby", "SQL",
+export const tags = ["C#", "C", "C++", "Java", "Python", "TypeScript", "HTML/CSS", "Kotlin", "Swift", "Ruby", "SQL",
               "Frontend Development", "Backend Development", "Full-Stack Development", "Desktop Development", "Web Development", "Database Development", "Mobile Development", 
               "Enviornmental", "Connectivity", "Communication", "Education", "Entertainment"]
 

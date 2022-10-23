@@ -3,6 +3,26 @@ import { BlackListedPosts, PostMode, PostModel, SavedPosts, TagsModel, UserModel
 import { DataStore } from 'aws-amplify'
 import isTag from './tags'
 
+export async function createUser(username, ...Tags) {
+    console.log(Tags)
+    let user = await DataStore.save(
+        new UserModel({
+            "user_name": username,
+            "UsersPosts": [],
+            "UsersSavedPosts": [],
+            "UsersBlackListedPosts": [],
+        })
+    );
+    for (let tag of Tags) {
+        const tagModel = await DataStore.save(
+            new TagsModel({
+                "tag" : tag,
+                "userID" : user.userId
+            })
+        )
+        user.TagsModels.push(tagModel)
+    }
+}
 export async function createPost(title, description, userId, Tags = []) {
     const post = await DataStore.save(
         new PostModel({
@@ -15,32 +35,13 @@ export async function createPost(title, description, userId, Tags = []) {
     for (let tag of Tags) {
         await DataStore.save(
             new TagsModel({
-                "tag" : tag,
+                "tag" : tag.tag,
                 "userID" : post.userID
             })
         )
     }
 }
 
-export async function createUser(username, ...Tags) {
-    const user = await DataStore.save(
-        new UserModel({
-            "user_name": username,
-            "UsersPosts": [],
-            "UsersSavedPosts": [],
-            "UsersBlackListedPosts": [],
-            "TagsModels": []
-        })
-    );
-    for (let tag of Tags) {
-        await DataStore.save(
-            new TagsModel({
-                "tag" : tag,
-                "userID" : user.userId
-            })
-        )
-    }
-}
 
 export async function createTag(tag) {
     await DataStore.save(

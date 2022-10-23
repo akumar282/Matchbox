@@ -5,9 +5,17 @@ import * as mutation from './backend/mutations'
 import * as query from './backend/queries'
 import * as tags from './backend/tags'
 
+import { Amplify } from 'aws-amplify'
+import awsconfig from './aws-exports'
+import { UserModel } from './models';
+Amplify.configure(awsconfig)
+
 function App() {
 
-  mutation.createUser(abhi, [tags.tags[0], tags.tags[1], tags.tags[6], tags.tags[4]])
+  mutation.createUser("abhi", [tags.tags[0], tags.tags[1], tags.tags[6], tags.tags[4]])
+  const abhi = query.getUsersByID(UserModel, "48a76094-1dfd-4c26-a427-ed210cf00ca9")
+  console.log("abhi: ")
+  console.log(abhi)
   
   return (
     <div className="App">
