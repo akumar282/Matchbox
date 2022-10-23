@@ -1,14 +1,19 @@
-# Originality
-This project aims to help software developers connect with open source projects that fits their prefrences. All the Developer will have to do is open the web application and put in a user name and choose their prefrences from their they will be brought to the discover page which will find open source. projects that relate to their prefrences.
-# Technology
-The technologies we used for are project are javascript react framework and aws amplpify to store our database of projects.
-# Consideration
-Did the team show awareness and consideration of the impact their project has (intentional or unintentional) and who it affects, individually and socially?
-# Design
-Did the team put thought into the user experience? How well designed is the interface?
-# Completion
-Does the hack work? Did the team achieve everything they wanted?
-# Learning
-Did the team stretch themselves? Did they try to learn something new?
-# Adherence to Theme
-Does the hack correspond well to the theme of the track (Studio, Campus, or Downtown) that it was submitted to?
+## How we built it
+We built the application in two parts and then merged them into one. We started by using AWS Amplify as our backend to hold developer information and open-source information. Additionally, we decided to use React.js for our frontend/UI using MUI which allows us to write code without needing separate CSS files.
+
+## Challenges we ran into
++
+
+Some challenge that we had run into was figuring out styling in react using MUI as it was our first time using this in a project. Setting up the backend took quite a while due to the difficulty of using AWS with so little experience with it.
+
+## Accomplishments that we're proud of
+We are proud of what we have implemented in the time frame with the lack of knowledge and experience we had when walking into this dubhack. We took nothing and made it into something and were able to create a working project with a front and back end that was able to communicate with each other.
+
+## What we learned
+What we have learned is how to use react to develop a front end and use AWS more effectively than before to set up our back end. We learned how to manage time better under stressful deadlines and came out with a working project. A nuanced understanding of time management and how to work effectively in a team.
+
+## What's next for Matchbox
+Next comes scaling our application to add more variety and adding features to improve the user experience for our developers.
+
+Our Figma design:
+https://www.figma.com/file/5GgpPtR2nnpO10SCe0ZyiK/Matchbox?node-id=0%3A1
