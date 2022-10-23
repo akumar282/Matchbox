@@ -1,3 +1,19 @@
+# Matchbox
+Welcome to Matchbox! Where innovation ignites... 
+Our web application connects developers to projects that align with their interests, experience, and values
+
+
+## Documentation
+Frontend
+* Javascript (React)
+* React router-dom
+* MUI
+
+Backend
+* AWS amplify
+* GraphQL
+* DyanamoDB
+
 ## Inspiration
 Our team was inspired by our university’s CS community. Being surrounded by talented developers, and as developers ourselves, we wanted to have a resource that would allow us to find projects we were passionate about.
 
