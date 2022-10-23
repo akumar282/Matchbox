@@ -27,6 +27,9 @@ export async function createUser(username, tags) {
 
 export async function createPost(username, title, description, projLink, imageLink, tags) {
 
+    const exist = await query.getPostsByLink(projLink)
+    if(exist.length > 0) return // dont add posts with the same link twice 
+
     const user = await query.getUsersByUsername(username)
     if (user.length === 0) return
     console.log(user[0].id)

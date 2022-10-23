@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
+import * as mut from '../backend/mutations'
+
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
@@ -59,8 +61,14 @@ function CreateProfilePg(){
     };
 
     const handleSubmit = (event) => {
+
         console.log("button submitted");
-        console.log(selectedLang);        
+        console.log(selectedLang); // [] of all tags
+        
+        let username = "username" // #TODO add username field 
+
+        mut.createUser(username, selectedLang)
+
     }
 
     return(

@@ -27,6 +27,10 @@ export async function getPostsByTags(...tags) {
     return posts
 }
 
+export async function getPostsByLink(proj_link) {
+    return DataStore.query(PostModel, (c) => c.project_link("eq", proj_link))
+}
+
 export async function getPostsByID(id) {
     return DataStore.query(PostModel, c => c.id)
 }

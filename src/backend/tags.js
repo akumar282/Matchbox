@@ -8,7 +8,8 @@ const TYPE_LIST = [{track: "Enviornmental"}, {track: "Connectivity"}, {track: ""
 
 export const tags = ["C#", "C", "C++", "Java", "Python", "TypeScript", "HTML/CSS", "Kotlin", "Swift", "Ruby", "SQL",
               "Frontend Development", "Backend Development", "Full-Stack Development", "Desktop Development", "Web Development", "Database Development", "Mobile Development", 
-              "Enviornmental", "Connectivity", "Communication", "Education", "Entertainment"]
+              "Enviornmental", "Connectivity", "Communication", "Education", "Entertainment",
+              "100 people >", "50 people >", "25 people >", "10 people>", "< 5 people"]
 
 export default function isTag(tag) {
     return tags.includes(tag)

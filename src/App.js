@@ -22,18 +22,7 @@ import { UserModel } from './models';
 import { queries } from '@testing-library/dom';
 Amplify.configure(awsconfig)
 
-async function addPosts() {
-  mutation.createPost("abhi", "Cool Project", "It's like really cool", 
-                      "https://github.com/author/repo.git/", 
-                      "image.com/image.png", ["C++", "Communication", "Desktop Development", "BAD TAG"])
-}
-
 function App() {
-
-  addPosts()
-
-  const tagsInput = [tags.tags[0], tags.tags[1], tags.tags[6], tags.tags[4]]
-  mutation.createUser("abhi", tagsInput)
   
   return (
     <BrowserRouter>
