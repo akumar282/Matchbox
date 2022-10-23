@@ -1,5 +1,5 @@
-import { React, useState, useSyncExternalStore } from 'react';
-import Box, { BoxProps } from '@mui/material/Box';
+import { React } from 'react';
+import Box from '@mui/material/Box';
 import projImg from '../img/farquad.png';
 import logImg from '../img/Logo.png';
 
@@ -14,8 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import * as query from '../backend/queries'
-import { username, tags } from './CreateProfilePg'
-import { nextTick } from 'q';
+import { tags } from './CreateProfilePg'
 
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 

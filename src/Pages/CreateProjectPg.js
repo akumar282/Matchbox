@@ -1,8 +1,7 @@
-import { React, useState, useSyncExternalStore } from 'react';
-import Box, { BoxProps } from '@mui/material/Box';
+import { React, useState } from 'react';
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import logImg from '../img/Logo.png';
-import { Container } from '@mui/system';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';

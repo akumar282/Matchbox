@@ -1,13 +1,13 @@
-import { React, useState, useSyncExternalStore } from 'react';
+import { React, useState } from 'react';
 import logImg from '../img/Logo.png';
 // mui IMPORTS
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Box, { BoxProps } from '@mui/material/Box';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { MuiThemeProvider, createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import AppBar from '@mui/material/AppBar';
@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 import * as mut from '../backend/mutations'
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export let username
 export let tags
 
