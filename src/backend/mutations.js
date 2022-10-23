@@ -6,25 +6,22 @@ import * as queries from './queries'
 export async function createUser(username, ...Tags) {
 
     const exist = await queries.getUsersByUsername(username)
+    console.log(exist)
+    // if(Object.keys(exist.user_name).length) return
 
-    if (JSON.parse(exist).Length > 0) return
-    let user = await DataStore.save(
-        new UserModel({
-            "user_name": username,
-            "UsersPosts": [],
-            "UsersSavedPosts": [],
-            "UsersBlackListedPosts": [],
-        })
-    );
+    let user = new UserModel({
+        "user_name": username,
+    })
     for (let tag of Tags) {
         const tagModel = await DataStore.save(
-            new TagsModel({
-                "tag" : tag,
-                "userID" : user.userId
-            })
+        new TagsModel({
+            "tag" : tag,
+            "userID" : user.userId
+        })
         )
         user.TagsModels.push(tagModel)
     }
+    await DataStore.save(user)
 }
 export async function createPost(title, description, userId, Tags = []) {
     const post = await DataStore.save(
