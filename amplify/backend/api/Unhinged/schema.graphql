@@ -1,0 +1,36 @@
+type TagsModel @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  tag: String
+  usermodelID: ID! @index(name: "byUserModel")
+}
+
+type BlackListedPosts @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  postID: ID
+  usermodelID: ID! @index(name: "byUserModel")
+}
+
+type SavedPosts @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  postID: ID
+  usermodelID: ID! @index(name: "byUserModel")
+}
+
+type PostModel @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  description: String
+  project_link: String
+  image_link: String
+  usermodelID: ID! @index(name: "byUserModel")
+}
+
+type UserModel @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  user_name: String
+  TagsModels: [TagsModel] @hasMany(indexName: "byUserModel", fields: ["id"])
+  SavedPosts: [SavedPosts] @hasMany(indexName: "byUserModel", fields: ["id"])
+  BlackListedPosts: [BlackListedPosts] @hasMany(indexName: "byUserModel", fields: ["id"])
+  PostModels: [PostModel] @hasMany(indexName: "byUserModel", fields: ["id"])
+}
+ 
