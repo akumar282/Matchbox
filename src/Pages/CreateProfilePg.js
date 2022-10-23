@@ -15,11 +15,11 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 
 const INTEREST_LIST = [{inte: "Enviornmental"}, {inte: "Connectivity"}, {inte: "Communication"}, {inte: "Education"}, {inte: "Entertainment"}];
-const SIZE_LIST = [{siz: "Large"}, {siz: "Medium"}, {siz: "Small"}];
-const KEYWORD_PARAMS = [];
+const SIZE_LIST = [{siz: "100 people >"}, {siz: "50 people >"}, {siz: "25 people >"}, {siz: "10 people>"}, {siz: "< 5 people"}];
+//const KEYWORD_PARAMS = [];
 function CreateProfilePg(){
-    // management for chips
-    const [chipVariant, setChipVariant] = useState("");
+    // unused management for chips
+    // const [chipVariant, setChipVariant] = useState("");
     
     // management for lang list
     const [selectedLang, setSelectedLang] = useState([]);   // state management for dropdown "Select Plan" filter
@@ -56,6 +56,7 @@ function CreateProfilePg(){
 
         }
         console.log(selectedLang);
+        
     };
 
     const handleSubmit = (event) => {
@@ -68,6 +69,9 @@ function CreateProfilePg(){
             <h1>
                 Matchbox
             </h1>
+            <h1>
+                Create Profile
+            </h1>
             <Box
             sx={{
             display: 'flex',
@@ -76,60 +80,145 @@ function CreateProfilePg(){
             m: 1,
             bgcolor: 'background.paper',
             borderRadius: 1,
+            justifyContent: 'center',
             }}
             >
 
+            <Stack
+            sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                border: 1,
+                MaxHeight: 200,
+             }}
+             
+            >
+                <h2 align="center">Language</h2>
                 <FormGroup>
+                <Box
+                    sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    m: 1,
+                    bgcolor: 'background.paper',
+                    maxWidth: 300,
+                    borderRadius: 1,
+                    }}
+                >
                     {LANG_LIST.map((e)=> 
+                    
                         <FormControlLabel  
                             key = {e.lang}
                             control = {<Checkbox
-                            
+                            sx=
+                            {{
+                            p:2
+                            }}
                             id = {e.lang}
                             onChange = {handleCheckboxChange}
                             />}
                             label={e.lang} 
-                            
                         />
                         )}
+                        </Box>
                 </FormGroup>
-                <FormGroup>
+            </Stack>
+            <Stack     
+            sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                border: 1,
+                MaxHeight: 200,
+            }}
+            >
+            <h2 align = "center">Development Type</h2>
+            <FormGroup>
+            <Box
+            sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            p: 1,
+            m: 1,
+            bgcolor: 'background.paper',
+            maxWidth: 500,
+            borderRadius: 1,
+            }}
+      >
                     {DEV_LIST.map((e)=> 
                             <FormControlLabel   
                             key = {e.dev}   
-
                             control = {<Checkbox
+                            sx={{m: 2}}
                             id = {e.dev}
                             onChange = {handleCheckboxChange}
                             />} 
                             
                             label={e.dev}   
                             />
-                        
                             )}
-                    
+                </Box> 
                 </FormGroup>
-    
+                </Stack>
+
+                <Stack 
+                sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                border: 1,
+            }}>
+                <h2 align = 'center'>Interest Type</h2>
                 <FormGroup>
+                <Box
+            sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            p: 1,
+            m: 1,
+            bgcolor: 'background.paper',
+            maxWidth: 190,
+            borderRadius: 1,
+            }}>
                     {INTEREST_LIST.map((e)=>{
                         return (
                         <FormControlLabel  
                             key = {e.inte}                 
                             control = {<Checkbox
-                             id = {e.inte}
+                            sx={{m: 2}}
+                            id = {e.inte}
                             onChange = {handleCheckboxChange}
                         />} 
                         label={e.inte}
                        
                         />
                         )})}
-               </FormGroup>
+                </Box>
+                </FormGroup>
+                </Stack>
+                <Stack 
+                sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                border: 1,
+                
+            }}>
+               <h2 align="center"> Size of Project</h2>
                <FormGroup>
+               <Box
+            sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            p: 1,
+            m: 1,
+            bgcolor: 'background.paper',
+            maxWidth: 200,
+            borderRadius: 1,
+            justifiyContent: 'space-evenly',
+            }}>
                     {SIZE_LIST.map((e)=> 
                         <FormControlLabel  
                             key = {e.siz}
                             control = {<Checkbox
-                            
+                            sx={{m: 2}}
                             id = {e.siz}
                             onChange = {handleCheckboxChange}
                             />}
@@ -137,8 +226,9 @@ function CreateProfilePg(){
                             
                         />
                         )}
+                        </Box>
                 </FormGroup>
-               
+                </Stack>
                {/* /* <Stack direction="row" spacing={1}>
                     <Chip key = "chip1" label="Clickable" onClick={handleChipChange} />
                     <Chip key = "chip2" label="Clickable" variant={chipVariant} onClick={handleChipChange} />
