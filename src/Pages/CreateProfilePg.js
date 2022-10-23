@@ -18,7 +18,8 @@ import { Link } from 'react-router-dom';
 import * as mut from '../backend/mutations'
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
+export let username
+export let tags
 
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 
@@ -84,7 +85,8 @@ function CreateProfilePg(){
         console.log("button submitted");
         console.log(selectedLang); // [] of all tags
         
-        let username = "username" // #TODO add username field 
+        username = textValue
+        tags = selectedLang
 
         mut.createUser(username, selectedLang)
 

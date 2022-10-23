@@ -13,6 +13,9 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import * as query from '../backend/queries'
+import { username, tags } from 'CreateProjectPg'
+import { nextTick } from 'q';
 
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 
@@ -20,7 +23,21 @@ const INTEREST_LIST = [{inte: "Enviornmental"}, {inte: "Connectivity"}, {inte: "
 const SIZE_LIST = [{siz: "100 people >"}, {siz: "50 people >"}, {siz: "25 people >"}, {siz: "10 people>"}, {siz: "< 5 people"}];
 const DES_TEMP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ex ante, auctor sit amet placerat a, faucibus nec ligula. Donec tincidunt ac ante in dignissim. Suspendisse vitae diam vitae metus tempus imperdiet. Maecenas nec rhoncus felis. Nullam finibus est ut viverra tincidunt. Nulla eu libero vel dolor aliquam dictum ut id urna. Maecenas posuere vestibulum quam sed cursus. Suspendisse molestie convallis dictum. Vivamus maximus molestie nunc, a fringilla augue pharetra a. In nec augue in justo ullamcorper placerat. Integer sagittis dui eget libero laoreet vehicula."
 function DiscoverProjectPg(){
+
+    const projects = query.getPostsByTags(tags)
+
     const handleSubmit = (event) => {
+
+        const next = projects.shift()
+        projects.push(next)
+
+        /*
+          populate fields from next
+
+          name = next.name etc..
+
+        */
+
         console.log("button submitted");
         console.log("fdhakfjdakl;fjd");        
     }

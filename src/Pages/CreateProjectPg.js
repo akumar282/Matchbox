@@ -12,6 +12,9 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import * as mut from '../backend/mutations'
+import { username } from 'CreateProfilePg'
+
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 
 const INTEREST_LIST = [{inte: "Enviornmental"}, {inte: "Connectivity"}, {inte: "Communication"}, {inte: "Education"}, {inte: "Entertainment"}];
@@ -19,8 +22,10 @@ const SIZE_LIST = [{siz: "100 people >"}, {siz: "50 people >"}, {siz: "25 people
 
 function CreateProjectPg(){
 
-     const handleSubmit= (e) => {
-       
+    const handleSubmit= (e) => {
+        
+        mut.createPost(username, name, desc, gith, image, projectLang)
+        
     }
     const [projectLang, setProjectLang] = useState([]);
     const [name, setName] = useState("");
