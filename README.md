@@ -1,7 +1,7 @@
 # Originality
 This project aims to help software developers connect with open source projects that fits their prefrences. All the Developer will have to do is open the web application and put in a user name and choose their prefrences from their they will be brought to the discover page which will find open source. projects that relate to their prefrences.
 # Technology
-How technically impressive was the hack? Was the technical problem the team tackled difficult? Did it use a particularly clever technique or did it use many different components? Did the technology involved make you go "Wow"?
+The technologies we used for are project are javascript react framework and aws amplpify to store our database of projects.
 # Consideration
 Did the team show awareness and consideration of the impact their project has (intentional or unintentional) and who it affects, individually and socially?
 # Design
