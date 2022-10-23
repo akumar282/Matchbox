@@ -1,5 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
+
+
+import React from "react";
+import { BrowserRouter, Routes, Outlet } from "react-router-dom";
+import CreateProfilePg from './Pages/CreateProfilePg';
+import CreateProjectPg from './Pages/CreateProjectPg';
+import DiscoverProjectPg from './Pages/DiscoverProjectPg';
+
+import { Tabs, Tab, AppBar } from "@material-ui/core";
+import { Route, Switch, Link } from "react-router-dom";
+
+import NavBar from './components/NavBar';
 
 import * as mutation from './backend/mutations'
 import * as query from './backend/queries'
@@ -15,9 +26,7 @@ async function addPosts() {
   mutation.createPost("abhi", "Cool Project", "It's like really cool", 
                       "https://github.com/author/repo.git/", 
                       "image.com/image.png", ["C++", "Communication", "Desktop Development", "BAD TAG"])
-
 }
-
 
 function App() {
 
@@ -27,22 +36,16 @@ function App() {
   mutation.createUser("abhi", tagsInput)
   
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <Routes>
+    {/* <Route element={<PageLayout> <Outlet /> </PageLayout>}> */}
+      <Route path="/" element={<CreateProfilePg/>}/>
+      <Route path="/create-project" element={<CreateProjectPg/>}/>
+      <Route path="/discover" element={<DiscoverProjectPg/>}/>
+      <Route path="/a" element={<NavBar/>}/>
+      
+    </Routes>
+    </BrowserRouter>
   );
 }
 
