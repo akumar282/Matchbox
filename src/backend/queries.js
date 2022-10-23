@@ -7,7 +7,7 @@ export async function getUsersByID(id) {
 }
 
 export async function getUsersByUsername(username) {
-    return DataStore.query(UserModel, c => c.user_name("equals", username))
+    return DataStore.query(UserModel, c => c.user_name("eq", username))
 } 
 
 export async function getPostsByTags(...tags) {

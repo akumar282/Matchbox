@@ -1,47 +1,53 @@
 
 import { BlackListedPosts, PostModel, SavedPosts, TagsModel, UserModel } from '../models'
 import { DataStore } from 'aws-amplify'
-import * as queries from './queries'
+import * as query from './queries'
 
-export async function createUser(username, ...Tags) {
+export async function createUser(username, tags) {
 
-    const exist = await queries.getUsersByUsername(username)
+    const exist = await query.getUsersByUsername(username)
     console.log(exist)
-    // if(Object.keys(exist.user_name).length) return
+    if (exist.length > 0) return
+    console.log("Creating Us")
 
-    let user = new UserModel({
-        "user_name": username
-    })
-    for (let tag of Tags) {
-        const tagModel = await DataStore.save(
-        new TagsModel({
-            "tag" : tag,
-            "userID" : user.userId
-        })
-        )
-        user.TagsModels.push(tagModel)
-    }
-    await DataStore.save(user)
-}
-export async function createPost(title, description, userId, Tags = []) {
-    const post = await DataStore.save(
-        new PostModel({
-            "usermodelID": userId,
-            "TagsModel": Tags,
-            "title": title,
-            "description": description,
+    const user = await DataStore.save(
+        new UserModel ({
+            "user_name": username
         })
     )
-    for (let tag of Tags) {
+    for (let tag of tags) {
         await DataStore.save(
             new TagsModel({
-                "tag" : tag.tag,
-                "userID" : post.userID
+            "tag" : tag,
+            "usermodelID" : user.id
             })
         )
     }
 }
 
+export async function createPost(username, title, description, projLink, imageLink, tags) {
+
+    const user = await query.getUsersByUsername(username)
+    if (user.length === 0) return
+    console.log(user[0].id)
+    const post = await DataStore.save(
+        new PostModel({
+            "usermodelID": user[0].id,
+            "title": title,
+            "description": description,
+            "project_link": projLink,
+            "image_link": imageLink
+        })
+    )
+    for (let tag of tags) {
+        await DataStore.save(
+            new TagsModel({
+                "tag" : tag,
+                "usermodelID" : post.id
+            })
+        )
+    }
+}
 
 export async function createTag(tag) {
     await DataStore.save(
@@ -51,41 +57,29 @@ export async function createTag(tag) {
     )
 }
 
-export async function createSavedPost(userID, postID) {
+export async function createSavedPost(username, postID) {
     
-    const user = DataStore.query(userID)
-    let savedPosts = user.SavedPosts
-
-    const newPost = await DataStore.save(
-        new SavedPosts({
-            postID : postID
-        })
-    )       
-    savedPosts.push(newPost)
+    const user = query.getUsersByUsername(username)
+    if(user.length === 0) return
 
     await DataStore.save(
-        UserModel.copyOf(user, update => {
-          update.SavedPosts = savedPosts
+        new SavedPosts({
+            "postID" : postID,
+            "usermodelID" : user[0].id
         })
-      );
+    )       
 }
 
-export async function createBlacklistedPost (userID, postID) {
+export async function createBlackListedPost(username, postID) {
     
-    const user = DataStore.query(userID)
-    let blacklistPost = user.BlackListedPosts
-
-    const newPost = await DataStore.save(
-        new BlackListedPosts({
-            postID : postID
-        })
-    )       
-    blacklistPost.push(newPost)
+    const user = query.getUsersByUsername(username)
+    if(user.length === 0) return
 
     await DataStore.save(
-        UserModel.copyOf(user, update => {
-          update.Blak = blacklistPost
+        new BlackListedPosts({
+            "postID" : postID,
+            "usermodelID" : user[0].id
         })
-      );
+    )       
 }
 

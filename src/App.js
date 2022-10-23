@@ -11,20 +11,20 @@ import { UserModel } from './models';
 import { queries } from '@testing-library/dom';
 Amplify.configure(awsconfig)
 
+async function addPosts() {
+  mutation.createPost("abhi", "Cool Project", "It's like really cool", 
+                      "https://github.com/author/repo.git/", 
+                      "image.com/image.png", ["C++", "Communication", "Desktop Development", "BAD TAG"])
 
-async function doQuery() {
-  const abhi = await query.getUsersByUsername("abhi")
-  return abhi
 }
 
 
 function App() {
 
-  mutation.createUser("abhi", [tags.tags[0], tags.tags[1], tags.tags[6], tags.tags[4]])
-  const abhi = doQuery()
-  // const abhi = query.getUsersByID(UserModel, "48a76094-1dfd-4c26-a427-ed210cf00ca9")
-  // console.log("abhi: ")
-  // console.log(abhi)
+  addPosts()
+
+  const tagsInput = [tags.tags[0], tags.tags[1], tags.tags[6], tags.tags[4]]
+  mutation.createUser("abhi", tagsInput)
   
   return (
     <div className="App">
