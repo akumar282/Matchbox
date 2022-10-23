@@ -13,6 +13,7 @@ export async function getUsersByUsername(username) {
 export async function getPostsByTags(...tags) {
 
     let posts = await DataStore.query(PostModel)
+    console.log(posts)
     if (tags.length === 0) return posts
     if (posts.length === 0) return
     console.log(posts)
