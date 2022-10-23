@@ -19,8 +19,6 @@ const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {
 const INTEREST_LIST = [{inte: "Enviornmental"}, {inte: "Connectivity"}, {inte: "Communication"}, {inte: "Education"}, {inte: "Entertainment"}];
 const SIZE_LIST = [{siz: "100 people >"}, {siz: "50 people >"}, {siz: "25 people >"}, {siz: "10 people>"}, {siz: "< 5 people"}];
 const DES_TEMP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ex ante, auctor sit amet placerat a, faucibus nec ligula. Donec tincidunt ac ante in dignissim. Suspendisse vitae diam vitae metus tempus imperdiet. Maecenas nec rhoncus felis. Nullam finibus est ut viverra tincidunt. Nulla eu libero vel dolor aliquam dictum ut id urna. Maecenas posuere vestibulum quam sed cursus. Suspendisse molestie convallis dictum. Vivamus maximus molestie nunc, a fringilla augue pharetra a. In nec augue in justo ullamcorper placerat. Integer sagittis dui eget libero laoreet vehicula."
-
-const pages = ['SavedProjects'];
 function DiscoverProjectPg(){
     const handleSubmit = (event) => {
         console.log("button submitted");
@@ -71,7 +69,8 @@ function DiscoverProjectPg(){
                     </Box>
                     </Typography>
                 <Stack direction = 'row' spacing = {2}>
-                    <Button component = {Link} to = "../create-proflie" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'cursive;',fontWeight: 700, mr: 2, mt:1, display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Saved Projects</Button>  
+                    <Button component = {Link} to = "../saved-project" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'cursive;',fontWeight: 700, mr: 2, mt:1, display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Saved Projects</Button> 
+                    <Button component = {Link} to = "../create-project" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'cursive;',fontWeight: 700, mr: 2, mt:1, display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Create Projects</Button>   
             </Stack> 
                 </Toolbar>
             </AppBar>

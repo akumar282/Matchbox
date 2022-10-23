@@ -7,7 +7,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Box, { BoxProps } from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { createTheme } from '@mui/material/styles';
+import { MuiThemeProvider, createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import AppBar from '@mui/material/AppBar';
@@ -22,10 +22,13 @@ const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lan
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 
 const INTEREST_LIST = [{inte: "Enviornmental"}, {inte: "Connectivity"}, {inte: "Communication"}, {inte: "Education"}, {inte: "Entertainment"}];
 const SIZE_LIST = [{siz: "100 people >"}, {siz: "50 people >"}, {siz: "25 people >"}, {siz: "10 people>"}, {siz: "< 5 people"}];
-let USER ="";
 //const KEYWORD_PARAMS = [];
 
-
+const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
 
 function CreateProfilePg(){
     
@@ -34,7 +37,7 @@ function CreateProfilePg(){
     
     // management for lang list
     const [selectedLang, setSelectedLang] = useState([]);   // state management for dropdown "Select Plan" filter
-   
+    const [textValue, setTextValue] = useState("");
     // unused handler for chips TODO convert to chips later
     /*
     const handleChipChange = (event) => {
@@ -48,7 +51,11 @@ function CreateProfilePg(){
             setChipVariant("");
         }        
     }*/
-
+    const handleTextFieldChange = (e) => {
+        console.log("pass");
+       console.log(`Typed => ${e.target.value}`)
+       setTextValue(e.target.value)
+    };
     // handler for checkbox
     const handleCheckboxChange = (event) => {
         console.log("pass");
@@ -76,7 +83,10 @@ function CreateProfilePg(){
     }
 
     return(
+        
         <div sx={{ color: 'text.secondary' }}>
+        <ThemeProvider theme={darkTheme}>
+    </ThemeProvider>
             <AppBar>
                 <Toolbar>
                     <Typography
@@ -97,7 +107,7 @@ function CreateProfilePg(){
                     </Typography>
                 </Toolbar>
             </AppBar>
-        <Container xp = {{ mr: 2, display: 'flex',flexDirection: 'row', MaxHeight: 50}}>
+        <Container xp = {{mr: 2, display: 'flex',flexDirection: 'row', flexWrap: 'wrap', MaxHeight: 50}}>
             <h1>
                 Matchbox
                 
@@ -105,10 +115,11 @@ function CreateProfilePg(){
             <h1>
                 Create Profile
             </h1>
-            <h2>  Choose a Username
-            <TextField sx = {{ml:2}} id="outlined-basic" label="Username" variant="outlined" />
-           </h2>
-                
+            <Typography   variant="h6" noWrap component="a" xp = {{ fontWeight: 'bold',m:10, mb:0,display: { xs: 'none', md: 'flex' } }}>
+                Choose a Username 
+            </Typography>
+            
+            <TextField sx = {{ml:2}} id="outlined-basic" label="Username" variant="outlined" value = {textValue} onChange = {handleTextFieldChange} />
             </Container>
             <Box
             sx={{
@@ -284,7 +295,7 @@ function CreateProfilePg(){
                 justifyContent: 'center'
                 }}
                 >
-                <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+                <Button component = {Link} to = "../saved-projects" variant="contained" onClick={handleSubmit}>Submit</Button>
 
 
             </Box>
