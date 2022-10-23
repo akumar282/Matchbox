@@ -10,7 +10,7 @@ export async function createUser(username, ...Tags) {
     // if(Object.keys(exist.user_name).length) return
 
     let user = new UserModel({
-        "user_name": username,
+        "user_name": username
     })
     for (let tag of Tags) {
         const tagModel = await DataStore.save(
