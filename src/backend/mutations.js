@@ -83,7 +83,7 @@ export async function createBlacklistedPost (userID, postID) {
 
     await DataStore.save(
         UserModel.copyOf(user, update => {
-          update.BlackListedPosts = blacklistPost
+          update.Blak = blacklistPost
         })
       );
 }
