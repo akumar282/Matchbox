@@ -32,8 +32,7 @@ function App() {
       <Route path="/create-Profile" element={<CreateProfilePg/>}/>
       <Route path="/create-project" element={<CreateProjectPg/>}/>
       <Route path="/discover" element={<DiscoverProjectPg/>}/>
-      <Route path="/saved-project" element={<SavedProjects/>}/>
-      <Route path="/saved-project" element={<SavedProjects/>}/>
+      {/* <Route path="/saved-project" element={<SavedProjects/>}/> */}
       <Route path="/success" element={<SuccessPg/>}/>
       
     </Routes>
