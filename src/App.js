@@ -23,24 +23,3 @@ function App() {
 }
 
 export default App;
-
-
-
-post = {
-  username: String,
-  desc : String,
-  image : "imageURI",
-  tags : {
-    tag1 : {
-      name: String, 
-      isSelected : boolean
-    }
-  }
-}
-
-tag = {
-  name: String, 
-  isSelected: boolean
-}
-
-const arr = []
