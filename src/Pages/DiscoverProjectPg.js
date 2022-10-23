@@ -11,20 +11,15 @@ import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';
 
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 
 const INTEREST_LIST = [{inte: "Enviornmental"}, {inte: "Connectivity"}, {inte: "Communication"}, {inte: "Education"}, {inte: "Entertainment"}];
 const SIZE_LIST = [{siz: "100 people >"}, {siz: "50 people >"}, {siz: "25 people >"}, {siz: "10 people>"}, {siz: "< 5 people"}];
 const DES_TEMP = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ex ante, auctor sit amet placerat a, faucibus nec ligula. Donec tincidunt ac ante in dignissim. Suspendisse vitae diam vitae metus tempus imperdiet. Maecenas nec rhoncus felis. Nullam finibus est ut viverra tincidunt. Nulla eu libero vel dolor aliquam dictum ut id urna. Maecenas posuere vestibulum quam sed cursus. Suspendisse molestie convallis dictum. Vivamus maximus molestie nunc, a fringilla augue pharetra a. In nec augue in justo ullamcorper placerat. Integer sagittis dui eget libero laoreet vehicula."
+
 const pages = ['SavedProjects'];
 function DiscoverProjectPg(){
     const handleSubmit = (event) => {
@@ -75,11 +70,9 @@ function DiscoverProjectPg(){
                     Matchbox
                     </Box>
                     </Typography>
-                    <Stack sx = {{mt: 1}}direction = 'row' spacing={2}>
-                    <button onClick={handleSubmit}>
-                    Create Project
-                    </button>
-                    </Stack>
+                <Stack direction = 'row' spacing = {2}>
+                    <Button component = {Link} to = "../create-proflie" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'cursive;',fontWeight: 700, mr: 2, mt:1, display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Saved Projects</Button>  
+            </Stack> 
                 </Toolbar>
             </AppBar>
             
@@ -90,7 +83,7 @@ function DiscoverProjectPg(){
                 display: 'flex',
                 flexWrap: 'wrap',
                 MaxWidth: 1200, 
-                MaxHeight: 700,
+                MaxHeight: 800,
                 }}>
                 {/* add a containter for the image and description */}
                 <img src={projImg} width={250} height={250} alt="passedImg"/>

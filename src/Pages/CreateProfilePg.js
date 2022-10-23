@@ -1,22 +1,34 @@
 import { React, useState, useSyncExternalStore } from 'react';
-
+import logImg from '../img/Logo.png';
 // mui IMPORTS
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Box, { BoxProps } from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import { createTheme } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import { Container } from '@mui/system';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 
 const INTEREST_LIST = [{inte: "Enviornmental"}, {inte: "Connectivity"}, {inte: "Communication"}, {inte: "Education"}, {inte: "Entertainment"}];
 const SIZE_LIST = [{siz: "100 people >"}, {siz: "50 people >"}, {siz: "25 people >"}, {siz: "10 people>"}, {siz: "< 5 people"}];
+let USER ="";
 //const KEYWORD_PARAMS = [];
+
+
+
 function CreateProfilePg(){
+    
     // unused management for chips
     // const [chipVariant, setChipVariant] = useState("");
     
@@ -64,13 +76,40 @@ function CreateProfilePg(){
     }
 
     return(
-        <div>
+        <div sx={{ color: 'text.secondary' }}>
+            <AppBar>
+                <Toolbar>
+                    <Typography
+                    variant="h6"
+                    noWrap
+                    component="a"
+                    href="/"
+                    sx={{
+                    display: { xs: 'none', md: 'flex' },
+                    fontFamily: 'cursive;',
+                    fontWeight: 700,
+                    mr: 2,
+                    letterSpacing: '.1rem',
+                    color: 'inherit',
+                    textDecoration: 'none',
+                    }}>
+                        <img src={logImg} width={80} height={40} alt="passedImg"/>
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+        <Container xp = {{ mr: 2, display: 'flex',flexDirection: 'row', MaxHeight: 50}}>
             <h1>
                 Matchbox
+                
             </h1>
             <h1>
                 Create Profile
             </h1>
+            <h2>  Choose a Username
+            <TextField sx = {{ml:2}} id="outlined-basic" label="Username" variant="outlined" />
+           </h2>
+                
+            </Container>
             <Box
             sx={{
             display: 'flex',
@@ -92,7 +131,7 @@ function CreateProfilePg(){
              }}
              
             >
-                <h2 align="center">Language</h2>
+                <h2 align="center" >Language</h2>
                 <FormGroup>
                 <Box
                     sx={{
@@ -245,7 +284,7 @@ function CreateProfilePg(){
                 justifyContent: 'center'
                 }}
                 >
-                <Button variant="contained" onClick={handleSubmit}>Contained</Button>
+                <Button variant="contained" onClick={handleSubmit}>Submit</Button>
 
 
             </Box>

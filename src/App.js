@@ -17,7 +17,7 @@ function App() {
     <BrowserRouter>
     <Routes>
     {/* <Route element={<PageLayout> <Outlet /> </PageLayout>}> */}
-      <Route path="/" element={<CreateProfilePg/>}/>
+      <Route path="/create-proflie" element={<CreateProfilePg/>}/>
       <Route path="/create-project" element={<CreateProjectPg/>}/>
       <Route path="/discover" element={<DiscoverProjectPg/>}/>
       <Route path="/a" element={<NavBar/>}/>
