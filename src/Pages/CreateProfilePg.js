@@ -305,7 +305,7 @@ function CreateProfilePg(){
                 justifyContent: 'center'
                 }}
                 >
-                <Button component = {Link} to = "../saved-projects" variant="contained" onClick={handleSubmit}>Submit</Button>
+                <Button component = {Link} to = "../saved-project" variant="contained" onClick={handleSubmit}>Submit</Button>
 
 
             </Box>

@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import * as mut from '../backend/mutations'
-import { username } from 'CreateProfilePg'
+import { username } from './CreateProfilePg'
 
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 
@@ -354,7 +354,7 @@ function CreateProjectPg(){
                 justifyContent: 'center'
                 }}
                 >
-            <Button component = {Link} to = "../saved-projects" variant="contained" onClick={handleSubmit}>Submit</Button>
+            <Button component = {Link} to = "../saved-project" variant="contained" onClick={handleSubmit}>Submit</Button>
             </Box>
         </div>
     );
