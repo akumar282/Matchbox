@@ -12,14 +12,17 @@ export async function getUsersByUsername(username) {
 
 export async function getPostsByTags(...tags) {
 
-    let posts = DataStore.query(PostModel)
-    posts = JSON.parse(posts)
+    let posts = await DataStore.query(PostModel)
+    console.log(posts)
+    if (tags.length === 0) return posts
+    if (posts.length === 0) return
+    console.log(posts)
 
     // filter for every tag
     for (let tag of tags) 
     {
         if (!isTag(tag)) continue; // not a valid tag in database   
-        let filteredPosts = posts.filter(post => post.TagsModel.contains(tag)   )
+        let filteredPosts = posts.filter(post => post.TagsModel.contains(tag))
         if (filteredPosts.length < 10) return posts // not enough results; stop removing posts
         posts = filteredPosts
     }
