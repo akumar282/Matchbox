@@ -23,7 +23,7 @@ export async function createPost(title, description, userId, Tags = []) {
 }
 
 export async function createUser(username, ...Tags) {
-    await DataStore.save(
+    const user = await DataStore.save(
         new UserModel({
             "user_name": username,
             "UsersPosts": [],
@@ -36,7 +36,7 @@ export async function createUser(username, ...Tags) {
         await DataStore.save(
             new TagsModel({
                 "tag" : tag,
-                "userID" : userId
+                "userID" : user.userId
             })
         )
     }

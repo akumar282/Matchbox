@@ -3,10 +3,6 @@ import { BlackListedPosts, PostMode, PostModel, SavedPosts, TagsModel, UserModel
 import { DataStore } from 'aws-amplify'
 import isTag from './tags'
 
-async function getBlackListedPosts() {
-
-}
-
 export async function getPostsByTags(...tags) {
 
     const posts = DataStore.query(PostModel)
