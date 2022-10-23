@@ -11,7 +11,6 @@ import Stack from '@mui/material/Stack';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 
 const INTEREST_LIST = [{inte: "Enviornmental"}, {inte: "Connectivity"}, {inte: "Communication"}, {inte: "Education"}, {inte: "Entertainment"}];
@@ -131,7 +130,7 @@ function CreateProfilePg(){
                 MaxHeight: 200,
             }}
             >
-            <h2 align = "center">Development Type</h2>
+            <h2 sx={{ borderBottom: 1 }}align = "center">Development Type</h2>
             <FormGroup>
             <Box
             sx={{
@@ -165,8 +164,9 @@ function CreateProfilePg(){
                 display: 'flex',
                 flexWrap: 'wrap',
                 border: 1,
+                pb: 0,
             }}>
-                <h2 align = 'center'>Interest Type</h2>
+                <h2 sx = {{pb: 0,}} align = 'center'>Interest Type</h2>
                 <FormGroup>
                 <Box
             sx={{
