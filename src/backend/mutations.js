@@ -1,10 +1,13 @@
-import * as query from '../graphql'
-import { BlackListedPosts, PostMode, PostModel, SavedPosts, TagsModel, UserModel } from '../models'
+
+import { BlackListedPosts, PostModel, SavedPosts, TagsModel, UserModel } from '../models'
 import { DataStore } from 'aws-amplify'
-import isTag from './tags'
+import * as queries from './queries'
 
 export async function createUser(username, ...Tags) {
-    console.log(Tags)
+
+    const exist = await queries.getUsersByUsername(username)
+
+    if (JSON.parse(exist).Length > 0) return
     let user = await DataStore.save(
         new UserModel({
             "user_name": username,

@@ -1,7 +1,14 @@
-import * as query from '../graphql'
-import { BlackListedPosts, PostMode, PostModel, SavedPosts, TagsModel, UserModel } from '../models'
+import { BlackListedPosts, PostModel, SavedPosts, TagsModel, UserModel } from '../models'
 import { DataStore } from 'aws-amplify'
 import isTag from './tags'
+
+export async function getUsersByID(id) {
+    return DataStore.query(UserModel, id)
+}
+
+export async function getUsersByUsername(username) {
+    return DataStore.query(UserModel, c => c.user_name("equals", username))
+} 
 
 export async function getPostsByTags(...tags) {
 
@@ -22,10 +29,6 @@ export async function getPostsByTags(...tags) {
 
 export async function getPostsByID(id) {
     return DataStore.query(PostModel, c => c.id)
-}
-
-export async function getUsersByID(id) {
-    return DataStore.query(UserModel, id)
 }
 
 export async function getSavedPostsByID(id) {
