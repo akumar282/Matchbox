@@ -1,12 +1,71 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getTagsModel = /* GraphQL */ `
+  query GetTagsModel($id: ID!) {
+    getTagsModel(id: $id) {
+      id
+      tag
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listTagsModels = /* GraphQL */ `
+  query ListTagsModels(
+    $filter: ModelTagsModelFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTagsModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        tag
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncTagsModels = /* GraphQL */ `
+  query SyncTagsModels(
+    $filter: ModelTagsModelFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncTagsModels(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        tag
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getBlackListedPosts = /* GraphQL */ `
   query GetBlackListedPosts($id: ID!) {
     getBlackListedPosts(id: $id) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -28,8 +87,6 @@ export const listBlackListedPosts = /* GraphQL */ `
     ) {
       items {
         id
-        post_id
-        usermodelID
         createdAt
         updatedAt
         _version
@@ -56,8 +113,6 @@ export const syncBlackListedPosts = /* GraphQL */ `
     ) {
       items {
         id
-        post_id
-        usermodelID
         createdAt
         updatedAt
         _version
@@ -73,8 +128,6 @@ export const getSavedPosts = /* GraphQL */ `
   query GetSavedPosts($id: ID!) {
     getSavedPosts(id: $id) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -92,8 +145,6 @@ export const listSavedPosts = /* GraphQL */ `
     listSavedPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        post_id
-        usermodelID
         createdAt
         updatedAt
         _version
@@ -120,8 +171,6 @@ export const syncSavedPosts = /* GraphQL */ `
     ) {
       items {
         id
-        post_id
-        usermodelID
         createdAt
         updatedAt
         _version
@@ -133,11 +182,13 @@ export const syncSavedPosts = /* GraphQL */ `
     }
   }
 `;
-export const getPostMode = /* GraphQL */ `
-  query GetPostMode($id: ID!) {
-    getPostMode(id: $id) {
+export const getPostModel = /* GraphQL */ `
+  query GetPostModel($id: ID!) {
+    getPostModel(id: $id) {
       id
-      usermodelID
+      title
+      description
+      link
       createdAt
       updatedAt
       _version
@@ -146,16 +197,18 @@ export const getPostMode = /* GraphQL */ `
     }
   }
 `;
-export const listPostModes = /* GraphQL */ `
-  query ListPostModes(
-    $filter: ModelPostModeFilterInput
+export const listPostModels = /* GraphQL */ `
+  query ListPostModels(
+    $filter: ModelPostModelFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listPostModes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listPostModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        usermodelID
+        title
+        description
+        link
         createdAt
         updatedAt
         _version
@@ -167,14 +220,14 @@ export const listPostModes = /* GraphQL */ `
     }
   }
 `;
-export const syncPostModes = /* GraphQL */ `
-  query SyncPostModes(
-    $filter: ModelPostModeFilterInput
+export const syncPostModels = /* GraphQL */ `
+  query SyncPostModels(
+    $filter: ModelPostModelFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncPostModes(
+    syncPostModels(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -182,7 +235,9 @@ export const syncPostModes = /* GraphQL */ `
     ) {
       items {
         id
-        usermodelID
+        title
+        description
+        link
         createdAt
         updatedAt
         _version
@@ -199,18 +254,6 @@ export const getUserModel = /* GraphQL */ `
     getUserModel(id: $id) {
       id
       user_name
-      UsersPosts {
-        nextToken
-        startedAt
-      }
-      UsersSavedPosts {
-        nextToken
-        startedAt
-      }
-      UsersBlackListedPosts {
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version

@@ -1,38 +1,36 @@
 type TagsModel @model @auth(rules: [{allow: public}]) {
   id: ID!
   tag: String
-  postmodelID: ID! @index(name: "byPostModel")
-  usermodels: [UserModel] @manyToMany(relationName: "UserModelTagsModel")
-  postmodels: [PostModel] @manyToMany(relationName: "PostModelTagsModel")
+  usermodelID: ID! @index(name: "byUserModel")
 }
 
 type BlackListedPosts @model @auth(rules: [{allow: public}]) {
   id: ID!
-  post_id: String
+  postID: ID
   usermodelID: ID! @index(name: "byUserModel")
 }
 
 type SavedPosts @model @auth(rules: [{allow: public}]) {
   id: ID!
-  post_id: String
+  postID: ID
   usermodelID: ID! @index(name: "byUserModel")
 }
 
 type PostModel @model @auth(rules: [{allow: public}]) {
   id: ID!
-  usermodelID: ID! @index(name: "byUserModel")
-  TagsModels: [TagsModel] @manyToMany(relationName: "PostModelTagsModel")
   title: String
   description: String
-  link: String
+  project_link: String
+  image_link: String
+  usermodelID: ID! @index(name: "byUserModel")
 }
 
 type UserModel @model @auth(rules: [{allow: public}]) {
   id: ID!
   user_name: String
-  UsersPosts: [PostModel] @hasMany(indexName: "byUserModel", fields: ["id"])
-  UsersSavedPosts: [PostModel] @hasMany(indexName: "byUserModel", fields: ["id"])
-  UsersBlackListedPosts: [PostModel] @hasMany(indexName: "byUserModel", fields: ["id"])
-  TagsModels: [TagsModel] @manyToMany(relationName: "UserModelTagsModel")
+  TagsModels: [TagsModel] @hasMany(indexName: "byUserModel", fields: ["id"])
+  SavedPosts: [SavedPosts] @hasMany(indexName: "byUserModel", fields: ["id"])
+  BlackListedPosts: [BlackListedPosts] @hasMany(indexName: "byUserModel", fields: ["id"])
+  PostModels: [PostModel] @hasMany(indexName: "byUserModel", fields: ["id"])
 }
  

@@ -1,14 +1,57 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateTagsModel = /* GraphQL */ `
+  subscription OnCreateTagsModel(
+    $filter: ModelSubscriptionTagsModelFilterInput
+  ) {
+    onCreateTagsModel(filter: $filter) {
+      id
+      tag
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateTagsModel = /* GraphQL */ `
+  subscription OnUpdateTagsModel(
+    $filter: ModelSubscriptionTagsModelFilterInput
+  ) {
+    onUpdateTagsModel(filter: $filter) {
+      id
+      tag
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteTagsModel = /* GraphQL */ `
+  subscription OnDeleteTagsModel(
+    $filter: ModelSubscriptionTagsModelFilterInput
+  ) {
+    onDeleteTagsModel(filter: $filter) {
+      id
+      tag
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateBlackListedPosts = /* GraphQL */ `
   subscription OnCreateBlackListedPosts(
     $filter: ModelSubscriptionBlackListedPostsFilterInput
   ) {
     onCreateBlackListedPosts(filter: $filter) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -23,8 +66,6 @@ export const onUpdateBlackListedPosts = /* GraphQL */ `
   ) {
     onUpdateBlackListedPosts(filter: $filter) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -39,8 +80,6 @@ export const onDeleteBlackListedPosts = /* GraphQL */ `
   ) {
     onDeleteBlackListedPosts(filter: $filter) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -55,8 +94,6 @@ export const onCreateSavedPosts = /* GraphQL */ `
   ) {
     onCreateSavedPosts(filter: $filter) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -71,8 +108,6 @@ export const onUpdateSavedPosts = /* GraphQL */ `
   ) {
     onUpdateSavedPosts(filter: $filter) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -87,8 +122,6 @@ export const onDeleteSavedPosts = /* GraphQL */ `
   ) {
     onDeleteSavedPosts(filter: $filter) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -97,11 +130,15 @@ export const onDeleteSavedPosts = /* GraphQL */ `
     }
   }
 `;
-export const onCreatePostMode = /* GraphQL */ `
-  subscription OnCreatePostMode($filter: ModelSubscriptionPostModeFilterInput) {
-    onCreatePostMode(filter: $filter) {
+export const onCreatePostModel = /* GraphQL */ `
+  subscription OnCreatePostModel(
+    $filter: ModelSubscriptionPostModelFilterInput
+  ) {
+    onCreatePostModel(filter: $filter) {
       id
-      usermodelID
+      title
+      description
+      link
       createdAt
       updatedAt
       _version
@@ -110,11 +147,15 @@ export const onCreatePostMode = /* GraphQL */ `
     }
   }
 `;
-export const onUpdatePostMode = /* GraphQL */ `
-  subscription OnUpdatePostMode($filter: ModelSubscriptionPostModeFilterInput) {
-    onUpdatePostMode(filter: $filter) {
+export const onUpdatePostModel = /* GraphQL */ `
+  subscription OnUpdatePostModel(
+    $filter: ModelSubscriptionPostModelFilterInput
+  ) {
+    onUpdatePostModel(filter: $filter) {
       id
-      usermodelID
+      title
+      description
+      link
       createdAt
       updatedAt
       _version
@@ -123,11 +164,15 @@ export const onUpdatePostMode = /* GraphQL */ `
     }
   }
 `;
-export const onDeletePostMode = /* GraphQL */ `
-  subscription OnDeletePostMode($filter: ModelSubscriptionPostModeFilterInput) {
-    onDeletePostMode(filter: $filter) {
+export const onDeletePostModel = /* GraphQL */ `
+  subscription OnDeletePostModel(
+    $filter: ModelSubscriptionPostModelFilterInput
+  ) {
+    onDeletePostModel(filter: $filter) {
       id
-      usermodelID
+      title
+      description
+      link
       createdAt
       updatedAt
       _version
@@ -143,18 +188,6 @@ export const onCreateUserModel = /* GraphQL */ `
     onCreateUserModel(filter: $filter) {
       id
       user_name
-      UsersPosts {
-        nextToken
-        startedAt
-      }
-      UsersSavedPosts {
-        nextToken
-        startedAt
-      }
-      UsersBlackListedPosts {
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
@@ -170,18 +203,6 @@ export const onUpdateUserModel = /* GraphQL */ `
     onUpdateUserModel(filter: $filter) {
       id
       user_name
-      UsersPosts {
-        nextToken
-        startedAt
-      }
-      UsersSavedPosts {
-        nextToken
-        startedAt
-      }
-      UsersBlackListedPosts {
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
@@ -197,18 +218,6 @@ export const onDeleteUserModel = /* GraphQL */ `
     onDeleteUserModel(filter: $filter) {
       id
       user_name
-      UsersPosts {
-        nextToken
-        startedAt
-      }
-      UsersSavedPosts {
-        nextToken
-        startedAt
-      }
-      UsersBlackListedPosts {
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version

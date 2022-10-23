@@ -17,40 +17,12 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "postmodelID": {
-                    "name": "postmodelID",
+                "usermodelID": {
+                    "name": "usermodelID",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": true,
                     "attributes": []
-                },
-                "usermodels": {
-                    "name": "usermodels",
-                    "isArray": true,
-                    "type": {
-                        "model": "UserModelTagsModel"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "tagsModel"
-                    }
-                },
-                "postmodels": {
-                    "name": "postmodels",
-                    "isArray": true,
-                    "type": {
-                        "model": "PostModelTagsModel"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "tagsModel"
-                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -71,224 +43,6 @@ export const schema = {
             },
             "syncable": true,
             "pluralName": "TagsModels",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byPostModel",
-                        "fields": [
-                            "postmodelID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "UserModel": {
-            "name": "UserModel",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "user_name": {
-                    "name": "user_name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "UsersPosts": {
-                    "name": "UsersPosts",
-                    "isArray": true,
-                    "type": {
-                        "model": "PostModel"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "usermodelID"
-                    }
-                },
-                "UsersSavedPosts": {
-                    "name": "UsersSavedPosts",
-                    "isArray": true,
-                    "type": {
-                        "model": "PostModel"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "usermodelID"
-                    }
-                },
-                "UsersBlackListedPosts": {
-                    "name": "UsersBlackListedPosts",
-                    "isArray": true,
-                    "type": {
-                        "model": "PostModel"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "usermodelID"
-                    }
-                },
-                "TagsModels": {
-                    "name": "TagsModels",
-                    "isArray": true,
-                    "type": {
-                        "model": "UserModelTagsModel"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "userModel"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "UserModels",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "PostModel": {
-            "name": "PostModel",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "usermodelID": {
-                    "name": "usermodelID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "TagsModels": {
-                    "name": "TagsModels",
-                    "isArray": true,
-                    "type": {
-                        "model": "PostModelTagsModel"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "postModel"
-                    }
-                },
-                "title": {
-                    "name": "title",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "description": {
-                    "name": "description",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "link": {
-                    "name": "link",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "PostModels",
             "attributes": [
                 {
                     "type": "model",
@@ -331,10 +85,10 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "post_id": {
-                    "name": "post_id",
+                "postID": {
+                    "name": "postID",
                     "isArray": false,
-                    "type": "String",
+                    "type": "ID",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -406,10 +160,10 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "post_id": {
-                    "name": "post_id",
+                "postID": {
+                    "name": "postID",
                     "isArray": false,
-                    "type": "String",
+                    "type": "ID",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -471,8 +225,8 @@ export const schema = {
                 }
             ]
         },
-        "UserModelTagsModel": {
-            "name": "UserModelTagsModel",
+        "PostModel": {
+            "name": "PostModel",
             "fields": {
                 "id": {
                     "name": "id",
@@ -481,31 +235,40 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "tagsModel": {
-                    "name": "tagsModel",
+                "title": {
+                    "name": "title",
                     "isArray": false,
-                    "type": {
-                        "model": "TagsModel"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "tagsModelID"
-                    }
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 },
-                "userModel": {
-                    "name": "userModel",
+                "description": {
+                    "name": "description",
                     "isArray": false,
-                    "type": {
-                        "model": "UserModel"
-                    },
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "project_link": {
+                    "name": "project_link",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "image_link": {
+                    "name": "image_link",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "usermodelID": {
+                    "name": "usermodelID",
+                    "isArray": false,
+                    "type": "ID",
                     "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "userModelID"
-                    }
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -525,34 +288,41 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "UserModelTagsModels",
+            "pluralName": "PostModels",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byTagsModel",
-                        "fields": [
-                            "tagsModelID"
-                        ]
-                    }
                 },
                 {
                     "type": "key",
                     "properties": {
                         "name": "byUserModel",
                         "fields": [
-                            "userModelID"
+                            "usermodelID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
                         ]
                     }
                 }
             ]
         },
-        "PostModelTagsModel": {
-            "name": "PostModelTagsModel",
+        "UserModel": {
+            "name": "UserModel",
             "fields": {
                 "id": {
                     "name": "id",
@@ -561,30 +331,67 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "tagsModel": {
-                    "name": "tagsModel",
+                "user_name": {
+                    "name": "user_name",
                     "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "TagsModels": {
+                    "name": "TagsModels",
+                    "isArray": true,
                     "type": {
                         "model": "TagsModel"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": [],
+                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "tagsModelID"
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "usermodelID"
                     }
                 },
-                "postModel": {
-                    "name": "postModel",
-                    "isArray": false,
+                "SavedPosts": {
+                    "name": "SavedPosts",
+                    "isArray": true,
+                    "type": {
+                        "model": "SavedPosts"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "usermodelID"
+                    }
+                },
+                "BlackListedPosts": {
+                    "name": "BlackListedPosts",
+                    "isArray": true,
+                    "type": {
+                        "model": "BlackListedPosts"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "usermodelID"
+                    }
+                },
+                "PostModels": {
+                    "name": "PostModels",
+                    "isArray": true,
                     "type": {
                         "model": "PostModel"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": [],
+                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "postModelID"
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "usermodelID"
                     }
                 },
                 "createdAt": {
@@ -605,27 +412,25 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "PostModelTagsModels",
+            "pluralName": "UserModels",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
                 },
                 {
-                    "type": "key",
+                    "type": "auth",
                     "properties": {
-                        "name": "byTagsModel",
-                        "fields": [
-                            "tagsModelID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byPostModel",
-                        "fields": [
-                            "postModelID"
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
                         ]
                     }
                 }
@@ -635,5 +440,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.2.0",
-    "version": "402b27c26a2de0df3cea5ed57fd3edf1"
+    "version": "df6e8d4112a4ec42c80ef959ac05bd99"
 };

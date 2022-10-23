@@ -1,6 +1,54 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createTagsModel = /* GraphQL */ `
+  mutation CreateTagsModel(
+    $input: CreateTagsModelInput!
+    $condition: ModelTagsModelConditionInput
+  ) {
+    createTagsModel(input: $input, condition: $condition) {
+      id
+      tag
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateTagsModel = /* GraphQL */ `
+  mutation UpdateTagsModel(
+    $input: UpdateTagsModelInput!
+    $condition: ModelTagsModelConditionInput
+  ) {
+    updateTagsModel(input: $input, condition: $condition) {
+      id
+      tag
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteTagsModel = /* GraphQL */ `
+  mutation DeleteTagsModel(
+    $input: DeleteTagsModelInput!
+    $condition: ModelTagsModelConditionInput
+  ) {
+    deleteTagsModel(input: $input, condition: $condition) {
+      id
+      tag
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const createBlackListedPosts = /* GraphQL */ `
   mutation CreateBlackListedPosts(
     $input: CreateBlackListedPostsInput!
@@ -8,8 +56,6 @@ export const createBlackListedPosts = /* GraphQL */ `
   ) {
     createBlackListedPosts(input: $input, condition: $condition) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -25,8 +71,6 @@ export const updateBlackListedPosts = /* GraphQL */ `
   ) {
     updateBlackListedPosts(input: $input, condition: $condition) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -42,8 +86,6 @@ export const deleteBlackListedPosts = /* GraphQL */ `
   ) {
     deleteBlackListedPosts(input: $input, condition: $condition) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -59,8 +101,6 @@ export const createSavedPosts = /* GraphQL */ `
   ) {
     createSavedPosts(input: $input, condition: $condition) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -76,8 +116,6 @@ export const updateSavedPosts = /* GraphQL */ `
   ) {
     updateSavedPosts(input: $input, condition: $condition) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -93,8 +131,6 @@ export const deleteSavedPosts = /* GraphQL */ `
   ) {
     deleteSavedPosts(input: $input, condition: $condition) {
       id
-      post_id
-      usermodelID
       createdAt
       updatedAt
       _version
@@ -103,14 +139,16 @@ export const deleteSavedPosts = /* GraphQL */ `
     }
   }
 `;
-export const createPostMode = /* GraphQL */ `
-  mutation CreatePostMode(
-    $input: CreatePostModeInput!
-    $condition: ModelPostModeConditionInput
+export const createPostModel = /* GraphQL */ `
+  mutation CreatePostModel(
+    $input: CreatePostModelInput!
+    $condition: ModelPostModelConditionInput
   ) {
-    createPostMode(input: $input, condition: $condition) {
+    createPostModel(input: $input, condition: $condition) {
       id
-      usermodelID
+      title
+      description
+      link
       createdAt
       updatedAt
       _version
@@ -119,14 +157,16 @@ export const createPostMode = /* GraphQL */ `
     }
   }
 `;
-export const updatePostMode = /* GraphQL */ `
-  mutation UpdatePostMode(
-    $input: UpdatePostModeInput!
-    $condition: ModelPostModeConditionInput
+export const updatePostModel = /* GraphQL */ `
+  mutation UpdatePostModel(
+    $input: UpdatePostModelInput!
+    $condition: ModelPostModelConditionInput
   ) {
-    updatePostMode(input: $input, condition: $condition) {
+    updatePostModel(input: $input, condition: $condition) {
       id
-      usermodelID
+      title
+      description
+      link
       createdAt
       updatedAt
       _version
@@ -135,14 +175,16 @@ export const updatePostMode = /* GraphQL */ `
     }
   }
 `;
-export const deletePostMode = /* GraphQL */ `
-  mutation DeletePostMode(
-    $input: DeletePostModeInput!
-    $condition: ModelPostModeConditionInput
+export const deletePostModel = /* GraphQL */ `
+  mutation DeletePostModel(
+    $input: DeletePostModelInput!
+    $condition: ModelPostModelConditionInput
   ) {
-    deletePostMode(input: $input, condition: $condition) {
+    deletePostModel(input: $input, condition: $condition) {
       id
-      usermodelID
+      title
+      description
+      link
       createdAt
       updatedAt
       _version
@@ -159,18 +201,6 @@ export const createUserModel = /* GraphQL */ `
     createUserModel(input: $input, condition: $condition) {
       id
       user_name
-      UsersPosts {
-        nextToken
-        startedAt
-      }
-      UsersSavedPosts {
-        nextToken
-        startedAt
-      }
-      UsersBlackListedPosts {
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
@@ -187,18 +217,6 @@ export const updateUserModel = /* GraphQL */ `
     updateUserModel(input: $input, condition: $condition) {
       id
       user_name
-      UsersPosts {
-        nextToken
-        startedAt
-      }
-      UsersSavedPosts {
-        nextToken
-        startedAt
-      }
-      UsersBlackListedPosts {
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
@@ -215,18 +233,6 @@ export const deleteUserModel = /* GraphQL */ `
     deleteUserModel(input: $input, condition: $condition) {
       id
       user_name
-      UsersPosts {
-        nextToken
-        startedAt
-      }
-      UsersSavedPosts {
-        nextToken
-        startedAt
-      }
-      UsersBlackListedPosts {
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
