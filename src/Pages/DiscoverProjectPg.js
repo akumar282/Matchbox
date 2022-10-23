@@ -153,7 +153,7 @@ function DiscoverProjectPg(){
                     fontWeight: "bold"
                 }} 
                 
-                component = {Link} to = "../create-profile"  
+                component = "https://github.com/tensorflow/tensorflow" to = "../create-profile"  
                 color = 'primary'  
                 onClick={handleSubmit}
                 variant="contained">Project Github
