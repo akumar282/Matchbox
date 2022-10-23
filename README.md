@@ -2,7 +2,7 @@
 Welcome to Matchbox! Where innovation ignites... 
 Our web application connects developers to projects that align with their interests, experience, and values
 
-## Visit our Figma design! 
+## Visit our Figma wireframe! 
 https://www.figma.com/file/5GgpPtR2nnpO10SCe0ZyiK/Matchbox?node-id=0%3A1
 
 ## Documentation
