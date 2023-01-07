@@ -6,10 +6,11 @@ import CreateProfilePg from './Pages/CreateProfilePg';
 import CreateProjectPg from './Pages/CreateProjectPg';
 import DiscoverProjectPg from './Pages/DiscoverProjectPg';
 
-import { Tabs, Tab, AppBar } from "@material-ui/core";
+//import { Tabs, Tab, AppBar } from "@material-ui/core";
 import { Route, Switch, Link } from "react-router-dom";
 
 import NavBar from './components/NavBar';
+import LandingPage from './Pages/LandingPage';
 
 
 function App() {
@@ -17,11 +18,11 @@ function App() {
     <BrowserRouter>
     <Routes>
     {/* <Route element={<PageLayout> <Outlet /> </PageLayout>}> */}
-      <Route path="/" element={<CreateProfilePg/>}/>
+      <Route path="/create_prof" element={<CreateProfilePg/>}/>
       <Route path="/create-project" element={<CreateProjectPg/>}/>
       <Route path="/discover" element={<DiscoverProjectPg/>}/>
       <Route path="/a" element={<NavBar/>}/>
-      
+      <Route path="/" element={<LandingPage/>}/>
     </Routes>
     </BrowserRouter>
   );

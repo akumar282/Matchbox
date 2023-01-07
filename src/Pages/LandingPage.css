@@ -1,0 +1,32 @@
+.logo {
+    font-size: 50px;
+    color: #000000ab;
+    font-weight: 500;
+
+    font-family: 'PT Serif';
+}
+
+
+.subtext {
+    position: static;
+    width: 675px;
+    height: 10px;
+    padding: 5px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    color: #000000;
+}
+
+.leadingtext {
+    position: static ;
+    width: 650px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 80px;
+    color: #000000;
+}
