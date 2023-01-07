@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Outlet } from "react-router-dom";
 import CreateProfilePg from './Pages/CreateProfilePg';
 import CreateProjectPg from './Pages/CreateProjectPg';
 import DiscoverProjectPg from './Pages/DiscoverProjectPg';
+import SavedProjects from './Pages/SavedProjects';
 
 //import { Tabs, Tab, AppBar } from "@material-ui/core";
 import { Route, Switch, Link } from "react-router-dom";
@@ -18,11 +19,20 @@ function App() {
     <BrowserRouter>
     <Routes>
     {/* <Route element={<PageLayout> <Outlet /> </PageLayout>}> */}
+<<<<<<< HEAD
       <Route path="/create_prof" element={<CreateProfilePg/>}/>
       <Route path="/create-project" element={<CreateProjectPg/>}/>
       <Route path="/discover" element={<DiscoverProjectPg/>}/>
       <Route path="/a" element={<NavBar/>}/>
       <Route path="/" element={<LandingPage/>}/>
+=======
+      <Route path="/create-profile" element={<CreateProfilePg/>}/>
+      <Route path="/create-project" element={<CreateProjectPg/>}/>
+      <Route path="/discover" element={<DiscoverProjectPg/>}/>
+      <Route path="/saved-project" element={<SavedProjects/>}/>
+      <Route path="/" element={<NavBar/>}/>
+      
+>>>>>>> dc4c1a0de698a1ef74895f0aef4b40384a9ca735
     </Routes>
     </BrowserRouter>
   );
