@@ -6,6 +6,7 @@ import illustration from './../img/landing-img.svg'; // matchstick illustration
 import { createTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 
+import LandingPopupRegister from "./components/LandingPopupRegister";
 const { palette } = createTheme();
 const { augmentColor } = palette;
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
@@ -20,9 +21,10 @@ const theme = createTheme({
 });
 
 export default function LandingPage(){
+    const [isOpen, setIsOpen] = useState(false);
     return( 
         <div className='Starting'>
-          
+            <LandingPopupRegister trigger ={isOpen} setTrigger = {setIsOpen} />
             <div className='navHome'> 
                 {/* logo */}
                 <div className ="logobox">
@@ -48,7 +50,7 @@ export default function LandingPage(){
                     '&:hover': {
                         backgroundColor: '#716ab4',
                     }
-                }}> Login</Button>
+                }} onClick={() => setIsOpen(true) }> Login</Button>
             </Stack>
             </div>
             <div className = "BoxStack"> 

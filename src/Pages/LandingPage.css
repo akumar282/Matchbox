@@ -12,12 +12,11 @@
     gap: 1rem;
 }
 .subtext {
-    padding: 5px;
     font-family: 'Roboto';
     font-size:max(30px, 10px);
     max-width: fit-content;
     color: #000000;
-    
+    margin-bottom: 0px;
 }
 
 .leadingtext {
@@ -62,7 +61,7 @@
     justify-self: center;
     align-self: center;
     margin: auto;
-    width: 35%;
+    width: 32%;
 }
 .BoxStack {
     display : flex;
