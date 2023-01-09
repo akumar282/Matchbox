@@ -14,19 +14,20 @@
 .subtext {
     padding: 5px;
     font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size:max(1.2vw, 10px);
+    font-size:max(30px, 10px);
+    max-width: fit-content;
     color: #000000;
-    margin-bottom: 0;
+    
 }
 
 .leadingtext {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 800;
-    font-size: max(6vw, 10px);
+    font-size: max(6.5vw, 10px);
     color: #000000;
+    max-width: fit-content;
+    
 }
 .navHome {
     display : flex;
@@ -38,8 +39,8 @@
 }
 .LandingStack {
     align-items: stretch;
-    width: 30rem;
-    gap: 1rem;
+    width: 60rem;
+    gap: 2rem;
     align-items: center;
     justify-content: center;
     margin-right: 5%;
@@ -56,25 +57,28 @@
     outline: none;
 }
 .firestick{
-    display: flex;
-    max-height: 70vh;
-    max-width: 70vw;
-    align-self: center;
     
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    margin: auto;
+    width: 35%;
 }
 .BoxStack {
     display : flex;
-    gap : 0rem;
+    padding: 0;
     max-width: 100%;
     max-height: 100%;
     margin-top: 2rem;
-    margin-left: 4rem;
     align-self: start;
+    
 }
 .textStack {
     display : flex;
     flex-direction: column;
-    max-width: 80vh;
+    gap: 0;
+    max-width: 40%;
+    margin-left: 5%;
 }
 .Starting {
     

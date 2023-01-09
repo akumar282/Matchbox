@@ -20,11 +20,9 @@ const theme = createTheme({
 });
 
 export default function LandingPage(){
-    return(
+    return( 
         <div className='Starting'>
-            <head>
-                <title>landing</title>
-            </head>
+          
             <div className='navHome'> 
                 {/* logo */}
                 <div className ="logobox">
@@ -34,23 +32,26 @@ export default function LandingPage(){
             <Stack className = "LandingStack" direction="row">
                <Button sx = {{
                     color: 'black',
+                    fontSize: 'max(20px, 10px);', 
                 }}> About Us</Button>
                 {/* sign up link */}
                 <Button component = {Link}  to = "/create-project" sx = {{
                     color: 'black',
+                    fontSize: 'max(20px, 10px);',
                 }}> Get Started</Button>
                 {/* login button */}
                 <Button variant='contained' 
                 sx ={{
                     backgroundColor: '#6259b9',
                     color: 'white',
+                    fontSize: 'max(20px, 10px);',
                     '&:hover': {
                         backgroundColor: '#716ab4',
                     }
                 }}> Login</Button>
             </Stack>
             </div>
-            <Stack className = "BoxStack" spacing={2} direction="row" > 
+            <div className = "BoxStack"> 
                 <Stack className = "textStack" direction="column" spacing={1} sx={{ 
                     justifyContent: 'center',
                     width: '100%',
@@ -62,15 +63,14 @@ export default function LandingPage(){
                     <p className='subtext'> Get instantly matched with open source projects </p>
                     <p className='subtext'> with a straight-forward process </p>
                 </Stack>
-
-                <img className='firestick' src={illustration}></img>
-            </Stack>
+                {/* matchstick illustration */}
+                    <img className='firestick' src={illustration}></img>
+            </div>
 
             <Button sx = {{
                 backgroundColor: '#6259b9',
-                marginLeft: '4rem',
-                width: '8rem',
-                height: '3rem',
+                marginLeft: '5%',
+                fontSize: 'max(20px, 10px);',
                 '&:hover': {
                     backgroundColor: '#716ab4',
                 }
