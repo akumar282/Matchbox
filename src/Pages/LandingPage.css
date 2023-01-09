@@ -16,26 +16,25 @@
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    font-size: 32px;
+    font-size:max(1.2vw, 10px);
     color: #000000;
+    margin-bottom: 0;
 }
 
 .leadingtext {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 800;
-    font-size: 80px;
+    font-size: max(6vw, 10px);
     color: #000000;
 }
 .navHome {
     display : flex;
     justify-content: space-between;
-    width: 100%;
     align-items: center;
     gap : 2rem;
     padding: 0 1rem;
     margin-top: 2rem;
-    
 }
 .LandingStack {
     align-items: stretch;
@@ -43,6 +42,7 @@
     gap: 1rem;
     align-items: center;
     justify-content: center;
+    margin-right: 5%;
 }
 .loginButton {
     background: #716ab4;
@@ -56,14 +56,26 @@
     outline: none;
 }
 .firestick{
-    height: 30rem;
+    display: flex;
+    max-height: 70vh;
+    max-width: 70vw;
+    align-self: center;
+    
 }
-.TextStack {
+.BoxStack {
     display : flex;
-    justify-content:center;
-    align-items: center;
-    gap : 2rem;
-    width: 70%;
+    gap : 0rem;
+    max-width: 100%;
+    max-height: 100%;
     margin-top: 2rem;
     margin-left: 4rem;
+    align-self: start;
+}
+.textStack {
+    display : flex;
+    flex-direction: column;
+    max-width: 80vh;
+}
+.Starting {
+    
 }

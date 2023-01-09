@@ -21,7 +21,7 @@ const theme = createTheme({
 
 export default function LandingPage(){
     return(
-        <div>
+        <div className='Starting'>
             <head>
                 <title>landing</title>
             </head>
@@ -30,20 +30,15 @@ export default function LandingPage(){
                 <div className ="logobox">
                 <span className='logo'>Matchbox</span>
                 {/* about us link */}
-                
             </div>
-                
             <Stack className = "LandingStack" direction="row">
                <Button sx = {{
                     color: 'black',
                 }}> About Us</Button>
                 {/* sign up link */}
-                <Link to ="/create-project">
-                
-                <Button sx = {{
+                <Button component = {Link}  to = "/create-project" sx = {{
                     color: 'black',
                 }}> Get Started</Button>
-                </Link>
                 {/* login button */}
                 <Button variant='contained' 
                 sx ={{
@@ -55,15 +50,17 @@ export default function LandingPage(){
                 }}> Login</Button>
             </Stack>
             </div>
-            <Stack className = "TextStack" spacing={2} direction="row" > 
-                <Stack direction="column" spacing={1} sx={{ 
+            <Stack className = "BoxStack" spacing={2} direction="row" > 
+                <Stack className = "textStack" direction="column" spacing={1} sx={{ 
                     justifyContent: 'center',
                     width: '100%',
                 }}>
                     {/* landing title & description */}
                     <p className='subtext'> Welcome to Matchbox </p>
-                    <p className='leadingtext'> Discover a project you'll love.</p>
-                    <p className='subtext'> Get instantly matched with open source projects with a straight-forward process </p>
+                    <p className='leadingtext'> Discover a project </p>
+                    <p className='leadingtext'> you'll love.</p>
+                    <p className='subtext'> Get instantly matched with open source projects </p>
+                    <p className='subtext'> with a straight-forward process </p>
                 </Stack>
 
                 <img className='firestick' src={illustration}></img>
