@@ -4,10 +4,12 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  IconButton,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import React from "react";
 import "./LandingPopup.css";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 export default function LandingPopupLogin(props) {
   const [name, setName] = React.useState("");
@@ -27,6 +29,22 @@ export default function LandingPopupLogin(props) {
     <Dialog open={props.trigger} maxWidth="sm" fullWidth="true">
       {/* as it said Dialog has its own form of objects 
             you are going to have to search up the documentation for them*/}
+      <IconButton 
+              sx={{
+                width: "40px",
+                height: "40px",
+                display: "flex",
+                justifySelf: "right",
+                alignSelf: "right",
+                marginLeft: "auto",
+                marginRight: "1%",
+                marginTop: "1%",
+              }}
+              variant="contained"
+              onClick={handleClose}
+            >
+              <HighlightOffIcon fontSize="large"/>
+            </IconButton>
       <DialogTitle
         id="dialog-title"
         sx={{
@@ -35,7 +53,7 @@ export default function LandingPopupLogin(props) {
           alignItems: "center",
         }}
       >
-        {"Register Your Account"}
+        {"Login to your Account"}
       </DialogTitle>
       {/* consider this a div */}
       <DialogContent
@@ -64,18 +82,8 @@ export default function LandingPopupLogin(props) {
         </form>
         <div className="popupControls">
           <Button
-            sx={{
-              width: "10px",
-              height: "40px",
-            }}
-            variant="contained"
-            onClick={handleClose}
-          >
-            Close
-          </Button>
-          <Button
             component={Link}
-            to="/create-profile"
+            to="/create-prefrences"
             sx={{
               width: "10px",
               height: "40px",

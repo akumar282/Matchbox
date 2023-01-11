@@ -2,7 +2,7 @@ import "./App.css";
 
 import React from "react";
 import { BrowserRouter, Routes, Outlet } from "react-router-dom";
-import CreateProfile from "./Pages/CreateProfile";
+import CreateProfile from "./Pages/CreatePrefrences";
 import CreateProfilePg from "./Pages/CreateProfilePg";
 import CreateProjectPg from "./Pages/CreateProjectPg";
 import DiscoverProjectPg from "./Pages/DiscoverProjectPg";
@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* <Route element={<PageLayout> <Outlet /> </PageLayout>}> */}
-        <Route path="/create-profile" element={<CreateProfile />} />
+        <Route path="/create-prefrences" element={<CreateProfile />} />
         <Route path="/create-project" element={<CreateProjectPg />} />
         <Route path="/discover" element={<DiscoverProjectPg />} />
         <Route path="/a" element={<NavBar />} />

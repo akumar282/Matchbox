@@ -7,6 +7,7 @@ import { createTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
 import LandingPopupLogin from "./components/LandingPopupLogin";
+import LandingPopupCreate from "./components/LandingPopupCreate";
 const { palette } = createTheme();
 const { augmentColor } = palette;
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
@@ -21,10 +22,12 @@ const theme = createTheme({
 });
 
 export default function LandingPage() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
   return (
     <div className="Starting">
-      <LandingPopupLogin trigger={isOpen} setTrigger={setIsOpen} />
+      <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} />
+      <LandingPopupCreate trigger={isCreateOpen} setTrigger={setIsCreateOpen} />
       <div className="navHome">
         {/* logo */}
         <div className="logobox">
@@ -64,7 +67,7 @@ export default function LandingPage() {
                 backgroundColor: "#716ab4",
               },
             }}
-            onClick={() => setIsOpen(true)}
+            onClick={() => setIsLoginOpen(true)}
           >
             {" "}
             Login
@@ -85,17 +88,13 @@ export default function LandingPage() {
           <p className="subtext"> Welcome to Matchbox </p>
           <p className="leadingtext"> Discover a project </p>
           <p className="leadingtext"> you'll love.</p>
-          <p className="subtext">
-            {" "}
-            Get instantly matched with open source projects{" "}
-          </p>
-          <p className="subtext"> with a straight-forward process </p>
+          <p className="subtext">Get instantly matched with open source projects with a straight-forward process </p>
         </Stack>
         {/* matchstick illustration */}
         <img className="firestick" src={illustration}></img>
       </div>
 
-      <Button
+      <Button onClick={() => setIsCreateOpen(true)}
         sx={{
           backgroundColor: "#6259b9",
           marginLeft: "5%",
@@ -105,10 +104,7 @@ export default function LandingPage() {
           },
         }}
         variant="contained"
-      >
-        {" "}
-        Get Started
-      </Button>
+      > Get Started </Button>
     </div>
   );
 }
