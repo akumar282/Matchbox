@@ -1,0 +1,22 @@
+.CreatePrefrences {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  outline: auto;
+  outline-color: #000;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  height: 60vh;
+  outline: auto;
+  background-color: rgb(248, 244, 239);
+  align-self: center;
+  justify-self: center;
+  margin-top: 5%;
+}

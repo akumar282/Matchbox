@@ -1,41 +1,35 @@
-import './App.css';
+import "./App.css";
 
 
 import React from "react";
-import { BrowserRouter, Routes } from "react-router-dom";
-import CreateProfilePg from './Pages/CreateProfilePg';
-import CreateProjectPg from './Pages/CreateProjectPg';
-import DiscoverProjectPg from './Pages/DiscoverProjectPg';
-import SavedProjects from './Pages/SavedProjects';
-import LoginPg from './Pages/LoginPg';
-import HomePg from './Pages/HomePg';
-import SuccessPg from './Pages/SuccessPg';
 
-import { Route } from "react-router-dom";
+import { BrowserRouter, Routes, Outlet } from "react-router-dom";
+import SelectPrefPg from "./Pages/CreatePrefrences";
+import CreateProjectPg from "./Pages/CreateProjectPg";
+import DiscoverProjectPg from "./Pages/DiscoverProjectPg";
+//import SavedProjects from "./Pages/SavedProjects";
 
-import NavBar from './components/NavBar';
+//import { Tabs, Tab, AppBar } from "@material-ui/core";
+import { Route, Switch, Link } from "react-router-dom";
 
-import { Amplify } from 'aws-amplify'
-import awsconfig from './aws-exports'
+import NavBar from "./components/NavBar";
+import LandingPage from "./Pages/LandingPage";
 
-Amplify.configure(awsconfig)
 
 function App() {
   
   return (
     <BrowserRouter>
-    <Routes>
-    {/* <Route element={<PageLayout> <Outlet /> </PageLayout>}> */}
-      
-      <Route path="/" element={<HomePg/>}/>
-      <Route path="/login" element={<LoginPg/>}/>
-      <Route path="/create-Profile" element={<CreateProfilePg/>}/>
-      <Route path="/create-project" element={<CreateProjectPg/>}/>
-      <Route path="/discover" element={<DiscoverProjectPg/>}/>
-      {/* <Route path="/saved-project" element={<SavedProjects/>}/> */}
-      <Route path="/success" element={<SuccessPg/>}/>
-      
-    </Routes>
+
+      <Routes>
+        {/* <Route element={<PageLayout> <Outlet /> </PageLayout>}> */}
+        <Route path="/create-prefrences" element={<SelectPrefPg />} />
+        <Route path="/create-project" element={<CreateProjectPg />} />
+        <Route path="/discover" element={<DiscoverProjectPg />} />
+        <Route path="/a" element={<NavBar />} />
+        <Route path="/" element={<LandingPage />} />
+      </Routes>
+
     </BrowserRouter>
   );
 }
