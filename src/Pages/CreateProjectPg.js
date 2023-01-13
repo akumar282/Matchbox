@@ -1,8 +1,7 @@
-import { React, useState, useSyncExternalStore } from 'react';
-import Box, { BoxProps } from '@mui/material/Box';
+import { React, useState } from 'react';
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import logImg from '../img/Logo.png';
-import { Container } from '@mui/system';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -12,15 +11,35 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import * as mut from '../backend/mutations'
+import { username } from './CreateProfilePg'
+import InvertLogoImg from '../img/InvertLogo.svg';
+
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 
 const INTEREST_LIST = [{inte: "Enviornmental"}, {inte: "Connectivity"}, {inte: "Communication"}, {inte: "Education"}, {inte: "Entertainment"}];
 const SIZE_LIST = [{siz: "100 people >"}, {siz: "50 people >"}, {siz: "25 people >"}, {siz: "10 people>"}, {siz: "< 5 people"}];
 
+
+const primTheme = createTheme({
+    palette: {
+      primary: {
+        main: '#312C51'
+      },
+      secondary: {
+        main: "#FOC38E"
+      }
+    },
+  });
+
 function CreateProjectPg(){
 
-     const handleSubmit= (e) => {
-       
+    const handleSubmit= (e) => {
+        
+        mut.createPost(username, name, desc, gith, image, projectLang)
+        
     }
     const [projectLang, setProjectLang] = useState([]);
     const [name, setName] = useState("");
@@ -84,49 +103,45 @@ function CreateProjectPg(){
           fontWeight: '700',
         }}
       >
-        Create Project
-        </Box>
-            <AppBar>
+       </Box>
+        <h1>Create Project Post</h1>
+        
+        <div>
+          <ThemeProvider theme={primTheme}> 
+              <AppBar color="primary"> 
                 <Toolbar>
                     <Typography
-                    variant="h6"
-                    noWrap
-                    component="a"
-                    href="/"
-                    sx={{
-                    display: { xs: 'none', md: 'flex' },
-                    fontFamily: 'cursive;',
-                    fontWeight: 700,
-                    mr: 2,
-                    letterSpacing: '.1rem',
-                    color: 'inherit',
-                    textDecoration: 'none',
-                    }}>
-                    <img src={logImg} width={80} height={40} alt="passedImg"/>
-                    <Box 
-                    sx = {{
-                    mt:1,
-                    }}>
-                    Matchbox
-                    </Box>
+                      variant="h6"
+                      noWrap
+                      component="a"
+                      href="/"
+                      sx={{
+                      display: { xs: 'none', md: 'flex' },
+                      fontFamily: 'Arial;',
+                      fontWeight: 700,
+                      mr: 2,
+                      letterSpacing: '.1rem',
+                      color: 'inherit',
+                      textDecoration: 'none',
+                      }}>
+                      <img src={InvertLogoImg} width={100} height={66} alt="passedImg"/>
                     </Typography>
-                <Stack direction = 'row' spacing = {2}>
-                <Button component = {Link} to = "../saved-project" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'cursive;',fontWeight: 700, mr: 2, mt:1, display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Saved Projects</Button> 
-                <Button component = {Link} to = "../discover" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'cursive;',fontWeight: 700, mr: 2, mt:2, display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Find Projects</Button>  
-            </Stack> 
+                    <Stack direction = 'row' spacing = {2}>
+                        <Button component = {Link} to = "../discover" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'Arial', fontWeight: 700, display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Discover</Button> 
+                        <Button component = {Link} to = "../saved-project" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'Arial',fontWeight: 700,  display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Saved</Button> 
+                        <Button component = {Link} to = "../create-project" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'Arial',fontWeight: 700,  display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Create</Button>   
+                    </Stack> 
                 </Toolbar>
             </AppBar>
+          </ThemeProvider>
+        </div>
             
-            <Box sx={{
+            <Stack spacing={1} sx={{
                 display: 'flex',
-                flexDirection: 'row',
-                p: 1,
-                m: 0,
-                mt: 1,
-                mr: 5,
-                bgcolor: 'background.paper',
-                borderRadius: 1,
-                justifyContent: 'center'
+                flexDirection: 'column',
+                m: 5,
+
+                
                 }}>
             {/* TODO make the textfield stacked like the figma and make the textboxes longer by default */}
             <TextField
@@ -146,7 +161,7 @@ function CreateProjectPg(){
             onChange = {gitTextHandle}
             />
            
-            </Box>
+            </Stack>
 
             {/* optional description box */}
             {/* TODO make the description box default size wider and longer and aligned with the other */}
@@ -306,27 +321,21 @@ function CreateProjectPg(){
                 </FormGroup>
                 </Stack>
             </Box>
-            <Box
+            <Stack
+                spacing={1}
                 sx={{
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
                 p: 1,
                 m: 0,
                 mb: 1,
                 mr: 5,
                 bgcolor: 'background.paper',
                 borderRadius: 1,
-                justifyContent: 'center'
+            
                 }}
                 >
-            <TextField
-            id="outlined-multiline-flexible"
-            label="Description"
-            variant="outlined"
-            multiline
-            value = {desc} 
-            onChange = {descTextHandle}
-            maxRows={4}/>
+
             <TextField
             required
             id="outlined-required"
@@ -335,8 +344,16 @@ function CreateProjectPg(){
             value = {image}
             onChange = {imageTexthandle}
             />
+            <TextField
+            id="outlined-multiline-flexible"
+            label="Description"
+            variant="outlined"
+            multiline
+            value = {desc} 
+            onChange = {descTextHandle}
+            maxRows={4}/>
                 
-            </Box>
+            </Stack>
             <Box
                 sx={{
                 display: 'flex',
@@ -349,7 +366,18 @@ function CreateProjectPg(){
                 justifyContent: 'center'
                 }}
                 >
-            <Button component = {Link} to = "../saved-projects" variant="contained" onClick={handleSubmit}>Submit</Button>
+                <Button  size="large" style={{
+                borderRadius: 25,
+                backgroundColor: "#F4D35E",
+                fontSize: "18",
+                fontWeight: "bold"
+                }} 
+
+                component = {Link} to = "../success"  
+                color = 'primary'  
+                variant="contained">Create
+                </Button>
+            {/* <Button color = 'primary'   component = {Link} to = "../sucess" variant="contained" onClick={handleSubmit}>Create</Button> */}
             </Box>
         </div>
     );

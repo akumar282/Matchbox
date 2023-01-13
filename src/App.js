@@ -1,6 +1,8 @@
 import "./App.css";
 
+
 import React from "react";
+
 import { BrowserRouter, Routes, Outlet } from "react-router-dom";
 import SelectPrefPg from "./Pages/CreatePrefrences";
 import CreateProjectPg from "./Pages/CreateProjectPg";
@@ -13,9 +15,12 @@ import { Route, Switch, Link } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import LandingPage from "./Pages/LandingPage";
 
+
 function App() {
+  
   return (
     <BrowserRouter>
+
       <Routes>
         {/* <Route element={<PageLayout> <Outlet /> </PageLayout>}> */}
         <Route path="/create-prefrences" element={<SelectPrefPg />} />
@@ -24,6 +29,7 @@ function App() {
         <Route path="/a" element={<NavBar />} />
         <Route path="/" element={<LandingPage />} />
       </Routes>
+
     </BrowserRouter>
   );
 }

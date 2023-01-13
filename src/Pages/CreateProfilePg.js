@@ -1,26 +1,34 @@
-import { React, useState, useSyncExternalStore } from 'react';
+import { React, useState } from 'react';
 import logImg from '../img/Logo.png';
+import InvertLogoImg from '../img/InvertLogo.svg';
 // mui IMPORTS
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Box, { BoxProps } from '@mui/material/Box';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { MuiThemeProvider, createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import LogoImg from '../img/Logo.svg';
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+// navvv
+import NavBar from '../components/NavBar'
 
+import * as mut from '../backend/mutations'
+
+// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+export let username
+export let tags
 
 const LANG_LIST = [{lang: "C#"}, {lang: "C++"}, {lang: "C"},{lang: "Java"}, {lang: "Python"}, {lang: "Typescript"}, {lang: "HTML/CSS"}, {lang: "Kotlin"}, {lang: "Swift"}, {lang: "Ruby"}, {lang: "SQL"}]; // static plan list
 const DEV_LIST = [{dev: "Frontend Development"}, {dev: "Backend Development"}, {dev: "Full-Stack Development"}, {dev: "Desktop Development"}, {dev: "Web Development"}, {dev: "Database Development"}, {dev: "Mobile Development"}, {dev: "Cloud Computing"}, {dev: "DevOps Engineering"}, {dev: "Security Engineering"}]; 
-const INTEREST_LIST = [{inte: "Enviornmental"}, {inte: "Connectivity"}, {inte: "Communication"}, {inte: "Education"}, {inte: "Entertainment"}];
+const INTEREST_LIST = [{inte: "Environmental"}, {inte: "Connectivity"}, {inte: "Communication"}, {inte: "Education"}, {inte: "Entertainment"}];
 const SIZE_LIST = [{siz: "100 people >"}, {siz: "50 people >"}, {siz: "25 people >"}, {siz: "10 people>"}, {siz: "< 5 people"}];
 //const KEYWORD_PARAMS = [];
 
@@ -29,6 +37,18 @@ const darkTheme = createTheme({
       mode: 'dark',
     },
   });
+
+const primTheme = createTheme({
+palette: {
+    primary: {
+    main: '#312C51'
+    },
+    secondary: {
+    main: "#F4D35E"
+    }
+},
+});
+  
 
 function CreateProfilePg(){
     
@@ -78,16 +98,56 @@ function CreateProfilePg(){
     };
 
     const handleSubmit = (event) => {
+
         console.log("button submitted");
-        console.log(selectedLang);        
+        console.log(selectedLang); // [] of all tags
+        
+        username = textValue
+        tags = selectedLang
+
+        mut.createUser(username, selectedLang)
+
     }
 
     return(
         
-        <div sx={{ color: 'text.secondary' }}>
-        <ThemeProvider theme={darkTheme}>
-    </ThemeProvider>
-            <AppBar>
+        <div>
+         <div>
+          <ThemeProvider theme={primTheme}> 
+              <AppBar color="primary"> 
+                <Toolbar>
+                    <Typography
+                      variant="h6"
+                      noWrap
+                      component="a"
+                      href="/"
+                      sx={{
+                      display: { xs: 'none', md: 'flex' },
+                      fontFamily: 'Arial;',
+                      fontWeight: 700,
+                      mr: 2,
+                      letterSpacing: '.1rem',
+                      color: 'inherit',
+                      textDecoration: 'none',
+                      }}>
+                      <img src={InvertLogoImg} width={100} height={66} alt="passedImg"/>
+                    </Typography>
+                    <Stack direction = 'row' spacing = {2}>
+                        <Button component = {Link} to = "../discover" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'Arial', fontWeight: 700, display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Discover</Button> 
+                        <Button component = {Link} to = "../saved-project" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'Arial',fontWeight: 700,  display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Saved</Button> 
+                        <Button component = {Link} to = "../create-project" color = 'inherit'  sx= {{letterSpacing: '.1rem', fontFamily: 'Arial',fontWeight: 700,  display: { xs: 'none', md: 'flex' }, fontSize:15, }}> Create</Button>   
+                    </Stack> 
+                </Toolbar>
+            </AppBar>
+          </ThemeProvider>
+        </div>
+ 
+ 
+ 
+        {/* <ThemeProvider theme={darkTheme}>
+        </ThemeProvider> */}
+
+            {/* <AppBar>
                 <Toolbar>
                     <Typography
                     variant="h6"
@@ -106,8 +166,9 @@ function CreateProfilePg(){
                         <img src={logImg} width={80} height={40} alt="passedImg"/>
                     </Typography>
                 </Toolbar>
-            </AppBar>
+            </AppBar> */}
         <Container xp = {{mr: 2, display: 'flex',flexDirection: 'row', flexWrap: 'wrap', MaxHeight: 50}}>
+
             <h1>
                 Matchbox
                 
@@ -115,11 +176,28 @@ function CreateProfilePg(){
             <h1>
                 Create Profile
             </h1>
-            <Typography   variant="h6" noWrap component="a" xp = {{ fontWeight: 'bold',m:10, mb:0,display: { xs: 'none', md: 'flex' } }}>
+            {/* <Typography   variant="h6" noWrap component="a" xp = {{ fontWeight: 'bold',m:10, mb:0,display: { xs: 'none', md: 'flex' } }}>
                 Choose a Username 
-            </Typography>
+            </Typography> */}
+            <Stack  
+                spacing= {2}
+                direction = 'column'
+                sx={{
+                display: 'flex',
+            }}>
+            <Stack  
+            spacing= {2}
+            // justifyContent="center"
+            direction='row'
+            sx={{
+            display: 'flex',
             
-            <TextField sx = {{ml:2}} id="outlined-basic" label="Username" variant="outlined" value = {textValue} onChange = {handleTextFieldChange} />
+            }}>
+                <TextField id="outlined-basic" label="Username" variant="outlined" value = {textValue} onChange = {handleTextFieldChange} />
+                <TextField id="outlined-basic" label="Password" variant="outlined"/>
+            </Stack>
+           <TextField  id="outlined-basic" label="Github Account" variant="outlined"/>
+            </Stack>
             </Container>
             <Box
             sx={{
@@ -155,10 +233,11 @@ function CreateProfilePg(){
                     }}
                 >
                     {LANG_LIST.map((e)=> 
-                    
+                    <ThemeProvider theme={primTheme}> 
                         <FormControlLabel  
                             key = {e.lang}
                             control = {<Checkbox
+                            color="secondary"
                             sx=
                             {{
                             p:2
@@ -166,10 +245,12 @@ function CreateProfilePg(){
                             id = {e.lang}
                             onChange = {handleCheckboxChange}
                             />}
-                            label={e.lang} 
-                        />
-                        )}
-                        </Box>
+                            label={e.lang} >
+                        </FormControlLabel>
+                    </ThemeProvider>
+                    )}
+
+                </Box>
                 </FormGroup>
             </Stack>
             <Stack     
@@ -194,17 +275,21 @@ function CreateProfilePg(){
             }}
       >
                     {DEV_LIST.map((e)=> 
+                    <ThemeProvider theme={primTheme}> 
                             <FormControlLabel   
                             key = {e.dev}   
                             control = {<Checkbox
                             sx={{m: 2}}
                             id = {e.dev}
+                            color = "secondary"
                             onChange = {handleCheckboxChange}
                             />} 
                             
                             label={e.dev}   
                             />
+                         </ThemeProvider>
                             )}
+                   
                 </Box> 
                 </FormGroup>
                 </Stack>
@@ -230,16 +315,19 @@ function CreateProfilePg(){
             }}>
                     {INTEREST_LIST.map((e)=>{
                         return (
+                            <ThemeProvider theme={primTheme}> 
                         <FormControlLabel  
                             key = {e.inte}                 
                             control = {<Checkbox
                             sx={{m: 2}}
+                            color="secondary"
                             id = {e.inte}
                             onChange = {handleCheckboxChange}
                         />} 
                         label={e.inte}
                        
                         />
+                         </ThemeProvider>
                         )})}
                 </Box>
                 </FormGroup>
@@ -264,17 +352,21 @@ function CreateProfilePg(){
             borderRadius: 1,
             justifiyContent: 'space-evenly',
             }}>
+
                     {SIZE_LIST.map((e)=> 
+                      <ThemeProvider theme={primTheme}> 
                         <FormControlLabel  
                             key = {e.siz}
                             control = {<Checkbox
                             sx={{m: 2}}
                             id = {e.siz}
+                            color="secondary"
                             onChange = {handleCheckboxChange}
                             />}
                             label={e.siz} 
                             
                         />
+                        </ThemeProvider>
                         )}
                         </Box>
                 </FormGroup>
@@ -295,7 +387,19 @@ function CreateProfilePg(){
                 justifyContent: 'center'
                 }}
                 >
-                <Button component = {Link} to = "../saved-projects" variant="contained" onClick={handleSubmit}>Submit</Button>
+                <Button  size="large" style={{
+                borderRadius: 25,
+                backgroundColor: "#F4D35E",
+                fontSize: "18",
+                fontWeight: "bold"
+                }} 
+
+                component = {Link} to = "../discover"
+                color = 'primary'  
+                variant="contained"
+                onClick={handleSubmit}>
+                Submit
+                </Button>
 
 
             </Box>

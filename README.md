@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# Matchbox
+Welcome to Matchbox! Where innovation ignites... 
+Our web application connects developers to projects that align with their interests, experience, and values
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Visit our Figma wireframe! 
+https://www.figma.com/file/5GgpPtR2nnpO10SCe0ZyiK/Matchbox?node-id=0%3A1
 
-## Available Scripts
+## Documentation
+Frontend
+* Javascript (React)
+* React router-dom
+* MUI
 
-In the project directory, you can run:
+Backend
+* AWS amplify
+* GraphQL
+* DyanamoDB
 
-### `npm start`
+## Inspiration
+Our team was inspired by our university’s CS community. Being surrounded by talented developers, and as developers ourselves, we wanted to have a resource that would allow us to find projects we were passionate about.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## What it does
+Matchbox is a web cloud application that allows users to specify their background, experience, and interests. The application connects the user with projects submitted by other developers that align with their values and background through our filtering algorithm. Matchbox empowers developers with the ability to instantly discover projects that they are excited to contribute to.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## How we built it
+We started by designing our user interface in Figma. Our team utilized AWS Amplify’s cloud computing tools to construct our backend and create a relational database using DynamoDB. Additionally, we used GraphQL to query and mutate the database to  interact and provide information with the frontend. This allowed dynamic and responsive features, such as viewing other users’ posted projects, or setting their own search preferences to help filter for similar projects.
 
-### `npm test`
+Our team then rapidly developed the UI using Javascript with React and MUI web development libraries to flush out six dynamic and responsive pages which also connected to our backend.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## What's next for Matchbox
+Our team is looking forward to expanding our web app’s features, scaling our application, and improving the user experience for our developers. We are excited to have the opportunity to deploy a working website to production!
 
-### `npm run build`
+Such as implementing a list of ‘not interested’ projects so the user can manually filter out projects they aren’t interested in despite it matching their language preferences or areas of experience.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
