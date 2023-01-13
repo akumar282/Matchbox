@@ -56,7 +56,7 @@ import {
             alignItems: "center",
           }}
         >
-          {"Register Your Account"}
+          {"Create Account"}
         </DialogTitle>
         {/* consider this a div */}
         <DialogContent
@@ -127,7 +127,7 @@ import {
               }}
               variant="contained"
               onClick={handleSubmit}
-            > Submit
+            > Create Account
             </Button>
           </div>
         </DialogContent>
