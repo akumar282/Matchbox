@@ -17,6 +17,7 @@ import {
     const [Uname, SetUname] = React.useState(""); //Username
     const [Pname, SetPname] = React.useState(""); //password
     const [Ename, SetEname] = React.useState(""); //email
+    const [Gitlink, SetGitlink] = React.useState(""); //email
 
     function handleClose() {
       SetFname("");
@@ -56,7 +57,7 @@ import {
             alignItems: "center",
           }}
         >
-          {"Register Your Account"}
+          {"Create Account"}
         </DialogTitle>
         {/* consider this a div */}
         <DialogContent
@@ -108,6 +109,14 @@ import {
             onChange={(e) => SetPname(e.target.value)}
             required
           />
+          <TextField
+            className="Gitlink"
+            label="Github"
+            variant="outlined"
+            value={Gitlink}
+            onChange={(e) => SetGitlink(e.target.value)}
+
+          />
           </form>
           <div className="popupControls">
             <Button
@@ -119,7 +128,7 @@ import {
               }}
               variant="contained"
               onClick={handleSubmit}
-            > Submit
+            > Create Account
             </Button>
           </div>
         </DialogContent>
