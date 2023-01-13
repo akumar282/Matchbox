@@ -17,21 +17,20 @@ import {
     const [Uname, SetUname] = React.useState(""); //Username
     const [Pname, SetPname] = React.useState(""); //password
     const [Ename, SetEname] = React.useState(""); //email
-    const [Gitlink, SetGitlink] = React.useState(""); //email
 
-    function handleClose() {
-      SetFname("");
-      SetPname("");
-      props.setTrigger(false);
-    }
-    function handleSubmit() {
-      props.setTrigger(false);
-      console.log(" Password: " + Pname);
-    }
-    return props.trigger ? (
-      // this is the main container for the popup consider this like divs  dad
-      <Dialog open={props.trigger} maxWidth="md" fullWidth="true">
-        {/* as it said Dialog has its own form of objects 
+  function handleClose() {
+    SetFname("");
+    SetPname("");
+    props.setTrigger(false);
+  }
+  function handleSubmit() {
+    props.setTrigger(false);
+    console.log(" Password: " + Pname);
+  }
+  return props.trigger ? (
+    // this is the main container for the popup consider this like divs  dad
+    <Dialog open={props.trigger} maxWidth="md" fullWidth="true">
+      {/* as it said Dialog has its own form of objects 
               you are going to have to search up the documentation for them*/}
                <IconButton 
               sx={{
@@ -57,7 +56,7 @@ import {
             alignItems: "center",
           }}
         >
-          {"Create Account"}
+          {"Register Your Account"}
         </DialogTitle>
         {/* consider this a div */}
         <DialogContent
@@ -128,7 +127,7 @@ import {
               }}
               variant="contained"
               onClick={handleSubmit}
-            > Create Account
+            > Submit
             </Button>
           </div>
         </DialogContent>
