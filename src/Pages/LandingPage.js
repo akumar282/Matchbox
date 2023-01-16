@@ -24,9 +24,13 @@ const theme = createTheme({
 export default function LandingPage() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  function NoAccount() {
+    setIsLoginOpen(false);
+    setIsCreateOpen(true);
+  }
   return (
     <div className="Starting">
-      <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} />
+      <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
       <LandingPopupCreate trigger={isCreateOpen} setTrigger={setIsCreateOpen} />
       <div className="navHome">
         {/* logo */}

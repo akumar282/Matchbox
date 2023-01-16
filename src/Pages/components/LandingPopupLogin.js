@@ -12,14 +12,16 @@ import "./LandingPopup.css";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useFormik } from "formik";
 import * as yup from "yup";
-export default function LandingPopupLogin(props) {
+
+export default function LandingPopupLogin(props ,{setCreateOpen, param}) {
   const rip = "sheesh";
   function handleClose() {
     props.setTrigger(false);
   }
-  function handleSubmit() {
+  function handleNoAccount() {
     props.setTrigger(false);
-    console.log("Name: " + name + " Password: " + pName);
+    {setCreateOpen};
+    console.log(setIsCreateOpen);
   }
   const validationSchema = yup.object({
     email: yup
@@ -137,11 +139,11 @@ export default function LandingPopupLogin(props) {
           
         </div>
         <div className="links">
-            <Button>
-              <a href="/forgotPassword">Dont Have An Account?</a>
+            <Button onClick={handleNoAccount}>
+               Dont Have An Account?
             </Button>
             <Button>
-              <a href="/forgotPassword">Forgot Password?</a>
+              Forgot Password?
             </Button>
           </div>
       </DialogContent>

@@ -5,6 +5,7 @@ import SelectPrefPg from './Pages/CreatePrefrences'
 
 // import SavedProjects from './Pages/SavedProjects'
 // import { Tabs, Tab, AppBar } from '@material-ui/core'
+import NotFound from './Pages/notfound'
 import NavBar from './components/NavBar'
 import LandingPage from './Pages/LandingPage'
 function App () {
@@ -13,6 +14,7 @@ function App () {
       <Routes>
         <Route path='/create-prefrences' element={<SelectPrefPg />} />
         <Route path='/a' element={<NavBar />} />
+        <Route path='/*' element={<NotFound />} />
         <Route path='/' element={<LandingPage />} />
       </Routes>
     </BrowserRouter>
