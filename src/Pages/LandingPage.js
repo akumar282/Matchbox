@@ -1,5 +1,5 @@
 import { React, useState, useSyncExternalStore } from "react";
-import "./LandingPage.css";
+import "./CSS/LandingPage.css";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import illustration from "./../img/landing-img.svg"; // matchstick illustration
@@ -98,7 +98,10 @@ export default function LandingPage() {
         sx={{
           backgroundColor: "#6259b9",
           marginLeft: "5%",
-          fontSize: "max(20px, 10px);",
+          mt: "1%",
+          width:"20%",
+          height : "6vh",
+          fontSize: "max(28px, 10px);",
           "&:hover": {
             backgroundColor: "#716ab4",
           },
