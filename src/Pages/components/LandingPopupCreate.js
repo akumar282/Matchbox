@@ -223,7 +223,6 @@ export default function LandingPopupCreate(props) {
             onClick={formik.handleSubmit}
             type="submit"
           >
-            {" "}
             Create Account
           </Button>
         </div>
