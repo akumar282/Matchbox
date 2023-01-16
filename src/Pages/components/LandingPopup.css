@@ -1,0 +1,12 @@
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+}
+.popupControls {
+  display: flex;
+  gap: 1rem;
+}
