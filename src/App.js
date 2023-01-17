@@ -5,7 +5,7 @@ import SelectPrefPg from './Pages/CreatePrefrences'
 
 // import SavedProjects from './Pages/SavedProjects'
 // import { Tabs, Tab, AppBar } from '@material-ui/core'
-import NotFound from './Pages/notfound'
+import NotFound from './Pages/NotFound'
 import NavBar from './components/NavBar'
 import LandingPage from './Pages/LandingPage'
 import HomePage from './Pages/HomePage'
