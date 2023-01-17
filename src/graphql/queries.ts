@@ -104,10 +104,12 @@ export const getUsersModel = /* GraphQL */ `
         nextToken
         startedAt
       }
+      first_name
+      last_name
       user_creation_date
+      dahublink
       saved_posts
       hide_posts
-      dahublink
       createdAt
       updatedAt
       _version
@@ -128,10 +130,12 @@ export const listUsersModels = /* GraphQL */ `
         user_name
         email
         password
+        first_name
+        last_name
         user_creation_date
+        dahublink
         saved_posts
         hide_posts
-        dahublink
         createdAt
         updatedAt
         _version
@@ -161,10 +165,12 @@ export const syncUsersModels = /* GraphQL */ `
         user_name
         email
         password
+        first_name
+        last_name
         user_creation_date
+        dahublink
         saved_posts
         hide_posts
-        dahublink
         createdAt
         updatedAt
         _version
