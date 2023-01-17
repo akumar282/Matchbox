@@ -67,8 +67,7 @@ export default function LandingPopupCreate(props) {
   return props.trigger ? (
     // this is the main container for the popup consider this like divs  dad
     <Dialog open={props.trigger} maxWidth="md" fullWidth="true">
-      {/* as it said Dialog has its own form of objects 
-              you are going to have to search up the documentation for them*/}
+      {/* as it said Dialog has its own form of objects you are going to have to search up the documentation for them*/}
       <IconButton
         sx={{
           width: "40px",
@@ -178,6 +177,7 @@ export default function LandingPopupCreate(props) {
                 id="password"
                 name="password"
                 label="Password"
+                type="password"
                 variant="outlined"
                 value={formik.values.password}
                 onChange={formik.handleChange}
@@ -193,6 +193,7 @@ export default function LandingPopupCreate(props) {
                 id="confirmPassword"
                 name="confirmPassword"
                 label="Confirm Password"
+                type="password"
                 variant="outlined"
                 value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
@@ -228,8 +229,10 @@ export default function LandingPopupCreate(props) {
         </div>
       </DialogContent>
     </Dialog>
+    
   ) : (
-    ""
-  );
-  {}
+    <React.Fragment>
+    </React.Fragment>
+    
+  )
 }
