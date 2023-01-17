@@ -7,19 +7,21 @@ Amplify.configure(awsconfig)
 
 
 // jest.mock('../../../src/API')
+let testnum = Math.floor(Math.random() * 10000)
 
-const bigload: CreateUsersPayload = {
+const testload: CreateUsersPayload = {
   input: {
-    user_name: 'haylau',
-    email: 'haydenemail@gmail',
-    password: 'peepeepoopoo2'
+    user_name: `example_user${testnum}`,
+    email: `exampleemail${testnum}@gmail.com`,
+    password: 'testpassword'
   }
 }
 
 describe('Mutation Tests', () => {
+
   test('Create user', async () => {
-    const result = await createUser(bigload)
-    console.log(result)
-    expect(createUser).toBeCalled()
+    const result = await createUser(testload)
+    const flatResult = JSON.stringify(result)
+    expect(flatResult).toContain(`example_user${testnum}`)
   })
 })
