@@ -15,12 +15,12 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
-import LogoImg from '../img/Logo.svg';
+//import LogoImg from '../img/Logo.svg';
 
 // navvv
 import NavBar from '../components/NavBar'
 
-import * as mut from '../backend/mutations'
+//import * as mut from '../backend/mutations'
 
 // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export let username
