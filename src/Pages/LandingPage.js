@@ -24,6 +24,7 @@ const theme = createTheme({
 export default function LandingPage() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  
   function NoAccount() {
     setIsLoginOpen(false);
     setIsCreateOpen(true);

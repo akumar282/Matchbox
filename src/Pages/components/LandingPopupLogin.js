@@ -6,23 +6,23 @@ import {
   TextField,
   IconButton,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import "./LandingPopup.css";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-export default function LandingPopupLogin(props ,{setCreateOpen, param}) {
-  const rip = "sheesh";
+export default function LandingPopupLogin(props) {
+  function noAccount() {
+    props.setTrigger(false);
+    props.setCreateOpen();
+  }
   function handleClose() {
+    formik.resetForm();
     props.setTrigger(false);
   }
-  function handleNoAccount() {
-    props.setTrigger(false);
-    {setCreateOpen};
-    console.log(setIsCreateOpen);
-  }
+  const navigate = useNavigate();
   const validationSchema = yup.object({
     email: yup
       .string("Enter your email")
@@ -42,8 +42,7 @@ export default function LandingPopupLogin(props ,{setCreateOpen, param}) {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       //Link to preferences page
-      alert(JSON.stringify(values, null, 2));
-      navigate("/");
+      navigate("/home");
     },
   });
   return props.trigger ? (
@@ -136,16 +135,14 @@ export default function LandingPopupLogin(props ,{setCreateOpen, param}) {
           >
             Login
           </Button>
-          
         </div>
         <div className="links">
-            <Button onClick={handleNoAccount}>
-               Dont Have An Account?
-            </Button>
-            <Button>
-              Forgot Password?
-            </Button>
-          </div>
+          <Button onClick={noAccount}>Dont Have An Account?</Button>
+
+          <Button to="/forgotpassword" component={Link}>
+            Forgot Password?
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
   ) : (
