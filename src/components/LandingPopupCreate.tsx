@@ -12,7 +12,10 @@ import "./LandingCreatePopup.css";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import awsconfig from '../aws-exports'
+import {Amplify} from 'aws-amplify'
 import { CreateUsersModelInput } from "../API";
+Amplify.configure(awsconfig)
 const frontload: CreateUsersModelInput = {
   user_name: '',
   email: '',
@@ -20,6 +23,8 @@ const frontload: CreateUsersModelInput = {
   last_name: '',
   password: ''
 }
+
+
 export default function LandingPopupCreate(props) {
 
   const navigate = useNavigate();
@@ -29,7 +34,7 @@ export default function LandingPopupCreate(props) {
     frontload.first_name = props.firstName
     frontload.last_name = props.lastName
     frontload.password = props.password
-    JSON.stringify(frontload)
+    alert(JSON.stringify(frontload))
   }
   function handleClose() {
     formik.resetForm();
