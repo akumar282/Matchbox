@@ -12,38 +12,54 @@ import "./LandingCreatePopup.css";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useFormik } from "formik";
 import * as yup from "yup";
-
+import { CreateUsersModelInput } from "../API";
+const frontload: CreateUsersModelInput = {
+  user_name: '',
+  email: '',
+  first_name: '',
+  last_name: '',
+  password: ''
+}
 export default function LandingPopupCreate(props) {
+
   const navigate = useNavigate();
+  function sendToDatabase(props) {
+    frontload.user_name = props.username
+    frontload.email = props.email
+    frontload.first_name = props.firstName
+    frontload.last_name = props.lastName
+    frontload.password = props.password
+    JSON.stringify(frontload)
+  }
   function handleClose() {
     formik.resetForm();
     props.setTrigger(false);
   }
   const validationSchema = yup.object({
     firstName: yup
-      .string("Enter your first name")
+      .string()
       .min(2, "First name should be of minimum 2 characters")
       .max(20, "First name should be of maximum 20 characters")
       .required("First name is required"),
     lastName: yup
-      .string("Enter your last name")
+      .string()
       .min(2, "Last name should be of minimum 2 characters")
       .max(20, "Last name should be of maximum 20 characters")
       .required("Last name is required"),
     email: yup
-      .string("Enter your email")
+      .string()
       .email("Enter a valid email")
       .required("Email is required"),
     password: yup
-      .string("Enter your password")
+      .string()
       .min(8, "Password should be of minimum 8 characters")
       .required("Password is required"),
     confirmPassword: yup
-      .string("Confirm your password")
+      .string()
       .oneOf([yup.ref("password"), null], "Passwords must match")
       .required("Confirm password is required"),
     username: yup
-      .string("Enter your username")
+      .string()
       .min(3, "Username should be of minimum 2 characters")
       .max(20, "Username should be of maximum 20 characters")
       .required("Username is required"),
@@ -56,17 +72,19 @@ export default function LandingPopupCreate(props) {
       email: "",
       username: "",
       password: "",
+      confirmPassword: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       //Link to preferences page
       // alert(JSON.stringify(values, null, 2));
-      navigate("/create-prefrences");
+      sendToDatabase(values)
+      navigate("/create-prefrences")
     },
   });
   return props.trigger ? (
     // this is the main container for the popup consider this like divs  dad
-    <Dialog open={props.trigger} maxWidth="md" fullWidth="true">
+    <Dialog open={props.trigger} maxWidth="md" fullWidth={true}>
       {/* as it said Dialog has its own form of objects you are going to have to search up the documentation for them*/}
       <IconButton
         sx={{
@@ -77,10 +95,9 @@ export default function LandingPopupCreate(props) {
           alignSelf: "right",
           marginLeft: "auto",
           marginRight: "1%",
-          marginTop: "1%",
+          marginTop: "1%"
         }}
-        variant="contained"
-        onClick={handleClose}
+        onClick={() => handleClose()}
       >
         <HighlightOffIcon fontSize="large" />
       </IconButton>
@@ -212,7 +229,6 @@ export default function LandingPopupCreate(props) {
         <div className="popupControls">
           <Button
             disabled={formik.isSubmitting}
-            state={formik.validateForm}
             sx={{
               backgroundColor: "#6259b9",
               ":hover": {
@@ -221,7 +237,7 @@ export default function LandingPopupCreate(props) {
               },
             }}
             variant="contained"
-            onClick={formik.handleSubmit}
+            onClick={() => formik.handleSubmit()}
             type="submit"
           >
             Create Account
