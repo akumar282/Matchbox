@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import LogoImg from '../img/Logo.svg';
+//import LogoImg from '../img/Logo.svg';
 import InvertLogoImg from '../img/InvertLogo.svg';
 // nav
 import { Link } from 'react-router-dom';

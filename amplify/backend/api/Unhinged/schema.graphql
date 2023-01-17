@@ -1,36 +1,75 @@
-type TagsModel @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  tag: String
-  usermodelID: ID! @index(name: "byUserModel")
+enum SizeTag {
+  LESS_FIVE
+  MORE_FIVE
+  LESS_TEN
+  MORE_TEN
+  MORE_TWENTY_FIVE
+  MORE_FIFTY
+  HUNDRED
+  MORE_HUND
 }
 
-type BlackListedPosts @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  postID: ID
-  usermodelID: ID! @index(name: "byUserModel")
+enum InterestTag {
+  COMMUNICATE
+  CONNECT
+  ENVIRON
+  EDU
+  ENTERTAIN
+  GAME
 }
 
-type SavedPosts @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  postID: ID
-  usermodelID: ID! @index(name: "byUserModel")
+enum DevelopmentTag {
+  FRONTEND
+  BACKEND
+  FULL_STACK
+  DESKTOP
+  WEB_DEV
+  DATABASE
+  MOBILE
+  CLOUD
+  DEV_OPS
+  CYBER_SEC
 }
 
-type PostModel @model @auth(rules: [{allow: public}]) {
+enum LanguageEnum {
+  C_SHARP
+  C_PLUS_PLUS
+  C
+  JAVA
+  PYTHON
+  TYPESCRIPT
+  JAVASCRIPT
+  KOTLIN
+  SWIFT
+  RUBY
+  RUST
+  SQL
+}
+
+type PostsModel @model @auth(rules: [{allow: public, operations: [read, create ] }]) {
   id: ID!
-  title: String
+  post_title: String!
   description: String
   project_link: String
-  image_link: String
-  usermodelID: ID! @index(name: "byUserModel")
+  image_link: AWSURL
+  post_date: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  lang_tag: [LanguageEnum]
+  dev_type_tag: [DevelopmentTag]
+  interest_tag: [InterestTag]
+  size_tag: [SizeTag]
+  dahublink: String
 }
 
-type UserModel @model @auth(rules: [{allow: public}]) {
+type UsersModel @model @auth(rules: [{allow: public, operations: [read, create ] }]) {
   id: ID!
-  user_name: String
-  TagsModels: [TagsModel] @hasMany(indexName: "byUserModel", fields: ["id"])
-  SavedPosts: [SavedPosts] @hasMany(indexName: "byUserModel", fields: ["id"])
-  BlackListedPosts: [BlackListedPosts] @hasMany(indexName: "byUserModel", fields: ["id"])
-  PostModels: [PostModel] @hasMany(indexName: "byUserModel", fields: ["id"])
+  user_name: String!
+  email: String!
+  password: String!
+  user_posts: [PostsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  user_creation_date: AWSDate
+  saved_posts: [ID]
+  hide_posts: [ID]
+  dahublink: String
 }
  
