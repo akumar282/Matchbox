@@ -1,8 +1,8 @@
 import { Amplify, API } from 'aws-amplify'
-import { CreateUsersModelInput } from "../../API"
+import { CreateUsersPayload } from "../../graphql/types"
 import { createUsersModel } from "../../graphql/mutations"
 
-export async function createUser(user: any) {
+export async function createUser(user: CreateUsersPayload) {
   return await API.graphql(
     {
       authMode: "API_KEY",

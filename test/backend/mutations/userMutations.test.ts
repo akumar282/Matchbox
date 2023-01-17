@@ -2,23 +2,17 @@ import { Amplify } from 'aws-amplify'
 import { CreateUsersModelInput } from '../../../src/API'
 import { createUser } from '../../../src/backend/mutations/userMutations'
 import awsconfig from '../../../src/aws-exports'
+import { CreateUsersPayload } from '../../../src/graphql/types'
 Amplify.configure(awsconfig)
 
 
 // jest.mock('../../../src/API')
 
-
-const payload: CreateUsersModelInput = {
-  user_name: 'akumar28',
-  email: 'actuallychowmein@gmail',
-  password: 'peepeepoopoo'
-}
-
-const bigload = {
+const bigload: CreateUsersPayload = {
   input: {
-    user_name: 'akumar28',
-    email: 'actuallychowmein@gmail',
-    password: 'peepeepoopoo'
+    user_name: 'haylau',
+    email: 'haydenemail@gmail',
+    password: 'peepeepoopoo2'
   }
 }
 
