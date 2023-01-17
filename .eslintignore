@@ -1,2 +1,4 @@
 src\models
 **/*.js
+**/*.jsx
+**/*.tsx

@@ -146,6 +146,6 @@ export default function LandingPopupLogin(props) {
       </DialogContent>
     </Dialog>
   ) : (
-    ""
+    <React.Fragment></React.Fragment>
   );
 }
