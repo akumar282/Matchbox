@@ -6,8 +6,8 @@ import illustration from "./../img/landing-img.svg"; // matchstick illustration
 import { createTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
-import LandingPopupLogin from "./components/LandingPopupLogin";
-import LandingPopupCreate from "./components/LandingPopupCreate";
+import LandingPopupLogin from "../components/LandingPopupLogin";
+import LandingPopupCreate from "../components/LandingPopupCreate";
 const { palette } = createTheme();
 const { augmentColor } = palette;
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
