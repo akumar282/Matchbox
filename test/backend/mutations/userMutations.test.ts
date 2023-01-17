@@ -7,7 +7,7 @@ Amplify.configure(awsconfig)
 
 
 // jest.mock('../../../src/API')
-let testnum = Math.floor(Math.random() * 10000)
+const testnum = Math.floor(Math.random() * 10000)
 
 const testload: CreateUsersPayload = {
   input: {
