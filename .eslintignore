@@ -1,2 +1,2 @@
 src\models
-*.js
+**/*.js
