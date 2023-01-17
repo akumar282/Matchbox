@@ -46,7 +46,7 @@ enum LanguageEnum {
   SQL
 }
 
-type PostsModel @model @auth(rules: [{allow: public, operations: [read, create ] }]) {
+type PostsModel @model @auth(rules: [{allow: public, operations: [read, create]}]) {
   id: ID!
   post_title: String!
   description: String
@@ -61,15 +61,17 @@ type PostsModel @model @auth(rules: [{allow: public, operations: [read, create ]
   dahublink: String
 }
 
-type UsersModel @model @auth(rules: [{allow: public, operations: [read, create ] }]) {
+type UsersModel @model @auth(rules: [{allow: public, operations: [read, create]}]) {
   id: ID!
   user_name: String!
   email: String!
   password: String!
   user_posts: [PostsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  first_name: String
+  last_name: String
   user_creation_date: AWSDate
+  dahublink: String
   saved_posts: [ID]
   hide_posts: [ID]
-  dahublink: String
 }
  
