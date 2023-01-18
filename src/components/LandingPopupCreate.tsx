@@ -14,7 +14,9 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import awsconfig from '../aws-exports'
 import {Amplify} from 'aws-amplify'
+import { createUser } from "../backend/mutations/userMutations";
 import { CreateUsersModelInput } from "../API";
+import { CreateUsersPayload } from "../graphql/types";
 Amplify.configure(awsconfig)
 const frontload: CreateUsersModelInput = {
   user_name: '',
@@ -23,18 +25,22 @@ const frontload: CreateUsersModelInput = {
   last_name: '',
   password: ''
 }
+const finalload: CreateUsersPayload = {
+  input: frontload
+}
+
 
 
 export default function LandingPopupCreate(props) {
 
   const navigate = useNavigate();
-  function sendToDatabase(props) {
+  async function sendToDatabase(props) {
     frontload.user_name = props.username
     frontload.email = props.email
     frontload.first_name = props.firstName
     frontload.last_name = props.lastName
     frontload.password = props.password
-    alert(JSON.stringify(frontload))
+    const request = await createUser(finalload)
   }
   function handleClose() {
     formik.resetForm();
