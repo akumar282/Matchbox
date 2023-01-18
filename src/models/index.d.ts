@@ -104,10 +104,12 @@ type EagerUsersModel = {
   readonly email: string;
   readonly password: string;
   readonly user_posts?: (PostsModel | null)[] | null;
+  readonly first_name?: string | null;
+  readonly last_name?: string | null;
   readonly user_creation_date?: string | null;
+  readonly dahublink?: string | null;
   readonly saved_posts?: (string | null)[] | null;
   readonly hide_posts?: (string | null)[] | null;
-  readonly dahublink?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -118,10 +120,12 @@ type LazyUsersModel = {
   readonly email: string;
   readonly password: string;
   readonly user_posts: AsyncCollection<PostsModel>;
+  readonly first_name?: string | null;
+  readonly last_name?: string | null;
   readonly user_creation_date?: string | null;
+  readonly dahublink?: string | null;
   readonly saved_posts?: (string | null)[] | null;
   readonly hide_posts?: (string | null)[] | null;
-  readonly dahublink?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

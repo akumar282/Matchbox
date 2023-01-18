@@ -94,10 +94,12 @@ export const createUsersModel = /* GraphQL */ `
         nextToken
         startedAt
       }
+      first_name
+      last_name
       user_creation_date
+      dahublink
       saved_posts
       hide_posts
-      dahublink
       createdAt
       updatedAt
       _version
@@ -120,10 +122,12 @@ export const updateUsersModel = /* GraphQL */ `
         nextToken
         startedAt
       }
+      first_name
+      last_name
       user_creation_date
+      dahublink
       saved_posts
       hide_posts
-      dahublink
       createdAt
       updatedAt
       _version
@@ -146,10 +150,12 @@ export const deleteUsersModel = /* GraphQL */ `
         nextToken
         startedAt
       }
+      first_name
+      last_name
       user_creation_date
+      dahublink
       saved_posts
       hide_posts
-      dahublink
       createdAt
       updatedAt
       _version
