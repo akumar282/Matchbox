@@ -2,7 +2,7 @@ import * as React from 'react'
 import './CSS/LandingPage.css'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-import illustration from './../img/landing-img.svg' // matchstick illustration
+import illustration from '../img/landing-img.svg' // matchstick illustration
 import { createTheme } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
 

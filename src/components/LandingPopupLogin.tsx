@@ -25,11 +25,11 @@ export default function LandingPopupLogin(props) {
   const navigate = useNavigate();
   const validationSchema = yup.object({
     email: yup
-      .string("Enter your email")
+      .string()
       .email("Enter a valid email")
       .required("Email is required"),
     password: yup
-      .string("Enter your password")
+      .string()
       .min(8, "Password should be of minimum 8 characters")
       .required("Password is required"),
   });
@@ -47,7 +47,7 @@ export default function LandingPopupLogin(props) {
   });
   return props.trigger ? (
     // this is the main container for the popup consider this like divs  dad
-    <Dialog open={props.trigger} maxWidth="sm" fullWidth="true">
+    <Dialog open={props.trigger} maxWidth="sm" fullWidth= {true}>
       {/* as it said Dialog has its own form of objects 
             you are going to have to search up the documentation for them*/}
       <IconButton
@@ -59,10 +59,9 @@ export default function LandingPopupLogin(props) {
           alignSelf: "right",
           marginLeft: "auto",
           marginRight: "1%",
-          marginTop: "1%",
+          marginTop: "1%"
         }}
-        variant="contained"
-        onClick={handleClose}
+        onClick={() => handleClose()}
       >
         <HighlightOffIcon fontSize="large" />
       </IconButton>
@@ -119,8 +118,7 @@ export default function LandingPopupLogin(props) {
         </form>
         <div className="popupControls">
           <Button
-            disabled={formik.isSubmitting}
-            state={formik.validateForm}
+             disabled={formik.isSubmitting}
             sx={{
               backgroundColor: "#6259b9",
               width: "25rem",
@@ -130,7 +128,7 @@ export default function LandingPopupLogin(props) {
               },
             }}
             variant="contained"
-            onClick={formik.handleSubmit}
+           onClick={() => formik.handleSubmit()}
             type="submit"
           >
             Login
