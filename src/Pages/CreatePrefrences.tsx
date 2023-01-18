@@ -3,29 +3,65 @@ import { Paper, Card, TextField } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import DoneIcon from '@mui/icons-material/Done';
-
 import "./CSS/CreatePrefrences.css";
-const tags = ["Java", "C++", "Python", "C#", "JavaScript", "PHP", "Ruby"];
+const tags = ["Java", "C++", "Python", "C#", "JavaScript", "PHP", "Ruby", "Swift", "Go", "Rust", "Kotlin", "Dart", "Scala", "TypeScript", "SQL", "NoSQL", "MongoDB", "MySQL", "PostgreSQL", "Firebase", "AWS", "Azure", "GCP", "Docker", "Kubernetes", "Linux", "Windows", "MacOS", "Android", "iOS", "React Native", "Flutter", "React", "Angular", "Vue", "Node", "Express", "Django", "Flask", "HTML", "CSS", "Bootstrap", "Material UI", "SASS", "Tailwind"];
+const tags2 = ["React", "Angular", "Vue", "Node", "Express", "Django", "Flask"];
+const tags3 = ["HTML", "CSS", "Bootstrap", "Material UI", "SASS", "Tailwind"];
+const savedTags : string[] = [];
 export default function CreateProfile() {
-  const [openTag, setTags] = React.useState([]);
+  const [openTag, setTags] = React.useState(savedTags);
+  const [tagState, setTagState] = React.useState(tags);
+  const [countState, setCountState] = React.useState(0);
+
   const handleTag = (event) => {
-    alert(event.target.innerText);
+    if (openTag.includes(event.target.innerText)) {
+      setTags(current => current.filter((tag) => tag !== event.target.innerText))
+    } else
+    setTags(current => [...current,  event.target.innerText])
+  };
+  const handleContinue = () => {
+    if (openTag.length === 0) {
+      alert("Please select at least one tag");
+    }
+    else {
+      alert("Continue to next page");
+      if (countState === 0) {
+        setTagState(tags2);
+        setCountState(1);
+      }
+    }
   };
   return (
     <div>
       <span className="logo">Matchbox</span>
       <div className="CreatePrefrences">
         <h1> Project Prefrences</h1>
-        <div className="tagHolder">
+        <div>
 
+        
+        <div className="tagHolder">
+        {openTag.map((tag) =>  
+          <Chip sx = {{
+            backgroundColor: "#6259b9",
+            m: "none",
+            outline: "auto",
+            ":hover": {
+              backgroundColor: "#716ab4",
+            }
+          }}
+          key= {tag} 
+          label={tag} 
+          variant="outlined" 
+          />
+        )}
         </div>
         <div className="card">
           <div className="Names">
-          {tags.map((tag) => 
+          {tagState.map((tag) => 
             <Chip sx = {{
               backgroundColor: "#6259b9",
               margin: "5px",
-              onclick: {
+              ":hover": {
                 backgroundColor: "#716ab4",
               }
             }}
@@ -33,11 +69,13 @@ export default function CreateProfile() {
             label={tag} 
             variant="outlined" 
             onClick= {handleTag}
+            deleteIcon={<DoneIcon />}
             />
           )}
           </div>
+          <h2> count {openTag}</h2>
           <Button
-            onClick={() => null}
+            onClick={() => handleContinue()}
             sx={{
               backgroundColor: "#6259b9",
               margin: "10%",
@@ -51,6 +89,7 @@ export default function CreateProfile() {
             {" "}
             Continue{" "}
           </Button>
+        </div>
         </div>
       </div>
     </div>
