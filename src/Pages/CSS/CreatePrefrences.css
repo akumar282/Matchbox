@@ -5,29 +5,65 @@
   flex-direction: column;
   align-items: center;
   background-color: rgb(255, 255, 255);
-  outline: auto;
-  outline-color: #000;
+}
+.tagBackground {
+  background-color: rgb(105, 202, 202);
+  width: 30vw;
+  height: 60vh;
+  border-radius: 1rem;
 }
 .tagHolder {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap ;
+  width: 100%;
+  height: 100%;
+  gap: 1vw;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  outline: auto;
+}
+.Names {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  height: 5vh;
-  justify-content: center;
-  gap: 1vw;
-  align-items: center;
-  background-color: azure;
+  margin: auto;
+  margin-top: 5%;
+  flex-wrap: wrap;
+  width: 50vh;
+  height: 50%;
   outline: auto;
-  outline-color: #000;
+  justify-content: center;
+  align-items: center;
 }
 .card {
   display: flex;
   flex-direction: column;
   width: 60vw;
   height: 60vh;
+  background-color: rgb(224, 206, 184);
+  border-radius: 1rem;
+}
+.Page {
+  margin-top: 1%;
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  width: 90vw;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  width: 100%;
+  height: 10%;
+  justify-content: center;
+  align-items: center;
   outline: auto;
-  background-color: rgb(248, 244, 239);
-  align-self: center;
-  justify-self: center;
-  margin-top: 5%;
 }
