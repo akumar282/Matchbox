@@ -10,11 +10,13 @@ import NavBar from './components/NavBar'
 import LandingPage from './Pages/LandingPage'
 import HomePage from './Pages/HomePage'
 import ForgotPassword from './Pages/ForgotPasswordPage'
+import DiscoverPage from './Pages/DiscoverPage'
 function App () {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/create-prefrences' element={<SelectPrefPg />} />
+        <Route path='/create-prefrences' element={<SelectPrefPg/>} />
+        <Route path='/discover' element={<DiscoverPage/>} />
         <Route path='/home' element={<HomePage />} />
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>
         <Route path='/*' element={<NotFound />} />
