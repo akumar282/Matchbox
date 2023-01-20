@@ -2,7 +2,7 @@ import { Amplify } from 'aws-amplify'
 import { CreateUsersModelInput } from '../../../src/API'
 import { createUser } from '../../../src/backend/mutations/userMutations'
 import awsconfig from '../../../src/aws-exports'
-import { CreateUsersPayload } from '../../../src/graphql/types'
+import { CreateUsersPayload } from '../../../src/backend/types'
 Amplify.configure(awsconfig)
 
 
