@@ -11,6 +11,7 @@ import LandingPage from './Pages/LandingPage'
 import HomePage from './Pages/HomePage'
 import ForgotPassword from './Pages/ForgotPasswordPage'
 import DiscoverPage from './Pages/DiscoverPage'
+import AboutPage from './Pages/AboutPage'
 function App () {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ function App () {
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>
         <Route path='/*' element={<NotFound />} />
         <Route path='/' element={<LandingPage />} />
+        <Route path='/about' element={<AboutPage />} />
       </Routes>
     </BrowserRouter>
   )
