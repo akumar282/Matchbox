@@ -3,6 +3,7 @@ import { CreatePostsModelInput } from '../../../src/API'
 import { createPost } from '../../../src/backend/mutations/postMutations'
 import awsconfig from '../../../src/aws-exports'
 import { CreatePostsPayload } from '../../../src/backend/types'
+import { LanguageEnum as Lang, DevelopmentTag as Dev, InterestTag as Int, SizeTag as Size} from '../../../src/API'
 Amplify.configure(awsconfig)
 
 
@@ -17,20 +18,30 @@ const query = `query GetData($id: ID!) {
 
 const variables = { id: "your_entry_id" }
 
+let dateTime = Date.now().toString()
 const testload: CreatePostsPayload = {
   input: {
-    post_title: ``,
-    userID: ``,
-    description: ``
+    post_title: `Matchbox`,
+    description: `A very cool project`,
+    project_link: `https://image.link/image.png`,
+    image_link: ``,
+    post_date: dateTime,
+    userID: `1`,
+    lang_tag:  [Lang.C_PLUS_PLUS],
+    dev_type_tag:  [Dev.BACKEND],
+    interest_tag:  [Int.COMMUNICATE, Int.CONNECT, Int.ENTERTAIN],
+    size_tag: [Size.LESS_FIVE],
+    dahublink: `https://github.com/testuser/testproj.git`,
+    _version:  0
   }
 }
 
 describe('Mutation Tests', () => {
 
-  // test('Create user', async () => {
-  //   // const item = await API.get("items", "/items/123");
-  //   const result = await createPost(testload)
-  //   const flatResult = JSON.stringify(result)
-  //   expect(flatResult).toContain(`example_user${testnum}`)
-  // })
+  test('Create post', async () => {
+    const result = await createPost(testload)
+    const flatResult = JSON.stringify(result)
+    expect(flatResult).toContain(`Matchbox`)
+  })
+
 })

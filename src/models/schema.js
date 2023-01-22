@@ -140,7 +140,8 @@ export const schema = {
                                 "allow": "public",
                                 "operations": [
                                     "read",
-                                    "create"
+                                    "create",
+                                    "delete"
                                 ]
                             }
                         ]
@@ -269,7 +270,8 @@ export const schema = {
                                 "allow": "public",
                                 "operations": [
                                     "read",
-                                    "create"
+                                    "create",
+                                    "delete"
                                 ]
                             }
                         ]

@@ -46,7 +46,7 @@ enum LanguageEnum {
   SQL
 }
 
-type PostsModel @model @auth(rules: [{allow: public, operations: [read, create]}]) {
+type PostsModel @model @auth(rules: [{allow: public, operations: [read, create, delete]}]) {
   id: ID!
   post_title: String!
   description: String
@@ -61,7 +61,7 @@ type PostsModel @model @auth(rules: [{allow: public, operations: [read, create]}
   dahublink: String
 }
 
-type UsersModel @model @auth(rules: [{allow: public, operations: [read, create]}]) {
+type UsersModel @model @auth(rules: [{allow: public, operations: [read, create, delete]}]) {
   id: ID!
   user_name: String!
   email: String!
