@@ -4,6 +4,7 @@ import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import DoneIcon from "@mui/icons-material/Done";
 import "./CSS/CreatePrefrences.css";
+import { useNavigate } from "react-router-dom";
 const tags = [
   "Java",
   "C++",
@@ -12,6 +13,8 @@ const tags = [
   "JavaScript",
   "PHP",
   "Ruby",
+  "HTML",
+  "CSS",
   "Swift",
   "Go",
   "Rust",
@@ -20,45 +23,37 @@ const tags = [
   "Scala",
   "TypeScript",
   "SQL",
-  "NoSQL",
+];
+const tags2 = [
+  "React",
+  "React Native",
+  "Angular",
+  "Vue",
+  "Node",
+  "Express",
+  "WebSocketIO",
+  "Django",
+  "Flask",
   "MongoDB",
   "MySQL",
   "PostgreSQL",
   "Firebase",
   "AWS",
   "Azure",
-  "GCP",
-  "Docker",
-  "Kubernetes",
-  "Linux",
-  "Windows",
-  "MacOS",
-  "Android",
-  "iOS",
-  "React Native",
-  "Flutter",
-  "React",
-  "Angular",
-  "Vue",
-  "Node",
-  "Express",
-  "Django",
-  "Flask",
-  "HTML",
-  "CSS",
-  "Bootstrap",
-  "Material UI",
-  "SASS",
-  "Tailwind",
+  "Heroku",
 ];
-const tags2 = ["React", "Angular", "Vue", "Node", "Express", "Django", "Flask"];
-const tags3 = ["HTML", "CSS", "Bootstrap", "Material UI", "SASS", "Tailwind"];
+const tags3 = ["small", "medium", "large"];
+const arrTags = [tags, tags2, tags3];
+const arrTitle = ["Languages", "Frameworks", "Size"];
 const savedTags: string[] = [];
 export default function CreateProfile() {
+  const navigate = useNavigate();
   const [openTag, setTags] = React.useState(savedTags);
-  const [tagState, setTagState] = React.useState(tags);
-  const [countState, setCountState] = React.useState(0);
-
+  const [tagState, setTagState] = React.useState(tags); //add tags
+  const [countState, setCountState] = React.useState(0); //index state
+  const [continueState, setContinueState] = React.useState("Continue"); //changes button label
+  let finalCount = arrTags.length;
+  const [Title, setTitle] = React.useState("Languages");
   const handleTag = (event) => {
     if (openTag.includes(event.target.innerText)) {
       setTags((current) =>
@@ -70,53 +65,74 @@ export default function CreateProfile() {
     if (openTag.length === 0) {
       alert("Please select at least one tag");
     } else {
-      if (countState === 0) {
-        setTagState(tags2);
-        setCountState(1);
+      if (countState < finalCount) {
+        setCountState(countState + 1);
+        setTagState(arrTags[countState + 1]);
+        setTitle(arrTitle[countState + 1]);
+        if (countState + 1 === finalCount - 1) {
+          setContinueState("Submit");
+        }
+        if (countState + 1 === finalCount) {
+          alert(openTag);
+          navigate("/home");
+        }
       }
     }
   };
   const handleBack = () => {
-    if (countState === 1) {
-      setTagState(tags);
-      setCountState(0);
+    if (countState > 0) {
+      setCountState(countState - 1);
+      setTagState(arrTags[countState - 1]);
+      setTitle(arrTitle[countState - 1]);
+      if (countState - 1 != finalCount - 1) {
+        setContinueState("Continue");
+      }
     }
   };
   return (
     <div>
       <span className="logo">Matchbox</span>
       <div className="CreatePrefrences">
-        <h1> Project Prefrences</h1>
+        <h1> Project Preferences</h1>
         <div className="Page">
           <div className="tagBackground">
-          <div className="tagHolder">
-            {openTag.map((tag) => (
-              <Chip
-                sx={{
-                  backgroundColor: "#6259b9",
-                  m: "none",
-                  outline: "auto",
-                  ":hover": {
-                    backgroundColor: "#716ab4",
-                  },
-                }}
-                key={tag}
-                label={tag}
-                variant="outlined"
-              />
-            ))}
-          </div>
+            <div className="tagHolder">
+              {openTag.map((tag) => (
+                <Chip
+                  sx={{
+                    backgroundColor: "#6259b9",
+                    width: "8rem",
+                    height: "3vh",
+                    fontSize: "1rem",
+                    m: "none",
+                    outline: "auto",
+                    ":hover": {
+                      backgroundColor: "#716ab4",
+                    },
+                  }}
+                  key={tag}
+                  label={tag}
+                  variant="outlined"
+                />
+              ))}
+            </div>
           </div>
           <div className="card">
+            <h1 className="Title">{Title}</h1>
             <Paper />
             <div className="Names">
               {tagState.map((tag) => (
                 <Chip
                   sx={{
                     backgroundColor: "#6259b9",
+                    width: "8rem",
+                    height: "3vh",
+                    fontSize: "1rem",
+                    color: "#f0f8ff",
                     margin: "5px",
                     ":hover": {
                       backgroundColor: "#716ab4",
+                      color: "#f0f8ff",
                     },
                   }}
                   key={tag}
@@ -129,36 +145,36 @@ export default function CreateProfile() {
             </div>
             {/* <h2> count {openTag}</h2> */}
             <div className="buttons">
-            <Button 
-            onClick={() =>handleBack()}
-            sx={{
-              backgroundColor: "#6259b9",
-              margin: "10%",
-              color : "white",
-              width: "10vw",
-              fontSize: "max(20px, 10px);",
-              "&:hover": {
-                backgroundColor: "#716ab4",
-              },
-            }}
-            >
-              Go Back
-            </Button>
-            <Button
-              onClick={() => handleContinue()}
-              sx={{
-                backgroundColor: "#6259b9",
-                margin: "10%",
-                width: "30vw",
-                fontSize: "max(20px, 10px);",
-                "&:hover": {
-                  backgroundColor: "#716ab4",
-                },
-              }}
-              variant="contained"
-            >
-              Continue
-            </Button>
+              <Button
+                onClick={() => handleBack()}
+                sx={{
+                  backgroundColor: "#6259b9",
+                  margin: "10%",
+                  color: "white",
+                  width: "10vw",
+                  fontSize: "max(20px, 10px);",
+                  "&:hover": {
+                    backgroundColor: "#716ab4",
+                  },
+                }}
+              >
+                Go Back
+              </Button>
+              <Button
+                onClick={() => handleContinue()}
+                sx={{
+                  backgroundColor: "#6259b9",
+                  margin: "10%",
+                  width: "30vw",
+                  fontSize: "max(20px, 10px);",
+                  "&:hover": {
+                    backgroundColor: "#716ab4",
+                  },
+                }}
+                variant="contained"
+              >
+                {continueState}
+              </Button>
             </div>
           </div>
         </div>
