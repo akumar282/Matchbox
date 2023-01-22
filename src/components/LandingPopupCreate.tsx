@@ -90,7 +90,7 @@ export default function LandingPopupCreate(props) {
       //Link to preferences page
       // alert(JSON.stringify(values, null, 2));
       sendToDatabase(values)
-      navigate("/create-prefrences")
+      navigate("/create-preferences")
     },
   });
   return props.trigger ? (

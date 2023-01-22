@@ -3,7 +3,7 @@ import { Paper, Card, TextField } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import DoneIcon from "@mui/icons-material/Done";
-import "./CSS/CreatePrefrences.css";
+import "./CSS/CreatePreferences.css";
 import { useNavigate } from "react-router-dom";
 const tags = [
   "Java",
