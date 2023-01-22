@@ -1,4 +1,4 @@
-import { Amplify, API } from 'aws-amplify'
+import { API } from 'aws-amplify'
 import { CreateUsersPayload, DeleteUserModelPayload, UpdateUsersModelPayload } from "../types"
 import { createUsersModel, deleteUsersModel, updateUsersModel } from "../../graphql/mutations"
 

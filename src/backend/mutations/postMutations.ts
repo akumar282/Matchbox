@@ -1,4 +1,4 @@
-import { Amplify, API } from 'aws-amplify'
+import { API } from 'aws-amplify'
 import { CreatePostsPayload } from "../types"
 import { createPostsModel } from "../../graphql/mutations"
 
