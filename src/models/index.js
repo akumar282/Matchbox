@@ -5,21 +5,19 @@ import { schema } from './schema';
 const SizeTag = {
   "LESS_FIVE": "LESS_FIVE",
   "MORE_FIVE": "MORE_FIVE",
-  "LESS_TEN": "LESS_TEN",
   "MORE_TEN": "MORE_TEN",
   "MORE_TWENTY_FIVE": "MORE_TWENTY_FIVE",
   "MORE_FIFTY": "MORE_FIFTY",
-  "HUNDRED": "HUNDRED",
   "MORE_HUND": "MORE_HUND"
 };
 
 const InterestTag = {
-  "COMMUNICATE": "COMMUNICATE",
-  "CONNECT": "CONNECT",
-  "ENVIRON": "ENVIRON",
-  "EDU": "EDU",
-  "ENTERTAIN": "ENTERTAIN",
-  "GAME": "GAME"
+  "COMMUNICATION": "COMMUNICATION",
+  "CONNECTING": "CONNECTING",
+  "ENVIRONMENT": "ENVIRONMENT",
+  "EDUCATION": "EDUCATION",
+  "ENTERTAINMENT": "ENTERTAINMENT",
+  "GAMING": "GAMING"
 };
 
 const DevelopmentTag = {
@@ -35,7 +33,7 @@ const DevelopmentTag = {
   "CYBER_SEC": "CYBER_SEC"
 };
 
-const LanguageEnum = {
+const LanguageTag = {
   "C_SHARP": "C_SHARP",
   "C_PLUS_PLUS": "C_PLUS_PLUS",
   "C": "C",
@@ -58,5 +56,5 @@ export {
   SizeTag,
   InterestTag,
   DevelopmentTag,
-  LanguageEnum
+  LanguageTag
 };

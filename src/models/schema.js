@@ -56,7 +56,7 @@ export const schema = {
                     "name": "lang_tag",
                     "isArray": true,
                     "type": {
-                        "enum": "LanguageEnum"
+                        "enum": "LanguageTag"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -281,23 +281,21 @@ export const schema = {
             "values": [
                 "LESS_FIVE",
                 "MORE_FIVE",
-                "LESS_TEN",
                 "MORE_TEN",
                 "MORE_TWENTY_FIVE",
                 "MORE_FIFTY",
-                "HUNDRED",
                 "MORE_HUND"
             ]
         },
         "InterestTag": {
             "name": "InterestTag",
             "values": [
-                "COMMUNICATE",
-                "CONNECT",
-                "ENVIRON",
-                "EDU",
-                "ENTERTAIN",
-                "GAME"
+                "COMMUNICATION",
+                "CONNECTING",
+                "ENVIRONMENT",
+                "EDUCATION",
+                "ENTERTAINMENT",
+                "GAMING"
             ]
         },
         "DevelopmentTag": {
@@ -315,8 +313,8 @@ export const schema = {
                 "CYBER_SEC"
             ]
         },
-        "LanguageEnum": {
-            "name": "LanguageEnum",
+        "LanguageTag": {
+            "name": "LanguageTag",
             "values": [
                 "C_SHARP",
                 "C_PLUS_PLUS",
@@ -335,5 +333,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.4",
-    "version": "1b59cdffd3eb66b977af8def580da8ef"
+    "version": "dc3fdbcb9adb1a71562eef7fe361c1fd"
 };

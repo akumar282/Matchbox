@@ -1,21 +1,19 @@
 enum SizeTag {
   LESS_FIVE
   MORE_FIVE
-  LESS_TEN
   MORE_TEN
   MORE_TWENTY_FIVE
   MORE_FIFTY
-  HUNDRED
   MORE_HUND
 }
 
 enum InterestTag {
-  COMMUNICATE
-  CONNECT
-  ENVIRON
-  EDU
-  ENTERTAIN
-  GAME
+  COMMUNICATION
+  CONNECTING
+  ENVIRONMENT
+  EDUCATION
+  ENTERTAINMENT
+  GAMING
 }
 
 enum DevelopmentTag {
@@ -31,7 +29,7 @@ enum DevelopmentTag {
   CYBER_SEC
 }
 
-enum LanguageEnum {
+enum LanguageTag {
   C_SHARP
   C_PLUS_PLUS
   C
@@ -54,7 +52,7 @@ type PostsModel @model @auth(rules: [{allow: public, operations: [read, create, 
   image_link: AWSURL
   post_date: AWSDateTime
   userID: ID! @index(name: "byUsersModel")
-  lang_tag: [LanguageEnum]
+  lang_tag: [LanguageTag]
   dev_type_tag: [DevelopmentTag]
   interest_tag: [InterestTag]
   size_tag: [SizeTag]

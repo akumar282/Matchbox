@@ -3,7 +3,7 @@ import { CreatePostsModelInput } from '../../../src/API'
 import { createPost } from '../../../src/backend/mutations/postMutations'
 import awsconfig from '../../../src/aws-exports'
 import { CreatePostsPayload } from '../../../src/backend/types'
-import { LanguageEnum as Lang, DevelopmentTag as Dev, InterestTag as Int, SizeTag as Size} from '../../../src/API'
+import { LanguageTag, DevelopmentTag, InterestTag, SizeTag} from '../../../src/API'
 Amplify.configure(awsconfig)
 
 let dateTime = new Date
@@ -15,10 +15,10 @@ const testload: CreatePostsPayload = {
     image_link: `https://image.link/image.pn`,
     post_date: dateTime.toISOString(),
     userID: `1`,
-    lang_tag:  [Lang.C_PLUS_PLUS],
-    dev_type_tag:  [Dev.BACKEND],
-    interest_tag:  [Int.COMMUNICATE, Int.CONNECT, Int.ENTERTAIN],
-    size_tag: [Size.LESS_FIVE],
+    lang_tag:  [LanguageTag.C_PLUS_PLUS],
+    dev_type_tag:  [DevelopmentTag.BACKEND],
+    interest_tag:  [InterestTag.COMMUNICATION, InterestTag.CONNECTING, InterestTag.ENTERTAINMENT],
+    size_tag: [SizeTag.LESS_FIVE],
     _version:  0
   }
 }

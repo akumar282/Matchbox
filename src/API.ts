@@ -10,14 +10,14 @@ export type CreatePostsModelInput = {
   image_link?: string | null,
   post_date?: string | null,
   userID: string,
-  lang_tag?: Array< LanguageEnum | null > | null,
+  lang_tag?: Array< LanguageTag | null > | null,
   dev_type_tag?: Array< DevelopmentTag | null > | null,
   interest_tag?: Array< InterestTag | null > | null,
   size_tag?: Array< SizeTag | null > | null,
   _version?: number | null,
 };
 
-export enum LanguageEnum {
+export enum LanguageTag {
   C_SHARP = "C_SHARP",
   C_PLUS_PLUS = "C_PLUS_PLUS",
   C = "C",
@@ -48,23 +48,21 @@ export enum DevelopmentTag {
 
 
 export enum InterestTag {
-  COMMUNICATE = "COMMUNICATE",
-  CONNECT = "CONNECT",
-  ENVIRON = "ENVIRON",
-  EDU = "EDU",
-  ENTERTAIN = "ENTERTAIN",
-  GAME = "GAME",
+  COMMUNICATION = "COMMUNICATION",
+  CONNECTING = "CONNECTING",
+  ENVIRONMENT = "ENVIRONMENT",
+  EDUCATION = "EDUCATION",
+  ENTERTAINMENT = "ENTERTAINMENT",
+  GAMING = "GAMING",
 }
 
 
 export enum SizeTag {
   LESS_FIVE = "LESS_FIVE",
   MORE_FIVE = "MORE_FIVE",
-  LESS_TEN = "LESS_TEN",
   MORE_TEN = "MORE_TEN",
   MORE_TWENTY_FIVE = "MORE_TWENTY_FIVE",
   MORE_FIFTY = "MORE_FIFTY",
-  HUNDRED = "HUNDRED",
   MORE_HUND = "MORE_HUND",
 }
 
@@ -76,7 +74,7 @@ export type ModelPostsModelConditionInput = {
   image_link?: ModelStringInput | null,
   post_date?: ModelStringInput | null,
   userID?: ModelIDInput | null,
-  lang_tag?: ModelLanguageEnumListInput | null,
+  lang_tag?: ModelLanguageTagListInput | null,
   dev_type_tag?: ModelDevelopmentTagListInput | null,
   interest_tag?: ModelInterestTagListInput | null,
   size_tag?: ModelSizeTagListInput | null,
@@ -141,11 +139,11 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelLanguageEnumListInput = {
-  eq?: Array< LanguageEnum | null > | null,
-  ne?: Array< LanguageEnum | null > | null,
-  contains?: LanguageEnum | null,
-  notContains?: LanguageEnum | null,
+export type ModelLanguageTagListInput = {
+  eq?: Array< LanguageTag | null > | null,
+  ne?: Array< LanguageTag | null > | null,
+  contains?: LanguageTag | null,
+  notContains?: LanguageTag | null,
 };
 
 export type ModelDevelopmentTagListInput = {
@@ -178,7 +176,7 @@ export type PostsModel = {
   image_link?: string | null,
   post_date?: string | null,
   userID: string,
-  lang_tag?: Array< LanguageEnum | null > | null,
+  lang_tag?: Array< LanguageTag | null > | null,
   dev_type_tag?: Array< DevelopmentTag | null > | null,
   interest_tag?: Array< InterestTag | null > | null,
   size_tag?: Array< SizeTag | null > | null,
@@ -197,7 +195,7 @@ export type UpdatePostsModelInput = {
   image_link?: string | null,
   post_date?: string | null,
   userID?: string | null,
-  lang_tag?: Array< LanguageEnum | null > | null,
+  lang_tag?: Array< LanguageTag | null > | null,
   dev_type_tag?: Array< DevelopmentTag | null > | null,
   interest_tag?: Array< InterestTag | null > | null,
   size_tag?: Array< SizeTag | null > | null,
@@ -292,7 +290,7 @@ export type ModelPostsModelFilterInput = {
   image_link?: ModelStringInput | null,
   post_date?: ModelStringInput | null,
   userID?: ModelIDInput | null,
-  lang_tag?: ModelLanguageEnumListInput | null,
+  lang_tag?: ModelLanguageTagListInput | null,
   dev_type_tag?: ModelDevelopmentTagListInput | null,
   interest_tag?: ModelInterestTagListInput | null,
   size_tag?: ModelSizeTagListInput | null,
@@ -400,7 +398,7 @@ export type CreatePostsModelMutation = {
     image_link?: string | null,
     post_date?: string | null,
     userID: string,
-    lang_tag?: Array< LanguageEnum | null > | null,
+    lang_tag?: Array< LanguageTag | null > | null,
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
@@ -427,7 +425,7 @@ export type UpdatePostsModelMutation = {
     image_link?: string | null,
     post_date?: string | null,
     userID: string,
-    lang_tag?: Array< LanguageEnum | null > | null,
+    lang_tag?: Array< LanguageTag | null > | null,
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
@@ -454,7 +452,7 @@ export type DeletePostsModelMutation = {
     image_link?: string | null,
     post_date?: string | null,
     userID: string,
-    lang_tag?: Array< LanguageEnum | null > | null,
+    lang_tag?: Array< LanguageTag | null > | null,
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
@@ -573,7 +571,7 @@ export type GetPostsModelQuery = {
     image_link?: string | null,
     post_date?: string | null,
     userID: string,
-    lang_tag?: Array< LanguageEnum | null > | null,
+    lang_tag?: Array< LanguageTag | null > | null,
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
@@ -603,7 +601,7 @@ export type ListPostsModelsQuery = {
       image_link?: string | null,
       post_date?: string | null,
       userID: string,
-      lang_tag?: Array< LanguageEnum | null > | null,
+      lang_tag?: Array< LanguageTag | null > | null,
       dev_type_tag?: Array< DevelopmentTag | null > | null,
       interest_tag?: Array< InterestTag | null > | null,
       size_tag?: Array< SizeTag | null > | null,
@@ -637,7 +635,7 @@ export type SyncPostsModelsQuery = {
       image_link?: string | null,
       post_date?: string | null,
       userID: string,
-      lang_tag?: Array< LanguageEnum | null > | null,
+      lang_tag?: Array< LanguageTag | null > | null,
       dev_type_tag?: Array< DevelopmentTag | null > | null,
       interest_tag?: Array< InterestTag | null > | null,
       size_tag?: Array< SizeTag | null > | null,
@@ -761,7 +759,7 @@ export type OnCreatePostsModelSubscription = {
     image_link?: string | null,
     post_date?: string | null,
     userID: string,
-    lang_tag?: Array< LanguageEnum | null > | null,
+    lang_tag?: Array< LanguageTag | null > | null,
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
@@ -787,7 +785,7 @@ export type OnUpdatePostsModelSubscription = {
     image_link?: string | null,
     post_date?: string | null,
     userID: string,
-    lang_tag?: Array< LanguageEnum | null > | null,
+    lang_tag?: Array< LanguageTag | null > | null,
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
@@ -813,7 +811,7 @@ export type OnDeletePostsModelSubscription = {
     image_link?: string | null,
     post_date?: string | null,
     userID: string,
-    lang_tag?: Array< LanguageEnum | null > | null,
+    lang_tag?: Array< LanguageTag | null > | null,
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
