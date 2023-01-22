@@ -18,20 +18,19 @@ const query = `query GetData($id: ID!) {
 
 const variables = { id: "your_entry_id" }
 
-let dateTime = Date.now().toString()
+let dateTime = new Date
 const testload: CreatePostsPayload = {
   input: {
     post_title: `Matchbox`,
     description: `A very cool project`,
-    project_link: `https://image.link/image.png`,
-    image_link: ``,
-    post_date: dateTime,
+    project_link: `https://github.com/testuser/testproj.git`,
+    image_link: `https://image.link/image.pn`,
+    post_date: dateTime.toISOString(),
     userID: `1`,
     lang_tag:  [Lang.C_PLUS_PLUS],
     dev_type_tag:  [Dev.BACKEND],
     interest_tag:  [Int.COMMUNICATE, Int.CONNECT, Int.ENTERTAIN],
     size_tag: [Size.LESS_FIVE],
-    dahublink: `https://github.com/testuser/testproj.git`,
     _version:  0
   }
 }

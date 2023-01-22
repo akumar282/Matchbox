@@ -46,11 +46,11 @@ enum LanguageEnum {
   SQL
 }
 
-type PostsModel @model @auth(rules: [{allow: public, operations: [read, create, delete]}]) {
+type PostsModel @model @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   post_title: String!
   description: String
-  project_link: String
+  project_link: AWSURL
   image_link: AWSURL
   post_date: AWSDateTime
   userID: ID! @index(name: "byUsersModel")
@@ -58,10 +58,9 @@ type PostsModel @model @auth(rules: [{allow: public, operations: [read, create, 
   dev_type_tag: [DevelopmentTag]
   interest_tag: [InterestTag]
   size_tag: [SizeTag]
-  dahublink: String
 }
 
-type UsersModel @model @auth(rules: [{allow: public, operations: [read, create, delete]}]) {
+type UsersModel @model @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   user_name: String!
   email: String!
@@ -70,7 +69,7 @@ type UsersModel @model @auth(rules: [{allow: public, operations: [read, create, 
   first_name: String
   last_name: String
   user_creation_date: AWSDate
-  dahublink: String
+  dahublink: AWSURL
   saved_posts: [ID]
   hide_posts: [ID]
 }

@@ -19,7 +19,6 @@ export const createPostsModel = /* GraphQL */ `
       dev_type_tag
       interest_tag
       size_tag
-      dahublink
       createdAt
       updatedAt
       _version
@@ -45,7 +44,6 @@ export const updatePostsModel = /* GraphQL */ `
       dev_type_tag
       interest_tag
       size_tag
-      dahublink
       createdAt
       updatedAt
       _version
@@ -71,7 +69,6 @@ export const deletePostsModel = /* GraphQL */ `
       dev_type_tag
       interest_tag
       size_tag
-      dahublink
       createdAt
       updatedAt
       _version

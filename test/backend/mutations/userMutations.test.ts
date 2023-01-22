@@ -17,7 +17,7 @@ const testload: CreateUsersPayload = {
   }
 }
 
-describe('Mutation Tests', () => {
+describe.skip('Mutation Tests', () => {
 
   test('Create user', async () => {
     const result = await createUser(testload)

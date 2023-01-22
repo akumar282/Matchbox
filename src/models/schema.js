@@ -27,7 +27,7 @@ export const schema = {
                 "project_link": {
                     "name": "project_link",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSURL",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -92,13 +92,6 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
-                "dahublink": {
-                    "name": "dahublink",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -141,7 +134,8 @@ export const schema = {
                                 "operations": [
                                     "read",
                                     "create",
-                                    "delete"
+                                    "delete",
+                                    "update"
                                 ]
                             }
                         ]
@@ -218,7 +212,7 @@ export const schema = {
                 "dahublink": {
                     "name": "dahublink",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSURL",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -271,7 +265,8 @@ export const schema = {
                                 "operations": [
                                     "read",
                                     "create",
-                                    "delete"
+                                    "delete",
+                                    "update"
                                 ]
                             }
                         ]
@@ -340,5 +335,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.4",
-    "version": "cb6ac18e896e17a6e56f85d97f8be090"
+    "version": "1b59cdffd3eb66b977af8def580da8ef"
 };

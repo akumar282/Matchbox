@@ -247,7 +247,7 @@ export default function UsersModelUpdateForm(props) {
     first_name: [],
     last_name: [],
     user_creation_date: [],
-    dahublink: [],
+    dahublink: [{ type: "URL" }],
     saved_posts: [],
     hide_posts: [],
   };
