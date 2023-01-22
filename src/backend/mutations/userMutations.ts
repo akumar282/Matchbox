@@ -1,5 +1,5 @@
 import { API } from 'aws-amplify'
-import { CreateUsersPayload, DeleteUserModelPayload, UpdateUsersModelPayload } from "../../graphql/types"
+import { CreateUsersPayload, DeleteUserModelPayload, UpdateUsersModelPayload } from "../types"
 import { createUsersModel, deleteUsersModel, updateUsersModel } from "../../graphql/mutations"
 
 export async function createUser(user: CreateUsersPayload) {
