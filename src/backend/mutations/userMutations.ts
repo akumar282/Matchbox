@@ -1,12 +1,32 @@
 import { Amplify, API } from 'aws-amplify'
-import { CreateUsersPayload } from "../types"
-import { createUsersModel } from "../../graphql/mutations"
+import { CreateUsersPayload, DeleteUserModelPayload, UpdateUsersModelPayload } from "../types"
+import { createUsersModel, deleteUsersModel, updateUsersModel } from "../../graphql/mutations"
 
 export async function createUser(user: CreateUsersPayload) {
   return await API.graphql(
     {
       authMode: "API_KEY",
       query: createUsersModel,
+      variables: user
+    }
+  )
+}
+
+export async function updateUser(user: UpdateUsersModelPayload) {
+  return await API.graphql(
+    {
+      authMode: 'API_KEY',
+      query: updateUsersModel,
+      variables: user
+    }
+  )
+}
+
+export async function deleteUser(user: DeleteUserModelPayload ) {
+  return await API.graphql(
+    {
+      authMode: 'API_KEY',
+      query: deleteUsersModel,
       variables: user
     }
   )
