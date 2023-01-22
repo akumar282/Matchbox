@@ -70,7 +70,6 @@ type EagerPostsModel = {
   readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
   readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
-  readonly dahublink?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -87,7 +86,6 @@ type LazyPostsModel = {
   readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
   readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
-  readonly dahublink?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

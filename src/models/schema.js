@@ -27,7 +27,7 @@ export const schema = {
                 "project_link": {
                     "name": "project_link",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSURL",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -91,13 +91,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true
-                },
-                "dahublink": {
-                    "name": "dahublink",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -219,7 +212,7 @@ export const schema = {
                 "dahublink": {
                     "name": "dahublink",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSURL",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -342,5 +335,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.2.0",
-    "version": "cb6ac18e896e17a6e56f85d97f8be090"
+    "version": "1b59cdffd3eb66b977af8def580da8ef"
 };
