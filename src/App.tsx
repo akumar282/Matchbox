@@ -1,7 +1,7 @@
 import './App.css'
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import SelectPrefPg from './Pages/CreatePrefrences'
+import SelectPrefPg from './Pages/CreatePreferences'
 
 // import SavedProjects from './Pages/SavedProjects'
 // import { Tabs, Tab, AppBar } from '@material-ui/core'
@@ -14,7 +14,7 @@ function App () {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/create-prefrences' element={<SelectPrefPg />} />
+        <Route path='/create-preferences' element={<SelectPrefPg />} />
         <Route path='/home' element={<HomePage />} />
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>
         <Route path='/*' element={<NotFound />} />
