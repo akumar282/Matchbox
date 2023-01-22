@@ -6,18 +6,6 @@ import { CreatePostsPayload } from '../../../src/backend/types'
 import { LanguageEnum as Lang, DevelopmentTag as Dev, InterestTag as Int, SizeTag as Size} from '../../../src/API'
 Amplify.configure(awsconfig)
 
-
-// jest.mock('../../../src/API')
-const testnum = Math.floor(Math.random() * 10000)
-
-const query = `query GetData($id: ID!) {
-  getData(id: $id) {
-    id
-  }
-}`
-
-const variables = { id: "your_entry_id" }
-
 let dateTime = new Date
 const testload: CreatePostsPayload = {
   input: {
