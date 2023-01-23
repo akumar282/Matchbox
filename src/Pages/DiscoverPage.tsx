@@ -12,6 +12,24 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LaunchIcon from '@mui/icons-material/Launch';
 import CancelIcon from '@mui/icons-material/Cancel';
 
+const ImgCard = (
+    <React.Fragment>
+      <CardContent>
+       image
+      </CardContent>
+      <CardActions>
+        {/* remove project button */}
+        <IconButton color="primary" aria-label="remove project" component="label">
+            <CancelIcon/>
+        </IconButton>
+        {/* bookmark project button */}
+        <IconButton color="primary" aria-label="bookmark project" component="label">
+            <BookmarkBorderIcon />
+        </IconButton>
+      </CardActions>
+    </React.Fragment>
+  );
+
 const DesriptCard = (
   <React.Fragment>
     <CardContent>
@@ -26,36 +44,31 @@ const DesriptCard = (
         
     </CardContent>
     <CardActions>
-        <IconButton color="primary" aria-label="upload picture" component="label">
-            {/* <input hidden accept="image/*" type="file" /> */}
-            <GitHubIcon />
-        </IconButton>
-        <IconButton color="primary" aria-label="upload picture" component="label">
-            {/* <input hidden accept="image/*" type="file" /> */}
-            <LaunchIcon />
-        </IconButton>
+        {/* TODO: potential issue with link routing */}
+        {/* project github link */}
+        <a href="/https://github.com/">    
+            <IconButton color="primary" aria-label="github link" component="label">
+                <GitHubIcon />
+            </IconButton>
+        </a>
+        {/* prject website link */}
+        <a href="/https://google.com/">
+            <IconButton color="primary" aria-label="website link" component="label">
+                <LaunchIcon />
+            </IconButton>
+        </a>
     </CardActions>
   </React.Fragment>
 );
 
-const ImgCard = (
-    <React.Fragment>
-      <CardContent>
-       image
-      </CardContent>
-      <CardActions>
-        <IconButton color="primary" aria-label="upload picture" component="label">
-            {/* <input hidden accept="image/*" type="file" /> */}
-            <CancelIcon/>
-        </IconButton>
-        <IconButton color="primary" aria-label="upload picture" component="label">
-            {/* <input hidden accept="image/*" type="file" /> */}
-            <BookmarkBorderIcon />
-        </IconButton>
-      </CardActions>
-    </React.Fragment>
-  );
 
+
+const longDescription = (
+    <React.Fragment>
+        <h2>Project Name</h2>
+        <p>(Detailed Description) Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Nam condimentum tempus diam, ultricies sollicitudin erat facilisis eget. Vestibulum rhoncus dui vel eros laoreet consectetur. Vivamus eget elementum ligula, vitae pharetra quam. Nullam at ligula sed metu. Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Nam condimentum tempus diam, ultricies sollicitudin erat facilisis eget. Vestibulum rhoncus dui vel eros laoreet consectetur. Vivamus eget elementum ligula, vitae pharetra quam. Nullam at ligula sed metu</p>
+    </React.Fragment>
+);
 
 export default function DiscoverPage() {
     return (
@@ -69,8 +82,10 @@ export default function DiscoverPage() {
                     <Card variant="outlined">{DesriptCard}</Card>
                 </Box>
             </Stack>
-            <h2>Project Name</h2>
-            <p>(Detailed Description) Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Nam condimentum tempus diam, ultricies sollicitudin erat facilisis eget. Vestibulum rhoncus dui vel eros laoreet consectetur. Vivamus eget elementum ligula, vitae pharetra quam. Nullam at ligula sed metu. Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Nam condimentum tempus diam, ultricies sollicitudin erat facilisis eget. Vestibulum rhoncus dui vel eros laoreet consectetur. Vivamus eget elementum ligula, vitae pharetra quam. Nullam at ligula sed metu</p>
+            <Box sx={{ maxWidth: 1200 }}>
+            <Card variant="outlined">{longDescription}</Card>
+            </Box>
+         
         </div>
     );
 }  
