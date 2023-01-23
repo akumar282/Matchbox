@@ -12,6 +12,17 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LaunchIcon from '@mui/icons-material/Launch';
 import CancelIcon from '@mui/icons-material/Cancel';
 
+
+function handleRemove(){
+    console.log("removing project");
+    // TODO make backend connection here
+}
+
+function handleSave(){
+    console.log("saving project");
+    // TODO make backend connection here
+}
+
 const ImgCard = (
     <React.Fragment>
       <CardContent>
@@ -19,11 +30,11 @@ const ImgCard = (
       </CardContent>
       <CardActions>
         {/* remove project button */}
-        <IconButton color="primary" aria-label="remove project" component="label">
+        <IconButton color="primary" aria-label="remove project" component="label" onClick={handleRemove}>
             <CancelIcon/>
         </IconButton>
-        {/* bookmark project button */}
-        <IconButton color="primary" aria-label="bookmark project" component="label">
+        {/* save project button */}
+        <IconButton color="primary" aria-label="save project" component="label" onClick={handleSave}>
             <BookmarkBorderIcon />
         </IconButton>
       </CardActions>
