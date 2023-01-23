@@ -27,7 +27,7 @@ export const schema = {
                 "project_link": {
                     "name": "project_link",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSURL",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -56,7 +56,7 @@ export const schema = {
                     "name": "lang_tag",
                     "isArray": true,
                     "type": {
-                        "enum": "LanguageEnum"
+                        "enum": "LanguageTag"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -91,13 +91,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true
-                },
-                "dahublink": {
-                    "name": "dahublink",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -140,7 +133,9 @@ export const schema = {
                                 "allow": "public",
                                 "operations": [
                                     "read",
-                                    "create"
+                                    "create",
+                                    "delete",
+                                    "update"
                                 ]
                             }
                         ]
@@ -217,7 +212,7 @@ export const schema = {
                 "dahublink": {
                     "name": "dahublink",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSURL",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -269,7 +264,9 @@ export const schema = {
                                 "allow": "public",
                                 "operations": [
                                     "read",
-                                    "create"
+                                    "create",
+                                    "delete",
+                                    "update"
                                 ]
                             }
                         ]
@@ -284,23 +281,21 @@ export const schema = {
             "values": [
                 "LESS_FIVE",
                 "MORE_FIVE",
-                "LESS_TEN",
                 "MORE_TEN",
                 "MORE_TWENTY_FIVE",
                 "MORE_FIFTY",
-                "HUNDRED",
                 "MORE_HUND"
             ]
         },
         "InterestTag": {
             "name": "InterestTag",
             "values": [
-                "COMMUNICATE",
-                "CONNECT",
-                "ENVIRON",
-                "EDU",
-                "ENTERTAIN",
-                "GAME"
+                "COMMUNICATION",
+                "CONNECTING",
+                "ENVIRONMENT",
+                "EDUCATION",
+                "ENTERTAINMENT",
+                "GAMING"
             ]
         },
         "DevelopmentTag": {
@@ -318,8 +313,8 @@ export const schema = {
                 "CYBER_SEC"
             ]
         },
-        "LanguageEnum": {
-            "name": "LanguageEnum",
+        "LanguageTag": {
+            "name": "LanguageTag",
             "values": [
                 "C_SHARP",
                 "C_PLUS_PLUS",
@@ -337,6 +332,6 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "codegenVersion": "3.3.5",
-    "version": "cb6ac18e896e17a6e56f85d97f8be090"
+    "codegenVersion": "3.3.4",
+    "version": "dc3fdbcb9adb1a71562eef7fe361c1fd"
 };

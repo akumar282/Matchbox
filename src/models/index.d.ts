@@ -5,21 +5,19 @@ import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/
 export enum SizeTag {
   LESS_FIVE = "LESS_FIVE",
   MORE_FIVE = "MORE_FIVE",
-  LESS_TEN = "LESS_TEN",
   MORE_TEN = "MORE_TEN",
   MORE_TWENTY_FIVE = "MORE_TWENTY_FIVE",
   MORE_FIFTY = "MORE_FIFTY",
-  HUNDRED = "HUNDRED",
   MORE_HUND = "MORE_HUND"
 }
 
 export enum InterestTag {
-  COMMUNICATE = "COMMUNICATE",
-  CONNECT = "CONNECT",
-  ENVIRON = "ENVIRON",
-  EDU = "EDU",
-  ENTERTAIN = "ENTERTAIN",
-  GAME = "GAME"
+  COMMUNICATION = "COMMUNICATION",
+  CONNECTING = "CONNECTING",
+  ENVIRONMENT = "ENVIRONMENT",
+  EDUCATION = "EDUCATION",
+  ENTERTAINMENT = "ENTERTAINMENT",
+  GAMING = "GAMING"
 }
 
 export enum DevelopmentTag {
@@ -35,7 +33,7 @@ export enum DevelopmentTag {
   CYBER_SEC = "CYBER_SEC"
 }
 
-export enum LanguageEnum {
+export enum LanguageTag {
   C_SHARP = "C_SHARP",
   C_PLUS_PLUS = "C_PLUS_PLUS",
   C = "C",
@@ -66,11 +64,10 @@ type EagerPostsModel = {
   readonly image_link?: string | null;
   readonly post_date?: string | null;
   readonly userID: string;
-  readonly lang_tag?: (LanguageEnum | null)[] | keyof typeof LanguageEnum | null;
+  readonly lang_tag?: (LanguageTag | null)[] | keyof typeof LanguageTag | null;
   readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
   readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
-  readonly dahublink?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -83,11 +80,10 @@ type LazyPostsModel = {
   readonly image_link?: string | null;
   readonly post_date?: string | null;
   readonly userID: string;
-  readonly lang_tag?: (LanguageEnum | null)[] | keyof typeof LanguageEnum | null;
+  readonly lang_tag?: (LanguageTag | null)[] | keyof typeof LanguageTag | null;
   readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
   readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
-  readonly dahublink?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

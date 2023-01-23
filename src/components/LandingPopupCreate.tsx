@@ -16,7 +16,7 @@ import awsconfig from '../aws-exports'
 import {Amplify} from 'aws-amplify'
 import { createUser } from "../backend/mutations/userMutations";
 import { CreateUsersModelInput } from "../API";
-import { CreateUsersPayload } from "../graphql/types";
+import { CreateUsersPayload } from "../backend/types";
 Amplify.configure(awsconfig)
 const frontload: CreateUsersModelInput = {
   user_name: '',
@@ -31,10 +31,10 @@ const finalload: CreateUsersPayload = {
 
 
 
-export default function LandingPopupCreate(props) {
+export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) => void; trigger: boolean; }) {
 
   const navigate = useNavigate();
-  async function sendToDatabase(props) {
+  async function sendToDatabase(props: { firstName: any; lastName: any; email: any; username: any; password: any; confirmPassword?: string; }) {
     frontload.user_name = props.username
     frontload.email = props.email
     frontload.first_name = props.firstName
@@ -90,7 +90,7 @@ export default function LandingPopupCreate(props) {
       //Link to preferences page
       // alert(JSON.stringify(values, null, 2));
       sendToDatabase(values)
-      navigate("/create-prefrences")
+      navigate("/create-preferences")
     },
   });
   return props.trigger ? (
