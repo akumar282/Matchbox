@@ -16,7 +16,7 @@ import awsconfig from '../aws-exports'
 import {Amplify} from 'aws-amplify'
 import { createUser } from "../backend/mutations/userMutations";
 import { CreateUsersModelInput } from "../API";
-import { CreateUsersPayload } from "../graphql/types";
+import { CreateUsersPayload } from "../backend/types";
 Amplify.configure(awsconfig)
 const frontload: CreateUsersModelInput = {
   user_name: '',
