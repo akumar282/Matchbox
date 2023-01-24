@@ -5,7 +5,10 @@ import {
     DialogTitle,
     TextField,
     IconButton,
-    Input
+    Input, 
+    Chip, 
+    Autocomplete, 
+  
   } from "@mui/material";
   import { useNavigate } from "react-router-dom";
   import React, { useState } from "react";
@@ -31,8 +34,6 @@ import {
   }
   
   
-
-
 import Navbar from "../components/NavBar";
 export default function Settings() {
 
@@ -233,8 +234,82 @@ export default function Settings() {
               >
                 Save
               </Button>
+            <h4>Filter Settings</h4>
+              <Autocomplete
+                sx={{
+                  width: "25rem",
+                }}
+                multiple
+                limitTags={5}
+                id="tags-outlined"
+                options={select_lang}
+                getOptionLabel={(option) => option.title}
+                // defaultValue={[select_lang[0]]} // TODO make default values the one already selected
+                filterSelectedOptions
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Languages"
+                  />
+                )}
+              />
+                            <Autocomplete
+                sx={{
+                  width: "25rem",
+                }}
+                multiple
+                limitTags={5}
+                id="tags-outlined"
+                options={select_frame}
+                getOptionLabel={(option) => option.title}
+                // defaultValue={[select_frame[0]]} // TODO make default values the one already selected
+                filterSelectedOptions
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Languages"
+                  />
+                )}
+              />
+                            <Autocomplete
+                sx={{
+                  width: "25rem",
+                }}
+                multiple
+                limitTags={5}
+                id="tags-outlined"
+                options={select_category}
+                getOptionLabel={(option) => option.title}
+                // defaultValue={[select_category[0]]} // TODO make default values the one already selected
+                filterSelectedOptions
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Languages"
+                  />
+                )}
+              />
             </div>
 
       );
 
 }
+
+const select_lang = [
+  { title: 'C++'},
+  { title: 'Java'},
+  { title: 'Python' },
+];
+
+
+const select_frame = [
+  { title: 'React'},
+  { title: 'Linux'},
+  { title: 'Shell' },
+];
+
+const select_category = [
+  { title: 'Cloud'},
+  { title: 'Web Programming'},
+  { title: 'DevOps' },
+];
