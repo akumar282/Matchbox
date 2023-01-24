@@ -10,9 +10,7 @@ import {
     Autocomplete, 
   
   } from "@mui/material";
-  import { useNavigate } from "react-router-dom";
   import React, { useState } from "react";
-  import HighlightOffIcon from "@mui/icons-material/HighlightOff";
   import { useFormik } from "formik";
   import * as yup from "yup";
   import awsconfig from '../aws-exports'
@@ -22,6 +20,32 @@ import {
   import { CreateUsersPayload } from "../backend/types";
   Amplify.configure(awsconfig)
 
+  
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // temporary lists for choices to user 
+  const select_lang = [
+    { title: 'C++'},
+    { title: 'Java'},
+    { title: 'Python' },
+  ];
+  
+  
+  const select_frame = [
+    { title: 'React'},
+    { title: 'Linux'},
+    { title: 'Shell' },
+  ];
+  
+  const select_category = [
+    { title: 'Cloud'},
+    { title: 'Web Programming'},
+    { title: 'DevOps' },
+  ];
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
   const frontload: CreateUsersModelInput = {
     user_name: '',
     email: '',
@@ -104,10 +128,7 @@ export default function Settings() {
         <div>
             <Navbar />
             <h4>Account Settings</h4>
-            {/* textField slot*/}
-            {/* <div className="Form"> */}
               <form onSubmit={formik.handleSubmit}>
-                {/* <Input placeholder="First Name"/> */}
                 <h5>First Name</h5>
                 <TextField
                     sx={{
@@ -116,7 +137,6 @@ export default function Settings() {
                     id="firstName"
                     name="firstName"
                     placeholder="James" //TODO have these update based on GET request from database for default values
-                    // label="First Name"
                     variant="outlined"
                     value={formik.values.firstName}
                     onChange={formik.handleChange}
@@ -125,32 +145,30 @@ export default function Settings() {
                     }
                     helperText={formik.touched.firstName && formik.errors.firstName}
                 />
+                
                 <h5>Last Name</h5>
                 <TextField
-                sx={{
-                    width: "25rem",
-                }}
-                id="lasatName"
-                name="lastName"
-                // label="Last Name"
-                placeholder="Bond"
-                variant="outlined"
-                value={formik.values.lastName}
-                onChange={formik.handleChange}
-                error={
-                    formik.touched.lastName && Boolean(formik.errors.lastName)
-                }
-                helperText={formik.touched.lastName && formik.errors.lastName}
+                  sx={{
+                      width: "25rem",
+                  }}
+                  id="lasatName"
+                  name="lastName"
+                  placeholder="Bond"
+                  variant="outlined"
+                  value={formik.values.lastName}
+                  onChange={formik.handleChange}
+                  error={
+                      formik.touched.lastName && Boolean(formik.errors.lastName)
+                  }
+                  helperText={formik.touched.lastName && formik.errors.lastName}
                 />
                 <h5>Email</h5>
-
                 <TextField
                 sx={{
                     width: "25rem",
                 }}
                 id="email"
                 name="email"
-                //label="Email"
                 placeholder="JamesBond@gmail.com"
                 variant="outlined"
                 value={formik.values.email}
@@ -158,43 +176,42 @@ export default function Settings() {
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
                 />
+
                 <h5>Username</h5>
                 <TextField
-                sx={{
-                    width: "25rem",
-                }}
-                id="username"
-                name="username"
-                //label="Username"
-                placeholder="JBond007"
-                variant="outlined"
-                value={formik.values.username}
-                onChange={formik.handleChange}
-                error={
-                    formik.touched.username && Boolean(formik.errors.username)
-                }
-                helperText={formik.touched.username && formik.errors.username}
+                  sx={{
+                      width: "25rem",
+                  }}
+                  id="username"
+                  name="username"
+                  placeholder="JBond007"
+                  variant="outlined"
+                  value={formik.values.username}
+                  onChange={formik.handleChange}
+                  error={
+                      formik.touched.username && Boolean(formik.errors.username)
+                  }
+                  helperText={formik.touched.username && formik.errors.username}
                 />
 
-                  <h4>Change Password</h4>
-                  <h5>New Passowrd</h5>
-                  <TextField
-                    sx={{
-                      width: "25rem",
-                    }}
-                    id="password"
-                    name="password"
-                    //label="Password"
-                    placeholder="12345"
-                    type="password"
-                    variant="outlined"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.password && Boolean(formik.errors.password)
-                    }
-                    helperText={formik.touched.password && formik.errors.password}
-                  />
+                <h4>Change Password</h4>
+                <h5>New Passowrd</h5>
+                <TextField
+                  sx={{
+                    width: "25rem",
+                  }}
+                  id="password"
+                  name="password"
+                  placeholder="12345"
+                  type="password"
+                  variant="outlined"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.password && Boolean(formik.errors.password)
+                  }
+                  helperText={formik.touched.password && formik.errors.password}
+                />
                   <h5>Confirm Password</h5>
                   <TextField
                     sx={{
@@ -202,7 +219,6 @@ export default function Settings() {
                     }}
                     id="confirmPassword"
                     name="confirmPassword"
-                    //label="Confirm Password"
                     type="password"
                     variant="outlined"
                     value={formik.values.confirmPassword}
@@ -217,7 +233,6 @@ export default function Settings() {
                     }
                   />
               </form>
-            {/* </div> */}
 
               <Button
                 disabled={formik.isSubmitting}
@@ -234,7 +249,9 @@ export default function Settings() {
               >
                 Save
               </Button>
+
             <h4>Filter Settings</h4>
+            <h5>Show projects from only </h5>
               <Autocomplete
                 sx={{
                   width: "25rem",
@@ -253,7 +270,7 @@ export default function Settings() {
                   />
                 )}
               />
-                            <Autocomplete
+              <Autocomplete
                 sx={{
                   width: "25rem",
                 }}
@@ -267,11 +284,11 @@ export default function Settings() {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Languages"
+                    label="Framework"
                   />
                 )}
               />
-                            <Autocomplete
+              <Autocomplete
                 sx={{
                   width: "25rem",
                 }}
@@ -285,31 +302,11 @@ export default function Settings() {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Languages"
+                    label="Category"
                   />
                 )}
               />
             </div>
-
       );
-
 }
 
-const select_lang = [
-  { title: 'C++'},
-  { title: 'Java'},
-  { title: 'Python' },
-];
-
-
-const select_frame = [
-  { title: 'React'},
-  { title: 'Linux'},
-  { title: 'Shell' },
-];
-
-const select_category = [
-  { title: 'Cloud'},
-  { title: 'Web Programming'},
-  { title: 'DevOps' },
-];
