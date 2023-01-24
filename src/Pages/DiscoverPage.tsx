@@ -57,13 +57,13 @@ const DesriptCard = (
     <CardActions>
         {/* TODO: potential issue with link routing */}
         {/* project github link */}
-        <a href="/https://github.com/">    
+        <a href="https://github.com/">    
             <IconButton color="primary" aria-label="github link" component="label">
                 <GitHubIcon />
             </IconButton>
         </a>
         {/* prject website link */}
-        <a href="/https://google.com/">
+        <a href="https://google.com/">
             <IconButton color="primary" aria-label="website link" component="label">
                 <LaunchIcon />
             </IconButton>
