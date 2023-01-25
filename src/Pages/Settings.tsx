@@ -56,6 +56,14 @@ import {
   const finalload: CreateUsersPayload = {
     input: frontload
   }
+
+  // TODO these requests should only be sent if there is a change
+  const frontload: UpdateUsersModelInput = {
+    languages: '',
+    frameworks: '',
+    category: '',
+
+  }
   
   
 import Navbar from "../components/NavBar";
@@ -65,14 +73,23 @@ export default function Settings() {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // pulled from LandingPopupCreate.tsx file, change later
+    // PUT method for updating filter settings
+    async function updateFilter (props: { languages: any; frameworks: any; category: any; }) {
+      frontload.languages = props.languages
+      frontload.frameworks = props.frameworks
+      frontload.category = props.category
+      const request = await createUser(finalload)
+    }
+    // PUT method for updating account settings
     async function sendToDatabase(props: { firstName: any; lastName: any; email: any; username: any; password: any; confirmPassword?: string; }) {
-        frontload.user_name = props.username
-        frontload.email = props.email
-        frontload.first_name = props.firstName
-        frontload.last_name = props.lastName
-        frontload.password = props.password
-        const request = await createUser(finalload)
-      }
+      frontload.user_name = props.username
+      frontload.email = props.email
+      frontload.first_name = props.firstName
+      frontload.last_name = props.lastName
+      frontload.password = props.password
+      const request = await createUser(finalload)
+    }
+
 
       const validationSchema = yup.object({
         firstName: yup
@@ -87,7 +104,7 @@ export default function Settings() {
           .required("Last name is required"),
         email: yup
           .string()
-          .email("Enter a valid email")
+          .email("Ente`r a valid email")
           .required("Email is required"),
         password: yup
           .string()
@@ -112,13 +129,18 @@ export default function Settings() {
           username: "",
           password: "",
           confirmPassword: "",
+          // these below will need to be separated later
+          languages: "",
+          frameworks: "",
+          category: "",
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-          //Link to preferences page
+          // Link to preferences page
           // alert(JSON.stringify(values, null, 2));
           sendToDatabase(values)
         },
+        
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -269,6 +291,7 @@ export default function Settings() {
                     label="Languages"
                   />
                 )}
+                value={formik.values.languages}
               />
               <Autocomplete
                 sx={{
