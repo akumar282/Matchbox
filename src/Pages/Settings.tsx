@@ -58,12 +58,12 @@ import {
   }
 
   // TODO these requests should only be sent if there is a change
-  const frontload: UpdateUsersModelInput = {
-    languages: '',
-    frameworks: '',
-    category: '',
+  // const frontload: UpdateUsersModelInput = {
+  //   languages: '',
+  //   frameworks: '',
+  //   category: '',
 
-  }
+  // }
   
   
 import Navbar from "../components/NavBar";
@@ -74,12 +74,12 @@ export default function Settings() {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // pulled from LandingPopupCreate.tsx file, change later
     // PUT method for updating filter settings
-    async function updateFilter (props: { languages: any; frameworks: any; category: any; }) {
-      frontload.languages = props.languages
-      frontload.frameworks = props.frameworks
-      frontload.category = props.category
-      const request = await createUser(finalload)
-    }
+    // async function updateFilter (props: { languages: any; frameworks: any; category: any; }) {
+    //   frontload.languages = props.languages
+    //   frontload.frameworks = props.frameworks
+    //   frontload.category = props.category
+    //   const request = await createUser(finalload)
+    // }
     // PUT method for updating account settings
     async function sendToDatabase(props: { firstName: any; lastName: any; email: any; username: any; password: any; confirmPassword?: string; }) {
       frontload.user_name = props.username
@@ -160,7 +160,7 @@ export default function Settings() {
                     name="firstName"
                     placeholder="James" //TODO have these update based on GET request from database for default values
                     variant="outlined"
-                    value={formik.values.firstName}
+                    value={null}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.firstName && Boolean(formik.errors.firstName)
@@ -177,7 +177,7 @@ export default function Settings() {
                   name="lastName"
                   placeholder="Bond"
                   variant="outlined"
-                  value={formik.values.lastName}
+                  value={null}
                   onChange={formik.handleChange}
                   error={
                       formik.touched.lastName && Boolean(formik.errors.lastName)
@@ -193,7 +193,7 @@ export default function Settings() {
                 name="email"
                 placeholder="JamesBond@gmail.com"
                 variant="outlined"
-                value={formik.values.email}
+                value={null}
                 onChange={formik.handleChange}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
@@ -208,7 +208,7 @@ export default function Settings() {
                   name="username"
                   placeholder="JBond007"
                   variant="outlined"
-                  value={formik.values.username}
+                  value={null}
                   onChange={formik.handleChange}
                   error={
                       formik.touched.username && Boolean(formik.errors.username)
@@ -227,7 +227,7 @@ export default function Settings() {
                   placeholder="12345"
                   type="password"
                   variant="outlined"
-                  value={formik.values.password}
+                  value={null}
                   onChange={formik.handleChange}
                   error={
                     formik.touched.password && Boolean(formik.errors.password)
@@ -243,7 +243,7 @@ export default function Settings() {
                     name="confirmPassword"
                     type="password"
                     variant="outlined"
-                    value={formik.values.confirmPassword}
+                    value={null}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.confirmPassword &&
@@ -291,7 +291,6 @@ export default function Settings() {
                     label="Languages"
                   />
                 )}
-                value={formik.values.languages}
               />
               <Autocomplete
                 sx={{
