@@ -13,10 +13,12 @@ import ForgotPassword from './Pages/ForgotPasswordPage'
 import DiscoverPage from './Pages/DiscoverPage'
 import AboutPage from './Pages/AboutPage'
 import SettingsPage from './Pages/SettingsPage'
+import CreateProject from './Pages/CreateProject'
 function App () {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path='/create-project' element={<CreateProject />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/create-preferences' element={<SelectPrefPg/>} />
         <Route path='/discover' element={<DiscoverPage/>} />

@@ -1,0 +1,80 @@
+.CreateProjectPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.Holder {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 80vw;
+
+}
+.TopHolder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 35vh;
+    border-radius: 1rem;
+    gap: 2rem;
+}
+.Uploadimg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35vw;
+    height: 100%;
+    
+    border-radius: 1rem;
+    box-shadow: 0 0 0.5rem 0.1rem #000000;
+    
+}
+.Uploadimg:hover {
+    cursor: pointer;
+    background-color: #bbbbbb5d;
+}
+.ShortDesc{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25vw;
+    height: 100%;
+    gap: 4rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 0.5rem 0.1rem #000000;
+    
+}
+.TagsHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25vw;
+    height: 100%;
+    
+    border-radius: 1rem;
+    box-shadow: 0 0 0.5rem 0.1rem #000000;
+    
+}
+.BottomHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    width: 100%;
+    height: 40vh;
+    border-radius: 1rem;
+    box-shadow: 0 0 0.5rem 0.1rem #000000;
+    
+}
