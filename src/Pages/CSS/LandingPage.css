@@ -2,8 +2,8 @@
     font-size: 4rem;
     color: #000000ab;
     font-weight: 500;
-    margin-left: 2rem;
-    font-family: 'PT Serif';
+    /* margin-left: 2rem; */
+    font-family: 'Signika Negative', sans-serif;
 }
 .logobox {
     display: flex;
@@ -21,11 +21,12 @@
 
 .leadingtext {
     font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 800;
-    font-size: max(6.5vw, 10px);
+    font-weight: bold;
+    font-size: max(5vw, 10px);
     color: #000000;
     max-width: fit-content;
+
+    
     
 }
 .navHome {
@@ -61,7 +62,7 @@
     justify-self: center;
     align-self: center;
     margin: auto;
-    width: 32%;
+    width: 30%;
 }
 .BoxStack {
     display : flex;
@@ -76,9 +77,30 @@
     display : flex;
     flex-direction: column;
     gap: 0;
-    max-width: 40%;
-    margin-left: 5%;
+    max-width: 50%;
+
+
+    /* margin-left: 5%; */
 }
-.Starting {
-    
+.land-header {
+    background-color: #FFFFFF;
+}
+
+.container {
+    max-width: 1420px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    overflow: auto;
+}
+
+.about-container {
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    background-color: #716ab4;
+}
+
+.header-padding {
+    padding-top: 180px;
 }

@@ -259,9 +259,3 @@ export default function SettingsPage(props) {
      </div> 
     );
   }
-  
-
-
-        </div>
-    );
-}
