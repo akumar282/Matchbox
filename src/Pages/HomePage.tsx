@@ -3,7 +3,7 @@ import Navbar from "../components/NavBar";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { IconButton } from "@mui/material";
-import { Link, useHref } from "react-router-dom";
+import { Link, useHref, useNavigate } from "react-router-dom";
 import "./CSS/HomePage.css";
 const project = {
   name: "Project 1",
@@ -28,11 +28,15 @@ const arr = [
   project,
 ];
 export default function HomePage() {
+  const navigate = useNavigate();
+  function handleCreate() {
+    navigate("/create-project");
+  }
   return (
     <div className="HomePage">
       <Navbar />
       <div className="HomeMain">
-        <div className="CreateProject">
+        <div className="CreateProject" onClick={() =>  handleCreate()}>
           <AddCircleOutlineIcon fontSize="large" className="Creaticon" />
         </div>
         {arr.map((tag) => (

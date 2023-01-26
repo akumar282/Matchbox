@@ -33,14 +33,10 @@
     justify-content: center;
     width: 35vw;
     height: 100%;
-    
+    background-color: #d283e610;
     border-radius: 1rem;
     box-shadow: 0 0 0.5rem 0.1rem #000000;
     
-}
-.Uploadimg:hover {
-    cursor: pointer;
-    background-color: #bbbbbb5d;
 }
 .ShortDesc{
     display: flex;
@@ -49,8 +45,8 @@
     justify-content: center;
     width: 25vw;
     height: 100%;
-    gap: 4rem;
     border-radius: 1rem;
+    background-color: #d283e613;
     box-shadow: 0 0 0.5rem 0.1rem #000000;
     
 }
@@ -61,7 +57,8 @@
     justify-content: center;
     width: 25vw;
     height: 100%;
-    
+    background-color: #d283e613;
+    gap: 2rem;
     border-radius: 1rem;
     box-shadow: 0 0 0.5rem 0.1rem #000000;
     
@@ -71,10 +68,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3rem;
     width: 100%;
     height: 40vh;
+    background-color: #d283e613;
     border-radius: 1rem;
     box-shadow: 0 0 0.5rem 0.1rem #000000;
-    
+}
+.imagePrev {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 1rem;
+    border: none;
 }
