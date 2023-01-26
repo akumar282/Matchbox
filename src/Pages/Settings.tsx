@@ -10,7 +10,7 @@ import {
     Autocomplete, 
   
   } from "@mui/material";
-  import React, { useState } from "react";
+  import * as React from "react";
   import { useFormik } from "formik";
   import * as yup from "yup";
   import awsconfig from '../aws-exports'
@@ -65,9 +65,34 @@ import {
 
   // }
   
-  
+type Tag = {
+  id: number
+  label: string
+}
+
+const tagOptions = select_category.map((category, index) => ({
+  id: index + 1,
+  label: category
+}))
+
 import Navbar from "../components/NavBar";
 export default function Settings() {
+
+  const [selectedTags, setSelectedTags] = React.useState([]);
+  
+  const handleChange = (event:any, newValue: any | null) => {
+    setSelectedTags(newValue.map(option => option.value || option));
+
+    // setSelectedTags(select_lang[0]);
+    console.log(typeof(selectedTags));
+    console.log(selectedTags);
+    console.log("change");
+  };
+  
+  // const handleTag = (event) => {
+  //   setSelectedTags(event.target.value);
+  //   console.log(event.target.value);
+  // };
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -160,7 +185,7 @@ export default function Settings() {
                     name="firstName"
                     placeholder="James" //TODO have these update based on GET request from database for default values
                     variant="outlined"
-                    value={null}
+                    value=""
                     onChange={formik.handleChange}
                     error={
                       formik.touched.firstName && Boolean(formik.errors.firstName)
@@ -177,7 +202,7 @@ export default function Settings() {
                   name="lastName"
                   placeholder="Bond"
                   variant="outlined"
-                  value={null}
+                  value=""
                   onChange={formik.handleChange}
                   error={
                       formik.touched.lastName && Boolean(formik.errors.lastName)
@@ -193,7 +218,7 @@ export default function Settings() {
                 name="email"
                 placeholder="JamesBond@gmail.com"
                 variant="outlined"
-                value={null}
+                value=""
                 onChange={formik.handleChange}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
@@ -208,7 +233,7 @@ export default function Settings() {
                   name="username"
                   placeholder="JBond007"
                   variant="outlined"
-                  value={null}
+                  value=""
                   onChange={formik.handleChange}
                   error={
                       formik.touched.username && Boolean(formik.errors.username)
@@ -227,7 +252,7 @@ export default function Settings() {
                   placeholder="12345"
                   type="password"
                   variant="outlined"
-                  value={null}
+                  value=""
                   onChange={formik.handleChange}
                   error={
                     formik.touched.password && Boolean(formik.errors.password)
@@ -243,7 +268,7 @@ export default function Settings() {
                     name="confirmPassword"
                     type="password"
                     variant="outlined"
-                    value={null}
+                    value=""
                     onChange={formik.handleChange}
                     error={
                       formik.touched.confirmPassword &&
@@ -280,10 +305,10 @@ export default function Settings() {
                 }}
                 multiple
                 limitTags={5}
-                id="tags-outlined"
+                id="languages"
                 options={select_lang}
                 getOptionLabel={(option) => option.title}
-                // defaultValue={[select_lang[0]]} // TODO make default values the one already selected
+                defaultValue={[select_lang[0]]} // TODO make default values the one already selected
                 filterSelectedOptions
                 renderInput={(params) => (
                   <TextField
@@ -298,10 +323,10 @@ export default function Settings() {
                 }}
                 multiple
                 limitTags={5}
-                id="tags-outlined"
+                id="frameworks"
                 options={select_frame}
                 getOptionLabel={(option) => option.title}
-                // defaultValue={[select_frame[0]]} // TODO make default values the one already selected
+                defaultValue={[select_frame[0]]} // TODO make default values the one already selected
                 filterSelectedOptions
                 renderInput={(params) => (
                   <TextField
@@ -311,16 +336,27 @@ export default function Settings() {
                 )}
               />
               <Autocomplete
+                // isOptionEqualToValue={(option, value) => option.id === value.id}
+                freeSolo
                 sx={{
                   width: "25rem",
                 }}
                 multiple
                 limitTags={5}
-                id="tags-outlined"
+                id="categories"
                 options={select_category}
                 getOptionLabel={(option) => option.title}
-                // defaultValue={[select_category[0]]} // TODO make default values the one already selected
+                defaultValue={[select_category[0]]} // TODO make default values the one already selected
                 filterSelectedOptions
+                value={selectedTags}
+                
+                onChange={handleChange}
+                
+                // onChange={(event: any, newTags: string | null) => setSelectedTags(newTags)}
+                
+                //onChange={(event: any, newValue: Tag | null) => setSelectedTags(newValue)}
+                
+                //onChange={(event, value) => setSelectedTags(value)}
                 renderInput={(params) => (
                   <TextField
                     {...params}
