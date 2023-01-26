@@ -33,7 +33,7 @@
     justify-content: center;
     width: 35vw;
     height: 100%;
-    background-color: #d283e610;
+    background-color: #53535338;
     border-radius: 1rem;
     box-shadow: 0 0 0.5rem 0.1rem #000000;
     
@@ -46,7 +46,7 @@
     width: 25vw;
     height: 100%;
     border-radius: 1rem;
-    background-color: #d283e613;
+    background-color: #53535338;
     box-shadow: 0 0 0.5rem 0.1rem #000000;
     
 }
@@ -57,7 +57,7 @@
     justify-content: center;
     width: 25vw;
     height: 100%;
-    background-color: #d283e613;
+    background-color: #53535338;
     gap: 2rem;
     border-radius: 1rem;
     box-shadow: 0 0 0.5rem 0.1rem #000000;
@@ -70,7 +70,7 @@
     justify-content: center;
     width: 100%;
     height: 40vh;
-    background-color: #d283e613;
+    background-color: #53535338;
     border-radius: 1rem;
     box-shadow: 0 0 0.5rem 0.1rem #000000;
 }
