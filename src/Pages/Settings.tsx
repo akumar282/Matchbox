@@ -78,22 +78,33 @@ const tagOptions = select_category.map((category, index) => ({
 import Navbar from "../components/NavBar";
 export default function Settings() {
 
-  const [selectedTags, setSelectedTags] = React.useState([]);
-  
-  const handleChange = (event:any, newValue: any | null) => {
-    setSelectedTags(newValue.map(option => option.value || option));
 
-    // setSelectedTags(select_lang[0]);
+  const [selectedLang, setSelectedLang] = React.useState([]);
+  const [selectedFrame, setSelectedFrame] = React.useState([]);
+  const [selectedTags, setSelectedTags] = React.useState([]);
+
+  
+  const handleSelectLang = (event: any, newValue: any | null) => {
+    setSelectedLang(newValue.map(option => option.value || option));
+    console.log(typeof(selectedLang));
+    console.log(selectedFrame);
+    console.log("change");
+  };
+
+  const handleSelectFrame = (event: any, newValue: any | null) => {
+    setSelectedFrame(newValue.map(option => option.value || option));
+    console.log(typeof(selectedTags));
+    console.log(selectedFrame);
+    console.log("change");
+  };
+
+  const handleChange = (event: any, newValue: any | null) => {
+    setSelectedTags(newValue.map(option => option.value || option));
     console.log(typeof(selectedTags));
     console.log(selectedTags);
     console.log("change");
   };
   
-  // const handleTag = (event) => {
-  //   setSelectedTags(event.target.value);
-  //   console.log(event.target.value);
-  // };
-
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -300,9 +311,12 @@ export default function Settings() {
             <h4>Filter Settings</h4>
             <h5>Show projects from only </h5>
               <Autocomplete
+              freeSolo
                 sx={{
                   width: "25rem",
                 }}
+                value={selectedLang}
+                onChange={handleSelectLang}
                 multiple
                 limitTags={5}
                 id="languages"
@@ -318,6 +332,7 @@ export default function Settings() {
                 )}
               />
               <Autocomplete
+              freeSolo
                 sx={{
                   width: "25rem",
                 }}
@@ -328,6 +343,9 @@ export default function Settings() {
                 getOptionLabel={(option) => option.title}
                 defaultValue={[select_frame[0]]} // TODO make default values the one already selected
                 filterSelectedOptions
+                
+                value={selectedFrame}
+                onChange={handleSelectFrame}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -336,7 +354,6 @@ export default function Settings() {
                 )}
               />
               <Autocomplete
-                // isOptionEqualToValue={(option, value) => option.id === value.id}
                 freeSolo
                 sx={{
                   width: "25rem",
@@ -349,14 +366,7 @@ export default function Settings() {
                 defaultValue={[select_category[0]]} // TODO make default values the one already selected
                 filterSelectedOptions
                 value={selectedTags}
-                
                 onChange={handleChange}
-                
-                // onChange={(event: any, newTags: string | null) => setSelectedTags(newTags)}
-                
-                //onChange={(event: any, newValue: Tag | null) => setSelectedTags(newValue)}
-                
-                //onChange={(event, value) => setSelectedTags(value)}
                 renderInput={(params) => (
                   <TextField
                     {...params}
