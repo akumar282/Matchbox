@@ -105,6 +105,9 @@ export default function CreateProject() {
       .min(2, "Project title should be of minimum 2 characters")
       .max(100, "Project title should be of maximum 100 characters")
       .required("Project title is required"),
+    language : yup.array().min(1, "Please select atleast one language").required("Language is required"),
+    framework : yup.array().min(1, "Please select atleast one framework").required("Framework is required"),
+    size : yup.array().min(1, "Please select atleast one size").required("Size is required"),
   });
 
   const formik = useFormik({
@@ -113,6 +116,9 @@ export default function CreateProject() {
       GithubLink: "",
       ProjectTitle: "",
       LongDesc: "",
+      language : [],
+      framework : [],
+      size : [],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -242,8 +248,14 @@ export default function CreateProject() {
               value={selectedLang}
               onChange={handleLang}
               renderInput={(params) => (
-                <TextField {...params} label="Languages" />
+                <TextField {...params} label="Languages" 
+                error={
+                  formik.touched.language && Boolean(formik.errors.language)
+                }
+                helperText={formik.touched.language && formik.errors.language}
+                />
               )}
+              
             />
             <Autocomplete
               freeSolo
@@ -260,7 +272,12 @@ export default function CreateProject() {
               value={selectedFrame}
               onChange={handleFrame}
               renderInput={(params) => (
-                <TextField {...params} label="Frameworks" />
+                <TextField {...params} label="Frameworks" 
+                error={
+                  formik.touched.framework && Boolean(formik.errors.framework)
+                }
+                helperText={formik.touched.framework && formik.errors.framework}
+                />
               )}
             />
             <Autocomplete
@@ -277,7 +294,14 @@ export default function CreateProject() {
               filterSelectedOptions
               value={selectedSize}
               onChange={handleSize}
-              renderInput={(params) => <TextField {...params} label="Size" />}
+              renderInput={(params) =>
+              <TextField {...params} label="Size" 
+              error={
+                formik.touched.size && Boolean(formik.errors.size)
+              }
+              helperText={formik.touched.size && formik.errors.size}
+              />}
+
             />
           </div>
         </div>
