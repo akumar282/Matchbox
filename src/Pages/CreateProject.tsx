@@ -8,51 +8,54 @@ import {
   Typography,
   Autocomplete,
 } from "@mui/material";
-import { useFormik } from "formik";
+import { useFormik, Field } from "formik";
 import * as yup from "yup";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { color } from "@mui/system";
+import { fieldToTextField } from 'formik-mui'
 
 const tags = [
-  "Java",
-  "C++",
-  "Python",
-  "C#",
-  "JavaScript",
-  "PHP",
-  "Ruby",
-  "HTML",
-  "CSS",
-  "Swift",
-  "Go",
-  "Rust",
-  "Kotlin",
-  "Dart",
-  "Scala",
-  "TypeScript",
-  "SQL",
+  { value: "Java", label: "Java" },
+  { value: "C++", label: "C++" },
+  { value: "Python", label: "Python" },
+  { value: "C#", label: "C#" },
+  { value: "JavaScript", label: "JavaScript" },
+  { value: "PHP", label: "PHP" },
+  { value: "Ruby", label: "Ruby" },
+  { value: "HTML", label: "HTML" },
+  { value: "CSS", label: "CSS" },
+  { value: "Swift", label: "Swift" },
+  { value: "Go", label: "Go" },
+  { value: "Rust", label: "Rust" },
+  { value: "Kotlin", label: "Kotlin" },
+  { value: "Dart", label: "Dart" },
+  { value: "Scala", label: "Scala" },
+  { value: "TypeScript", label: "TypeScript" },
+  { value: "SQL", label: "SQL" },
 ];
 const tags2 = [
-  "React",
-  "React Native",
-  "Angular",
-  "Vue",
-  "Node",
-  "Express",
-  "WebSocketIO",
-  "Django",
-  "Flask",
-  "MongoDB",
-  "MySQL",
-  "PostgreSQL",
-  "Firebase",
-  "AWS",
-  "Azure",
-  "Heroku",
+  { value: "React", label: "React" },
+  { value: "React Native", label: "React Native" },
+  { value: "Angular", label: "Angular" },
+  { value: "Vue", label: "Vue" },
+  { value: "Node", label: "Node" },
+  { value: "Express", label: "Express" },
+  { value: "WebSocketIO", label: "WebSocketIO" },
+  { value: "Django", label: "Django" },
+  { value: "Flask", label: "Flask" },
+  { value: "MongoDB", label: "MongoDB" },
+  { value: "MySQL", label: "MySQL" },
+  { value: "PostgreSQL", label: "PostgreSQL" },
+  { value: "Firebase", label: "Firebase" },
+  { value: "AWS", label: "AWS" },
+  { value: "Azure", label: "Azure" },
+  { value: "Heroku", label: "Heroku" },
 ];
+
 const tags3 = ["small", "medium", "large"];
 const arrTags = [tags, tags2, tags3];
+
 
 export default function CreateProject() {
   const [isSelected, setIsSelected] = React.useState(false);
@@ -63,6 +66,7 @@ export default function CreateProject() {
   const [selectedSize, setSelectedSize] = React.useState([]);
 
   function handleLang(event: any, value: any | null) {
+    console.log(value);  
     setSelectedLang(value.map((item: any) => item));
   }
   function handleFrame(event: any, value: any | null) {
@@ -125,7 +129,10 @@ export default function CreateProject() {
       //Link to preferences page
       alert(JSON.stringify(values, null, 2));
     },
+    validateOnChange: false,
+    validateOnBlur: false,
   });
+
   return (
     <div className="CreateProjectPage">
       <Typography
@@ -231,10 +238,10 @@ export default function CreateProject() {
               helperText={formik.touched.GithubLink && formik.errors.GithubLink}
             />
           </div>
-
+             
           <div className="TagsHolder">
             <Autocomplete
-              freeSolo
+              
               sx={{
                 width: "90%",
               }}
@@ -242,7 +249,7 @@ export default function CreateProject() {
               limitTags={3}
               id="language"
               options={tags}
-              getOptionLabel={(option) => option}
+              getOptionLabel={(option) => option.label}
               defaultValue={[tags[0]]}
               filterSelectedOptions
               value={selectedLang}
@@ -257,16 +264,15 @@ export default function CreateProject() {
               )}
               
             />
-            <Autocomplete
-              freeSolo
+           <Autocomplete
               sx={{
                 width: "90%",
               }}
               multiple
               limitTags={3}
               id="framework"
-              options={tags2}
-              getOptionLabel={(option) => option}
+              options={tags}
+              getOptionLabel={(option) => option.label}
               defaultValue={[tags2[0]]}
               filterSelectedOptions
               value={selectedFrame}
@@ -274,14 +280,15 @@ export default function CreateProject() {
               renderInput={(params) => (
                 <TextField {...params} label="Frameworks" 
                 error={
-                  formik.touched.framework && Boolean(formik.errors.framework)
+                  formik.touched.language && Boolean(formik.errors.language)
                 }
-                helperText={formik.touched.framework && formik.errors.framework}
+                helperText={formik.touched.language && formik.errors.language}
                 />
               )}
+              
             />
             <Autocomplete
-              freeSolo
+              
               sx={{
                 width: "90%",
               }}
