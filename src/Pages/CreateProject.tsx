@@ -1,5 +1,7 @@
 import React from "react";
 import "./CSS/CreateProject.css";
+import CloseIcon from "@mui/icons-material/Close";
+import DownloadIcon from "@mui/icons-material/Download";
 import {
   Button,
   TextField,
@@ -10,10 +12,11 @@ import {
 } from "@mui/material";
 import { useFormik, Field } from "formik";
 import * as yup from "yup";
+import { Link } from "react-router-dom";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { color } from "@mui/system";
-import { fieldToTextField } from 'formik-mui'
+import { useNavigate } from "react-router-dom";
 
 const tags = [
   { value: "Java", label: "Java" },
@@ -56,7 +59,6 @@ const tags2 = [
 const tags3 = ["small", "medium", "large"];
 const arrTags = [tags, tags2, tags3];
 
-
 export default function CreateProject() {
   const [isSelected, setIsSelected] = React.useState(false);
   const [selectedFile, setSelectedFile] = React.useState(null);
@@ -65,15 +67,19 @@ export default function CreateProject() {
   const [selectedFrame, setSelectedFrame] = React.useState([]);
   const [selectedSize, setSelectedSize] = React.useState([]);
 
+  const navigate = useNavigate();
+  //auto complete handlers
   function handleLang(event: any, value: any | null) {
-    console.log(value);  
     setSelectedLang(value.map((item: any) => item));
+    formik.setFieldValue("language", value);
   }
   function handleFrame(event: any, value: any | null) {
     setSelectedFrame(value.map((item: any) => item));
+    formik.setFieldValue("framework", value);
   }
   function handleSize(event: any, value: any | null) {
     setSelectedSize(value.map((item: any) => item));
+    formik.setFieldValue("size", value);
   }
   //upload button handler for file input to add better styling
   function handleClick(event) {
@@ -109,9 +115,18 @@ export default function CreateProject() {
       .min(2, "Project title should be of minimum 2 characters")
       .max(100, "Project title should be of maximum 100 characters")
       .required("Project title is required"),
-    language : yup.array().min(1, "Please select atleast one language").required("Language is required"),
-    framework : yup.array().min(1, "Please select atleast one framework").required("Framework is required"),
-    size : yup.array().min(1, "Please select atleast one size").required("Size is required"),
+    language: yup
+      .array()
+      .min(1, "Please select atleast one language")
+      .required("Language is required"),
+    framework: yup
+      .array()
+      .min(1, "Please select atleast one framework")
+      .required("Framework is required"),
+    size: yup
+      .array()
+      .min(1, "Please select atleast one size")
+      .required("Size is required"),
   });
 
   const formik = useFormik({
@@ -120,16 +135,18 @@ export default function CreateProject() {
       GithubLink: "",
       ProjectTitle: "",
       LongDesc: "",
-      language : [],
-      framework : [],
-      size : [],
+      language: [],
+      framework: [],
+      size: [],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       //Link to preferences page
-      alert(JSON.stringify(values, null, 2));
+      //alert(JSON.stringify(values, null, 2));
+      //waiting for backend connection
+      navigate("/preferences");
     },
-    validateOnChange: false,
+    validateOnChange: true,
     validateOnBlur: false,
   });
 
@@ -147,24 +164,39 @@ export default function CreateProject() {
       >
         Create Project
       </Typography>
+      <IconButton
+        component={Link}
+        to="/home"
+        size="large"
+        sx={{
+          position: "absolute",
+          top: 20,
+          right: 20,
+          color: "#FFFFFF",
+          backgroundColor: "#6259b9",
+          "&:hover": {
+            backgroundColor: "#716ab4",
+          },
+        }}
+      >
+        <CloseIcon fontSize="large" />
+      </IconButton>
       <div className="Holder">
         <div className="TopHolder">
           <div className="Uploadimg">
-            <Button
-              variant="contained"
+            <IconButton
               sx={{
                 position: "absolute",
                 backgroundColor: "#6259b9",
                 color: "white",
-                fontFamily: "PT Serif",
                 "&:hover": {
                   backgroundColor: "#716ab4",
                 },
               }}
               onClick={handleClick}
             >
-              Upload a file
-            </Button>
+              <DownloadIcon fontSize="large" />
+            </IconButton>
             <input
               type="file"
               id="file"
@@ -238,10 +270,9 @@ export default function CreateProject() {
               helperText={formik.touched.GithubLink && formik.errors.GithubLink}
             />
           </div>
-             
+
           <div className="TagsHolder">
             <Autocomplete
-              
               sx={{
                 width: "90%",
               }}
@@ -255,16 +286,18 @@ export default function CreateProject() {
               value={selectedLang}
               onChange={handleLang}
               renderInput={(params) => (
-                <TextField {...params} label="Languages" 
-                error={
-                  formik.touched.language && Boolean(formik.errors.language)
-                }
-                helperText={formik.touched.language && formik.errors.language}
+                <TextField
+                  {...params}
+                  label="Languages"
+                  value={formik.values.language}
+                  error={
+                    formik.touched.language && Boolean(formik.errors.language)
+                  }
+                  helperText={formik.touched.language && formik.errors.language}
                 />
               )}
-              
             />
-           <Autocomplete
+            <Autocomplete
               sx={{
                 width: "90%",
               }}
@@ -278,17 +311,20 @@ export default function CreateProject() {
               value={selectedFrame}
               onChange={handleFrame}
               renderInput={(params) => (
-                <TextField {...params} label="Frameworks" 
-                error={
-                  formik.touched.language && Boolean(formik.errors.language)
-                }
-                helperText={formik.touched.language && formik.errors.language}
+                <TextField
+                  {...params}
+                  label="Frameworks"
+                  value={formik.values.framework}
+                  error={
+                    formik.touched.framework && Boolean(formik.errors.framework)
+                  }
+                  helperText={
+                    formik.touched.framework && formik.errors.framework
+                  }
                 />
               )}
-              
             />
             <Autocomplete
-              
               sx={{
                 width: "90%",
               }}
@@ -301,14 +337,14 @@ export default function CreateProject() {
               filterSelectedOptions
               value={selectedSize}
               onChange={handleSize}
-              renderInput={(params) =>
-              <TextField {...params} label="Size" 
-              error={
-                formik.touched.size && Boolean(formik.errors.size)
-              }
-              helperText={formik.touched.size && formik.errors.size}
-              />}
-
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Size"
+                  error={formik.touched.size && Boolean(formik.errors.size)}
+                  helperText={formik.touched.size && formik.errors.size}
+                />
+              )}
             />
           </div>
         </div>
