@@ -62,12 +62,11 @@ export default function LandingPage() {
           </Button>
           {/* sign up link */}
           <Button
-            component={Link}
-            to='/create-profile'
             sx={{
               color: '#000000',
               fontSize: 'max(20px, 10px);',
             }}
+            onClick={() => setIsCreateOpen(true)}
           >
             {' '}
             Sign Up
