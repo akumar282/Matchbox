@@ -13,6 +13,7 @@ import ForgotPassword from './Pages/ForgotPasswordPage'
 import DiscoverPage from './Pages/DiscoverPage'
 import AboutPage from './Pages/AboutPage'
 import SettingsPage from './Pages/SettingsPage'
+
 function App () {
   return (
     <BrowserRouter>
@@ -26,6 +27,7 @@ function App () {
         <Route path='/' element={<LandingPage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/settings' element={<SettingsPage />} />
+
       </Routes>
     </BrowserRouter>
   )

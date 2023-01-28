@@ -12,6 +12,11 @@ const { palette } = createTheme()
 const { augmentColor } = palette
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } })
 
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
+import { about } from './AboutPageData'
+
 declare module '@mui/material/styles/createTheme' {
   interface Theme {
     status: {
@@ -24,6 +29,8 @@ declare module '@mui/material/styles/createTheme' {
     }
   }
 }
+
+
 export default function LandingPage() {
   const [isLoginOpen, setIsLoginOpen] = React.useState(false)
   const [isCreateOpen, setIsCreateOpen] = React.useState(false)
@@ -31,8 +38,15 @@ export default function LandingPage() {
     setIsLoginOpen(false)
     setIsCreateOpen(true)
   }
+  Aos.init({
+    duration: 2500,
+    delay: 400,
+  });
+
+  const { title, subtext } = about;
+
   return (
-    <div className='land-header'>
+    <div className='landing'>
     <header className='container'>
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
       <LandingPopupCreate trigger={isCreateOpen} setTrigger={setIsCreateOpen} />
@@ -44,6 +58,7 @@ export default function LandingPage() {
         </div>
 
         <Stack className='LandingStack' direction='row'>
+
           <Button
             sx={{
               color: '#000000',
@@ -52,6 +67,17 @@ export default function LandingPage() {
           >
             {' '}
             About Us
+          </Button>
+          <Button
+            component={Link}
+            to='/create-profile'
+            sx={{
+              color: '#000000',
+              fontSize: 'max(20px, 10px);',
+            }}
+          >
+            {' '}
+            Contact
           </Button>
           {/* sign up link */}
           <Button
@@ -65,22 +91,6 @@ export default function LandingPage() {
             {' '}
             Sign Up
           </Button>
-          {/* login button */}
-          {/* <Button
-            variant='contained'
-            sx={{
-              backgroundColor: '#312C51',
-              color: 'white',
-              fontSize: 'max(20px, 10px);',
-              '&:hover': {
-                backgroundColor: '#716ab4',
-              },
-            }}
-            onClick={() => setIsLoginOpen(true)}
-          >
-            {' '}
-            Login
-          </Button> */}
         </Stack>
       </div>
       <div className='BoxStack'>
@@ -92,6 +102,8 @@ export default function LandingPage() {
             justifyContent: 'center',
             width: '100%',
           }}
+          data-aos='fade-down'
+          data-aos-delay='500'
         >
           {/* landing title & description */}
           <p className='subtext'> Welcome to Matchbox </p>
@@ -100,7 +112,9 @@ export default function LandingPage() {
           <p className='subtext'>Get instantly matched with open source projects with a straight-forward process </p>
         </Stack>
         {/* matchstick illustration */}
-        <img className='firestick' src={illustration}></img>
+        <img className='firestick' src={illustration}         
+            data-aos='fade-right'
+            data-aos-delay='900'></img>
       </div>
 
       <Button onClick={() => setIsCreateOpen(true)}
@@ -116,6 +130,8 @@ export default function LandingPage() {
           },
         }}
         variant='contained'
+        data-aos='fade-down'
+        data-aos-delay='600'
       > 
         Learn More
       </Button>
@@ -125,7 +141,14 @@ export default function LandingPage() {
       </header>
         <div className="about-container">
             <div className="container">
-                hello world    
+              <div className="about-text-container">
+            <p className='about-lead-text' 
+            data-aos='fade-up'
+            data-aos-delay='100'>About us</p>
+              <p className='about-sub-text'
+                      data-aos='fade-up'
+                      data-aos-delay='200'>{subtext} </p>
+            </div>
             </div>
         </div>
     </div>
