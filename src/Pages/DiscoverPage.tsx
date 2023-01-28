@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Navbar from "../components/NavBar";
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -11,7 +12,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LaunchIcon from '@mui/icons-material/Launch';
 import CancelIcon from '@mui/icons-material/Cancel';
-
+import "./CSS/DiscoverPage.css";
 
 function handleRemove(){
     console.log("removing project");
@@ -23,8 +24,12 @@ function handleSave(){
     // TODO make backend connection here
 }
 
-const ImgCard = (
-    <React.Fragment>
+function ImgCard() {
+    return (
+    <Card variant="outlined" sx = {{
+        outline: 'auto',
+        width: "40rem",
+    }}>
       <CardContent>
        image
       </CardContent>
@@ -38,8 +43,11 @@ const ImgCard = (
             <BookmarkBorderIcon />
         </IconButton>
       </CardActions>
-    </React.Fragment>
-  );
+    </Card>
+    );
+}
+
+
 
 const DesriptCard = (
   <React.Fragment>
@@ -83,12 +91,12 @@ const longDescription = (
 
 export default function DiscoverPage() {
     return (
-        <div>
+        <div className="DiscoverPage">
+            <Navbar/>
+            <div className="DiscoverMain">
             <span className='logo'>Matchbox</span>
-            <Stack direction="row" spacing={3}>
-                <Box sx={{ maxWidth: 500}}>
-                    <Card variant="outlined">{ImgCard}</Card>
-                </Box>
+            <Stack direction="row" spacing={3} mb = "1rem">
+                <ImgCard/>
                 <Box sx={{ maxWidth: 800 }}>
                     <Card variant="outlined">{DesriptCard}</Card>
                 </Box>
@@ -96,7 +104,7 @@ export default function DiscoverPage() {
             <Box sx={{ maxWidth: 1200 }}>
             <Card variant="outlined">{longDescription}</Card>
             </Box>
-         
+         </div>
         </div>
     );
 }  
