@@ -18,7 +18,7 @@ function App () {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/settings' element={<Settings />} />
+        {/* <Route path='/settings' element={<Settings />} /> */}
         <Route path='/create-preferences' element={<SelectPrefPg/>} />
         <Route path='/discover' element={<DiscoverPage/>} />
         <Route path='/home' element={<HomePage />} />
