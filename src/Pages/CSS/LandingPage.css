@@ -20,6 +20,12 @@
     /* position: relative; */
 }
 
+.about-text-container{
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
 .leadingtext {
     font-family: 'Roboto';
     font-weight: bold;
@@ -107,17 +113,17 @@
 }
 
 .about{
-    background-color: #312C51;
+    background-color: #203354;
 }
 
 .about-container {
     margin:auto;
     /* overflow: auto; */
-    background-color: #312C51;
-    height: 1000px;
+    background-color: #203354;
+    height: 400px;
 
+    /* max-width: 1420px; */
     max-width: 1420px;
-
     display: block;
     /* overflow: auto; */
     /* height: 1000px; */
@@ -127,17 +133,21 @@
 
 .about-lead-text {
     font-family: 'Roboto';
-    font-weight: bold;
+    font-weight: 800;
     font-size: max(5vw, 10px);
     color: #FFFFFF;
+    margin-top: 30px;
+    margin-bottom: 0;
 }
 
 .about-sub-text {
     font-family: 'Roboto';
     font-size:max(30px, 10px);
-    /* max-width: fit-content; */
+    max-width: 100%;
     color: #FFFFFF;
     margin-bottom: 0px;
+    
+
 }
 
 .signupEntry {

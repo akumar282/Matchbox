@@ -57,7 +57,7 @@ export default function LandingPage() {
         </div>
 
         <Stack className='LandingStack' direction='row'>
-
+{/* 
           <Button
             sx={{
               color: '#000000',
@@ -66,19 +66,22 @@ export default function LandingPage() {
           >
             {' '}
             About Us
-          </Button>
+          </Button> */}
 
           {/* sign up link */}
+          
           <Button
-            component={Link}
-            to='/home'
+            // component={Link}
+            // to='/home'
             sx={{
               color: '#000000',
               fontSize: 'max(20px, 10px);',
             }}
+            
           >
             {' '}
-            Sign Up
+            <Link to="#about" />
+            About Us
           </Button>
         </Stack>
       </div>
@@ -119,18 +122,22 @@ export default function LandingPage() {
      
       
       </div>
+     
       <div className='about'>
+        
         <div className="about-container">
 
         <div className='signupStack' 
-                data-aos='fade-down'
-                data-aos-delay='600'>
+                // data-aos='fade-down'
+                // data-aos-delay='600'
+                >
           <p className='signText'>
           Sign up to get free access to preview upon release.
       
       </p>
       <div className='signupEntry'>
       <TextField variant="filled" color="#FFFFFF" sx={{ backgroundColor: '#FFFFFF', height : '6vh', width:'30em'}}/>
+      
       <Button onClick={() => submitEmail()}
         sx={{
           backgroundColor: '#F68084',
@@ -140,7 +147,7 @@ export default function LandingPage() {
           height : '6.5vh',
           fontSize: 'max(14px, 5px);',
           '&:hover': {
-            backgroundColor: '#FF0000',
+            backgroundColor: '#f59da0',
           },
           mx: '10px',
         }}
@@ -156,24 +163,29 @@ export default function LandingPage() {
 
         
               
-              <div className="about-text-container">
+              {/* <div className="about-text-container">
+              <a href="#about"> </a>
+              
             <p className='about-lead-text' 
             data-aos='fade-up'
             data-aos-delay='100'>About us</p>
               <p className='about-sub-text'
                       data-aos='fade-up'
-                      data-aos-delay='200'>{subtext} </p>
+                      data-aos-delay='200'>
+                        {subtext} 
+
+                        Matchbox is a platform connecting developers to open source projects and connecting project owners and organizations to qualified developers. 
+                        Our mission is to empower developers and project owners by streamlining the process of finding and collaborating on open source projects. 
+                        </p>
+            </div> */}
+ 
+             
             </div>
-            {/* <p className='about-lead-text' >
-              Let's Stay in Touch
-            </p> */}
-            </div>
+           
         </div>
-        {/* <div className='container'>
-          Let's Stay in Touch
+        
 
-
-        </div> */}
+       
     </div>
   );
 }
