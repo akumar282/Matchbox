@@ -24,9 +24,9 @@ function App () {
         <Route path='/home' element={<HomePage />} />
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>
         <Route path='/*' element={<NotFound />} />
-        <Route path='/' element={<LandingPage />} />
-        <Route path='/about' element={<AboutPage />} />
-        <Route path='/settings' element={<SettingsPage />} />
+        <Route path='/landing' element={<LandingPage />} />
+        <Route path='/' element={<AboutPage />} />
+        <Route path='/settings' element={<Settings />} />
 
       </Routes>
     </BrowserRouter>

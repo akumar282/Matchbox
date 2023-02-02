@@ -46,8 +46,8 @@ export default function LandingPage() {
   const { title, subtext } = about;
 
   return (
-    <div >
-    <div className='top-container'>
+    <div className='landing'>
+    <header className='container'>
 
       <div className='navHome'>
         {/* logo */}
@@ -67,11 +67,21 @@ export default function LandingPage() {
             {' '}
             About Us
           </Button>
-
+          <Button
+            component={Link}
+            to='/create-profile'
+            sx={{
+              color: '#000000',
+              fontSize: 'max(20px, 10px);',
+            }}
+          >
+            {' '}
+            Contact
+          </Button>
           {/* sign up link */}
           <Button
             component={Link}
-            to='/home'
+            to='/create-profile'
             sx={{
               color: '#000000',
               fontSize: 'max(20px, 10px);',
@@ -86,76 +96,53 @@ export default function LandingPage() {
         <Stack
           className='textStack'
           direction='column'
+          spacing={1}
           sx={{
             justifyContent: 'center',
             width: '100%',
           }}
+          data-aos='fade-down'
+          data-aos-delay='500'
         >
           {/* landing title & description */}
-          <p 
-            className='leadingtext'          
-            data-aos='fade-down'
-            data-aos-delay='600'
-          > 
-            Bridge between ideas and execution 
-          </p>
-
-          <p 
-          className='subtext'           
-          data-aos='fade-down'
-          data-aos-delay='800'
-          >
-            Matchbox is a project collaboration platform that curates
-            countless open source projects in seconds.
-          </p>
+          <p className='subtext'> Welcome to Matchbox </p>
+          <p className='leadingtext'> Discover a project you'll love</p>
+          {/* <p className='leadingtext'> you'll love.</p> */}
+          <p className='subtext'>Get instantly matched with open source projects with a straight-forward process </p>
         </Stack>
         {/* matchstick illustration */}
         <img className='firestick' src={illustration}         
             data-aos='fade-right'
             data-aos-delay='900'></img>
       </div>
-      {/* stack together */}
+      <TextField variant="standard">
 
-     
-      
-      </div>
-      <div className='about'>
-        <div className="about-container">
+      </TextField>
 
-        <div className='signupStack' 
-                data-aos='fade-down'
-                data-aos-delay='600'>
-          <p className='signText'>
-          Sign up to get free access to preview upon release.
-      
-      </p>
-      <div className='signupEntry'>
-      <TextField variant="filled" color="#FFFFFF" sx={{ backgroundColor: '#FFFFFF', height : '6vh', width:'30em'}}/>
       <Button onClick={() => submitEmail()}
         sx={{
-          backgroundColor: '#F68084',
+          backgroundColor: '#312C51',
         //   marginLeft: '5%',
-          // mt: '1%',
-          width: '15%',
-          height : '6.5vh',
-          fontSize: 'max(14px, 5px);',
+          mt: '1%',
+          width:'20%',
+          height : '8vh',
+          fontSize: 'max(28px, 10px);',
           '&:hover': {
-            backgroundColor: '#FF0000',
+            backgroundColor: '#716ab4',
           },
-          mx: '10px',
         }}
         variant='contained'
-
+        data-aos='fade-down'
+        data-aos-delay='600'
       > 
-        Sign Up
+        Connect
       </Button>
-      </div>
-      </div>
-      
+      <div className='header-padding'>
 
-
-        
-              
+      </div>
+      </header>
+        <div className="about-container">
+            <div className="container">
               <div className="about-text-container">
             <p className='about-lead-text' 
             data-aos='fade-up'
@@ -164,16 +151,13 @@ export default function LandingPage() {
                       data-aos='fade-up'
                       data-aos-delay='200'>{subtext} </p>
             </div>
-            {/* <p className='about-lead-text' >
-              Let's Stay in Touch
-            </p> */}
             </div>
         </div>
-        {/* <div className='container'>
+        <div className='container'>
           Let's Stay in Touch
 
 
-        </div> */}
+        </div>
     </div>
   );
 }
