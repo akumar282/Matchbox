@@ -4,7 +4,10 @@ import {
   DeleteUsersModelInput, 
   CreatePostsModelInput, 
   UpdatePostsModelInput,
-  DeletePostsModelInput 
+  DeletePostsModelInput,
+  CreateNewsletterEmailModelInput,
+  UpdateNewsletterEmailModelInput,
+  DeleteNewsletterEmailModelInput
 } from '../API'
 
 export type CreateUsersPayload = {
@@ -30,3 +33,16 @@ export type UpdatePostsModelPayload = {
 export type DeletePostsodelPayload = { 
   input: DeletePostsModelInput
 }
+
+export type CreateNewsletterEmailModelPayload = {
+  input: CreateNewsletterEmailModelInput
+}
+
+export type UpdateewsletterEmailModelPayload = {
+  input: UpdateNewsletterEmailModelInput
+}
+
+export type DeleteewsletterEmailModelPayload = { 
+  input: DeleteNewsletterEmailModelInput
+}
+

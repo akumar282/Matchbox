@@ -48,9 +48,10 @@ const LanguageTag = {
   "SQL": "SQL"
 };
 
-const { PostsModel, UsersModel } = initSchema(schema);
+const { NewsletterEmailModel, PostsModel, UsersModel } = initSchema(schema);
 
 export {
+  NewsletterEmailModel,
   PostsModel,
   UsersModel,
   SizeTag,
