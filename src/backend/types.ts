@@ -38,11 +38,11 @@ export type CreateNewsletterEmailModelPayload = {
   input: CreateNewsletterEmailModelInput
 }
 
-export type UpdateewsletterEmailModelPayload = {
+export type UpdateNewsletterEmailModelPayload = {
   input: UpdateNewsletterEmailModelInput
 }
 
-export type DeleteewsletterEmailModelPayload = { 
+export type DeleteNewsletterEmailModelPayload = { 
   input: DeleteNewsletterEmailModelInput
 }
 
