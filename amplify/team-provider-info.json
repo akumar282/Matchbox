@@ -17,6 +17,12 @@
       },
       "api": {
         "Unhinged": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dnpxlnk1ec683",
+          "type": "manual"
+        }
       }
     }
   }

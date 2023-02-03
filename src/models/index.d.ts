@@ -48,12 +48,36 @@ export enum LanguageTag {
   SQL = "SQL"
 }
 
+type NewsletterEmailModelMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type PostsModelMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
 type UsersModelMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type EagerNewsletterEmailModel = {
+  readonly id: string;
+  readonly email: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyNewsletterEmailModel = {
+  readonly id: string;
+  readonly email: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type NewsletterEmailModel = LazyLoading extends LazyLoadingDisabled ? EagerNewsletterEmailModel : LazyNewsletterEmailModel
+
+export declare const NewsletterEmailModel: (new (init: ModelInit<NewsletterEmailModel, NewsletterEmailModelMetaData>) => NewsletterEmailModel) & {
+  copyOf(source: NewsletterEmailModel, mutator: (draft: MutableModel<NewsletterEmailModel, NewsletterEmailModelMetaData>) => MutableModel<NewsletterEmailModel, NewsletterEmailModelMetaData> | void): NewsletterEmailModel;
 }
 
 type EagerPostsModel = {

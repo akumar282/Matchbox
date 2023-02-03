@@ -2,6 +2,81 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
+export type CreateNewsletterEmailModelInput = {
+  id?: string | null,
+  email: string,
+  _version?: number | null,
+};
+
+export type ModelNewsletterEmailModelConditionInput = {
+  email?: ModelStringInput | null,
+  and?: Array< ModelNewsletterEmailModelConditionInput | null > | null,
+  or?: Array< ModelNewsletterEmailModelConditionInput | null > | null,
+  not?: ModelNewsletterEmailModelConditionInput | null,
+};
+
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
+
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
+export type NewsletterEmailModel = {
+  __typename: "NewsletterEmailModel",
+  id: string,
+  email: string,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type UpdateNewsletterEmailModelInput = {
+  id: string,
+  email?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteNewsletterEmailModelInput = {
+  id: string,
+  _version?: number | null,
+};
+
 export type CreatePostsModelInput = {
   id?: string | null,
   post_title: string,
@@ -81,46 +156,6 @@ export type ModelPostsModelConditionInput = {
   and?: Array< ModelPostsModelConditionInput | null > | null,
   or?: Array< ModelPostsModelConditionInput | null > | null,
   not?: ModelPostsModelConditionInput | null,
-};
-
-export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
-
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
 };
 
 export type ModelIDInput = {
@@ -282,6 +317,21 @@ export type DeleteUsersModelInput = {
   _version?: number | null,
 };
 
+export type ModelNewsletterEmailModelFilterInput = {
+  id?: ModelIDInput | null,
+  email?: ModelStringInput | null,
+  and?: Array< ModelNewsletterEmailModelFilterInput | null > | null,
+  or?: Array< ModelNewsletterEmailModelFilterInput | null > | null,
+  not?: ModelNewsletterEmailModelFilterInput | null,
+};
+
+export type ModelNewsletterEmailModelConnection = {
+  __typename: "ModelNewsletterEmailModelConnection",
+  items:  Array<NewsletterEmailModel | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
 export type ModelPostsModelFilterInput = {
   id?: ModelIDInput | null,
   post_title?: ModelStringInput | null,
@@ -322,20 +372,11 @@ export type ModelUsersModelConnection = {
   startedAt?: number | null,
 };
 
-export type ModelSubscriptionPostsModelFilterInput = {
+export type ModelSubscriptionNewsletterEmailModelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  post_title?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  project_link?: ModelSubscriptionStringInput | null,
-  image_link?: ModelSubscriptionStringInput | null,
-  post_date?: ModelSubscriptionStringInput | null,
-  userID?: ModelSubscriptionIDInput | null,
-  lang_tag?: ModelSubscriptionStringInput | null,
-  dev_type_tag?: ModelSubscriptionStringInput | null,
-  interest_tag?: ModelSubscriptionStringInput | null,
-  size_tag?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionPostsModelFilterInput | null > | null,
-  or?: Array< ModelSubscriptionPostsModelFilterInput | null > | null,
+  email?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionNewsletterEmailModelFilterInput | null > | null,
+  or?: Array< ModelSubscriptionNewsletterEmailModelFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -368,6 +409,22 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
+export type ModelSubscriptionPostsModelFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  post_title?: ModelSubscriptionStringInput | null,
+  description?: ModelSubscriptionStringInput | null,
+  project_link?: ModelSubscriptionStringInput | null,
+  image_link?: ModelSubscriptionStringInput | null,
+  post_date?: ModelSubscriptionStringInput | null,
+  userID?: ModelSubscriptionIDInput | null,
+  lang_tag?: ModelSubscriptionStringInput | null,
+  dev_type_tag?: ModelSubscriptionStringInput | null,
+  interest_tag?: ModelSubscriptionStringInput | null,
+  size_tag?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionPostsModelFilterInput | null > | null,
+  or?: Array< ModelSubscriptionPostsModelFilterInput | null > | null,
+};
+
 export type ModelSubscriptionUsersModelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   user_name?: ModelSubscriptionStringInput | null,
@@ -381,6 +438,60 @@ export type ModelSubscriptionUsersModelFilterInput = {
   hide_posts?: ModelSubscriptionIDInput | null,
   and?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
+};
+
+export type CreateNewsletterEmailModelMutationVariables = {
+  input: CreateNewsletterEmailModelInput,
+  condition?: ModelNewsletterEmailModelConditionInput | null,
+};
+
+export type CreateNewsletterEmailModelMutation = {
+  createNewsletterEmailModel?:  {
+    __typename: "NewsletterEmailModel",
+    id: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateNewsletterEmailModelMutationVariables = {
+  input: UpdateNewsletterEmailModelInput,
+  condition?: ModelNewsletterEmailModelConditionInput | null,
+};
+
+export type UpdateNewsletterEmailModelMutation = {
+  updateNewsletterEmailModel?:  {
+    __typename: "NewsletterEmailModel",
+    id: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteNewsletterEmailModelMutationVariables = {
+  input: DeleteNewsletterEmailModelInput,
+  condition?: ModelNewsletterEmailModelConditionInput | null,
+};
+
+export type DeleteNewsletterEmailModelMutation = {
+  deleteNewsletterEmailModel?:  {
+    __typename: "NewsletterEmailModel",
+    id: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
 };
 
 export type CreatePostsModelMutationVariables = {
@@ -554,6 +665,72 @@ export type DeleteUsersModelMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+  } | null,
+};
+
+export type GetNewsletterEmailModelQueryVariables = {
+  id: string,
+};
+
+export type GetNewsletterEmailModelQuery = {
+  getNewsletterEmailModel?:  {
+    __typename: "NewsletterEmailModel",
+    id: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListNewsletterEmailModelsQueryVariables = {
+  filter?: ModelNewsletterEmailModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListNewsletterEmailModelsQuery = {
+  listNewsletterEmailModels?:  {
+    __typename: "ModelNewsletterEmailModelConnection",
+    items:  Array< {
+      __typename: "NewsletterEmailModel",
+      id: string,
+      email: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncNewsletterEmailModelsQueryVariables = {
+  filter?: ModelNewsletterEmailModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncNewsletterEmailModelsQuery = {
+  syncNewsletterEmailModels?:  {
+    __typename: "ModelNewsletterEmailModelConnection",
+    items:  Array< {
+      __typename: "NewsletterEmailModel",
+      id: string,
+      email: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -742,6 +919,57 @@ export type SyncUsersModelsQuery = {
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
+  } | null,
+};
+
+export type OnCreateNewsletterEmailModelSubscriptionVariables = {
+  filter?: ModelSubscriptionNewsletterEmailModelFilterInput | null,
+};
+
+export type OnCreateNewsletterEmailModelSubscription = {
+  onCreateNewsletterEmailModel?:  {
+    __typename: "NewsletterEmailModel",
+    id: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateNewsletterEmailModelSubscriptionVariables = {
+  filter?: ModelSubscriptionNewsletterEmailModelFilterInput | null,
+};
+
+export type OnUpdateNewsletterEmailModelSubscription = {
+  onUpdateNewsletterEmailModel?:  {
+    __typename: "NewsletterEmailModel",
+    id: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteNewsletterEmailModelSubscriptionVariables = {
+  filter?: ModelSubscriptionNewsletterEmailModelFilterInput | null,
+};
+
+export type OnDeleteNewsletterEmailModelSubscription = {
+  onDeleteNewsletterEmailModel?:  {
+    __typename: "NewsletterEmailModel",
+    id: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
