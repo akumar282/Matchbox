@@ -22,7 +22,7 @@ export type DeleteUserModelPayload = {
   input: DeleteUsersModelInput
 }
 
-export type CreatePostsPayload = {
+export type CreatePostsModelPayload = {
   input: CreatePostsModelInput
 }
 
@@ -30,7 +30,7 @@ export type UpdatePostsModelPayload = {
   input: UpdatePostsModelInput
 }
 
-export type DeletePostsodelPayload = { 
+export type DeletePostsModelPayload = { 
   input: DeletePostsModelInput
 }
 
