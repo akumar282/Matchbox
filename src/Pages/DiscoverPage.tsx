@@ -25,69 +25,6 @@ function handleSave() {
   // TODO make backend connection here
 }
 
-function ImgCard() {
-  return (
-    <Card
-      variant="outlined"
-      sx={{
-        outline: "auto",
-        width: "40rem",
-      }}
-    >
-      <CardContent>image</CardContent>
-      <CardActions></CardActions>
-    </Card>
-  );
-}
-
-const DesriptCard = (
-  <React.Fragment>
-    <CardContent>
-      {/* short description */}
-      <p>
-        (Short description) Lorem ipsum dolor sit amet, consec tetur adipiscing
-        elit. Nam condimentum tempus diam, ultricies sollicitudin erat facilisis
-        eget. Vestibulum rhoncus dui vel eros laoreet consectetur. Vivamus eget
-        elementum ligula, vitae pharetra quam.
-      </p>
-      {/* tags */}
-      <Chip label="Python" />
-      <Chip label="Java" />
-      <Chip label="C++" />
-    </CardContent>
-    <CardActions>
-      {/* TODO: potential issue with link routing */}
-      {/* project github link */}
-      <a href="https://github.com/">
-        <IconButton color="primary" aria-label="github link" component="label">
-          <GitHubIcon />
-        </IconButton>
-      </a>
-      {/* prject website link */}
-      <a href="https://google.com/">
-        <IconButton color="primary" aria-label="website link" component="label">
-          <LaunchIcon />
-        </IconButton>
-      </a>
-    </CardActions>
-  </React.Fragment>
-);
-
-const longDescription = (
-  <React.Fragment>
-    <h2>Project Name</h2>
-    <p>
-      (Detailed Description) Lorem ipsum dolor sit amet, consec tetur adipiscing
-      elit. Nam condimentum tempus diam, ultricies sollicitudin erat facilisis
-      eget. Vestibulum rhoncus dui vel eros laoreet consectetur. Vivamus eget
-      elementum ligula, vitae pharetra quam. Nullam at ligula sed metu. Lorem
-      ipsum dolor sit amet, consec tetur adipiscing elit. Nam condimentum tempus
-      diam, ultricies sollicitudin erat facilisis eget. Vestibulum rhoncus dui
-      vel eros laoreet consectetur. Vivamus eget elementum ligula, vitae
-      pharetra quam. Nullam at ligula sed metu
-    </p>
-  </React.Fragment>
-);
 
 export default function DiscoverPage() {
   return (
@@ -196,9 +133,6 @@ function DiscoverComponent(props: {
             </div>
           </div>
         </div>
-        {/* <Box sx={{ maxWidth: 800 }}>
-            <Card variant="outlined">{DesriptCard}</Card>
-          </Box> */}
       </div>
       <div className="BottomHolderDiscover">
         <p>{props.projects.Longdescription}</p>
