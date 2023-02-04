@@ -19,9 +19,23 @@ import 'aos/dist/aos.css';
 import { about } from './LandingPageData' // data import 
 import { TextField } from '@mui/material'
 
-function submitEmail(){
-  console.log("nice");
+
+import awsconfig from '../aws-exports'
+import {Amplify} from 'aws-amplify'
+import { createUser } from "../backend/mutations/userMutations";
+import { CreateUsersModelInput } from "../API";
+import { CreateUsersPayload } from "../backend/types";
+
+
+Amplify.configure(awsconfig)
+const frontload: CreateUsersModelInput = {
+  email: '',
 }
+const finalload: CreateUsersPayload = {
+  input: frontload
+}
+
+
 
 export default function LandingPage() {
   // login handling
@@ -35,6 +49,18 @@ export default function LandingPage() {
   const handleEmailChange = (event) => {
     setUserEmail(event.target.value);
   }
+
+  function submitEmail(){
+    console.log(userEmail);
+    sendToDatabase();
+    setUserEmail("");
+  }
+  
+  async function sendToDatabase() {
+    frontload.email = userEmail;
+    const request = await createUser(finalload);
+  }
+
 
   // page animations
   Aos.init({
