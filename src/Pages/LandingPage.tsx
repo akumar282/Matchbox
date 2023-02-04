@@ -6,7 +6,7 @@ import illustration from '../img/landing-img.svg' // matchstick illustration
 import { createTheme } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
 import LandingPopupLogin from '../components/LandingPopupLogin';
-import LandingPopupCreate from '../components/LandingPopupCreate';
+import LandingPopupConfirm from '../components/LandingPopupConfirm';
 const { palette } = createTheme()
 const { augmentColor } = palette
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } })
@@ -22,45 +22,52 @@ import { TextField } from '@mui/material'
 
 import awsconfig from '../aws-exports'
 import {Amplify} from 'aws-amplify'
-import { createUser } from "../backend/mutations/userMutations";
+import { createUser } from "../backend/mutations/newsletterMutations";
 import { CreateUsersModelInput } from "../API";
 import { CreateUsersPayload } from "../backend/types";
 
 
 Amplify.configure(awsconfig)
-const frontload: CreateUsersModelInput = {
+const frontload: CreateNewsletterEmailModelInput = {
   email: '',
 }
-const finalload: CreateUsersPayload = {
+
+// TODO [] payload format? 
+const finalload: CreatePayload = {
   input: frontload
 }
 
-
-
 export default function LandingPage() {
-  // login handling
-  const [isLoginOpen, setIsLoginOpen] = React.useState(false)
-  function NoAccount() {
-    setIsLoginOpen(false)
-  }
-
-  // signup handling
+  // email signup textfield handling
   const [userEmail, setUserEmail] = React.useState("");
   const handleEmailChange = (event) => {
     setUserEmail(event.target.value);
   }
 
+  // email signup button handling
   function submitEmail(){
     console.log(userEmail);
     sendToDatabase();
     setUserEmail("");
+    console.log(userEmail);
+    console.log(userEmail);
+    setIsConfirmOpen(true); // trigger confirmation popup
   }
   
+  // email signup database query
   async function sendToDatabase() {
     frontload.email = userEmail;
     const request = await createUser(finalload);
   }
 
+  
+  // login popup handling
+  const [isLoginOpen, setIsLoginOpen] = React.useState(false)
+  const [isConfirmOpen, setIsConfirmOpen] = React.useState(false);
+  function NoAccount() {
+    setIsLoginOpen(false);
+    setIsConfirmOpen(false);
+  }
 
   // page animations
   Aos.init({
@@ -74,6 +81,7 @@ export default function LandingPage() {
   return (
     <div >
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
+      <LandingPopupConfirm trigger={isConfirmOpen} setTrigger={setIsConfirmOpen}/>
       <div className='top-container'>
         <div className='header-stack'>
           <div className='logobox'>
