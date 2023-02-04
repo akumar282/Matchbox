@@ -11,10 +11,12 @@ const { palette } = createTheme()
 const { augmentColor } = palette
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } })
 
+// animation iabouts
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
-import { about } from './AboutPageData'
+
+import { about } from './LandingPageData' // data import 
 import { TextField } from '@mui/material'
 
 function submitEmail(){
@@ -27,7 +29,7 @@ export default function LandingPage() {
     delay: 400,
   });
 
-  // remake object for about section, TODO for future funtionality
+  // remake object for about section, TODO to improve code quality in the future
   const { title, subtext } = about;
 
   return (
@@ -103,7 +105,7 @@ export default function LandingPage() {
           </Button>
         </div>
       </div>
-      {/* TODO about information for future funtionality */}
+      {/* TODO about information to add about section in the future */}
       {/* <div className="about-text-container">
       <a href="#about"> </a>
 
