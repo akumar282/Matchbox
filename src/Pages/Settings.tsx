@@ -308,7 +308,6 @@ export default function Settings() {
           >
             Save
           </Button>
-          
         </div>
         <div>
           <h4>Filter Settings</h4>
@@ -331,7 +330,7 @@ export default function Settings() {
               <TextField {...params} label="Languages" />
             )}
           />
-          
+
           <Autocomplete
             freeSolo
             sx={{
@@ -366,7 +365,7 @@ export default function Settings() {
             onChange={handleChange}
             renderInput={(params) => <TextField {...params} label="Category" />}
           />
-          </div>
+        </div>
       </div>
     </div>
   );
