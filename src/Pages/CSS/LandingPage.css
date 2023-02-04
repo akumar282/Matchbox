@@ -47,8 +47,8 @@
     width: 100%;
 }
 
-.loginButton {
-    background: #716ab4;
+.login-button {
+    background: #2d2a48;
     border-radius: 10px;
     font-family: 'Roboto';
     font-style: normal;
@@ -93,15 +93,13 @@
     height: 600px;
 }
 
-
-
 .about-section{
-    background-color: #203354;
+    background-color: #2d2a48;
 }
 
 .about-container {
     margin:auto;
-    background-color: #203354;
+    background-color: #2d2a48;
     height: 400px;
     max-width: 1420px;
     display: block;
