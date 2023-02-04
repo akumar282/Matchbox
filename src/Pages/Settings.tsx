@@ -181,7 +181,7 @@ export default function Settings() {
     <div className="SettingPage">
       <Navbar />
       <div className="SettingsContainer">
-        <h4>Account Settings</h4>
+        <h1>Account Settings</h1>
         <div className="SettingsCard">
           <form onSubmit={formik.handleSubmit}>
             <div className="TopPartSetting">
@@ -256,42 +256,116 @@ export default function Settings() {
                 />
               </div>
             </div>
-            <h4>Change Password</h4>
-            <h5>New Password</h5>
-            <TextField
-              sx={{
-                width: "25rem",
-              }}
-              id="password"
-              name="password"
-              placeholder="12345"
-              type="password"
-              variant="outlined"
-              value=""
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-            />
-            <h5>Confirm Password</h5>
-            <TextField
-              sx={{
-                width: "25rem",
-              }}
-              id="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              variant="outlined"
-              value=""
-              onChange={formik.handleChange}
-              error={
-                formik.touched.confirmPassword &&
-                Boolean(formik.errors.confirmPassword)
-              }
-              helperText={
-                formik.touched.confirmPassword && formik.errors.confirmPassword
-              }
-            />
-          </form>
+            <div className="BottomPartSetting">
+              <div className="SettingsPassword">
+                <h4>Change Password</h4>
+                <div>
+                  <h5>New Password</h5>
+                  <TextField
+                    sx={{
+                      width: "25rem",
+                    }}
+                    id="password"
+                    name="password"
+                    placeholder="12345"
+                    type="password"
+                    variant="outlined"
+                    value=""
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.password && Boolean(formik.errors.password)
+                    }
+                    helperText={
+                      formik.touched.password && formik.errors.password
+                    }
+                  />
+                </div>
+                <div>
+                  <h5>Confirm Password</h5>
+                  <TextField
+                    sx={{
+                      width: "25rem",
+                    }}
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    variant="outlined"
+                    value=""
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.confirmPassword &&
+                      Boolean(formik.errors.confirmPassword)
+                    }
+                    helperText={
+                      formik.touched.confirmPassword &&
+                      formik.errors.confirmPassword
+                    }
+                  />
+                </div>
+              </div>
+              <div className="SettingsPassword">
+                <h4>Filter Settings</h4>
+                <h5>Show projects from only </h5>
+                <Autocomplete
+                  freeSolo
+                  sx={{
+                    width: "25rem",
+                  }}
+                  value={selectedLang}
+                  onChange={handleSelectLang}
+                  multiple
+                  limitTags={5}
+                  id="languages"
+                  options={select_lang}
+                  getOptionLabel={(option) => option.title}
+                  defaultValue={[select_lang[0]]} // TODO make default values the one already selected
+                  filterSelectedOptions
+                  renderInput={(params) => (
+                    <TextField {...params} label="Languages" />
+                  )}
+                />
+
+                <Autocomplete
+                  freeSolo
+                  sx={{
+                    width: "25rem",
+                  }}
+                  multiple
+                  limitTags={5}
+                  id="frameworks"
+                  options={select_frame}
+                  getOptionLabel={(option) => option.title}
+                  defaultValue={[select_frame[0]]} // TODO make default values the one already selected
+                  filterSelectedOptions
+                  value={selectedFrame}
+                  onChange={handleSelectFrame}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Framework" />
+                  )}
+                />
+                <Autocomplete
+                  freeSolo
+                  sx={{
+                    width: "25rem",
+                  }}
+                  multiple
+                  limitTags={5}
+                  id="categories"
+                  options={select_category}
+                  getOptionLabel={(option) => option.title}
+                  defaultValue={[select_category[0]]} // TODO make default values the one already selected
+                  filterSelectedOptions
+                  value={selectedTags}
+                  onChange={handleChange}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Category" />
+                  )}
+                />
+                </div>
+              </div>
+              </form>
+            </div>
+          
 
           <Button
             disabled={formik.isSubmitting}
@@ -309,64 +383,6 @@ export default function Settings() {
             Save
           </Button>
         </div>
-        <div>
-          <h4>Filter Settings</h4>
-          <h5>Show projects from only </h5>
-          <Autocomplete
-            freeSolo
-            sx={{
-              width: "25rem",
-            }}
-            value={selectedLang}
-            onChange={handleSelectLang}
-            multiple
-            limitTags={5}
-            id="languages"
-            options={select_lang}
-            getOptionLabel={(option) => option.title}
-            defaultValue={[select_lang[0]]} // TODO make default values the one already selected
-            filterSelectedOptions
-            renderInput={(params) => (
-              <TextField {...params} label="Languages" />
-            )}
-          />
-
-          <Autocomplete
-            freeSolo
-            sx={{
-              width: "25rem",
-            }}
-            multiple
-            limitTags={5}
-            id="frameworks"
-            options={select_frame}
-            getOptionLabel={(option) => option.title}
-            defaultValue={[select_frame[0]]} // TODO make default values the one already selected
-            filterSelectedOptions
-            value={selectedFrame}
-            onChange={handleSelectFrame}
-            renderInput={(params) => (
-              <TextField {...params} label="Framework" />
-            )}
-          />
-          <Autocomplete
-            freeSolo
-            sx={{
-              width: "25rem",
-            }}
-            multiple
-            limitTags={5}
-            id="categories"
-            options={select_category}
-            getOptionLabel={(option) => option.title}
-            defaultValue={[select_category[0]]} // TODO make default values the one already selected
-            filterSelectedOptions
-            value={selectedTags}
-            onChange={handleChange}
-            renderInput={(params) => <TextField {...params} label="Category" />}
-          />
-        </div>
       </div>
-    </div>
   );
 }
