@@ -9,7 +9,7 @@ import "./NavBar.css"
 export default function Navbar() {
     return (
         <nav className="nav"> 
-        <h1 className="SiteTitle"> MatchBox </h1>
+        <h1 className="SiteTitle"> Matchbox </h1>
         <ul>
             {/* <img src={LogoImg} width={130} height={50} alt="passedImg"/>
                 <CustomLink to= "/game"> Game </CustomLink>*/}

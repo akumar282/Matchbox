@@ -304,7 +304,7 @@ export default function CreateProject() {
               multiple
               limitTags={3}
               id="framework"
-              options={tags}
+              options={tags2}
               getOptionLabel={(option) => option.label}
               defaultValue={[tags2[0]]}
               filterSelectedOptions
