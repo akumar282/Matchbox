@@ -2,12 +2,12 @@ import { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { CreatePostsModelInput } from '../../../src/API'
 import { createPost } from '../../../src/backend/mutations/postMutations'
 import awsconfig from '../../../src/aws-exports'
-import { CreatePostsPayload } from '../../../src/backend/types'
+import { CreatePostsModelPayload } from '../../../src/backend/types'
 import { LanguageTag, DevelopmentTag, InterestTag, SizeTag} from '../../../src/API'
 Amplify.configure(awsconfig)
 
 let dateTime = new Date
-const testload: CreatePostsPayload = {
+const testload: CreatePostsModelPayload = {
   input: {
     post_title: `Matchbox`,
     description: `A very cool project`,

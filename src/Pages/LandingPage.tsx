@@ -22,20 +22,25 @@ import { TextField } from '@mui/material'
 
 import awsconfig from '../aws-exports'
 import {Amplify} from 'aws-amplify'
-import { createUser } from "../backend/mutations/newsletterMutations";
-import { CreateUsersModelInput } from "../API";
-import { CreateUsersPayload } from "../backend/types";
+// import { CreateNewsletterEmailModelPayload } from "../backend/mutations/newsletterMutations";
+import { CreateNewsletterEmailModelInput  } from "../API";
+import { CreateNewsletterEmailModelPayload } from "../backend/types";
+import { createNewsletterEmail } from "../../src/backend/mutations/newsletterMutations"
+
+
 
 
 Amplify.configure(awsconfig)
-const frontload: CreateNewsletterEmailModelInput = {
-  email: '',
+const payload: CreateNewsletterEmailModelPayload = {
+  input: {
+    email: ''
+  }
 }
 
 // TODO [] payload format? 
-const finalload: CreatePayload = {
-  input: frontload
-}
+// const finalload: CreatePayload = {
+//   input: frontload
+// }
 
 export default function LandingPage() {
   // email signup textfield handling
@@ -54,10 +59,10 @@ export default function LandingPage() {
     setIsConfirmOpen(true); // trigger confirmation popup
   }
   
-  // email signup database query
+  // email signup database mutation
   async function sendToDatabase() {
-    frontload.email = userEmail;
-    const request = await createUser(finalload);
+    payload.input.email = userEmail;
+    const request = await createNewsletterEmail(payload);
   }
 
   

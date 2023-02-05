@@ -2,6 +2,51 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateNewsletterEmailModel = /* GraphQL */ `
+  subscription OnCreateNewsletterEmailModel(
+    $filter: ModelSubscriptionNewsletterEmailModelFilterInput
+  ) {
+    onCreateNewsletterEmailModel(filter: $filter) {
+      id
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateNewsletterEmailModel = /* GraphQL */ `
+  subscription OnUpdateNewsletterEmailModel(
+    $filter: ModelSubscriptionNewsletterEmailModelFilterInput
+  ) {
+    onUpdateNewsletterEmailModel(filter: $filter) {
+      id
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteNewsletterEmailModel = /* GraphQL */ `
+  subscription OnDeleteNewsletterEmailModel(
+    $filter: ModelSubscriptionNewsletterEmailModelFilterInput
+  ) {
+    onDeleteNewsletterEmailModel(filter: $filter) {
+      id
+      email
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreatePostsModel = /* GraphQL */ `
   subscription OnCreatePostsModel(
     $filter: ModelSubscriptionPostsModelFilterInput
