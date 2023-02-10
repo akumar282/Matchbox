@@ -8,6 +8,7 @@ import {
   Input,
   Chip,
   Autocomplete,
+  InputAdornment,
 } from "@mui/material";
 import "./CSS/Settings.css";
 import * as React from "react";
@@ -18,24 +19,52 @@ import { Amplify } from "aws-amplify";
 import { createUser } from "../backend/mutations/userMutations";
 import { CreateUsersModelInput } from "../API";
 import { CreateUsersPayload } from "../backend/types";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 Amplify.configure(awsconfig);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // temporary lists for choices to user
-const select_lang = [{ title: "C++" }, { title: "Java" }, { title: "Python" }];
-
+const select_lang = [
+  { value: "Java", label: "Java" },
+  { value: "C++", label: "C++" },
+  { value: "Python", label: "Python" },
+  { value: "C#", label: "C#" },
+  { value: "JavaScript", label: "JavaScript" },
+  { value: "PHP", label: "PHP" },
+  { value: "Ruby", label: "Ruby" },
+  { value: "HTML", label: "HTML" },
+  { value: "CSS", label: "CSS" },
+  { value: "Swift", label: "Swift" },
+  { value: "Go", label: "Go" },
+  { value: "Rust", label: "Rust" },
+  { value: "Kotlin", label: "Kotlin" },
+  { value: "Dart", label: "Dart" },
+  { value: "Scala", label: "Scala" },
+  { value: "TypeScript", label: "TypeScript" },
+  { value: "SQL", label: "SQL" },
+];
 const select_frame = [
-  { title: "React" },
-  { title: "Linux" },
-  { title: "Shell" },
+  { value: "React", label: "React" },
+  { value: "React Native", label: "React Native" },
+  { value: "Angular", label: "Angular" },
+  { value: "Vue", label: "Vue" },
+  { value: "Node", label: "Node" },
+  { value: "Express", label: "Express" },
+  { value: "WebSocketIO", label: "WebSocketIO" },
+  { value: "Django", label: "Django" },
+  { value: "Flask", label: "Flask" },
+  { value: "MongoDB", label: "MongoDB" },
+  { value: "MySQL", label: "MySQL" },
+  { value: "PostgreSQL", label: "PostgreSQL" },
+  { value: "Firebase", label: "Firebase" },
+  { value: "AWS", label: "AWS" },
+  { value: "Azure", label: "Azure" },
+  { value: "Heroku", label: "Heroku" },
 ];
 
-const select_category = [
-  { title: "Cloud" },
-  { title: "Web Programming" },
-  { title: "DevOps" },
-];
+const select_size = ["small", "medium", "large"];
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -58,43 +87,31 @@ const finalload: CreateUsersPayload = {
 
 // }
 
-type Tag = {
-  id: number;
-  label: string;
-};
-
-const tagOptions = select_category.map((category, index) => ({
-  id: index + 1,
-  label: category,
-}));
-
 import Navbar from "../components/NavBar";
 export default function Settings() {
   const [selectedLang, setSelectedLang] = React.useState([]);
   const [selectedFrame, setSelectedFrame] = React.useState([]);
-  const [selectedTags, setSelectedTags] = React.useState([]);
+  const [selectedSize, setSelectedSize] = React.useState([]);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
-  const handleSelectLang = (event: any, newValue: any | null) => {
-    setSelectedLang(newValue.map((option) => option.value || option));
-    console.log(typeof selectedLang);
-    console.log(selectedFrame);
-    console.log("change");
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
   };
-
-  const handleSelectFrame = (event: any, newValue: any | null) => {
-    setSelectedFrame(newValue.map((option) => option.value || option));
-    console.log(typeof selectedTags);
-    console.log(selectedFrame);
-    console.log("change");
-  };
-
-  const handleChange = (event: any, newValue: any | null) => {
-    setSelectedTags(newValue.map((option) => option.value || option));
-    console.log(typeof selectedTags);
-    console.log(selectedTags);
-    console.log("change");
-  };
-
+  function handleLang(event: any, value: any | null) {
+    setSelectedLang(value.map((item: any) => item));
+    formik.setFieldValue("language", value);
+  }
+  function handleFrame(event: any, value: any | null) {
+    setSelectedFrame(value.map((item: any) => item));
+    formik.setFieldValue("framework", value);
+  }
+  function handleSize(event: any, value: any | null) {
+    setSelectedSize(value.map((item: any) => item));
+    formik.setFieldValue("size", value);
+  }
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,21 +124,6 @@ export default function Settings() {
   //   const request = await createUser(finalload)
   // }
   // PUT method for updating account settings
-  async function sendToDatabase(props: {
-    firstName: any;
-    lastName: any;
-    email: any;
-    username: any;
-    password: any;
-    confirmPassword?: string;
-  }) {
-    frontload.user_name = props.username;
-    frontload.email = props.email;
-    frontload.first_name = props.firstName;
-    frontload.last_name = props.lastName;
-    frontload.password = props.password;
-    const request = await createUser(finalload);
-  }
 
   const validationSchema = yup.object({
     firstName: yup
@@ -151,6 +153,18 @@ export default function Settings() {
       .min(3, "Username should be of minimum 2 characters")
       .max(20, "Username should be of maximum 20 characters")
       .required("Username is required"),
+    language: yup
+      .array()
+      .min(1, "Please select atleast one language")
+      .required("Language is required"),
+    framework: yup
+      .array()
+      .min(1, "Please select atleast one framework")
+      .required("Framework is required"),
+    size: yup
+      .array()
+      .min(1, "Please select atleast one size")
+      .required("Size is required"),
   });
 
   const formik = useFormik({
@@ -161,27 +175,23 @@ export default function Settings() {
       username: "",
       password: "",
       confirmPassword: "",
-      // these below will need to be separated later
-      languages: "",
-      frameworks: "",
-      category: "",
+      language: [],
+      framework: [],
+      size: [],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       // Link to preferences page
       // alert(JSON.stringify(values, null, 2));
-      sendToDatabase(values);
+      alert(JSON.stringify(values, null, 2));
     },
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
   });
   return (
     <div className="SettingPage">
       <Navbar />
       <div className="SettingsContainer">
-        <h1>Account Settings</h1>
         <div className="SettingsCard">
           <form onSubmit={formik.handleSubmit}>
             <div className="TopPartSetting">
@@ -195,7 +205,7 @@ export default function Settings() {
                   name="firstName"
                   placeholder="" //TODO have these update based on GET request from database for default values
                   variant="outlined"
-                  value=""
+                  value={formik.values.firstName}
                   onChange={formik.handleChange}
                   error={
                     formik.touched.firstName && Boolean(formik.errors.firstName)
@@ -214,7 +224,7 @@ export default function Settings() {
                   name="lastName"
                   placeholder=""
                   variant="outlined"
-                  value=""
+                  value={formik.values.lastName}
                   onChange={formik.handleChange}
                   error={
                     formik.touched.lastName && Boolean(formik.errors.lastName)
@@ -232,7 +242,7 @@ export default function Settings() {
                   name="email"
                   placeholder=""
                   variant="outlined"
-                  value=""
+                  value={formik.values.email}
                   onChange={formik.handleChange}
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
@@ -247,7 +257,7 @@ export default function Settings() {
                   name="username"
                   placeholder=""
                   variant="outlined"
-                  value=""
+                  value={formik.values.username}
                   onChange={formik.handleChange}
                   error={
                     formik.touched.username && Boolean(formik.errors.username)
@@ -259,18 +269,35 @@ export default function Settings() {
             <div className="BottomPartSetting">
               <div className="SettingsPassword">
                 <h4>Change Password</h4>
-                <div>
+                <div className="SettingPasswords">
+                  
                   <h5>New Password</h5>
                   <TextField
                     sx={{
                       width: "25rem",
+                      fullWidth: "true",
+                      
                     }}
+                    InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                     id="password"
                     name="password"
                     placeholder="12345"
-                    type="password"
+                    type= {showPassword ? "text" : "password"}
                     variant="outlined"
-                    value=""
+                    value={formik.values.password}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.password && Boolean(formik.errors.password)
@@ -279,110 +306,153 @@ export default function Settings() {
                       formik.touched.password && formik.errors.password
                     }
                   />
-                </div>
-                <div>
-                  <h5>Confirm Password</h5>
-                  <TextField
-                    sx={{
-                      width: "25rem",
-                    }}
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                    variant="outlined"
-                    value=""
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.confirmPassword &&
-                      Boolean(formik.errors.confirmPassword)
-                    }
-                    helperText={
-                      formik.touched.confirmPassword &&
-                      formik.errors.confirmPassword
-                    }
-                  />
+                  <div  className="SettingPasswords">
+                    <h5>Confirm Password</h5>
+                    <TextField
+                      sx={{
+                        width: "25rem",
+                      }}
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type= {showConfirmPassword ? "text" : "password"}
+                      variant="outlined"
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowConfirmPassword}
+                              onMouseDown={handleMouseDownPassword}
+                              edge="end"
+                            >
+                              {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                      value={formik.values.confirmPassword}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.confirmPassword &&
+                        Boolean(formik.errors.confirmPassword)
+                      }
+                      helperText={
+                        formik.touched.confirmPassword &&
+                        formik.errors.confirmPassword
+                      }
+                    />
+                  </div>
                 </div>
               </div>
               <div className="SettingsPassword">
                 <h4>Filter Settings</h4>
                 <h5>Show projects from only </h5>
-                <Autocomplete
-                  freeSolo
-                  sx={{
-                    width: "25rem",
-                  }}
-                  value={selectedLang}
-                  onChange={handleSelectLang}
-                  multiple
-                  limitTags={5}
-                  id="languages"
-                  options={select_lang}
-                  getOptionLabel={(option) => option.title}
-                  defaultValue={[select_lang[0]]} // TODO make default values the one already selected
-                  filterSelectedOptions
-                  renderInput={(params) => (
-                    <TextField {...params} label="Languages" />
-                  )}
-                />
-
-                <Autocomplete
-                  freeSolo
-                  sx={{
-                    width: "25rem",
-                  }}
-                  multiple
-                  limitTags={5}
-                  id="frameworks"
-                  options={select_frame}
-                  getOptionLabel={(option) => option.title}
-                  defaultValue={[select_frame[0]]} // TODO make default values the one already selected
-                  filterSelectedOptions
-                  value={selectedFrame}
-                  onChange={handleSelectFrame}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Framework" />
-                  )}
-                />
-                <Autocomplete
-                  freeSolo
-                  sx={{
-                    width: "25rem",
-                  }}
-                  multiple
-                  limitTags={5}
-                  id="categories"
-                  options={select_category}
-                  getOptionLabel={(option) => option.title}
-                  defaultValue={[select_category[0]]} // TODO make default values the one already selected
-                  filterSelectedOptions
-                  value={selectedTags}
-                  onChange={handleChange}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Category" />
-                  )}
-                />
+                <div className="SettingFilters">
+                  <Autocomplete
+                    sx={{
+                      width: "90%",
+                    }}
+                    multiple
+                    limitTags={3}
+                    id="language"
+                    options={select_lang}
+                    getOptionLabel={(option) => option.label}
+                    defaultValue={[select_lang[0]]}
+                    filterSelectedOptions
+                    value={selectedLang}
+                    onChange={handleLang}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Languages"
+                        value={formik.values.language}
+                        error={
+                          formik.touched.language &&
+                          Boolean(formik.errors.language)
+                        }
+                        helperText={
+                          formik.touched.language && formik.errors.language
+                        }
+                      />
+                    )}
+                  />
+                  <Autocomplete
+                    sx={{
+                      width: "90%",
+                    }}
+                    multiple
+                    limitTags={3}
+                    id="framework"
+                    options={select_frame}
+                    getOptionLabel={(option) => option.label}
+                    defaultValue={[select_frame[0]]}
+                    filterSelectedOptions
+                    value={selectedFrame}
+                    onChange={handleFrame}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Frameworks"
+                        value={formik.values.framework}
+                        error={
+                          formik.touched.framework &&
+                          Boolean(formik.errors.framework)
+                        }
+                        helperText={
+                          formik.touched.framework && formik.errors.framework
+                        }
+                      />
+                    )}
+                  />
+                  <Autocomplete
+                    sx={{
+                      width: "90%",
+                    }}
+                    multiple
+                    limitTags={3}
+                    id="size"
+                    options={select_size}
+                    getOptionLabel={(option) => option}
+                    defaultValue={[select_size[0]]}
+                    filterSelectedOptions
+                    value={selectedSize}
+                    onChange={handleSize}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Size"
+                        error={
+                          formik.touched.size && Boolean(formik.errors.size)
+                        }
+                        helperText={formik.touched.size && formik.errors.size}
+                      />
+                    )}
+                  />
                 </div>
               </div>
-              </form>
             </div>
-          
-
-          <Button
-            disabled={formik.isSubmitting}
-            sx={{
-              backgroundColor: "#6259b9",
-              ":hover": {
-                backgroundColor: "#3f51b5",
-                color: "white",
-              },
-            }}
-            variant="contained"
-            onClick={() => formik.handleSubmit()}
-            type="submit"
-          >
-            Save
-          </Button>
+          </form>
         </div>
+
+        <Button
+          disabled={formik.isSubmitting}
+          sx={{
+            backgroundColor: "#6259b9",
+            width: "10rem",
+            height: "3rem",
+            fontSize: "1rem",
+            color: "white",
+            ":hover": {
+              backgroundColor: "#716ab4",
+            },
+          }}
+          variant="contained"
+          onClick={() => formik.handleSubmit()}
+          type="submit"
+        >
+          Save
+        </Button>
       </div>
+    </div>
   );
 }
