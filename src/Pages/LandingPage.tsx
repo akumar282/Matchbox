@@ -47,12 +47,9 @@ export default function LandingPage() {
   
   // email signup database mutation
   async function sendToDatabase(values : any) {
-    try {
-      payload.input.email = values.userEmail;
-      const request = await createNewsletterEmail(payload);
-    } catch(error) {
-      console.log(error);
-    }
+    payload.input.email = values.email;
+    const request = await createNewsletterEmail(payload)
+      .catch(error => console.log(error));  
   }
 
   // login popup handling
