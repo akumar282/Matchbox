@@ -23,15 +23,6 @@ declare module '@mui/material/styles/createTheme' {
     }
   }
 }
-// const theme = createTheme({
-//   palette: {
-//     anger: createColor('#F40B27'),
-//     apple: createColor('#5DBA40'),
-//     steelBlue: createColor('#5C76B7'),
-//     violet: createColor('#BC00A3'),
-//     black: createColor('#000000')
-//   }
-// })
 
 export default function LandingPage() {
   const [isLoginOpen, setIsLoginOpen] = React.useState(false)
@@ -42,7 +33,7 @@ export default function LandingPage() {
   }
   return (
     <div className='Starting'>
-      <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
+      <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen={NoAccount} />
       <LandingPopupCreate trigger={isCreateOpen} setTrigger={setIsCreateOpen} />
       <div className='navHome'>
         {/* logo */}
@@ -114,8 +105,8 @@ export default function LandingPage() {
           backgroundColor: '#6259b9',
           marginLeft: '5%',
           mt: '1%',
-          width:'20%',
-          height : '6vh',
+          width: '20%',
+          height: '6vh',
           fontSize: 'max(28px, 10px);',
           '&:hover': {
             backgroundColor: '#716ab4',

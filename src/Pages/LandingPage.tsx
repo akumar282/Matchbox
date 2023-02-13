@@ -1,4 +1,5 @@
 import * as React from 'react'
+<<<<<<< HEAD
 import { Link } from 'react-router-dom'
 import './CSS/LandingPage.css'
 import illustration from '../img/landing-img.svg' // matchstick illustration 
@@ -31,6 +32,30 @@ import 'aos/dist/aos.css';
 import { about } from './LandingPageData' 
 
 
+=======
+import './CSS/LandingPage.css'
+import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
+import illustration from '../img/landing-img.svg' // matchstick illustration 
+import { createTheme } from '@mui/material/styles'
+import LandingPopupLogin from '../components/LandingPopupLogin';
+import LandingPopupConfirm from '../components/LandingPopupConfirm';
+const { palette } = createTheme()
+const { augmentColor } = palette
+
+// animation iabouts
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
+import { about } from './LandingPageData' // data import 
+import { TextField } from '@mui/material'
+
+import awsconfig from '../aws-exports'
+import {Amplify} from 'aws-amplify'
+import { CreateNewsletterEmailModelPayload } from "../backend/types";
+import { createNewsletterEmail } from "../../src/backend/mutations/newsletterMutations"
+
+>>>>>>> b4aa942d3a015711667633fa09c5af7042485138
 Amplify.configure(awsconfig)
 const payload: CreateNewsletterEmailModelPayload = {
   input: {
@@ -39,11 +64,26 @@ const payload: CreateNewsletterEmailModelPayload = {
 }
 
 export default function LandingPage() {
+<<<<<<< HEAD
   // email signup textfield handling [leave this here, will be used later]
   // const [userEmail, setUserEmail] = React.useState("");
   // const handleEmailChange = (event : any) => {
   //   setUserEmail(event.target.value);
   // }
+=======
+  // email signup textfield handling
+  const [userEmail, setUserEmail] = React.useState("");
+  const handleEmailChange = (event) => {
+    setUserEmail(event.target.value);
+  }
+
+  // email signup button handling
+  function submitEmail(){
+    sendToDatabase();
+    setUserEmail("");
+    setIsConfirmOpen(true); // trigger confirmation popup
+  }
+>>>>>>> b4aa942d3a015711667633fa09c5af7042485138
   
   // email signup database mutation
   async function sendToDatabase(values : any) {
@@ -89,7 +129,11 @@ export default function LandingPage() {
   });
 
   return (
+<<<<<<< HEAD
     <div className='landing'>
+=======
+    <div className='parent'>
+>>>>>>> b4aa942d3a015711667633fa09c5af7042485138
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
       <LandingPopupConfirm trigger={isConfirmOpen} setTrigger={setIsConfirmOpen}/>
       <div className='top-container'>
@@ -157,6 +201,7 @@ export default function LandingPage() {
           <div className='signup-stack'>
           <h2 className='signText'>Sign up to get free access to preview upon release.</h2>
           <div className='signup-entry'>
+<<<<<<< HEAD
             <form className='signup-entry' onSubmit={formik.handleSubmit}>
               <TextField 
                 id="email"
@@ -190,6 +235,31 @@ export default function LandingPage() {
               </Button>
             </form>
             
+=======
+            <TextField 
+              variant="outlined"  
+              placeholder="Email" 
+              sx={{ 
+                backgroundColor: '#FFFFFF', 
+                width:'35rem',
+              }}
+              onChange = {handleEmailChange}  
+            /> 
+            <Button onClick={() => submitEmail()}
+              sx={{
+                backgroundColor: '#F68084',
+                width:'15%',
+                height :'55px',
+                fontSize:'max(14px, 5px);', '&:hover': {
+                backgroundColor:'#f59da0',
+                },
+                mx:'11px',
+              }}
+              variant='contained'
+            > 
+              Sign Up
+            </Button>
+>>>>>>> b4aa942d3a015711667633fa09c5af7042485138
           </div>
         </div>
         {/* TODO about information to add about section in the future */}
