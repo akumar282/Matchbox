@@ -1,34 +1,34 @@
 import * as React from 'react'
-import './CSS/LandingPage.css'
-import Button from '@mui/material/Button'
-import Stack from '@mui/material/Stack'
-import illustration from '../img/landing-img.svg' // matchstick illustration 
-import { createTheme } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
+import './CSS/LandingPage.css'
+import illustration from '../img/landing-img.svg' // matchstick illustration 
+
+// aws imports
+import awsconfig from '../aws-exports'
+import {Amplify} from 'aws-amplify'
+import { CreateNewsletterEmailModelInput  } from "../API";
+import { CreateNewsletterEmailModelPayload } from "../backend/types";
+import { createNewsletterEmail } from "../../src/backend/mutations/newsletterMutations"
+
+// component imports
 import LandingPopupLogin from '../components/LandingPopupLogin';
 import LandingPopupConfirm from '../components/LandingPopupConfirm';
+
+// MUI imports
+import { TextField } from '@mui/material'
+import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
 
 // form control imports
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-// animation iabouts
+// animation imports
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
-
-import { about } from './LandingPageData' // data import 
-import { TextField } from '@mui/material'
-
-
-import awsconfig from '../aws-exports'
-import {Amplify} from 'aws-amplify'
-// import { CreateNewsletterEmailModelPayload } from "../backend/mutations/newsletterMutations";
-import { CreateNewsletterEmailModelInput  } from "../API";
-import { CreateNewsletterEmailModelPayload } from "../backend/types";
-import { createNewsletterEmail } from "../../src/backend/mutations/newsletterMutations"
-
-
+// data import 
+import { about } from './LandingPageData' 
 
 
 Amplify.configure(awsconfig)
@@ -38,19 +38,12 @@ const payload: CreateNewsletterEmailModelPayload = {
   }
 }
 
-// TODO [] payload format? 
-// const finalload: CreatePayload = {
-//   input: frontload
-// }
-
 export default function LandingPage() {
-  // email signup textfield handling [will be used later]
+  // email signup textfield handling [leave this here, will be used later]
   // const [userEmail, setUserEmail] = React.useState("");
   // const handleEmailChange = (event : any) => {
   //   setUserEmail(event.target.value);
   // }
-
-
   
   // email signup database mutation
   async function sendToDatabase(values : any) {
@@ -59,7 +52,6 @@ export default function LandingPage() {
     const request = await createNewsletterEmail(payload);
   }
 
-  
   // login popup handling
   const [isLoginOpen, setIsLoginOpen] = React.useState(false)
   const [isConfirmOpen, setIsConfirmOpen] = React.useState(false);
@@ -74,7 +66,7 @@ export default function LandingPage() {
     delay: 400,
   });
 
-  // remake object for about section, TODO to improve code quality in the future
+  // remake object for about section [leave this here]
   const { title, subtext } = about;
 
   const validationSchema = yup.object({
@@ -90,11 +82,6 @@ export default function LandingPage() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      // console.log(userEmail);
-      // sendToDatabase();
-      // setUserEmail(values.email);
-
-      // console.log(userEmail);
       sendToDatabase(values);
       setIsConfirmOpen(true); // trigger confirmation popup
       formik.resetForm();
@@ -169,8 +156,8 @@ export default function LandingPage() {
         <div className="about-container">
           <div className='signup-stack'>
           <h2 className='signText'>Sign up to get free access to preview upon release.</h2>
-          {/* <div className='signup-entry'> */}
-            <form onSubmit={formik.handleSubmit}>
+          <div className='signup-entry'>
+            <form className='signup-entry' onSubmit={formik.handleSubmit}>
               <TextField 
                 id="email"
                 variant="filled"  
@@ -184,8 +171,9 @@ export default function LandingPage() {
                 }
                 helperText={formik.touched.email && formik.errors.email} 
               /> 
-            </form>
+           
             <Button onClick={() => formik.handleSubmit()}
+              id='submit-btn'
               disabled={formik.isSubmitting}
                 sx={{
                   backgroundColor: '#F68084',
@@ -200,7 +188,9 @@ export default function LandingPage() {
               > 
                 Sign Up
               </Button>
-          {/* </div> */}
+              </form>
+            
+          </div>
         </div>
         {/* TODO about information to add about section in the future */}
         {/* <div className="about-text-container">

@@ -110,7 +110,8 @@
     flex-direction: row;
     justify-self: center;
     justify-content: space-between;
-    max-width: 80%;
+    gap: 20px;
+    /* max-width: 80%; */
     margin: auto;
 }
 
@@ -119,7 +120,9 @@
     flex-direction: column;
     justify-self: center;
     /* display: flex; */
+    /* text-align: center; */
     text-align: center;
+    margin: auto;
 }
 
 .signText {
