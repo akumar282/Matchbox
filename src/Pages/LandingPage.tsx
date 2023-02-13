@@ -89,7 +89,7 @@ export default function LandingPage() {
   });
 
   return (
-    <div >
+    <div className='landing'>
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
       <LandingPopupConfirm trigger={isConfirmOpen} setTrigger={setIsConfirmOpen}/>
       <div className='top-container'>
@@ -188,7 +188,7 @@ export default function LandingPage() {
               > 
                 Sign Up
               </Button>
-              </form>
+            </form>
             
           </div>
         </div>
