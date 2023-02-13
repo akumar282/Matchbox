@@ -7,9 +7,10 @@ import { createTheme } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
 import LandingPopupLogin from '../components/LandingPopupLogin';
 import LandingPopupConfirm from '../components/LandingPopupConfirm';
-const { palette } = createTheme()
-const { augmentColor } = palette
-const createColor = (mainColor) => augmentColor({ color: { main: mainColor } })
+
+// form control imports
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 // animation iabouts
 import Aos from 'aos';
@@ -43,25 +44,18 @@ const payload: CreateNewsletterEmailModelPayload = {
 // }
 
 export default function LandingPage() {
-  // email signup textfield handling
-  const [userEmail, setUserEmail] = React.useState("");
-  const handleEmailChange = (event) => {
-    setUserEmail(event.target.value);
-  }
+  // email signup textfield handling [will be used later]
+  // const [userEmail, setUserEmail] = React.useState("");
+  // const handleEmailChange = (event : any) => {
+  //   setUserEmail(event.target.value);
+  // }
 
-  // email signup button handling
-  function submitEmail(){
-    console.log(userEmail);
-    sendToDatabase();
-    setUserEmail("");
-    console.log(userEmail);
-    console.log(userEmail);
-    setIsConfirmOpen(true); // trigger confirmation popup
-  }
+
   
   // email signup database mutation
-  async function sendToDatabase() {
-    payload.input.email = userEmail;
+  async function sendToDatabase(values : any) {
+    console.log(values.email);
+    payload.input.email = values.userEmail;
     const request = await createNewsletterEmail(payload);
   }
 
@@ -82,6 +76,30 @@ export default function LandingPage() {
 
   // remake object for about section, TODO to improve code quality in the future
   const { title, subtext } = about;
+
+  const validationSchema = yup.object({
+    email: yup
+      .string()
+      .email("Enter a valid email")
+      .required("Email is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      // console.log(userEmail);
+      // sendToDatabase();
+      // setUserEmail(values.email);
+
+      // console.log(userEmail);
+      sendToDatabase(values);
+      setIsConfirmOpen(true); // trigger confirmation popup
+      formik.resetForm();
+    },
+  });
 
   return (
     <div >
@@ -151,29 +169,38 @@ export default function LandingPage() {
         <div className="about-container">
           <div className='signup-stack'>
           <h2 className='signText'>Sign up to get free access to preview upon release.</h2>
-          <div className='signup-entry'>
-            <TextField 
-              variant="filled"  
-              color="#FFFFFF" 
-              placeholder="Email" 
-              sx={{ backgroundColor: '#FFFFFF', width:'35em'}}
-              onChange = {handleEmailChange}  
-            /> 
-            <Button onClick={() => submitEmail()}
-              sx={{
-                backgroundColor: '#F68084',
-                width:'15%',
-                height :'55px',
-                fontSize:'max(14px, 5px);', '&:hover': {
-                backgroundColor:'#f59da0',
-                },
-                mx:'10px',
-              }}
-              variant='contained'
-            > 
-              Sign Up
-            </Button>
-          </div>
+          {/* <div className='signup-entry'> */}
+            <form onSubmit={formik.handleSubmit}>
+              <TextField 
+                id="email"
+                variant="filled"  
+                color="#FFFFFF" 
+                placeholder="Email" 
+                sx={{ backgroundColor: '#FFFFFF', width:'35em'}}
+                value = {formik.values.email}
+                onChange = {formik.handleChange} 
+                error={
+                  formik.touched.email && Boolean(formik.errors.email)
+                }
+                helperText={formik.touched.email && formik.errors.email} 
+              /> 
+            </form>
+            <Button onClick={() => formik.handleSubmit()}
+              disabled={formik.isSubmitting}
+                sx={{
+                  backgroundColor: '#F68084',
+                  width:'15%',
+                  height :'55px',
+                  fontSize:'max(14px, 5px);', '&:hover': {
+                  backgroundColor:'#f59da0',
+                  },
+                  mx:'10px',
+                }}
+                variant='contained'
+              > 
+                Sign Up
+              </Button>
+          {/* </div> */}
         </div>
         {/* TODO about information to add about section in the future */}
         {/* <div className="about-text-container">
