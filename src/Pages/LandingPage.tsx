@@ -4,31 +4,22 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import illustration from '../img/landing-img.svg' // matchstick illustration 
 import { createTheme } from '@mui/material/styles'
-import { Link } from 'react-router-dom'
 import LandingPopupLogin from '../components/LandingPopupLogin';
 import LandingPopupConfirm from '../components/LandingPopupConfirm';
 const { palette } = createTheme()
 const { augmentColor } = palette
-const createColor = (mainColor) => augmentColor({ color: { main: mainColor } })
 
 // animation iabouts
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
-
 import { about } from './LandingPageData' // data import 
 import { TextField } from '@mui/material'
 
-
 import awsconfig from '../aws-exports'
 import {Amplify} from 'aws-amplify'
-// import { CreateNewsletterEmailModelPayload } from "../backend/mutations/newsletterMutations";
-import { CreateNewsletterEmailModelInput  } from "../API";
 import { CreateNewsletterEmailModelPayload } from "../backend/types";
 import { createNewsletterEmail } from "../../src/backend/mutations/newsletterMutations"
-
-
-
 
 Amplify.configure(awsconfig)
 const payload: CreateNewsletterEmailModelPayload = {
@@ -36,11 +27,6 @@ const payload: CreateNewsletterEmailModelPayload = {
     email: ''
   }
 }
-
-// TODO [] payload format? 
-// const finalload: CreatePayload = {
-//   input: frontload
-// }
 
 export default function LandingPage() {
   // email signup textfield handling
@@ -51,11 +37,8 @@ export default function LandingPage() {
 
   // email signup button handling
   function submitEmail(){
-    console.log(userEmail);
     sendToDatabase();
     setUserEmail("");
-    console.log(userEmail);
-    console.log(userEmail);
     setIsConfirmOpen(true); // trigger confirmation popup
   }
   
@@ -84,7 +67,7 @@ export default function LandingPage() {
   const { title, subtext } = about;
 
   return (
-    <div >
+    <div className='parent'>
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
       <LandingPopupConfirm trigger={isConfirmOpen} setTrigger={setIsConfirmOpen}/>
       <div className='top-container'>
@@ -153,10 +136,12 @@ export default function LandingPage() {
           <h2 className='signText'>Sign up to get free access to preview upon release.</h2>
           <div className='signup-entry'>
             <TextField 
-              variant="filled"  
-              multiline color="#FFFFFF" 
+              variant="outlined"  
               placeholder="Email" 
-              sx={{ backgroundColor: '#FFFFFF', width:'35em'}}
+              sx={{ 
+                backgroundColor: '#FFFFFF', 
+                width:'35rem',
+              }}
               onChange = {handleEmailChange}  
             /> 
             <Button onClick={() => submitEmail()}
@@ -167,7 +152,7 @@ export default function LandingPage() {
                 fontSize:'max(14px, 5px);', '&:hover': {
                 backgroundColor:'#f59da0',
                 },
-                mx:'10px',
+                mx:'11px',
               }}
               variant='contained'
             > 
