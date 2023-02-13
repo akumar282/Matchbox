@@ -154,7 +154,7 @@ export default function LandingPage() {
           <div className='signup-entry'>
             <TextField 
               variant="filled"  
-              multiline color="#FFFFFF" 
+              color="#FFFFFF" 
               placeholder="Email" 
               sx={{ backgroundColor: '#FFFFFF', width:'35em'}}
               onChange = {handleEmailChange}  
