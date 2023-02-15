@@ -94,25 +94,8 @@ function DiscoverComponent(props: {
         <div className="ShortTagBoxDiscover">
           <div className="ShortDescDiscover">
             <h1>{props.projects.title}</h1>
-            <h4> Short Description</h4>
+            {/* <h4> Short Description</h4> */}
             <p> {props.projects.Shortdescription}</p>
-          </div>
-          <div className="TagBoxDiscover">
-            <div className="TagDiscover">
-              {props.projects.Lang.map((tag) => (
-                <Chip label={tag} />
-              ))}
-            </div>
-            <div className="TagDiscover">
-              {props.projects.Frame.map((tag) => (
-                <Chip label={tag} />
-              ))}
-            </div>
-            <div className="TagDiscover">
-              {props.projects.Tools.map((tag) => (
-                <Chip label={tag} />
-              ))}
-            </div>
             <div className="ProjectLinksDiscover">
               <IconButton
                 color="primary"
@@ -120,9 +103,7 @@ function DiscoverComponent(props: {
                 href={props.projects.githubLink}
               >
                 <GitHubIcon />
-                {/* why is website button here if we linking github*/}
               </IconButton>
-
               <IconButton 
                 color="primary"
                 aria-label="website link"
@@ -131,6 +112,24 @@ function DiscoverComponent(props: {
                 <LaunchIcon />
               </IconButton>
             </div>
+          </div>
+          <div className="TagBoxDiscover">
+            <div className="TagDiscover">
+              {props.projects.Lang.map((tag) => (
+                <Chip label={tag} sx={{minWidth: 80}}/>
+              ))}
+            </div>
+            <div className="TagDiscover">
+              {props.projects.Frame.map((tag) => (
+                <Chip label={tag} sx={{minWidth: 70}}/>
+              ))}
+            </div>
+            <div className="TagDiscover">
+              {props.projects.Tools.map((tag) => (
+                <Chip label={tag} sx={{minWidth: 70}}/>
+              ))}
+            </div>
+
           </div>
         </div>
       </div>
