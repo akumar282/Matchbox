@@ -13,6 +13,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { white } from '@mui/material/colors';
 import "./CSS/DiscoverPage.css";
 
 function handleRemove() {
@@ -72,7 +73,7 @@ function DiscoverComponent(props: {
             }}
             onClick={handleRemove}
           >
-            <CancelIcon fontSize="large" />
+            <CancelIcon fontSize="large" sx={{ color: 'white'}}/>
           </IconButton>
           {/* save project button */}
           <IconButton
@@ -88,7 +89,7 @@ function DiscoverComponent(props: {
             }}
             onClick={handleSave}
           >
-            <BookmarkBorderIcon fontSize="large" />
+            <BookmarkBorderIcon fontSize="large" sx={{ color: 'white'}}/>
           </IconButton>
         </div>
         <div className="ShortTagBoxDiscover">
@@ -102,7 +103,7 @@ function DiscoverComponent(props: {
                 aria-label="github link"
                 href={props.projects.githubLink}
               >
-                <GitHubIcon />
+                <GitHubIcon/>
               </IconButton>
               <IconButton 
                 color="primary"
