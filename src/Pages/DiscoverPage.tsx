@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/NavBar";
-
+import { motion, useScroll } from "framer-motion"
 import Projects from "./JsonTestDiscover";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -13,7 +13,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { white } from '@mui/material/colors';
+// import { white } from '@mui/material/colors';
 import "./CSS/DiscoverPage.css";
 
 function handleRemove() {
@@ -26,18 +26,34 @@ function handleSave() {
   // TODO make backend connection here
 }
 
-
 export default function DiscoverPage() {
+  
+  // Set up state to keep track of which project is currently visible
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
+
+  // Define a function to handle clicking the "Next" button
+  const handleNextProject = () => {
+    setCurrentProjectIndex((currentProjectIndex + 1) % Projects.length);
+  };
+
+
   return (
     <div className="DiscoverPage">
       <Navbar />
-      {Projects.map((project) => (
-        <DiscoverComponent projects={project} key={project.title} />
+      {Projects.map((project, index) => (
+        <DiscoverComponent 
+          projects={project} 
+          key={project.title}
+          isVisible={index === currentProjectIndex}
+          onNextProject={handleNextProject}
+          />
       ))}
     </div>
   );
 }
 function DiscoverComponent(props: {
+  
+  
   projects: {
     title: string;
     img: string;
@@ -48,8 +64,18 @@ function DiscoverComponent(props: {
     Tools: string[];
     githubLink: string;
   };
+  isVisible: boolean;
+  onNextProject: () => void;
 }) {
-  return (
+  // remake objects
+  const { projects, isVisible, onNextProject } = props;
+
+  const handleRemove = () => {
+    onNextProject();
+  };
+
+  return isVisible ? (
+
     <div className="DiscoverMain">
       <div className="topRowDiscover">
         <div className="DiscoverimgBox">
@@ -138,5 +164,5 @@ function DiscoverComponent(props: {
         <p>{props.projects.Longdescription}</p>
       </div>
     </div>
-  );
+  ):(<div/>);
 }
