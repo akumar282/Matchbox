@@ -1,51 +1,54 @@
-.logo {
-    font-size: 4rem;
-    color: #000000ab;
-    font-weight: 500;
-    margin-left: 2rem;
-    font-family: 'PT Serif';
-}
-.logobox {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 1rem;
-}
-.subtext {
+.sub-text {
     font-family: 'Roboto';
     font-size:max(30px, 10px);
-    max-width: fit-content;
     color: #000000;
     margin-bottom: 0px;
 }
 
-.leadingtext {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 800;
-    font-size: max(6.5vw, 10px);
-    color: #000000;
-    max-width: fit-content;
-    
+.about-text-container{
+    width: 100%;
+    justify-content: center;
+    text-align: center;
 }
-.navHome {
+
+.title-text {
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: max(60px, 10px);
+    color: #000000;
+    margin: 0;
+}
+
+.header-stack {
     display : flex;
     justify-content: space-between;
     align-items: center;
     gap : 2rem;
-    padding: 0 1rem;
     margin-top: 2rem;
 }
-.LandingStack {
-    align-items: stretch;
-    width: 60rem;
+
+.nav-stack {
+    width: 50rem;
     gap: 2rem;
     align-items: center;
     justify-content: center;
-    margin-right: 5%;
 }
-.loginButton {
-    background: #716ab4;
+
+.logo {
+    font-size: 2rem;
+    color: #000000ab;
+    font-weight: 500;
+    font-family: 'Signika Negative', sans-serif;
+}
+
+.logobox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.login-button {
+    background: #2d2a48;
     border-radius: 10px;
     font-family: 'Roboto';
     font-style: normal;
@@ -55,15 +58,16 @@
     border: beige;
     outline: none;
 }
-.firestick{
-    
+
+.matchstick{
     display: flex;
     justify-self: center;
     align-self: center;
     margin: auto;
-    width: 32%;
+    width: 25%;
 }
-.BoxStack {
+
+.landing-container {
     display : flex;
     padding: 0;
     max-width: 100%;
@@ -72,13 +76,76 @@
     align-self: start;
     
 }
-.textStack {
-    display : flex;
+
+.text-stack {
     flex-direction: column;
     gap: 0;
-    max-width: 40%;
-    margin-left: 5%;
+    justify-self: center;
+    max-width: 60%;
 }
-.Starting {
-    
+
+.top-container {
+    max-width: 1420px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    overflow: hidden;
+    height: 600px;
+}
+
+.about-section{
+    background-color: #2d2a48;
+    height: 100vh;
+}
+
+.about-container {
+    margin:auto;
+    background-color: #2d2a48;
+    height: 400px;
+    max-width: 1420px;
+    display: block;
+}
+
+
+.signup-entry {
+    flex-direction: row;
+    justify-self: center;
+    justify-content: space-between;
+    gap: 20px;
+    /* max-width: 80%; */
+    margin: auto;
+}
+
+.signup-stack {
+    padding-top: 50px;
+    flex-direction: column;
+    justify-self: center;
+    /* display: flex; */
+    /* text-align: center; */
+    text-align: center;
+    margin: auto;
+}
+
+.signText {
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: max(30px, 20px);
+    color: #FFFFFF;
+}
+
+.about-title-text {
+    font-family: 'Roboto';
+    font-weight: 800;
+    font-size: max(5vw, 10px);
+    color: #FFFFFF;
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+.about-sub-text {
+    font-family: 'Roboto';
+    font-size:max(30px, 10px);
+    max-width: 100%;
+    color: #FFFFFF;
+    margin-bottom: 0px;
 }
