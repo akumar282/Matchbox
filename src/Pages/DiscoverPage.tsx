@@ -16,12 +16,13 @@ import CancelIcon from "@mui/icons-material/Cancel";
 // import { white } from '@mui/material/colors';
 import "./CSS/DiscoverPage.css";
 
-function handleRemove() {
+// keep these functions here for top level backend connection
+function handleBackendRemove() {
   console.log("removing project");
   // TODO make backend connection here
 }
 
-function handleSave() {
+function handleBackendSave() {
   console.log("saving project");
   // TODO make backend connection here
 }
@@ -70,12 +71,26 @@ function DiscoverComponent(props: {
   // remake objects
   const { projects, isVisible, onNextProject } = props;
 
-  const handleRemove = () => {
+  const slideRight = {
+    x: 1000,
+    opacity: 0,
+    transition: {
+      duration: 20,
+    }
+  };
+
+  const handleSave = () => {   
+    handleBackendSave();
+    onNextProject();
+  };
+
+  const handleRemove = () => {   
+    handleBackendRemove();
     onNextProject();
   };
 
   return isVisible ? (
-
+  <motion.div initial={{opacity: 0, x: -1000}} animate={{opacity: 1, x: 0}} exit={slideRight}>
     <div className="DiscoverMain">
       <div className="topRowDiscover">
         <div className="DiscoverimgBox">
@@ -164,5 +179,6 @@ function DiscoverComponent(props: {
         <p>{props.projects.Longdescription}</p>
       </div>
     </div>
+   </motion.div>
   ):(<div/>);
 }
