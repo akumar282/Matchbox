@@ -28,15 +28,13 @@ function handleBackendSave() {
 }
 
 export default function DiscoverPage() {
-  
-  // Set up state to keep track of which project is currently visible
+  // set up state to keep track of which project is currently visible
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
 
-  // Define a function to handle clicking the "Next" button
+  // define a function to handle clicking either save or remove project buttona
   const handleNextProject = () => {
     setCurrentProjectIndex((currentProjectIndex + 1) % Projects.length);
   };
-
 
   return (
     <div className="DiscoverPage">
@@ -52,9 +50,8 @@ export default function DiscoverPage() {
     </div>
   );
 }
+
 function DiscoverComponent(props: {
-  
-  
   projects: {
     title: string;
     img: string;
@@ -71,6 +68,7 @@ function DiscoverComponent(props: {
   // remake objects
   const { projects, isVisible, onNextProject } = props;
 
+  // framer motion 
   const slideRight = {
     x: 1000,
     opacity: 0,
@@ -136,7 +134,6 @@ function DiscoverComponent(props: {
         <div className="ShortTagBoxDiscover">
           <div className="ShortDescDiscover">
             <h1>{props.projects.title}</h1>
-            {/* <h4> Short Description</h4> */}
             <p> {props.projects.Shortdescription}</p>
             <div className="ProjectLinksDiscover">
               <IconButton
