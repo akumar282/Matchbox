@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import Navbar from "../components/NavBar";
-import { motion, useScroll } from "framer-motion"
+import "./CSS/DiscoverPage.css";
+
+import { motion } from "framer-motion"
 import Projects from "./JsonTestDiscover";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import { autocompleteClasses, Stack } from "@mui/material";
+
+// MUI imports
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
 import CancelIcon from "@mui/icons-material/Cancel";
-// import { white } from '@mui/material/colors';
-import "./CSS/DiscoverPage.css";
+
 
 // keep these functions here for top level backend connection
 function handleBackendRemove() {
