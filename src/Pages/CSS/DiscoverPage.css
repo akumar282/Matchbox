@@ -87,22 +87,18 @@
 }
 .TagBoxDiscover {
     display: flex;
-    flex-direction: column;
-    margin-top: 3em;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    overflow: hidden;
+    margin-top: 4em;
+    margin-right: 1em;
     gap: 0.5rem;
     width: 100%;
     height: 75%;
 }
 .TagDiscover {
-    gap: 0.5rem;
-    width: 100%;
-    max-width: 25em;
     display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    flex-direction: row;
+    align-items: center;
 }
 .ShortDescDiscover {
     display: flex;

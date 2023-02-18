@@ -151,23 +151,16 @@ function DiscoverComponent(props: {
             </div>
           </div>
           <div className="TagBoxDiscover">
+          {[
+            ...props.projects.Lang.map(tag => ({tag})),
+            ...props.projects.Frame.map(tag => ({tag})),
+            ...props.projects.Tools.map(tag => ({tag}))
+          ].map(({tag}) => (
             <div className="TagDiscover">
-              {props.projects.Lang.map((tag) => (
-                <Chip label={tag} sx={{minWidth: 80}}/>
-              ))}
+              <Chip label={tag} sx={{minWidth: 70}}/>
             </div>
-            <div className="TagDiscover">
-              {props.projects.Frame.map((tag) => (
-                <Chip label={tag} sx={{minWidth: 70}}/>
-              ))}
-            </div>
-            <div className="TagDiscover">
-              {props.projects.Tools.map((tag) => (
-                <Chip label={tag} sx={{minWidth: 70}}/>
-              ))}
-            </div>
-
-          </div>
+          ))}
+        </div>
         </div>
       </div>
       <div className="BottomHolderDiscover">
