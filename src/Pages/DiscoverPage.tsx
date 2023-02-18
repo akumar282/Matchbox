@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../components/NavBar";
 import "./CSS/DiscoverPage.css";
 
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import Projects from "./JsonTestDiscover";
 
 // MUI imports
@@ -66,12 +66,12 @@ function DiscoverComponent(props: {
   // remake objects
   const { projects, isVisible, onNextProject } = props;
 
-  // framer motion 
+  // framer motion -- use for exit, later implementation
   const slideRight = {
     x: 1000,
-    opacity: 0,
+    opacity: 1,
     transition: {
-      duration: 20,
+      duration: 200,
     }
   };
 
@@ -86,87 +86,95 @@ function DiscoverComponent(props: {
   };
 
   return isVisible ? (
-  <motion.div initial={{opacity: 0, x: -1000}} animate={{opacity: 1, x: 0}} exit={slideRight}>
-    <div className="DiscoverMain">
-      <div className="topRowDiscover">
-        <div className="DiscoverimgBox">
-          <img
-            className="DiscoverImg"
-            src={"images/" + props.projects.img}
-            alt="project image"
-          />
+  <AnimatePresence>
+    <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+    >
+    
+      <div className="DiscoverMain">
+        <div className="topRowDiscover">
+          <div className="DiscoverimgBox">
+            <img
+              className="DiscoverImg"
+              src={"images/" + props.projects.img}
+              alt="project image"
+            />
 
-          {/* remove project button */}
-          <IconButton
-            color="primary"
-            aria-label="remove project"
-            component="label"
-            sx={{
-              position: "absolute",
-              bottom: "0",
-              left: "0",
-              zIndex: 30,
-              color: "black",
-            }}
-            onClick={handleRemove}
-          >
-            <CancelIcon fontSize="large" sx={{ color: 'white'}}/>
-          </IconButton>
-          {/* save project button */}
-          <IconButton
-            color="primary"
-            aria-label="save project"
-            component="label"
-            sx={{
-              position: "absolute",
-              bottom: "0",
-              right: "0",
-              zIndex: 30,
-              color: "black",
-            }}
-            onClick={handleSave}
-          >
-            <BookmarkBorderIcon fontSize="large" sx={{ color: 'white'}}/>
-          </IconButton>
-        </div>
-        <div className="ShortTagBoxDiscover">
-          <div className="ShortDescDiscover">
-            <h1>{props.projects.title}</h1>
-            <p> {props.projects.Shortdescription}</p>
-            <div className="ProjectLinksDiscover">
-              <IconButton
-                color="primary"
-                aria-label="github link"
-                href={props.projects.githubLink}
-              >
-                <GitHubIcon/>
-              </IconButton>
-              <IconButton 
-                color="primary"
-                aria-label="website link"
-                component="label"
-              >
-                <LaunchIcon />
-              </IconButton>
-            </div>
+            {/* remove project button */}
+            <IconButton
+              color="primary"
+              aria-label="remove project"
+              component="label"
+              sx={{
+                position: "absolute",
+                bottom: "0",
+                left: "0",
+                zIndex: 30,
+                color: "black",
+              }}
+              onClick={handleRemove}
+            >
+              <CancelIcon fontSize="large" sx={{ color: 'white'}}/>
+            </IconButton>
+            {/* save project button */}
+            <IconButton
+              color="primary"
+              aria-label="save project"
+              component="label"
+              sx={{
+                position: "absolute",
+                bottom: "0",
+                right: "0",
+                zIndex: 30,
+                color: "black",
+              }}
+              onClick={handleSave}
+            >
+              <BookmarkBorderIcon fontSize="large" sx={{ color: 'white'}}/>
+            </IconButton>
           </div>
-          <div className="TagBoxDiscover">
-          {[
-            ...props.projects.Lang.map(tag => ({tag})),
-            ...props.projects.Frame.map(tag => ({tag})),
-            ...props.projects.Tools.map(tag => ({tag}))
-          ].map(({tag}) => (
-            <div className="TagDiscover">
-              <Chip label={tag} sx={{minWidth: 70}}/>
+          <div className="ShortTagBoxDiscover">
+            <div className="ShortDescDiscover">
+              <h1>{props.projects.title}</h1>
+              <p> {props.projects.Shortdescription}</p>
+              <div className="ProjectLinksDiscover">
+                <IconButton
+                  color="primary"
+                  aria-label="github link"
+                  href={props.projects.githubLink}
+                >
+                  <GitHubIcon/>
+                </IconButton>
+                <IconButton 
+                  color="primary"
+                  aria-label="website link"
+                  component="label"
+                >
+                  <LaunchIcon />
+                </IconButton>
+              </div>
             </div>
-          ))}
+            <div className="TagBoxDiscover">
+            {[
+              ...props.projects.Lang.map(tag => ({tag})),
+              ...props.projects.Frame.map(tag => ({tag})),
+              ...props.projects.Tools.map(tag => ({tag}))
+            ].map(({tag}) => (
+              <div className="TagDiscover">
+                <Chip label={tag} sx={{minWidth: 70}}/>
+              </div>
+            ))}
+          </div>
+          </div>
         </div>
+        <div className="BottomHolderDiscover">
+          <p>{props.projects.Longdescription}</p>
         </div>
       </div>
-      <div className="BottomHolderDiscover">
-        <p>{props.projects.Longdescription}</p>
-      </div>
-    </div>
-   </motion.div>
+    </motion.div>
+  </AnimatePresence>
+
   ):(<div/>);
 }
