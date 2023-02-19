@@ -13,6 +13,7 @@ import { createNewsletterEmail } from "../../src/backend/mutations/newsletterMut
 // component imports
 import LandingPopupLogin from '../components/LandingPopupLogin';
 import LandingPopupConfirm from '../components/LandingPopupConfirm';
+import LandingPopupCreate from '../components/LandingPopupCreate';
 
 // MUI imports
 import { TextField } from '@mui/material'
@@ -55,9 +56,10 @@ export default function LandingPage() {
   // login popup handling
   const [isLoginOpen, setIsLoginOpen] = React.useState(false)
   const [isConfirmOpen, setIsConfirmOpen] = React.useState(false);
+  const [isCreateOpen, setIsCreateOpen] = React.useState(false)
   function NoAccount() {
     setIsLoginOpen(false);
-    setIsConfirmOpen(false);
+    setIsCreateOpen(true);
   }
 
   // page animations
@@ -92,6 +94,7 @@ export default function LandingPage() {
     <div className='landing'>
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
       <LandingPopupConfirm trigger={isConfirmOpen} setTrigger={setIsConfirmOpen}/>
+      <LandingPopupCreate trigger={isCreateOpen} setTrigger={setIsCreateOpen} />
       <div className='top-container'>
         <div className='header-stack'>
           <div className='logobox'>
@@ -110,6 +113,8 @@ export default function LandingPage() {
               About Us
             </Button> */}
             {/* login button */}
+            
+
             <Button
               sx={{
                 color: '#000000',
@@ -129,6 +134,7 @@ export default function LandingPage() {
             sx={{
               justifyContent: 'center',
               width: '100%',
+              ml: '2%',
             }}
           >
             <h1 
@@ -151,27 +157,57 @@ export default function LandingPage() {
               data-aos='fade-right'
               data-aos-delay='900'></img>
         </div>
+        <div className='button-stack'>
+        <Button 
+             sx={{
+              fontSize: 'max(20px, 10px);',
+              backgroundColor: '#F68084',
+              width: 'max(10em, 10px)',
+              height: 'max(3em, 10px)',
+              borderRadius: '10px',
+              color : '#FFFFFF',
+              fontSize: '20px',
+              mr: '30rem',
+              "&:hover": {
+                backgroundColor: "#ffa7aa",
+              },
+            }}
+            onClick={() => setIsCreateOpen(true)}
+            >
+              Get Started
+            </Button>
+            </div>
       </div>     
+      
       <div className='about-section'>
         <div className="about-container">
           <div className='signup-stack'>
           <h2 className='signText'>Sign up to get free access to preview upon release.</h2>
           <div className='signup-entry'>
-            <form className='signup-entry' onSubmit={formik.handleSubmit}>
-              <TextField 
-                id="email"
-                variant="filled"  
-                color="#FFFFFF" 
-                placeholder="Email" 
-                sx={{ backgroundColor: '#FFFFFF', width:'35em'}}
-                value = {formik.values.email}
-                onChange = {formik.handleChange} 
-                error={
-                  formik.touched.email && Boolean(formik.errors.email)
-                }
-                helperText={formik.touched.email && formik.errors.email} 
-              /> 
-           
+            
+           <TextField
+              id="email"
+              name="email"
+              placeholder="Email"
+              variant='standard'
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              InputProps = {{
+                disableUnderline: true,
+              }}
+              sx={{
+                justifyContent: 'center',
+                px: '1rem',
+                height: '3.5rem',
+                width: 'max(20em, 10px)',
+                backgroundColor: '#FFFFFF',
+                fontSize: '20px',
+                mr: '1rem',
+                
+              }}
+            />
             <Button onClick={() => formik.handleSubmit()}
               id='submit-btn'
               disabled={formik.isSubmitting}
@@ -181,6 +217,7 @@ export default function LandingPage() {
                   height :'55px',
                   fontSize:'max(14px, 5px);', '&:hover': {
                   backgroundColor:'#f59da0',
+                  
                   },
                   mx:'10px',
                 }}
@@ -188,7 +225,7 @@ export default function LandingPage() {
               > 
                 Sign Up
               </Button>
-            </form>
+            
             
           </div>
         </div>
