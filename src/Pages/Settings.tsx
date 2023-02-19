@@ -23,8 +23,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 Amplify.configure(awsconfig);
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // temporary lists for choices to user
 const select_lang = [
   { value: "Java", label: "Java" },
@@ -65,18 +64,6 @@ const select_frame = [
 ];
 
 const select_size = ["small", "medium", "large"];
-
-
-const frontload: CreateUsersModelInput = {
-  user_name: "",
-  email: "",
-  first_name: "",
-  last_name: "",
-  password: "",
-};
-const finalload: CreateUsersPayload = {
-  input: frontload,
-};
 
 
 import Navbar from "../components/NavBar";
