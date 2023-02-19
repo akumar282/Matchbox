@@ -75,7 +75,6 @@
     max-height: 100%;
     margin-top: 2rem;
     align-self: start;
-    
 }
 
 .text-stack {
@@ -89,7 +88,6 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
-    overflow: hidden;
     height: 69.6vh;
     max-width: 70rem;
 }
@@ -103,7 +101,6 @@
     margin:auto;
     background-color: #2d2a48;
     height: 30.4vh;
-    overflow: hidden;
     overflow: hidden;
     display: block;
 }
