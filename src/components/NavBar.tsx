@@ -9,7 +9,8 @@ import "./NavBar.css"
 export default function Navbar() {
     return (
         <nav className="nav"> 
-        <h1 className="SiteTitle"> Matchbox </h1>
+            <div className="divNav">
+            <h1 className="SiteTitle"> Matchbox </h1>
         <ul>
             {/* <img src={LogoImg} width={130} height={50} alt="passedImg"/>
                 <CustomLink to= "/game"> Game </CustomLink>*/}
@@ -18,6 +19,7 @@ export default function Navbar() {
                 <CustomLink className ="navElement" to= "/discover"> <SearchIcon fontSize="large"/> Discover </CustomLink>
                 <CustomLink className ="navElement" to= "/settings"> <SettingsIcon fontSize="large"/> Settings </CustomLink> 
         </ul>
+            </div>
         </nav>
     );
 }
