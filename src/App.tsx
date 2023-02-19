@@ -11,7 +11,7 @@ import HomePage from './Pages/HomePage'
 import ForgotPassword from './Pages/ForgotPasswordPage'
 import DiscoverPage from './Pages/DiscoverPage'
 import DetailedLandingPage from './Pages/DetailedLandingPage'
-import SettingsPage from './Pages/SettingsPage'
+import SettingsPage from './Pages/Settings'
 import CreateProject from './Pages/CreateProject'
 
 function App () {
