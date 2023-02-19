@@ -238,21 +238,7 @@ export default function SettingsPage(props) {
             </form>
           </div>
           <div className="popupControls">
-            <Button
-              disabled={formik.isSubmitting}
-              sx={{
-                backgroundColor: "#6259b9",
-                ":hover": {
-                  backgroundColor: "#3f51b5",
-                  color: "white",
-                },
-              }}
-              variant="contained"
-              onClick={() => formik.handleSubmit()}
-              type="submit"
-            >
-              Save Changes
-            </Button>
+          
           </div>
         </DialogContent>
      </div> 
