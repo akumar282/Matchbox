@@ -2,7 +2,7 @@ import { Auth } from 'aws-amplify'
 
 
 
-export async function newUserSignUp(username: string, password: string, email: string, userId: string): string {
+export async function newUserSignUp(username: string, password: string, email: string, userId: string): Promise<string> {
   try {
     const newUser = await Auth.signUp({
       username,
