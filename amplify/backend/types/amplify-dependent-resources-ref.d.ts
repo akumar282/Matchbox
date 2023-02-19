@@ -7,13 +7,14 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "auth": {
-        "Unhinged": {
+        "unhinged15d4ae3f": {
+            "IdentityPoolId": "string",
+            "IdentityPoolName": "string",
             "UserPoolId": "string",
             "UserPoolArn": "string",
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
-            "AppClientID": "string",
-            "CreatedSNSRole": "string"
+            "AppClientID": "string"
         }
     }
 }

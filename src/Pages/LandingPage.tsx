@@ -6,7 +6,6 @@ import illustration from '../img/landing-img.svg' // matchstick illustration
 // aws imports
 import awsconfig from '../aws-exports'
 import {Amplify} from 'aws-amplify'
-import { CreateNewsletterEmailModelInput  } from "../API";
 import { CreateNewsletterEmailModelPayload } from "../backend/types";
 import { createNewsletterEmail } from "../../src/backend/mutations/newsletterMutations"
 
@@ -160,8 +159,8 @@ export default function LandingPage() {
             <form className='signup-entry' onSubmit={formik.handleSubmit}>
               <TextField 
                 id="email"
-                variant="filled"  
-                color="#FFFFFF" 
+                variant="filled" 
+                color="#FFFFFF"
                 placeholder="Email" 
                 sx={{ backgroundColor: '#FFFFFF', width:'35em'}}
                 value = {formik.values.email}
