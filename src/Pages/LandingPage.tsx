@@ -1,128 +1,252 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import './CSS/LandingPage.css'
+import illustration from '../img/landing-img.svg' // matchstick illustration 
+
+// aws imports
+import awsconfig from '../aws-exports'
+import {Amplify} from 'aws-amplify'
+import { CreateNewsletterEmailModelInput  } from "../API";
+import { CreateNewsletterEmailModelPayload } from "../backend/types";
+import { createNewsletterEmail } from "../../src/backend/mutations/newsletterMutations"
+
+// component imports
+import LandingPopupLogin from '../components/LandingPopupLogin';
+import LandingPopupConfirm from '../components/LandingPopupConfirm';
+import LandingPopupCreate from '../components/LandingPopupCreate';
+
+// MUI imports
+import { TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-import illustration from '../img/landing-img.svg' // matchstick illustration
-import { createTheme } from '@mui/material/styles'
-import { Link } from 'react-router-dom'
 
-import LandingPopupLogin from '../components/LandingPopupLogin';
-import LandingPopupCreate from '../components/LandingPopupCreate';
-const { palette } = createTheme()
-const { augmentColor } = palette
-const createColor = (mainColor) => augmentColor({ color: { main: mainColor } })
-declare module '@mui/material/styles/createTheme' {
-  interface Theme {
-    status: {
-      anger: React.CSSProperties['color'],
-    }
-  }
-  interface ThemeOptions {
-    status?: {
-      anger?: React.CSSProperties['color']
-    }
+// form control imports
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+// animation imports
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
+// data import 
+import { about } from './LandingPageData' 
+
+
+Amplify.configure(awsconfig)
+const payload: CreateNewsletterEmailModelPayload = {
+  input: {
+    email: ''
   }
 }
-// const theme = createTheme({
-//   palette: {
-//     anger: createColor('#F40B27'),
-//     apple: createColor('#5DBA40'),
-//     steelBlue: createColor('#5C76B7'),
-//     violet: createColor('#BC00A3'),
-//     black: createColor('#000000')
-//   }
-// })
 
 export default function LandingPage() {
+  // email signup textfield handling [leave this here, will be used later]
+  // const [userEmail, setUserEmail] = React.useState("");
+  // const handleEmailChange = (event : any) => {
+  //   setUserEmail(event.target.value);
+  // }
+  
+  // email signup database mutation
+  async function sendToDatabase(values : any) {
+    payload.input.email = values.email;
+    const request = await createNewsletterEmail(payload)
+      .catch(error => console.log(error));  
+  }
+
+  // login popup handling
   const [isLoginOpen, setIsLoginOpen] = React.useState(false)
+  const [isConfirmOpen, setIsConfirmOpen] = React.useState(false);
   const [isCreateOpen, setIsCreateOpen] = React.useState(false)
   function NoAccount() {
-    setIsLoginOpen(false)
-    setIsCreateOpen(true)
+    setIsLoginOpen(false);
+    setIsCreateOpen(true);
   }
+
+  // page animations
+  Aos.init({
+    duration: 2500,
+    delay: 400,
+  });
+
+  // remake object for about section [leave this here]
+  const { title, subtext } = about;
+
+  const validationSchema = yup.object({
+    email: yup
+      .string()
+      .email("Enter a valid email")
+      .required("Email is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      sendToDatabase(values);
+      setIsConfirmOpen(true); // trigger confirmation popup
+      formik.resetForm();
+    },
+  });
+
   return (
-    <div className='Starting'>
+    <div className='landing'>
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
+      <LandingPopupConfirm trigger={isConfirmOpen} setTrigger={setIsConfirmOpen}/>
       <LandingPopupCreate trigger={isCreateOpen} setTrigger={setIsCreateOpen} />
-      <div className='navHome'>
-        {/* logo */}
-        <div className='logobox'>
-          <span className='logo'>Matchbox</span>
-          {/* about us link */}
+      <div className='top-container'>
+        <div className='header-stack'>
+          <div className='logobox'>
+            <span className='logo'>Matchbox</span>
+          </div>
+          <Stack className='nav-stack' direction='row'>
+            {/* TODO link scoll animation here later */}
+            {/* <Button
+              sx={{
+                color: '#000000',
+                fontSize: 'max(20px, 10px);',
+              }}
+            >
+              {' '}            
+              <Link to="#about" /> 
+              About Us
+            </Button> */}
+            {/* login button */}
+            
+
+            <Button
+              sx={{
+                color: '#000000',
+                fontSize: 'max(20px, 10px);',
+              }}
+              onClick={() => setIsLoginOpen(true)}
+            >
+              {' '}
+              Login
+            </Button>
+          </Stack>
         </div>
-        <Stack className='LandingStack' direction='row'>
-          <Button
+        <div className='landing-container'>
+          <Stack
+            className='text-stack'
+            direction='column'
             sx={{
-              color: '#000000',
-              fontSize: 'max(20px, 10px);',
+              justifyContent: 'center',
+              width: '100%',
+              ml: '2%',
             }}
           >
-            {' '}
-            About Us
-          </Button>
-          {/* sign up link */}
-          <Button
-            sx={{
-              color: '#000000',
+            <h1 
+              className='title-text'          
+              data-aos='fade-down'
+              data-aos-delay='600'
+            > 
+              Matchbox: Bridging between ideas and execution 
+            </h1>
+            <p
+              className='sub-text'           
+              data-aos='fade-down'
+              data-aos-delay='800'
+            >
+              Matchbox is a project collaboration platform that curates
+              countless relevant projects in seconds. 
+            </p>
+          </Stack>
+          <img className='matchstick' src={illustration}         
+              data-aos='fade-right'
+              data-aos-delay='900'></img>
+        </div>
+        <div className='button-stack'>
+        <Button 
+             sx={{
               fontSize: 'max(20px, 10px);',
-            }}
-            onClick={() => setIsCreateOpen(true)}
-          >
-            {' '}
-            Sign Up
-          </Button>
-          {/* login button */}
-          <Button
-            variant='contained'
-            sx={{
-              backgroundColor: '#6259b9',
-              color: 'white',
-              fontSize: 'max(20px, 10px);',
-              '&:hover': {
-                backgroundColor: '#716ab4',
+              backgroundColor: '#F68084',
+              width: 'max(10em, 10px)',
+              height: 'max(3em, 10px)',
+              borderRadius: '10px',
+              color : '#FFFFFF',
+              fontSize: '20px',
+              mr: '30rem',
+              "&:hover": {
+                backgroundColor: "#ffa7aa",
               },
             }}
-            onClick={() => setIsLoginOpen(true)}
-          >
-            {' '}
-            Login
-          </Button>
-        </Stack>
-      </div>
-      <div className='BoxStack'>
-        <Stack
-          className='textStack'
-          direction='column'
-          spacing={1}
-          sx={{
-            justifyContent: 'center',
-            width: '100%',
-          }}
-        >
-          {/* landing title & description */}
-          <p className='subtext'> Welcome to Matchbox </p>
-          <p className='leadingtext'> Discover a project </p>
-          <p className='leadingtext'> you'll love.</p>
-          <p className='subtext'>Get instantly matched with open source projects with a straight-forward process </p>
-        </Stack>
-        {/* matchstick illustration */}
-        <img className='firestick' src={illustration}></img>
-      </div>
+            onClick={() => setIsCreateOpen(true)}
+            >
+              Get Started
+            </Button>
+            </div>
+      </div>     
+      
+      <div className='about-section'>
+        <div className="about-container">
+          <div className='signup-stack'>
+          <h2 className='signText'>Sign up to get free access to preview upon release.</h2>
+          <div className='signup-entry'>
+            
+           <TextField
+              id="email"
+              name="email"
+              placeholder="Email"
+              variant='standard'
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              InputProps = {{
+                disableUnderline: true,
+              }}
+              sx={{
+                justifyContent: 'center',
+                px: '1rem',
+                height: '3.5rem',
+                width: 'max(20em, 10px)',
+                backgroundColor: '#FFFFFF',
+                fontSize: '20px',
+                mr: '1rem',
+                
+              }}
+            />
+            <Button onClick={() => formik.handleSubmit()}
+              id='submit-btn'
+              disabled={formik.isSubmitting}
+                sx={{
+                  backgroundColor: '#F68084',
+                  width:'15%',
+                  height :'55px',
+                  fontSize:'max(14px, 5px);', '&:hover': {
+                  backgroundColor:'#f59da0',
+                  
+                  },
+                  mx:'10px',
+                }}
+                variant='contained'
+              > 
+                Sign Up
+              </Button>
+            
+            
+          </div>
+        </div>
+        {/* TODO about information to add about section in the future */}
+        {/* <div className="about-text-container">
+        <a href="#about"> </a>
 
-      <Button onClick={() => setIsCreateOpen(true)}
-        sx={{
-          backgroundColor: '#6259b9',
-          marginLeft: '5%',
-          mt: '1%',
-          width:'20%',
-          height : '6vh',
-          fontSize: 'max(28px, 10px);',
-          '&:hover': {
-            backgroundColor: '#716ab4',
-          },
-        }}
-        variant='contained'
-      > Get Started </Button>
-    </div>
+        <p className='about-title-text' 
+        data-aos='fade-up'
+        data-aos-delay='100'>About us</p>
+        <p className='about-sub-text'
+        data-aos='fade-up'
+        data-aos-delay='200'>
+        {subtext} 
+
+        Matchbox is a platform connecting developers to open source projects and connecting project owners and organizations to qualified developers. 
+        Our mission is to empower developers and project owners by streamlining the process of finding and collaborating on open source projects. 
+        </p>
+        </div> */}          
+        </div>
+      </div>       
+  </div>
   );
 }

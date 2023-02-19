@@ -1,4 +1,4 @@
-type NewsletterEmailModel @model @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+type NewsletterEmailModel @model @auth(rules: [{allow: public}]) {
   id: ID!
   email: AWSEmail!
 }
