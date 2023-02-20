@@ -3,9 +3,9 @@ Welcome to Matchbox! Where innovation ignites...
 Our web application connects developers to projects that align with their interests, experience, and values
 
 Team:
-Abhimanyu Kumar - Principal Engineer/Tech Lead
-Hayden Lauritzen - Backend Engineer
-Rosie Shen - Frontend Engineer
+Abhimanyu Kumar - Principal Engineer/Tech Lead  
+Hayden Lauritzen - Backend Engineer  
+Rosie Shen - Frontend Engineer  
 Mohammad Zahid- Frontend Engineer
 
 ## Visit our Figma wireframe! 
