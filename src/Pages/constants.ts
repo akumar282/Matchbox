@@ -1,8 +1,20 @@
 export * from './constants'
+import { EnumType } from 'typescript'
 import { FrameworkTag, LanguageTag } from '../API'
 
+type langBundle = {
+  value: string
+  label: string
+  enumMap: LanguageTag
+}
 
-export const LanguageTags = [
+type frameworkBundle = {
+  value: string
+  label: string
+  enumMap: FrameworkTag
+}
+
+export const LanguageTags : langBundle[] = [
   { value: "Java", label: "Java", enumMap: LanguageTag.JAVA },
   { value: "C++", label: "C++", enumMap: LanguageTag.C_PLUS_PLUS },
   { value: "C", label: "C", enumMap: LanguageTag.C},
@@ -23,7 +35,7 @@ export const LanguageTags = [
   { value: "SQL", label: "SQL", enumMap: LanguageTag.SQL }, 
 ];
 
-export const FrameworkTags = [
+export const FrameworkTags: frameworkBundle[] = [
   { value: "React", label: "React", enumMap: FrameworkTag.REACT},
   { value: "React Native", label: "React Native", enumMap: FrameworkTag.REACT_NATIVE },
   { value: "Angular", label: "Angular", enumMap: FrameworkTag.ANGULAR },

@@ -18,9 +18,26 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { color } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import * as TagData from './constants'
+import { CreatePostsModelPayload } from '../backend/types'
 
 
 const arrTags = [TagData.LanguageTags, TagData.FrameworkTags, TagData.SizeTags];
+
+const projectInputLoad: CreatePostsModelPayload = {
+  input: {
+    post_title: '',
+    description: '',
+    project_link: '',
+    image_link: '',
+    post_date: '',
+    userID: '',
+    lang_tag: [],
+    dev_type_tag: [],
+    interest_tag: [],
+    size_tag: [],
+    framework_tag: []
+  }
+}
 
 export default function CreateProject() {
   const [isSelected, setIsSelected] = React.useState(false);
@@ -29,7 +46,19 @@ export default function CreateProject() {
   const [selectedLang, setSelectedLang] = React.useState([]);
   const [selectedFrame, setSelectedFrame] = React.useState([]);
   const [selectedSize, setSelectedSize] = React.useState([]);
-
+  
+  async function sendProjectToDyanmo(props:{
+    ProjectTitle: string;
+    ShortDesc: string;
+    LongDesc: string;
+    GithubLink: string;
+    language: [];
+    framework: [];
+    size: [];
+  }){
+    // const mapToEnum = props.language.map(x => x.enumMap)
+    formik.
+  }
   const navigate = useNavigate();
   //auto complete handlers
   function handleLang(event: any, value: any | null) {
