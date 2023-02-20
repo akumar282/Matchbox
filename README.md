@@ -6,7 +6,7 @@ Team:
 Abhimanyu Kumar - Principal Engineer/Tech Lead  
 Hayden Lauritzen - Backend Engineer  
 Rosie Shen - Frontend Engineer  
-Mohammad Zahid- Frontend Engineer
+Mohammad Zahid - Frontend Engineer
 
 ## Visit our Figma wireframe! 
 https://www.figma.com/file/5GgpPtR2nnpO10SCe0ZyiK/Matchbox?node-id=0%3A1
