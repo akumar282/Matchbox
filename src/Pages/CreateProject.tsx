@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import * as TagData from './constants'
 
 
-const arrTags = [TagData.tags, TagData.tags2, TagData.tags3];
+const arrTags = [TagData.LanguageTags, TagData.FrameworkTags, TagData.SizeTags];
 
 export default function CreateProject() {
   const [isSelected, setIsSelected] = React.useState(false);
@@ -242,9 +242,9 @@ export default function CreateProject() {
               multiple
               limitTags={3}
               id="language"
-              options={TagData.tags}
+              options={TagData.LanguageTags}
               getOptionLabel={(option) => option.label}
-              defaultValue={[TagData.tags[0]]}
+              defaultValue={[TagData.LanguageTags[0]]}
               filterSelectedOptions
               value={selectedLang}
               onChange={handleLang}
@@ -267,9 +267,9 @@ export default function CreateProject() {
               multiple
               limitTags={3}
               id="framework"
-              options={TagData.tags2}
+              options={TagData.FrameworkTags}
               getOptionLabel={(option) => option.label}
-              defaultValue={[TagData.tags2[0]]}
+              defaultValue={[TagData.FrameworkTags[0]]}
               filterSelectedOptions
               value={selectedFrame}
               onChange={handleFrame}
@@ -294,9 +294,9 @@ export default function CreateProject() {
               multiple
               limitTags={3}
               id="size"
-              options={TagData.tags3}
+              options={TagData.SizeTags}
               getOptionLabel={(option) => option}
-              defaultValue={[TagData.tags3[0]]}
+              defaultValue={[TagData.SizeTags[0]]}
               filterSelectedOptions
               value={selectedSize}
               onChange={handleSize}

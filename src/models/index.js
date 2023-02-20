@@ -45,7 +45,32 @@ const LanguageTag = {
   "SWIFT": "SWIFT",
   "RUBY": "RUBY",
   "RUST": "RUST",
-  "SQL": "SQL"
+  "SQL": "SQL",
+  "PHP": "PHP",
+  "HTML": "HTML",
+  "CSS": "CSS",
+  "GO": "GO",
+  "DART": "DART",
+  "SCALA": "SCALA"
+};
+
+const FrameworkTag = {
+  "REACT": "REACT",
+  "REACT_NATIVE": "REACT_NATIVE",
+  "ANGULAR": "ANGULAR",
+  "VUE": "VUE",
+  "NODE": "NODE",
+  "EXPRESS": "EXPRESS",
+  "WEB_SOCKET_IO": "WEB_SOCKET_IO",
+  "DJANGO": "DJANGO",
+  "FLASK": "FLASK",
+  "MONGO_DB": "MONGO_DB",
+  "MY_SQL": "MY_SQL",
+  "POSTGRES_SQL": "POSTGRES_SQL",
+  "FIREBASE": "FIREBASE",
+  "AWS": "AWS",
+  "AZURE": "AZURE",
+  "HEROKU": "HEROKU"
 };
 
 const { NewsletterEmailModel, PostsModel, UsersModel } = initSchema(schema);
@@ -57,5 +82,6 @@ export {
   SizeTag,
   InterestTag,
   DevelopmentTag,
-  LanguageTag
+  LanguageTag,
+  FrameworkTag
 };

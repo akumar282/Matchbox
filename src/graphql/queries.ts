@@ -81,6 +81,7 @@ export const getPostsModel = /* GraphQL */ `
       dev_type_tag
       interest_tag
       size_tag
+      framework_tag
       createdAt
       updatedAt
       _version
@@ -108,6 +109,7 @@ export const listPostsModels = /* GraphQL */ `
         dev_type_tag
         interest_tag
         size_tag
+        framework_tag
         createdAt
         updatedAt
         _version
@@ -144,6 +146,7 @@ export const syncPostsModels = /* GraphQL */ `
         dev_type_tag
         interest_tag
         size_tag
+        framework_tag
         createdAt
         updatedAt
         _version

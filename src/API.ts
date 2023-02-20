@@ -89,6 +89,7 @@ export type CreatePostsModelInput = {
   dev_type_tag?: Array< DevelopmentTag | null > | null,
   interest_tag?: Array< InterestTag | null > | null,
   size_tag?: Array< SizeTag | null > | null,
+  framework_tag?: Array< FrameworkTag | null > | null,
   _version?: number | null,
 };
 
@@ -105,6 +106,12 @@ export enum LanguageTag {
   RUBY = "RUBY",
   RUST = "RUST",
   SQL = "SQL",
+  PHP = "PHP",
+  HTML = "HTML",
+  CSS = "CSS",
+  GO = "GO",
+  DART = "DART",
+  SCALA = "SCALA",
 }
 
 
@@ -142,6 +149,26 @@ export enum SizeTag {
 }
 
 
+export enum FrameworkTag {
+  REACT = "REACT",
+  REACT_NATIVE = "REACT_NATIVE",
+  ANGULAR = "ANGULAR",
+  VUE = "VUE",
+  NODE = "NODE",
+  EXPRESS = "EXPRESS",
+  WEB_SOCKET_IO = "WEB_SOCKET_IO",
+  DJANGO = "DJANGO",
+  FLASK = "FLASK",
+  MONGO_DB = "MONGO_DB",
+  MY_SQL = "MY_SQL",
+  POSTGRES_SQL = "POSTGRES_SQL",
+  FIREBASE = "FIREBASE",
+  AWS = "AWS",
+  AZURE = "AZURE",
+  HEROKU = "HEROKU",
+}
+
+
 export type ModelPostsModelConditionInput = {
   post_title?: ModelStringInput | null,
   description?: ModelStringInput | null,
@@ -153,6 +180,7 @@ export type ModelPostsModelConditionInput = {
   dev_type_tag?: ModelDevelopmentTagListInput | null,
   interest_tag?: ModelInterestTagListInput | null,
   size_tag?: ModelSizeTagListInput | null,
+  framework_tag?: ModelFrameworkTagListInput | null,
   and?: Array< ModelPostsModelConditionInput | null > | null,
   or?: Array< ModelPostsModelConditionInput | null > | null,
   not?: ModelPostsModelConditionInput | null,
@@ -202,6 +230,13 @@ export type ModelSizeTagListInput = {
   notContains?: SizeTag | null,
 };
 
+export type ModelFrameworkTagListInput = {
+  eq?: Array< FrameworkTag | null > | null,
+  ne?: Array< FrameworkTag | null > | null,
+  contains?: FrameworkTag | null,
+  notContains?: FrameworkTag | null,
+};
+
 export type PostsModel = {
   __typename: "PostsModel",
   id: string,
@@ -215,6 +250,7 @@ export type PostsModel = {
   dev_type_tag?: Array< DevelopmentTag | null > | null,
   interest_tag?: Array< InterestTag | null > | null,
   size_tag?: Array< SizeTag | null > | null,
+  framework_tag?: Array< FrameworkTag | null > | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -234,6 +270,7 @@ export type UpdatePostsModelInput = {
   dev_type_tag?: Array< DevelopmentTag | null > | null,
   interest_tag?: Array< InterestTag | null > | null,
   size_tag?: Array< SizeTag | null > | null,
+  framework_tag?: Array< FrameworkTag | null > | null,
   _version?: number | null,
 };
 
@@ -344,6 +381,7 @@ export type ModelPostsModelFilterInput = {
   dev_type_tag?: ModelDevelopmentTagListInput | null,
   interest_tag?: ModelInterestTagListInput | null,
   size_tag?: ModelSizeTagListInput | null,
+  framework_tag?: ModelFrameworkTagListInput | null,
   and?: Array< ModelPostsModelFilterInput | null > | null,
   or?: Array< ModelPostsModelFilterInput | null > | null,
   not?: ModelPostsModelFilterInput | null,
@@ -421,6 +459,7 @@ export type ModelSubscriptionPostsModelFilterInput = {
   dev_type_tag?: ModelSubscriptionStringInput | null,
   interest_tag?: ModelSubscriptionStringInput | null,
   size_tag?: ModelSubscriptionStringInput | null,
+  framework_tag?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionPostsModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionPostsModelFilterInput | null > | null,
 };
@@ -513,6 +552,7 @@ export type CreatePostsModelMutation = {
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -540,6 +580,7 @@ export type UpdatePostsModelMutation = {
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -567,6 +608,7 @@ export type DeletePostsModelMutation = {
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -752,6 +794,7 @@ export type GetPostsModelQuery = {
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -782,6 +825,7 @@ export type ListPostsModelsQuery = {
       dev_type_tag?: Array< DevelopmentTag | null > | null,
       interest_tag?: Array< InterestTag | null > | null,
       size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -816,6 +860,7 @@ export type SyncPostsModelsQuery = {
       dev_type_tag?: Array< DevelopmentTag | null > | null,
       interest_tag?: Array< InterestTag | null > | null,
       size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -991,6 +1036,7 @@ export type OnCreatePostsModelSubscription = {
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1017,6 +1063,7 @@ export type OnUpdatePostsModelSubscription = {
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1043,6 +1090,7 @@ export type OnDeletePostsModelSubscription = {
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,

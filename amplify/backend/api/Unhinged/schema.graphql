@@ -47,6 +47,31 @@ enum LanguageTag {
   RUBY
   RUST
   SQL
+  PHP
+  HTML
+  CSS
+  GO
+  DART
+  SCALA
+}
+
+enum FrameworkTag {
+  REACT
+  REACT_NATIVE
+  ANGULAR
+  VUE 
+  NODE
+  EXPRESS
+  WEB_SOCKET_IO
+  DJANGO
+  FLASK
+  MONGO_DB
+  MY_SQL
+  POSTGRES_SQL
+  FIREBASE
+  AWS
+  AZURE
+  HEROKU
 }
 
 type PostsModel @model @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
@@ -61,6 +86,7 @@ type PostsModel @model @auth(rules: [{allow: public, operations: [read, create, 
   dev_type_tag: [DevelopmentTag]
   interest_tag: [InterestTag]
   size_tag: [SizeTag]
+  framework_tag: [FrameworkTag]
 }
 
 type UsersModel @model @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {

@@ -63,6 +63,7 @@ export const onCreatePostsModel = /* GraphQL */ `
       dev_type_tag
       interest_tag
       size_tag
+      framework_tag
       createdAt
       updatedAt
       _version
@@ -87,6 +88,7 @@ export const onUpdatePostsModel = /* GraphQL */ `
       dev_type_tag
       interest_tag
       size_tag
+      framework_tag
       createdAt
       updatedAt
       _version
@@ -111,6 +113,7 @@ export const onDeletePostsModel = /* GraphQL */ `
       dev_type_tag
       interest_tag
       size_tag
+      framework_tag
       createdAt
       updatedAt
       _version
