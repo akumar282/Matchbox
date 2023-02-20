@@ -15,18 +15,18 @@ import * as yup from "yup";
 import awsconfig from '../aws-exports'
 import {Amplify} from 'aws-amplify'
 import { createUser } from "../backend/mutations/userMutations";
+import { CreateUsersModelInput } from "../API";
 import { CreateUsersPayload } from "../backend/types";
 Amplify.configure(awsconfig)
-
-
+const frontload: CreateUsersModelInput = {
+  user_name: '',
+  email: '',
+  first_name: '',
+  last_name: '',
+  password: ''
+}
 const finalload: CreateUsersPayload = {
-  input: {
-    user_name: '',
-    email: '',
-    first_name: '',
-    last_name: '',
-    password: ''
-  }
+  input: frontload
 }
 
 
@@ -34,11 +34,14 @@ const finalload: CreateUsersPayload = {
 export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) => void; trigger: boolean; }) {
 
   const navigate = useNavigate();
-  async function sendToDatabase(props: { first_name: any; last_name: any; email: any; user_name: any; password: any; }) {
-    finalload.input = props
-    await createUser(finalload)
+  async function sendToDatabase(props: { firstName: any; lastName: any; email: any; username: any; password: any; confirmPassword?: string; }) {
+    frontload.user_name = props.username
+    frontload.email = props.email
+    frontload.first_name = props.firstName
+    frontload.last_name = props.lastName
+    frontload.password = props.password
+    const request = await createUser(finalload)
   }
-  
   function handleClose() {
     formik.resetForm();
     props.setTrigger(false);
@@ -75,10 +78,10 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
 
   const formik = useFormik({
     initialValues: {
-      first_name: "",
-      last_name: "",
+      firstName: "",
+      lastName: "",
       email: "",
-      user_name: "",
+      username: "",
       password: "",
       confirmPassword: "",
     },
@@ -141,12 +144,12 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
                 name="firstName"
                 label="First Name"
                 variant="outlined"
-                value={formik.values.first_name}
+                value={formik.values.firstName}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.first_name && Boolean(formik.errors.first_name)
+                  formik.touched.firstName && Boolean(formik.errors.firstName)
                 }
-                helperText={formik.touched.first_name && formik.errors.first_name}
+                helperText={formik.touched.firstName && formik.errors.firstName}
               />
               <TextField
                 sx={{
@@ -156,12 +159,12 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
                 name="lastName"
                 label="Last Name"
                 variant="outlined"
-                value={formik.values.last_name}
+                value={formik.values.lastName}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.last_name && Boolean(formik.errors.last_name)
+                  formik.touched.lastName && Boolean(formik.errors.lastName)
                 }
-                helperText={formik.touched.last_name && formik.errors.last_name}
+                helperText={formik.touched.lastName && formik.errors.lastName}
               />
             </div>
             <div className="Name">
@@ -186,12 +189,12 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
                 name="username"
                 label="Username"
                 variant="outlined"
-                value={formik.values.user_name}
+                value={formik.values.username}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.user_name && Boolean(formik.errors.user_name)
+                  formik.touched.username && Boolean(formik.errors.username)
                 }
-                helperText={formik.touched.user_name && formik.errors.user_name}
+                helperText={formik.touched.username && formik.errors.username}
               />
             </div>
             <div className="Name">

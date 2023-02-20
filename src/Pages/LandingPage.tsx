@@ -1,33 +1,20 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
 import './CSS/LandingPage.css'
-import illustration from '../img/landing-img.svg' // matchstick illustration 
-
-// aws imports
+import illustration from '../img/landing-img.svg'
 import awsconfig from '../aws-exports'
 import {Amplify} from 'aws-amplify'
 import { CreateNewsletterEmailModelPayload } from "../backend/types";
 import { createNewsletterEmail } from "../../src/backend/mutations/newsletterMutations"
-
-// component imports
 import LandingPopupLogin from '../components/LandingPopupLogin';
 import LandingPopupConfirm from '../components/LandingPopupConfirm';
 import LandingPopupCreate from '../components/LandingPopupCreate';
-
-// MUI imports
 import { TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-
-// form control imports
 import { useFormik } from "formik";
 import * as yup from "yup";
-
-// animation imports
 import Aos from 'aos';
 import 'aos/dist/aos.css';
-
-// data import 
 import { about } from './LandingPageData' 
 
 
