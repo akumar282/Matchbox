@@ -17,47 +17,10 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { color } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import * as TagData from './constants'
 
-const tags = [
-  { value: "Java", label: "Java" },
-  { value: "C++", label: "C++" },
-  { value: "Python", label: "Python" },
-  { value: "C#", label: "C#" },
-  { value: "JavaScript", label: "JavaScript" },
-  { value: "PHP", label: "PHP" },
-  { value: "Ruby", label: "Ruby" },
-  { value: "HTML", label: "HTML" },
-  { value: "CSS", label: "CSS" },
-  { value: "Swift", label: "Swift" },
-  { value: "Go", label: "Go" },
-  { value: "Rust", label: "Rust" },
-  { value: "Kotlin", label: "Kotlin" },
-  { value: "Dart", label: "Dart" },
-  { value: "Scala", label: "Scala" },
-  { value: "TypeScript", label: "TypeScript" },
-  { value: "SQL", label: "SQL" },
-];
-const tags2 = [
-  { value: "React", label: "React" },
-  { value: "React Native", label: "React Native" },
-  { value: "Angular", label: "Angular" },
-  { value: "Vue", label: "Vue" },
-  { value: "Node", label: "Node" },
-  { value: "Express", label: "Express" },
-  { value: "WebSocketIO", label: "WebSocketIO" },
-  { value: "Django", label: "Django" },
-  { value: "Flask", label: "Flask" },
-  { value: "MongoDB", label: "MongoDB" },
-  { value: "MySQL", label: "MySQL" },
-  { value: "PostgreSQL", label: "PostgreSQL" },
-  { value: "Firebase", label: "Firebase" },
-  { value: "AWS", label: "AWS" },
-  { value: "Azure", label: "Azure" },
-  { value: "Heroku", label: "Heroku" },
-];
 
-const tags3 = ["small", "medium", "large"];
-const arrTags = [tags, tags2, tags3];
+const arrTags = [TagData.tags, TagData.tags2, TagData.tags3];
 
 export default function CreateProject() {
   const [isSelected, setIsSelected] = React.useState(false);
@@ -279,9 +242,9 @@ export default function CreateProject() {
               multiple
               limitTags={3}
               id="language"
-              options={tags}
+              options={TagData.tags}
               getOptionLabel={(option) => option.label}
-              defaultValue={[tags[0]]}
+              defaultValue={[TagData.tags[0]]}
               filterSelectedOptions
               value={selectedLang}
               onChange={handleLang}
@@ -304,9 +267,9 @@ export default function CreateProject() {
               multiple
               limitTags={3}
               id="framework"
-              options={tags2}
+              options={TagData.tags2}
               getOptionLabel={(option) => option.label}
-              defaultValue={[tags2[0]]}
+              defaultValue={[TagData.tags2[0]]}
               filterSelectedOptions
               value={selectedFrame}
               onChange={handleFrame}
@@ -331,9 +294,9 @@ export default function CreateProject() {
               multiple
               limitTags={3}
               id="size"
-              options={tags3}
+              options={TagData.tags3}
               getOptionLabel={(option) => option}
-              defaultValue={[tags3[0]]}
+              defaultValue={[TagData.tags3[0]]}
               filterSelectedOptions
               value={selectedSize}
               onChange={handleSize}
