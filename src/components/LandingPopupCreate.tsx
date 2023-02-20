@@ -15,18 +15,20 @@ import * as yup from "yup";
 import awsconfig from '../aws-exports'
 import {Amplify} from 'aws-amplify'
 import { createUser } from "../backend/mutations/userMutations";
-import { CreateUsersModelInput } from "../API";
 import { CreateUsersPayload } from "../backend/types";
+import { newUserSignUp } from '../backend/auth'
+import { v4 as uuidv4 } from 'uuid';
 Amplify.configure(awsconfig)
-const frontload: CreateUsersModelInput = {
-  user_name: '',
-  email: '',
-  first_name: '',
-  last_name: '',
-  password: ''
-}
+
 const finalload: CreateUsersPayload = {
-  input: frontload
+  input: {
+    id: '',
+    user_name: '',
+    email: '',
+    first_name: '',
+    last_name: '',
+    password: ''
+  }
 }
 
 
@@ -34,13 +36,28 @@ const finalload: CreateUsersPayload = {
 export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) => void; trigger: boolean; }) {
 
   const navigate = useNavigate();
-  async function sendToDatabase(props: { firstName: any; lastName: any; email: any; username: any; password: any; confirmPassword?: string; }) {
-    frontload.user_name = props.username
-    frontload.email = props.email
-    frontload.first_name = props.firstName
-    frontload.last_name = props.lastName
-    frontload.password = props.password
-    const request = await createUser(finalload)
+  const uuidGen = uuidv4();
+  async function sendToDatabase(
+    props: { 
+      firstName: any; 
+      lastName: any; 
+      email: any; 
+      username: any; 
+      password: any; 
+      confirmPassword?: string;
+      uuid: string;
+      }
+    ) {
+    // redundatant code. should be fixed to finalload.input = props
+    props.uuid = uuidGen
+    finalload.input.id = props.uuid
+    finalload.input.user_name = props.username
+    finalload.input.email = props.email
+    finalload.input.first_name = props.firstName
+    finalload.input.last_name = props.lastName
+    finalload.input.password = props.password
+    await newUserSignUp(props.email, props.password, props.email, props.uuid )
+    await createUser(finalload)
   }
   function handleClose() {
     formik.resetForm();
