@@ -5,6 +5,7 @@ import awsconfig from '../aws-exports'
 import {Amplify} from 'aws-amplify'
 import { CreateNewsletterEmailModelPayload } from "../backend/types";
 import { createNewsletterEmail } from "../../src/backend/mutations/newsletterMutations"
+import ConfirmationPopup from '../components/ConfirmationPopup'
 import LandingPopupLogin from '../components/LandingPopupLogin';
 import LandingPopupConfirm from '../components/LandingPopupConfirm';
 import LandingPopupCreate from '../components/LandingPopupCreate';
@@ -43,9 +44,14 @@ export default function LandingPage() {
   const [isLoginOpen, setIsLoginOpen] = React.useState(false)
   const [isConfirmOpen, setIsConfirmOpen] = React.useState(false);
   const [isCreateOpen, setIsCreateOpen] = React.useState(false)
+  const [isAuthOpen, setAuthOpen] = React.useState(false)
   function NoAccount() {
     setIsLoginOpen(false);
     setIsCreateOpen(true);
+  }
+  function OpenAuth() {
+    setAuthOpen(true);
+    setIsCreateOpen(false);
   }
 
   // page animations
@@ -78,9 +84,10 @@ export default function LandingPage() {
 
   return (
     <div className='landing'>
+      <ConfirmationPopup trigger={isAuthOpen} setTrigger={setAuthOpen} />
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
       <LandingPopupConfirm trigger={isConfirmOpen} setTrigger={setIsConfirmOpen}/>
-      <LandingPopupCreate trigger={isCreateOpen} setTrigger={setIsCreateOpen} />
+      <LandingPopupCreate trigger={isCreateOpen} setTrigger={setIsCreateOpen} setAuthOpen = {OpenAuth}/>
       <div className='top-container'>
         <div className='header-stack'>
           <div className='logobox'>
@@ -110,6 +117,16 @@ export default function LandingPage() {
             >
               {' '}
               Login
+            </Button>
+            <Button
+              sx={{
+                color: '#000000',
+                fontSize: 'max(20px, 10px);',
+              }}
+              onClick={() => OpenAuth()}
+            >
+              {' '}
+              Auth Test
             </Button>
           </Stack>
         </div>

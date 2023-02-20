@@ -47,7 +47,7 @@ export default function LandingPopupLogin(props) {
   });
   return props.trigger ? (
     // this is the main container for the popup consider this like divs  dad
-    <Dialog open={props.trigger} maxWidth="sm" fullWidth= {true}>
+    <Dialog open={props.trigger} maxWidth="sm" fullWidth={true}>
       {/* as it said Dialog has its own form of objects 
             you are going to have to search up the documentation for them*/}
       <IconButton
@@ -59,7 +59,7 @@ export default function LandingPopupLogin(props) {
           alignSelf: "right",
           marginLeft: "auto",
           marginRight: "1%",
-          marginTop: "1%"
+          marginTop: "1%",
         }}
         onClick={() => handleClose()}
       >
@@ -118,7 +118,7 @@ export default function LandingPopupLogin(props) {
         </form>
         <div className="popupControls">
           <Button
-             disabled={formik.isSubmitting}
+            disabled={formik.isSubmitting}
             sx={{
               backgroundColor: "#6259b9",
               width: "25rem",
@@ -128,7 +128,7 @@ export default function LandingPopupLogin(props) {
               },
             }}
             variant="contained"
-           onClick={() => formik.handleSubmit()}
+            onClick={() => formik.handleSubmit()}
             type="submit"
           >
             Login

@@ -31,6 +31,7 @@
     box-shadow: 0 3px 4px rgba(0,0,0,0.4);
     border-radius: 10px;
     border-width: .2rem;
+    transition: ease-in-out 0.4s;
 }
 @keyframes Gradient {
     0% {
@@ -46,6 +47,7 @@
 .CreateProject:hover{
     display: flex;
     box-shadow: 0 9px 10px rgba(0,0,0,0.4);
+    transition: ease-in-out 0.4s;
 }
 .CreateProject:hover .Creaticon {
     color: #915ee4;
@@ -66,10 +68,12 @@
     border-radius: 10px;
     border-width: .2rem;
     overflow-y: hidden;
+    transition: ease-in-out 0.4s;
 }
 .HomeSavedProjects:hover{
     box-shadow: 0 9px 10px rgba(0,0,0,0.4);
-    height: 25vh;
+    height: 24.9vh;
+    transition: ease-in-out 0.4s;
     margin-bottom: 0;
     margin-top: 0;
 }
