@@ -20,7 +20,7 @@ function App () {
     <BrowserRouter>
       <Routes>
         <Route path='/create-project' element={<CreateProject />} />
-        <Route path='/create-preferences' element={<SelectPrefPg/>} />
+        {/* <Route path='/create-preferences' element={<SelectPrefPg/>} /> */}
         <Route path='/discover' element={<DiscoverPage/>} />
         <Route path='/home' element={<HomePage />} />
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>

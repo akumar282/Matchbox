@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
-//import tags from "../Pages/contants.ts"
+// import commented for now to avoid errors
+import * as TagData from './constants'
 
 // mui imports
 import {
@@ -21,7 +22,7 @@ import * as yup from "yup";
 
 // temporary lists for choices to user
 const select_lang = [
-  { value: "Java", label: "Java", enumMap: LanguageTag.JAVA },
+  { value: "Java", label: "Java", },
   { value: "C++", label: "C++" },
   { value: "Python", label: "Python" },
   { value: "C#", label: "C#" },
