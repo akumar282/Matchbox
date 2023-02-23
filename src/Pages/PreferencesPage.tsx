@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 
 // style sheet import
-import "./CSS/CreatePreferences.css";
+import "./CSS/PreferencesPage.css";
 
 // form control imports
 import { useFormik } from "formik";
@@ -110,12 +110,12 @@ export default function PreferencesPage() {
   });
 
   return (
-  <div>
-    <span className="logo"> Matchbox </span>
-    <div className="CreatePrefrences">
-      <h1> Project Preferences</h1>
+  <div className="preferences-page">
+    <h1 className="SiteTitle"> Matchbox </h1>
+    <div className="CreatePreferences">
       <div className="card">
         <Paper/>
+        <h1 className="card-title"> Project Preferences </h1>
         <div className="SettingFilters">
           <Autocomplete
             sx={{
@@ -199,7 +199,9 @@ export default function PreferencesPage() {
           />
         </div>
         <Button
+          className="continue-btn"
           disabled={formikFilters.isSubmitting}
+          style={{marginTop: '1em'}}
           sx={{
           backgroundColor: "#6259b9",
           mt: "1rem",
