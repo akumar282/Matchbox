@@ -6,7 +6,7 @@ import {
   TextField,
   IconButton,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import "./LandingCreatePopup.css";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
@@ -101,7 +101,11 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
       //Link to preferences page
       // alert(JSON.stringify(values, null, 2));
       sendToDatabase(values)
-      OpenAuth();
+      // this.props.history.push(
+      //   {pathname: '/ConfirmationPopup', state: {username: values.username, email: values.email}}
+      //   )
+      // OpenAuth();
+      process.env.USER = values.email
     },
   });
   return props.trigger ? (
