@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack'
 import illustration from '../img/landing-img.svg' // matchstick illustration
 import { createTheme } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
-
+import ConfirmationPopup from '../components/ConfirmationPopup'
 import LandingPopupLogin from '../components/LandingPopupLogin';
 import LandingPopupCreate from '../components/LandingPopupCreate';
 const { palette } = createTheme()
@@ -27,12 +27,14 @@ declare module '@mui/material/styles/createTheme' {
 export default function LandingPage() {
   const [isLoginOpen, setIsLoginOpen] = React.useState(false)
   const [isCreateOpen, setIsCreateOpen] = React.useState(false)
+  const [isConfirmOpen, setIsConfirmOpen] = React.useState(false)
   function NoAccount() {
     setIsLoginOpen(false)
     setIsCreateOpen(true)
   }
   return (
     <div className='Starting'>
+      <ConfirmationPopup trigger={isConfirmOpen} setTrigger={setIsConfirmOpen} />
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen={NoAccount} />
       <LandingPopupCreate trigger={isCreateOpen} setTrigger={setIsCreateOpen} />
       <div className='navHome'>
