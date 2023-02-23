@@ -27,13 +27,13 @@ export default function ConfirmationPopup(props: { setTrigger: (arg0: boolean) =
         }),
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
-            navigate("/create-preferences")
+            navigate("/preferences")
         },
     });
     function handleClose() {
         formik.resetForm();
         props.setTrigger(false);
-        navigate("/create-preferences")
+        navigate("/preferences")
     }
     return props.trigger ? (
         <Dialog open={props.trigger} maxWidth="sm" fullWidth={true}>
