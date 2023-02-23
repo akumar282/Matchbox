@@ -1,168 +1,235 @@
 import * as React from "react";
-import { Paper, Card, TextField } from "@mui/material";
-import Chip from "@mui/material/Chip";
-import Button from "@mui/material/Button";
+// import { Paper, Card, TextField } from "@mui/material";
+import {
+  Paper,
+  Card,
+  Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  IconButton,
+  Input,
+  Chip,
+  Autocomplete,
+  InputAdornment,
+} from "@mui/material";
+
 import DoneIcon from "@mui/icons-material/Done";
 import "./CSS/CreatePreferences.css";
 import { useNavigate } from "react-router-dom";
-const tags = [
-  "Java",
-  "C++",
-  "Python",
-  "C#",
-  "JavaScript",
-  "PHP",
-  "Ruby",
-  "HTML",
-  "CSS",
-  "Swift",
-  "Go",
-  "Rust",
-  "Kotlin",
-  "Dart",
-  "Scala",
-  "TypeScript",
-  "SQL",
+
+
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+// temporary lists for choices to user
+const select_lang = [
+  { value: "Java", label: "Java" },
+  { value: "C++", label: "C++" },
+  { value: "Python", label: "Python" },
+  { value: "C#", label: "C#" },
+  { value: "JavaScript", label: "JavaScript" },
+  { value: "PHP", label: "PHP" },
+  { value: "Ruby", label: "Ruby" },
+  { value: "HTML", label: "HTML" },
+  { value: "CSS", label: "CSS" },
+  { value: "Swift", label: "Swift" },
+  { value: "Go", label: "Go" },
+  { value: "Rust", label: "Rust" },
+  { value: "Kotlin", label: "Kotlin" },
+  { value: "Dart", label: "Dart" },
+  { value: "Scala", label: "Scala" },
+  { value: "TypeScript", label: "TypeScript" },
+  { value: "SQL", label: "SQL" },
 ];
-const tags2 = [
-  "React",
-  "React Native",
-  "Angular",
-  "Vue",
-  "Node",
-  "Express",
-  "WebSocketIO",
-  "Django",
-  "Flask",
-  "MongoDB",
-  "MySQL",
-  "PostgreSQL",
-  "Firebase",
-  "AWS",
-  "Azure",
-  "Heroku",
+const select_frame = [
+  { value: "React", label: "React" },
+  { value: "React Native", label: "React Native" },
+  { value: "Angular", label: "Angular" },
+  { value: "Vue", label: "Vue" },
+  { value: "Node", label: "Node" },
+  { value: "Express", label: "Express" },
+  { value: "WebSocketIO", label: "WebSocketIO" },
+  { value: "Django", label: "Django" },
+  { value: "Flask", label: "Flask" },
+  { value: "MongoDB", label: "MongoDB" },
+  { value: "MySQL", label: "MySQL" },
+  { value: "PostgreSQL", label: "PostgreSQL" },
+  { value: "Firebase", label: "Firebase" },
+  { value: "AWS", label: "AWS" },
+  { value: "Azure", label: "Azure" },
+  { value: "Heroku", label: "Heroku" },
 ];
-const tags3 = ["small", "medium", "large"];
-const arrTags = [tags, tags2, tags3];
-const arrTitle = ["Languages", "Frameworks", "Size"];
-const savedTags: string[] = [];
+
+const select_size = ["small", "medium", "large"];
 
 export default function PreferencesPage() {
   const navigate = useNavigate();
-  const [openTag, setTags] = React.useState(savedTags);
-  const [tagState, setTagState] = React.useState(tags); //add tags
-  const [countState, setCountState] = React.useState(0); //index state
-  const [continueState, setContinueState] = React.useState("Continue"); //changes button label
-  let finalCount = arrTags.length;
-  const [Title, setTitle] = React.useState("Languages");
-  const handleTag = (event) => {
-    if (openTag.includes(event.target.innerText)) {
-      setTags((current) =>
-        current.filter((tag) => tag !== event.target.innerText)
-      );
-    } else setTags((current) => [...current, event.target.innerText]);
-  };
-  const handleContinue = () => {
-    if (openTag.length === 0) {
-      alert("Please select at least one tag");
-    } else {
-      if (countState < finalCount) {
-        setCountState(countState + 1);
-        setTagState(arrTags[countState + 1]);
-        setTitle(arrTitle[countState + 1]);
-        if (countState + 1 === finalCount - 1) {
-          setContinueState("Submit");
-        }
-        if (countState + 1 === finalCount) {
-          alert(openTag);
-          navigate("/home");
-        }
-      }
-    }
-  };
-  const handleBack = () => {
-    if (countState > 0) {
-      setCountState(countState - 1);
-      setTagState(arrTags[countState - 1]);
-      setTitle(arrTitle[countState - 1]);
-      if (countState - 1 != finalCount - 1) {
-        setContinueState("Continue");
-      }
-    }
-  };
+
+  const [selectedLang, setSelectedLang] = React.useState([]);
+  const [selectedFrame, setSelectedFrame] = React.useState([]);
+  const [selectedSize, setSelectedSize] = React.useState([]);
+
+
+  function handleLang(event: any, value: any | null) {
+    setSelectedLang(value.map((item: any) => item));
+    formikFilters.setFieldValue("language", value);
+  }
+  function handleFrame(event: any, value: any | null) {
+    setSelectedFrame(value.map((item: any) => item));
+    formikFilters.setFieldValue("framework", value);
+  }
+  function handleSize(event: any, value: any | null) {
+    setSelectedSize(value.map((item: any) => item));
+    formikFilters.setFieldValue("size", value);
+  }
+
+  const validationSchemaFilter = yup.object({
+    language: yup
+      .array()
+      .min(1, "Please select atleast one language")
+      .required("Language is required"),
+    framework: yup
+      .array()
+      .min(1, "Please select atleast one framework")
+      .required("Framework is required"),
+    size: yup
+      .array()
+      .min(1, "Please select atleast one size")
+      .required("Size is required"),
+  });
+
+  const formikFilters = useFormik({
+    initialValues: {
+      language: [], //pull from db
+      framework: [], //pull from db
+      size: [], //pull from db
+    },
+    validationSchema: validationSchemaFilter,
+    onSubmit: (values) => {
+      // Link to preferences page
+      // alert(JSON.stringify(values, null, 2));
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
+  //changes button label
+  const [continueState, setContinueState] = React.useState("Skip for now"); 
+
   return (
     <div>
       <span className="logo">Matchbox</span>
       <div className="CreatePrefrences">
         <h1> Project Preferences</h1>
-        <div className="Page">
-          <div className="tagBackground">
-            <div className="tagHolder">
-              {openTag.map((tag) => (
-                <Chip
-                  sx={{
-                    backgroundColor: "#6259b9",
-                    width: "8rem",
-                    height: "3vh",
-                    fontSize: "1rem",
-                    m: "none",
-                    outline: "auto",
-                    ":hover": {
-                      backgroundColor: "#716ab4",
-                    },
-                  }}
-                  key={tag}
-                  label={tag}
-                  variant="outlined"
-                />
-              ))}
-            </div>
-          </div>
-          <div className="card">
-            <h1 className="Title">{Title}</h1>
+        
+        <div className="card">
             <Paper />
-            <div className="Names">
-              {tagState.map((tag) => (
-                <Chip
-                  sx={{
-                    backgroundColor: "#6259b9",
-                    width: "8rem",
-                    height: "3vh",
-                    fontSize: "1rem",
-                    color: "#f0f8ff",
-                    margin: "5px",
-                    ":hover": {
-                      backgroundColor: "#716ab4",
-                      color: "#f0f8ff",
-                    },
-                  }}
-                  key={tag}
-                  label={tag}
-                  variant="outlined"
-                  onClick={handleTag}
-                  deleteIcon={<DoneIcon />}
-                />
-              ))}
-            </div>
-            {/* <h2> count {openTag}</h2> */}
-            <div className="buttons">
+
+            <div className="SettingFilters">
+                  <Autocomplete
+                    sx={{
+                      width: "25rem",
+                    }}
+                    multiple
+                    limitTags={3}
+                    id="language"
+                    options={select_lang}
+                    getOptionLabel={(option) => option.label}
+                    defaultValue={[select_lang[0]]}
+                    filterSelectedOptions
+                    value={selectedLang}
+                    onChange={handleLang}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Languages"
+                        value={formikFilters.values.language}
+                        error={
+                          formikFilters.touched.language &&
+                          Boolean(formikFilters.errors.language)
+                        }
+                        helperText={
+                          formikFilters.touched.language && formikFilters.errors.language
+                        }
+                      />
+                    )}
+                  />
+                  <Autocomplete
+                    sx={{
+                      width: "25rem",
+                    }}
+                    multiple
+                    limitTags={3}
+                    id="framework"
+                    options={select_frame}
+                    getOptionLabel={(option) => option.label}
+                    defaultValue={[select_frame[0]]}
+                    filterSelectedOptions
+                    value={selectedFrame}
+                    onChange={handleFrame}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Frameworks"
+                        value={formikFilters.values.framework}
+                        error={
+                          formikFilters.touched.framework &&
+                          Boolean(formikFilters.errors.framework)
+                        }
+                        helperText={
+                          formikFilters.touched.framework && formikFilters.errors.framework
+                        }
+                      />
+                    )}
+                  />
+                  <Autocomplete
+                    sx={{
+                      width: "25rem",
+                    }}
+                    multiple
+                    limitTags={3}
+                    id="size"
+                    options={select_size}
+                    getOptionLabel={(option) => option}
+                    defaultValue={[select_size[0]]}
+                    filterSelectedOptions
+                    value={selectedSize}
+                    onChange={handleSize}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Size"
+                        error={
+                          formikFilters.touched.size && Boolean(formikFilters.errors.size)
+                        }
+                        helperText={formikFilters.touched.size && formikFilters.errors.size}
+                      />
+                    )}
+                  />
+                </div>
+                <Button
+          disabled={formikFilters.isSubmitting}
+          sx={{
+            backgroundColor: "#6259b9",
+            mt: "1rem",
+            width: "7rem",
+            height: "3rem",
+            fontSize: "1rem",
+            color: "white",
+            ":hover": {
+              backgroundColor: "#716ab4",
+            },
+          }}
+          variant="contained"
+          onClick={() => formikFilters.handleSubmit()}
+          type="submit"
+        >
+          Save
+        </Button>
+
               <Button
-                onClick={() => handleBack()}
-                sx={{
-                  backgroundColor: "#6259b9",
-                  margin: "10%",
-                  color: "white",
-                  width: "10vw",
-                  fontSize: "max(20px, 10px);",
-                  "&:hover": {
-                    backgroundColor: "#716ab4",
-                  },
-                }}
-              >
-                Go Back
-              </Button>
-              <Button
-                onClick={() => handleContinue()}
+                
                 sx={{
                   backgroundColor: "#6259b9",
                   margin: "10%",
@@ -174,12 +241,11 @@ export default function PreferencesPage() {
                 }}
                 variant="contained"
               >
-                {continueState}
+                Continue
               </Button>
             </div>
-          </div>
+
         </div>
-      </div>
     </div>
   );
 }
