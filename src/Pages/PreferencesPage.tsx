@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
+//import tags from "../Pages/contants.ts"
+
 // mui imports
 import {
   Paper,
@@ -19,7 +21,7 @@ import * as yup from "yup";
 
 // temporary lists for choices to user
 const select_lang = [
-  { value: "Java", label: "Java" },
+  { value: "Java", label: "Java", enumMap: LanguageTag.JAVA },
   { value: "C++", label: "C++" },
   { value: "Python", label: "Python" },
   { value: "C#", label: "C#" },
@@ -86,7 +88,7 @@ export default function PreferencesPage() {
   const validationSchemaFilter = yup.object({
     language: yup
       .array()
-      .min(1, "Please select atleast one language")
+      .min(1, "Please select at least one language")
       .required("Language is required"),
     framework: yup
       .array()
