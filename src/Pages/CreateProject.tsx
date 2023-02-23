@@ -21,6 +21,8 @@ import * as TagData from './constants'
 import { langBundle, frameworkBundle, sizeBundle } from "./constants";
 import { CreatePostsModelPayload } from '../backend/types'
 import { createPost } from '../backend/mutations/postMutations'
+import { Auth } from 'aws-amplify'
+
 
 
 const arrTags = [TagData.LanguageTags, TagData.FrameworkTags, TagData.SizeTags];
@@ -32,6 +34,8 @@ export default function CreateProject() {
   const [selectedLang, setSelectedLang] = React.useState([]);
   const [selectedFrame, setSelectedFrame] = React.useState([]);
   const [selectedSize, setSelectedSize] = React.useState([]);
+
+  console.log(Auth.currentAuthenticatedUser());
   
   async function sendProjectToDyanmo(props:{
     ProjectTitle: string;

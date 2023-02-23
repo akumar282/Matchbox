@@ -12,6 +12,7 @@ import "./LandingPopup.css";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { Auth } from "aws-amplify";
 
 export default function LandingPopupLogin(props) {
   function noAccount() {
@@ -40,9 +41,12 @@ export default function LandingPopupLogin(props) {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      //Link to preferences page
-      navigate("/home");
+    onSubmit: async (values) => {
+      if (await Auth.signIn(values.email, values.password)){
+        navigate("/home");
+      } else {
+        alert("Incorrect username or password")
+      }
     },
   });
   return props.trigger ? (
