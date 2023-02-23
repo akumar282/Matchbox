@@ -18,26 +18,12 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { color } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import * as TagData from './constants'
+import { langBundle, frameworkBundle, sizeBundle } from "./constants";
 import { CreatePostsModelPayload } from '../backend/types'
+import { createPost } from '../backend/mutations/postMutations'
 
 
 const arrTags = [TagData.LanguageTags, TagData.FrameworkTags, TagData.SizeTags];
-
-const projectInputLoad: CreatePostsModelPayload = {
-  input: {
-    post_title: '',
-    description: '',
-    project_link: '',
-    image_link: '',
-    post_date: '',
-    userID: '',
-    lang_tag: [],
-    dev_type_tag: [],
-    interest_tag: [],
-    size_tag: [],
-    framework_tag: []
-  }
-}
 
 export default function CreateProject() {
   const [isSelected, setIsSelected] = React.useState(false);
@@ -52,18 +38,36 @@ export default function CreateProject() {
     ShortDesc: string;
     LongDesc: string;
     GithubLink: string;
-    language: [];
-    framework: [];
-    size: [];
+    language: langBundle[];
+    framework: frameworkBundle[];
+    size: sizeBundle[];
   }){
-    // const mapToEnum = props.language.map(x => x.enumMap)
-    formik.
+    let dateTime = new Date
+    const result = await createPost(
+      {
+        input: {
+          post_title: props.ProjectTitle,
+          description: props.LongDesc,
+          project_link: props.GithubLink,
+          image_link: 'https://github.com/akumar282/Matchbox',
+          post_date: dateTime.toISOString(),
+          userID: '5',
+          lang_tag: props.language.map(x => x.enumMap),
+          dev_type_tag: [],
+          interest_tag: [],
+          size_tag: props.size.map(x => x.enumMap),
+          framework_tag: props.framework.map(x => x.enumMap)
+        }
+      }
+    )
+    console.log(result)
   }
   const navigate = useNavigate();
   //auto complete handlers
   function handleLang(event: any, value: any | null) {
     setSelectedLang(value.map((item: any) => item));
     formik.setFieldValue("language", value);
+    console.log(value);
   }
   function handleFrame(event: any, value: any | null) {
     setSelectedFrame(value.map((item: any) => item));
@@ -127,15 +131,13 @@ export default function CreateProject() {
       GithubLink: "",
       ProjectTitle: "",
       LongDesc: "",
-      language: [],
-      framework: [],
-      size: [],
+      language: [] as langBundle[],
+      framework: [] as frameworkBundle[],
+      size: [] as sizeBundle[],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      //Link to preferences page
-      //alert(JSON.stringify(values, null, 2));
-      //waiting for backend connection
+      sendProjectToDyanmo(values)
       navigate("/preferences");
     },
     validateOnChange: true,
@@ -285,7 +287,7 @@ export default function CreateProject() {
                   error={
                     formik.touched.language && Boolean(formik.errors.language)
                   }
-                  helperText={formik.touched.language && formik.errors.language}
+                  // helperText={formik.touched.language && formik.errors.language}
                 />
               )}
             />
@@ -309,10 +311,10 @@ export default function CreateProject() {
                   value={formik.values.framework}
                   error={
                     formik.touched.framework && Boolean(formik.errors.framework)
-                  }
-                  helperText={
-                    formik.touched.framework && formik.errors.framework
-                  }
+                  } 
+                  // helperText={
+                  //   formik.touched.framework && formik.errors.framework
+                  // }
                 />
               )}
             />
@@ -324,7 +326,7 @@ export default function CreateProject() {
               limitTags={3}
               id="size"
               options={TagData.SizeTags}
-              getOptionLabel={(option) => option}
+              getOptionLabel={(option) => option.label}
               defaultValue={[TagData.SizeTags[0]]}
               filterSelectedOptions
               value={selectedSize}

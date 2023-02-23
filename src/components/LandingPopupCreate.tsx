@@ -20,18 +20,6 @@ import { newUserSignUp } from '../backend/auth'
 import { v4 as uuidv4 } from 'uuid';
 Amplify.configure(awsconfig)
 
-const finalload: CreateUsersPayload = {
-  input: {
-    id: '',
-    user_name: '',
-    email: '',
-    first_name: '',
-    last_name: '',
-    password: ''
-  }
-}
-
-
 
 export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) => void; trigger: boolean; }) {
 
@@ -50,14 +38,19 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
     ) {
     // redundatant code. should be fixed to finalload.input = props
     props.uuid = uuidGen
-    finalload.input.id = props.uuid
-    finalload.input.user_name = props.username
-    finalload.input.email = props.email
-    finalload.input.first_name = props.firstName
-    finalload.input.last_name = props.lastName
-    finalload.input.password = props.password
     await newUserSignUp(props.email, props.password, props.email, props.uuid )
-    await createUser(finalload)
+    await createUser(
+      {
+        input: {
+          id: props.uuid,
+          user_name: props.username,
+          email: props.email,
+          first_name: props.firstName,
+          last_name: props.lastName,
+          password: props.password
+        }
+      } 
+    )
   }
   function handleClose() {
     formik.resetForm();

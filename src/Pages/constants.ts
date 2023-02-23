@@ -1,17 +1,23 @@
 export * from './constants'
-import { EnumType } from 'typescript'
-import { FrameworkTag, LanguageTag } from '../API'
 
-type langBundle = {
+import { FrameworkTag, LanguageTag, SizeTag } from '../API'
+
+export type langBundle = {
   value: string
   label: string
   enumMap: LanguageTag
 }
 
-type frameworkBundle = {
+export type frameworkBundle = {
   value: string
   label: string
   enumMap: FrameworkTag
+}
+
+export type sizeBundle = {
+  value: string
+  label: string
+  enumMap: SizeTag
 }
 
 export const LanguageTags : langBundle[] = [
@@ -52,6 +58,10 @@ export const FrameworkTags: frameworkBundle[] = [
   { value: "AWS", label: "AWS", enumMap: FrameworkTag.AWS },
   { value: "Azure", label: "Azure", enumMap: FrameworkTag.AZURE },
   { value: "Heroku", label: "Heroku", enumMap: FrameworkTag.HEROKU },
-]
+];
 
-export const SizeTags = ["Small", "Medium", "Large"];
+export const SizeTags = [
+  { value: "Small", label: "Small", enumMap: SizeTag.MORE_FIVE },
+  { value: "Medium", label: "Medium", enumMap: SizeTag.MORE_TEN},
+  { value: "Large", label: "Large", enumMap: SizeTag.MORE_TWENTY_FIVE}
+];
