@@ -113,8 +113,7 @@ export default function PreferencesPage() {
   <div className="preferences-page">
     <h1 className="SiteTitle"> Matchbox </h1>
     <div className="CreatePreferences">
-      <div className="card">
-        <Paper/>
+      <div className="card-box">
         <h1 className="card-title"> Project Preferences </h1>
         <div className="SettingFilters">
           <Autocomplete
@@ -201,7 +200,7 @@ export default function PreferencesPage() {
         <Button
           className="continue-btn"
           disabled={formikFilters.isSubmitting}
-          style={{marginTop: '1em'}}
+          style={{marginTop: '1em', marginBottom: '2em'}}
           sx={{
           backgroundColor: "#6259b9",
           mt: "1rem",
