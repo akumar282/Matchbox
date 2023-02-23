@@ -1,25 +1,19 @@
 import * as React from "react";
-// import { Paper, Card, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+// mui imports
 import {
   Paper,
   Card,
   Button,
-  Dialog,
-  DialogContent,
-  DialogTitle,
   TextField,
-  IconButton,
-  Input,
-  Chip,
   Autocomplete,
-  InputAdornment,
 } from "@mui/material";
 
-import DoneIcon from "@mui/icons-material/Done";
+// style sheet import
 import "./CSS/CreatePreferences.css";
-import { useNavigate } from "react-router-dom";
 
-
+// form control imports
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -111,141 +105,120 @@ export default function PreferencesPage() {
       // Link to preferences page
       // alert(JSON.stringify(values, null, 2));
       alert(JSON.stringify(values, null, 2));
+      navigate("/home");
     },
   });
 
-  //changes button label
-  const [continueState, setContinueState] = React.useState("Skip for now"); 
-
   return (
-    <div>
-      <span className="logo">Matchbox</span>
-      <div className="CreatePrefrences">
-        <h1> Project Preferences</h1>
-        
-        <div className="card">
-            <Paper />
-
-            <div className="SettingFilters">
-                  <Autocomplete
-                    sx={{
-                      width: "25rem",
-                    }}
-                    multiple
-                    limitTags={3}
-                    id="language"
-                    options={select_lang}
-                    getOptionLabel={(option) => option.label}
-                    defaultValue={[select_lang[0]]}
-                    filterSelectedOptions
-                    value={selectedLang}
-                    onChange={handleLang}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Languages"
-                        value={formikFilters.values.language}
-                        error={
-                          formikFilters.touched.language &&
-                          Boolean(formikFilters.errors.language)
-                        }
-                        helperText={
-                          formikFilters.touched.language && formikFilters.errors.language
-                        }
-                      />
-                    )}
-                  />
-                  <Autocomplete
-                    sx={{
-                      width: "25rem",
-                    }}
-                    multiple
-                    limitTags={3}
-                    id="framework"
-                    options={select_frame}
-                    getOptionLabel={(option) => option.label}
-                    defaultValue={[select_frame[0]]}
-                    filterSelectedOptions
-                    value={selectedFrame}
-                    onChange={handleFrame}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Frameworks"
-                        value={formikFilters.values.framework}
-                        error={
-                          formikFilters.touched.framework &&
-                          Boolean(formikFilters.errors.framework)
-                        }
-                        helperText={
-                          formikFilters.touched.framework && formikFilters.errors.framework
-                        }
-                      />
-                    )}
-                  />
-                  <Autocomplete
-                    sx={{
-                      width: "25rem",
-                    }}
-                    multiple
-                    limitTags={3}
-                    id="size"
-                    options={select_size}
-                    getOptionLabel={(option) => option}
-                    defaultValue={[select_size[0]]}
-                    filterSelectedOptions
-                    value={selectedSize}
-                    onChange={handleSize}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Size"
-                        error={
-                          formikFilters.touched.size && Boolean(formikFilters.errors.size)
-                        }
-                        helperText={formikFilters.touched.size && formikFilters.errors.size}
-                      />
-                    )}
-                  />
-                </div>
-                <Button
+  <div>
+    <span className="logo"> Matchbox </span>
+    <div className="CreatePrefrences">
+      <h1> Project Preferences</h1>
+      <div className="card">
+        <Paper/>
+        <div className="SettingFilters">
+          <Autocomplete
+            sx={{
+            width: "25rem",
+            }}
+            multiple
+            limitTags={3}
+            id="language"
+            options={select_lang}
+            getOptionLabel={(option) => option.label}
+            defaultValue={[select_lang[0]]}
+            filterSelectedOptions
+            value={selectedLang}
+            onChange={handleLang}
+            renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Languages"
+              value={formikFilters.values.language}
+              error={
+              formikFilters.touched.language &&
+              Boolean(formikFilters.errors.language)
+              }
+              helperText={
+              formikFilters.touched.language && formikFilters.errors.language
+              }
+            />
+            )}
+          />
+          <Autocomplete
+            sx={{
+            width: "25rem",
+            }}
+            multiple
+            limitTags={3}
+            id="framework"
+            options={select_frame}
+            getOptionLabel={(option) => option.label}
+            defaultValue={[select_frame[0]]}
+            filterSelectedOptions
+            value={selectedFrame}
+            onChange={handleFrame}
+            renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Frameworks"
+              value={formikFilters.values.framework}
+              error={
+              formikFilters.touched.framework &&
+              Boolean(formikFilters.errors.framework)
+              }
+              helperText={
+              formikFilters.touched.framework && formikFilters.errors.framework
+              }
+            />
+            )}
+          />
+          <Autocomplete
+            sx={{
+            width: "25rem",
+            }}
+            multiple
+            limitTags={3}
+            id="size"
+            options={select_size}
+            getOptionLabel={(option) => option}
+            defaultValue={[select_size[0]]}
+            filterSelectedOptions
+            value={selectedSize}
+            onChange={handleSize}
+            renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Size"
+              error={
+              formikFilters.touched.size && Boolean(formikFilters.errors.size)
+              }
+              helperText={formikFilters.touched.size && formikFilters.errors.size}
+            />
+            )}
+          />
+        </div>
+        <Button
           disabled={formikFilters.isSubmitting}
           sx={{
-            backgroundColor: "#6259b9",
-            mt: "1rem",
-            width: "7rem",
-            height: "3rem",
-            fontSize: "1rem",
-            color: "white",
-            ":hover": {
-              backgroundColor: "#716ab4",
-            },
+          backgroundColor: "#6259b9",
+          mt: "1rem",
+          width: "7rem",
+          height: "3rem",
+          fontSize: "1rem",
+          color: "white",
+          ":hover": {
+          backgroundColor: "#716ab4",
+          },
           }}
           variant="contained"
           onClick={() => formikFilters.handleSubmit()}
           type="submit"
         >
-          Save
+          Continue
         </Button>
-
-              <Button
-                
-                sx={{
-                  backgroundColor: "#6259b9",
-                  margin: "10%",
-                  width: "30vw",
-                  fontSize: "max(20px, 10px);",
-                  "&:hover": {
-                    backgroundColor: "#716ab4",
-                  },
-                }}
-                variant="contained"
-              >
-                Continue
-              </Button>
-            </div>
-
-        </div>
+      </div>
     </div>
+  </div>
   );
 }
