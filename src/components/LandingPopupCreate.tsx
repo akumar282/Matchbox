@@ -104,8 +104,8 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
       // this.props.history.push(
       //   {pathname: '/ConfirmationPopup', state: {username: values.username, email: values.email}}
       //   )
-      // OpenAuth();
       process.env.USER = values.email
+      OpenAuth();
     },
   });
   return props.trigger ? (
