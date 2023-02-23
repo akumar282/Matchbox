@@ -49,6 +49,10 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
       } 
     )
   }
+  function OpenAuth() {
+    props.setAuthOpen();
+    props.setTrigger(false);
+  }
   function handleClose() {
     formik.resetForm();
     props.setTrigger(false);
