@@ -56,7 +56,11 @@ const select_frame = [
   { value: "Heroku", label: "Heroku" },
 ];
 
-const select_size = ["small", "medium", "large"];
+const select_size = [
+  { value: "Small", label: "Small" },
+  { value: "Medium", label: "Medium" },
+  { value: "Large", label: "Large" },
+];
 
 export default function PreferencesPage() {
   const navigate = useNavigate();
@@ -180,7 +184,7 @@ export default function PreferencesPage() {
             limitTags={3}
             id="size"
             options={select_size}
-            getOptionLabel={(option) => option}
+            getOptionLabel={(option) => option.label}
             defaultValue={[select_size[0]]}
             filterSelectedOptions
             value={selectedSize}
