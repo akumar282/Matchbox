@@ -13,6 +13,7 @@ import DiscoverPage from './Pages/DiscoverPage'
 import DetailedLandingPage from './Pages/DetailedLandingPage'
 import SettingsPage from './Pages/Settings'
 import CreateProject from './Pages/CreateProject'
+import PreferencesPage from './Pages/PreferencesPage'
 
 function App () {
   return (
@@ -27,7 +28,8 @@ function App () {
         <Route path='/landing' element={<DetailedLandingPage />} />
         <Route path='/' element={<LandingPage />} />
         <Route path='/settings' element={<SettingsPage />} />
-
+        <Route path='/preferences' element={<PreferencesPage/>} />
+        
       </Routes>
     </BrowserRouter>
   )
