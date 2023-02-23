@@ -12,10 +12,9 @@ import "./LandingCreatePopup.css";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import awsconfig from '../aws-exports'
-import {Amplify} from 'aws-amplify'
+import awsconfig from "../aws-exports";
+import { Amplify } from "aws-amplify";
 import { createUser } from "../backend/mutations/userMutations";
-import { CreateUsersPayload } from "../backend/types";
 import { newUserSignUp } from '../backend/auth'
 import { v4 as uuidv4 } from 'uuid';
 Amplify.configure(awsconfig)
@@ -25,17 +24,15 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
 
   const navigate = useNavigate();
   const uuidGen = uuidv4();
-  async function sendToDatabase(
-    props: { 
-      firstName: any; 
-      lastName: any; 
-      email: any; 
-      username: any; 
-      password: any; 
-      confirmPassword?: string;
-      uuid: string;
-      }
-    ) {
+  async function sendToDatabase(props: {
+    firstName: any;
+    lastName: any;
+    email: any;
+    username: any;
+    password: any;
+    confirmPassword?: string;
+    uuid: string;
+  }) {
     // redundatant code. should be fixed to finalload.input = props
     props.uuid = uuidGen
     await newUserSignUp(props.email, props.password, props.email, props.uuid )
@@ -100,7 +97,7 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
       //Link to preferences page
       // alert(JSON.stringify(values, null, 2));
       sendToDatabase(values)
-      navigate("/create-preferences")
+      OpenAuth();
     },
   });
   return props.trigger ? (
@@ -116,7 +113,7 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
           alignSelf: "right",
           marginLeft: "auto",
           marginRight: "1%",
-          marginTop: "1%"
+          marginTop: "1%",
         }}
         onClick={() => handleClose()}
       >
@@ -165,7 +162,7 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
                 sx={{
                   width: "25rem",
                 }}
-                id="lasatName"
+                id="lastName"
                 name="lastName"
                 label="Last Name"
                 variant="outlined"
@@ -266,10 +263,7 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
         </div>
       </DialogContent>
     </Dialog>
-    
   ) : (
-    <React.Fragment>
-    </React.Fragment>
-    
-  )
+    <React.Fragment></React.Fragment>
+  );
 }

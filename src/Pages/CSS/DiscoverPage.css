@@ -1,11 +1,7 @@
-.DiscoverPage {
-    
-}
 .DiscoverMain{
     margin: auto;
     padding: 2rem;
     margin-top: 1rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
     width: 80vw;
     max-width: 90rem;
@@ -58,14 +54,12 @@
     width: 100%;
     border-radius: 10px;
     transition: 0.5s ease;
-    padding : 0.5rem;
+    padding : 1rem;
     margin: 0;
 }
 .ShortTagBoxDiscover {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 100%;
     height: 100%;
@@ -74,13 +68,13 @@
     padding : 0;
     margin: 0;
 }
+/* TODO doesnt seem like this is being used */
 .ShortTagBoxDiscover p {
     font-size: 1rem;
     font-weight: 500;
     width: 95%;
     color: #000;
     text-align: center;
-    transition: 0.5s ease;
     margin: 0;
 }
 .DiscoverImg {
@@ -93,41 +87,32 @@
 }
 .TagBoxDiscover {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    overflow: hidden;
+    margin-top: 4em;
+    margin-right: 1em;
     gap: 0.5rem;
     width: 100%;
-    height: 50%;
-    
-    
+    height: 75%;
 }
 .TagDiscover {
-    gap: 0.5rem;
-    width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
 }
 .ShortDescDiscover {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
+    margin: 3em;
     width: 60%;
-    height: 50%;
-    border-radius: 10px;
-    transition: 0.5s ease-in;
-    padding : 0;
-    margin: 0;
+    height: 75%;
+    overflow: hidden;
 }
 .ShortDescDiscover p {
     font-size: 1rem;
     font-weight: 500;
     color: #000;
-    text-align: center;
+    text-align: left;
     
     transition: 0.5s ease;
     margin: 0;
@@ -136,8 +121,6 @@
     font-size: 2rem;
     font-weight: 700;
     color: #000;
-    text-align: center;
-    
     transition: 0.5s ease;
     margin: 0;
     padding: 0;
@@ -157,12 +140,17 @@
 .ProjectLinksDiscover {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    width: 98%;
     gap: 0.5rem;
-    height: 50%;
-    border-radius: 10px;
-    transition: 0.5s ease-in;
-    padding : .5rem;
-    margin: 0;
+    position: relative;
+    padding-top: 30%;
 }
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: var(--red);
+    transform-origin: 0%;
+  }

@@ -340,7 +340,7 @@ export default function CreateProject() {
                   {...params}
                   label="Size"
                   error={formik.touched.size && Boolean(formik.errors.size)}
-                  helperText={formik.touched.size && formik.errors.size}
+                  // helperText={formik.touched.size && formik.errors.size}
                 />
               )}
             />
