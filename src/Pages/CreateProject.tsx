@@ -17,47 +17,15 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { color } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import * as TagData from './constants'
+import { langBundle, frameworkBundle, sizeBundle } from "./constants";
+import { CreatePostsModelPayload } from '../backend/types'
+import { createPost } from '../backend/mutations/postMutations'
+import { Auth } from 'aws-amplify'
 
-const tags = [
-  { value: "Java", label: "Java" },
-  { value: "C++", label: "C++" },
-  { value: "Python", label: "Python" },
-  { value: "C#", label: "C#" },
-  { value: "JavaScript", label: "JavaScript" },
-  { value: "PHP", label: "PHP" },
-  { value: "Ruby", label: "Ruby" },
-  { value: "HTML", label: "HTML" },
-  { value: "CSS", label: "CSS" },
-  { value: "Swift", label: "Swift" },
-  { value: "Go", label: "Go" },
-  { value: "Rust", label: "Rust" },
-  { value: "Kotlin", label: "Kotlin" },
-  { value: "Dart", label: "Dart" },
-  { value: "Scala", label: "Scala" },
-  { value: "TypeScript", label: "TypeScript" },
-  { value: "SQL", label: "SQL" },
-];
-const tags2 = [
-  { value: "React", label: "React" },
-  { value: "React Native", label: "React Native" },
-  { value: "Angular", label: "Angular" },
-  { value: "Vue", label: "Vue" },
-  { value: "Node", label: "Node" },
-  { value: "Express", label: "Express" },
-  { value: "WebSocketIO", label: "WebSocketIO" },
-  { value: "Django", label: "Django" },
-  { value: "Flask", label: "Flask" },
-  { value: "MongoDB", label: "MongoDB" },
-  { value: "MySQL", label: "MySQL" },
-  { value: "PostgreSQL", label: "PostgreSQL" },
-  { value: "Firebase", label: "Firebase" },
-  { value: "AWS", label: "AWS" },
-  { value: "Azure", label: "Azure" },
-  { value: "Heroku", label: "Heroku" },
-];
 
-const tags3 = ["small", "medium", "large"];
-const arrTags = [tags, tags2, tags3];
+
+const arrTags = [TagData.LanguageTags, TagData.FrameworkTags, TagData.SizeTags];
 
 export default function CreateProject() {
   const [isSelected, setIsSelected] = React.useState(false);
@@ -67,11 +35,43 @@ export default function CreateProject() {
   const [selectedFrame, setSelectedFrame] = React.useState([]);
   const [selectedSize, setSelectedSize] = React.useState([]);
 
+  console.log(Auth.currentAuthenticatedUser());
+  
+  async function sendProjectToDyanmo(props:{
+    ProjectTitle: string;
+    ShortDesc: string;
+    LongDesc: string;
+    GithubLink: string;
+    language: langBundle[];
+    framework: frameworkBundle[];
+    size: sizeBundle[];
+  }){
+    let dateTime = new Date
+    const result = await createPost(
+      {
+        input: {
+          post_title: props.ProjectTitle,
+          description: props.LongDesc,
+          project_link: props.GithubLink,
+          image_link: 'https://github.com/akumar282/Matchbox',
+          post_date: dateTime.toISOString(),
+          userID: '5',
+          lang_tag: props.language.map(x => x.enumMap),
+          dev_type_tag: [],
+          interest_tag: [],
+          size_tag: props.size.map(x => x.enumMap),
+          framework_tag: props.framework.map(x => x.enumMap)
+        }
+      }
+    )
+    console.log(result)
+  }
   const navigate = useNavigate();
   //auto complete handlers
   function handleLang(event: any, value: any | null) {
     setSelectedLang(value.map((item: any) => item));
     formik.setFieldValue("language", value);
+    console.log(value);
   }
   function handleFrame(event: any, value: any | null) {
     setSelectedFrame(value.map((item: any) => item));
@@ -135,15 +135,13 @@ export default function CreateProject() {
       GithubLink: "",
       ProjectTitle: "",
       LongDesc: "",
-      language: [],
-      framework: [],
-      size: [],
+      language: [] as langBundle[],
+      framework: [] as frameworkBundle[],
+      size: [] as sizeBundle[],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      //Link to preferences page
-      //alert(JSON.stringify(values, null, 2));
-      //waiting for backend connection
+      sendProjectToDyanmo(values)
       navigate("/preferences");
     },
     validateOnChange: true,
@@ -279,9 +277,9 @@ export default function CreateProject() {
               multiple
               limitTags={3}
               id="language"
-              options={tags}
+              options={TagData.LanguageTags}
               getOptionLabel={(option) => option.label}
-              defaultValue={[tags[0]]}
+              defaultValue={[TagData.LanguageTags[0]]}
               filterSelectedOptions
               value={selectedLang}
               onChange={handleLang}
@@ -293,7 +291,7 @@ export default function CreateProject() {
                   error={
                     formik.touched.language && Boolean(formik.errors.language)
                   }
-                  helperText={formik.touched.language && formik.errors.language}
+                  // helperText={formik.touched.language && formik.errors.language}
                 />
               )}
             />
@@ -304,9 +302,9 @@ export default function CreateProject() {
               multiple
               limitTags={3}
               id="framework"
-              options={tags2}
+              options={TagData.FrameworkTags}
               getOptionLabel={(option) => option.label}
-              defaultValue={[tags2[0]]}
+              defaultValue={[TagData.FrameworkTags[0]]}
               filterSelectedOptions
               value={selectedFrame}
               onChange={handleFrame}
@@ -317,10 +315,10 @@ export default function CreateProject() {
                   value={formik.values.framework}
                   error={
                     formik.touched.framework && Boolean(formik.errors.framework)
-                  }
-                  helperText={
-                    formik.touched.framework && formik.errors.framework
-                  }
+                  } 
+                  // helperText={
+                  //   formik.touched.framework && formik.errors.framework
+                  // }
                 />
               )}
             />
@@ -331,9 +329,9 @@ export default function CreateProject() {
               multiple
               limitTags={3}
               id="size"
-              options={tags3}
-              getOptionLabel={(option) => option}
-              defaultValue={[tags3[0]]}
+              options={TagData.SizeTags}
+              getOptionLabel={(option) => option.label}
+              defaultValue={[TagData.SizeTags[0]]}
               filterSelectedOptions
               value={selectedSize}
               onChange={handleSize}
@@ -342,7 +340,7 @@ export default function CreateProject() {
                   {...params}
                   label="Size"
                   error={formik.touched.size && Boolean(formik.errors.size)}
-                  helperText={formik.touched.size && formik.errors.size}
+                  // helperText={formik.touched.size && formik.errors.size}
                 />
               )}
             />

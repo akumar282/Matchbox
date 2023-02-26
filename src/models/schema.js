@@ -151,6 +151,16 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
+                "framework_tag": {
+                    "name": "framework_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "FrameworkTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -386,11 +396,38 @@ export const schema = {
                 "SWIFT",
                 "RUBY",
                 "RUST",
-                "SQL"
+                "SQL",
+                "PHP",
+                "HTML",
+                "CSS",
+                "GO",
+                "DART",
+                "SCALA"
+            ]
+        },
+        "FrameworkTag": {
+            "name": "FrameworkTag",
+            "values": [
+                "REACT",
+                "REACT_NATIVE",
+                "ANGULAR",
+                "VUE",
+                "NODE",
+                "EXPRESS",
+                "WEB_SOCKET_IO",
+                "DJANGO",
+                "FLASK",
+                "MONGO_DB",
+                "MY_SQL",
+                "POSTGRES_SQL",
+                "FIREBASE",
+                "AWS",
+                "AZURE",
+                "HEROKU"
             ]
         }
     },
     "nonModels": {},
     "codegenVersion": "3.2.0",
-    "version": "47817a2322c4dfc8563c32b0dd3e7fc4"
+    "version": "f2d11fb7d4b4964969fb509718a8e7d4"
 };
