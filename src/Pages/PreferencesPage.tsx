@@ -1,11 +1,7 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-
-// import commented for now to avoid errors
 import * as TagData from './constants'
-
-
-// mui imports
+import { langBundle, frameworkBundle, sizeBundle } from "./constants";
 import {
   Paper,
   Card,
@@ -13,58 +9,10 @@ import {
   TextField,
   Autocomplete,
 } from "@mui/material";
-
-// style sheet import
 import "./CSS/PreferencesPage.css";
-
-// form control imports
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-// temporary lists for choices to user
-const select_lang = [
-  { value: "Java", label: "Java", },
-  { value: "C++", label: "C++" },
-  { value: "Python", label: "Python" },
-  { value: "C#", label: "C#" },
-  { value: "JavaScript", label: "JavaScript" },
-  { value: "PHP", label: "PHP" },
-  { value: "Ruby", label: "Ruby" },
-  { value: "HTML", label: "HTML" },
-  { value: "CSS", label: "CSS" },
-  { value: "Swift", label: "Swift" },
-  { value: "Go", label: "Go" },
-  { value: "Rust", label: "Rust" },
-  { value: "Kotlin", label: "Kotlin" },
-  { value: "Dart", label: "Dart" },
-  { value: "Scala", label: "Scala" },
-  { value: "TypeScript", label: "TypeScript" },
-  { value: "SQL", label: "SQL" },
-];
-const select_frame = [
-  { value: "React", label: "React" },
-  { value: "React Native", label: "React Native" },
-  { value: "Angular", label: "Angular" },
-  { value: "Vue", label: "Vue" },
-  { value: "Node", label: "Node" },
-  { value: "Express", label: "Express" },
-  { value: "WebSocketIO", label: "WebSocketIO" },
-  { value: "Django", label: "Django" },
-  { value: "Flask", label: "Flask" },
-  { value: "MongoDB", label: "MongoDB" },
-  { value: "MySQL", label: "MySQL" },
-  { value: "PostgreSQL", label: "PostgreSQL" },
-  { value: "Firebase", label: "Firebase" },
-  { value: "AWS", label: "AWS" },
-  { value: "Azure", label: "Azure" },
-  { value: "Heroku", label: "Heroku" },
-];
-
-const select_size = [
-  { value: "Small", label: "Small" },
-  { value: "Medium", label: "Medium" },
-  { value: "Large", label: "Large" },
-];
 
 export default function PreferencesPage() {
   const navigate = useNavigate();
@@ -131,9 +79,9 @@ export default function PreferencesPage() {
             multiple
             limitTags={3}
             id="language"
-            options={select_lang}
+              options={TagData.LanguageTags}
             getOptionLabel={(option) => option.label}
-            defaultValue={[select_lang[0]]}
+              defaultValue={[TagData.LanguageTags[0]]}
             filterSelectedOptions
             value={selectedLang}
             onChange={handleLang}
@@ -159,9 +107,9 @@ export default function PreferencesPage() {
             multiple
             limitTags={3}
             id="framework"
-            options={select_frame}
+              options={TagData.FrameworkTags}
             getOptionLabel={(option) => option.label}
-            defaultValue={[select_frame[0]]}
+            defaultValue={[TagData.FrameworkTags[0]]}
             filterSelectedOptions
             value={selectedFrame}
             onChange={handleFrame}
@@ -187,9 +135,9 @@ export default function PreferencesPage() {
             multiple
             limitTags={3}
             id="size"
-            options={select_size}
+            options={TagData.SizeTags}
             getOptionLabel={(option) => option.label}
-            defaultValue={[select_size[0]]}
+            defaultValue={[TagData.SizeTags[0]]}
             filterSelectedOptions
             value={selectedSize}
             onChange={handleSize}
