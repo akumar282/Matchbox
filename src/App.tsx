@@ -10,11 +10,37 @@ import DiscoverPage from './Pages/DiscoverPage'
 import SettingsPage from './Pages/Settings'
 import CreateProject from './Pages/CreateProject'
 import UserPreferencesPage from './Pages/UserPreferencesPage'
+const globalAuthState = {
+  isAuthenticated: false,
+  username: null,
+  email: null,
+  token: null,
+  isLoggedin: false,
+  // firstAccount: true,
 
+}
+  
+const AuthContext = React.createContext(globalAuthState)
+const DispacthContext = React.createContext(undefined)
+const AuthProvider = ({ children }) => { 
+  const [authState, dispatch] = React.useReducer( 
+    (state, action) => ({...state, ...action}),
+    globalAuthState
+  );
+  return (
+    <AuthContext.Provider value={authState}>
+      <DispacthContext.Provider value={dispatch}>
+        {children}
+      </DispacthContext.Provider>
+    </AuthContext.Provider>
+  );
+
+  }
 function App () {
   
   return (
     //create a saved state that can be updated by the user
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path='/create-project' element={<CreateProject />} />
@@ -27,6 +53,7 @@ function App () {
         <Route path='/preferences' element={<UserPreferencesPage/>} />
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   )
 }
 

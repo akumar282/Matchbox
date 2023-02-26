@@ -17,6 +17,7 @@ import * as yup from "yup";
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { about } from './LandingPageData' 
+import { Link } from 'react-router-dom';
 
 
 Amplify.configure(awsconfig)
@@ -88,6 +89,7 @@ export default function LandingPage() {
 
   return (
     <div className='landing'>
+     
       <ConfirmationPopup trigger={isAuthOpen} setTrigger={setAuthOpen} setLoginOpen = {OpenLogin}/>
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
       <LandingPopupConfirm trigger={isConfirmOpen} setTrigger={setIsConfirmOpen}/>
