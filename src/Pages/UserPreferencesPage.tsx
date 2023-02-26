@@ -9,12 +9,12 @@ import {
   TextField,
   Autocomplete,
 } from "@mui/material";
-import "./CSS/PreferencesPage.css";
+import "./CSS/UserPreferencesPage.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
 
-export default function PreferencesPage() {
+export default function UserPreferencesPage() {
   const navigate = useNavigate();
 
   const [selectedLang, setSelectedLang] = React.useState([]);
@@ -52,15 +52,12 @@ export default function PreferencesPage() {
 
   const formikFilters = useFormik({
     initialValues: {
-      language: [], //pull from db
-      framework: [], //pull from db
-      size: [], //pull from db
+      language: [] as unknown as langBundle,
+      framework: [] as unknown as frameworkBundle,
+      size: [] as unknown as sizeBundle,
     },
     validationSchema: validationSchemaFilter,
     onSubmit: (values) => {
-      // Link to preferences page
-      // alert(JSON.stringify(values, null, 2));
-      alert(JSON.stringify(values, null, 2));
       navigate("/home");
     },
   });
