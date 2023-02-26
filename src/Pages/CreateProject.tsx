@@ -24,9 +24,6 @@ import { createPost } from '../backend/mutations/postMutations'
 import { Auth } from 'aws-amplify'
 
 
-
-const arrTags = [TagData.LanguageTags, TagData.FrameworkTags, TagData.SizeTags];
-
 export default function CreateProject() {
   const [isSelected, setIsSelected] = React.useState(false);
   const [selectedFile, setSelectedFile] = React.useState(null);

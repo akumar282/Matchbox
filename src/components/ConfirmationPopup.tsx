@@ -36,7 +36,7 @@ export default function ConfirmationPopup(props: { setTrigger: (arg0: boolean) =
     function handleClose() {
         formik.resetForm();
         props.setTrigger(false);
-        navigate("/create-preferences")
+        navigate("/preferences")
     }
     return props.trigger ? (
         <Dialog open={props.trigger} maxWidth="sm" fullWidth={true}>
