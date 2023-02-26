@@ -67,6 +67,7 @@ export const createPostsModel = /* GraphQL */ `
       dev_type_tag
       interest_tag
       size_tag
+      framework_tag
       createdAt
       updatedAt
       _version
@@ -92,6 +93,7 @@ export const updatePostsModel = /* GraphQL */ `
       dev_type_tag
       interest_tag
       size_tag
+      framework_tag
       createdAt
       updatedAt
       _version
@@ -117,6 +119,7 @@ export const deletePostsModel = /* GraphQL */ `
       dev_type_tag
       interest_tag
       size_tag
+      framework_tag
       createdAt
       updatedAt
       _version

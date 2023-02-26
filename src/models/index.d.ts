@@ -45,7 +45,32 @@ export enum LanguageTag {
   SWIFT = "SWIFT",
   RUBY = "RUBY",
   RUST = "RUST",
-  SQL = "SQL"
+  SQL = "SQL",
+  PHP = "PHP",
+  HTML = "HTML",
+  CSS = "CSS",
+  GO = "GO",
+  DART = "DART",
+  SCALA = "SCALA"
+}
+
+export enum FrameworkTag {
+  REACT = "REACT",
+  REACT_NATIVE = "REACT_NATIVE",
+  ANGULAR = "ANGULAR",
+  VUE = "VUE",
+  NODE = "NODE",
+  EXPRESS = "EXPRESS",
+  WEB_SOCKET_IO = "WEB_SOCKET_IO",
+  DJANGO = "DJANGO",
+  FLASK = "FLASK",
+  MONGO_DB = "MONGO_DB",
+  MY_SQL = "MY_SQL",
+  POSTGRES_SQL = "POSTGRES_SQL",
+  FIREBASE = "FIREBASE",
+  AWS = "AWS",
+  AZURE = "AZURE",
+  HEROKU = "HEROKU"
 }
 
 type NewsletterEmailModelMetaData = {
@@ -92,6 +117,7 @@ type EagerPostsModel = {
   readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
   readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
+  readonly framework_tag?: (FrameworkTag | null)[] | keyof typeof FrameworkTag | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -108,6 +134,7 @@ type LazyPostsModel = {
   readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
   readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
+  readonly framework_tag?: (FrameworkTag | null)[] | keyof typeof FrameworkTag | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

@@ -12,8 +12,10 @@ import {
   } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import "./ConfirmationPopup.css";
+import { Auth } from "aws-amplify"
 
 export default function ConfirmationPopup(props: { setTrigger: (arg0: boolean) => void; trigger: boolean; }) {
+    // const data = this.props.location.state
     const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
@@ -25,8 +27,9 @@ export default function ConfirmationPopup(props: { setTrigger: (arg0: boolean) =
                 .required("AuthCode is required")
                 .matches(/^[0-9]+$/, "Must be only digits"),
         }),
-        onSubmit: values => {
+        onSubmit: async values => {
             alert(JSON.stringify(values, null, 2));
+            await Auth.confirmSignUp(process.env.EMAIL!, values.AuthCode)
             navigate("/create-preferences")
         },
     });
