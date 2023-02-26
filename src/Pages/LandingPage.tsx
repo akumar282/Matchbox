@@ -53,6 +53,10 @@ export default function LandingPage() {
     setAuthOpen(true);
     setIsCreateOpen(false);
   }
+  function OpenLogin() {
+    setIsLoginOpen(true);
+    setAuthOpen(false);
+  }
 
   // page animations
   Aos.init({
@@ -84,7 +88,7 @@ export default function LandingPage() {
 
   return (
     <div className='landing'>
-      <ConfirmationPopup trigger={isAuthOpen} setTrigger={setAuthOpen} />
+      <ConfirmationPopup trigger={isAuthOpen} setTrigger={setAuthOpen} setLoginOpen = {OpenLogin}/>
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
       <LandingPopupConfirm trigger={isConfirmOpen} setTrigger={setIsConfirmOpen}/>
       <LandingPopupCreate trigger={isCreateOpen} setTrigger={setIsCreateOpen} setAuthOpen = {OpenAuth}/>
@@ -123,10 +127,10 @@ export default function LandingPage() {
                 color: '#000000',
                 fontSize: 'max(20px, 10px);',
               }}
-              onClick={() => OpenAuth()}
+              onClick={() => setIsCreateOpen(true)}
             >
               {' '}
-              Auth Test
+              Get Started
             </Button>
           </Stack>
         </div>
@@ -161,24 +165,6 @@ export default function LandingPage() {
               data-aos-delay='900'></img>
         </div>
         <div className='button-stack'>
-        <Button 
-             sx={{
-              fontSize: 'max(20px, 10px);',
-              backgroundColor: '#F68084',
-              width: 'max(10em, 10px)',
-              height: 'max(3em, 10px)',
-              borderRadius: '10px',
-              color : '#FFFFFF',
-              fontSize: '20px',
-              mr: '30rem',
-              "&:hover": {
-                backgroundColor: "#ffa7aa",
-              },
-            }}
-            onClick={() => setIsCreateOpen(true)}
-            >
-              Get Started
-            </Button>
             </div>
       </div>     
       

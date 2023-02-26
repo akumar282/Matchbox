@@ -10,7 +10,7 @@ import {
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import "./LandingConfirmPopup.css";
 
-export default function LandingPopupConfirm(props: { setTrigger: (arg0: boolean) => void; trigger: boolean; }) {
+export default function LandingPopupConfirm(props) {
     function handleClose() {
         props.setTrigger(false);
     }

@@ -6,13 +6,15 @@ import LandingPage from './Pages/LandingPage'
 import HomePage from './Pages/HomePage'
 import ForgotPassword from './Pages/ForgotPasswordPage'
 import DiscoverPage from './Pages/DiscoverPage'
-import DetailedLandingPage from './Pages/DetailedLandingPage'
+
 import SettingsPage from './Pages/Settings'
 import CreateProject from './Pages/CreateProject'
 import UserPreferencesPage from './Pages/UserPreferencesPage'
 
 function App () {
+  
   return (
+    //create a saved state that can be updated by the user
     <BrowserRouter>
       <Routes>
         <Route path='/create-project' element={<CreateProject />} />
@@ -20,7 +22,6 @@ function App () {
         <Route path='/home' element={<HomePage />} />
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>
         <Route path='/*' element={<NotFound />} />
-        <Route path='/landing' element={<DetailedLandingPage />} />
         <Route path='/' element={<LandingPage />} />
         <Route path='/settings' element={<SettingsPage />} />
         <Route path='/preferences' element={<UserPreferencesPage/>} />

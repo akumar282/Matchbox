@@ -20,7 +20,7 @@ import { v4 as uuidv4 } from 'uuid';
 Amplify.configure(awsconfig)
 
 
-export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) => void; trigger: boolean; }) {
+export default function LandingPopupCreate(props) {
 
   const navigate = useNavigate();
   const uuidGen = uuidv4();
@@ -50,6 +50,7 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
     )
   }
   function OpenAuth() {
+    formik.resetForm();
     props.setAuthOpen();
     props.setTrigger(false);
   }
@@ -100,11 +101,11 @@ export default function LandingPopupCreate(props: { setTrigger: (arg0: boolean) 
     onSubmit: (values) => {
       //Link to preferences page
       // alert(JSON.stringify(values, null, 2));
-      sendToDatabase(values)
-      // this.props.history.push(
-      //   {pathname: '/ConfirmationPopup', state: {username: values.username, email: values.email}}
-      //   )
-      process.env.USER = values.email
+      // sendToDatabase(values)
+      // // this.props.history.push(
+      // //   {pathname: '/ConfirmationPopup', state: {username: values.username, email: values.email}}
+      // //   )
+      // process.env.USER = values.email
       OpenAuth();
     },
   });
