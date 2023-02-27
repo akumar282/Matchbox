@@ -24,6 +24,9 @@
           "appId": "dnpxlnk1ec683",
           "type": "manual"
         }
+      },
+      "storage": {
+        "s3unhingedstorage98feb2cc": {}
       }
     }
   }

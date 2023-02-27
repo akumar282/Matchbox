@@ -1,14 +1,18 @@
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { CreatePostsModelInput } from '../../../src/API'
-import { createPost } from '../../../src/backend/mutations/postMutations'
+import { createPost, deletePost, updatePost } from '../../../src/backend/mutations/postMutations'
 import awsconfig from '../../../src/aws-exports'
-import { CreatePostsModelPayload } from '../../../src/backend/types'
+import { CreatePostsModelPayload, UpdatePostsModelPayload } from '../../../src/backend/types'
 import { LanguageTag, DevelopmentTag, InterestTag, SizeTag} from '../../../src/API'
 Amplify.configure(awsconfig)
+
+const testnum = Math.floor(Math.random() * 10000)
+const test_id = '6795d81a-425f-460d-9c21-b733adbf62ae' + testnum
 
 let dateTime = new Date
 const testload: CreatePostsModelPayload = {
   input: {
+    id: `${test_id}`,
     post_title: `Matchbox`,
     description: `A very cool project`,
     project_link: `https://github.com/testuser/testproj.git`,
@@ -23,6 +27,7 @@ const testload: CreatePostsModelPayload = {
   }
 }
 
+
 describe('Mutation Tests', () => {
 
   test('Create post', async () => {
@@ -30,5 +35,25 @@ describe('Mutation Tests', () => {
     const flatResult = JSON.stringify(result)
     expect(flatResult).toContain(`Matchbox`)
   })
+
+  test('Update post', async () => {
+    const result = await updatePost(
+      {
+        input: {
+          id: `${test_id}`,
+          description: 'a project'
+        }
+      }
+    )
+    const flatResult = JSON.stringify(result)
+    expect(flatResult).toContain(`Matchbox`)
+  })
+
+  test('Delete post', async () => {
+    const result = await deletePost({input: {id: `${test_id}`, _version: 2}})
+    const flatResult = JSON.stringify(result)
+    expect(flatResult).toContain(`Matchbox`)
+  })
+
 
 })
