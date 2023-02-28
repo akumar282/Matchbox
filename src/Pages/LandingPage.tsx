@@ -18,15 +18,15 @@ import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { about } from './LandingPageData' 
 import { Link } from 'react-router-dom';
-
-
+import { useContext } from 'react';
+import { AuthContext, DispatchContext } from '../App';
 Amplify.configure(awsconfig)
 const payload: CreateNewsletterEmailModelPayload = {
   input: {
     email: ''
   }
 }
-
+  
 export default function LandingPage() {
   // email signup textfield handling [leave this here, will be used later]
   // const [userEmail, setUserEmail] = React.useState("");
@@ -40,12 +40,20 @@ export default function LandingPage() {
     const request = await createNewsletterEmail(payload)
       .catch(error => console.log(error));  
   }
-
+  const Authstate = useContext(AuthContext);
+  const Authdispatch = useContext(DispatchContext);
+  const useGlobalState = () => [
+    Authstate,
+    Authdispatch
+  ];
+  const [State, Dispatch] = useGlobalState();
   // login popup handling
+  
   const [isLoginOpen, setIsLoginOpen] = React.useState(false)
   const [isConfirmOpen, setIsConfirmOpen] = React.useState(false);
   const [isCreateOpen, setIsCreateOpen] = React.useState(false)
   const [isAuthOpen, setAuthOpen] = React.useState(false)
+  
   function NoAccount() {
     setIsLoginOpen(false);
     setIsCreateOpen(true);
@@ -58,6 +66,14 @@ export default function LandingPage() {
     setIsLoginOpen(true);
     setAuthOpen(false);
   }
+  function Testing() {
+    console.log(State);
+    Dispatch({isAuthenticated: true});
+  }
+  React.useEffect(() => { 
+      console.log(State.isAuthenticated);
+      console.log(localStorage.getItem('isAuthenticated'));
+    }, [State.isAuthenticated]);
 
   // page animations
   Aos.init({
@@ -86,7 +102,7 @@ export default function LandingPage() {
       formik.resetForm();
     },
   });
-
+  
   return (
     <div className='landing'>
      
@@ -129,7 +145,7 @@ export default function LandingPage() {
                 color: '#000000',
                 fontSize: 'max(20px, 10px);',
               }}
-              onClick={() => setIsCreateOpen(true)}
+              onClick={() => Testing()}
             >
               {' '}
               Get Started

@@ -2,8 +2,11 @@ import React from "react";
 import Navbar from "../components/NavBar";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { IconButton } from "@mui/material";
+import { IconButton, Button } from "@mui/material";
 import { Link, useHref, useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+import { AuthContext, DispatchContext } from '../App';
+import { useEffect, useState } from "react";
 import "./CSS/HomePage.css";
 const project = {
   name: "Project 1",
@@ -28,10 +31,21 @@ const arr = [
   project,
 ];
 export default function HomePage() {
+  const Authstate = useContext(AuthContext);
+  const Authdispatch = useContext(DispatchContext);
+  const useGlobalState = () => [
+    Authstate,
+    Authdispatch
+  ];
+  const [State, Dispatch] = useGlobalState();
   const navigate = useNavigate();
   function handleCreate() {
     navigate("/create-project");
   }
+  function Test() {
+    console.log(State);
+  }
+
   return (
     <div className="HomePage">
       <Navbar />
@@ -42,10 +56,14 @@ export default function HomePage() {
         {arr.map((tag) => (
           <CustomSavedProjects user={tag} key={tag.name} />
         ))}
+        <Button onClick={() => Test()}>
+          Test
+        </Button>
       </div>
     </div>
   );
 }
+
 const CustomSavedProjects = (props: {
   user: { name: string; image: string; githubLink: string };
 }) => {
