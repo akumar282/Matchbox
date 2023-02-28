@@ -56,9 +56,7 @@ export default function HomePage() {
         {arr.map((tag) => (
           <CustomSavedProjects user={tag} key={tag.name} />
         ))}
-        <Button onClick={() => Test()}>
-          Test
-        </Button>
+        
       </div>
     </div>
   );
