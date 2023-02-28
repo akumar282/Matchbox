@@ -40,15 +40,15 @@ export default function LandingPage() {
     const request = await createNewsletterEmail(payload)
       .catch(error => console.log(error));  
   }
-  const Authstate = useContext(AuthContext);
-  const Authdispatch = useContext(DispatchContext);
-  const useGlobalState = () => [
-    Authstate,
-    Authdispatch
-  ];
-  const [State, Dispatch] = useGlobalState();
-  // login popup handling
+  const Authstate = useContext(AuthContext); //code for local contextx
+  const Authdispatch = useContext(DispatchContext); // code for local context
+  const useGlobalState = () => [ // code for local context
+    Authstate,  // code for local context
+    Authdispatch // code for local context
+  ]; 
+  const [State, Dispatch] = useGlobalState(); // code for local context
   
+  // login popup handling
   const [isLoginOpen, setIsLoginOpen] = React.useState(false)
   const [isConfirmOpen, setIsConfirmOpen] = React.useState(false);
   const [isCreateOpen, setIsCreateOpen] = React.useState(false)
@@ -66,14 +66,14 @@ export default function LandingPage() {
     setIsLoginOpen(true);
     setAuthOpen(false);
   }
-  function Testing() {
-    console.log(State);
-    Dispatch({isAuthenticated: true});
-  }
-  React.useEffect(() => { 
-      console.log(State.isAuthenticated);
-      console.log(localStorage.getItem('isAuthenticated'));
-    }, [State.isAuthenticated]);
+  // function Testing() {
+  //   console.log(State);
+  //   Dispatch({isAuthenticated: true});
+  // }
+  // React.useEffect(() => { 
+  //     console.log(State.isAuthenticated);
+  //     console.log(localStorage.getItem('isAuthenticated'));
+  //   }, [State.isAuthenticated]);
 
   // page animations
   Aos.init({
@@ -145,7 +145,7 @@ export default function LandingPage() {
                 color: '#000000',
                 fontSize: 'max(20px, 10px);',
               }}
-              onClick={() => Testing()}
+              onClick={() => setIsCreateOpen(true)}
             >
               {' '}
               Get Started

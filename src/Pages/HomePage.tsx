@@ -42,9 +42,6 @@ export default function HomePage() {
   function handleCreate() {
     navigate("/create-project");
   }
-  function Test() {
-    console.log(State);
-  }
 
   return (
     <div className="HomePage">

@@ -58,10 +58,11 @@ const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     const savedState = getLocalStorage('authState', globalAuthState);
-      
+    dispatch(savedState);
   }, []);
   React.useEffect(() => {
     setLocalStorage('authState', state);
+    
   }, [state]);
   return (
     <AuthContext.Provider value={state}>
@@ -81,12 +82,12 @@ function App () {
     <AuthProvider>
     <BrowserRouter>
       <Routes>
+        <Route path='/*' element={<NotFound />} />
+        <Route path='/' element={<LandingPage />} />
         <Route path='/create-project' element={<CreateProject />} />
         <Route path='/discover' element={<DiscoverPage/>} />
         <Route path='/home' element={<HomePage />} />
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>
-        <Route path='/*' element={<NotFound />} />
-        <Route path='/' element={<LandingPage />} />
         <Route path='/settings' element={<SettingsPage />} />
         <Route path='/preferences' element={<UserPreferencesPage/>} />
       </Routes>
