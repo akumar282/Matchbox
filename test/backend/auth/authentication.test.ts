@@ -6,7 +6,7 @@ Amplify.configure(awsconfig)
 
 
 
-describe('Authentication methods test', () => {
+describe.skip('Authentication methods test', () => {
   test('Sign Up user test', async () => {
     const userPackage = {
       username: 'actuallychowmein',

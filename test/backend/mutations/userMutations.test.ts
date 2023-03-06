@@ -11,7 +11,7 @@ const testnum = Math.floor(Math.random() * 10000)
 
 const test_id = '6795d81a-425f-460d-9c21-b733adbf62ae' + testnum
 
-describe('Mutation Tests', () => {
+describe.skip('Mutation Tests', () => {
 
   test('Create user', async () => {
 

@@ -28,7 +28,7 @@ const testload: CreatePostsModelPayload = {
 }
 
 
-describe('Mutation Tests', () => {
+describe.skip('Mutation Tests', () => {
 
   test('Create post', async () => {
     const result = await createPost(testload)

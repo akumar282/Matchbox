@@ -35,6 +35,9 @@ export default function LandingPopupCreate(props) {
   }) {
     // redundatant code. should be fixed to finalload.input = props
     props.uuid = uuidGen
+    localStorage.setItem('uuid', props.uuid)
+    localStorage.setItem('username', props.username)
+    localStorage.setItem('email', props.email)
     await newUserSignUp(props.email, props.password, props.email, props.uuid )
     await createUser(
       {
@@ -101,7 +104,7 @@ export default function LandingPopupCreate(props) {
     onSubmit: (values) => {
       //Link to preferences page
       // alert(JSON.stringify(values, null, 2));
-      // sendToDatabase(values)
+      sendToDatabase(values)
       // // this.props.history.push(
       // //   {pathname: '/ConfirmationPopup', state: {username: values.username, email: values.email}}
       // //   )
