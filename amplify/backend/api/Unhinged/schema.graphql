@@ -1,4 +1,4 @@
-type NewsletterEmailModel @model @auth(rules: [{allow: public}]) {
+type NewsletterEmailModel @model @searchable @auth(rules: [{allow: public}]) {
   id: ID!
   email: AWSEmail!
 }
@@ -74,7 +74,7 @@ enum FrameworkTag {
   HEROKU
 }
 
-type PostsModel @model @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   post_title: String!
   description: String
@@ -89,7 +89,7 @@ type PostsModel @model @auth(rules: [{allow: public, operations: [read, create, 
   framework_tag: [FrameworkTag]
 }
 
-type UsersModel @model @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   user_name: String!
   email: String!

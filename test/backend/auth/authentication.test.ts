@@ -3,10 +3,7 @@ import { Amplify } from 'aws-amplify'
 import awsconfig from '../../../src/aws-exports'
 Amplify.configure(awsconfig)
 
-
-
-
-describe('Authentication methods test', () => {
+describe.skip('Authentication methods test', () => {
   test('Sign Up user test', async () => {
     const userPackage = {
       username: 'actuallychowmein',

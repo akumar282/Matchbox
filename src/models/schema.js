@@ -42,6 +42,10 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -186,6 +190,10 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
                     "type": "key",
                     "properties": {
                         "name": "byUsersModel",
@@ -326,6 +334,10 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -428,6 +440,6 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "codegenVersion": "3.2.0",
+    "codegenVersion": "3.3.4",
     "version": "f2d11fb7d4b4964969fb509718a8e7d4"
 };

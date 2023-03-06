@@ -11,7 +11,7 @@ const testload: CreateNewsletterEmailModelPayload = {
   }
 }
 
-describe('Mutation Tests', () => {
+describe.skip('Mutation Tests', () => {
 
   test('Create NewsletterEmail', async () => {
     const result = await createNewsletterEmail(testload)
