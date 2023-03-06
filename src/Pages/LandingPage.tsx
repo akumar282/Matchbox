@@ -17,15 +17,16 @@ import * as yup from "yup";
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { about } from './LandingPageData' 
-
-
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext, DispatchContext } from '../App';
 Amplify.configure(awsconfig)
 const payload: CreateNewsletterEmailModelPayload = {
   input: {
     email: ''
   }
 }
-
+  
 export default function LandingPage() {
   // email signup textfield handling [leave this here, will be used later]
   // const [userEmail, setUserEmail] = React.useState("");
@@ -39,12 +40,20 @@ export default function LandingPage() {
     const request = await createNewsletterEmail(payload)
       .catch(error => console.log(error));  
   }
-
+  const Authstate = useContext(AuthContext); //code for local contextx
+  const Authdispatch = useContext(DispatchContext); // code for local context
+  const useGlobalState = () => [ // code for local context
+    Authstate,  // code for local context
+    Authdispatch // code for local context
+  ]; 
+  const [State, Dispatch] = useGlobalState(); // code for local context
+  
   // login popup handling
   const [isLoginOpen, setIsLoginOpen] = React.useState(false)
   const [isConfirmOpen, setIsConfirmOpen] = React.useState(false);
   const [isCreateOpen, setIsCreateOpen] = React.useState(false)
   const [isAuthOpen, setAuthOpen] = React.useState(false)
+  
   function NoAccount() {
     setIsLoginOpen(false);
     setIsCreateOpen(true);
@@ -53,6 +62,18 @@ export default function LandingPage() {
     setAuthOpen(true);
     setIsCreateOpen(false);
   }
+  function OpenLogin() {
+    setIsLoginOpen(true);
+    setAuthOpen(false);
+  }
+  // function Testing() {
+  //   console.log(State);
+  //   Dispatch({isAuthenticated: true});
+  // }
+  // React.useEffect(() => { 
+  //     console.log(State.isAuthenticated);
+  //     console.log(localStorage.getItem('isAuthenticated'));
+  //   }, [State.isAuthenticated]);
 
   // page animations
   Aos.init({
@@ -81,10 +102,11 @@ export default function LandingPage() {
       formik.resetForm();
     },
   });
-
+  
   return (
     <div className='landing'>
-      <ConfirmationPopup trigger={isAuthOpen} setTrigger={setAuthOpen} />
+     
+      <ConfirmationPopup trigger={isAuthOpen} setTrigger={setAuthOpen} setLoginOpen = {OpenLogin}/>
       <LandingPopupLogin trigger={isLoginOpen} setTrigger={setIsLoginOpen} setCreateOpen = {NoAccount}/>
       <LandingPopupConfirm trigger={isConfirmOpen} setTrigger={setIsConfirmOpen}/>
       <LandingPopupCreate trigger={isCreateOpen} setTrigger={setIsCreateOpen} setAuthOpen = {OpenAuth}/>
@@ -123,10 +145,10 @@ export default function LandingPage() {
                 color: '#000000',
                 fontSize: 'max(20px, 10px);',
               }}
-              onClick={() => OpenAuth()}
+              onClick={() => setIsCreateOpen(true)}
             >
               {' '}
-              Auth Test
+              Get Started
             </Button>
           </Stack>
         </div>
@@ -161,24 +183,6 @@ export default function LandingPage() {
               data-aos-delay='900'></img>
         </div>
         <div className='button-stack'>
-        <Button 
-             sx={{
-              fontSize: 'max(20px, 10px);',
-              backgroundColor: '#F68084',
-              width: 'max(10em, 10px)',
-              height: 'max(3em, 10px)',
-              borderRadius: '10px',
-              color : '#FFFFFF',
-              fontSize: '20px',
-              mr: '30rem',
-              "&:hover": {
-                backgroundColor: "#ffa7aa",
-              },
-            }}
-            onClick={() => setIsCreateOpen(true)}
-            >
-              Get Started
-            </Button>
             </div>
       </div>     
       

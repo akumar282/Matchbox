@@ -14,7 +14,7 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import "./ConfirmationPopup.css";
 import { Auth } from "aws-amplify"
 
-export default function ConfirmationPopup(props: { setTrigger: (arg0: boolean) => void; trigger: boolean; }) {
+export default function ConfirmationPopup(props) {
     // const data = this.props.location.state
     const navigate = useNavigate();
     const formik = useFormik({
@@ -29,14 +29,14 @@ export default function ConfirmationPopup(props: { setTrigger: (arg0: boolean) =
         }),
         onSubmit: async values => {
             alert(JSON.stringify(values, null, 2));
-            await Auth.confirmSignUp(process.env.EMAIL!, values.AuthCode)
-            navigate("/create-preferences")
+            // await Auth.confirmSignUp(process.env.EMAIL!, values.AuthCode)
+            // navigate("/create-preferences")
+            handleClose();
         },
     });
     function handleClose() {
         formik.resetForm();
-        props.setTrigger(false);
-        navigate("/preferences")
+        props.setLoginOpen();
     }
     return props.trigger ? (
         <Dialog open={props.trigger} maxWidth="sm" fullWidth={true}>
