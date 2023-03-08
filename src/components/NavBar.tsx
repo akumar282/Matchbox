@@ -4,6 +4,7 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
+import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import "./NavBar.css"
 import { useNavigate } from "react-router-dom";
@@ -24,7 +25,8 @@ export default function Navbar() {
                 
                 <CustomLink className ="navElement" to= "/home"> <HomeIcon fontSize="large"/> Home </CustomLink>
                 <CustomLink className ="navElement" to= "/discover"> <SearchIcon fontSize="large"/> Discover </CustomLink>
-                <CustomLink className ="navElement" to= "/settings"> <SettingsIcon fontSize="large"/> Settings </CustomLink> 
+                <CustomLink className ="navElement" to= "/settings"> <SettingsIcon fontSize="large"/> Settings </CustomLink>
+                <CustomLink className ="navElement" to= "/create-project"> <AddIcon sx={{fontSize: 40}}/> Create </CustomLink> 
                 
                 <IconButton sx={{
                     display: 'flex',
