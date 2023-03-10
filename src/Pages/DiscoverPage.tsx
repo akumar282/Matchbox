@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/NavBar";
 import "./CSS/DiscoverPage.css";
 
@@ -14,6 +14,8 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { getPostsByUser } from '../../src/backend/queries/postQueries';
+import { ModelIDInput } from "../API";
 // keep these functions here for top level backend connection
 function handleBackendRemove() {
   console.log("removing project");
@@ -25,7 +27,15 @@ function handleBackendSave() {
   // TODO make backend connection here
 }
 
+async function getProjects(uuid: string): Promise<any[]> {
+  const result = await getPostsByUser({ userID: uuid as ModelIDInput })
+  return result.data.listPostsModels.items.filter(x => x._deleted !== true)
+}
+
+const projectsAll = await getProjects(localStorage.getItem('uuid')!)
+
 export default function DiscoverPage() {
+  console.log(localStorage)
   // set up state to keep track of which project is currently visible
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
 
@@ -40,11 +50,11 @@ export default function DiscoverPage() {
       setCurrentProjectIndex((currentProjectIndex - 1) % Projects.length);
     }
   };
-
+  console.log(projectsAll)
   return (
     <div className="DiscoverPage">
       <Navbar />
-      {Projects.map((project, index) => (
+      {(projectsAll).map((project, index) => (
         <DiscoverComponent
           projects={project}
           key={project.title}
@@ -101,7 +111,7 @@ function DiscoverComponent(props: any) {
                 <div className="DiscoverimgBox">
                   <img
                     className="DiscoverImg"
-                    src={"images/" + props.projects.img}
+                    src={props.projects.image_link}
                     alt="project image"
                   />
                   {/* remove project button */}
@@ -142,13 +152,13 @@ function DiscoverComponent(props: any) {
                 </div>
                 <div className="ShortTagBoxDiscover">
                   <div className="ShortDescDiscover">
-                    <h1>{props.projects.title}</h1>
-                    <p> {props.projects.Shortdescription}</p>
+                    <h1>{props.projects.post_title}</h1>
+                    <p> {props.projects.description}</p>
                     <div className="ProjectLinksDiscover">
                       <IconButton
                         color="primary"
                         aria-label="github link"
-                        href={props.projects.githubLink}
+                        href={props.projects.project_link}
                       >
                         <GitHubIcon />
                       </IconButton>
@@ -163,9 +173,9 @@ function DiscoverComponent(props: any) {
                   </div>
                   <div className="TagBoxDiscover">
                     {[
-                      ...props.projects.Lang.map((tag) => ({ tag })),
-                      ...props.projects.Frame.map((tag) => ({ tag })),
-                      ...props.projects.Tools.map((tag) => ({ tag })),
+                      ...props.projects.lang_tag?.map((tag) => ({ tag })),
+                      ...props.projects.framework_tag?.map((tag) => ({ tag })),
+                      ...props.projects.size_tag?.map((tag) => ({ tag })),
                     ].map(({ tag }) => (
                       <div className="TagDiscover">
                         <Chip label={tag} sx={{ minWidth: 70 }} />
@@ -175,7 +185,7 @@ function DiscoverComponent(props: any) {
                 </div>
               </div>
               <div className="BottomHolderDiscover">
-                <p>{props.projects.Longdescription}</p>
+                <p>{props.projects.description}</p>
               </div>
             </div>
             <IconButton sx={{}} onClick={handleNext}>

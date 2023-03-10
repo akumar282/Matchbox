@@ -29,7 +29,7 @@ export default function ConfirmationPopup(props) {
         }),
         onSubmit: async values => {
             alert(JSON.stringify(values, null, 2));
-            // await Auth.confirmSignUp(process.env.EMAIL!, values.AuthCode)
+            await Auth.confirmSignUp(localStorage.getItem('email')!, values.AuthCode)
             // navigate("/create-preferences")
             handleClose();
         },

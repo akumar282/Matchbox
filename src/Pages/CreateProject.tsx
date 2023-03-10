@@ -52,7 +52,7 @@ export default function CreateProject() {
           project_link: props.GithubLink,
           image_link: 'https://github.com/akumar282/Matchbox',
           post_date: dateTime.toISOString(),
-          userID: '5',
+          userID: localStorage.getItem('uuid')!,
           lang_tag: props.language.map(x => x.enumMap),
           dev_type_tag: [],
           interest_tag: [],

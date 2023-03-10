@@ -20,6 +20,7 @@ const globalAuthState = {
   username: null,
   email: null,
   token: null,
+  uuid: null,
   isLoggedin: false,
   // firstAccount: true,
 }

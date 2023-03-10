@@ -8,6 +8,8 @@ import { useContext } from 'react';
 import { AuthContext, DispatchContext } from '../App';
 import { useEffect, useState } from "react";
 import "./CSS/HomePage.css";
+import { getPostsByUser } from "../backend/queries/postQueries";
+import { ModelIDInput } from "../API";
 const project = {
   name: "Project 1",
   image: "/Strom.jpg",
@@ -30,6 +32,14 @@ const arr = [
   project,
   project,
 ];
+
+async function getProjects(uuid: string): Promise<any[]> {
+  const result = await getPostsByUser({ userID: uuid as ModelIDInput })
+  return result.data.listPostsModels.items.filter(x => x._deleted !== true)
+}
+
+const projectsAll = await getProjects(localStorage.getItem('uuid')!)
+
 export default function HomePage() {
   const Authstate = useContext(AuthContext);
   const Authdispatch = useContext(DispatchContext);
@@ -50,8 +60,8 @@ export default function HomePage() {
         <div className="CreateProject" onClick={() =>  handleCreate()}>
           <AddCircleOutlineIcon fontSize="large" className="Creaticon" />
         </div>
-        {arr.map((tag) => (
-          <CustomSavedProjects user={tag} key={tag.name} />
+        {projectsAll.map((tag) => (
+          <CustomSavedProjects user={tag} key={tag.post_title} />
         ))}
         
       </div>
@@ -59,22 +69,20 @@ export default function HomePage() {
   );
 }
 
-const CustomSavedProjects = (props: {
-  user: { name: string; image: string; githubLink: string };
-}) => {
+const CustomSavedProjects = (props: any) => {
   return (
     <div className="HomeSavedProjects">
       <div className="SavedImgCont">
         <img
           className="SavedImg"
-          src={"images/" + props.user.image}
+          src={props.user.image_link}
           alt="Project Image"
         />
       </div>
-      <h1 className="ProjectTitle">{props.user.name}</h1>
+      <h1 className="ProjectTitle">{props.user.post_title}</h1>
       <div className="SavedProjectInfo">
         <div className="ProjectShow">
-          <IconButton href={props.user.githubLink}>
+          <IconButton href={props.user.project_link}>
             {" "}
             <GitHubIcon />{" "}
           </IconButton>

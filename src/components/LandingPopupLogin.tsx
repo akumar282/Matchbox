@@ -42,12 +42,11 @@ export default function LandingPopupLogin(props) {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      // if (await Auth.signIn(values.email, values.password)){
-        
+      if (await Auth.signIn(values.email, values.password)){
         navigate("/home");
-      // } else {
-      //   alert("Incorrect username or password")
-      // }
+      } else {
+        alert("Incorrect username or password")
+      }
     },
   });
   return props.trigger ? (
