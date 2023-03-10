@@ -41,13 +41,13 @@ export default function DiscoverPage() {
 
   // define a function to handle clicking either save or remove project buttona
   const handleNextProject = () => {
-    setCurrentProjectIndex((currentProjectIndex + 1) % Projects.length);
+    setCurrentProjectIndex((currentProjectIndex + 1));
   };
   const handleBackProject = () => {
     if (currentProjectIndex === 0) {
-      setCurrentProjectIndex(Projects.length - 1);
+      setCurrentProjectIndex(projectsAll.length - 1);
     } else {
-      setCurrentProjectIndex((currentProjectIndex - 1) % Projects.length);
+      setCurrentProjectIndex((currentProjectIndex - 1));
     }
   };
   console.log(projectsAll)
