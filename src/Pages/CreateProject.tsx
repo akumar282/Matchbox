@@ -50,7 +50,7 @@ export default function CreateProject() {
           post_title: props.ProjectTitle,
           description: props.LongDesc,
           project_link: props.GithubLink,
-          image_link: 'https://github.com/akumar282/Matchbox',
+          image_link: 'https://avatars.githubusercontent.com/u/13607064?s=64&v=4',
           post_date: dateTime.toISOString(),
           userID: localStorage.getItem('uuid')!,
           lang_tag: props.language.map(x => x.enumMap),
