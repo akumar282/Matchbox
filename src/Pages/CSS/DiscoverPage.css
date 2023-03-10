@@ -78,7 +78,7 @@
     margin: 0;
 }
 .DiscoverImg {
-    width: 100%;
+    width: 102%;
     height: 100%;
     object-fit: cover;
     
@@ -153,4 +153,28 @@
     height: 10px;
     background: var(--red);
     transform-origin: 0%;
+  }
+  .DiscoverHolder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    transition: 0.5s ease;  
+  }
+  .DHolder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    transition: 0.5s ease;  
   }
