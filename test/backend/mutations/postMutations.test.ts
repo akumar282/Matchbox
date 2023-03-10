@@ -49,7 +49,7 @@ describe.skip('Mutation Tests', () => {
     expect(flatResult).toContain(`Matchbox`)
   })
 
-  test('Delete post', async () => {
+  test.skip('Delete post', async () => {
     const result = await deletePost({input: {id: `${test_id}`, _version: 2}})
     const flatResult = JSON.stringify(result)
     expect(flatResult).toContain(`Matchbox`)
