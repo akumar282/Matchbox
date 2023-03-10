@@ -12,8 +12,8 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
 import CancelIcon from "@mui/icons-material/Cancel";
-
-
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 // keep these functions here for top level backend connection
 function handleBackendRemove() {
   console.log("removing project");
@@ -33,6 +33,13 @@ export default function DiscoverPage() {
   const handleNextProject = () => {
     setCurrentProjectIndex((currentProjectIndex + 1) % Projects.length);
   };
+  const handleBackProject = () => {
+    if (currentProjectIndex === 0) {
+      setCurrentProjectIndex(Projects.length - 1);
+    }else {
+    setCurrentProjectIndex((currentProjectIndex - 1) % Projects.length);
+    }
+  };
 
   return (
     <div className="DiscoverPage">
@@ -43,6 +50,7 @@ export default function DiscoverPage() {
           key={project.title}
           isVisible={index === currentProjectIndex}
           onNextProject={handleNextProject}
+          onBackProject={handleBackProject}
           />
       ))}
     </div>
@@ -62,9 +70,10 @@ function DiscoverComponent(props: {
   };
   isVisible: boolean;
   onNextProject: () => void;
+  onBackProject: () => void;
 }) {
   // remake objects
-  const { projects, isVisible, onNextProject } = props;
+  const { projects, isVisible, onNextProject, onBackProject } = props;
 
   // framer motion -- use for exit, later implementation
   const slideRight = {
@@ -77,13 +86,18 @@ function DiscoverComponent(props: {
 
   const handleSave = () => {   
     handleBackendSave();
-    onNextProject();
   };
 
   const handleRemove = () => {   
     handleBackendRemove();
+  };
+  const handleNext = () => {
     onNextProject();
   };
+  const handleBack = () => {
+    onBackProject();
+  };
+
 
   return isVisible ? (
   <AnimatePresence>
@@ -92,8 +106,12 @@ function DiscoverComponent(props: {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
     >
-    
+      <div className="DiscoverHolder">
+        <div className="DHolder">
+         <IconButton sx = {{}} onClick= {handleBack}> <ArrowBackIosNewIcon fontSize="large"/> </IconButton>
       <div className="DiscoverMain">
+       
+        
         <div className="topRowDiscover">
           <div className="DiscoverimgBox">
             <img
@@ -172,6 +190,9 @@ function DiscoverComponent(props: {
         <div className="BottomHolderDiscover">
           <p>{props.projects.Longdescription}</p>
         </div>
+      </div>
+      <IconButton sx = {{}} onClick = {handleNext}> <ArrowForwardIosIcon fontSize="large"/> </IconButton>
+      </div>
       </div>
     </motion.div>
   </AnimatePresence>
