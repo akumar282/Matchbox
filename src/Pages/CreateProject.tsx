@@ -33,8 +33,8 @@ export default function CreateProject() {
   const [selectedSize, setSelectedSize] = React.useState([]);
 
   console.log(Auth.currentAuthenticatedUser());
-  
-  async function sendProjectToDyanmo(props:{
+
+  async function sendProjectToDyanmo(props: {
     ProjectTitle: string;
     ShortDesc: string;
     LongDesc: string;
@@ -42,7 +42,7 @@ export default function CreateProject() {
     language: langBundle[];
     framework: frameworkBundle[];
     size: sizeBundle[];
-  }){
+  }) {
     let dateTime = new Date
     const result = await createPost(
       {
@@ -139,7 +139,7 @@ export default function CreateProject() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       sendProjectToDyanmo(values)
-      navigate("/preferences");
+      navigate("/home");
     },
     validateOnChange: true,
     validateOnBlur: false,
@@ -150,252 +150,252 @@ export default function CreateProject() {
     <div className="CreateProjectPage">
       <Navbar />
       <div className="CreateProjectHolder">
-      <div className="Holder">
-        <div className="TopHolder">
-          <div className="Uploadimg">
-            <IconButton
-              sx={{
-                position: "absolute",
-                backgroundColor: "#6259b9",
-                color: "white",
-                "&:hover": {
-                  backgroundColor: "#716ab4",
-                },
-              }}
-              onClick={handleClick}
-            >
-              <DownloadIcon fontSize="large" />
-            </IconButton>
-            <input
-              type="file"
-              id="file"
-              name="file"
-              accept="image/*"
-              onChange={handleChange}
-              style={{ display: "none", borderWidth: "0px" }}
-            />
-            <img className="imagePrev" id="Image" src={Image} alt={""} />
-          </div>
+        <div className="Holder">
+          <div className="TopHolder">
+            <div className="Uploadimg">
+              <IconButton
+                sx={{
+                  position: "absolute",
+                  backgroundColor: "#6259b9",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#716ab4",
+                  },
+                }}
+                onClick={handleClick}
+              >
+                <DownloadIcon fontSize="large" />
+              </IconButton>
+              <input
+                type="file"
+                id="file"
+                name="file"
+                accept="image/*"
+                onChange={handleChange}
+                style={{ display: "none", borderWidth: "0px" }}
+              />
+              <img className="imagePrev" id="Image" src={Image} alt={""} />
+            </div>
 
-          <div className="ShortDesc">
-            <div>
+            <div className="ShortDesc">
+              <div>
+                <Typography
+                  sx={{
+
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  {" "}
+                  Short Description
+                </Typography>
+                <TextField
+                  multiline
+                  maxRows={2}
+                  sx={{
+                    width: "90%",
+                  }}
+                  inputProps={{
+                    style: {},
+                  }}
+                  id="ShortDesc"
+                  name="ShortDesc"
+                  variant="outlined"
+                  value={formik.values.ShortDesc}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.ShortDesc && Boolean(formik.errors.ShortDesc)
+                  }
+                  helperText={formik.touched.ShortDesc && formik.errors.ShortDesc}
+                />
+                <Typography
+                  sx={{
+
+                    fontSize: "1.5rem",
+                    mt: "2rem",
+                  }}
+                >
+                  {" "}
+                  Github Link
+                </Typography>
+                <TextField
+                  sx={{
+                    width: "90%",
+                  }}
+                  id="GithubLink"
+                  name="GithubLink"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <GitHubIcon />
+                      </InputAdornment>
+                    ),
+                    style: {},
+                  }}
+                  variant="outlined"
+                  value={formik.values.GithubLink}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.GithubLink && Boolean(formik.errors.GithubLink)
+                  }
+                  helperText={formik.touched.GithubLink && formik.errors.GithubLink}
+                />
+              </div>
+              <div className="TagsHolder">
+                <Autocomplete
+                  sx={{
+                    width: "90%",
+                  }}
+                  multiple
+                  limitTags={2}
+                  id="language"
+                  options={TagData.LanguageTags}
+                  getOptionLabel={(option) => option.label}
+                  defaultValue={[TagData.LanguageTags[0]]}
+                  filterSelectedOptions
+                  value={selectedLang}
+                  onChange={handleLang}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Languages"
+                      value={formik.values.language}
+                      error={
+                        formik.touched.language && Boolean(formik.errors.language)
+                      }
+                    // helperText={formik.touched.language && formik.errors.language}
+                    />
+                  )}
+                />
+                <Autocomplete
+                  sx={{
+                    width: "90%",
+                  }}
+                  multiple
+                  limitTags={2}
+                  id="framework"
+                  options={TagData.FrameworkTags}
+                  getOptionLabel={(option) => option.label}
+                  defaultValue={[TagData.FrameworkTags[0]]}
+                  filterSelectedOptions
+                  value={selectedFrame}
+                  onChange={handleFrame}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Frameworks"
+                      value={formik.values.framework}
+                      error={
+                        formik.touched.framework && Boolean(formik.errors.framework)
+                      }
+                    // helperText={
+                    //   formik.touched.framework && formik.errors.framework
+                    // }
+                    />
+                  )}
+                />
+                <Autocomplete
+                  sx={{
+                    width: "90%",
+                  }}
+                  multiple
+                  limitTags={2}
+                  id="size"
+                  options={TagData.SizeTags}
+                  getOptionLabel={(option) => option.label}
+                  defaultValue={[TagData.SizeTags[0]]}
+                  filterSelectedOptions
+                  value={selectedSize}
+                  onChange={handleSize}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Size"
+                      error={formik.touched.size && Boolean(formik.errors.size)}
+                    // helperText={formik.touched.size && formik.errors.size}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="BottomHolder">
             <Typography
               sx={{
-                
+
                 fontSize: "1.5rem",
               }}
             >
               {" "}
-              Short Description
+              Project Title
+            </Typography>
+            <TextField
+              sx={{
+                width: "90%",
+                mb: "2rem",
+              }}
+              inputProps={{
+                style: { fontSize: "1.5rem" },
+              }}
+              id="ProjectTitle"
+              name="ProjectTitle"
+              variant="outlined"
+              value={formik.values.ProjectTitle}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.ProjectTitle && Boolean(formik.errors.ProjectTitle)
+              }
+              helperText={
+                formik.touched.ProjectTitle && formik.errors.ProjectTitle
+              }
+            />
+            <Typography
+              sx={{
+
+                fontSize: "1.5rem",
+              }}
+            >
+              {" "}
+              Long Description
             </Typography>
             <TextField
               multiline
-              maxRows={2}
+              maxRows={4}
+              minRows={2}
               sx={{
                 width: "90%",
               }}
               inputProps={{
-                style: {  },
+                style: { fontSize: "1rem" },
               }}
-              id="ShortDesc"
-              name="ShortDesc"
+              id="LongDesc"
+              name="LongDesc"
               variant="outlined"
-              value={formik.values.ShortDesc}
+              value={formik.values.LongDesc}
               onChange={formik.handleChange}
-              error={
-                formik.touched.ShortDesc && Boolean(formik.errors.ShortDesc)
-              }
-              helperText={formik.touched.ShortDesc && formik.errors.ShortDesc}
-            />
-            <Typography
-              sx={{
-               
-                fontSize: "1.5rem",
-                mt: "2rem",
-              }}
-            >
-              {" "}
-              Github Link
-            </Typography>
-            <TextField
-              sx={{
-                width: "90%",
-              }}
-              id="GithubLink"
-              name="GithubLink"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <GitHubIcon />
-                  </InputAdornment>
-                ),
-                style: {  },
-              }}
-              variant="outlined"
-              value={formik.values.GithubLink}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.GithubLink && Boolean(formik.errors.GithubLink)
-              }
-              helperText={formik.touched.GithubLink && formik.errors.GithubLink}
-            />
-          </div>
-          <div className="TagsHolder">
-            <Autocomplete
-              sx={{
-                width: "90%",
-              }}
-              multiple
-              limitTags={2}
-              id="language"
-              options={TagData.LanguageTags}
-              getOptionLabel={(option) => option.label}
-              defaultValue={[TagData.LanguageTags[0]]}
-              filterSelectedOptions
-              value={selectedLang}
-              onChange={handleLang}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Languages"
-                  value={formik.values.language}
-                  error={
-                    formik.touched.language && Boolean(formik.errors.language)
-                  }
-                  // helperText={formik.touched.language && formik.errors.language}
-                />
-              )}
-            />
-            <Autocomplete
-              sx={{
-                width: "90%",
-              }}
-              multiple
-              limitTags={2}
-              id="framework"
-              options={TagData.FrameworkTags}
-              getOptionLabel={(option) => option.label}
-              defaultValue={[TagData.FrameworkTags[0]]}
-              filterSelectedOptions
-              value={selectedFrame}
-              onChange={handleFrame}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Frameworks"
-                  value={formik.values.framework}
-                  error={
-                    formik.touched.framework && Boolean(formik.errors.framework)
-                  } 
-                  // helperText={
-                  //   formik.touched.framework && formik.errors.framework
-                  // }
-                />
-              )}
-            />
-            <Autocomplete
-              sx={{
-                width: "90%",
-              }}
-              multiple
-              limitTags={2}
-              id="size"
-              options={TagData.SizeTags}
-              getOptionLabel={(option) => option.label}
-              defaultValue={[TagData.SizeTags[0]]}
-              filterSelectedOptions
-              value={selectedSize}
-              onChange={handleSize}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Size"
-                  error={formik.touched.size && Boolean(formik.errors.size)}
-                  // helperText={formik.touched.size && formik.errors.size}
-                />
-              )}
+              error={formik.touched.LongDesc && Boolean(formik.errors.LongDesc)}
+              helperText={formik.touched.LongDesc && formik.errors.LongDesc}
             />
           </div>
         </div>
-        </div>
-        <div className="BottomHolder">
-          <Typography
-            sx={{
-              
-              fontSize: "1.5rem",
-            }}
-          >
-            {" "}
-            Project Title
-          </Typography>
-          <TextField
-            sx={{
-              width: "90%",
-              mb: "2rem",
-            }}
-            inputProps={{
-              style: {  fontSize: "1.5rem" },
-            }}
-            id="ProjectTitle"
-            name="ProjectTitle"
-            variant="outlined"
-            value={formik.values.ProjectTitle}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.ProjectTitle && Boolean(formik.errors.ProjectTitle)
-            }
-            helperText={
-              formik.touched.ProjectTitle && formik.errors.ProjectTitle
-            }
-          />
-          <Typography
-            sx={{
-              
-              fontSize: "1.5rem",
-            }}
-          >
-            {" "}
-            Long Description
-          </Typography>
-          <TextField
-            multiline
-            maxRows={4}
-            minRows={2}
-            sx={{
-              width: "90%",
-            }}
-            inputProps={{
-              style: { fontSize: "1rem" },
-            }}
-            id="LongDesc"
-            name="LongDesc"
-            variant="outlined"
-            value={formik.values.LongDesc}
-            onChange={formik.handleChange}
-            error={formik.touched.LongDesc && Boolean(formik.errors.LongDesc)}
-            helperText={formik.touched.LongDesc && formik.errors.LongDesc}
-          />
-        </div>
+        <Button
+          variant="contained"
+          sx={{
+            width: "12rem",
+            height: "4rem",
+            mt: "2rem",
+            mb: "2rem",
+            backgroundColor: "#6259b9",
+            color: "white",
+            fontSize: "1rem",
+            "&:hover": {
+              backgroundColor: "#716ab4",
+            },
+          }}
+          onClick={() => formik.handleSubmit()}
+        >
+          Create Project
+        </Button>
       </div>
-      <Button
-        variant="contained"
-        sx={{
-          width: "12rem",
-          height: "4rem",
-          mt: "2rem",
-          mb: "2rem",
-          backgroundColor: "#6259b9",
-          color: "white",
-          fontSize: "1rem",
-          "&:hover": {
-            backgroundColor: "#716ab4",
-          },
-        }}
-        onClick={() => formik.handleSubmit()}
-      >
-        Create Project
-      </Button>
-    </div>
     </div>
   );
 }
