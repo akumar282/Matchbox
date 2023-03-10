@@ -15,14 +15,14 @@ import * as yup from "yup";
 import { Link } from "react-router-dom";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { color } from "@mui/system";
+import { border, color } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import * as TagData from './constants'
 import { langBundle, frameworkBundle, sizeBundle } from "./constants";
 import { CreatePostsModelPayload } from '../backend/types'
 import { createPost } from '../backend/mutations/postMutations'
 import { Auth } from 'aws-amplify'
-
+import Navbar from "../components/NavBar";
 
 export default function CreateProject() {
   const [isSelected, setIsSelected] = React.useState(false);
@@ -146,36 +146,10 @@ export default function CreateProject() {
   });
 
   return (
+
     <div className="CreateProjectPage">
-      <Typography
-        variant="h4"
-        sx={{
-          textAlign: "center",
-          fontSize: "4rem",
-          mt: "1rem",
-          color: "#403f41c0",
-          fontFamily: "PT Serif",
-        }}
-      >
-        Create Project
-      </Typography>
-      <IconButton
-        component={Link}
-        to="/home"
-        size="large"
-        sx={{
-          position: "absolute",
-          top: 20,
-          right: 20,
-          color: "#FFFFFF",
-          backgroundColor: "#6259b9",
-          "&:hover": {
-            backgroundColor: "#716ab4",
-          },
-        }}
-      >
-        <CloseIcon fontSize="large" />
-      </IconButton>
+      <Navbar />
+      <div className="CreateProjectHolder">
       <div className="Holder">
         <div className="TopHolder">
           <div className="Uploadimg">
@@ -198,15 +172,16 @@ export default function CreateProject() {
               name="file"
               accept="image/*"
               onChange={handleChange}
-              style={{ display: "none" }}
+              style={{ display: "none", borderWidth: "0px" }}
             />
             <img className="imagePrev" id="Image" src={Image} alt={""} />
           </div>
 
           <div className="ShortDesc">
+            <div>
             <Typography
               sx={{
-                fontFamily: "PT Serif",
+                
                 fontSize: "1.5rem",
               }}
             >
@@ -215,12 +190,12 @@ export default function CreateProject() {
             </Typography>
             <TextField
               multiline
-              rows={6}
+              maxRows={2}
               sx={{
                 width: "90%",
               }}
               inputProps={{
-                style: { fontFamily: "PT Serif" },
+                style: {  },
               }}
               id="ShortDesc"
               name="ShortDesc"
@@ -234,7 +209,7 @@ export default function CreateProject() {
             />
             <Typography
               sx={{
-                fontFamily: "PT Serif",
+               
                 fontSize: "1.5rem",
                 mt: "2rem",
               }}
@@ -254,7 +229,7 @@ export default function CreateProject() {
                     <GitHubIcon />
                   </InputAdornment>
                 ),
-                style: { fontFamily: "PT Serif" },
+                style: {  },
               }}
               variant="outlined"
               value={formik.values.GithubLink}
@@ -265,14 +240,13 @@ export default function CreateProject() {
               helperText={formik.touched.GithubLink && formik.errors.GithubLink}
             />
           </div>
-
           <div className="TagsHolder">
             <Autocomplete
               sx={{
                 width: "90%",
               }}
               multiple
-              limitTags={3}
+              limitTags={2}
               id="language"
               options={TagData.LanguageTags}
               getOptionLabel={(option) => option.label}
@@ -297,7 +271,7 @@ export default function CreateProject() {
                 width: "90%",
               }}
               multiple
-              limitTags={3}
+              limitTags={2}
               id="framework"
               options={TagData.FrameworkTags}
               getOptionLabel={(option) => option.label}
@@ -324,7 +298,7 @@ export default function CreateProject() {
                 width: "90%",
               }}
               multiple
-              limitTags={3}
+              limitTags={2}
               id="size"
               options={TagData.SizeTags}
               getOptionLabel={(option) => option.label}
@@ -343,10 +317,11 @@ export default function CreateProject() {
             />
           </div>
         </div>
+        </div>
         <div className="BottomHolder">
           <Typography
             sx={{
-              fontFamily: "PT Serif",
+              
               fontSize: "1.5rem",
             }}
           >
@@ -359,7 +334,7 @@ export default function CreateProject() {
               mb: "2rem",
             }}
             inputProps={{
-              style: { fontFamily: "PT Serif", fontSize: "1.5rem" },
+              style: {  fontSize: "1.5rem" },
             }}
             id="ProjectTitle"
             name="ProjectTitle"
@@ -375,7 +350,7 @@ export default function CreateProject() {
           />
           <Typography
             sx={{
-              fontFamily: "PT Serif",
+              
               fontSize: "1.5rem",
             }}
           >
@@ -384,12 +359,13 @@ export default function CreateProject() {
           </Typography>
           <TextField
             multiline
-            rows={6}
+            maxRows={4}
+            minRows={2}
             sx={{
               width: "90%",
             }}
             inputProps={{
-              style: { fontFamily: "PT Serif", fontSize: "1.5rem" },
+              style: { fontSize: "1rem" },
             }}
             id="LongDesc"
             name="LongDesc"
@@ -404,14 +380,13 @@ export default function CreateProject() {
       <Button
         variant="contained"
         sx={{
-          width: "20%",
-          height: "5rem",
+          width: "12rem",
+          height: "4rem",
           mt: "2rem",
           mb: "2rem",
           backgroundColor: "#6259b9",
           color: "white",
-          fontFamily: "PT Serif",
-          fontSize: "1.5rem",
+          fontSize: "1rem",
           "&:hover": {
             backgroundColor: "#716ab4",
           },
@@ -420,6 +395,7 @@ export default function CreateProject() {
       >
         Create Project
       </Button>
+    </div>
     </div>
   );
 }

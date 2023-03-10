@@ -5,16 +5,24 @@
     justify-content: center;
     width: 100%;
     height: 100vh;
+    overflow: hidden;
 }
 .Holder {
-    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    width: 80vw;
-
+    width: 100%;
+}
+.CreateProjectHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 75rem;
+    height: 100%;
 }
 .TopHolder {
     display: flex;
@@ -22,32 +30,29 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 35vh;
+    height: 33vh;
     border-radius: 1rem;
-    gap: 2rem;
 }
 .Uploadimg {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 35vw;
+    width: 45%;
     height: 100%;
-    background-color: #53535338;
     border-radius: 1rem;
-    box-shadow: 0 0 0.5rem 0.1rem #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     
 }
 .ShortDesc{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 25vw;
+    width: 53%;
     height: 100%;
     border-radius: 1rem;
-    background-color: #53535338;
-    box-shadow: 0 0 0.5rem 0.1rem #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     
 }
 .TagsHolder {
@@ -55,13 +60,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 25vw;
+    width: 50%;
     height: 100%;
-    background-color: #53535338;
     gap: 2rem;
     border-radius: 1rem;
-    box-shadow: 0 0 0.5rem 0.1rem #000000;
-    
 }
 .BottomHolder {
     display: flex;
@@ -69,10 +71,9 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 40vh;
-    background-color: #53535338;
+    height: 35vh;
     border-radius: 1rem;
-    box-shadow: 0 0 0.5rem 0.1rem #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .imagePrev {
     display: flex;
@@ -81,7 +82,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    border-radius: 1rem;
     border: none;
+    object-fit: fill;
+    border-radius: 1rem;
 }
