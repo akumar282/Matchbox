@@ -111,7 +111,7 @@ function DiscoverComponent(props: any) {
                 <div className="DiscoverimgBox">
                   <img
                     className="DiscoverImg"
-                    src={"images/" + props.projects.image_link}
+                    src={props.projects.image_link}
                     alt="project image"
                   />
                   {/* remove project button */}
