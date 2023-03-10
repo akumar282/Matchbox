@@ -89,7 +89,6 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
-    height: 69.6vh;
     max-width: 70rem;
 }
 
@@ -101,9 +100,11 @@
 .about-container {
     margin:auto;
     background-color: #2d2a48;
-    height: 30.4vh;
+    height: 30.9vh;
     overflow: hidden;
-    display: block;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 
@@ -156,4 +157,7 @@
     margin: auto;
     /* max-width: 80%; */
     margin: auto;
+}
+.landing {
+    overflow: hidden;
 }
