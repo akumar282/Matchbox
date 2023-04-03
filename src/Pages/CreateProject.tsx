@@ -23,6 +23,7 @@ import { CreatePostsModelPayload } from '../backend/types'
 import { createPost } from '../backend/mutations/postMutations'
 import { Auth } from 'aws-amplify'
 import Navbar from "../components/NavBar";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function CreateProject() {
   const [isSelected, setIsSelected] = React.useState(false);
@@ -44,9 +45,11 @@ export default function CreateProject() {
     size: sizeBundle[];
   }) {
     let dateTime = new Date
+    const uuidGen = uuidv4();
     const result = await createPost(
       {
         input: {
+          id: uuidGen,
           post_title: props.ProjectTitle,
           description: props.LongDesc,
           project_link: props.GithubLink,

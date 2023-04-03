@@ -13,20 +13,16 @@
     },
     "categories": {
       "auth": {
-        "Unhinged": {},
         "unhinged15d4ae3f": {}
       },
-      "api": {
-        "Unhinged": {}
+      "storage": {
+        "s3unhingedstorage98feb2cc": {}
       },
       "hosting": {
         "amplifyhosting": {
           "appId": "dnpxlnk1ec683",
           "type": "manual"
         }
-      },
-      "storage": {
-        "s3unhingedstorage98feb2cc": {}
       }
     }
   }
