@@ -23,11 +23,13 @@ import { CreatePostsModelPayload } from '../backend/types'
 import { createPost } from '../backend/mutations/postMutations'
 import { Auth } from 'aws-amplify'
 import Navbar from "../components/NavBar";
+import { uploadImage, getImage} from '../backend/storage/s3'
 import { v4 as uuidv4 } from 'uuid';
 
 export default function CreateProject() {
   const [isSelected, setIsSelected] = React.useState(false);
   const [selectedFile, setSelectedFile] = React.useState(null);
+  const [fileObject, setFileObject] = React.useState(null);
   const [Image, setImage] = React.useState("");
   const [selectedLang, setSelectedLang] = React.useState([]);
   const [selectedFrame, setSelectedFrame] = React.useState([]);
@@ -45,7 +47,9 @@ export default function CreateProject() {
     size: sizeBundle[];
   }): Promise<void> {
     let dateTime = new Date
+
     const uuidGen = uuidv4();
+    const imageLink = await getImage(await uploadImage(selectedFile!))
     const result = await createPost(
       {
         input: {
@@ -53,7 +57,7 @@ export default function CreateProject() {
           post_title: props.ProjectTitle,
           description: props.LongDesc,
           project_link: props.GithubLink,
-          image_link: 'https://avatars.githubusercontent.com/u/13607064?s=64&v=4',
+          image_link: imageLink == null ? 'https://avatars.githubusercontent.com/u/13607064?s=64&v=4' : imageLink,
           post_date: dateTime.toISOString(),
           userID: localStorage.getItem('uuid')!,
           lang_tag: props.language.map(x => x.enumMap),
@@ -88,10 +92,11 @@ export default function CreateProject() {
   }
   //file input handler
   function handleChange(event) {
-    setSelectedFile(event.target.files[0]);
+    setFileObject({ ...event.target.files[0] })
+    setSelectedFile(event.target.files[0])
     setIsSelected(true);
     if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
+      setImage(URL.createObjectURL(event.target.files[0]))
     }
   }
   const validationSchema = yup.object({
@@ -131,10 +136,11 @@ export default function CreateProject() {
 
   const formik = useFormik({
     initialValues: {
-      ShortDesc: "",
-      GithubLink: "",
-      ProjectTitle: "",
-      LongDesc: "",
+      ShortDesc: '',
+      GithubLink: '',
+      ImageLine: '',
+      ProjectTitle: '',
+      LongDesc: '',
       language: [] as langBundle[],
       framework: [] as frameworkBundle[],
       size: [] as sizeBundle[],
@@ -142,6 +148,7 @@ export default function CreateProject() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(localStorage.getItem('uuid'))
+      console.log(fileObject)
       sendProjectToDyanmo(values)
       navigate("/home");
     },
