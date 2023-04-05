@@ -3,8 +3,6 @@ import Navbar from "../components/NavBar";
 import "./CSS/DiscoverPage.css";
 
 import { motion, AnimatePresence } from "framer-motion";
-import Projects from "./JsonTestDiscover";
-
 // MUI imports
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
@@ -42,7 +40,7 @@ async function getProjects(uuid: string): Promise<any[]> {
 const projectsAll = await getProjects(localStorage.getItem('uuid')!)
 
 export default function DiscoverPage() {
-  console.log(localStorage)
+  console.log(projectsAll)
   // set up state to keep track of which project is currently visible
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
 
@@ -51,7 +49,11 @@ export default function DiscoverPage() {
     setCurrentProjectIndex((currentProjectIndex + 1) % projectsAll.length);
   };
   const handleBackProject = () => {
+    if (currentProjectIndex === 0) {
+      setCurrentProjectIndex(projectsAll.length - 1);
+    } else
     setCurrentProjectIndex((currentProjectIndex - 1) % projectsAll.length);
+    
   };
   console.log(projectsAll)
   return (
@@ -131,7 +133,7 @@ function DiscoverComponent(props: any) {
                     }}
                     onClick={handleRemove}
                   >
-                    <CancelIcon fontSize="large" sx={{ color: "white" }} />
+                    <CancelIcon fontSize="large" sx={{ }} />
                   </IconButton>
                   {/* save project button */}
                   <IconButton
@@ -149,7 +151,7 @@ function DiscoverComponent(props: any) {
                   >
                     <BookmarkBorderIcon
                       fontSize="large"
-                      sx={{ color: "white" }}
+                      sx={{ }}
                     />
                   </IconButton>
                 </div>
@@ -165,7 +167,7 @@ function DiscoverComponent(props: any) {
                       >
                         <GitHubIcon />
                       </IconButton>
-                      <IconButton
+                      <IconButton 
                         color="primary"
                         aria-label="website link"
                         component="label"
@@ -179,7 +181,7 @@ function DiscoverComponent(props: any) {
                       ...props.projects.lang_tag?.map((tag) => ({ tag })),
                       ...props.projects.framework_tag?.map((tag) => ({ tag })),
                       ...props.projects.size_tag?.map((tag) => ({ tag })),
-                    ].map(({ tag }) => (
+                    ].map(({ tag}) => (
                       <div className="TagDiscover">
                         <Chip label={tag} sx={{ minWidth: 70 }} />
                       </div>

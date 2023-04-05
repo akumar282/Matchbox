@@ -147,8 +147,6 @@ export default function CreateProject() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(localStorage.getItem('uuid'))
-      console.log(fileObject)
       sendProjectToDyanmo(values)
       navigate("/home");
     },

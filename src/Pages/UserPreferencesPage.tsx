@@ -58,6 +58,8 @@ export default function UserPreferencesPage() {
     },
     validationSchema: validationSchemaFilter,
     onSubmit: (values) => {
+      localStorage.setItem("firstTime", "false");
+      
       navigate("/home");
     },
   });

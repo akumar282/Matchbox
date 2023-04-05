@@ -46,6 +46,7 @@ export default function HomePage() {
       <div className="HomeMain">
         <div className="CreateProject" onClick={() =>  handleCreate()}>
           <AddCircleOutlineIcon fontSize="large" className="Creaticon" />
+          <h1 className="CreateText">Create Project</h1>
         </div>
         {projectsAll.map((tag) => (
           <CustomSavedProjects user={tag} key={tag.post_title} />

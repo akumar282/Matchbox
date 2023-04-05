@@ -10,10 +10,11 @@ import LandingPage from './Pages/LandingPage'
 import HomePage from './Pages/HomePage'
 import ForgotPassword from './Pages/ForgotPasswordPage'
 import DiscoverPage from './Pages/DiscoverPage'
-
+import ProjectDetails from './Pages/ProjectDetails'
 import SettingsPage from './Pages/Settings'
 import CreateProject from './Pages/CreateProject'
 import UserPreferencesPage from './Pages/UserPreferencesPage'
+import SavedProjects from './Pages/SavedProjects';
 
 const globalAuthState = {
   isAuthenticated: false,
@@ -22,11 +23,19 @@ const globalAuthState = {
   token: null,
   uuid: null,
   isLoggedin: false,
-  // firstAccount: true,
+  firstTime: false,
 }
 function setLocalStorage(key, value) {
+  console.log (key, value)
+  window.localStorage.setItem('email', value.email)
+  window.localStorage.setItem('isLoggedin', value.isLoggedin)
+  window.localStorage.setItem('firstTime', value.firstTime)
+  window.localStorage.setItem('uuid', value.uuid)
+  window.localStorage.setItem('token', value.token)
+  window.localStorage.setItem('username', value.username) 
+
   try {
-    window.sessionStorage.setItem(key, JSON.stringify(value));
+    window.localStorage.setItem(key, JSON.stringify(value));
   } catch (e) {
     // catch possible errors:
     // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
@@ -89,6 +98,8 @@ function App () {
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>
         <Route path='/settings' element={<SettingsPage />} />
         <Route path='/preferences' element={<UserPreferencesPage/>} />
+        <Route path='/discover/:projectName' element={<ProjectDetails/>} />
+        <Route path='/savedprojects' element={<SavedProjects/>} />
       </Routes>
     </BrowserRouter>
     </AuthProvider>
