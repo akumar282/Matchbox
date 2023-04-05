@@ -5,7 +5,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import { IconButton, Button } from "@mui/material";
 import { Link, useHref, useNavigate } from "react-router-dom";
 import { useContext } from 'react';
-import { AuthContext, DispatchContext } from '../App';
 import { useEffect, useState } from "react";
 import "./CSS/HomePage.css";
 import { getPostsByUser } from "../backend/queries/postQueries";
@@ -26,15 +25,9 @@ async function getProjects(uuid: string): Promise<any[]> {
 }
 
 const projectsAll = await getProjects(localStorage.getItem('uuid')!)
-
+console.log(localStorage)
 export default function HomePage() {
-  const Authstate = useContext(AuthContext);
-  const Authdispatch = useContext(DispatchContext);
-  const useGlobalState = () => [
-    Authstate,
-    Authdispatch
-  ];
-  const [State, Dispatch] = useGlobalState();
+ 
   const navigate = useNavigate();
   function handleCreate() {
     navigate("/create-project");
