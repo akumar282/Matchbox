@@ -17,12 +17,14 @@ describe('Query Tests', () => {
     const fil: ListPostsModelsQueryVariables = {
       filter: {
         userID: {
-          eq: 'f4f4a813-3b83-4e3a-99f8-39f5927d52e8'
+          eq: 'eb91bda2-7560-44c6-a89d-b2ada79bc7cf'
         }
-      }
+      },
+      limit: 30
     }
     const result = await getPostsByUser(fil)
     const flatResult = JSON.stringify(result)
+    console.log(result.data.listPostsModels)
     console.log(result.data.listPostsModels.items.filter(x => x._deleted !== true))
     console.log(result.data.listPostsModels.items.size)
     expect(flatResult).toContain(`items`)
