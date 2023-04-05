@@ -107,7 +107,11 @@
     height: 3vh;
     margin-top: 4px;
     margin-bottom: 2rem;
+    font-size: 1.5rem;
+    white-space: nowrap; 
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .ProjectShow {
     display:none;

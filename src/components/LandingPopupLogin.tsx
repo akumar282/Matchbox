@@ -45,8 +45,16 @@ export default function LandingPopupLogin(props) {
     onSubmit: async (values) => {
       if (await Auth.signIn(values.email, values.password)){
         localStorage.setItem('uuid', (await getCurrentUserAttributes()).at(0)!.value)
+        localStorage.setItem('email', values.email)
+        localStorage.setItem('isLoggedin', 'true')
+        console.log(localStorage.getItem('firstTime') === 'true')
         console.log(localStorage.getItem('uuid'))
-        navigate("/home")
+        
+        if (localStorage.getItem('firstTime') === 'true') {
+          navigate("/preferences")
+        } else {
+          navigate("/home")
+        }
       } else {
         alert("Incorrect username or password")
       }

@@ -22,11 +22,19 @@ const globalAuthState = {
   token: null,
   uuid: null,
   isLoggedin: false,
-  // firstAccount: true,
+  firstTime: false,
 }
 function setLocalStorage(key, value) {
+  console.log (key, value)
+  window.localStorage.setItem('email', value.email)
+  window.localStorage.setItem('isLoggedin', value.isLoggedin)
+  window.localStorage.setItem('firstTime', value.firstTime)
+  window.localStorage.setItem('uuid', value.uuid)
+  window.localStorage.setItem('token', value.token)
+  window.localStorage.setItem('username', value.username) 
+
   try {
-    window.sessionStorage.setItem(key, JSON.stringify(value));
+    window.localStorage.setItem(key, JSON.stringify(value));
   } catch (e) {
     // catch possible errors:
     // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
