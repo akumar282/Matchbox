@@ -126,7 +126,7 @@ function DiscoverComponent(props: any) {
                     }}
                     onClick={handleRemove}
                   >
-                    <CancelIcon fontSize="large" sx={{ color: "white" }} />
+                    <CancelIcon fontSize="large" sx={{ }} />
                   </IconButton>
                   {/* save project button */}
                   <IconButton
@@ -144,7 +144,7 @@ function DiscoverComponent(props: any) {
                   >
                     <BookmarkBorderIcon
                       fontSize="large"
-                      sx={{ color: "white" }}
+                      sx={{ }}
                     />
                   </IconButton>
                 </div>
@@ -160,7 +160,7 @@ function DiscoverComponent(props: any) {
                       >
                         <GitHubIcon />
                       </IconButton>
-                      <IconButton
+                      <IconButton 
                         color="primary"
                         aria-label="website link"
                         component="label"

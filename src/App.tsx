@@ -10,7 +10,7 @@ import LandingPage from './Pages/LandingPage'
 import HomePage from './Pages/HomePage'
 import ForgotPassword from './Pages/ForgotPasswordPage'
 import DiscoverPage from './Pages/DiscoverPage'
-
+import ProjectDetails from './Pages/ProjectDetails'
 import SettingsPage from './Pages/Settings'
 import CreateProject from './Pages/CreateProject'
 import UserPreferencesPage from './Pages/UserPreferencesPage'
@@ -97,6 +97,7 @@ function App () {
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>
         <Route path='/settings' element={<SettingsPage />} />
         <Route path='/preferences' element={<UserPreferencesPage/>} />
+        <Route path='/discover/:projectName' element={<ProjectDetails/>} />
       </Routes>
     </BrowserRouter>
     </AuthProvider>
