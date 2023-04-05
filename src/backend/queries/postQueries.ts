@@ -1,5 +1,5 @@
 import { API } from 'aws-amplify'
-import { ModelIDInput, ModelPostsModelFilterInput } from '../../API'
+import { ListPostsModelsQueryVariables, ModelIDInput, ModelPostsModelFilterInput } from '../../API'
 import { getPostsModel, listPostsModels } from '../../graphql/queries'
 
 
@@ -13,12 +13,12 @@ export async function getPostById(id: string){
   )
 }
 
-export async function getPostsByUser(userID: ModelPostsModelFilterInput) {
+export async function getPostsByUser(userID: ListPostsModelsQueryVariables) {
   return await API.graphql(
     {
       authMode: 'API_KEY',
       query: listPostsModels,
-      variables: userID
+      variables: userID 
     }
   )
 }

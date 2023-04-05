@@ -15,7 +15,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { getPostsByUser } from '../../src/backend/queries/postQueries';
-import { ModelIDInput } from "../API";
+import { ListPostsModelsQueryVariables, ModelIDInput } from "../API";
 // keep these functions here for top level backend connection
 function handleBackendRemove() {
   console.log("removing project");
@@ -28,7 +28,14 @@ function handleBackendSave() {
 }
 
 async function getProjects(uuid: string): Promise<any[]> {
-  const result = await getPostsByUser({ userID: uuid as ModelIDInput })
+  const fil: ListPostsModelsQueryVariables = {
+    filter: {
+      userID: {
+        ne: uuid
+      }
+    }
+  }
+  const result = await getPostsByUser(fil)
   return result.data.listPostsModels.items.filter(x => x._deleted !== true)
 }
 

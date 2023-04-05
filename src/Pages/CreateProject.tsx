@@ -49,7 +49,7 @@ export default function CreateProject() {
     let dateTime = new Date
 
     const uuidGen = uuidv4();
-    const imageLink = await getImage(await uploadImage(selectedFile!))
+    const imageLink = await uploadImage(selectedFile!)
     const result = await createPost(
       {
         input: {
