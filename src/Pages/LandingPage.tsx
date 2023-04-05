@@ -19,14 +19,43 @@ import 'aos/dist/aos.css';
 import { about } from './LandingPageData' 
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext, DispatchContext } from '../App';
 Amplify.configure(awsconfig)
 const payload: CreateNewsletterEmailModelPayload = {
   input: {
     email: ''
   }
 }
-  
+const globalAuthState = {
+  isAuthenticated: 'false',
+  username: null,
+  email: null,
+  token: null,
+  uuid: null,
+  isLoggedin: 'false',
+  firstTime: 'false',
+}
+function setLocalStorage() {
+  if (!localStorage.getItem('email')) {
+    window.localStorage.setItem('email', globalAuthState.email)
+  }
+  if (!localStorage.getItem('isAuthenticated')) {
+  window.localStorage.setItem('isLoggedin', globalAuthState.isLoggedin)
+  }
+  if (!localStorage.getItem('firstTime')) {
+  window.localStorage.setItem('firstTime', globalAuthState.firstTime)
+  }
+  if (!localStorage.getItem('uuid')) {
+  window.localStorage.setItem('uuid', globalAuthState.uuid)
+  }
+  if (!localStorage.getItem('token')) {
+  window.localStorage.setItem('token', globalAuthState.token)
+  }
+  if (!localStorage.getItem('username')) {
+  window.localStorage.setItem('username', globalAuthState.username) 
+  }
+}
+setLocalStorage();
+console.log(localStorage)
 export default function LandingPage() {
   // email signup textfield handling [leave this here, will be used later]
   // const [userEmail, setUserEmail] = React.useState("");
@@ -40,13 +69,6 @@ export default function LandingPage() {
     const request = await createNewsletterEmail(payload)
       .catch(error => console.log(error));  
   }
-  const Authstate = useContext(AuthContext); //code for local contextx
-  const Authdispatch = useContext(DispatchContext); // code for local context
-  const useGlobalState = () => [ // code for local context
-    Authstate,  // code for local context
-    Authdispatch // code for local context
-  ]; 
-  const [State, Dispatch] = useGlobalState(); // code for local context
   
   // login popup handling
   const [isLoginOpen, setIsLoginOpen] = React.useState(false)
