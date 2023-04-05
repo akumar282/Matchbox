@@ -13,6 +13,7 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Auth } from "aws-amplify";
+import { getCurrentUserAttributes } from '../backend/auth/authentication'
 
 export default function LandingPopupLogin(props) {
   function noAccount() {
@@ -43,7 +44,9 @@ export default function LandingPopupLogin(props) {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       if (await Auth.signIn(values.email, values.password)){
-        navigate("/home");
+        localStorage.setItem('uuid', (await getCurrentUserAttributes()).at(0)!.value)
+        console.log(localStorage.getItem('uuid'))
+        navigate("/home")
       } else {
         alert("Incorrect username or password")
       }

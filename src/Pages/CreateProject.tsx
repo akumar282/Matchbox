@@ -43,7 +43,7 @@ export default function CreateProject() {
     language: langBundle[];
     framework: frameworkBundle[];
     size: sizeBundle[];
-  }) {
+  }): Promise<void> {
     let dateTime = new Date
     const uuidGen = uuidv4();
     const result = await createPost(
@@ -141,6 +141,7 @@ export default function CreateProject() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      console.log(localStorage.getItem('uuid'))
       sendProjectToDyanmo(values)
       navigate("/home");
     },
