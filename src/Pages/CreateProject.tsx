@@ -35,8 +35,6 @@ export default function CreateProject() {
   const [selectedFrame, setSelectedFrame] = React.useState([]);
   const [selectedSize, setSelectedSize] = React.useState([]);
 
-  console.log(Auth.currentAuthenticatedUser());
-
   async function sendProjectToDyanmo(props: {
     ProjectTitle: string;
     ShortDesc: string;
@@ -47,7 +45,7 @@ export default function CreateProject() {
     size: sizeBundle[];
   }): Promise<void> {
     let dateTime = new Date
-
+    console.log(localStorage.getItem('uuid'))
     const uuidGen = uuidv4();
     const imageLink = await uploadImage(selectedFile!)
     const result = await createPost(

@@ -47,7 +47,6 @@ export default function LandingPopupLogin(props) {
         localStorage.setItem('uuid', (await getCurrentUserAttributes()).at(0)!.value)
         localStorage.setItem('email', values.email)
         localStorage.setItem('isLoggedin', 'true')
-        console.log(localStorage.getItem('firstTime') === 'true')
         console.log(localStorage.getItem('uuid'))
         
         if (localStorage.getItem('firstTime') === 'true') {
