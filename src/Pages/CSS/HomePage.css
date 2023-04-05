@@ -16,7 +16,6 @@
 }
 .CreateProject{
     display: flex;
-    flex-direction: row;
     align-items: center;
     
     background: linear-gradient(-45deg, #dd846973, #e0598d7a, #6cbbd879, #81ddc875);
@@ -32,6 +31,7 @@
     border-radius: 10px;
     border-width: .2rem;
     transition: ease-in-out 0.4s;
+    flex-direction: column;
 }
 @keyframes Gradient {
     0% {
@@ -51,6 +51,11 @@
 }
 .CreateProject:hover .Creaticon {
     color: #915ee4;
+    transition: ease-in-out 0.4s;
+}
+.CreateProject:hover .CreateText {
+    color: #915ee4;
+    transition: ease-in-out 0.4s;
 }
 
 .HomeSavedProjects {
@@ -70,6 +75,15 @@
     overflow-y: hidden;
     transition: ease-in-out 0.4s;
 }
+.CreateText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    font-size: 1.5rem;
+}
 .HomeSavedProjects:hover{
     box-shadow: 0 9px 10px rgba(0,0,0,0.4);
     height: 24.9vh;
@@ -79,12 +93,13 @@
 }
 .HomeSavedProjects:hover .ProjectShow {
     display: block;
+    transition: ease-in-out 0.4s;
 }
 .SavedImgCont{
     display: static;
     width: 20rem;
     height: 15vh;
-    background-color: #915ee4;
+    background-color: #c1c0c4;
     border-radius: 10px 10px 0 0;
     margin-bottom: 0;
 }
@@ -107,10 +122,9 @@
     height: 3vh;
     margin-top: 4px;
     margin-bottom: 2rem;
-    font-size: 1.5rem;
+    font-size: 2rem;
     white-space: nowrap; 
     text-align: center;
-    overflow: hidden;
     text-overflow: ellipsis;
 }
 .ProjectShow {

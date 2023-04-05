@@ -23,6 +23,9 @@
           "appId": "dnpxlnk1ec683",
           "type": "manual"
         }
+      },
+      "api": {
+        "Unhinged": {}
       }
     }
   }

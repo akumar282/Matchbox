@@ -14,6 +14,7 @@ import ProjectDetails from './Pages/ProjectDetails'
 import SettingsPage from './Pages/Settings'
 import CreateProject from './Pages/CreateProject'
 import UserPreferencesPage from './Pages/UserPreferencesPage'
+import SavedProjects from './Pages/SavedProjects';
 
 const globalAuthState = {
   isAuthenticated: false,
@@ -98,6 +99,7 @@ function App () {
         <Route path='/settings' element={<SettingsPage />} />
         <Route path='/preferences' element={<UserPreferencesPage/>} />
         <Route path='/discover/:projectName' element={<ProjectDetails/>} />
+        <Route path='/savedprojects' element={<SavedProjects/>} />
       </Routes>
     </BrowserRouter>
     </AuthProvider>

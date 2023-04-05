@@ -79,7 +79,7 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   post_title: String!
   description: String
   project_link: AWSURL
-  image_link: AWSURL
+  image_link: String
   post_date: AWSDateTime
   userID: ID! @index(name: "byUsersModel")
   lang_tag: [LanguageTag]

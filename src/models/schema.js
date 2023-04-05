@@ -97,7 +97,7 @@ export const schema = {
                 "image_link": {
                     "name": "image_link",
                     "isArray": false,
-                    "type": "AWSURL",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -441,5 +441,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.2.0",
-    "version": "f2d11fb7d4b4964969fb509718a8e7d4"
+    "version": "b13ed3c4fd39a21014c424465ac4b31b"
 };

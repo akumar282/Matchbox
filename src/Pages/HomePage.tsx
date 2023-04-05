@@ -9,32 +9,19 @@ import { AuthContext, DispatchContext } from '../App';
 import { useEffect, useState } from "react";
 import "./CSS/HomePage.css";
 import { getPostsByUser } from "../backend/queries/postQueries";
-import { ModelIDInput } from "../API";
-const project = {
-  name: "Project 1",
-  image: "/Strom.jpg",
-  githubLink: "https://github.com/mohazahid/Tatos/wiki",
-};
-const project2 = {
-  name: "Project 2",
-  image: "/Strom.jpg",
-  githubLink: "https://github.com/mohazahid/Tatos/wiki",
-};
-const arr = [
-  project,
-  project2,
-  project,
-  project,
-  project,
-  project,
-  project,
-  project,
-  project,
-  project,
-];
+import { ListPostsModelsQueryVariables, ModelIDInput } from "../API";
+import { Auth } from 'aws-amplify';
+import { getImage } from "../backend/storage/s3";
 
 async function getProjects(uuid: string): Promise<any[]> {
-  const result = await getPostsByUser({ userID: uuid as ModelIDInput })
+  const fil: ListPostsModelsQueryVariables = {
+    filter: {
+      userID: {
+        eq: uuid
+      }
+    }
+  }
+  const result = await getPostsByUser(fil)
   return result.data.listPostsModels.items.filter(x => x._deleted !== true)
 }
 
@@ -59,6 +46,7 @@ export default function HomePage() {
       <div className="HomeMain">
         <div className="CreateProject" onClick={() =>  handleCreate()}>
           <AddCircleOutlineIcon fontSize="large" className="Creaticon" />
+          <h1 className="CreateText">Create Project</h1>
         </div>
         {projectsAll.map((tag) => (
           <CustomSavedProjects user={tag} key={tag.post_title} />
@@ -70,12 +58,23 @@ export default function HomePage() {
 }
 
 const CustomSavedProjects = (props: any) => {
+  const [imageSrc, setImageSrc] = useState("");
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      const src = await getImage(props.user.image_link);
+      setImageSrc(src);
+    };
+
+    fetchImage();
+  }, [props.user.image_link]);
+
   return (
     <div className="HomeSavedProjects">
       <div className="SavedImgCont">
         <img
           className="SavedImg"
-          src={props.user.image_link}
+          src={imageSrc}
           alt="Project Image"
         />
       </div>
