@@ -28,7 +28,6 @@ export default function ConfirmationPopup(props) {
                 .matches(/^[0-9]+$/, "Must be only digits"),
         }),
         onSubmit: async values => {
-            alert(JSON.stringify(values, null, 2));
             await Auth.confirmSignUp(localStorage.getItem('email')!, values.AuthCode)
             // navigate("/create-preferences")
             handleClose();
