@@ -14,6 +14,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { getPostsByUser } from '../../src/backend/queries/postQueries';
 import { ListPostsModelsQueryVariables, ModelIDInput } from "../API";
+import { getImage } from "../backend/storage/s3";
 // keep these functions here for top level backend connection
 function handleBackendRemove() {
   console.log("removing project");
@@ -25,21 +26,25 @@ function handleBackendSave() {
   // TODO make backend connection here
 }
 
-async function getProjects(uuid: string): Promise<any[]> {
-  const fil: ListPostsModelsQueryVariables = {
-    filter: {
-      userID: {
-        ne: uuid
-      }
-    }
-  }
-  const result = await getPostsByUser(fil)
-  return result.data.listPostsModels.items.filter(x => x._deleted !== true)
-}
 
-const projectsAll = await getProjects(localStorage.getItem('uuid')!)
 
 export default function DiscoverPage() {
+  const [projectsAll, setProjectsAll] = useState<any[]>([]);
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const result = await getPostsByUser({
+        filter: {
+          userID: {
+            ne: localStorage.getItem('uuid')!
+          }
+        }
+      });
+      const filteredProjects = result.data.listPostsModels.items.filter(x => x._deleted !== true);
+      setProjectsAll(filteredProjects);
+    };
+
+    fetchProjects();
+  }, []);
   console.log(projectsAll)
   // set up state to keep track of which project is currently visible
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
@@ -74,6 +79,18 @@ export default function DiscoverPage() {
 
 function DiscoverComponent(props: any) {
   // remake objects
+
+  const [imageSrc, setImageSrc] = useState("");
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      const src = await getImage(props.projects.image_link);
+      setImageSrc(src);
+    };
+
+    fetchImage();
+  }, []);
+
   const { projects, isVisible, onNextProject, onBackProject } = props;
 
   // framer motion -- use for exit, later implementation
@@ -116,7 +133,7 @@ function DiscoverComponent(props: any) {
                 <div className="DiscoverimgBox">
                   <img
                     className="DiscoverImg"
-                    src={props.projects.image_link}
+                    src={imageSrc}
                     alt="project image"
                   />
                   {/* remove project button */}
