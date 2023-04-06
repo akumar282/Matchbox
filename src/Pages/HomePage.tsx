@@ -2,32 +2,35 @@ import React from "react";
 import Navbar from "../components/NavBar";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { IconButton, Button } from "@mui/material";
-import { Link, useHref, useNavigate } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { useEffect, useState } from "react";
 import "./CSS/HomePage.css";
 import { getPostsByUser } from "../backend/queries/postQueries";
-import { ListPostsModelsQueryVariables, ModelIDInput } from "../API";
-import { Auth } from 'aws-amplify';
+import { ListPostsModelsQueryVariables } from "../API";
 import { getImage } from "../backend/storage/s3";
 
-async function getProjects(uuid: string): Promise<any[]> {
-  const fil: ListPostsModelsQueryVariables = {
-    filter: {
-      userID: {
-        eq: uuid
-      }
-    }
-  }
-  const result = await getPostsByUser(fil)
-  return result.data.listPostsModels.items.filter(x => x._deleted !== true)
-}
-
-const projectsAll = await getProjects(localStorage.getItem('uuid')!)
 export default function HomePage() {
- 
   const navigate = useNavigate();
+  const [projectsAll, setProjectsAll] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const result = await getPostsByUser({
+        filter: {
+          userID: {
+            eq: localStorage.getItem('uuid')!
+          }
+        }
+      });
+      const filteredProjects = result.data.listPostsModels.items.filter(x => x._deleted !== true);
+      setProjectsAll(filteredProjects);
+    };
+
+    fetchProjects();
+  }, []);
+
   function handleCreate() {
     navigate("/create-project");
   }
@@ -43,7 +46,6 @@ export default function HomePage() {
         {projectsAll.map((tag) => (
           <CustomSavedProjects user={tag} key={tag.post_title} />
         ))}
-
       </div>
     </div>
   );
