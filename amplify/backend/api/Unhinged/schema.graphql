@@ -78,6 +78,7 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   id: ID!
   post_title: String!
   description: String
+  long_description: String
   project_link: AWSURL
   image_link: String
   post_date: AWSDateTime
@@ -87,6 +88,7 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   interest_tag: [InterestTag]
   size_tag: [SizeTag]
   framework_tag: [FrameworkTag]
+  post_comments: [CommentModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
 }
 
 type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
@@ -94,7 +96,9 @@ type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [re
   user_name: String!
   email: String!
   password: String!
+  profile_image: String
   user_posts: [PostsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  user_comments: [CommentModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   first_name: String
   last_name: String
   user_creation_date: AWSDate
@@ -102,4 +106,13 @@ type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [re
   saved_posts: [ID]
   hide_posts: [ID]
 }
- 
+
+type CommentModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  comment: String!
+  profile_image: String
+  comment_date: AWSDateTime
+  postID: ID! @index(name: "byPostsModel")
+  userID: ID! @index(name: "byUsersModel")
+  user_name: String!
+}

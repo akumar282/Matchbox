@@ -207,7 +207,7 @@ function DiscoverComponent(props: any) {
                 </div>
               </div>
               <div className="BottomHolderDiscover">
-                <p>{props.projects.description}</p>
+                <p>{props.projects.long_description}</p>
               </div>
             </div>
             <IconButton sx={{}} onClick={handleNext}>

@@ -59,6 +59,7 @@ export const createPostsModel = /* GraphQL */ `
       id
       post_title
       description
+      long_description
       project_link
       image_link
       post_date
@@ -68,6 +69,10 @@ export const createPostsModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      post_comments {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -85,6 +90,7 @@ export const updatePostsModel = /* GraphQL */ `
       id
       post_title
       description
+      long_description
       project_link
       image_link
       post_date
@@ -94,6 +100,10 @@ export const updatePostsModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      post_comments {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -111,6 +121,7 @@ export const deletePostsModel = /* GraphQL */ `
       id
       post_title
       description
+      long_description
       project_link
       image_link
       post_date
@@ -120,6 +131,10 @@ export const deletePostsModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      post_comments {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -138,7 +153,12 @@ export const createUsersModel = /* GraphQL */ `
       user_name
       email
       password
+      profile_image
       user_posts {
+        nextToken
+        startedAt
+      }
+      user_comments {
         nextToken
         startedAt
       }
@@ -166,7 +186,12 @@ export const updateUsersModel = /* GraphQL */ `
       user_name
       email
       password
+      profile_image
       user_posts {
+        nextToken
+        startedAt
+      }
+      user_comments {
         nextToken
         startedAt
       }
@@ -194,7 +219,12 @@ export const deleteUsersModel = /* GraphQL */ `
       user_name
       email
       password
+      profile_image
       user_posts {
+        nextToken
+        startedAt
+      }
+      user_comments {
         nextToken
         startedAt
       }
@@ -204,6 +234,69 @@ export const deleteUsersModel = /* GraphQL */ `
       dahublink
       saved_posts
       hide_posts
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createCommentModel = /* GraphQL */ `
+  mutation CreateCommentModel(
+    $input: CreateCommentModelInput!
+    $condition: ModelCommentModelConditionInput
+  ) {
+    createCommentModel(input: $input, condition: $condition) {
+      id
+      comment
+      profile_image
+      comment_date
+      postID
+      userID
+      user_name
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateCommentModel = /* GraphQL */ `
+  mutation UpdateCommentModel(
+    $input: UpdateCommentModelInput!
+    $condition: ModelCommentModelConditionInput
+  ) {
+    updateCommentModel(input: $input, condition: $condition) {
+      id
+      comment
+      profile_image
+      comment_date
+      postID
+      userID
+      user_name
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteCommentModel = /* GraphQL */ `
+  mutation DeleteCommentModel(
+    $input: DeleteCommentModelInput!
+    $condition: ModelCommentModelConditionInput
+  ) {
+    deleteCommentModel(input: $input, condition: $condition) {
+      id
+      comment
+      profile_image
+      comment_date
+      postID
+      userID
+      user_name
       createdAt
       updatedAt
       _version

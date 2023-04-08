@@ -81,6 +81,7 @@ export type CreatePostsModelInput = {
   id?: string | null,
   post_title: string,
   description?: string | null,
+  long_description?: string | null,
   project_link?: string | null,
   image_link?: string | null,
   post_date?: string | null,
@@ -172,6 +173,7 @@ export enum FrameworkTag {
 export type ModelPostsModelConditionInput = {
   post_title?: ModelStringInput | null,
   description?: ModelStringInput | null,
+  long_description?: ModelStringInput | null,
   project_link?: ModelStringInput | null,
   image_link?: ModelStringInput | null,
   post_date?: ModelStringInput | null,
@@ -242,6 +244,7 @@ export type PostsModel = {
   id: string,
   post_title: string,
   description?: string | null,
+  long_description?: string | null,
   project_link?: string | null,
   image_link?: string | null,
   post_date?: string | null,
@@ -251,6 +254,30 @@ export type PostsModel = {
   interest_tag?: Array< InterestTag | null > | null,
   size_tag?: Array< SizeTag | null > | null,
   framework_tag?: Array< FrameworkTag | null > | null,
+  post_comments?: ModelCommentModelConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type ModelCommentModelConnection = {
+  __typename: "ModelCommentModelConnection",
+  items:  Array<CommentModel | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type CommentModel = {
+  __typename: "CommentModel",
+  id: string,
+  comment: string,
+  profile_image?: string | null,
+  comment_date?: string | null,
+  postID: string,
+  userID: string,
+  user_name: string,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -262,6 +289,7 @@ export type UpdatePostsModelInput = {
   id: string,
   post_title?: string | null,
   description?: string | null,
+  long_description?: string | null,
   project_link?: string | null,
   image_link?: string | null,
   post_date?: string | null,
@@ -284,6 +312,7 @@ export type CreateUsersModelInput = {
   user_name: string,
   email: string,
   password: string,
+  profile_image?: string | null,
   first_name?: string | null,
   last_name?: string | null,
   user_creation_date?: string | null,
@@ -297,6 +326,7 @@ export type ModelUsersModelConditionInput = {
   user_name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   password?: ModelStringInput | null,
+  profile_image?: ModelStringInput | null,
   first_name?: ModelStringInput | null,
   last_name?: ModelStringInput | null,
   user_creation_date?: ModelStringInput | null,
@@ -314,7 +344,9 @@ export type UsersModel = {
   user_name: string,
   email: string,
   password: string,
+  profile_image?: string | null,
   user_posts?: ModelPostsModelConnection | null,
+  user_comments?: ModelCommentModelConnection | null,
   first_name?: string | null,
   last_name?: string | null,
   user_creation_date?: string | null,
@@ -340,6 +372,7 @@ export type UpdateUsersModelInput = {
   user_name?: string | null,
   email?: string | null,
   password?: string | null,
+  profile_image?: string | null,
   first_name?: string | null,
   last_name?: string | null,
   user_creation_date?: string | null,
@@ -350,6 +383,45 @@ export type UpdateUsersModelInput = {
 };
 
 export type DeleteUsersModelInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type CreateCommentModelInput = {
+  id?: string | null,
+  comment: string,
+  profile_image?: string | null,
+  comment_date?: string | null,
+  postID: string,
+  userID: string,
+  user_name: string,
+  _version?: number | null,
+};
+
+export type ModelCommentModelConditionInput = {
+  comment?: ModelStringInput | null,
+  profile_image?: ModelStringInput | null,
+  comment_date?: ModelStringInput | null,
+  postID?: ModelIDInput | null,
+  userID?: ModelIDInput | null,
+  user_name?: ModelStringInput | null,
+  and?: Array< ModelCommentModelConditionInput | null > | null,
+  or?: Array< ModelCommentModelConditionInput | null > | null,
+  not?: ModelCommentModelConditionInput | null,
+};
+
+export type UpdateCommentModelInput = {
+  id: string,
+  comment?: string | null,
+  profile_image?: string | null,
+  comment_date?: string | null,
+  postID?: string | null,
+  userID?: string | null,
+  user_name?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteCommentModelInput = {
   id: string,
   _version?: number | null,
 };
@@ -516,6 +588,7 @@ export type ModelPostsModelFilterInput = {
   id?: ModelIDInput | null,
   post_title?: ModelStringInput | null,
   description?: ModelStringInput | null,
+  long_description?: ModelStringInput | null,
   project_link?: ModelStringInput | null,
   image_link?: ModelStringInput | null,
   post_date?: ModelStringInput | null,
@@ -534,6 +607,7 @@ export type SearchablePostsModelFilterInput = {
   id?: SearchableIDFilterInput | null,
   post_title?: SearchableStringFilterInput | null,
   description?: SearchableStringFilterInput | null,
+  long_description?: SearchableStringFilterInput | null,
   project_link?: SearchableStringFilterInput | null,
   image_link?: SearchableStringFilterInput | null,
   post_date?: SearchableStringFilterInput | null,
@@ -562,6 +636,7 @@ export enum SearchablePostsModelSortableFields {
   id = "id",
   post_title = "post_title",
   description = "description",
+  long_description = "long_description",
   project_link = "project_link",
   image_link = "image_link",
   post_date = "post_date",
@@ -584,6 +659,7 @@ export enum SearchablePostsModelAggregateField {
   id = "id",
   post_title = "post_title",
   description = "description",
+  long_description = "long_description",
   project_link = "project_link",
   image_link = "image_link",
   post_date = "post_date",
@@ -614,6 +690,7 @@ export type ModelUsersModelFilterInput = {
   user_name?: ModelStringInput | null,
   email?: ModelStringInput | null,
   password?: ModelStringInput | null,
+  profile_image?: ModelStringInput | null,
   first_name?: ModelStringInput | null,
   last_name?: ModelStringInput | null,
   user_creation_date?: ModelStringInput | null,
@@ -637,6 +714,7 @@ export type SearchableUsersModelFilterInput = {
   user_name?: SearchableStringFilterInput | null,
   email?: SearchableStringFilterInput | null,
   password?: SearchableStringFilterInput | null,
+  profile_image?: SearchableStringFilterInput | null,
   first_name?: SearchableStringFilterInput | null,
   last_name?: SearchableStringFilterInput | null,
   user_creation_date?: SearchableStringFilterInput | null,
@@ -663,6 +741,7 @@ export enum SearchableUsersModelSortableFields {
   user_name = "user_name",
   email = "email",
   password = "password",
+  profile_image = "profile_image",
   first_name = "first_name",
   last_name = "last_name",
   user_creation_date = "user_creation_date",
@@ -688,6 +767,7 @@ export enum SearchableUsersModelAggregateField {
   user_name = "user_name",
   email = "email",
   password = "password",
+  profile_image = "profile_image",
   first_name = "first_name",
   last_name = "last_name",
   user_creation_date = "user_creation_date",
@@ -705,6 +785,88 @@ export enum SearchableUsersModelAggregateField {
 export type SearchableUsersModelConnection = {
   __typename: "SearchableUsersModelConnection",
   items:  Array<UsersModel | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
+export type ModelCommentModelFilterInput = {
+  id?: ModelIDInput | null,
+  comment?: ModelStringInput | null,
+  profile_image?: ModelStringInput | null,
+  comment_date?: ModelStringInput | null,
+  postID?: ModelIDInput | null,
+  userID?: ModelIDInput | null,
+  user_name?: ModelStringInput | null,
+  and?: Array< ModelCommentModelFilterInput | null > | null,
+  or?: Array< ModelCommentModelFilterInput | null > | null,
+  not?: ModelCommentModelFilterInput | null,
+};
+
+export type SearchableCommentModelFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  comment?: SearchableStringFilterInput | null,
+  profile_image?: SearchableStringFilterInput | null,
+  comment_date?: SearchableStringFilterInput | null,
+  postID?: SearchableIDFilterInput | null,
+  userID?: SearchableIDFilterInput | null,
+  user_name?: SearchableStringFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  _version?: SearchableIntFilterInput | null,
+  _deleted?: SearchableBooleanFilterInput | null,
+  _lastChangedAt?: SearchableIntFilterInput | null,
+  and?: Array< SearchableCommentModelFilterInput | null > | null,
+  or?: Array< SearchableCommentModelFilterInput | null > | null,
+  not?: SearchableCommentModelFilterInput | null,
+};
+
+export type SearchableCommentModelSortInput = {
+  field?: SearchableCommentModelSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableCommentModelSortableFields {
+  id = "id",
+  comment = "comment",
+  profile_image = "profile_image",
+  comment_date = "comment_date",
+  postID = "postID",
+  userID = "userID",
+  user_name = "user_name",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+  _version = "_version",
+  _deleted = "_deleted",
+  _lastChangedAt = "_lastChangedAt",
+}
+
+
+export type SearchableCommentModelAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableCommentModelAggregateField,
+};
+
+export enum SearchableCommentModelAggregateField {
+  id = "id",
+  comment = "comment",
+  profile_image = "profile_image",
+  comment_date = "comment_date",
+  postID = "postID",
+  userID = "userID",
+  user_name = "user_name",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+  _version = "_version",
+  _deleted = "_deleted",
+  _lastChangedAt = "_lastChangedAt",
+}
+
+
+export type SearchableCommentModelConnection = {
+  __typename: "SearchableCommentModelConnection",
+  items:  Array<CommentModel | null >,
   nextToken?: string | null,
   total?: number | null,
   aggregateItems:  Array<SearchableAggregateResult | null >,
@@ -751,6 +913,7 @@ export type ModelSubscriptionPostsModelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   post_title?: ModelSubscriptionStringInput | null,
   description?: ModelSubscriptionStringInput | null,
+  long_description?: ModelSubscriptionStringInput | null,
   project_link?: ModelSubscriptionStringInput | null,
   image_link?: ModelSubscriptionStringInput | null,
   post_date?: ModelSubscriptionStringInput | null,
@@ -769,6 +932,7 @@ export type ModelSubscriptionUsersModelFilterInput = {
   user_name?: ModelSubscriptionStringInput | null,
   email?: ModelSubscriptionStringInput | null,
   password?: ModelSubscriptionStringInput | null,
+  profile_image?: ModelSubscriptionStringInput | null,
   first_name?: ModelSubscriptionStringInput | null,
   last_name?: ModelSubscriptionStringInput | null,
   user_creation_date?: ModelSubscriptionStringInput | null,
@@ -777,6 +941,18 @@ export type ModelSubscriptionUsersModelFilterInput = {
   hide_posts?: ModelSubscriptionIDInput | null,
   and?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
+};
+
+export type ModelSubscriptionCommentModelFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  comment?: ModelSubscriptionStringInput | null,
+  profile_image?: ModelSubscriptionStringInput | null,
+  comment_date?: ModelSubscriptionStringInput | null,
+  postID?: ModelSubscriptionIDInput | null,
+  userID?: ModelSubscriptionIDInput | null,
+  user_name?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionCommentModelFilterInput | null > | null,
+  or?: Array< ModelSubscriptionCommentModelFilterInput | null > | null,
 };
 
 export type CreateNewsletterEmailModelMutationVariables = {
@@ -844,6 +1020,7 @@ export type CreatePostsModelMutation = {
     id: string,
     post_title: string,
     description?: string | null,
+    long_description?: string | null,
     project_link?: string | null,
     image_link?: string | null,
     post_date?: string | null,
@@ -853,6 +1030,11 @@ export type CreatePostsModelMutation = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    post_comments?:  {
+      __typename: "ModelCommentModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -872,6 +1054,7 @@ export type UpdatePostsModelMutation = {
     id: string,
     post_title: string,
     description?: string | null,
+    long_description?: string | null,
     project_link?: string | null,
     image_link?: string | null,
     post_date?: string | null,
@@ -881,6 +1064,11 @@ export type UpdatePostsModelMutation = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    post_comments?:  {
+      __typename: "ModelCommentModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -900,6 +1088,7 @@ export type DeletePostsModelMutation = {
     id: string,
     post_title: string,
     description?: string | null,
+    long_description?: string | null,
     project_link?: string | null,
     image_link?: string | null,
     post_date?: string | null,
@@ -909,6 +1098,11 @@ export type DeletePostsModelMutation = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    post_comments?:  {
+      __typename: "ModelCommentModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -929,8 +1123,14 @@ export type CreateUsersModelMutation = {
     user_name: string,
     email: string,
     password: string,
+    profile_image?: string | null,
     user_posts?:  {
       __typename: "ModelPostsModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    user_comments?:  {
+      __typename: "ModelCommentModelConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -960,8 +1160,14 @@ export type UpdateUsersModelMutation = {
     user_name: string,
     email: string,
     password: string,
+    profile_image?: string | null,
     user_posts?:  {
       __typename: "ModelPostsModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    user_comments?:  {
+      __typename: "ModelCommentModelConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -991,8 +1197,14 @@ export type DeleteUsersModelMutation = {
     user_name: string,
     email: string,
     password: string,
+    profile_image?: string | null,
     user_posts?:  {
       __typename: "ModelPostsModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    user_comments?:  {
+      __typename: "ModelCommentModelConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1002,6 +1214,75 @@ export type DeleteUsersModelMutation = {
     dahublink?: string | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type CreateCommentModelMutationVariables = {
+  input: CreateCommentModelInput,
+  condition?: ModelCommentModelConditionInput | null,
+};
+
+export type CreateCommentModelMutation = {
+  createCommentModel?:  {
+    __typename: "CommentModel",
+    id: string,
+    comment: string,
+    profile_image?: string | null,
+    comment_date?: string | null,
+    postID: string,
+    userID: string,
+    user_name: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateCommentModelMutationVariables = {
+  input: UpdateCommentModelInput,
+  condition?: ModelCommentModelConditionInput | null,
+};
+
+export type UpdateCommentModelMutation = {
+  updateCommentModel?:  {
+    __typename: "CommentModel",
+    id: string,
+    comment: string,
+    profile_image?: string | null,
+    comment_date?: string | null,
+    postID: string,
+    userID: string,
+    user_name: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteCommentModelMutationVariables = {
+  input: DeleteCommentModelInput,
+  condition?: ModelCommentModelConditionInput | null,
+};
+
+export type DeleteCommentModelMutation = {
+  deleteCommentModel?:  {
+    __typename: "CommentModel",
+    id: string,
+    comment: string,
+    profile_image?: string | null,
+    comment_date?: string | null,
+    postID: string,
+    userID: string,
+    user_name: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1129,6 +1410,7 @@ export type GetPostsModelQuery = {
     id: string,
     post_title: string,
     description?: string | null,
+    long_description?: string | null,
     project_link?: string | null,
     image_link?: string | null,
     post_date?: string | null,
@@ -1138,6 +1420,11 @@ export type GetPostsModelQuery = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    post_comments?:  {
+      __typename: "ModelCommentModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1160,6 +1447,7 @@ export type ListPostsModelsQuery = {
       id: string,
       post_title: string,
       description?: string | null,
+      long_description?: string | null,
       project_link?: string | null,
       image_link?: string | null,
       post_date?: string | null,
@@ -1195,6 +1483,7 @@ export type SyncPostsModelsQuery = {
       id: string,
       post_title: string,
       description?: string | null,
+      long_description?: string | null,
       project_link?: string | null,
       image_link?: string | null,
       post_date?: string | null,
@@ -1232,6 +1521,7 @@ export type SearchPostsModelsQuery = {
       id: string,
       post_title: string,
       description?: string | null,
+      long_description?: string | null,
       project_link?: string | null,
       image_link?: string | null,
       post_date?: string | null,
@@ -1279,8 +1569,14 @@ export type GetUsersModelQuery = {
     user_name: string,
     email: string,
     password: string,
+    profile_image?: string | null,
     user_posts?:  {
       __typename: "ModelPostsModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    user_comments?:  {
+      __typename: "ModelCommentModelConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1313,6 +1609,7 @@ export type ListUsersModelsQuery = {
       user_name: string,
       email: string,
       password: string,
+      profile_image?: string | null,
       first_name?: string | null,
       last_name?: string | null,
       user_creation_date?: string | null,
@@ -1346,6 +1643,7 @@ export type SyncUsersModelsQuery = {
       user_name: string,
       email: string,
       password: string,
+      profile_image?: string | null,
       first_name?: string | null,
       last_name?: string | null,
       user_creation_date?: string | null,
@@ -1381,12 +1679,142 @@ export type SearchUsersModelsQuery = {
       user_name: string,
       email: string,
       password: string,
+      profile_image?: string | null,
       first_name?: string | null,
       last_name?: string | null,
       user_creation_date?: string | null,
       dahublink?: string | null,
       saved_posts?: Array< string | null > | null,
       hide_posts?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
+export type GetCommentModelQueryVariables = {
+  id: string,
+};
+
+export type GetCommentModelQuery = {
+  getCommentModel?:  {
+    __typename: "CommentModel",
+    id: string,
+    comment: string,
+    profile_image?: string | null,
+    comment_date?: string | null,
+    postID: string,
+    userID: string,
+    user_name: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListCommentModelsQueryVariables = {
+  filter?: ModelCommentModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCommentModelsQuery = {
+  listCommentModels?:  {
+    __typename: "ModelCommentModelConnection",
+    items:  Array< {
+      __typename: "CommentModel",
+      id: string,
+      comment: string,
+      profile_image?: string | null,
+      comment_date?: string | null,
+      postID: string,
+      userID: string,
+      user_name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncCommentModelsQueryVariables = {
+  filter?: ModelCommentModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncCommentModelsQuery = {
+  syncCommentModels?:  {
+    __typename: "ModelCommentModelConnection",
+    items:  Array< {
+      __typename: "CommentModel",
+      id: string,
+      comment: string,
+      profile_image?: string | null,
+      comment_date?: string | null,
+      postID: string,
+      userID: string,
+      user_name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SearchCommentModelsQueryVariables = {
+  filter?: SearchableCommentModelFilterInput | null,
+  sort?: Array< SearchableCommentModelSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableCommentModelAggregationInput | null > | null,
+};
+
+export type SearchCommentModelsQuery = {
+  searchCommentModels?:  {
+    __typename: "SearchableCommentModelConnection",
+    items:  Array< {
+      __typename: "CommentModel",
+      id: string,
+      comment: string,
+      profile_image?: string | null,
+      comment_date?: string | null,
+      postID: string,
+      userID: string,
+      user_name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1475,6 +1903,7 @@ export type OnCreatePostsModelSubscription = {
     id: string,
     post_title: string,
     description?: string | null,
+    long_description?: string | null,
     project_link?: string | null,
     image_link?: string | null,
     post_date?: string | null,
@@ -1484,6 +1913,11 @@ export type OnCreatePostsModelSubscription = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    post_comments?:  {
+      __typename: "ModelCommentModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1502,6 +1936,7 @@ export type OnUpdatePostsModelSubscription = {
     id: string,
     post_title: string,
     description?: string | null,
+    long_description?: string | null,
     project_link?: string | null,
     image_link?: string | null,
     post_date?: string | null,
@@ -1511,6 +1946,11 @@ export type OnUpdatePostsModelSubscription = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    post_comments?:  {
+      __typename: "ModelCommentModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1529,6 +1969,7 @@ export type OnDeletePostsModelSubscription = {
     id: string,
     post_title: string,
     description?: string | null,
+    long_description?: string | null,
     project_link?: string | null,
     image_link?: string | null,
     post_date?: string | null,
@@ -1538,6 +1979,11 @@ export type OnDeletePostsModelSubscription = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    post_comments?:  {
+      __typename: "ModelCommentModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1557,8 +2003,14 @@ export type OnCreateUsersModelSubscription = {
     user_name: string,
     email: string,
     password: string,
+    profile_image?: string | null,
     user_posts?:  {
       __typename: "ModelPostsModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    user_comments?:  {
+      __typename: "ModelCommentModelConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1587,8 +2039,14 @@ export type OnUpdateUsersModelSubscription = {
     user_name: string,
     email: string,
     password: string,
+    profile_image?: string | null,
     user_posts?:  {
       __typename: "ModelPostsModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    user_comments?:  {
+      __typename: "ModelCommentModelConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1617,8 +2075,14 @@ export type OnDeleteUsersModelSubscription = {
     user_name: string,
     email: string,
     password: string,
+    profile_image?: string | null,
     user_posts?:  {
       __typename: "ModelPostsModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    user_comments?:  {
+      __typename: "ModelCommentModelConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1628,6 +2092,72 @@ export type OnDeleteUsersModelSubscription = {
     dahublink?: string | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnCreateCommentModelSubscriptionVariables = {
+  filter?: ModelSubscriptionCommentModelFilterInput | null,
+};
+
+export type OnCreateCommentModelSubscription = {
+  onCreateCommentModel?:  {
+    __typename: "CommentModel",
+    id: string,
+    comment: string,
+    profile_image?: string | null,
+    comment_date?: string | null,
+    postID: string,
+    userID: string,
+    user_name: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateCommentModelSubscriptionVariables = {
+  filter?: ModelSubscriptionCommentModelFilterInput | null,
+};
+
+export type OnUpdateCommentModelSubscription = {
+  onUpdateCommentModel?:  {
+    __typename: "CommentModel",
+    id: string,
+    comment: string,
+    profile_image?: string | null,
+    comment_date?: string | null,
+    postID: string,
+    userID: string,
+    user_name: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteCommentModelSubscriptionVariables = {
+  filter?: ModelSubscriptionCommentModelFilterInput | null,
+};
+
+export type OnDeleteCommentModelSubscription = {
+  onDeleteCommentModel?:  {
+    __typename: "CommentModel",
+    id: string,
+    comment: string,
+    profile_image?: string | null,
+    comment_date?: string | null,
+    postID: string,
+    userID: string,
+    user_name: string,
     createdAt: string,
     updatedAt: string,
     _version: number,

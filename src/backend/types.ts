@@ -5,6 +5,9 @@ import {
   CreatePostsModelInput, 
   UpdatePostsModelInput,
   DeletePostsModelInput,
+  CreateCommentModelInput,
+  UpdateCommentModelInput,
+  DeleteCommentModelInput,
   CreateNewsletterEmailModelInput,
   UpdateNewsletterEmailModelInput,
   DeleteNewsletterEmailModelInput
@@ -44,5 +47,17 @@ export type UpdateNewsletterEmailModelPayload = {
 
 export type DeleteNewsletterEmailModelPayload = { 
   input: DeleteNewsletterEmailModelInput
+}
+
+export type CreateCommentModelPayload = {
+  input: CreateCommentModelInput
+}
+
+export type UpdateCommentModelPayload = {
+  input: UpdateCommentModelInput
+}
+
+export type DeleteCommentModelPayload = {
+  input: DeleteCommentModelInput
 }
 

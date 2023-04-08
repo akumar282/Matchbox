@@ -81,6 +81,10 @@ type PostsModelMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type CommentModelMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type UsersModelMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -109,6 +113,7 @@ type EagerPostsModel = {
   readonly id: string;
   readonly post_title: string;
   readonly description?: string | null;
+  readonly long_description?: string | null;
   readonly project_link?: string | null;
   readonly image_link?: string | null;
   readonly post_date?: string | null;
@@ -118,6 +123,7 @@ type EagerPostsModel = {
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
   readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
   readonly framework_tag?: (FrameworkTag | null)[] | keyof typeof FrameworkTag | null;
+  readonly post_comments?: (CommentModel | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -126,6 +132,7 @@ type LazyPostsModel = {
   readonly id: string;
   readonly post_title: string;
   readonly description?: string | null;
+  readonly long_description?: string | null;
   readonly project_link?: string | null;
   readonly image_link?: string | null;
   readonly post_date?: string | null;
@@ -135,6 +142,7 @@ type LazyPostsModel = {
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
   readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
   readonly framework_tag?: (FrameworkTag | null)[] | keyof typeof FrameworkTag | null;
+  readonly post_comments: AsyncCollection<CommentModel>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -145,12 +153,44 @@ export declare const PostsModel: (new (init: ModelInit<PostsModel, PostsModelMet
   copyOf(source: PostsModel, mutator: (draft: MutableModel<PostsModel, PostsModelMetaData>) => MutableModel<PostsModel, PostsModelMetaData> | void): PostsModel;
 }
 
+type EagerCommentModel = {
+  readonly id: string;
+  readonly comment: string;
+  readonly profile_image?: string | null;
+  readonly comment_date?: string | null;
+  readonly postID: string;
+  readonly userID: string;
+  readonly user_name: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyCommentModel = {
+  readonly id: string;
+  readonly comment: string;
+  readonly profile_image?: string | null;
+  readonly comment_date?: string | null;
+  readonly postID: string;
+  readonly userID: string;
+  readonly user_name: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type CommentModel = LazyLoading extends LazyLoadingDisabled ? EagerCommentModel : LazyCommentModel
+
+export declare const CommentModel: (new (init: ModelInit<CommentModel, CommentModelMetaData>) => CommentModel) & {
+  copyOf(source: CommentModel, mutator: (draft: MutableModel<CommentModel, CommentModelMetaData>) => MutableModel<CommentModel, CommentModelMetaData> | void): CommentModel;
+}
+
 type EagerUsersModel = {
   readonly id: string;
   readonly user_name: string;
   readonly email: string;
   readonly password: string;
+  readonly profile_image?: string | null;
   readonly user_posts?: (PostsModel | null)[] | null;
+  readonly user_comments?: (CommentModel | null)[] | null;
   readonly first_name?: string | null;
   readonly last_name?: string | null;
   readonly user_creation_date?: string | null;
@@ -166,7 +206,9 @@ type LazyUsersModel = {
   readonly user_name: string;
   readonly email: string;
   readonly password: string;
+  readonly profile_image?: string | null;
   readonly user_posts: AsyncCollection<PostsModel>;
+  readonly user_comments: AsyncCollection<CommentModel>;
   readonly first_name?: string | null;
   readonly last_name?: string | null;
   readonly user_creation_date?: string | null;

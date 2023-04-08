@@ -53,7 +53,8 @@ export default function CreateProject() {
         input: {
           id: uuidGen,
           post_title: props.ProjectTitle,
-          description: props.LongDesc,
+          description: props.ShortDesc,
+          long_description: props.LongDesc,
           project_link: props.GithubLink,
           image_link: imageLink == null ? 'https://avatars.githubusercontent.com/u/13607064?s=64&v=4' : imageLink,
           post_date: dateTime.toISOString(),

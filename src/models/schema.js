@@ -87,6 +87,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "long_description": {
+                    "name": "long_description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "project_link": {
                     "name": "project_link",
                     "isArray": false,
@@ -165,6 +172,20 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
+                "post_comments": {
+                    "name": "post_comments",
+                    "isArray": true,
+                    "type": {
+                        "model": "CommentModel"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "postID"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -192,6 +213,122 @@ export const schema = {
                 {
                     "type": "searchable",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUsersModel",
+                        "fields": [
+                            "userID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "delete",
+                                    "update"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "CommentModel": {
+            "name": "CommentModel",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "comment": {
+                    "name": "comment",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "profile_image": {
+                    "name": "profile_image",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "comment_date": {
+                    "name": "comment_date",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "postID": {
+                    "name": "postID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "user_name": {
+                    "name": "user_name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "CommentModels",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPostsModel",
+                        "fields": [
+                            "postID"
+                        ]
+                    }
                 },
                 {
                     "type": "key",
@@ -251,11 +388,32 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "profile_image": {
+                    "name": "profile_image",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "user_posts": {
                     "name": "user_posts",
                     "isArray": true,
                     "type": {
                         "model": "PostsModel"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "userID"
+                    }
+                },
+                "user_comments": {
+                    "name": "user_comments",
+                    "isArray": true,
+                    "type": {
+                        "model": "CommentModel"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -441,5 +599,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.2.0",
-    "version": "b13ed3c4fd39a21014c424465ac4b31b"
+    "version": "700fed0a112b2037c2f79f30230dd3bc"
 };

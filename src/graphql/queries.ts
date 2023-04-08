@@ -118,6 +118,7 @@ export const getPostsModel = /* GraphQL */ `
       id
       post_title
       description
+      long_description
       project_link
       image_link
       post_date
@@ -127,6 +128,10 @@ export const getPostsModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      post_comments {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -146,6 +151,7 @@ export const listPostsModels = /* GraphQL */ `
         id
         post_title
         description
+        long_description
         project_link
         image_link
         post_date
@@ -183,6 +189,7 @@ export const syncPostsModels = /* GraphQL */ `
         id
         post_title
         description
+        long_description
         project_link
         image_link
         post_date
@@ -224,6 +231,7 @@ export const searchPostsModels = /* GraphQL */ `
         id
         post_title
         description
+        long_description
         project_link
         image_link
         post_date
@@ -265,7 +273,12 @@ export const getUsersModel = /* GraphQL */ `
       user_name
       email
       password
+      profile_image
       user_posts {
+        nextToken
+        startedAt
+      }
+      user_comments {
         nextToken
         startedAt
       }
@@ -295,6 +308,7 @@ export const listUsersModels = /* GraphQL */ `
         user_name
         email
         password
+        profile_image
         first_name
         last_name
         user_creation_date
@@ -330,6 +344,7 @@ export const syncUsersModels = /* GraphQL */ `
         user_name
         email
         password
+        profile_image
         first_name
         last_name
         user_creation_date
@@ -369,12 +384,139 @@ export const searchUsersModels = /* GraphQL */ `
         user_name
         email
         password
+        profile_image
         first_name
         last_name
         user_creation_date
         dahublink
         saved_posts
         hide_posts
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export const getCommentModel = /* GraphQL */ `
+  query GetCommentModel($id: ID!) {
+    getCommentModel(id: $id) {
+      id
+      comment
+      profile_image
+      comment_date
+      postID
+      userID
+      user_name
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listCommentModels = /* GraphQL */ `
+  query ListCommentModels(
+    $filter: ModelCommentModelFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCommentModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncCommentModels = /* GraphQL */ `
+  query SyncCommentModels(
+    $filter: ModelCommentModelFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncCommentModels(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const searchCommentModels = /* GraphQL */ `
+  query SearchCommentModels(
+    $filter: SearchableCommentModelFilterInput
+    $sort: [SearchableCommentModelSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCommentModelAggregationInput]
+  ) {
+    searchCommentModels(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        postID
+        userID
+        user_name
         createdAt
         updatedAt
         _version
