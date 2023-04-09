@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 // MUI imports
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
@@ -15,6 +16,9 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { getPostsByUser } from '../../src/backend/queries/postQueries';
 import { ListPostsModelsQueryVariables, ModelIDInput } from "../API";
 import { getImage } from "../backend/storage/s3";
+import { TextField } from "@mui/material";
+import { useFormik, Field } from "formik";
+import * as yup from "yup";
 // keep these functions here for top level backend connection
 function handleBackendRemove() {
   console.log("removing project");
@@ -25,8 +29,6 @@ function handleBackendSave() {
   console.log("saving project");
   // TODO make backend connection here
 }
-
-
 
 export default function DiscoverPage() {
   const [projectsAll, setProjectsAll] = useState<any[]>([]);
@@ -73,17 +75,88 @@ export default function DiscoverPage() {
           onBackProject={handleBackProject}
         />
       ))}
-      <CommentSection/>
     </div>
   );
 }
 
 function CommentSection(props: any) {
+  
   return (
     <div className="CommentSection">
       <h2>Comments</h2>
-      <div className="Comments">
-        {/* render comments here */}
+      <CreateComment />
+      {props.comments.map((comment) => (
+        <Comments CommentInfo = {comment}/>
+      ))}
+    </div>
+  );
+}
+function CreateComment(props: any) {
+  const validationSchema = yup.object({
+    comment : yup
+      .string()
+      .required("Required")
+      .max(1000, "Must be 1000 characters or less")
+  });
+  
+  const formik = useFormik({
+    initialValues: {
+      comment: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+  return (
+    <div className="CreateComment">
+      <TextField
+        id="comment"
+        name="comment"
+        placeholder="Write a comment..."
+        multiline
+        hiddenLabel
+        fullWidth
+        maxRows={10}
+        rows={4}
+        sx = {{
+          color: "#FFFFFF",
+        }}
+        value = {formik.values.comment}
+        onChange = {formik.handleChange}
+        error = {formik.touched.comment && Boolean(formik.errors.comment)}
+        helperText = {(formik.touched.comment && formik.errors.comment) || " "}
+      />
+      <Button 
+      sx={{
+        width: "100%",
+        height: "2.5rem",
+        backgroundColor: "#6259b9",
+        color: "white",
+        "&:hover": {
+          backgroundColor: "#716ab4",
+        },
+      }} 
+      onClick={() => formik.handleSubmit()}>
+      Post Comment
+      </Button>
+      
+    </div>
+  );
+  }
+function Comments(props: any) {
+  return (
+    <div className="Comment">
+      <div className="CommentHeader">
+        <img src="avatar.png" alt="User Avatar" className="Avatar" />
+        <h3 className="Username">John Doe</h3>
+        </div>
+        <p className="CommentBody">This is a sample comment.</p>
+    </div>
+      );
+      }
+      {/* <div className="Comments">
+       
         <div className="Comment">
           <div className="CommentHeader">
             <img src="avatar.png" alt="User Avatar" className="Avatar" />
@@ -102,10 +175,7 @@ function CommentSection(props: any) {
       <form className="CommentForm">
         <textarea className="CommentTextarea" placeholder="Write a comment..." />
         <button className="CommentButton">Post Comment</button>
-      </form>
-    </div>
-  );
-}
+      </form> */}
 
 function DiscoverComponent(props: any) {
   // remake objects
@@ -145,7 +215,12 @@ function DiscoverComponent(props: any) {
   const handleBack = () => {
     onBackProject();
   };
-
+  // implement using project id to pull and store array of comments
+  const testComment = {
+    username: "John Doe",
+    comment: "This is a sample comment.",
+  }
+  const comment = [ testComment, testComment, testComment]
   return isVisible ? (
     <AnimatePresence>
       <motion.div
@@ -245,6 +320,7 @@ function DiscoverComponent(props: any) {
             </IconButton>
           </div>
         </div>
+        <CommentSection comments = {comment}/>
       </motion.div>
     </AnimatePresence>
   ) : (

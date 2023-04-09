@@ -15,7 +15,7 @@
     justify-content: center;
     border-radius: 10px;
     font-family: 'Roboto', sans-serif;
-    transition: 0.5s;
+    transition: ease-in-out 0.4s;
 }
 .DiscoverimgBox {
     width: 50rem;
@@ -183,74 +183,89 @@
   }
 
   .CommentSection {
-      background-color: #f8f8f8;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 20px;
-      margin-bottom: 20px;
+    align-self: center;
+    justify-self: center;
+    margin: auto;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 20px;
+    width: 77vw;
+    max-width: 88.2rem;
+    transition: ease-in-out 0.4s;
   }
 
   .CommentSection h2 {
-      margin-top: 0;
+    margin-top: 0;
   }
 
   .Comments {
-      margin-top: 20px;
+    margin-top: 20px;
   }
 
   .Comment {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 10px;
-      margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
   }
 
   .CommentHeader {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
   }
-
+.CreateComment {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
   .Avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
   }
 
   .Username {
-      margin: 0;
+    margin: 0;
   }
 
   .CommentBody {
-      margin: 0;
+    margin: 0;
   }
 
   .CommentForm {
-      display: flex;
-      flex-direction: column;
-      margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    
   }
 
   .CommentTextarea {
-      height: 100px;
-      resize: none;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 10px;
-      margin-bottom: 10px;
+    height: 100px;
+    resize: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
   }
 
   .CommentButton {
-      background-color: #008080;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      padding: 10px;
-      cursor: pointer;
+    background-color: #008080;
+    color: #fff;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
   }
 
   .CommentButton:hover {
-      background-color: #006666;
+    background-color: #006666;
   }
