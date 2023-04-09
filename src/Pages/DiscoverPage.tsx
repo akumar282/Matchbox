@@ -73,6 +73,36 @@ export default function DiscoverPage() {
           onBackProject={handleBackProject}
         />
       ))}
+      <CommentSection/>
+    </div>
+  );
+}
+
+function CommentSection(props: any) {
+  return (
+    <div className="CommentSection">
+      <h2>Comments</h2>
+      <div className="Comments">
+        {/* render comments here */}
+        <div className="Comment">
+          <div className="CommentHeader">
+            <img src="avatar.png" alt="User Avatar" className="Avatar" />
+            <h3 className="Username">John Doe</h3>
+          </div>
+          <p className="CommentBody">This is a sample comment.</p>
+        </div>
+        <div className="Comment">
+          <div className="CommentHeader">
+            <img src="avatar.png" alt="User Avatar" className="Avatar" />
+            <h3 className="Username">Jane Smith</h3>
+          </div>
+          <p className="CommentBody">This is another sample comment.</p>
+        </div>
+      </div>
+      <form className="CommentForm">
+        <textarea className="CommentTextarea" placeholder="Write a comment..." />
+        <button className="CommentButton">Post Comment</button>
+      </form>
     </div>
   );
 }

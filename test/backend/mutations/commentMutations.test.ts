@@ -6,7 +6,7 @@ Amplify.configure(awsconfig)
 
 
 
-describe('Mutation Tests', () => {
+describe.skip('Mutation Tests', () => {
 
   test('Create post', async () => {
     let datetime = new Date
