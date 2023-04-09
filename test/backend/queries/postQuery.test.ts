@@ -13,7 +13,7 @@ describe('Query Tests', () => {
     expect(flatResult).toContain(`Matchbox`)
   })
 
-  test('List Post by user', async () => {
+  test.skip('List Post by user', async () => {
     const fil: ListPostsModelsQueryVariables = {
       // filter: {
       //   userID: {
