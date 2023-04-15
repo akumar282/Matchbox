@@ -54,6 +54,22 @@
     flex-direction: row;
     margin-bottom: 2rem;
     gap: 1rem;
+   
+}
+.FilterField {
+    width: 100%;
+    max-width: 25rem;
+    
+}
+.NameField {
+    width: 30vw;
+    max-width: 20rem;
+    gap: 1rem;
+}
+.emailField {
+    width: 60vw;
+    max-width: 50rem;
+    gap: 1rem;
 }
 .TopPartSetting {
     display: flex;
@@ -72,26 +88,25 @@
     padding: 0;
     align-items: center;
     justify-content: center;
-    width: 100%;
     margin:auto;
+    
 }
 .BottomPartSetting {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
     margin-bottom: 1rem;
     gap: .5rem;
 }
 .SettingFilters {
-
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 30vw;
+    max-width: 30rem;
 }
 .SettingPasswords {
    

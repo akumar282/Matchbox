@@ -97,9 +97,11 @@ const CustomSavedProjects = (props: any) => {
 
     fetchImage();
   }, [props.user.image_link]);
-
+  function projectClick() {
+    window.open(props.user.project_link);
+  }
   return (
-    <div className="HomeSavedProjects">
+    <div className="HomeSavedProjects" onClick={projectClick}>
       <div className="SavedImgCont">
         <img
           className="SavedImg"

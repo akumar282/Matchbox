@@ -184,11 +184,9 @@ export default function Settings() {
             <div className="TopPartSetting">
               <h4> Edit Account</h4>
               <div className="TopNameSetting">
-                
+                <div className= "NameField">
                 <TextField
-                  sx={{
-                    width: "25rem",
-                  }}
+                  fullWidth
                   id="firstName"
                   name="firstName"
                   label="First Name"
@@ -202,11 +200,10 @@ export default function Settings() {
                     formik.touched.firstName && formik.errors.firstName
                   }
                 />
-
+                </div>
+                <div className= "NameField">
                 <TextField
-                  sx={{
-                    width: "25rem",
-                  }}
+                  fullWidth
                   id="lastName"
                   name="lastName"
                   label="Last Name"
@@ -218,13 +215,11 @@ export default function Settings() {
                   }
                   helperText={formik.touched.lastName && formik.errors.lastName}
                 />
+                </div>
               </div>
               <div className="TopNameSetting">
-                
+                <div className = "emailField">
                 <TextField
-                  sx={{
-                    width: "51rem",
-                  }}
                   id="email"
                   name="email"
                   label="Email"
@@ -235,6 +230,7 @@ export default function Settings() {
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
                 />
+                </div>
               </div>
               <Button
           disabled={formik.isSubmitting}
@@ -259,12 +255,9 @@ export default function Settings() {
               <div className="SettingsPassword">
                 <h4>Change Password</h4>
                 <div className="SettingFilters">
+                  <div className="FilterField">
                 <TextField
-                    sx={{
-                      width: "25rem",
-                      fullWidth: "true",
-                      
-                    }}
+                  fullWidth
                     InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -293,12 +286,10 @@ export default function Settings() {
                       formikPassword.touched.oldPassword && formikPassword.errors.oldPassword
                     }
                   />
+                  </div>
+                  <div className="FilterField">
                   <TextField
-                    sx={{
-                      width: "25rem",
-                      fullWidth: "true",
-                      
-                    }}
+                  fullWidth
                     InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -327,11 +318,10 @@ export default function Settings() {
                       formikPassword.touched.newPassword && formikPassword.errors.newPassword
                     }
                   />
-                 
+                  </div>
+                  <div className="FilterField">
                     <TextField
-                      sx={{
-                        width: "25rem",
-                      }}
+                      fullWidth
                       id="confirmPassword"
                       name="confirmPassword"
                       placeholder="Confirm Password"
@@ -362,8 +352,8 @@ export default function Settings() {
                         formikPassword.errors.confirmPassword
                       }
                     />
-                  
-                  
+                    </div>
+          
                 </div>
                 <Button
           disabled={formikPassword.isSubmitting}
@@ -391,10 +381,9 @@ export default function Settings() {
                 <h4>Filter Settings</h4>
 
                 <div className="SettingFilters">
+                  <div className="FilterField">
                   <Autocomplete
-                    sx={{
-                      width: "25rem",
-                    }}
+                    fullWidth
                     multiple
                     limitTags={3}
                     id="language"
@@ -419,10 +408,10 @@ export default function Settings() {
                       />
                     )}
                   />
+                  </div>
+                  <div className="FilterField">
                   <Autocomplete
-                    sx={{
-                      width: "25rem",
-                    }}
+                    fullWidth
                     multiple
                     limitTags={3}
                     id="framework"
@@ -447,10 +436,10 @@ export default function Settings() {
                       />
                     )}
                   />
+                  </div>
+                  <div className="FilterField">
                   <Autocomplete
-                    sx={{
-                      width: "25rem",
-                    }}
+                    fullWidth
                     multiple
                     limitTags={3}
                     id="size"
@@ -471,6 +460,7 @@ export default function Settings() {
                       />
                     )}
                   />
+                  </div>
                 </div>
                 <Button
           disabled={formikFilters.isSubmitting}
