@@ -14,6 +14,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { getPostsByUser } from '../../src/backend/queries/postQueries';
+import { getAllComments } from '../../src/backend/queries/commentQueries';
 import { ListPostsModelsQueryVariables, ModelIDInput } from "../API";
 import { getImage } from "../backend/storage/s3";
 import { TextField } from "@mui/material";
@@ -44,8 +45,6 @@ export default function DiscoverPage() {
       const filteredProjects = result.data.listPostsModels.items.filter(x => x._deleted !== true);
       setProjectsAll(filteredProjects);
     };
-
-    fetchProjects();
   }, []);
   console.log(projectsAll)
   // set up state to keep track of which project is currently visible
@@ -179,7 +178,7 @@ function Comments(props: any) {
 
 function DiscoverComponent(props: any) {
   // remake objects
-
+  const [commentsAll, setCommentsAll] = useState<any[]>([]);
   const [imageSrc, setImageSrc] = useState("");
 
   useEffect(() => {
@@ -189,6 +188,14 @@ function DiscoverComponent(props: any) {
     };
 
     fetchImage();
+   
+    const fetchComments = async () => {
+      const rawComments = await getAllComments(props.projects.id)
+      const filteredComments = rawComments.data.listCommentModels.items.filter(x => x._deleted !== true);
+      setCommentsAll(filteredComments);
+    }
+
+    fetchComments();
   }, []);
 
   const { projects, isVisible, onNextProject, onBackProject } = props;
@@ -320,7 +327,7 @@ function DiscoverComponent(props: any) {
             </IconButton>
           </div>
         </div>
-        <CommentSection comments = {comment}/>
+        <CommentSection comments={commentsAll}/>
       </motion.div>
     </AnimatePresence>
   ) : (
