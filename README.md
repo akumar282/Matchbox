@@ -4,7 +4,7 @@ Our web application connects developers to projects that align with their intere
 
 # Link to the project
 https://staging.appmatchbox.com/
-|
+
 Team:  
 Abhimanyu Kumar - Principal Engineer/Backend Engineer  
 Hayden Lauritzen - Backend Engineer  
