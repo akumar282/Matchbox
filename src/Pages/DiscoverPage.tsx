@@ -154,7 +154,7 @@ function Comments(props: any) {
         <p className="CommentBody">This is a sample comment.</p>
     </div>
       );
-      }
+    }
       {/* <div className="Comments">
        
         <div className="Comment">
@@ -211,6 +211,7 @@ function DiscoverComponent(props: any) {
   };
   const handleNext = () => {
     onNextProject();
+    console.log(props.projects.id);
   };
   const handleBack = () => {
     onBackProject();
