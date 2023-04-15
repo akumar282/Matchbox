@@ -14,6 +14,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { Auth } from "aws-amplify";
 import { getCurrentUserAttributes } from '../backend/auth/authentication'
+import { getUserById } from '../backend/queries/userQueries'
 
 export default function LandingPopupLogin(props) {
   function noAccount() {
@@ -48,6 +49,9 @@ export default function LandingPopupLogin(props) {
         localStorage.setItem('email', values.email)
         localStorage.setItem('isLoggedin', 'true')
         console.log(localStorage.getItem('uuid'))
+        const username = await getUserById(localStorage.getItem('uuid')!)
+        localStorage.setItem('username', username.data.getUsersModel.user_name)
+        localStorage.setItem('profileImage', username.data.getUsersModel.profile_image)
         
         if (localStorage.getItem('firstTime') === 'true') {
           navigate("/preferences")
