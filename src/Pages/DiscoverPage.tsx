@@ -106,8 +106,7 @@ function CreateComment(props: any) {
         userID: localStorage.getItem('uuid')!,
         postID: props.postID,
         user_name: localStorage.getItem('username')!,
-        profile_image: localStorage.getItem('profileImage')!
-      }
+        profile_image: localStorage.getItem('profileImage')!      }
     })
     console.log(result)
   }
@@ -182,6 +181,7 @@ function Comments(props: any) {
       <div className="CommentHeader">
         <img src={imageSrc} alt="User Avatar" className="Avatar" />
         <h3 className="Username">{props.CommentInfo.user_name}</h3>
+        <p className="DateTime">Date Time</p>
         </div>
       <p className="CommentBody">{props.CommentInfo.comment}</p>
     </div>

@@ -13,11 +13,80 @@
     justify-content: center;
     border-radius: 10px;
     font-family: 'Roboto', sans-serif;
+    transition: ease-in-out 0.4s;
 }
+.HomeSwitch {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    max-width: 70rem;
+    height: 100%;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    padding: 1rem;
+    transition: ease-in-out 0.4s;
+
+}
+.HomeButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #fff;
+    transition: 0.5s;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 10%;
+    height: 3vh;
+    border: none;
+    border-bottom: 5px solid #000000;
+    transition: ease-in-out 0.4s;
+}
+.HomeButton:hover {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #fff;
+    transition: 0.5s;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 10%;
+    height: 3vh;
+    border: none;
+    color: #c8bfd8;
+    border-bottom: 5px solid #c8bfd8;
+    transition: ease-in-out 0.4s;
+}
+.ActiveHomeButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #fff;
+    transition: 0.5s;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 10%;
+    height: 3vh;
+    border: none;
+    color: #915ee4;
+    border-bottom: 5px solid #915ee4;
+    transition: ease-in-out 0.4s;
+}
+
 .CreateProject{
     display: flex;
     align-items: center;
-    
     background: linear-gradient(-45deg, #dd846973, #e0598d7a, #6cbbd879, #81ddc875);
     animation: Gradient 15s ease infinite;
     background-size: 200% 200%;
