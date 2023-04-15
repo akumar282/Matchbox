@@ -38,6 +38,7 @@ export default function LandingPopupCreate(props) {
     localStorage.setItem('uuid', props.uuid)
     localStorage.setItem('username', props.username)
     localStorage.setItem('email', props.email)
+    const defaultPic = ['defaultimg1.JPG', 'defaultimg2.JPG', 'defaultimg3.JPG', 'defaultimg4.JPG']
     await newUserSignUp(props.email, props.password, props.email, props.uuid )
     await createUser(
       {
@@ -47,7 +48,8 @@ export default function LandingPopupCreate(props) {
           email: props.email,
           first_name: props.firstName,
           last_name: props.lastName,
-          password: props.password
+          password: props.password,
+          profile_image: defaultPic[Math.floor(Math.random() * 4)],
         }
       } 
     )

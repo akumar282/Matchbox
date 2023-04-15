@@ -106,7 +106,8 @@ function CreateComment(props: any) {
         userID: localStorage.getItem('uuid')!,
         postID: props.postID,
         user_name: localStorage.getItem('username')!,
-        profile_image: localStorage.getItem('profileImage')!
+        profile_image: localStorage.getItem('profileImage')!,
+        comment_date: new Date().toISOString()
       }
     })
     console.log(result)
@@ -164,6 +165,18 @@ function CreateComment(props: any) {
     </div>
   );
   }
+
+
+function formatIsoTimestamp(isoTimestamp: string): string {
+  const date = new Date(isoTimestamp);
+  const month = date.toLocaleString('en-US', { month: 'long' });
+  const day = date.toLocaleString('en-US', { day: 'numeric' });
+  const year = date.toLocaleString('en-US', { year: 'numeric' });
+  const time = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric' });
+
+  return `${month} ${day}, ${year}, ${time}`;
+}
+
 function Comments(props: any) {
   const [imageSrc, setImageSrc] = useState("");
 
@@ -177,12 +190,14 @@ function Comments(props: any) {
     fetchImage()
 
   }, []);
+
+  let commentdate = formatIsoTimestamp(props.CommentInfo.comment_date)
   return (
     <div className="Comment">
       <div className="CommentHeader">
         <img src={imageSrc} alt="User Avatar" className="Avatar" />
         <h3 className="Username">{props.CommentInfo.user_name}</h3>
-        <p className="DateTime">Date Time</p>
+        <p className="DateTime">{commentdate}</p>
         </div>
       <p className="CommentBody">{props.CommentInfo.comment}</p>
     </div>
