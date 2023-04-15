@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../components/NavBar";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { useEffect, useState } from "react";
@@ -13,6 +13,9 @@ import { getImage } from "../backend/storage/s3";
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const [homeState, setHomeState] = useState<any>("Home"); 
+  const [HomeActive, setHomeActive] = useState<any>(true);
+  const [SavedActive, setSavedActive] = useState<any>(false);
   const [projectsAll, setProjectsAll] = useState<any[]>([]);
 
   useEffect(() => {
@@ -34,18 +37,50 @@ export default function HomePage() {
   function handleCreate() {
     navigate("/create-project");
   }
-
-  return (
-    <div className="HomePage">
-      <Navbar />
-      <div className="HomeMain">
-        <div className="CreateProject" onClick={() => handleCreate()}>
+  const CustomHomePage = (props: any) => {
+    if (homeState === "Home") {
+    return (
+      <>
+       <div className="CreateProject" onClick={() => handleCreate()}>
           <AddCircleOutlineIcon fontSize="large" className="Creaticon" />
           <h1 className="CreateText">Create Project</h1>
         </div>
         {projectsAll.map((tag) => (
           <CustomSavedProjects user={tag} key={tag.post_title} />
-        ))}
+        ))}    
+      </>
+    );
+  } else {
+    // add code for saved projects
+    return ( 
+      <h1 className="ProjectTitle">No Projects Saved</h1>
+    );
+  }
+}
+  const CustomSwtich = (props: any) => {
+    function handleHome() {
+      setHomeState("Home");
+      setHomeActive(true);
+      setSavedActive(false);
+    }
+    function handleSaved() {
+      setHomeState("Saved");
+      setHomeActive(false);
+      setSavedActive(true);
+    }
+    return (
+      <div className="HomeSwitch">
+      <button className={HomeActive ? "ActiveHomeButton" : "HomeButton"} onClick={() => handleHome()}>Home</button>
+      <button className={SavedActive ? "ActiveHomeButton" : "HomeButton"} onClick={() => handleSaved()}>Saved</button>
+     </div>
+    );
+  }
+  return  (
+    <div className="HomePage">
+      <Navbar />
+      <CustomSwtich/>
+      <div className="HomeMain">
+       <CustomHomePage />
       </div>
     </div>
   );
