@@ -15,6 +15,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { getPostsByUser } from '../../src/backend/queries/postQueries';
 import { getAllComments } from '../../src/backend/queries/commentQueries';
+import { createComment } from '../../src/backend/mutations/commentMutations';
 import { ListPostsModelsQueryVariables, ModelIDInput } from "../API";
 import { getImage } from "../backend/storage/s3";
 import { TextField } from "@mui/material";
@@ -32,6 +33,7 @@ function handleBackendSave() {
 }
 
 export default function DiscoverPage() {
+
   const [projectsAll, setProjectsAll] = useState<any[]>([]);
   useEffect(() => {
     const fetchProjects = async () => {
@@ -85,7 +87,7 @@ function CommentSection(props: any) {
   return (
     <div className="CommentSection">
       <h2>Comments</h2>
-      <CreateComment />
+      <CreateComment projectInfo = {props.project}/>
       {props.comments.map((comment) => (
         <Comments CommentInfo = {comment}/>
       ))}
@@ -93,6 +95,22 @@ function CommentSection(props: any) {
   );
 }
 function CreateComment(props: any) {
+  async function postComment(props: {
+    comment: string;
+    postID: string;
+  }): Promise<void> {
+    const result = await createComment({
+      input:
+      {
+        comment: props.comment,
+        userID: localStorage.getItem('uuid')!,
+        postID: props.postID,
+        user_name: localStorage.getItem('username')!,
+        profile_image: localStorage.getItem('profileImage')!
+      }
+    })
+    console.log(result)
+  }
   const validationSchema = yup.object({
     comment : yup
       .string()
@@ -103,10 +121,11 @@ function CreateComment(props: any) {
   const formik = useFormik({
     initialValues: {
       comment: "",
+      postID: props.projectInfo
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      postComment(values)
     },
   });
   return (
@@ -146,13 +165,25 @@ function CreateComment(props: any) {
   );
   }
 function Comments(props: any) {
+  const [imageSrc, setImageSrc] = useState("");
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      const src = await getImage(props.CommentInfo.profile_image);
+      console.log(src)
+      setImageSrc(src);
+    };
+
+    fetchImage()
+
+  }, []);
   return (
     <div className="Comment">
       <div className="CommentHeader">
-        <img src="avatar.png" alt="User Avatar" className="Avatar" />
-        <h3 className="Username">John Doe</h3>
+        <img src={imageSrc} alt="User Avatar" className="Avatar" />
+        <h3 className="Username">{props.CommentInfo.user_name}</h3>
         </div>
-        <p className="CommentBody">This is a sample comment.</p>
+      <p className="CommentBody">{props.CommentInfo.comment}</p>
     </div>
       );
       }
@@ -192,14 +223,20 @@ function DiscoverComponent(props: any) {
     fetchImage();
    
     const fetchComments = async () => {
-      const rawComments = await getAllComments(props.projects.id)
+      console.log(props.projects.id)
+      const rawComments = await getAllComments({
+      filter: {
+        postID: {
+          eq: props.projects.id
+        }
+      }
+    })
       const filteredComments = rawComments.data.listCommentModels.items.filter(x => x._deleted !== true);
       setCommentsAll(filteredComments);
     }
-
     fetchComments();
+    
   }, []);
-
   const { projects, isVisible, onNextProject, onBackProject } = props;
 
   // framer motion -- use for exit, later implementation
@@ -329,7 +366,7 @@ function DiscoverComponent(props: any) {
             </IconButton>
           </div>
         </div>
-        <CommentSection comments={commentsAll}/>
+        <CommentSection comments={commentsAll} project={props.projects.id}/>
       </motion.div>
     </AnimatePresence>
   ) : (

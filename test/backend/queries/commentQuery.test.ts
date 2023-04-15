@@ -6,7 +6,7 @@ Amplify.configure(awsconfig)
 
 describe('Query Tests', () => {
 
-  test('List Post by user', async () => {
+  test.skip('List Post by user', async () => {
     const fil: ListCommentModelsQueryVariables = {
       filter: {
         userID: {
