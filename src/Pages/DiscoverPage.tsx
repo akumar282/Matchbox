@@ -182,6 +182,7 @@ function Comments(props: any) {
       <div className="CommentHeader">
         <img src={imageSrc} alt="User Avatar" className="Avatar" />
         <h3 className="Username">{props.CommentInfo.user_name}</h3>
+        <p className="DateTime">Date Time</p>
         </div>
       <p className="CommentBody">{props.CommentInfo.comment}</p>
     </div>
