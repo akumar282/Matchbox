@@ -30,7 +30,7 @@
     margin-bottom: 1rem;
     background-color: #fff;
     padding: 1rem;
-    transition: 0.5s;
+    transition: ease-in-out 0.4s;
 
 }
 .HomeButton {
@@ -46,7 +46,7 @@
     width: 10%;
     height: 3vh;
     border: none;
-    border-bottom: 3px solid #000000;
+    border-bottom: 5px solid #000000;
     transition: ease-in-out 0.4s;
 }
 .HomeButton:hover {
@@ -62,7 +62,8 @@
     width: 10%;
     height: 3vh;
     border: none;
-    border-bottom: 3px solid #915ee4;
+    color: #c8bfd8;
+    border-bottom: 5px solid #c8bfd8;
     transition: ease-in-out 0.4s;
 }
 .ActiveHomeButton {
@@ -78,14 +79,14 @@
     width: 10%;
     height: 3vh;
     border: none;
-    border-bottom: 3px solid #915ee4;
+    color: #915ee4;
+    border-bottom: 5px solid #915ee4;
     transition: ease-in-out 0.4s;
 }
 
 .CreateProject{
     display: flex;
     align-items: center;
-    
     background: linear-gradient(-45deg, #dd846973, #e0598d7a, #6cbbd879, #81ddc875);
     animation: Gradient 15s ease infinite;
     background-size: 200% 200%;
