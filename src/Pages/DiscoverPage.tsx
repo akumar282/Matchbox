@@ -42,9 +42,11 @@ export default function DiscoverPage() {
           }
         }
       });
+      
       const filteredProjects = result.data.listPostsModels.items.filter(x => x._deleted !== true);
       setProjectsAll(filteredProjects);
     };
+    fetchProjects();
   }, []);
   console.log(projectsAll)
   // set up state to keep track of which project is currently visible
