@@ -2,7 +2,7 @@
 Welcome to Matchbox! Where innovation ignites... 
 Our web application connects developers to projects that align with their interests, experience, and values
 
-#Link to the project
+# Link to the project
 https://staging.appmatchbox.com/
 |
 Team:  
