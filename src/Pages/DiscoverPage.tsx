@@ -202,28 +202,8 @@ function Comments(props: any) {
       <p className="CommentBody">{props.CommentInfo.comment}</p>
     </div>
       );
-      }
-      {/* <div className="Comments">
-       
-        <div className="Comment">
-          <div className="CommentHeader">
-            <img src="avatar.png" alt="User Avatar" className="Avatar" />
-            <h3 className="Username">John Doe</h3>
-          </div>
-          <p className="CommentBody">This is a sample comment.</p>
-        </div>
-        <div className="Comment">
-          <div className="CommentHeader">
-            <img src="avatar.png" alt="User Avatar" className="Avatar" />
-            <h3 className="Username">Jane Smith</h3>
-          </div>
-          <p className="CommentBody">This is another sample comment.</p>
-        </div>
-      </div>
-      <form className="CommentForm">
-        <textarea className="CommentTextarea" placeholder="Write a comment..." />
-        <button className="CommentButton">Post Comment</button>
-      </form> */}
+}
+
 
 function DiscoverComponent(props: any) {
   // remake objects

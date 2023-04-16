@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { useEffect, useState } from "react";
 import "./CSS/HomePage.css";
-import { getPostsByUser } from "../backend/queries/postQueries";
-import { ListPostsModelsQueryVariables } from "../API";
+import { getPostsByUser, getPostById } from "../backend/queries/postQueries";
+import { getUserById } from "../backend/queries/userQueries";
 import { getImage } from "../backend/storage/s3";
 
 export default function HomePage() {
@@ -17,6 +17,7 @@ export default function HomePage() {
   const [HomeActive, setHomeActive] = useState<any>(true);
   const [SavedActive, setSavedActive] = useState<any>(false);
   const [projectsAll, setProjectsAll] = useState<any[]>([]);
+  const [savedAll, setSavedAll] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -31,7 +32,23 @@ export default function HomePage() {
       setProjectsAll(filteredProjects);
     };
 
+    const usersSavedProjects = async () => {
+      const savedProjects: any[] = [];
+      const result = await getUserById(localStorage.getItem('uuid')!);
+      if(result.data.getUsersModel.saved_posts) {
+        for (const id of result.data.getUsersModel.saved_posts){
+          const project = await getPostById(id);
+          savedProjects.push(project.data.getPostsModel);
+        }
+      } else {
+        console.log('no saved projects');
+      }
+      setSavedAll(savedProjects);
+    }
+
     fetchProjects();
+    usersSavedProjects();
+    console.log(savedAll)
   }, []);
 
   function handleCreate() {
