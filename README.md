@@ -8,6 +8,9 @@ Hayden Lauritzen - Backend Engineer
 Rosie Shen - Frontend Engineer  
 Mohammad Zahid - Lead Frontend Engineer
 
+# Link to the project
+https://staging.appmatchbox.com/
+
 ## Visit our Figma wireframe! 
 https://www.figma.com/file/5GgpPtR2nnpO10SCe0ZyiK/Matchbox?node-id=0%3A1
 
