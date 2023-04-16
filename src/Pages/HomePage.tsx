@@ -48,7 +48,6 @@ export default function HomePage() {
 
     fetchProjects();
     usersSavedProjects();
-    console.log(savedAll)
   }, []);
 
   function handleCreate() {
@@ -125,7 +124,6 @@ const CustomSavedProjects = (props: any) => {
     fetchImage();
   }, [props.user.image_link]);
   function projectClick() {
-    console.log(props.State);
     props.user.state = props.State;
     navigate("/project-overview/" + props.user.post_title, { state: props.user});
   }

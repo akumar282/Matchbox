@@ -18,7 +18,6 @@ export async function newUserSignUp(username: string, password: string, email: s
         enabled: true
       }
     })
-    console.log(`User ${userId} successfully created! Message: ${newUser}`)
     return 'Success'
   } catch (error) {
     console.error('Sign up failed!', error)
@@ -35,7 +34,6 @@ export async function getCurrentUserAttributes(): Promise<CustomAttribute[]> {
         name: key.substring('custom:'.length),
         value: value as string
       }))
-    console.log(customAttributes)
     return customAttributes
   } catch (error) {
     console.log('Error getting user attributes: ', error)

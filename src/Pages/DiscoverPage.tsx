@@ -42,7 +42,6 @@ export default function DiscoverPage() {
     };
     fetchProjects();
   }, []);
-  console.log(projectsAll)
   // set up state to keep track of which project is currently visible
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
 
@@ -57,7 +56,6 @@ export default function DiscoverPage() {
     setCurrentProjectIndex((currentProjectIndex - 1) % projectsAll.length);
     
   };
-  console.log(projectsAll)
   return (
     <div className="DiscoverPage">
       <Navbar />
@@ -176,7 +174,6 @@ function Comments(props: any) {
   useEffect(() => {
     const fetchImage = async () => {
       const src = await getImage(props.CommentInfo.profile_image);
-      console.log(src)
       setImageSrc(src);
     };
 
@@ -212,7 +209,6 @@ function DiscoverComponent(props: any) {
     fetchImage();
    
     const fetchComments = async () => {
-      console.log(props.projects.id)
       const rawComments = await getAllComments({
       filter: {
         postID: {

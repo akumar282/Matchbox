@@ -55,7 +55,6 @@ function setLocalStorage() {
   }
 }
 setLocalStorage();
-console.log(localStorage)
 export default function LandingPage() {
   // email signup textfield handling [leave this here, will be used later]
   // const [userEmail, setUserEmail] = React.useState("");
