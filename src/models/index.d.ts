@@ -77,6 +77,10 @@ type NewsletterEmailModelMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type MessageModelMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type PostsModelMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -107,6 +111,32 @@ export declare type NewsletterEmailModel = LazyLoading extends LazyLoadingDisabl
 
 export declare const NewsletterEmailModel: (new (init: ModelInit<NewsletterEmailModel, NewsletterEmailModelMetaData>) => NewsletterEmailModel) & {
   copyOf(source: NewsletterEmailModel, mutator: (draft: MutableModel<NewsletterEmailModel, NewsletterEmailModelMetaData>) => MutableModel<NewsletterEmailModel, NewsletterEmailModelMetaData> | void): NewsletterEmailModel;
+}
+
+type EagerMessageModel = {
+  readonly id: string;
+  readonly message: string;
+  readonly to: string;
+  readonly from: string;
+  readonly message_date?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyMessageModel = {
+  readonly id: string;
+  readonly message: string;
+  readonly to: string;
+  readonly from: string;
+  readonly message_date?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type MessageModel = LazyLoading extends LazyLoadingDisabled ? EagerMessageModel : LazyMessageModel
+
+export declare const MessageModel: (new (init: ModelInit<MessageModel, MessageModelMetaData>) => MessageModel) & {
+  copyOf(source: MessageModel, mutator: (draft: MutableModel<MessageModel, MessageModelMetaData>) => MutableModel<MessageModel, MessageModelMetaData> | void): MessageModel;
 }
 
 type EagerPostsModel = {
@@ -197,6 +227,12 @@ type EagerUsersModel = {
   readonly dahublink?: string | null;
   readonly saved_posts?: (string | null)[] | null;
   readonly hide_posts?: (string | null)[] | null;
+  readonly messages?: (MessageModel | null)[] | null;
+  readonly lang_tag?: (LanguageTag | null)[] | keyof typeof LanguageTag | null;
+  readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
+  readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
+  readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
+  readonly framework_tag?: (FrameworkTag | null)[] | keyof typeof FrameworkTag | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -215,6 +251,12 @@ type LazyUsersModel = {
   readonly dahublink?: string | null;
   readonly saved_posts?: (string | null)[] | null;
   readonly hide_posts?: (string | null)[] | null;
+  readonly messages: AsyncCollection<MessageModel>;
+  readonly lang_tag?: (LanguageTag | null)[] | keyof typeof LanguageTag | null;
+  readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
+  readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
+  readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
+  readonly framework_tag?: (FrameworkTag | null)[] | keyof typeof FrameworkTag | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

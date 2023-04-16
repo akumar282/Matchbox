@@ -112,6 +112,124 @@ export const searchNewsletterEmailModels = /* GraphQL */ `
     }
   }
 `;
+export const getMessageModel = /* GraphQL */ `
+  query GetMessageModel($id: ID!) {
+    getMessageModel(id: $id) {
+      id
+      message
+      to
+      from
+      message_date
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listMessageModels = /* GraphQL */ `
+  query ListMessageModels(
+    $filter: ModelMessageModelFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMessageModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        message
+        to
+        from
+        message_date
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncMessageModels = /* GraphQL */ `
+  query SyncMessageModels(
+    $filter: ModelMessageModelFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncMessageModels(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        message
+        to
+        from
+        message_date
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const searchMessageModels = /* GraphQL */ `
+  query SearchMessageModels(
+    $filter: SearchableMessageModelFilterInput
+    $sort: [SearchableMessageModelSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableMessageModelAggregationInput]
+  ) {
+    searchMessageModels(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        message
+        to
+        from
+        message_date
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const getPostsModel = /* GraphQL */ `
   query GetPostsModel($id: ID!) {
     getPostsModel(id: $id) {
@@ -288,6 +406,15 @@ export const getUsersModel = /* GraphQL */ `
       dahublink
       saved_posts
       hide_posts
+      messages {
+        nextToken
+        startedAt
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
       createdAt
       updatedAt
       _version
@@ -315,6 +442,11 @@ export const listUsersModels = /* GraphQL */ `
         dahublink
         saved_posts
         hide_posts
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
         createdAt
         updatedAt
         _version
@@ -351,6 +483,11 @@ export const syncUsersModels = /* GraphQL */ `
         dahublink
         saved_posts
         hide_posts
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
         createdAt
         updatedAt
         _version
@@ -391,6 +528,11 @@ export const searchUsersModels = /* GraphQL */ `
         dahublink
         saved_posts
         hide_posts
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
         createdAt
         updatedAt
         _version

@@ -77,6 +77,69 @@ export type DeleteNewsletterEmailModelInput = {
   _version?: number | null,
 };
 
+export type CreateMessageModelInput = {
+  id?: string | null,
+  message: string,
+  to: string,
+  from: string,
+  message_date?: string | null,
+  _version?: number | null,
+};
+
+export type ModelMessageModelConditionInput = {
+  message?: ModelStringInput | null,
+  to?: ModelStringInput | null,
+  from?: ModelIDInput | null,
+  message_date?: ModelStringInput | null,
+  and?: Array< ModelMessageModelConditionInput | null > | null,
+  or?: Array< ModelMessageModelConditionInput | null > | null,
+  not?: ModelMessageModelConditionInput | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type MessageModel = {
+  __typename: "MessageModel",
+  id: string,
+  message: string,
+  to: string,
+  from: string,
+  message_date?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type UpdateMessageModelInput = {
+  id: string,
+  message?: string | null,
+  to?: string | null,
+  from?: string | null,
+  message_date?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteMessageModelInput = {
+  id: string,
+  _version?: number | null,
+};
+
 export type CreatePostsModelInput = {
   id?: string | null,
   post_title: string,
@@ -186,22 +249,6 @@ export type ModelPostsModelConditionInput = {
   and?: Array< ModelPostsModelConditionInput | null > | null,
   or?: Array< ModelPostsModelConditionInput | null > | null,
   not?: ModelPostsModelConditionInput | null,
-};
-
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
 };
 
 export type ModelLanguageTagListInput = {
@@ -319,6 +366,11 @@ export type CreateUsersModelInput = {
   dahublink?: string | null,
   saved_posts?: Array< string | null > | null,
   hide_posts?: Array< string | null > | null,
+  lang_tag?: Array< LanguageTag | null > | null,
+  dev_type_tag?: Array< DevelopmentTag | null > | null,
+  interest_tag?: Array< InterestTag | null > | null,
+  size_tag?: Array< SizeTag | null > | null,
+  framework_tag?: Array< FrameworkTag | null > | null,
   _version?: number | null,
 };
 
@@ -333,6 +385,11 @@ export type ModelUsersModelConditionInput = {
   dahublink?: ModelStringInput | null,
   saved_posts?: ModelIDInput | null,
   hide_posts?: ModelIDInput | null,
+  lang_tag?: ModelLanguageTagListInput | null,
+  dev_type_tag?: ModelDevelopmentTagListInput | null,
+  interest_tag?: ModelInterestTagListInput | null,
+  size_tag?: ModelSizeTagListInput | null,
+  framework_tag?: ModelFrameworkTagListInput | null,
   and?: Array< ModelUsersModelConditionInput | null > | null,
   or?: Array< ModelUsersModelConditionInput | null > | null,
   not?: ModelUsersModelConditionInput | null,
@@ -353,6 +410,12 @@ export type UsersModel = {
   dahublink?: string | null,
   saved_posts?: Array< string | null > | null,
   hide_posts?: Array< string | null > | null,
+  messages?: ModelMessageModelConnection | null,
+  lang_tag?: Array< LanguageTag | null > | null,
+  dev_type_tag?: Array< DevelopmentTag | null > | null,
+  interest_tag?: Array< InterestTag | null > | null,
+  size_tag?: Array< SizeTag | null > | null,
+  framework_tag?: Array< FrameworkTag | null > | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -363,6 +426,13 @@ export type UsersModel = {
 export type ModelPostsModelConnection = {
   __typename: "ModelPostsModelConnection",
   items:  Array<PostsModel | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type ModelMessageModelConnection = {
+  __typename: "ModelMessageModelConnection",
+  items:  Array<MessageModel | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
@@ -379,6 +449,11 @@ export type UpdateUsersModelInput = {
   dahublink?: string | null,
   saved_posts?: Array< string | null > | null,
   hide_posts?: Array< string | null > | null,
+  lang_tag?: Array< LanguageTag | null > | null,
+  dev_type_tag?: Array< DevelopmentTag | null > | null,
+  interest_tag?: Array< InterestTag | null > | null,
+  size_tag?: Array< SizeTag | null > | null,
+  framework_tag?: Array< FrameworkTag | null > | null,
   _version?: number | null,
 };
 
@@ -584,6 +659,80 @@ export type SearchableAggregateBucketResultItem = {
   doc_count: number,
 };
 
+export type ModelMessageModelFilterInput = {
+  id?: ModelIDInput | null,
+  message?: ModelStringInput | null,
+  to?: ModelStringInput | null,
+  from?: ModelIDInput | null,
+  message_date?: ModelStringInput | null,
+  and?: Array< ModelMessageModelFilterInput | null > | null,
+  or?: Array< ModelMessageModelFilterInput | null > | null,
+  not?: ModelMessageModelFilterInput | null,
+};
+
+export type SearchableMessageModelFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  message?: SearchableStringFilterInput | null,
+  to?: SearchableStringFilterInput | null,
+  from?: SearchableIDFilterInput | null,
+  message_date?: SearchableStringFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  _version?: SearchableIntFilterInput | null,
+  _deleted?: SearchableBooleanFilterInput | null,
+  _lastChangedAt?: SearchableIntFilterInput | null,
+  and?: Array< SearchableMessageModelFilterInput | null > | null,
+  or?: Array< SearchableMessageModelFilterInput | null > | null,
+  not?: SearchableMessageModelFilterInput | null,
+};
+
+export type SearchableMessageModelSortInput = {
+  field?: SearchableMessageModelSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableMessageModelSortableFields {
+  id = "id",
+  message = "message",
+  to = "to",
+  from = "from",
+  message_date = "message_date",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+  _version = "_version",
+  _deleted = "_deleted",
+  _lastChangedAt = "_lastChangedAt",
+}
+
+
+export type SearchableMessageModelAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableMessageModelAggregateField,
+};
+
+export enum SearchableMessageModelAggregateField {
+  id = "id",
+  message = "message",
+  to = "to",
+  from = "from",
+  message_date = "message_date",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+  _version = "_version",
+  _deleted = "_deleted",
+  _lastChangedAt = "_lastChangedAt",
+}
+
+
+export type SearchableMessageModelConnection = {
+  __typename: "SearchableMessageModelConnection",
+  items:  Array<MessageModel | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
 export type ModelPostsModelFilterInput = {
   id?: ModelIDInput | null,
   post_title?: ModelStringInput | null,
@@ -697,6 +846,11 @@ export type ModelUsersModelFilterInput = {
   dahublink?: ModelStringInput | null,
   saved_posts?: ModelIDInput | null,
   hide_posts?: ModelIDInput | null,
+  lang_tag?: ModelLanguageTagListInput | null,
+  dev_type_tag?: ModelDevelopmentTagListInput | null,
+  interest_tag?: ModelInterestTagListInput | null,
+  size_tag?: ModelSizeTagListInput | null,
+  framework_tag?: ModelFrameworkTagListInput | null,
   and?: Array< ModelUsersModelFilterInput | null > | null,
   or?: Array< ModelUsersModelFilterInput | null > | null,
   not?: ModelUsersModelFilterInput | null,
@@ -726,6 +880,11 @@ export type SearchableUsersModelFilterInput = {
   _version?: SearchableIntFilterInput | null,
   _deleted?: SearchableBooleanFilterInput | null,
   _lastChangedAt?: SearchableIntFilterInput | null,
+  lang_tag?: SearchableStringFilterInput | null,
+  dev_type_tag?: SearchableStringFilterInput | null,
+  interest_tag?: SearchableStringFilterInput | null,
+  size_tag?: SearchableStringFilterInput | null,
+  framework_tag?: SearchableStringFilterInput | null,
   and?: Array< SearchableUsersModelFilterInput | null > | null,
   or?: Array< SearchableUsersModelFilterInput | null > | null,
   not?: SearchableUsersModelFilterInput | null,
@@ -774,6 +933,11 @@ export enum SearchableUsersModelAggregateField {
   dahublink = "dahublink",
   saved_posts = "saved_posts",
   hide_posts = "hide_posts",
+  lang_tag = "lang_tag",
+  dev_type_tag = "dev_type_tag",
+  interest_tag = "interest_tag",
+  size_tag = "size_tag",
+  framework_tag = "framework_tag",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
   _version = "_version",
@@ -909,6 +1073,16 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
+export type ModelSubscriptionMessageModelFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  message?: ModelSubscriptionStringInput | null,
+  to?: ModelSubscriptionStringInput | null,
+  from?: ModelSubscriptionIDInput | null,
+  message_date?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionMessageModelFilterInput | null > | null,
+  or?: Array< ModelSubscriptionMessageModelFilterInput | null > | null,
+};
+
 export type ModelSubscriptionPostsModelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   post_title?: ModelSubscriptionStringInput | null,
@@ -939,6 +1113,11 @@ export type ModelSubscriptionUsersModelFilterInput = {
   dahublink?: ModelSubscriptionStringInput | null,
   saved_posts?: ModelSubscriptionIDInput | null,
   hide_posts?: ModelSubscriptionIDInput | null,
+  lang_tag?: ModelSubscriptionStringInput | null,
+  dev_type_tag?: ModelSubscriptionStringInput | null,
+  interest_tag?: ModelSubscriptionStringInput | null,
+  size_tag?: ModelSubscriptionStringInput | null,
+  framework_tag?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
 };
@@ -1001,6 +1180,69 @@ export type DeleteNewsletterEmailModelMutation = {
     __typename: "NewsletterEmailModel",
     id: string,
     email: string,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type CreateMessageModelMutationVariables = {
+  input: CreateMessageModelInput,
+  condition?: ModelMessageModelConditionInput | null,
+};
+
+export type CreateMessageModelMutation = {
+  createMessageModel?:  {
+    __typename: "MessageModel",
+    id: string,
+    message: string,
+    to: string,
+    from: string,
+    message_date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateMessageModelMutationVariables = {
+  input: UpdateMessageModelInput,
+  condition?: ModelMessageModelConditionInput | null,
+};
+
+export type UpdateMessageModelMutation = {
+  updateMessageModel?:  {
+    __typename: "MessageModel",
+    id: string,
+    message: string,
+    to: string,
+    from: string,
+    message_date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteMessageModelMutationVariables = {
+  input: DeleteMessageModelInput,
+  condition?: ModelMessageModelConditionInput | null,
+};
+
+export type DeleteMessageModelMutation = {
+  deleteMessageModel?:  {
+    __typename: "MessageModel",
+    id: string,
+    message: string,
+    to: string,
+    from: string,
+    message_date?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1140,6 +1382,16 @@ export type CreateUsersModelMutation = {
     dahublink?: string | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    messages?:  {
+      __typename: "ModelMessageModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    lang_tag?: Array< LanguageTag | null > | null,
+    dev_type_tag?: Array< DevelopmentTag | null > | null,
+    interest_tag?: Array< InterestTag | null > | null,
+    size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1177,6 +1429,16 @@ export type UpdateUsersModelMutation = {
     dahublink?: string | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    messages?:  {
+      __typename: "ModelMessageModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    lang_tag?: Array< LanguageTag | null > | null,
+    dev_type_tag?: Array< DevelopmentTag | null > | null,
+    interest_tag?: Array< InterestTag | null > | null,
+    size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1214,6 +1476,16 @@ export type DeleteUsersModelMutation = {
     dahublink?: string | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    messages?:  {
+      __typename: "ModelMessageModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    lang_tag?: Array< LanguageTag | null > | null,
+    dev_type_tag?: Array< DevelopmentTag | null > | null,
+    interest_tag?: Array< InterestTag | null > | null,
+    size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1373,6 +1645,127 @@ export type SearchNewsletterEmailModelsQuery = {
       __typename: "NewsletterEmailModel",
       id: string,
       email: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
+export type GetMessageModelQueryVariables = {
+  id: string,
+};
+
+export type GetMessageModelQuery = {
+  getMessageModel?:  {
+    __typename: "MessageModel",
+    id: string,
+    message: string,
+    to: string,
+    from: string,
+    message_date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListMessageModelsQueryVariables = {
+  filter?: ModelMessageModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListMessageModelsQuery = {
+  listMessageModels?:  {
+    __typename: "ModelMessageModelConnection",
+    items:  Array< {
+      __typename: "MessageModel",
+      id: string,
+      message: string,
+      to: string,
+      from: string,
+      message_date?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncMessageModelsQueryVariables = {
+  filter?: ModelMessageModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncMessageModelsQuery = {
+  syncMessageModels?:  {
+    __typename: "ModelMessageModelConnection",
+    items:  Array< {
+      __typename: "MessageModel",
+      id: string,
+      message: string,
+      to: string,
+      from: string,
+      message_date?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SearchMessageModelsQueryVariables = {
+  filter?: SearchableMessageModelFilterInput | null,
+  sort?: Array< SearchableMessageModelSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableMessageModelAggregationInput | null > | null,
+};
+
+export type SearchMessageModelsQuery = {
+  searchMessageModels?:  {
+    __typename: "SearchableMessageModelConnection",
+    items:  Array< {
+      __typename: "MessageModel",
+      id: string,
+      message: string,
+      to: string,
+      from: string,
+      message_date?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1586,6 +1979,16 @@ export type GetUsersModelQuery = {
     dahublink?: string | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    messages?:  {
+      __typename: "ModelMessageModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    lang_tag?: Array< LanguageTag | null > | null,
+    dev_type_tag?: Array< DevelopmentTag | null > | null,
+    interest_tag?: Array< InterestTag | null > | null,
+    size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1616,6 +2019,11 @@ export type ListUsersModelsQuery = {
       dahublink?: string | null,
       saved_posts?: Array< string | null > | null,
       hide_posts?: Array< string | null > | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1650,6 +2058,11 @@ export type SyncUsersModelsQuery = {
       dahublink?: string | null,
       saved_posts?: Array< string | null > | null,
       hide_posts?: Array< string | null > | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1686,6 +2099,11 @@ export type SearchUsersModelsQuery = {
       dahublink?: string | null,
       saved_posts?: Array< string | null > | null,
       hide_posts?: Array< string | null > | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1893,6 +2311,66 @@ export type OnDeleteNewsletterEmailModelSubscription = {
   } | null,
 };
 
+export type OnCreateMessageModelSubscriptionVariables = {
+  filter?: ModelSubscriptionMessageModelFilterInput | null,
+};
+
+export type OnCreateMessageModelSubscription = {
+  onCreateMessageModel?:  {
+    __typename: "MessageModel",
+    id: string,
+    message: string,
+    to: string,
+    from: string,
+    message_date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateMessageModelSubscriptionVariables = {
+  filter?: ModelSubscriptionMessageModelFilterInput | null,
+};
+
+export type OnUpdateMessageModelSubscription = {
+  onUpdateMessageModel?:  {
+    __typename: "MessageModel",
+    id: string,
+    message: string,
+    to: string,
+    from: string,
+    message_date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteMessageModelSubscriptionVariables = {
+  filter?: ModelSubscriptionMessageModelFilterInput | null,
+};
+
+export type OnDeleteMessageModelSubscription = {
+  onDeleteMessageModel?:  {
+    __typename: "MessageModel",
+    id: string,
+    message: string,
+    to: string,
+    from: string,
+    message_date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
 export type OnCreatePostsModelSubscriptionVariables = {
   filter?: ModelSubscriptionPostsModelFilterInput | null,
 };
@@ -2020,6 +2498,16 @@ export type OnCreateUsersModelSubscription = {
     dahublink?: string | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    messages?:  {
+      __typename: "ModelMessageModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    lang_tag?: Array< LanguageTag | null > | null,
+    dev_type_tag?: Array< DevelopmentTag | null > | null,
+    interest_tag?: Array< InterestTag | null > | null,
+    size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -2056,6 +2544,16 @@ export type OnUpdateUsersModelSubscription = {
     dahublink?: string | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    messages?:  {
+      __typename: "ModelMessageModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    lang_tag?: Array< LanguageTag | null > | null,
+    dev_type_tag?: Array< DevelopmentTag | null > | null,
+    interest_tag?: Array< InterestTag | null > | null,
+    size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -2092,6 +2590,16 @@ export type OnDeleteUsersModelSubscription = {
     dahublink?: string | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    messages?:  {
+      __typename: "ModelMessageModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    lang_tag?: Array< LanguageTag | null > | null,
+    dev_type_tag?: Array< DevelopmentTag | null > | null,
+    interest_tag?: Array< InterestTag | null > | null,
+    size_tag?: Array< SizeTag | null > | null,
+    framework_tag?: Array< FrameworkTag | null > | null,
     createdAt: string,
     updatedAt: string,
     _version: number,

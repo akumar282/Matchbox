@@ -47,6 +47,60 @@ export const onDeleteNewsletterEmailModel = /* GraphQL */ `
     }
   }
 `;
+export const onCreateMessageModel = /* GraphQL */ `
+  subscription OnCreateMessageModel(
+    $filter: ModelSubscriptionMessageModelFilterInput
+  ) {
+    onCreateMessageModel(filter: $filter) {
+      id
+      message
+      to
+      from
+      message_date
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateMessageModel = /* GraphQL */ `
+  subscription OnUpdateMessageModel(
+    $filter: ModelSubscriptionMessageModelFilterInput
+  ) {
+    onUpdateMessageModel(filter: $filter) {
+      id
+      message
+      to
+      from
+      message_date
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteMessageModel = /* GraphQL */ `
+  subscription OnDeleteMessageModel(
+    $filter: ModelSubscriptionMessageModelFilterInput
+  ) {
+    onDeleteMessageModel(filter: $filter) {
+      id
+      message
+      to
+      from
+      message_date
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreatePostsModel = /* GraphQL */ `
   subscription OnCreatePostsModel(
     $filter: ModelSubscriptionPostsModelFilterInput
@@ -161,6 +215,15 @@ export const onCreateUsersModel = /* GraphQL */ `
       dahublink
       saved_posts
       hide_posts
+      messages {
+        nextToken
+        startedAt
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
       createdAt
       updatedAt
       _version
@@ -193,6 +256,15 @@ export const onUpdateUsersModel = /* GraphQL */ `
       dahublink
       saved_posts
       hide_posts
+      messages {
+        nextToken
+        startedAt
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
       createdAt
       updatedAt
       _version
@@ -225,6 +297,15 @@ export const onDeleteUsersModel = /* GraphQL */ `
       dahublink
       saved_posts
       hide_posts
+      messages {
+        nextToken
+        startedAt
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
       createdAt
       updatedAt
       _version

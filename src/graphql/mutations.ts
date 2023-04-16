@@ -50,6 +50,63 @@ export const deleteNewsletterEmailModel = /* GraphQL */ `
     }
   }
 `;
+export const createMessageModel = /* GraphQL */ `
+  mutation CreateMessageModel(
+    $input: CreateMessageModelInput!
+    $condition: ModelMessageModelConditionInput
+  ) {
+    createMessageModel(input: $input, condition: $condition) {
+      id
+      message
+      to
+      from
+      message_date
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateMessageModel = /* GraphQL */ `
+  mutation UpdateMessageModel(
+    $input: UpdateMessageModelInput!
+    $condition: ModelMessageModelConditionInput
+  ) {
+    updateMessageModel(input: $input, condition: $condition) {
+      id
+      message
+      to
+      from
+      message_date
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteMessageModel = /* GraphQL */ `
+  mutation DeleteMessageModel(
+    $input: DeleteMessageModelInput!
+    $condition: ModelMessageModelConditionInput
+  ) {
+    deleteMessageModel(input: $input, condition: $condition) {
+      id
+      message
+      to
+      from
+      message_date
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const createPostsModel = /* GraphQL */ `
   mutation CreatePostsModel(
     $input: CreatePostsModelInput!
@@ -168,6 +225,15 @@ export const createUsersModel = /* GraphQL */ `
       dahublink
       saved_posts
       hide_posts
+      messages {
+        nextToken
+        startedAt
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
       createdAt
       updatedAt
       _version
@@ -201,6 +267,15 @@ export const updateUsersModel = /* GraphQL */ `
       dahublink
       saved_posts
       hide_posts
+      messages {
+        nextToken
+        startedAt
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
       createdAt
       updatedAt
       _version
@@ -234,6 +309,15 @@ export const deleteUsersModel = /* GraphQL */ `
       dahublink
       saved_posts
       hide_posts
+      messages {
+        nextToken
+        startedAt
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
       createdAt
       updatedAt
       _version

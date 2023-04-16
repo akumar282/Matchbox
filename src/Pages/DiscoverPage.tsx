@@ -16,21 +16,12 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { getPostsByUser } from '../../src/backend/queries/postQueries';
 import { getAllComments } from '../../src/backend/queries/commentQueries';
 import { createComment } from '../../src/backend/mutations/commentMutations';
-import { ListPostsModelsQueryVariables, ModelIDInput } from "../API";
+import { updateUser } from '../../src/backend/mutations/userMutations';
 import { getImage } from "../backend/storage/s3";
 import { TextField } from "@mui/material";
 import { useFormik, Field } from "formik";
 import * as yup from "yup";
 // keep these functions here for top level backend connection
-function handleBackendRemove() {
-  console.log("removing project");
-  // TODO make backend connection here
-}
-
-function handleBackendSave() {
-  console.log("saving project");
-  // TODO make backend connection here
-}
 
 export default function DiscoverPage() {
 
@@ -203,8 +194,9 @@ function Comments(props: any) {
       <p className="CommentBody">{props.CommentInfo.comment}</p>
     </div>
       );
-  }
-      
+}
+
+
 function DiscoverComponent(props: any) {
   // remake objects
   const [commentsAll, setCommentsAll] = useState<any[]>([]);
@@ -244,12 +236,19 @@ function DiscoverComponent(props: any) {
     },
   };
 
-  const handleSave = () => {
-    handleBackendSave();
+  const handleSave = async () => {
+    console.log("saving project");
+    const result = await updateUser({
+      input: {
+        id: localStorage.getItem('uuid')!,
+        saved_posts: [props.projects.id]
+      }
+    })
+    console.log(result)
   };
 
   const handleRemove = () => {
-    handleBackendRemove();
+    
   };
   const handleNext = () => {
     onNextProject();

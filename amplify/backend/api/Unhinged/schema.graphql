@@ -74,6 +74,14 @@ enum FrameworkTag {
   HEROKU
 }
 
+type MessageModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  message: String!
+  to: String!
+  from: ID! @index(name: "byUsersModel")
+  message_date: AWSDateTime
+}
+
 type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   post_title: String!
@@ -105,6 +113,12 @@ type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [re
   dahublink: AWSURL
   saved_posts: [ID]
   hide_posts: [ID]
+  messages: [MessageModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  lang_tag: [LanguageTag]
+  dev_type_tag: [DevelopmentTag]
+  interest_tag: [InterestTag]
+  size_tag: [SizeTag]
+  framework_tag: [FrameworkTag]
 }
 
 type CommentModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {

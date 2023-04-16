@@ -63,6 +63,99 @@ export const schema = {
                 }
             ]
         },
+        "MessageModel": {
+            "name": "MessageModel",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "message": {
+                    "name": "message",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "to": {
+                    "name": "to",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "from": {
+                    "name": "from",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "message_date": {
+                    "name": "message_date",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "MessageModels",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUsersModel",
+                        "fields": [
+                            "from"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "delete",
+                                    "update"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "PostsModel": {
             "name": "PostsModel",
             "fields": {
@@ -467,6 +560,70 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
+                "messages": {
+                    "name": "messages",
+                    "isArray": true,
+                    "type": {
+                        "model": "MessageModel"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "from"
+                    }
+                },
+                "lang_tag": {
+                    "name": "lang_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "LanguageTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "dev_type_tag": {
+                    "name": "dev_type_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "DevelopmentTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "interest_tag": {
+                    "name": "interest_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "InterestTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "size_tag": {
+                    "name": "size_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "SizeTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "framework_tag": {
+                    "name": "framework_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "FrameworkTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -599,5 +756,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.2.0",
-    "version": "700fed0a112b2037c2f79f30230dd3bc"
+    "version": "fe80238e0112feadff7f78527de3e365"
 };
