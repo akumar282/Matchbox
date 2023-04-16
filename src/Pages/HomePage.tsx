@@ -98,12 +98,12 @@ const CustomSavedProjects = (props: any) => {
     fetchImage();
   }, [props.user.image_link]);
   function projectClick() {
-    if (props.State === "Saved") {
+    // if (props.State === "Saved") {
       navigate("/project-overview/" + props.user.post_title, { state: props.user});
-    } else {
-      // add code for edit project
+    // } else {
+    //   // add code for edit project
       
-    }
+    // }
   }
   return (
     <div className="HomeSavedProjects" onClick={projectClick}>
