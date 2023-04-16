@@ -52,6 +52,7 @@ export default function LandingPopupLogin(props) {
         const username = await getUserById(localStorage.getItem('uuid')!)
         localStorage.setItem('username', username.data.getUsersModel.user_name)
         localStorage.setItem('profileImage', username.data.getUsersModel.profile_image)
+        console.log(username)
         
         if (localStorage.getItem('firstTime') === 'true') {
           navigate("/preferences")
