@@ -127,6 +127,7 @@ function CreateComment(props: any) {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       postComment(values)
+      window.location.reload();
     },
   });
   return (
