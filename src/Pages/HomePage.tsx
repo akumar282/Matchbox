@@ -46,7 +46,7 @@ export default function HomePage() {
           <h1 className="CreateText">Create Project</h1>
         </div>
         {projectsAll.map((tag) => (
-          <CustomSavedProjects user={tag} key={tag.post_title} />
+          <CustomSavedProjects user={tag} key={tag.post_title} State = {homeState}/>
         ))}    
       </>
     );
@@ -98,7 +98,12 @@ const CustomSavedProjects = (props: any) => {
     fetchImage();
   }, [props.user.image_link]);
   function projectClick() {
-    navigate("/project-overview/" + props.user.post_title, { state: props.user});
+    if (props.State === "Saved") {
+      navigate("/project-overview/" + props.user.post_title, { state: props.user});
+    } else {
+      // add code for edit project
+      
+    }
   }
   return (
     <div className="HomeSavedProjects" onClick={projectClick}>
