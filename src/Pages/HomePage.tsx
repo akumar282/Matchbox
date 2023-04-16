@@ -3,7 +3,7 @@ import Navbar from "../components/NavBar";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { Button, IconButton } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { useEffect, useState } from "react";
 import "./CSS/HomePage.css";
@@ -63,7 +63,7 @@ export default function HomePage() {
           <h1 className="CreateText">Create Project</h1>
         </div>
         {projectsAll.map((tag) => (
-          <CustomSavedProjects user={tag} key={tag.post_title} />
+          <CustomSavedProjects user={tag} key={tag.post_title} State = {homeState}/>
         ))}    
       </>
     );
@@ -73,7 +73,7 @@ export default function HomePage() {
       return (
         <>
           {savedAll.map((tag) => (
-            <CustomSavedProjects user={tag} key={tag.post_title} />
+            <CustomSavedProjects user={tag} key={tag.post_title} State = {homeState}/>
           ))}    
         </>
       );
@@ -115,7 +115,7 @@ export default function HomePage() {
 
 const CustomSavedProjects = (props: any) => {
   const [imageSrc, setImageSrc] = useState("");
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchImage = async () => {
       const src = await getImage(props.user.image_link);
@@ -125,7 +125,9 @@ const CustomSavedProjects = (props: any) => {
     fetchImage();
   }, [props.user.image_link]);
   function projectClick() {
-    window.open(props.user.project_link);
+    console.log(props.State);
+    props.user.state = props.State;
+    navigate("/project-overview/" + props.user.post_title, { state: props.user});
   }
   return (
     <div className="HomeSavedProjects" onClick={projectClick}>

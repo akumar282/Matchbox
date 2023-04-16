@@ -11,6 +11,7 @@ import SettingsPage from './Pages/Settings'
 import CreateProject from './Pages/CreateProject'
 import UserPreferencesPage from './Pages/UserPreferencesPage'
 import SavedProjects from './Pages/SavedProjects';
+import ProjectOverview from './Pages/ProjectOverview'
 
 const globalAuthState = {
   isAuthenticated: false,
@@ -20,6 +21,8 @@ const globalAuthState = {
   uuid: null,
   isLoggedin: false,
   firstTime: false,
+  viewProject: null,
+  editProject: null,
 }
 
 
@@ -39,6 +42,7 @@ function App () {
         <Route path='/preferences' element={<UserPreferencesPage/>} />
         <Route path='/discover/:projectName' element={<ProjectDetails/>} />
         <Route path='/savedprojects' element={<SavedProjects/>} />
+        <Route path='/project-overview/:projectName' element={<ProjectOverview/>} />
       </Routes>
     </BrowserRouter>
   )

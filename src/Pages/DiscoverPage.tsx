@@ -23,14 +23,6 @@ import { useFormik, Field } from "formik";
 import * as yup from "yup";
 import { getUserById } from "../backend/queries/userQueries";
 // keep these functions here for top level backend connection
-function handleBackendRemove() {
-  console.log("removing project");
-  // TODO make backend connection here
-}
-
-function handleBackendSave() {
-
-}
 
 export default function DiscoverPage() {
 
@@ -111,6 +103,7 @@ function CreateComment(props: any) {
       }
     })
     console.log(result)
+    window.location.reload();
   }
   const validationSchema = yup.object({
     comment : yup
@@ -268,7 +261,7 @@ function DiscoverComponent(props: any) {
   };
 
   const handleRemove = () => {
-    handleBackendRemove();
+    
   };
   const handleNext = () => {
     onNextProject();
