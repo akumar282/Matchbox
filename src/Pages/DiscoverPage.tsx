@@ -21,6 +21,7 @@ import { getImage } from "../backend/storage/s3";
 import { TextField } from "@mui/material";
 import { useFormik, Field } from "formik";
 import * as yup from "yup";
+import { getUserById } from "../backend/queries/userQueries";
 // keep these functions here for top level backend connection
 function handleBackendRemove() {
   console.log("removing project");
@@ -245,13 +246,25 @@ function DiscoverComponent(props: any) {
 
   const handleSave = async () => {
     console.log("saving project");
-    const result = await updateUser({
-      input: {
-        id: localStorage.getItem('uuid')!,
-        saved_posts: [props.projects.id]
-      }
-    })
-    console.log(result)
+    const oldsaved = await getUserById(localStorage.getItem('uuid')!)
+    const oldVersion = oldsaved.data.getUsersModel._version
+    console.log(oldVersion)
+    const newsaved: any[] = oldsaved.data.getUsersModel.saved_posts
+    if (!newsaved.includes(props.projects.id)) {
+      newsaved.push(props.projects.id)
+      const result = await updateUser({
+        input: {
+          id: localStorage.getItem('uuid')!,
+          saved_posts: newsaved,
+          _version: oldVersion
+        }
+      })
+      console.log(result)
+    } else {
+      console.log('already saved')
+    }
+
+
   };
 
   const handleRemove = () => {
