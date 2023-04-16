@@ -69,9 +69,19 @@ export default function HomePage() {
     );
   } else {
     // add code for saved projects
+    if (savedAll.length > 0) {
+      return (
+        <>
+          {savedAll.map((tag) => (
+            <CustomSavedProjects user={tag} key={tag.post_title} />
+          ))}    
+        </>
+      );
+    } else {
     return ( 
       <h1 className="ProjectTitle">No Projects Saved</h1>
     );
+    }
   }
 }
   const CustomSwtich = (props: any) => {
