@@ -12,6 +12,7 @@ import CreateProject from './Pages/CreateProject'
 import UserPreferencesPage from './Pages/UserPreferencesPage'
 import SavedProjects from './Pages/SavedProjects';
 import ProjectOverview from './Pages/ProjectOverview'
+import Inbox from './Pages/Inbox'
 
 const globalAuthState = {
   isAuthenticated: false,
@@ -43,6 +44,7 @@ function App () {
         <Route path='/discover/:projectName' element={<ProjectDetails/>} />
         <Route path='/savedprojects' element={<SavedProjects/>} />
         <Route path='/project-overview/:projectName' element={<ProjectOverview/>} />
+        <Route path='/inbox' element={<Inbox/>} />
       </Routes>
     </BrowserRouter>
   )
