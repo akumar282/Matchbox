@@ -77,6 +77,10 @@ type NewsletterEmailModelMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type ConversationModelMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type MessageModelMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -113,12 +117,37 @@ export declare const NewsletterEmailModel: (new (init: ModelInit<NewsletterEmail
   copyOf(source: NewsletterEmailModel, mutator: (draft: MutableModel<NewsletterEmailModel, NewsletterEmailModelMetaData>) => MutableModel<NewsletterEmailModel, NewsletterEmailModelMetaData> | void): NewsletterEmailModel;
 }
 
+type EagerConversationModel = {
+  readonly id: string;
+  readonly user_one: string;
+  readonly user_two: string;
+  readonly messages?: (string | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyConversationModel = {
+  readonly id: string;
+  readonly user_one: string;
+  readonly user_two: string;
+  readonly messages?: (string | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type ConversationModel = LazyLoading extends LazyLoadingDisabled ? EagerConversationModel : LazyConversationModel
+
+export declare const ConversationModel: (new (init: ModelInit<ConversationModel, ConversationModelMetaData>) => ConversationModel) & {
+  copyOf(source: ConversationModel, mutator: (draft: MutableModel<ConversationModel, ConversationModelMetaData>) => MutableModel<ConversationModel, ConversationModelMetaData> | void): ConversationModel;
+}
+
 type EagerMessageModel = {
   readonly id: string;
   readonly message: string;
   readonly to: string;
   readonly from: string;
   readonly message_date?: string | null;
+  readonly conversationID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -129,6 +158,7 @@ type LazyMessageModel = {
   readonly to: string;
   readonly from: string;
   readonly message_date?: string | null;
+  readonly conversationID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -228,6 +258,7 @@ type EagerUsersModel = {
   readonly saved_posts?: (string | null)[] | null;
   readonly hide_posts?: (string | null)[] | null;
   readonly messages?: (MessageModel | null)[] | null;
+  readonly conversations?: (ConversationModel | null)[] | null;
   readonly lang_tag?: (LanguageTag | null)[] | keyof typeof LanguageTag | null;
   readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
@@ -252,6 +283,7 @@ type LazyUsersModel = {
   readonly saved_posts?: (string | null)[] | null;
   readonly hide_posts?: (string | null)[] | null;
   readonly messages: AsyncCollection<MessageModel>;
+  readonly conversations: AsyncCollection<ConversationModel>;
   readonly lang_tag?: (LanguageTag | null)[] | keyof typeof LanguageTag | null;
   readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;

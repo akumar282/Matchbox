@@ -50,6 +50,60 @@ export const deleteNewsletterEmailModel = /* GraphQL */ `
     }
   }
 `;
+export const createConversationModel = /* GraphQL */ `
+  mutation CreateConversationModel(
+    $input: CreateConversationModelInput!
+    $condition: ModelConversationModelConditionInput
+  ) {
+    createConversationModel(input: $input, condition: $condition) {
+      id
+      user_one
+      user_two
+      messages
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateConversationModel = /* GraphQL */ `
+  mutation UpdateConversationModel(
+    $input: UpdateConversationModelInput!
+    $condition: ModelConversationModelConditionInput
+  ) {
+    updateConversationModel(input: $input, condition: $condition) {
+      id
+      user_one
+      user_two
+      messages
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteConversationModel = /* GraphQL */ `
+  mutation DeleteConversationModel(
+    $input: DeleteConversationModelInput!
+    $condition: ModelConversationModelConditionInput
+  ) {
+    deleteConversationModel(input: $input, condition: $condition) {
+      id
+      user_one
+      user_two
+      messages
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const createMessageModel = /* GraphQL */ `
   mutation CreateMessageModel(
     $input: CreateMessageModelInput!
@@ -61,6 +115,7 @@ export const createMessageModel = /* GraphQL */ `
       to
       from
       message_date
+      conversationID
       createdAt
       updatedAt
       _version
@@ -80,6 +135,7 @@ export const updateMessageModel = /* GraphQL */ `
       to
       from
       message_date
+      conversationID
       createdAt
       updatedAt
       _version
@@ -99,6 +155,7 @@ export const deleteMessageModel = /* GraphQL */ `
       to
       from
       message_date
+      conversationID
       createdAt
       updatedAt
       _version
@@ -229,6 +286,10 @@ export const createUsersModel = /* GraphQL */ `
         nextToken
         startedAt
       }
+      conversations {
+        nextToken
+        startedAt
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -271,6 +332,10 @@ export const updateUsersModel = /* GraphQL */ `
         nextToken
         startedAt
       }
+      conversations {
+        nextToken
+        startedAt
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -310,6 +375,10 @@ export const deleteUsersModel = /* GraphQL */ `
       saved_posts
       hide_posts
       messages {
+        nextToken
+        startedAt
+      }
+      conversations {
         nextToken
         startedAt
       }

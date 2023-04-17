@@ -112,6 +112,124 @@ export const searchNewsletterEmailModels = /* GraphQL */ `
     }
   }
 `;
+export const getConversationModel = /* GraphQL */ `
+  query GetConversationModel($id: ID!) {
+    getConversationModel(id: $id) {
+      id
+      user_one
+      user_two
+      messages
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listConversationModels = /* GraphQL */ `
+  query ListConversationModels(
+    $filter: ModelConversationModelFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listConversationModels(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        user_one
+        user_two
+        messages
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncConversationModels = /* GraphQL */ `
+  query SyncConversationModels(
+    $filter: ModelConversationModelFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncConversationModels(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        user_one
+        user_two
+        messages
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const searchConversationModels = /* GraphQL */ `
+  query SearchConversationModels(
+    $filter: SearchableConversationModelFilterInput
+    $sort: [SearchableConversationModelSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableConversationModelAggregationInput]
+  ) {
+    searchConversationModels(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        user_one
+        user_two
+        messages
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const getMessageModel = /* GraphQL */ `
   query GetMessageModel($id: ID!) {
     getMessageModel(id: $id) {
@@ -120,6 +238,7 @@ export const getMessageModel = /* GraphQL */ `
       to
       from
       message_date
+      conversationID
       createdAt
       updatedAt
       _version
@@ -141,6 +260,7 @@ export const listMessageModels = /* GraphQL */ `
         to
         from
         message_date
+        conversationID
         createdAt
         updatedAt
         _version
@@ -171,6 +291,7 @@ export const syncMessageModels = /* GraphQL */ `
         to
         from
         message_date
+        conversationID
         createdAt
         updatedAt
         _version
@@ -205,6 +326,7 @@ export const searchMessageModels = /* GraphQL */ `
         to
         from
         message_date
+        conversationID
         createdAt
         updatedAt
         _version
@@ -407,6 +529,10 @@ export const getUsersModel = /* GraphQL */ `
       saved_posts
       hide_posts
       messages {
+        nextToken
+        startedAt
+      }
+      conversations {
         nextToken
         startedAt
       }

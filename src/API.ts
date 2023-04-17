@@ -77,23 +77,21 @@ export type DeleteNewsletterEmailModelInput = {
   _version?: number | null,
 };
 
-export type CreateMessageModelInput = {
+export type CreateConversationModelInput = {
   id?: string | null,
-  message: string,
-  to: string,
-  from: string,
-  message_date?: string | null,
+  user_one: string,
+  user_two: string,
+  messages?: Array< string | null > | null,
   _version?: number | null,
 };
 
-export type ModelMessageModelConditionInput = {
-  message?: ModelStringInput | null,
-  to?: ModelStringInput | null,
-  from?: ModelIDInput | null,
-  message_date?: ModelStringInput | null,
-  and?: Array< ModelMessageModelConditionInput | null > | null,
-  or?: Array< ModelMessageModelConditionInput | null > | null,
-  not?: ModelMessageModelConditionInput | null,
+export type ModelConversationModelConditionInput = {
+  user_one?: ModelIDInput | null,
+  user_two?: ModelStringInput | null,
+  messages?: ModelIDInput | null,
+  and?: Array< ModelConversationModelConditionInput | null > | null,
+  or?: Array< ModelConversationModelConditionInput | null > | null,
+  not?: ModelConversationModelConditionInput | null,
 };
 
 export type ModelIDInput = {
@@ -112,6 +110,53 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
+export type ConversationModel = {
+  __typename: "ConversationModel",
+  id: string,
+  user_one: string,
+  user_two: string,
+  messages?: Array< string | null > | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type UpdateConversationModelInput = {
+  id: string,
+  user_one?: string | null,
+  user_two?: string | null,
+  messages?: Array< string | null > | null,
+  _version?: number | null,
+};
+
+export type DeleteConversationModelInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type CreateMessageModelInput = {
+  id?: string | null,
+  message: string,
+  to: string,
+  from: string,
+  message_date?: string | null,
+  conversationID: string,
+  _version?: number | null,
+};
+
+export type ModelMessageModelConditionInput = {
+  message?: ModelStringInput | null,
+  to?: ModelStringInput | null,
+  from?: ModelIDInput | null,
+  message_date?: ModelStringInput | null,
+  conversationID?: ModelIDInput | null,
+  and?: Array< ModelMessageModelConditionInput | null > | null,
+  or?: Array< ModelMessageModelConditionInput | null > | null,
+  not?: ModelMessageModelConditionInput | null,
+};
+
 export type MessageModel = {
   __typename: "MessageModel",
   id: string,
@@ -119,6 +164,7 @@ export type MessageModel = {
   to: string,
   from: string,
   message_date?: string | null,
+  conversationID: string,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -132,6 +178,7 @@ export type UpdateMessageModelInput = {
   to?: string | null,
   from?: string | null,
   message_date?: string | null,
+  conversationID?: string | null,
   _version?: number | null,
 };
 
@@ -411,6 +458,7 @@ export type UsersModel = {
   saved_posts?: Array< string | null > | null,
   hide_posts?: Array< string | null > | null,
   messages?: ModelMessageModelConnection | null,
+  conversations?: ModelConversationModelConnection | null,
   lang_tag?: Array< LanguageTag | null > | null,
   dev_type_tag?: Array< DevelopmentTag | null > | null,
   interest_tag?: Array< InterestTag | null > | null,
@@ -433,6 +481,13 @@ export type ModelPostsModelConnection = {
 export type ModelMessageModelConnection = {
   __typename: "ModelMessageModelConnection",
   items:  Array<MessageModel | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type ModelConversationModelConnection = {
+  __typename: "ModelConversationModelConnection",
+  items:  Array<ConversationModel | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
@@ -659,12 +714,83 @@ export type SearchableAggregateBucketResultItem = {
   doc_count: number,
 };
 
+export type ModelConversationModelFilterInput = {
+  id?: ModelIDInput | null,
+  user_one?: ModelIDInput | null,
+  user_two?: ModelStringInput | null,
+  messages?: ModelIDInput | null,
+  and?: Array< ModelConversationModelFilterInput | null > | null,
+  or?: Array< ModelConversationModelFilterInput | null > | null,
+  not?: ModelConversationModelFilterInput | null,
+};
+
+export type SearchableConversationModelFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  user_one?: SearchableIDFilterInput | null,
+  user_two?: SearchableStringFilterInput | null,
+  messages?: SearchableIDFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  _version?: SearchableIntFilterInput | null,
+  _deleted?: SearchableBooleanFilterInput | null,
+  _lastChangedAt?: SearchableIntFilterInput | null,
+  and?: Array< SearchableConversationModelFilterInput | null > | null,
+  or?: Array< SearchableConversationModelFilterInput | null > | null,
+  not?: SearchableConversationModelFilterInput | null,
+};
+
+export type SearchableConversationModelSortInput = {
+  field?: SearchableConversationModelSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableConversationModelSortableFields {
+  id = "id",
+  user_one = "user_one",
+  user_two = "user_two",
+  messages = "messages",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+  _version = "_version",
+  _deleted = "_deleted",
+  _lastChangedAt = "_lastChangedAt",
+}
+
+
+export type SearchableConversationModelAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableConversationModelAggregateField,
+};
+
+export enum SearchableConversationModelAggregateField {
+  id = "id",
+  user_one = "user_one",
+  user_two = "user_two",
+  messages = "messages",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+  _version = "_version",
+  _deleted = "_deleted",
+  _lastChangedAt = "_lastChangedAt",
+}
+
+
+export type SearchableConversationModelConnection = {
+  __typename: "SearchableConversationModelConnection",
+  items:  Array<ConversationModel | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
 export type ModelMessageModelFilterInput = {
   id?: ModelIDInput | null,
   message?: ModelStringInput | null,
   to?: ModelStringInput | null,
   from?: ModelIDInput | null,
   message_date?: ModelStringInput | null,
+  conversationID?: ModelIDInput | null,
   and?: Array< ModelMessageModelFilterInput | null > | null,
   or?: Array< ModelMessageModelFilterInput | null > | null,
   not?: ModelMessageModelFilterInput | null,
@@ -676,6 +802,7 @@ export type SearchableMessageModelFilterInput = {
   to?: SearchableStringFilterInput | null,
   from?: SearchableIDFilterInput | null,
   message_date?: SearchableStringFilterInput | null,
+  conversationID?: SearchableIDFilterInput | null,
   createdAt?: SearchableStringFilterInput | null,
   updatedAt?: SearchableStringFilterInput | null,
   _version?: SearchableIntFilterInput | null,
@@ -697,6 +824,7 @@ export enum SearchableMessageModelSortableFields {
   to = "to",
   from = "from",
   message_date = "message_date",
+  conversationID = "conversationID",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
   _version = "_version",
@@ -717,6 +845,7 @@ export enum SearchableMessageModelAggregateField {
   to = "to",
   from = "from",
   message_date = "message_date",
+  conversationID = "conversationID",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
   _version = "_version",
@@ -1073,12 +1202,22 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
+export type ModelSubscriptionConversationModelFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  user_one?: ModelSubscriptionIDInput | null,
+  user_two?: ModelSubscriptionStringInput | null,
+  messages?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionConversationModelFilterInput | null > | null,
+  or?: Array< ModelSubscriptionConversationModelFilterInput | null > | null,
+};
+
 export type ModelSubscriptionMessageModelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   message?: ModelSubscriptionStringInput | null,
   to?: ModelSubscriptionStringInput | null,
   from?: ModelSubscriptionIDInput | null,
   message_date?: ModelSubscriptionStringInput | null,
+  conversationID?: ModelSubscriptionIDInput | null,
   and?: Array< ModelSubscriptionMessageModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionMessageModelFilterInput | null > | null,
 };
@@ -1188,6 +1327,66 @@ export type DeleteNewsletterEmailModelMutation = {
   } | null,
 };
 
+export type CreateConversationModelMutationVariables = {
+  input: CreateConversationModelInput,
+  condition?: ModelConversationModelConditionInput | null,
+};
+
+export type CreateConversationModelMutation = {
+  createConversationModel?:  {
+    __typename: "ConversationModel",
+    id: string,
+    user_one: string,
+    user_two: string,
+    messages?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateConversationModelMutationVariables = {
+  input: UpdateConversationModelInput,
+  condition?: ModelConversationModelConditionInput | null,
+};
+
+export type UpdateConversationModelMutation = {
+  updateConversationModel?:  {
+    __typename: "ConversationModel",
+    id: string,
+    user_one: string,
+    user_two: string,
+    messages?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteConversationModelMutationVariables = {
+  input: DeleteConversationModelInput,
+  condition?: ModelConversationModelConditionInput | null,
+};
+
+export type DeleteConversationModelMutation = {
+  deleteConversationModel?:  {
+    __typename: "ConversationModel",
+    id: string,
+    user_one: string,
+    user_two: string,
+    messages?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
 export type CreateMessageModelMutationVariables = {
   input: CreateMessageModelInput,
   condition?: ModelMessageModelConditionInput | null,
@@ -1201,6 +1400,7 @@ export type CreateMessageModelMutation = {
     to: string,
     from: string,
     message_date?: string | null,
+    conversationID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1222,6 +1422,7 @@ export type UpdateMessageModelMutation = {
     to: string,
     from: string,
     message_date?: string | null,
+    conversationID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1243,6 +1444,7 @@ export type DeleteMessageModelMutation = {
     to: string,
     from: string,
     message_date?: string | null,
+    conversationID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1387,6 +1589,11 @@ export type CreateUsersModelMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+    conversations?:  {
+      __typename: "ModelConversationModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     lang_tag?: Array< LanguageTag | null > | null,
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
@@ -1434,6 +1641,11 @@ export type UpdateUsersModelMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+    conversations?:  {
+      __typename: "ModelConversationModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     lang_tag?: Array< LanguageTag | null > | null,
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
@@ -1478,6 +1690,11 @@ export type DeleteUsersModelMutation = {
     hide_posts?: Array< string | null > | null,
     messages?:  {
       __typename: "ModelMessageModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    conversations?:  {
+      __typename: "ModelConversationModelConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1672,6 +1889,123 @@ export type SearchNewsletterEmailModelsQuery = {
   } | null,
 };
 
+export type GetConversationModelQueryVariables = {
+  id: string,
+};
+
+export type GetConversationModelQuery = {
+  getConversationModel?:  {
+    __typename: "ConversationModel",
+    id: string,
+    user_one: string,
+    user_two: string,
+    messages?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListConversationModelsQueryVariables = {
+  filter?: ModelConversationModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListConversationModelsQuery = {
+  listConversationModels?:  {
+    __typename: "ModelConversationModelConnection",
+    items:  Array< {
+      __typename: "ConversationModel",
+      id: string,
+      user_one: string,
+      user_two: string,
+      messages?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncConversationModelsQueryVariables = {
+  filter?: ModelConversationModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncConversationModelsQuery = {
+  syncConversationModels?:  {
+    __typename: "ModelConversationModelConnection",
+    items:  Array< {
+      __typename: "ConversationModel",
+      id: string,
+      user_one: string,
+      user_two: string,
+      messages?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SearchConversationModelsQueryVariables = {
+  filter?: SearchableConversationModelFilterInput | null,
+  sort?: Array< SearchableConversationModelSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableConversationModelAggregationInput | null > | null,
+};
+
+export type SearchConversationModelsQuery = {
+  searchConversationModels?:  {
+    __typename: "SearchableConversationModelConnection",
+    items:  Array< {
+      __typename: "ConversationModel",
+      id: string,
+      user_one: string,
+      user_two: string,
+      messages?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
 export type GetMessageModelQueryVariables = {
   id: string,
 };
@@ -1684,6 +2018,7 @@ export type GetMessageModelQuery = {
     to: string,
     from: string,
     message_date?: string | null,
+    conversationID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1708,6 +2043,7 @@ export type ListMessageModelsQuery = {
       to: string,
       from: string,
       message_date?: string | null,
+      conversationID: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1736,6 +2072,7 @@ export type SyncMessageModelsQuery = {
       to: string,
       from: string,
       message_date?: string | null,
+      conversationID: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1766,6 +2103,7 @@ export type SearchMessageModelsQuery = {
       to: string,
       from: string,
       message_date?: string | null,
+      conversationID: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1981,6 +2319,11 @@ export type GetUsersModelQuery = {
     hide_posts?: Array< string | null > | null,
     messages?:  {
       __typename: "ModelMessageModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    conversations?:  {
+      __typename: "ModelConversationModelConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -2311,6 +2654,63 @@ export type OnDeleteNewsletterEmailModelSubscription = {
   } | null,
 };
 
+export type OnCreateConversationModelSubscriptionVariables = {
+  filter?: ModelSubscriptionConversationModelFilterInput | null,
+};
+
+export type OnCreateConversationModelSubscription = {
+  onCreateConversationModel?:  {
+    __typename: "ConversationModel",
+    id: string,
+    user_one: string,
+    user_two: string,
+    messages?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateConversationModelSubscriptionVariables = {
+  filter?: ModelSubscriptionConversationModelFilterInput | null,
+};
+
+export type OnUpdateConversationModelSubscription = {
+  onUpdateConversationModel?:  {
+    __typename: "ConversationModel",
+    id: string,
+    user_one: string,
+    user_two: string,
+    messages?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteConversationModelSubscriptionVariables = {
+  filter?: ModelSubscriptionConversationModelFilterInput | null,
+};
+
+export type OnDeleteConversationModelSubscription = {
+  onDeleteConversationModel?:  {
+    __typename: "ConversationModel",
+    id: string,
+    user_one: string,
+    user_two: string,
+    messages?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
 export type OnCreateMessageModelSubscriptionVariables = {
   filter?: ModelSubscriptionMessageModelFilterInput | null,
 };
@@ -2323,6 +2723,7 @@ export type OnCreateMessageModelSubscription = {
     to: string,
     from: string,
     message_date?: string | null,
+    conversationID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -2343,6 +2744,7 @@ export type OnUpdateMessageModelSubscription = {
     to: string,
     from: string,
     message_date?: string | null,
+    conversationID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -2363,6 +2765,7 @@ export type OnDeleteMessageModelSubscription = {
     to: string,
     from: string,
     message_date?: string | null,
+    conversationID: string,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -2503,6 +2906,11 @@ export type OnCreateUsersModelSubscription = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+    conversations?:  {
+      __typename: "ModelConversationModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     lang_tag?: Array< LanguageTag | null > | null,
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
@@ -2549,6 +2957,11 @@ export type OnUpdateUsersModelSubscription = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+    conversations?:  {
+      __typename: "ModelConversationModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
     lang_tag?: Array< LanguageTag | null > | null,
     dev_type_tag?: Array< DevelopmentTag | null > | null,
     interest_tag?: Array< InterestTag | null > | null,
@@ -2592,6 +3005,11 @@ export type OnDeleteUsersModelSubscription = {
     hide_posts?: Array< string | null > | null,
     messages?:  {
       __typename: "ModelMessageModelConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    conversations?:  {
+      __typename: "ModelConversationModelConnection",
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,

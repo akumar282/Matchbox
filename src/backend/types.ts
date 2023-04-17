@@ -10,7 +10,13 @@ import {
   DeleteCommentModelInput,
   CreateNewsletterEmailModelInput,
   UpdateNewsletterEmailModelInput,
-  DeleteNewsletterEmailModelInput
+  DeleteNewsletterEmailModelInput,
+  CreateConversationModelInput,
+  UpdateConversationModelInput,
+  DeleteConversationModelInput,
+  CreateMessageModelInput,
+  UpdateMessageModelInput,
+  DeleteMessageModelInput,
 } from '../API'
 
 export type CreateUsersPayload = {
@@ -61,3 +67,26 @@ export type DeleteCommentModelPayload = {
   input: DeleteCommentModelInput
 }
 
+export type CreateConversationModelPayload = {
+  input: CreateConversationModelInput
+}
+
+export type UpdateConversationModelPayload = {
+  input: UpdateConversationModelInput
+}
+
+export type DeleteConversationModelPayload = {
+  input: DeleteConversationModelInput
+}
+
+export type CreateMessageModelPayload = {
+  input: CreateMessageModelInput
+}
+
+export type UpdateMessageModelPayload = {
+  input: UpdateMessageModelInput
+}
+
+export type DeleteMessageModelPayload = {
+  input: DeleteMessageModelInput
+}

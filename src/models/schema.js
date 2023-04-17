@@ -63,6 +63,93 @@ export const schema = {
                 }
             ]
         },
+        "ConversationModel": {
+            "name": "ConversationModel",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "user_one": {
+                    "name": "user_one",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "user_two": {
+                    "name": "user_two",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "messages": {
+                    "name": "messages",
+                    "isArray": true,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "ConversationModels",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUsersModel",
+                        "fields": [
+                            "user_one"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "delete",
+                                    "update"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "MessageModel": {
             "name": "MessageModel",
             "fields": {
@@ -101,6 +188,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "conversationID": {
+                    "name": "conversationID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -135,6 +229,15 @@ export const schema = {
                         "name": "byUsersModel",
                         "fields": [
                             "from"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byConversationModel",
+                        "fields": [
+                            "conversationID"
                         ]
                     }
                 },
@@ -574,6 +677,20 @@ export const schema = {
                         "associatedWith": "from"
                     }
                 },
+                "conversations": {
+                    "name": "conversations",
+                    "isArray": true,
+                    "type": {
+                        "model": "ConversationModel"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "user_one"
+                    }
+                },
                 "lang_tag": {
                     "name": "lang_tag",
                     "isArray": true,
@@ -756,5 +873,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.2.0",
-    "version": "fe80238e0112feadff7f78527de3e365"
+    "version": "c1baefbb6bdbc4d0b1e2e22807f8d7f1"
 };

@@ -47,6 +47,57 @@ export const onDeleteNewsletterEmailModel = /* GraphQL */ `
     }
   }
 `;
+export const onCreateConversationModel = /* GraphQL */ `
+  subscription OnCreateConversationModel(
+    $filter: ModelSubscriptionConversationModelFilterInput
+  ) {
+    onCreateConversationModel(filter: $filter) {
+      id
+      user_one
+      user_two
+      messages
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateConversationModel = /* GraphQL */ `
+  subscription OnUpdateConversationModel(
+    $filter: ModelSubscriptionConversationModelFilterInput
+  ) {
+    onUpdateConversationModel(filter: $filter) {
+      id
+      user_one
+      user_two
+      messages
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteConversationModel = /* GraphQL */ `
+  subscription OnDeleteConversationModel(
+    $filter: ModelSubscriptionConversationModelFilterInput
+  ) {
+    onDeleteConversationModel(filter: $filter) {
+      id
+      user_one
+      user_two
+      messages
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateMessageModel = /* GraphQL */ `
   subscription OnCreateMessageModel(
     $filter: ModelSubscriptionMessageModelFilterInput
@@ -57,6 +108,7 @@ export const onCreateMessageModel = /* GraphQL */ `
       to
       from
       message_date
+      conversationID
       createdAt
       updatedAt
       _version
@@ -75,6 +127,7 @@ export const onUpdateMessageModel = /* GraphQL */ `
       to
       from
       message_date
+      conversationID
       createdAt
       updatedAt
       _version
@@ -93,6 +146,7 @@ export const onDeleteMessageModel = /* GraphQL */ `
       to
       from
       message_date
+      conversationID
       createdAt
       updatedAt
       _version
@@ -219,6 +273,10 @@ export const onCreateUsersModel = /* GraphQL */ `
         nextToken
         startedAt
       }
+      conversations {
+        nextToken
+        startedAt
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -260,6 +318,10 @@ export const onUpdateUsersModel = /* GraphQL */ `
         nextToken
         startedAt
       }
+      conversations {
+        nextToken
+        startedAt
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -298,6 +360,10 @@ export const onDeleteUsersModel = /* GraphQL */ `
       saved_posts
       hide_posts
       messages {
+        nextToken
+        startedAt
+      }
+      conversations {
         nextToken
         startedAt
       }
