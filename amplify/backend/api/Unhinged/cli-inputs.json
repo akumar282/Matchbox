@@ -16,7 +16,15 @@
     "conflictResolution": {
       "defaultResolutionStrategy": {
         "type": "OPTIMISTIC_CONCURRENCY"
-      }
+      },
+      "perModelResolutionStrategy": [
+        {
+          "resolutionStrategy": {
+            "type": "AUTOMERGE"
+          },
+          "entityName": "ConversationModel"
+        }
+      ]
     }
   }
 }
