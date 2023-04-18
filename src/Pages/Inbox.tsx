@@ -35,7 +35,7 @@ const Convo1 = {
         {
             id: '5',
             sender: '111111',
-            text: 'I am good, thanks for asking',
+            text: 'I am good, thanks for asking dalkshjldkjsaljdlajsldkjaldjlajdlkasjdlksajldkajslkdjalkdjaslkdjasldjaldjaslkdsjlaskdjlkasjdlkajs',
         },
         {
             id: '6',
@@ -268,10 +268,10 @@ function MyMessage(props: any) {
             <div className = "InboxConversationMessage">
                 <div className = "InboxMessageContainer">
             <Typography sx = {{
-                fontSize: 20,
+                fontSize: 16,
          
                 fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
-                color: 'black',
+                color: 'white',
             }}>
                 {props.message.text}
             </Typography>
@@ -283,7 +283,7 @@ function MyMessage(props: any) {
                 <div className = "InboxConversationMessageNotUser">
                     <div className = "InboxMessageContainerNotUser">
                 <Typography sx = {{
-                    fontSize: 20,
+                    fontSize: 16,
                 
                     fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
                     color: 'black',
