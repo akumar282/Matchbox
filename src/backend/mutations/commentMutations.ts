@@ -1,9 +1,11 @@
 import { API } from 'aws-amplify'
 import { createCommentModel, deleteCommentModel, updateCommentModel } from "../../graphql/mutations"
 import { CreateCommentModelPayload, DeleteCommentModelPayload, UpdateCommentModelPayload } from "../types"
+import { GraphQLQuery } from '@aws-amplify/api';
+import { CreateCommentModelMutation } from '../../API'
 
 export async function createComment(comment: CreateCommentModelPayload) {
-  return await API.graphql(
+  return await API.graphql<GraphQLQuery<CreateCommentModelMutation>>(
     {
       authMode: "API_KEY",
       query: createCommentModel,

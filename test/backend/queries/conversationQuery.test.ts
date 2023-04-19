@@ -9,9 +9,10 @@ describe.skip('Query Tests', () => {
   test('List Conversation by user', async () => {
     const fil: ListConversationModelsQueryVariables = {
       filter: {
-        user_one: {
-          eq: 'f4f4a813-3b83-4e3a-99f8-39f5927d52e8'
-        },
+        or: [
+          { user_one: { eq: '3274133e-30cd-44e0-8854-cbe96ec2475e' }},
+          { user_two: { eq: '3274133e-30cd-44e0-8854-cbe96ec2475e' } }
+        ]
       },
       limit: 30,
     }
@@ -21,7 +22,7 @@ describe.skip('Query Tests', () => {
     expect(flatResult).toContain(`items`)
   })
 
-  test('Get Conversation by ID', async () => {
+  test.skip('Get Conversation by ID', async () => {
     const result = await getConversationById('bc0707c2-62de-4462-83e1-d5e09ef1356e')
     console.log(result)
     const flatResult = JSON.stringify(result)
