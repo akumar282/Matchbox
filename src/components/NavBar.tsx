@@ -6,7 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import InboxIcon from '@mui/icons-material/Inbox';
 import "./NavBar.css"
 import { useNavigate } from "react-router-dom";
 export default function Navbar() {
@@ -26,8 +26,10 @@ export default function Navbar() {
                 
                 <CustomLink className ="navElement" to= "/home"> <HomeIcon fontSize="large"/> Home </CustomLink>
                 <CustomLink className ="navElement" to= "/discover"> <SearchIcon fontSize="large"/> Discover </CustomLink>
-                <CustomLink className ="navElement" to= "/settings"> <SettingsIcon fontSize="large"/> Settings </CustomLink>
                 <CustomLink className ="navElement" to= "/create-project"> <AddIcon sx={{fontSize: 40}}/> Create </CustomLink>
+                <CustomLink className = "navElement" to= "/inbox" > <InboxIcon fontSize="large"/> Inbox </CustomLink>
+                <CustomLink className ="navElement" to= "/settings"> <SettingsIcon fontSize="large"/> Settings </CustomLink>
+                
                 
                 <IconButton sx={{
                     display: 'flex',
