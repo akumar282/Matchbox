@@ -13,11 +13,6 @@ import { getImage } from "../backend/storage/s3";
 
 
 export default function Inbox() {
-
-    const [convos, setConvosQuery] = useState<any[]>([]);
-    const [convoIndex, setConvoIndex] = useState(0);
-    const [convo, setConvo] = useState(convos[convoIndex]);
-
     useEffect(() => {
       const fetchConvos = async () => {
         const userConvos = await getAllConversations({
@@ -35,11 +30,16 @@ export default function Inbox() {
       
 
     }, []);
+    const [convos, setConvosQuery] = useState<any[]>([]);
+    const [convoIndex, setConvoIndex] = useState(0);
+    const [convo, setConvo] = useState(convos.at(0));
+    console.log(convos.at(0))
+
     useEffect(() => {
-        setConvo(convos[convoIndex]);
+        setConvo(convos.at(convoIndex));
        
     }, [convoIndex]);
-
+    console.log(convo)
     return (
         <div className="InboxMain">
             <Navbar />
@@ -70,7 +70,7 @@ export default function Inbox() {
                         }}> Conversation </Typography>
                     </div>
                     <div className = "InboxConversationBody">
-                        <CustonConversation convo = {convo}/>
+                        <CustomConversation convo = {convo}/>
                     </div>
                     <CustomMessageSender />
                 </div>
@@ -136,7 +136,6 @@ function CustomMessageSender() {
         initialValues: {
             message: '',
         },
-
         onSubmit: (values) => {
             if (values.message === '') {
                 return;
@@ -144,14 +143,12 @@ function CustomMessageSender() {
             formik.resetForm();
         },
     });
-
     return (
             <div className = "InboxMessageField">
                 <TextField sx = {{
                     width: '60%',
                     outline: 'none',
                     border: 'none',
-
                 }}
                 size="small"
                 placeholder = "Type a message..."
@@ -174,15 +171,27 @@ function CustomMessageSender() {
                 >
                     Send
                 </Button>
-            
             </div>
     );
 }
 
-function CustonConversation(props: any) {
+function CustomConversation(props: any) {
     console.log(props.convo)
     const [messages, setMessages] = useState<any[]>([]);
     
+    useEffect(() => {
+      const fetchMessages = async () => {
+        const userMessages = await getAllMessages({
+          filter: {
+            conversationID: { eq: props.convo.id }
+          }
+        })
+        const filterMessages = userMessages.data.listMessageModels.items.filter(x => x._deleted !== true);
+        setMessages(filterMessages);
+      }
+      fetchMessages();
+    }, []);
+    console.log(messages)
     //add query for messages
     return (
         <div className = "InboxConversationMessages">
