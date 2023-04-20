@@ -50,6 +50,14 @@ export default function LandingPopupCreate(props) {
           last_name: props.lastName,
           password: props.password,
           profile_image: defaultPic[Math.floor(Math.random() * 4)],
+          user_creation_date: new Date().toISOString(),
+          saved_posts: [],
+          lang_tag: [],
+          dev_type_tag: [],
+          interest_tag: [],
+          size_tag: [],
+          framework_tag: [],
+          new_user: true,
         }
       } 
     )

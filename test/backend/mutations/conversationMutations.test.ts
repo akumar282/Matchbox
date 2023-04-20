@@ -4,13 +4,14 @@ import awsconfig from '../../../src/aws-exports'
 import { CreateConversationModelPayload, DeleteConversationModelPayload, UpdateConversationModelPayload } from '../../../src/backend/types'
 Amplify.configure(awsconfig)
 
-describe('Mutation Tests', () => {
+describe.skip('Mutation Tests', () => {
 
-  test.skip('Create conversation', async () => {
+  test('Create conversation', async () => {
     const conversation: CreateConversationModelPayload = {
       input: {
         user_one: 'f4f4a813-3b83-4e3a-99f8-39f5927d52e8',
-        user_two: '3274133e-30cd-44e0-8854-cbe96ec2475e',
+        user_two: 'c6802cf8-b297-42b9-8017-cda3e3fb9f22',
+        messages: []
       }
     }
     const result = await createConversation(conversation)

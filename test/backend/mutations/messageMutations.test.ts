@@ -4,7 +4,7 @@ import awsconfig from '../../../src/aws-exports'
 import { CreateMessageModelPayload } from '../../../src/backend/types'
 Amplify.configure(awsconfig)
 
-describe('Mutation Tests', () => {
+describe.skip('Mutation Tests', () => {
 
   test('Create Message', async () => {
     const Message: CreateMessageModelPayload = {

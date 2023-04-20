@@ -4,10 +4,10 @@ import awsconfig from '../../../src/aws-exports'
 Amplify.configure(awsconfig)
 
 
-describe.skip('Query Tests', () => {
+describe('Query Tests', () => {
 
   test('Get Post', async () => {
-    const result = await getUserById('f4f4a813-3b83-4e3a-99f8-39f5927d52e8')
+    const result = await getUserById('c6802cf8-b297-42b9-8017-cda3e3fb9f22')
     console.log(result)
     const flatResult = JSON.stringify(result)
     expect(flatResult).toContain(`id`)
