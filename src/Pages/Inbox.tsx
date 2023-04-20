@@ -79,9 +79,6 @@ export default function Inbox() {
                         <CustomMessageSender convo = {convo} CallRefresh = {setRefresh} shouldRefresh = {refresh}/>
                 </div>
             </div>
-            <Button onClick = {() => console.log(refresh)}>
-                Press
-            </Button>
         </div>
     );
 }
