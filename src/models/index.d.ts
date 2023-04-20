@@ -264,6 +264,7 @@ type EagerUsersModel = {
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
   readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
   readonly framework_tag?: (FrameworkTag | null)[] | keyof typeof FrameworkTag | null;
+  readonly new_user?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -289,6 +290,7 @@ type LazyUsersModel = {
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
   readonly size_tag?: (SizeTag | null)[] | keyof typeof SizeTag | null;
   readonly framework_tag?: (FrameworkTag | null)[] | keyof typeof FrameworkTag | null;
+  readonly new_user?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

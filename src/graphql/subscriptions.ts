@@ -282,6 +282,7 @@ export const onCreateUsersModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      new_user
       createdAt
       updatedAt
       _version
@@ -327,6 +328,7 @@ export const onUpdateUsersModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      new_user
       createdAt
       updatedAt
       _version
@@ -372,6 +374,7 @@ export const onDeleteUsersModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      new_user
       createdAt
       updatedAt
       _version

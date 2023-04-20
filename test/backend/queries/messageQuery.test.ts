@@ -9,8 +9,11 @@ describe.skip('Query Tests', () => {
   test('List Message by user', async () => {
     const fil: ListMessageModelsQueryVariables = {
       filter: {
-        from: {
-          eq: 'f4f4a813-3b83-4e3a-99f8-39f5927d52e8'
+        // from: {
+        //   eq: 'f4f4a813-3b83-4e3a-99f8-39f5927d52e8'
+        // },
+        conversationID: {
+          eq: 'bc0707c2-62de-4462-83e1-d5e09ef1356e'
         },
       },
       limit: 30,
@@ -21,7 +24,7 @@ describe.skip('Query Tests', () => {
     expect(flatResult).toContain(`items`)
   })
 
-  test('Get Message by ID', async () => {
+  test.skip('Get Message by ID', async () => {
     const result = await getMessageById('9ad64c6f-0ea1-4dcc-9fed-9a89a1ca6bd4')
     console.log(result)
     const flatResult = JSON.stringify(result)

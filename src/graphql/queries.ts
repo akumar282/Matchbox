@@ -541,6 +541,7 @@ export const getUsersModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      new_user
       createdAt
       updatedAt
       _version
@@ -573,6 +574,7 @@ export const listUsersModels = /* GraphQL */ `
         interest_tag
         size_tag
         framework_tag
+        new_user
         createdAt
         updatedAt
         _version
@@ -614,6 +616,7 @@ export const syncUsersModels = /* GraphQL */ `
         interest_tag
         size_tag
         framework_tag
+        new_user
         createdAt
         updatedAt
         _version
@@ -659,6 +662,7 @@ export const searchUsersModels = /* GraphQL */ `
         interest_tag
         size_tag
         framework_tag
+        new_user
         createdAt
         updatedAt
         _version

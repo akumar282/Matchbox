@@ -741,6 +741,13 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
+                "new_user": {
+                    "name": "new_user",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -873,5 +880,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.2.0",
-    "version": "c1baefbb6bdbc4d0b1e2e22807f8d7f1"
+    "version": "33ac2f2dba53f442a5566537eafad732"
 };

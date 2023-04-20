@@ -128,6 +128,7 @@ type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [re
   interest_tag: [InterestTag]
   size_tag: [SizeTag]
   framework_tag: [FrameworkTag]
+  new_user: Boolean
 }
 
 type CommentModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {

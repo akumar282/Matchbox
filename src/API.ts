@@ -418,6 +418,7 @@ export type CreateUsersModelInput = {
   interest_tag?: Array< InterestTag | null > | null,
   size_tag?: Array< SizeTag | null > | null,
   framework_tag?: Array< FrameworkTag | null > | null,
+  new_user?: boolean | null,
   _version?: number | null,
 };
 
@@ -437,9 +438,17 @@ export type ModelUsersModelConditionInput = {
   interest_tag?: ModelInterestTagListInput | null,
   size_tag?: ModelSizeTagListInput | null,
   framework_tag?: ModelFrameworkTagListInput | null,
+  new_user?: ModelBooleanInput | null,
   and?: Array< ModelUsersModelConditionInput | null > | null,
   or?: Array< ModelUsersModelConditionInput | null > | null,
   not?: ModelUsersModelConditionInput | null,
+};
+
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type UsersModel = {
@@ -464,6 +473,7 @@ export type UsersModel = {
   interest_tag?: Array< InterestTag | null > | null,
   size_tag?: Array< SizeTag | null > | null,
   framework_tag?: Array< FrameworkTag | null > | null,
+  new_user?: boolean | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -509,6 +519,7 @@ export type UpdateUsersModelInput = {
   interest_tag?: Array< InterestTag | null > | null,
   size_tag?: Array< SizeTag | null > | null,
   framework_tag?: Array< FrameworkTag | null > | null,
+  new_user?: boolean | null,
   _version?: number | null,
 };
 
@@ -980,6 +991,7 @@ export type ModelUsersModelFilterInput = {
   interest_tag?: ModelInterestTagListInput | null,
   size_tag?: ModelSizeTagListInput | null,
   framework_tag?: ModelFrameworkTagListInput | null,
+  new_user?: ModelBooleanInput | null,
   and?: Array< ModelUsersModelFilterInput | null > | null,
   or?: Array< ModelUsersModelFilterInput | null > | null,
   not?: ModelUsersModelFilterInput | null,
@@ -1004,6 +1016,7 @@ export type SearchableUsersModelFilterInput = {
   dahublink?: SearchableStringFilterInput | null,
   saved_posts?: SearchableIDFilterInput | null,
   hide_posts?: SearchableIDFilterInput | null,
+  new_user?: SearchableBooleanFilterInput | null,
   createdAt?: SearchableStringFilterInput | null,
   updatedAt?: SearchableStringFilterInput | null,
   _version?: SearchableIntFilterInput | null,
@@ -1036,6 +1049,7 @@ export enum SearchableUsersModelSortableFields {
   dahublink = "dahublink",
   saved_posts = "saved_posts",
   hide_posts = "hide_posts",
+  new_user = "new_user",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
   _version = "_version",
@@ -1067,6 +1081,7 @@ export enum SearchableUsersModelAggregateField {
   interest_tag = "interest_tag",
   size_tag = "size_tag",
   framework_tag = "framework_tag",
+  new_user = "new_user",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
   _version = "_version",
@@ -1257,8 +1272,14 @@ export type ModelSubscriptionUsersModelFilterInput = {
   interest_tag?: ModelSubscriptionStringInput | null,
   size_tag?: ModelSubscriptionStringInput | null,
   framework_tag?: ModelSubscriptionStringInput | null,
+  new_user?: ModelSubscriptionBooleanInput | null,
   and?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
+};
+
+export type ModelSubscriptionBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
 };
 
 export type ModelSubscriptionCommentModelFilterInput = {
@@ -1599,6 +1620,7 @@ export type CreateUsersModelMutation = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    new_user?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1651,6 +1673,7 @@ export type UpdateUsersModelMutation = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    new_user?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1703,6 +1726,7 @@ export type DeleteUsersModelMutation = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    new_user?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -2332,6 +2356,7 @@ export type GetUsersModelQuery = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    new_user?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -2367,6 +2392,7 @@ export type ListUsersModelsQuery = {
       interest_tag?: Array< InterestTag | null > | null,
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
+      new_user?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -2406,6 +2432,7 @@ export type SyncUsersModelsQuery = {
       interest_tag?: Array< InterestTag | null > | null,
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
+      new_user?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -2447,6 +2474,7 @@ export type SearchUsersModelsQuery = {
       interest_tag?: Array< InterestTag | null > | null,
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
+      new_user?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -2916,6 +2944,7 @@ export type OnCreateUsersModelSubscription = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    new_user?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -2967,6 +2996,7 @@ export type OnUpdateUsersModelSubscription = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    new_user?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -3018,6 +3048,7 @@ export type OnDeleteUsersModelSubscription = {
     interest_tag?: Array< InterestTag | null > | null,
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
+    new_user?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
