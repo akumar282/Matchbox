@@ -3,131 +3,40 @@ import Navbar from "../components/NavBar";
 import "./CSS/Inbox.css";
 import { Button, TextField, Typography } from "@mui/material";
 import { Formik, useFormik } from "formik";
+import { getAllConversations } from '../backend/queries/conversationQueries'
+import { getUserById } from '../backend/queries/userQueries';
+import { getAllMessages} from '../backend/queries/messageQueries'
 import * as yup from "yup";
 
 // Test Data
-const selfuser = '111111';
-const Convo1 = {
-    id: '134325345345353',
-    user1: '111111',
-    user2: '222222',
-    messages: [
-        {
-            id: '1',
-            sender: '111111',
-            text: 'Hello',
-        },
-        {
-            id: '2',
-            sender: '222222',
-            text: 'Hi',
-        },
-        {
-            id: '3',
-            sender: '111111',
-            text: 'How are you?',
-        },
-        {
-            id: '4',
-            sender: '222222',
-            text: 'I am good, how are you?',
-        },
-        {
-            id: '5',
-            sender: '111111',
-            text: 'I am good, thanks for asking dalkshjldkjsaljdlajsldkjaldjlajdlkasjdlksajldkajslkdjalkdjaslkdjasldjaldjaslkdsjlaskdjlkasjdlkajs',
-        },
-        {
-            id: '6',
-            sender: '222222',
-            text: 'No problem',
-        },
-        {
-            id: '7',
-            sender: '111111',   
-            text: 'What are you up to?',
-        },
-        {
-            id: '8',
-            sender: '222222',
-            text: 'Nothing much, just chilling',
-        },
-        {
-            id: '9',
-            sender: '111111',
-            text: 'Cool, I am going to go now',
-        },
-        {
-            id: '10',
-            sender: '222222',
-            text: 'Ok, bye',
-        },
-        {
-            id: '11',
-            sender: '111111',
-            text: 'Bye',
-        },
-        {
-            id: '12',
-            sender: '222222',
-            text: 'YOUR MOM',
-        },
-        {
-            id: '13',
-            sender: '222222',
-            text: 'YOUR MOM',
-        },
-        {
-            id: '14',
-            sender: '222222',
-            text: 'YOUR MOM',
-        },
-        {
-            id: '15',
-            sender: '222222',
-            text: 'YOUR MOM',
-        },
-        {
-            id: '16',
-            sender: '222222',
-            text: 'YOUR MOM',
-        },
-        {
-            id: '17',
-            sender: '222222',
-            text: 'YOUR MOM',
-        },
-        
 
 
-    ]
-};
+export default function Inbox() {
 
-const Convo2 = {
-    id: '49230948920840',
-    user1: '111111',
-    user2: '333333',
-    messages: [
-        {
-            id: '1',
-            sender: '111111',
-            text: 'Hello',
-        },
-        {
-            id: '2',
-            sender: '333333',
-            text: 'YOUR MOM',
-        }
-    ]
-};
-
-export default function Inbox() { 
-    const users = [Convo1, Convo2];
+    const [convos, setConvosQuery] = useState<any[]>([]);
     const [convoIndex, setConvoIndex] = useState(0);
-    const [convo, setConvo] = useState(users[convoIndex]);
+    const [convo, setConvo] = useState(convos[convoIndex]);
 
     useEffect(() => {
-        setConvo(users[convoIndex]);
+      const fetchConvos = async () => {
+        const userConvos = await getAllConversations({
+          filter: {
+            or: [
+              { user_one: { eq: localStorage.getItem('uuid')! } },
+              { user_two: { eq: localStorage.getItem('uuid')! } }
+            ]
+          }
+        })
+        const filterConvos = userConvos.data.listConversationModels.items.filter(x => x._deleted !== true);
+        setConvosQuery(filterConvos);
+      }
+      fetchConvos();
+      
+
+    }, []);
+  console.log(convos)
+    useEffect(() => {
+        setConvo(convos[convoIndex]);
         console.log(convo);
     }, [convoIndex]);
 
@@ -145,7 +54,7 @@ export default function Inbox() {
                         }}> Messages </Typography>
                     </div>
                         <ul>
-                            {users.map((Sender, index) => (
+                            {convos.map((Sender, index) => (
                                 <CustomButtons Convo = {Sender} index = {index} setConvoIndex = {setConvoIndex}/>
                                 
                             ))}
@@ -171,7 +80,8 @@ export default function Inbox() {
 }
 
 function CustomButtons(props: any) {
-    console.log(props.index);
+    
+    console.log(props.sender);
     return (
         <li>
             <Button sx = {{
@@ -253,13 +163,13 @@ function CustomMessageSender() {
 function CustonConversation(props: any) {
     
     // add query for messages
-    return (
-        <div className = "InboxConversationMessages">
-            {props.convo.messages.map((message) => (
-                <MyMessage message = {message}/>
-            ))}
-        </div>
-    );
+    // return (
+    //     <div className = "InboxConversationMessages">
+    //         {props.convo.messages.map((message) => (
+    //             <MyMessage message = {message}/>
+    //         ))}
+    //     </div>
+    // );
 }
 
 function MyMessage(props: any) {
