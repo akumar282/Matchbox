@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import Navbar from "../components/NavBar";
 import "./CSS/Inbox.css";
 import { Button, TextField, Typography } from "@mui/material";
@@ -9,17 +9,16 @@ import { getAllMessages} from '../backend/queries/messageQueries'
 import { createMessage } from '../backend/mutations/messageMutations'
 import * as yup from "yup";
 import { getImage } from "../backend/storage/s3";
+import { refresh } from "aos";
 
 // Test Data
 
 
 export default function Inbox() {
-   
-    
+    const [refresh, setRefresh] = useState(false);
     const [convos, setConvosQuery] = useState<any[]>([]);
     const [convoIndex, setConvoIndex] = useState(0);
     const [convo, setConvo] = useState(convos.at(0));
-    console.log(convos.at(0))
     useEffect(() => {
       const fetchConvos = async () => {
         const userConvos = await getAllConversations({
@@ -44,7 +43,6 @@ export default function Inbox() {
     useEffect(() => {
         setConvo(convos.at(0));
     }, [convos]);
-    console.log(convo)
     return (
         <div className="InboxMain">
             <Navbar />
@@ -75,11 +73,15 @@ export default function Inbox() {
                         }}> Conversation </Typography>
                     </div>
                     <div className = "InboxConversationBody">
-                        <CustomConversation convo = {convo}/>
+                        <CustomConversation convo = {convo} shouldRefresh = {refresh} refreshed = {setRefresh}/>
                     </div>
-                    <CustomMessageSender convo = {convo}/>
+                  
+                        <CustomMessageSender convo = {convo} CallRefresh = {setRefresh} shouldRefresh = {refresh}/>
                 </div>
             </div>
+            <Button onClick = {() => console.log(refresh)}>
+                Press
+            </Button>
         </div>
     );
 }
@@ -94,7 +96,6 @@ function CustomButtons(props: any) {
         const fetchUser = async () => {
           const userObj = await getUserById(OppoUser)
           setUser(userObj.data.getUsersModel)
-          console.log(userObj)
         }
         fetchUser();
     }, []);
@@ -158,8 +159,8 @@ function CustomMessageSender(props: any) {
                 return;
             }
             sendMessage(values.message);
+            props.CallRefresh(!props.shouldRefresh);
             formik.resetForm();
-            
         },
     });
     return (
@@ -196,6 +197,7 @@ function CustomMessageSender(props: any) {
 
 function CustomConversation(props: any) {
     const [messages, setMessages] = useState<any[]>([]);
+    const [ForceRun, setForceRun] = useState(true);
     useEffect(() => {
       const fetchMessages = async () => {
         const userMessages = await getAllMessages({
@@ -207,8 +209,41 @@ function CustomConversation(props: any) {
         setMessages(filterMessages);
       }
       fetchMessages();
+      
     }, [props.convo]);
-    console.log(messages)
+    // skipping on
+    useEffect(() => {
+        console.log(props.shouldRefresh);
+
+        if (ForceRun) {
+            setForceRun(false);
+        } else {
+            setForceRun(true);
+        }
+    }, [props.shouldRefresh]);
+
+    useEffect(() => {
+        const fetchMessages = async () => {
+            const userMessages = await getAllMessages({
+              filter: {
+                conversationID: { eq: props.convo.id }
+              },
+              limit: 200
+            })
+            const filterMessages = userMessages.data.listMessageModels.items.filter(x => x._deleted !== true);
+            console.log(userMessages);
+            setMessages(filterMessages);
+          }
+          const delay = setTimeout(() => {
+            fetchMessages();
+          }, 200);
+          
+          // Clean up the timeout
+          return () => clearTimeout(delay);
+    }, [ForceRun]);
+    
+
+    
     //sort by time
     function sort (array: any[]) {
         return array.sort((a: any, b: any) => {
@@ -218,7 +253,6 @@ function CustomConversation(props: any) {
       }
 
     let Sortedmessages = sort(messages);
-      console.log(Sortedmessages)
     //add query for messages
     if (messages.length !== 0) {
     return (
