@@ -92,15 +92,15 @@ function CustomButtons(props: any) {
           console.log(userObj)
         }
         fetchUser();
-
-        const fetchImage = async () => {
-          const src = await getImage(user.profile_image);
-          setImageSrc(src);
-        };
-        fetchImage();
-
-        //query here for username
     }, []);
+    useEffect (() => {
+        const fetchImage = async () => {
+            const src = await getImage(user.profile_image);
+            setImageSrc(src);
+            };
+            fetchImage();
+    }, [user]);
+    console.log (user.user_name)
     return (
         <li>
             <Button sx = {{
@@ -180,11 +180,13 @@ function CustomMessageSender() {
 }
 
 function CustonConversation(props: any) {
+    console.log(props.convo)
+    const [messages, setMessages] = useState<any[]>([]);
     
     //add query for messages
     return (
         <div className = "InboxConversationMessages">
-            
+            your mom
         </div>
     );
 }
