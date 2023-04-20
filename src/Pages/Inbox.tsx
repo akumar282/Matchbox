@@ -34,10 +34,9 @@ export default function Inbox() {
       
 
     }, []);
-  console.log(convos)
     useEffect(() => {
         setConvo(convos[convoIndex]);
-        console.log(convo);
+       
     }, [convoIndex]);
 
     return (
@@ -80,8 +79,14 @@ export default function Inbox() {
 }
 
 function CustomButtons(props: any) {
-    
-    console.log(props.sender);
+    //query for username
+    const [user, setUser] = useState<any>("");
+    //This is where you query for the username
+    useEffect(() => {
+        let OppoUser = props.Convo.user_one === localStorage.getItem('uuid') ? props.Convo.user_two : props.Convo.user_one;
+
+        //query here for username
+    }, []);
     return (
         <li>
             <Button sx = {{
@@ -99,7 +104,7 @@ function CustomButtons(props: any) {
             >
                 <img className="InboxUserImage" src = "images/Strom.jpg" />
                 <Typography>
-                    {props.Convo.user2}
+                    {user}
                 </Typography>
             </Button>
         </li>
@@ -162,14 +167,12 @@ function CustomMessageSender() {
 
 function CustonConversation(props: any) {
     
-    // add query for messages
-    // return (
-    //     <div className = "InboxConversationMessages">
-    //         {props.convo.messages.map((message) => (
-    //             <MyMessage message = {message}/>
-    //         ))}
-    //     </div>
-    // );
+    //add query for messages
+    return (
+        <div className = "InboxConversationMessages">
+            
+        </div>
+    );
 }
 
 function MyMessage(props: any) {
