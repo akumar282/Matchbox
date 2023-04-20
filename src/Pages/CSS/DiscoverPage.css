@@ -1,4 +1,5 @@
 .DiscoverMain{
+    
     margin: auto;
     padding: 2rem;
     margin-top: 1rem;
@@ -18,10 +19,12 @@
     transition: ease-in-out 0.4s;
 }
 .DiscoverimgBox {
+    
     width: 50rem;
     max-width: 70rem;
     height: 100%;
     margin: 0.5rem;
+    margin-left: 0;
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -33,6 +36,7 @@
     transition: 0.5s;
 }
 .topRowDiscover {
+  
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -104,11 +108,12 @@
 .ShortDescDiscover {
     display: flex;
     flex-direction: column;
-    width: 100%;
     height: 25%;
-    margin: 1rem;
-    overflow: hidden;
     transition: 0.5s ease;
+    padding : 0;
+    margin-top: 0.5rem;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 .ShortDescDiscover p {
     font-size: 1rem;
@@ -116,19 +121,8 @@
     color: #000;
     transition: 0.5s ease;
     margin: 0;
+}
 
-}
-.ShortDescDiscover h1 {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #000;
-    transition: 0.5s ease;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 0.5rem;
-    text-align: center;
-    text-overflow: ellipsis;
-}
 
 .ShortDescDiscover h4 {
     font-size: 1.2rem;
@@ -160,6 +154,7 @@
     transform-origin: 0%;
   }
   .DiscoverHolder {
+    
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -172,6 +167,7 @@
     transition: 0.5s ease;  
   }
   .DHolder {
+    
     display: flex;
     flex-direction: row;
     align-items: center;

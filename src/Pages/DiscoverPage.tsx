@@ -346,8 +346,16 @@ function DiscoverComponent(props: any) {
                 </div>
                 <div className="ShortTagBoxDiscover">
                   <div className="ShortDescDiscover">
-                    <h1>{props.projects.post_title}</h1>
-                    <p> {props.projects.description}</p>
+                    <Typography 
+                    variant="h3"
+                    sx = {{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}>
+                      {props.projects.post_title}
+                    </Typography>
+                    <Typography>{props.projects.description}</Typography>
                     </div>
                     <div className="TagBoxDiscover">
                     {[
