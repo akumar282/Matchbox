@@ -33,6 +33,7 @@ const globalAuthState = {
   uuid: null,
   isLoggedin: 'false',
   firstTime: 'false',
+  currentProjectindex: '0'
 }
 function setLocalStorage() {
   if (!localStorage.getItem('email')) {
@@ -52,6 +53,9 @@ function setLocalStorage() {
   }
   if (!localStorage.getItem('username')) {
   window.localStorage.setItem('username', globalAuthState.username) 
+  }
+  if (!localStorage.getItem('currentProjectindex')) {
+  window.localStorage.setItem('currentProjectindex', globalAuthState.currentProjectindex)
   }
 }
 setLocalStorage();

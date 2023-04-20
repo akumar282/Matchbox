@@ -5,7 +5,7 @@ import { OnUpdateConversationModelSubscriptionVariables } from "../../API";
 
 export async function updateSubscription(id: OnUpdateConversationModelSubscriptionVariables) {
   const subscription = API.graphql<GraphQLSubscription<OnUpdateConversationModelSubscriptionVariables>>(graphqlOperation(onUpdateConversationModel, id)).subscribe({
-    next: (data) => console.log(data.value.data.On),
+    next: (data) => console.log(data),
     error: (error) => {
       console.error(error)
     }

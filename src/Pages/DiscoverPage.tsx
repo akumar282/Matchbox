@@ -13,12 +13,13 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import SendIcon from '@mui/icons-material/Send';
 import { getPostsByUser } from '../../src/backend/queries/postQueries';
 import { getAllComments } from '../../src/backend/queries/commentQueries';
 import { createComment } from '../../src/backend/mutations/commentMutations';
 import { updateUser } from '../../src/backend/mutations/userMutations';
 import { getImage } from "../backend/storage/s3";
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { useFormik, Field } from "formik";
 import * as yup from "yup";
 import { getUserById } from "../backend/queries/userQueries";
@@ -43,17 +44,25 @@ export default function DiscoverPage() {
     fetchProjects();
   }, []);
   // set up state to keep track of which project is currently visible
-  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
-
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(parseInt(localStorage.getItem('currentProjectindex')!));
   // define a function to handle clicking either save or remove project buttona
   const handleNextProject = () => {
+    if (currentProjectIndex === projectsAll.length - 1) { 
+      setCurrentProjectIndex(0);
+      localStorage.setItem('currentProjectindex', '0');
+    } else {
     setCurrentProjectIndex((currentProjectIndex + 1) % projectsAll.length);
+    localStorage.setItem('currentProjectindex', ((currentProjectIndex + 1) % projectsAll.length).toString());
+    }
   };
   const handleBackProject = () => {
     if (currentProjectIndex === 0) {
       setCurrentProjectIndex(projectsAll.length - 1);
-    } else
+      localStorage.setItem('currentProjectindex', (projectsAll.length - 1).toString());
+    } else {
     setCurrentProjectIndex((currentProjectIndex - 1) % projectsAll.length);
+    localStorage.setItem('currentProjectindex', ((currentProjectIndex - 1) % projectsAll.length).toString());
+    }
     
   };
   return (
@@ -73,12 +82,20 @@ export default function DiscoverPage() {
 }
 
 function CommentSection(props: any) {
-  
+
+  function sort (array: any[]) {
+    return array.sort((a: any, b: any) => {
+      return new Date(b.comment_date).getTime() - new Date(a.comment_date).getTime();
+    }
+    );
+  }
+  let sortedComments = sort(props.comments);
+  console.log(sortedComments);
   return (
     <div className="CommentSection">
       <h2>Comments</h2>
       <CreateComment projectInfo = {props.project}/>
-      {props.comments.map((comment) => (
+      {sortedComments.map((comment) => (
         <Comments CommentInfo = {comment}/>
       ))}
     </div>
@@ -331,24 +348,8 @@ function DiscoverComponent(props: any) {
                   <div className="ShortDescDiscover">
                     <h1>{props.projects.post_title}</h1>
                     <p> {props.projects.description}</p>
-                    <div className="ProjectLinksDiscover">
-                      <IconButton
-                        color="primary"
-                        aria-label="github link"
-                        href={props.projects.project_link}
-                      >
-                        <GitHubIcon />
-                      </IconButton>
-                      <IconButton 
-                        color="primary"
-                        aria-label="website link"
-                        component="label"
-                      >
-                        <LaunchIcon />
-                      </IconButton>
                     </div>
-                  </div>
-                  <div className="TagBoxDiscover">
+                    <div className="TagBoxDiscover">
                     {[
                       ...props.projects.lang_tag?.map((tag) => ({ tag })),
                       ...props.projects.framework_tag?.map((tag) => ({ tag })),
@@ -359,6 +360,57 @@ function DiscoverComponent(props: any) {
                       </div>
                     ))}
                   </div>
+                    <div className="ProjectLinksDiscover">
+                      <Button
+                        color="primary"
+                        aria-label="github link"
+                        href={props.projects.project_link}
+                        sx = {{
+                          color: "black",
+                          fontSize: "large",
+                          gap: "10px",
+                          width: "10rem",
+                          m: "auto",
+                        }}>
+                        <GitHubIcon />
+                        <Typography sx = {{
+                          fontSize: "large",
+                          border: "none",
+                        }}>
+                          Go To Github
+                        </Typography>
+                      </Button>
+                      <IconButton 
+                        color="primary"
+                        aria-label="website link"
+                        component="label"
+                        sx = {{
+                          color: "black",
+                        }}>
+                        <LaunchIcon />
+                      </IconButton>
+                      <Button
+                      disableRipple
+                      sx={{
+                        backgroundColor: "#F68084",
+                        width: "30%",
+                        m: "auto",
+                        color: "white",
+                        "&:hover": {
+                          backgroundColor: "#f59da0",
+                          color: "white",
+                        },
+                      }}>
+                      <Typography sx = {{
+                          fontSize: "large",
+                          color: "white",
+                          border: "none",
+                        }}>Contact Owner</Typography>
+                       </Button>
+                    </div>
+                    
+                  
+                  
                 </div>
               </div>
               <div className="BottomHolderDiscover">
