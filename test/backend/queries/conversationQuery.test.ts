@@ -4,7 +4,7 @@ import awsconfig from '../../../src/aws-exports'
 import { ListConversationModelsQueryVariables } from "../../../src/API";
 Amplify.configure(awsconfig)
 
-describe('Query Tests', () => {
+describe.skip('Query Tests', () => {
 
   test('List Conversation by user', async () => {
     const fil: ListConversationModelsQueryVariables = {

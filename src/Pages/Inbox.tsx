@@ -7,6 +7,7 @@ import { getAllConversations } from '../backend/queries/conversationQueries'
 import { getUserById } from '../backend/queries/userQueries';
 import { getAllMessages} from '../backend/queries/messageQueries'
 import * as yup from "yup";
+import { getImage } from "../backend/storage/s3";
 
 // Test Data
 
@@ -81,9 +82,22 @@ export default function Inbox() {
 function CustomButtons(props: any) {
     //query for username
     const [user, setUser] = useState<any>("");
+    const [imageSrc, setImageSrc] = useState("");
+    let OppoUser = props.Convo.user_one === localStorage.getItem('uuid') ? props.Convo.user_two : props.Convo.user_one;
     //This is where you query for the username
     useEffect(() => {
-        let OppoUser = props.Convo.user_one === localStorage.getItem('uuid') ? props.Convo.user_two : props.Convo.user_one;
+        const fetchUser = async () => {
+          const userObj = await getUserById(OppoUser)
+          setUser(userObj.data.getUsersModel)
+          console.log(userObj)
+        }
+        fetchUser();
+
+        const fetchImage = async () => {
+          const src = await getImage(user.profile_image);
+          setImageSrc(src);
+        };
+        fetchImage();
 
         //query here for username
     }, []);
@@ -102,9 +116,9 @@ function CustomButtons(props: any) {
             disableRipple
             onClick={() => props.setConvoIndex(props.index)}
             >
-                <img className="InboxUserImage" src = "images/Strom.jpg" />
+                <img className="InboxUserImage" src = {imageSrc} />
                 <Typography>
-                    {user}
+                    {user.user_name}
                 </Typography>
             </Button>
         </li>
