@@ -122,7 +122,7 @@ function CustomButtons(props: any) {
             onClick={() => props.setConvoIndex(props.index)}
             >
                 <img className="InboxUserImage" src = {imageSrc} />
-                <Typography>
+                <Typography style={{ textTransform: 'none' }}>
                     {user.user_name}
                 </Typography>
             </Button>
