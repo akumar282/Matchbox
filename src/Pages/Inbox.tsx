@@ -6,6 +6,7 @@ import { Formik, useFormik } from "formik";
 import { getAllConversations } from '../backend/queries/conversationQueries'
 import { getUserById } from '../backend/queries/userQueries';
 import { getAllMessages} from '../backend/queries/messageQueries'
+import { createMessage } from '../backend/mutations/messageMutations'
 import * as yup from "yup";
 import { getImage } from "../backend/storage/s3";
 
@@ -14,6 +15,7 @@ import { getImage } from "../backend/storage/s3";
 
 export default function Inbox() {
    
+    
     const [convos, setConvosQuery] = useState<any[]>([]);
     const [convoIndex, setConvoIndex] = useState(0);
     const [convo, setConvo] = useState(convos.at(0));
@@ -128,6 +130,19 @@ function CustomButtons(props: any) {
 }
 
 function CustomMessageSender(props: any) {
+
+    async function sendMessage(message: string) {
+      const result = await createMessage({
+        input: {
+          message: message,
+          conversationID: props.convo.id!,
+          to: props.convo.user_one === localStorage.getItem('uuid') ? props.convo.user_two : props.convo.user_one,
+          from: localStorage.getItem('uuid')!,
+          message_date: new Date().toISOString()
+        }
+      })
+      console.log(result)
+    }
     const validationSchema = yup.object({
         message : yup
           .string()
@@ -142,7 +157,9 @@ function CustomMessageSender(props: any) {
             if (values.message === '') {
                 return;
             }
+            sendMessage(values.message);
             formik.resetForm();
+            
         },
     });
     return (
