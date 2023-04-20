@@ -190,7 +190,7 @@ function CustomConversation(props: any) {
         setMessages(filterMessages);
       }
       fetchMessages();
-    }, [props.convo === undefined]);
+    }, [props.convo]);
     console.log(messages)
     //sort by time
     function sort (array: any[]) {
