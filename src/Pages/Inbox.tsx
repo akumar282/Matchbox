@@ -13,6 +13,11 @@ import { getImage } from "../backend/storage/s3";
 
 
 export default function Inbox() {
+   
+    const [convos, setConvosQuery] = useState<any[]>([]);
+    const [convoIndex, setConvoIndex] = useState(0);
+    const [convo, setConvo] = useState(convos.at(0));
+    console.log(convos.at(0))
     useEffect(() => {
       const fetchConvos = async () => {
         const userConvos = await getAllConversations({
@@ -25,20 +30,18 @@ export default function Inbox() {
         })
         const filterConvos = userConvos.data.listConversationModels.items.filter(x => x._deleted !== true);
         setConvosQuery(filterConvos);
+        
       }
       fetchConvos();
-      
-
+     
     }, []);
-    const [convos, setConvosQuery] = useState<any[]>([]);
-    const [convoIndex, setConvoIndex] = useState(0);
-    const [convo, setConvo] = useState(convos.at(0));
-    console.log(convos.at(0))
-
     useEffect(() => {
         setConvo(convos.at(convoIndex));
        
     }, [convoIndex]);
+    useEffect(() => {
+        setConvo(convos.at(0));
+    }, [convos]);
     console.log(convo)
     return (
         <div className="InboxMain">
@@ -100,7 +103,6 @@ function CustomButtons(props: any) {
             };
             fetchImage();
     }, [user]);
-    console.log (user.user_name)
     return (
         <li>
             <Button sx = {{
@@ -176,9 +178,7 @@ function CustomMessageSender() {
 }
 
 function CustomConversation(props: any) {
-    console.log(props.convo)
     const [messages, setMessages] = useState<any[]>([]);
-    
     useEffect(() => {
       const fetchMessages = async () => {
         const userMessages = await getAllMessages({
@@ -190,18 +190,37 @@ function CustomConversation(props: any) {
         setMessages(filterMessages);
       }
       fetchMessages();
-    }, []);
+    }, [props.convo === undefined]);
     console.log(messages)
+    //sort by time
+    function sort (array: any[]) {
+        return array.sort((a: any, b: any) => {
+          return  new Date(a.message_date).getTime() - new Date(b.message_date).getTime();
+        }
+        );
+      }
+
+    let Sortedmessages = sort(messages);
+      console.log(Sortedmessages)
     //add query for messages
+    if (messages.length !== 0) {
     return (
         <div className = "InboxConversationMessages">
-            your mom
+            {Sortedmessages.map((message) => (
+                <MyMessage message = {message}/>
+            ))}
+
         </div>
     );
+            } else 
+    return (
+        <></>
+    );
+
 }
 
 function MyMessage(props: any) {
-        if(props.message.sender === selfuser) {
+        if(props.message.from === localStorage.getItem('uuid')) {
         return (
             <div className = "InboxConversationMessage">
                 <div className = "InboxMessageContainer">
@@ -211,7 +230,7 @@ function MyMessage(props: any) {
                 fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
                 color: 'white',
             }}>
-                {props.message.text}
+                {props.message.message}
             </Typography>
             </div>
         </div>
@@ -226,7 +245,7 @@ function MyMessage(props: any) {
                     fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
                     color: 'black',
                 }}>
-                    {props.message.text}
+                    {props.message.message}
                 </Typography>
                 </div>
             </div>
