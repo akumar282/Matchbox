@@ -75,7 +75,7 @@ export default function Inbox() {
                     <div className = "InboxConversationBody">
                         <CustomConversation convo = {convo}/>
                     </div>
-                    <CustomMessageSender />
+                    <CustomMessageSender convo = {convo}/>
                 </div>
             </div>
         </div>
@@ -127,7 +127,7 @@ function CustomButtons(props: any) {
     );
 }
 
-function CustomMessageSender() {
+function CustomMessageSender(props: any) {
     const validationSchema = yup.object({
         message : yup
           .string()
