@@ -12,6 +12,7 @@ import {
 import "./CSS/UserPreferencesPage.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { updateUser } from "../backend/mutations/userMutations";
 
 
 export default function UserPreferencesPage() {
@@ -33,6 +34,16 @@ export default function UserPreferencesPage() {
   function handleSize(event: any, value: any | null) {
     setSelectedSize(value.map((item: any) => item));
     formikFilters.setFieldValue("size", value);
+  }
+  async function updateUserFunction(idCur: string){
+    const log = await updateUser({
+      input: {
+        id: idCur,
+        new_user: false,
+        _version: parseInt(localStorage.getItem('userVersion')!),
+      }
+    })
+    console.log(log)
   }
 
   const validationSchemaFilter = yup.object({
@@ -58,7 +69,7 @@ export default function UserPreferencesPage() {
     },
     validationSchema: validationSchemaFilter,
     onSubmit: (values) => {
-      localStorage.setItem("firstTime", "false");
+      updateUserFunction(localStorage.getItem('uuid')!)
       
       navigate("/home");
     },

@@ -55,7 +55,7 @@ export default function LandingPopupLogin(props) {
         localStorage.setItem('userVersion', username.data.getUsersModel._version)
         console.log(username)
         
-        if (localStorage.getItem('firstTime') === 'true') {
+        if (username.data.getUsersModel.new_user === true) {
           navigate("/preferences")
         } else {
           navigate("/home")
