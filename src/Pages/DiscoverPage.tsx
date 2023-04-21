@@ -23,6 +23,7 @@ import { TextField, Typography } from "@mui/material";
 import { useFormik, Field } from "formik";
 import * as yup from "yup";
 import { getUserById } from "../backend/queries/userQueries";
+import { Navigate, useNavigate } from "react-router-dom";
 // keep these functions here for top level backend connection
 
 //this is the top level page holding the nav bar and the discover component
@@ -102,6 +103,8 @@ export default function DiscoverPage() {
 
 // this is each discover component that is rendered
 function DiscoverComponent(props: any) {
+
+  const navigate = useNavigate();
   // remake objects
   const [commentsAll, setCommentsAll] = useState<any[]>([]);
   const [imageSrc, setImageSrc] = useState("");
@@ -159,6 +162,11 @@ function DiscoverComponent(props: any) {
     } else {
       console.log("already saved");
     }
+  };
+  const handleContact = () => {
+    // function for the query()
+
+    navigate('/inbox');
   };
 
   const handleRemove = () => {};
@@ -305,6 +313,7 @@ function DiscoverComponent(props: any) {
                           color: "white",
                           border: "none",
                         }}
+                        onClick={() => {handleContact()}}
                       >
                         Contact Owner
                       </Typography>
