@@ -1,8 +1,9 @@
 .sub-text {
     font-family: 'Roboto';
-    font-size:max(30px, 10px);
+    font-size: calc(20px + 1vh);
     color: #000000;
     margin-bottom: 0px;
+    flex-wrap: wrap;
 }
 
 .about-text-container{
@@ -14,8 +15,9 @@
 .title-text {
     font-family: 'Roboto';
     font-weight: bold;
-    font-size: max(60px, 10px);
+    font-size: calc(30px + 3.5vh);
     color: #000000;
+    flex-wrap: wrap;
     margin: 0;
 }
 
@@ -57,7 +59,7 @@
     font-size: 24px;
     color: #FFFFFF;
     border: beige;
-    outline: none;
+    
 }
 
 .matchstick{
@@ -65,7 +67,8 @@
     justify-self: center;
     align-self: center;
     margin: auto;
-    width: 50%;
+    width: 30%;
+    height: 40vh;
     max-width: 22rem;
 }
 
@@ -90,35 +93,35 @@
     margin-right: auto;
     display: block;
     max-width: 70rem;
+    height: 65%;
 }
 
 .about-section{
     background-color: #2d2a48;
     overflow: hidden;
+    height: 100%;
 }
 
 .about-container {
     margin:auto;
     background-color: #2d2a48;
-    height: 30.9vh;
     overflow: hidden;
-    position: fixed;
     bottom: 0;
     width: 100%;
 }
 
 
 .signup-entry {
+    display: flex;
     flex-direction: row;
     justify-self: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 20px;
     /* max-width: 80%; */
     margin: auto;
 }
 
 .signup-stack {
-    padding-top: 50px;
     flex-direction: column;
     justify-self: center;
     /* display: flex; */
@@ -128,9 +131,10 @@
 }
 
 .signText {
+    margin-top: 4vh;
     font-family: 'Roboto';
     font-weight: bold;
-    font-size: max(30px, 20px);
+    font-size: calc(15px + 2vh);
     color: #FFFFFF;
 }
 
@@ -160,4 +164,15 @@
 }
 .landing {
     overflow: hidden;
+    height: 100vh;
+}
+.TextFieldHolder {
+    width: 40%;
+    max-width: 40rem;
+    height: 6vh;
+    max-height: 4rem;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+
 }
