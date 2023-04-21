@@ -99,6 +99,7 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   image_link: String
   post_date: AWSDateTime
   userID: ID! @index(name: "byUsersModel")
+  creator_name: String
   lang_tag: [LanguageTag]
   dev_type_tag: [DevelopmentTag]
   interest_tag: [InterestTag]
@@ -117,7 +118,7 @@ type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [re
   user_comments: [CommentModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   first_name: String
   last_name: String
-  user_creation_date: AWSDate
+  user_creation_date: AWSDateTime
   dahublink: AWSURL
   saved_posts: [ID]
   hide_posts: [ID]

@@ -178,6 +178,7 @@ type EagerPostsModel = {
   readonly image_link?: string | null;
   readonly post_date?: string | null;
   readonly userID: string;
+  readonly creator_name?: string | null;
   readonly lang_tag?: (LanguageTag | null)[] | keyof typeof LanguageTag | null;
   readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;
@@ -197,6 +198,7 @@ type LazyPostsModel = {
   readonly image_link?: string | null;
   readonly post_date?: string | null;
   readonly userID: string;
+  readonly creator_name?: string | null;
   readonly lang_tag?: (LanguageTag | null)[] | keyof typeof LanguageTag | null;
   readonly dev_type_tag?: (DevelopmentTag | null)[] | keyof typeof DevelopmentTag | null;
   readonly interest_tag?: (InterestTag | null)[] | keyof typeof InterestTag | null;

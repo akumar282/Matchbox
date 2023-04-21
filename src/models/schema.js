@@ -318,6 +318,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "creator_name": {
+                    "name": "creator_name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "lang_tag": {
                     "name": "lang_tag",
                     "isArray": true,
@@ -636,7 +643,7 @@ export const schema = {
                 "user_creation_date": {
                     "name": "user_creation_date",
                     "isArray": false,
-                    "type": "AWSDate",
+                    "type": "AWSDateTime",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -880,5 +887,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.2.0",
-    "version": "33ac2f2dba53f442a5566537eafad732"
+    "version": "e2ef06954bdd805ffc347b0bf1179179"
 };

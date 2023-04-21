@@ -363,6 +363,7 @@ export const getPostsModel = /* GraphQL */ `
       image_link
       post_date
       userID
+      creator_name
       lang_tag
       dev_type_tag
       interest_tag
@@ -396,6 +397,7 @@ export const listPostsModels = /* GraphQL */ `
         image_link
         post_date
         userID
+        creator_name
         lang_tag
         dev_type_tag
         interest_tag
@@ -434,6 +436,7 @@ export const syncPostsModels = /* GraphQL */ `
         image_link
         post_date
         userID
+        creator_name
         lang_tag
         dev_type_tag
         interest_tag
@@ -476,6 +479,7 @@ export const searchPostsModels = /* GraphQL */ `
         image_link
         post_date
         userID
+        creator_name
         lang_tag
         dev_type_tag
         interest_tag

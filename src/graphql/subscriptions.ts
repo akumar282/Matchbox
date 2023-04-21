@@ -168,6 +168,7 @@ export const onCreatePostsModel = /* GraphQL */ `
       image_link
       post_date
       userID
+      creator_name
       lang_tag
       dev_type_tag
       interest_tag
@@ -198,6 +199,7 @@ export const onUpdatePostsModel = /* GraphQL */ `
       image_link
       post_date
       userID
+      creator_name
       lang_tag
       dev_type_tag
       interest_tag
@@ -228,6 +230,7 @@ export const onDeletePostsModel = /* GraphQL */ `
       image_link
       post_date
       userID
+      creator_name
       lang_tag
       dev_type_tag
       interest_tag
