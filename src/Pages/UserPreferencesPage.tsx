@@ -35,12 +35,19 @@ export default function UserPreferencesPage() {
     setSelectedSize(value.map((item: any) => item));
     formikFilters.setFieldValue("size", value);
   }
-  async function updateUserFunction(idCur: string){
+  async function updateUserFunction(idCur: string, props: {
+    language: langBundle[];
+    framework: frameworkBundle[];
+    size: sizeBundle[];
+  }){
     const log = await updateUser({
       input: {
         id: idCur,
         new_user: false,
         _version: parseInt(localStorage.getItem('userVersion')!),
+        lang_tag: props.language.map(x => x.enumMap),
+        size_tag: props.size.map(x => x.enumMap),
+        framework_tag: props.framework.map(x => x.enumMap)
       }
     })
     console.log(log)
@@ -63,13 +70,13 @@ export default function UserPreferencesPage() {
 
   const formikFilters = useFormik({
     initialValues: {
-      language: [] as unknown as langBundle,
-      framework: [] as unknown as frameworkBundle,
-      size: [] as unknown as sizeBundle,
+      language: [] as langBundle[],
+      framework: [] as frameworkBundle[],
+      size: [] as sizeBundle[],
     },
     validationSchema: validationSchemaFilter,
     onSubmit: (values) => {
-      updateUserFunction(localStorage.getItem('uuid')!)
+      updateUserFunction(localStorage.getItem('uuid')!, values)
       
       navigate("/home");
     },
