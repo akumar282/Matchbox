@@ -112,8 +112,7 @@ export default function Settings() {
   });
   const validationSchemaPassword = yup.object({
     oldPassword: yup
-      .string() 
-      .oneOf(["password"], "Passwords must match") //change password to db password
+      .string()
       .required("Password is required"),
     newPassword: yup
       .string()
