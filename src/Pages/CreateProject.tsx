@@ -102,7 +102,7 @@ export default function CreateProject() {
     ShortDesc: yup
       .string()
       .min(2, "Short description should be of minimum 2 characters")
-      .max(100, "Short description should be of maximum 100 characters")
+      .max(50, "Short description should be of maximum 50 characters")
       .required("Short description is required"),
     LongDesc: yup
       .string()
