@@ -13,11 +13,11 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import CancelIcon from "@mui/icons-material/Cancel";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import SendIcon from '@mui/icons-material/Send';
-import { getPostsByUser } from '../../src/backend/queries/postQueries';
-import { getAllComments } from '../../src/backend/queries/commentQueries';
-import { createComment } from '../../src/backend/mutations/commentMutations';
-import { updateUser } from '../../src/backend/mutations/userMutations';
+import SendIcon from "@mui/icons-material/Send";
+import { getPostsByUser } from "../../src/backend/queries/postQueries";
+import { getAllComments } from "../../src/backend/queries/commentQueries";
+import { createComment } from "../../src/backend/mutations/commentMutations";
+import { updateUser } from "../../src/backend/mutations/userMutations";
 import { getImage } from "../backend/storage/s3";
 import { TextField, Typography } from "@mui/material";
 import { useFormik, Field } from "formik";
@@ -25,50 +25,69 @@ import * as yup from "yup";
 import { getUserById } from "../backend/queries/userQueries";
 // keep these functions here for top level backend connection
 
+//this is the top level page holding the nav bar and the discover component
 export default function DiscoverPage() {
 
+  // set up state to keep track of all projects
   const [projectsAll, setProjectsAll] = useState<any[]>([]);
+
+  // fetch all projects from backend
   useEffect(() => {
     const fetchProjects = async () => {
       const result = await getPostsByUser({
         filter: {
           userID: {
-            ne: localStorage.getItem('uuid')!
-          }
-        }
+            ne: localStorage.getItem("uuid")!,
+          },
+        },
       });
-      
-      const filteredProjects = result.data.listPostsModels.items.filter(x => x._deleted !== true);
+
+      const filteredProjects = result.data.listPostsModels.items.filter(
+        (x) => x._deleted !== true
+      );
       setProjectsAll(filteredProjects);
     };
     fetchProjects();
   }, []);
+
   // set up state to keep track of which project is currently visible
-  const [currentProjectIndex, setCurrentProjectIndex] = useState(parseInt(localStorage.getItem('currentProjectindex')!));
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(
+    parseInt(localStorage.getItem("currentProjectindex")!)
+  );
   // define a function to handle clicking either save or remove project buttona
   const handleNextProject = () => {
-    if (currentProjectIndex === projectsAll.length - 1) { 
+    if (currentProjectIndex === projectsAll.length - 1) {
       setCurrentProjectIndex(0);
-      localStorage.setItem('currentProjectindex', '0');
+      localStorage.setItem("currentProjectindex", "0");
     } else {
-    setCurrentProjectIndex((currentProjectIndex + 1) % projectsAll.length);
-    localStorage.setItem('currentProjectindex', ((currentProjectIndex + 1) % projectsAll.length).toString());
+      setCurrentProjectIndex((currentProjectIndex + 1) % projectsAll.length);
+      localStorage.setItem(
+        "currentProjectindex",
+        ((currentProjectIndex + 1) % projectsAll.length).toString()
+      );
     }
   };
+  // define a function to handle clicking either save or remove project buttona
   const handleBackProject = () => {
     if (currentProjectIndex === 0) {
       setCurrentProjectIndex(projectsAll.length - 1);
-      localStorage.setItem('currentProjectindex', (projectsAll.length - 1).toString());
+      localStorage.setItem(
+        "currentProjectindex",
+        (projectsAll.length - 1).toString()
+      );
     } else {
-    setCurrentProjectIndex((currentProjectIndex - 1) % projectsAll.length);
-    localStorage.setItem('currentProjectindex', ((currentProjectIndex - 1) % projectsAll.length).toString());
+      setCurrentProjectIndex((currentProjectIndex - 1) % projectsAll.length);
+      localStorage.setItem(
+        "currentProjectindex",
+        ((currentProjectIndex - 1) % projectsAll.length).toString()
+      );
     }
-    
   };
+
   return (
     <div className="DiscoverPage">
       <Navbar />
-      {(projectsAll).map((project, index) => (
+      {projectsAll.map((project, index) => (
         <DiscoverComponent
           projects={project}
           key={project.title}
@@ -81,142 +100,12 @@ export default function DiscoverPage() {
   );
 }
 
-function CommentSection(props: any) {
-
-  function sort (array: any[]) {
-    return array.sort((a: any, b: any) => {
-      return new Date(b.comment_date).getTime() - new Date(a.comment_date).getTime();
-    }
-    );
-  }
-  let sortedComments = sort(props.comments);
-  console.log(sortedComments);
-  return (
-    <div className="CommentSection">
-      <h2>Comments</h2>
-      <CreateComment projectInfo = {props.project}/>
-      {sortedComments.map((comment) => (
-        <Comments CommentInfo = {comment}/>
-      ))}
-    </div>
-  );
-}
-function CreateComment(props: any) {
-  async function postComment(props: {
-    comment: string;
-    postID: string;
-  }): Promise<void> {
-    const result = await createComment({
-      input:
-      {
-        comment: props.comment,
-        userID: localStorage.getItem('uuid')!,
-        postID: props.postID,
-        user_name: localStorage.getItem('username')!,
-        profile_image: localStorage.getItem('profileImage')!,
-        comment_date: new Date().toISOString()
-      }
-    })
-    console.log(result)
-    window.location.reload();
-  }
-  const validationSchema = yup.object({
-    comment : yup
-      .string()
-      .required("Required")
-      .max(1000, "Must be 1000 characters or less")
-  });
-  
-  const formik = useFormik({
-    initialValues: {
-      comment: "",
-      postID: props.projectInfo
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      postComment(values)
-    },
-  });
-  return (
-    <div className="CreateComment">
-      <TextField
-        id="comment"
-        name="comment"
-        placeholder="Write a comment..."
-        multiline
-        hiddenLabel
-        fullWidth
-        maxRows={10}
-        rows={4}
-        sx = {{
-          color: "#FFFFFF",
-        }}
-        value = {formik.values.comment}
-        onChange = {formik.handleChange}
-        error = {formik.touched.comment && Boolean(formik.errors.comment)}
-        helperText = {(formik.touched.comment && formik.errors.comment) || " "}
-      />
-      <Button 
-      sx={{
-        width: "100%",
-        height: "2.5rem",
-        backgroundColor: "#6259b9",
-        color: "white",
-        "&:hover": {
-          backgroundColor: "#716ab4",
-        },
-      }} 
-      onClick={() => formik.handleSubmit()}>
-      Post Comment
-      </Button>
-      
-    </div>
-  );
-  }
-
-
-function formatIsoTimestamp(isoTimestamp: string): string {
-  const date = new Date(isoTimestamp);
-  const month = date.toLocaleString('en-US', { month: 'long' });
-  const day = date.toLocaleString('en-US', { day: 'numeric' });
-  const year = date.toLocaleString('en-US', { year: 'numeric' });
-  const time = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric' });
-
-  return `${month} ${day}, ${year}, ${time}`;
-}
-
-function Comments(props: any) {
-  const [imageSrc, setImageSrc] = useState("");
-
-  useEffect(() => {
-    const fetchImage = async () => {
-      const src = await getImage(props.CommentInfo.profile_image);
-      setImageSrc(src);
-    };
-
-    fetchImage()
-
-  }, []);
-
-  let commentdate = formatIsoTimestamp(props.CommentInfo.comment_date)
-  return (
-    <div className="Comment">
-      <div className="CommentHeader">
-        <img src={imageSrc} alt="User Avatar" className="Avatar" />
-        <h3 className="Username">{props.CommentInfo.user_name}</h3>
-        <p className="DateTime">{commentdate}</p>
-        </div>
-      <p className="CommentBody">{props.CommentInfo.comment}</p>
-    </div>
-      );
-}
-
-
+// this is each discover component that is rendered
 function DiscoverComponent(props: any) {
   // remake objects
   const [commentsAll, setCommentsAll] = useState<any[]>([]);
   const [imageSrc, setImageSrc] = useState("");
-
+  // fetch image and comments
   useEffect(() => {
     const fetchImage = async () => {
       const src = await getImage(props.projects.image_link);
@@ -224,20 +113,21 @@ function DiscoverComponent(props: any) {
     };
 
     fetchImage();
-   
+
     const fetchComments = async () => {
       const rawComments = await getAllComments({
-      filter: {
-        postID: {
-          eq: props.projects.id
-        }
-      }
-    })
-      const filteredComments = rawComments.data.listCommentModels.items.filter(x => x._deleted !== true);
+        filter: {
+          postID: {
+            eq: props.projects.id,
+          },
+        },
+      });
+      const filteredComments = rawComments.data.listCommentModels.items.filter(
+        (x) => x._deleted !== true
+      );
       setCommentsAll(filteredComments);
-    }
+    };
     fetchComments();
-    
   }, []);
   const { projects, isVisible, onNextProject, onBackProject } = props;
 
@@ -249,33 +139,30 @@ function DiscoverComponent(props: any) {
       duration: 1000,
     },
   };
-
+  // this function will handle saving a project
   const handleSave = async () => {
     console.log("saving project");
-    const oldsaved = await getUserById(localStorage.getItem('uuid')!)
-    const oldVersion = oldsaved.data.getUsersModel._version
-    console.log(oldVersion)
-    const newsaved: any[] = oldsaved.data.getUsersModel.saved_posts
+    const oldsaved = await getUserById(localStorage.getItem("uuid")!);
+    const oldVersion = oldsaved.data.getUsersModel._version;
+    console.log(oldVersion);
+    const newsaved: any[] = oldsaved.data.getUsersModel.saved_posts;
     if (!newsaved.includes(props.projects.id)) {
-      newsaved.push(props.projects.id)
+      newsaved.push(props.projects.id);
       const result = await updateUser({
         input: {
-          id: localStorage.getItem('uuid')!,
+          id: localStorage.getItem("uuid")!,
           saved_posts: newsaved,
-          _version: oldVersion
-        }
-      })
-      console.log(result)
+          _version: oldVersion,
+        },
+      });
+      console.log(result);
     } else {
-      console.log('already saved')
+      console.log("already saved");
     }
-
-
   };
 
-  const handleRemove = () => {
-    
-  };
+  const handleRemove = () => {};
+
   const handleNext = () => {
     onNextProject();
   };
@@ -286,8 +173,8 @@ function DiscoverComponent(props: any) {
   const testComment = {
     username: "John Doe",
     comment: "This is a sample comment.",
-  }
-  const comment = [ testComment, testComment, testComment]
+  };
+  const comment = [testComment, testComment, testComment];
   return isVisible ? (
     <AnimatePresence>
       <motion.div
@@ -322,7 +209,7 @@ function DiscoverComponent(props: any) {
                     }}
                     onClick={handleRemove}
                   >
-                    <CancelIcon fontSize="large" sx={{ }} />
+                    <CancelIcon fontSize="large" sx={{}} />
                   </IconButton>
                   {/* save project button */}
                   <IconButton
@@ -338,66 +225,68 @@ function DiscoverComponent(props: any) {
                     }}
                     onClick={handleSave}
                   >
-                    <BookmarkBorderIcon
-                      fontSize="large"
-                      sx={{ }}
-                    />
+                    <BookmarkBorderIcon fontSize="large" sx={{}} />
                   </IconButton>
                 </div>
                 <div className="ShortTagBoxDiscover">
                   <div className="ShortDescDiscover">
-                    <Typography 
-                    variant="h3"
-                    sx = {{
+                    <Typography
+                      variant="h3"
+                      sx={{
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                    }}>
+                      }}
+                    >
                       {props.projects.post_title}
                     </Typography>
                     <Typography>{props.projects.description}</Typography>
-                    </div>
-                    <div className="TagBoxDiscover">
+                  </div>
+                  <div className="TagBoxDiscover">
                     {[
                       ...props.projects.lang_tag?.map((tag) => ({ tag })),
                       ...props.projects.framework_tag?.map((tag) => ({ tag })),
                       ...props.projects.size_tag?.map((tag) => ({ tag })),
-                    ].map(({ tag}) => (
+                    ].map(({ tag }) => (
                       <div className="TagDiscover">
                         <Chip label={tag} sx={{ minWidth: 70 }} />
                       </div>
                     ))}
                   </div>
-                    <div className="ProjectLinksDiscover">
-                      <Button
-                        color="primary"
-                        aria-label="github link"
-                        href={props.projects.project_link}
-                        sx = {{
-                          color: "black",
-                          fontSize: "large",
-                          gap: "10px",
-                          width: "10rem",
-                          m: "auto",
-                        }}>
-                        <GitHubIcon />
-                        <Typography sx = {{
+                  <div className="ProjectLinksDiscover">
+                    <Button
+                      color="primary"
+                      aria-label="github link"
+                      href={props.projects.project_link}
+                      sx={{
+                        color: "black",
+                        fontSize: "large",
+                        gap: "10px",
+                        width: "10rem",
+                        m: "auto",
+                      }}
+                    >
+                      <GitHubIcon />
+                      <Typography
+                        sx={{
                           fontSize: "large",
                           border: "none",
-                        }}>
-                          Go To Github
-                        </Typography>
-                      </Button>
-                      <IconButton 
-                        color="primary"
-                        aria-label="website link"
-                        component="label"
-                        sx = {{
-                          color: "black",
-                        }}>
-                        <LaunchIcon />
-                      </IconButton>
-                      <Button
+                        }}
+                      >
+                        Go To Github
+                      </Typography>
+                    </Button>
+                    <IconButton
+                      color="primary"
+                      aria-label="website link"
+                      component="label"
+                      sx={{
+                        color: "black",
+                      }}
+                    >
+                      <LaunchIcon />
+                    </IconButton>
+                    <Button
                       disableRipple
                       sx={{
                         backgroundColor: "#F68084",
@@ -408,17 +297,19 @@ function DiscoverComponent(props: any) {
                           backgroundColor: "#f59da0",
                           color: "white",
                         },
-                      }}>
-                      <Typography sx = {{
+                      }}
+                    >
+                      <Typography
+                        sx={{
                           fontSize: "large",
                           color: "white",
                           border: "none",
-                        }}>Contact Owner</Typography>
-                       </Button>
-                    </div>
-                    
-                  
-                  
+                        }}
+                      >
+                        Contact Owner
+                      </Typography>
+                    </Button>
+                  </div>
                 </div>
               </div>
               <div className="BottomHolderDiscover">
@@ -430,10 +321,143 @@ function DiscoverComponent(props: any) {
             </IconButton>
           </div>
         </div>
-        <CommentSection comments={commentsAll} project={props.projects.id}/>
+        <CommentSection comments={commentsAll} project={props.projects.id} />
       </motion.div>
     </AnimatePresence>
   ) : (
     <div />
+  );
+}
+
+//this function is the whole comment section rendering
+function CommentSection(props: any) {
+  function sort(array: any[]) {
+    return array.sort((a: any, b: any) => {
+      return (
+        new Date(b.comment_date).getTime() - new Date(a.comment_date).getTime()
+      );
+    });
+  }
+  let sortedComments = sort(props.comments);
+  console.log(sortedComments);
+  return (
+    <div className="CommentSection">
+      <h2>Comments</h2>
+      <CreateComment projectInfo={props.project} />
+      {sortedComments.map((comment) => (
+        <Comments CommentInfo={comment} />
+      ))}
+    </div>
+  );
+}
+// This function formats the date and time of the comment
+function formatIsoTimestamp(isoTimestamp: string): string {
+  const date = new Date(isoTimestamp);
+  const month = date.toLocaleString("en-US", { month: "long" });
+  const day = date.toLocaleString("en-US", { day: "numeric" });
+  const year = date.toLocaleString("en-US", { year: "numeric" });
+  const time = date.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+  });
+
+  return `${month} ${day}, ${year}, ${time}`;
+}
+
+//This is the function that creates each comment object
+function Comments(props: any) {
+  const [imageSrc, setImageSrc] = useState("");
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      const src = await getImage(props.CommentInfo.profile_image);
+      setImageSrc(src);
+    };
+
+    fetchImage();
+  }, []);
+
+  let commentdate = formatIsoTimestamp(props.CommentInfo.comment_date);
+  return (
+    <div className="Comment">
+      <div className="CommentHeader">
+        <img src={imageSrc} alt="User Avatar" className="Avatar" />
+        <h3 className="Username">{props.CommentInfo.user_name}</h3>
+        <p className="DateTime">{commentdate}</p>
+      </div>
+      <p className="CommentBody">{props.CommentInfo.comment}</p>
+    </div>
+  );
+}
+// This function is the comment creation section on the discover page
+function CreateComment(props: any) {
+  async function postComment(props: {
+    comment: string;
+    postID: string;
+  }): Promise<void> {
+    const result = await createComment({
+      input: {
+        comment: props.comment,
+        userID: localStorage.getItem("uuid")!,
+        postID: props.postID,
+        user_name: localStorage.getItem("username")!,
+        profile_image: localStorage.getItem("profileImage")!,
+        comment_date: new Date().toISOString(),
+      },
+    });
+    console.log(result);
+    window.location.reload();
+  }
+  const validationSchema = yup.object({
+    comment: yup
+      .string()
+      .required("Required")
+      .max(1000, "Must be 1000 characters or less"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      comment: "",
+      postID: props.projectInfo,
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      postComment(values);
+    },
+  });
+  return (
+    <div className="CreateComment">
+      <TextField
+        id="comment"
+        name="comment"
+        placeholder="Write a comment..."
+        multiline
+        hiddenLabel
+        fullWidth
+        maxRows={10}
+        rows={4}
+        sx={{
+          color: "#FFFFFF",
+        }}
+        value={formik.values.comment}
+        onChange={formik.handleChange}
+        error={formik.touched.comment && Boolean(formik.errors.comment)}
+        helperText={(formik.touched.comment && formik.errors.comment) || " "}
+      />
+      <Button
+        sx={{
+          width: "100%",
+          height: "2.5rem",
+          backgroundColor: "#6259b9",
+          color: "white",
+          "&:hover": {
+            backgroundColor: "#716ab4",
+          },
+        }}
+        onClick={() => formik.handleSubmit()}
+      >
+        Post Comment
+      </Button>
+    </div>
   );
 }
