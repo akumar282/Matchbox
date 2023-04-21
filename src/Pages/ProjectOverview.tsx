@@ -1,7 +1,7 @@
-import { Chip, IconButton, TextField } from "@mui/material";
+import { Chip, IconButton, TextField, Typography } from "@mui/material";
 import React from "react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getImage } from "../backend/storage/s3";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
@@ -13,13 +13,16 @@ import { useFormik, Field } from "formik";
 import * as yup from "yup";
 import { getAllComments } from "../../src/backend/queries/commentQueries";
 import { createComment } from "../../src/backend/mutations/commentMutations";
+import { getAllConversations } from "../backend/queries/conversationQueries";
+import { createConversation } from "../../src/backend/mutations/conversationMutations";
 
 export default function ProjectOverview() {
   const [imageSrc, setImageSrc] = useState("");
   const [commentsAll, setCommentsAll] = useState([]);
   const location = useLocation();
   const project = location.state;
-    const userState = project.state;
+  const userState = project.state;
+
   function GetButtons(props: any) {
     if (userState === "Saved") {
       return (
@@ -61,7 +64,7 @@ export default function ProjectOverview() {
       return <></>;
     }
   }
-  
+
   const handleSave = () => {};
 
   const handleRemove = () => {};
@@ -114,24 +117,17 @@ export default function ProjectOverview() {
               </div>
               <div className="ShortTagBoxDiscover">
                 <div className="ShortDescDiscover">
-                  <h1>{project.post_title}</h1>
-                  <p> {project.description}</p>
-                  <div className="ProjectLinksDiscover">
-                    <IconButton
-                      color="primary"
-                      aria-label="github link"
-                      href={project.project_link}
-                    >
-                      <GitHubIcon />
-                    </IconButton>
-                    <IconButton
-                      color="primary"
-                      aria-label="website link"
-                      component="label"
-                    >
-                      <LaunchIcon />
-                    </IconButton>
-                  </div>
+                  <Typography
+                    variant="h3"
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {project.post_title}
+                  </Typography>
+                  <Typography>{project.description}</Typography>
                 </div>
                 <div className="TagBoxDiscover">
                   {[
@@ -144,6 +140,9 @@ export default function ProjectOverview() {
                     </div>
                   ))}
                 </div>
+                <div className="ProjectLinksDiscover">
+                  <ButtonLinks project={project} />
+                </div>
               </div>
             </div>
             <div className="BottomHolderDiscover">
@@ -155,6 +154,122 @@ export default function ProjectOverview() {
       <CommentSection comments={commentsAll} project={project.id} />
     </div>
   );
+}
+function ButtonLinks(props: any) {
+  const navigate = useNavigate();
+  const handleContact = async () => {
+    // function for the query()
+
+    const checkExising = await getAllConversations({
+      filter: {
+        or: [
+          {and: [{user_one: {eq: localStorage.getItem("uuid")!}}, {user_two: {eq: props.projects.userID}}]}, 
+          {and: [{user_one: {eq: props.projects.userID}}, {user_two: {eq: localStorage.getItem("uuid")!}}]}
+        ]
+      }
+    })
+    console.log(checkExising)
+    const noDelete = checkExising.data.listConversationModels.items.filter((x) => x._deleted !== true)
+    console.log(noDelete)
+    if (noDelete.length > 0) {
+      navigate('/inbox');
+      return;
+    } else {
+      const newConveration = await createConversation({
+      input: {
+        user_one: localStorage.getItem("uuid")!,
+        user_two: props.projects.userID,
+        messages: [],
+        }
+      })
+      navigate('/inbox');
+    }
+
+  };
+
+  if (props.project.state === "Saved") {
+  return (
+    <>
+      <Button
+        color="primary"
+        aria-label="github link"
+        href={props.project.project_link}
+        sx={{
+          color: "black",
+          fontSize: "large",
+          gap: "10px",
+          width: "10rem",
+          m: "auto",
+        }}
+      >
+        <GitHubIcon />
+        <Typography
+          sx={{
+            fontSize: "large",
+            border: "none",
+          }}
+        >
+          Github Repo
+        </Typography>
+      </Button>
+     
+      <Button
+        disableRipple
+        sx={{
+          backgroundColor: "#F68084",
+          width: "10rem",
+          m: "auto",
+          color: "white",
+          "&:hover": {
+            backgroundColor: "#f59da0",
+            color: "white",
+          },
+        }}
+      >
+        <Typography
+          sx={{
+            fontSize: "large",
+            color: "white",
+            border: "none",
+          }}
+          onClick={() => {
+            handleContact();
+          }}
+        >
+          Contact Owner
+        </Typography>
+      </Button>
+    </>
+  );
+} else {
+  return (
+    <>
+  <Button
+        color="primary"
+        aria-label="github link"
+        href={props.project.project_link}
+        sx={{
+          color: "black",
+          fontSize: "large",
+          gap: "10px",
+          width: "10rem",
+          m: "auto",
+          outline: "auto",
+        }}
+      >
+        <GitHubIcon />
+        <Typography
+          sx={{
+            fontSize: "large",
+            border: "none",
+          }}
+        >
+          Github Repo
+        </Typography>
+      </Button>
+      </>
+  );
+}
 }
 
 function CommentSection(props: any) {

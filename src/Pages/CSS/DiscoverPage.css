@@ -129,19 +129,18 @@
     font-weight: 500;
     color: #000;
     text-align: left;
-    
     transition: 0.5s ease;
     margin: 0;
     margin-bottom: 0.25rem;
     padding: 0;
 }
 .ProjectLinksDiscover {
-  
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-
-    position: relative;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .progress-bar {

@@ -167,7 +167,7 @@ function DiscoverComponent(props: any) {
   };
   const handleContact = async () => {
     // function for the query()
-    console.log(props.projects)
+
     const checkExising = await getAllConversations({
       filter: {
         or: [
@@ -307,24 +307,15 @@ function DiscoverComponent(props: any) {
                           border: "none",
                         }}
                       >
-                        Go To Github
+                        Github Repo
                       </Typography>
                     </Button>
-                    <IconButton
-                      color="primary"
-                      aria-label="website link"
-                      component="label"
-                      sx={{
-                        color: "black",
-                      }}
-                    >
-                      <LaunchIcon />
-                    </IconButton>
+              
                     <Button
                       disableRipple
                       sx={{
                         backgroundColor: "#F68084",
-                        width: "30%",
+                        width: "10rem",
                         m: "auto",
                         color: "white",
                         "&:hover": {
