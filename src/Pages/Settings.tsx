@@ -12,6 +12,11 @@ import {
 } from "@mui/material";
 import "./CSS/Settings.css";
 import * as React from "react";
+import * as TagData from './constants'
+import { langBundle, frameworkBundle, sizeBundle } from "./constants";
+import { updateUser } from '../backend/mutations/userMutations'
+import { getUserById } from '../backend/queries/userQueries'
+import { changeUserPassword } from '../backend/auth/authentication'
 import { useFormik } from "formik";
 import * as yup from "yup";
 import awsconfig from "../aws-exports";
@@ -22,45 +27,7 @@ Amplify.configure(awsconfig);
 
 
 // temporary lists for choices to user
-const select_lang = [
-  { value: "Java", label: "Java" },
-  { value: "C++", label: "C++" },
-  { value: "Python", label: "Python" },
-  { value: "C#", label: "C#" },
-  { value: "JavaScript", label: "JavaScript" },
-  { value: "PHP", label: "PHP" },
-  { value: "Ruby", label: "Ruby" },
-  { value: "HTML", label: "HTML" },
-  { value: "CSS", label: "CSS" },
-  { value: "Swift", label: "Swift" },
-  { value: "Go", label: "Go" },
-  { value: "Rust", label: "Rust" },
-  { value: "Kotlin", label: "Kotlin" },
-  { value: "Dart", label: "Dart" },
-  { value: "Scala", label: "Scala" },
-  { value: "TypeScript", label: "TypeScript" },
-  { value: "SQL", label: "SQL" },
-];
-const select_frame = [
-  { value: "React", label: "React" },
-  { value: "React Native", label: "React Native" },
-  { value: "Angular", label: "Angular" },
-  { value: "Vue", label: "Vue" },
-  { value: "Node", label: "Node" },
-  { value: "Express", label: "Express" },
-  { value: "WebSocketIO", label: "WebSocketIO" },
-  { value: "Django", label: "Django" },
-  { value: "Flask", label: "Flask" },
-  { value: "MongoDB", label: "MongoDB" },
-  { value: "MySQL", label: "MySQL" },
-  { value: "PostgreSQL", label: "PostgreSQL" },
-  { value: "Firebase", label: "Firebase" },
-  { value: "AWS", label: "AWS" },
-  { value: "Azure", label: "Azure" },
-  { value: "Heroku", label: "Heroku" },
-];
 
-const select_size = ["small", "medium", "large"];
 
 
 import Navbar from "../components/NavBar";
@@ -90,7 +57,42 @@ export default function Settings() {
     setSelectedSize(value.map((item: any) => item));
     formikFilters.setFieldValue("size", value);
   }
+  async function updateCurrentUserPreferences(uuid: string, props: {
+    language: langBundle[];
+    framework: frameworkBundle[];
+    size: sizeBundle[];
+  }) {
+    const version = await getUserById(uuid)
+    const result = await updateUser({
+      input: {
+        id: uuid,
+        _version: version.data.getUsersModel._version,
+        lang_tag: props.language.map(x => x.enumMap),
+        size_tag: props.size.map(x => x.enumMap),
+        framework_tag: props.framework.map(x => x.enumMap)
+      }
+    })
+    console.log(result)
+  }
 
+  async function updateCurrentUserInformation(uuid: string, props: {
+    firstName: string,
+    lastName: string,
+    email: string
+  }) {
+    const version = await getUserById(uuid)
+    console.log(version)
+    const result = await updateUser({
+      input: {
+        id: uuid,
+        _version: version.data.getUsersModel._version,
+        email: props.email === '' ? version.data.getUsersModel.email : props.email,
+        first_name: props.firstName === '' ? version.data.getUsersModel.firstName : props.firstName,
+        last_name: props.lastName === '' ? version.data.getUsersModel.lastName : props.lastName
+      }
+    })
+    console.log(result)
+  }
 
   const validationSchema = yup.object({
     firstName: yup
@@ -147,7 +149,7 @@ export default function Settings() {
     onSubmit: (values) => {
       // Link to preferences page
       // alert(JSON.stringify(values, null, 2));
-      alert(JSON.stringify(values, null, 2));
+      updateCurrentUserInformation(localStorage.getItem('uuid')!, values)
     },
   });
   const formikPassword = useFormik({
@@ -160,20 +162,20 @@ export default function Settings() {
     onSubmit: (values) => {
       // Link to preferences page
       // alert(JSON.stringify(values, null, 2));
-      alert(JSON.stringify(values, null, 2));
+      changeUserPassword(values)
     },
   });
   const formikFilters = useFormik({
     initialValues: {
-      language: [], //pull from db
-      framework: [], //pull from db
-      size: [], //pull from db
+      language: [] as langBundle[],
+      framework: [] as frameworkBundle[],
+      size: [] as sizeBundle[],
     },
     validationSchema: validationSchemaFilter,
     onSubmit: (values) => {
       // Link to preferences page
       // alert(JSON.stringify(values, null, 2));
-      alert(JSON.stringify(values, null, 2));
+      updateCurrentUserPreferences(localStorage.getItem('uuid')!, values)
     },
   });
   return (
@@ -387,9 +389,9 @@ export default function Settings() {
                     multiple
                     limitTags={3}
                     id="language"
-                    options={select_lang}
+                    options={TagData.LanguageTags}
                     getOptionLabel={(option) => option.label}
-                    defaultValue={[select_lang[0]]}
+                    defaultValue={[TagData.LanguageTags[0]]}
                     filterSelectedOptions
                     value={selectedLang}
                     onChange={handleLang}
@@ -415,9 +417,9 @@ export default function Settings() {
                     multiple
                     limitTags={3}
                     id="framework"
-                    options={select_frame}
+                    options={TagData.FrameworkTags}
                     getOptionLabel={(option) => option.label}
-                    defaultValue={[select_frame[0]]}
+                    defaultValue={[TagData.FrameworkTags[0]]}
                     filterSelectedOptions
                     value={selectedFrame}
                     onChange={handleFrame}
@@ -443,9 +445,9 @@ export default function Settings() {
                     multiple
                     limitTags={3}
                     id="size"
-                    options={select_size}
-                    getOptionLabel={(option) => option}
-                    defaultValue={[select_size[0]]}
+                    options={TagData.SizeTags}
+                    getOptionLabel={(option) => option.label}
+                    defaultValue={[TagData.SizeTags[0]]}
                     filterSelectedOptions
                     value={selectedSize}
                     onChange={handleSize}
