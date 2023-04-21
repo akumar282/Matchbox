@@ -10,6 +10,7 @@ import { createMessage } from '../backend/mutations/messageMutations'
 import * as yup from "yup";
 import { getImage } from "../backend/storage/s3";
 import { refresh } from "aos";
+import { updateConversation } from "../backend/mutations/conversationMutations";
 
 // Test Data
 
@@ -140,6 +141,13 @@ function CustomMessageSender(props: any) {
         }
       })
       console.log(result)
+      const updateConverse = await updateConversation({
+        input: {
+          id: props.convo.id!,
+          messages: [result.data.createMessageModel.id!]
+        }
+      })
+      console.log(updateConverse)
     }
     const validationSchema = yup.object({
         message : yup

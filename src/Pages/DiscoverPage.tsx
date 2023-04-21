@@ -17,6 +17,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { getPostsByUser } from "../../src/backend/queries/postQueries";
 import { getAllComments } from "../../src/backend/queries/commentQueries";
 import { createComment } from "../../src/backend/mutations/commentMutations";
+import { createConversation } from "../../src/backend/mutations/conversationMutations";
 import { updateUser } from "../../src/backend/mutations/userMutations";
 import { getImage } from "../backend/storage/s3";
 import { TextField, Typography } from "@mui/material";
@@ -24,6 +25,7 @@ import { useFormik, Field } from "formik";
 import * as yup from "yup";
 import { getUserById } from "../backend/queries/userQueries";
 import { Navigate, useNavigate } from "react-router-dom";
+import { getAllConversations } from "../backend/queries/conversationQueries";
 // keep these functions here for top level backend connection
 
 //this is the top level page holding the nav bar and the discover component
@@ -163,10 +165,34 @@ function DiscoverComponent(props: any) {
       console.log("already saved");
     }
   };
-  const handleContact = () => {
+  const handleContact = async () => {
     // function for the query()
+    console.log(props.projects)
+    const checkExising = await getAllConversations({
+      filter: {
+        or: [
+          {and: [{user_one: {eq: localStorage.getItem("uuid")!}}, {user_two: {eq: props.projects.userID}}]}, 
+          {and: [{user_one: {eq: props.projects.userID}}, {user_two: {eq: localStorage.getItem("uuid")!}}]}
+        ]
+      }
+    })
+    console.log(checkExising)
+    const noDelete = checkExising.data.listConversationModels.items.filter((x) => x._deleted !== true)
+    console.log(noDelete)
+    if (noDelete.length > 0) {
+      navigate('/inbox');
+      return;
+    } else {
+      const newConveration = await createConversation({
+      input: {
+        user_one: localStorage.getItem("uuid")!,
+        user_two: props.projects.userID,
+        messages: [],
+        }
+      })
+      navigate('/inbox');
+    }
 
-    navigate('/inbox');
   };
 
   const handleRemove = () => {};
