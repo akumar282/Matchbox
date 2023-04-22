@@ -54,7 +54,7 @@ export default function Navbar() {
             </CustomLink>
             <CustomLink className="navElement" to="/create-project">
               {" "}
-              <AddIcon sx={{ fontSize: 40 }} /> Create{" "}
+              <AddIcon sx={{ fontSize: 35 }} /> Create{" "}
             </CustomLink>
             <CustomLink className="navElement" to="/inbox">
               {" "}
