@@ -146,10 +146,8 @@ function DiscoverComponent(props: any) {
   };
   // this function will handle saving a project
   const handleSave = async () => {
-    console.log("saving project");
     const oldsaved = await getUserById(localStorage.getItem("uuid")!);
     const oldVersion = oldsaved.data.getUsersModel._version;
-    console.log(oldVersion);
     const newsaved: any[] = oldsaved.data.getUsersModel.saved_posts;
     if (!newsaved.includes(props.projects.id)) {
       newsaved.push(props.projects.id);
@@ -160,7 +158,6 @@ function DiscoverComponent(props: any) {
           _version: oldVersion,
         },
       });
-      console.log(result);
     } else {
       console.log("already saved");
     }
@@ -176,9 +173,7 @@ function DiscoverComponent(props: any) {
         ]
       }
     })
-    console.log(checkExising)
     const noDelete = checkExising.data.listConversationModels.items.filter((x) => x._deleted !== true)
-    console.log(noDelete)
     if (noDelete.length > 0) {
       navigate('/inbox');
       return;
@@ -376,7 +371,6 @@ function CommentSection(props: any) {
     });
   }
   let sortedComments = sort(props.comments);
-  console.log(sortedComments);
   return (
     <div className="CommentSection">
       <h2>Comments</h2>
@@ -442,7 +436,6 @@ function CreateComment(props: any) {
         comment_date: new Date().toISOString(),
       },
     });
-    console.log(result);
     window.location.reload();
   }
   const validationSchema = yup.object({

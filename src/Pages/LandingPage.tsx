@@ -229,7 +229,7 @@ export default function LandingPage() {
       <div className="about-section">
         <div className="signup-stack">
           <h2 className="signText">
-            Sign Up To Get Access To Our News Letter.
+            Sign Up To Get Access To Our Newsletter.
           </h2>
           <div className="signup-entry">
             <div className="TextFieldHolder">

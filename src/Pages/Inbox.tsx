@@ -11,6 +11,7 @@ import * as yup from "yup";
 import { getImage } from "../backend/storage/s3";
 import { refresh } from "aos";
 import { updateConversation } from "../backend/mutations/conversationMutations";
+import { getConversationById } from "../backend/queries/conversationQueries";
 
 // Test Data
 
@@ -140,14 +141,16 @@ function CustomMessageSender(props: any) {
           message_date: new Date().toISOString()
         }
       })
-      console.log(result)
+      const thisConversation = await getConversationById(props.convo.id!)
+      const allMessageIds: any[] = thisConversation.data.getConversationModel.messages
+      allMessageIds.push(result.data.createMessageModel.id!)
       const updateConverse = await updateConversation({
         input: {
           id: props.convo.id!,
-          messages: [result.data.createMessageModel.id!]
+          messages: allMessageIds,
+          _version: thisConversation.data.getConversationModel._version
         }
       })
-      console.log(updateConverse)
     }
     const validationSchema = yup.object({
         message : yup
@@ -218,7 +221,6 @@ function CustomConversation(props: any) {
     }, [props.convo]);
     // skipping on
     useEffect(() => {
-        console.log(props.shouldRefresh);
 
         if (ForceRun) {
             setForceRun(false);
@@ -236,7 +238,6 @@ function CustomConversation(props: any) {
               limit: 200
             })
             const filterMessages = userMessages.data.listMessageModels.items.filter(x => x._deleted !== true);
-            console.log(userMessages);
             setMessages(filterMessages);
           }
           const delay = setTimeout(() => {

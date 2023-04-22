@@ -20,7 +20,7 @@
       "perModelResolutionStrategy": [
         {
           "resolutionStrategy": {
-            "type": "AUTOMERGE"
+            "type": "OPTIMISTIC_CONCURRENCY"
           },
           "entityName": "ConversationModel"
         }

@@ -170,9 +170,7 @@ function ButtonLinks(props: any) {
         ]
       }
     })
-    console.log(checkExising)
     const noDelete = checkExising.data.listConversationModels.items.filter((x) => x._deleted !== true)
-    console.log(noDelete)
     if (noDelete.length > 0) {
       navigate('/inbox');
       return;
@@ -290,7 +288,6 @@ function CreateComment(props: any) {
     comment: string;
     postID: string;
   }): Promise<void> {
-    console.log(props);
     const result = await createComment({
       input: {
         comment: props.comment,
@@ -301,7 +298,6 @@ function CreateComment(props: any) {
         comment_date: new Date().toISOString(),
       },
     });
-    console.log(result);
     window.location.reload();
   }
   const validationSchema = yup.object({
@@ -377,7 +373,6 @@ function Comments(props: any) {
   useEffect(() => {
     const fetchImage = async () => {
       const src = await getImage(props.CommentInfo.profile_image);
-      console.log(src);
       setImageSrc(src);
     };
 

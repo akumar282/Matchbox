@@ -8,7 +8,7 @@
         },
         "models": {
             "ConversationModel": {
-                "ConflictHandler": "AUTOMERGE",
+                "ConflictHandler": "OPTIMISTIC_CONCURRENCY",
                 "ConflictDetection": "VERSION"
             }
         }
