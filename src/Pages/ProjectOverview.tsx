@@ -127,7 +127,9 @@ export default function ProjectOverview() {
                   >
                     {project.post_title}
                   </Typography>
+                  <div className="ShortDecDiv">
                   <Typography>{project.description}</Typography>
+                  </div>
                 </div>
                 <div className="TagBoxDiscover">
                   {[
@@ -254,7 +256,7 @@ function ButtonLinks(props: any) {
           gap: "10px",
           width: "10rem",
           m: "auto",
-          outline: "auto",
+          
         }}
       >
         <GitHubIcon />

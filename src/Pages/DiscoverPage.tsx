@@ -270,12 +270,23 @@ function DiscoverComponent(props: any) {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
+                        width: "100%",
+                        
                       }}
                     >
                       {props.projects.post_title}
                     </Typography>
-                    <Typography>{props.projects.description}</Typography>
+                    <div className="ShortDecDiv">
+                    <Typography sx = {{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                    
+                    }}>
+                      {props.projects.description}</Typography>
                   </div>
+                </div>
                   <div className="TagBoxDiscover">
                     {[
                       ...props.projects.lang_tag?.map((tag) => ({ tag })),
