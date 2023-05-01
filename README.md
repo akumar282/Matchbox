@@ -4,7 +4,6 @@ Our web application connects developers to projects that align with their intere
 
 Team:  
 Abhimanyu Kumar - Principal Engineer  
-
 Hayden Lauritzen - Backend Engineer  
 Mohammad Zahid - Frontend Engineer
 
