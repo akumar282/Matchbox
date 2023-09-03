@@ -13,6 +13,7 @@ export type ModelNewsletterEmailModelConditionInput = {
   and?: Array< ModelNewsletterEmailModelConditionInput | null > | null,
   or?: Array< ModelNewsletterEmailModelConditionInput | null > | null,
   not?: ModelNewsletterEmailModelConditionInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelStringInput = {
@@ -55,6 +56,13 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type NewsletterEmailModel = {
   __typename: "NewsletterEmailModel",
   id: string,
@@ -92,6 +100,7 @@ export type ModelConversationModelConditionInput = {
   and?: Array< ModelConversationModelConditionInput | null > | null,
   or?: Array< ModelConversationModelConditionInput | null > | null,
   not?: ModelConversationModelConditionInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelIDInput = {
@@ -155,6 +164,7 @@ export type ModelMessageModelConditionInput = {
   and?: Array< ModelMessageModelConditionInput | null > | null,
   or?: Array< ModelMessageModelConditionInput | null > | null,
   not?: ModelMessageModelConditionInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type MessageModel = {
@@ -298,6 +308,7 @@ export type ModelPostsModelConditionInput = {
   and?: Array< ModelPostsModelConditionInput | null > | null,
   or?: Array< ModelPostsModelConditionInput | null > | null,
   not?: ModelPostsModelConditionInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelLanguageTagListInput = {
@@ -446,13 +457,7 @@ export type ModelUsersModelConditionInput = {
   and?: Array< ModelUsersModelConditionInput | null > | null,
   or?: Array< ModelUsersModelConditionInput | null > | null,
   not?: ModelUsersModelConditionInput | null,
-};
-
-export type ModelBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type UsersModel = {
@@ -553,6 +558,7 @@ export type ModelCommentModelConditionInput = {
   and?: Array< ModelCommentModelConditionInput | null > | null,
   or?: Array< ModelCommentModelConditionInput | null > | null,
   not?: ModelCommentModelConditionInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type UpdateCommentModelInput = {
@@ -577,6 +583,7 @@ export type ModelNewsletterEmailModelFilterInput = {
   and?: Array< ModelNewsletterEmailModelFilterInput | null > | null,
   or?: Array< ModelNewsletterEmailModelFilterInput | null > | null,
   not?: ModelNewsletterEmailModelFilterInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelNewsletterEmailModelConnection = {
@@ -737,6 +744,7 @@ export type ModelConversationModelFilterInput = {
   and?: Array< ModelConversationModelFilterInput | null > | null,
   or?: Array< ModelConversationModelFilterInput | null > | null,
   not?: ModelConversationModelFilterInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type SearchableConversationModelFilterInput = {
@@ -809,6 +817,7 @@ export type ModelMessageModelFilterInput = {
   and?: Array< ModelMessageModelFilterInput | null > | null,
   or?: Array< ModelMessageModelFilterInput | null > | null,
   not?: ModelMessageModelFilterInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type SearchableMessageModelFilterInput = {
@@ -895,6 +904,7 @@ export type ModelPostsModelFilterInput = {
   and?: Array< ModelPostsModelFilterInput | null > | null,
   or?: Array< ModelPostsModelFilterInput | null > | null,
   not?: ModelPostsModelFilterInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type SearchablePostsModelFilterInput = {
@@ -1003,6 +1013,7 @@ export type ModelUsersModelFilterInput = {
   and?: Array< ModelUsersModelFilterInput | null > | null,
   or?: Array< ModelUsersModelFilterInput | null > | null,
   not?: ModelUsersModelFilterInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelUsersModelConnection = {
@@ -1117,6 +1128,7 @@ export type ModelCommentModelFilterInput = {
   and?: Array< ModelCommentModelFilterInput | null > | null,
   or?: Array< ModelCommentModelFilterInput | null > | null,
   not?: ModelCommentModelFilterInput | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type SearchableCommentModelFilterInput = {
@@ -1193,6 +1205,7 @@ export type ModelSubscriptionNewsletterEmailModelFilterInput = {
   email?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionNewsletterEmailModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionNewsletterEmailModelFilterInput | null > | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -1232,6 +1245,7 @@ export type ModelSubscriptionConversationModelFilterInput = {
   messages?: ModelSubscriptionIDInput | null,
   and?: Array< ModelSubscriptionConversationModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionConversationModelFilterInput | null > | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionMessageModelFilterInput = {
@@ -1243,6 +1257,7 @@ export type ModelSubscriptionMessageModelFilterInput = {
   conversationID?: ModelSubscriptionIDInput | null,
   and?: Array< ModelSubscriptionMessageModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionMessageModelFilterInput | null > | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionPostsModelFilterInput = {
@@ -1262,6 +1277,7 @@ export type ModelSubscriptionPostsModelFilterInput = {
   framework_tag?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionPostsModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionPostsModelFilterInput | null > | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionUsersModelFilterInput = {
@@ -1284,6 +1300,7 @@ export type ModelSubscriptionUsersModelFilterInput = {
   new_user?: ModelSubscriptionBooleanInput | null,
   and?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionBooleanInput = {
@@ -1301,6 +1318,7 @@ export type ModelSubscriptionCommentModelFilterInput = {
   user_name?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionCommentModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionCommentModelFilterInput | null > | null,
+  _deleted?: ModelBooleanInput | null,
 };
 
 export type CreateNewsletterEmailModelMutationVariables = {

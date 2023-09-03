@@ -89,11 +89,11 @@ type PostsModelMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type CommentModelMetaData = {
+type UsersModelMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UsersModelMetaData = {
+type CommentModelMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -215,36 +215,6 @@ export declare const PostsModel: (new (init: ModelInit<PostsModel, PostsModelMet
   copyOf(source: PostsModel, mutator: (draft: MutableModel<PostsModel, PostsModelMetaData>) => MutableModel<PostsModel, PostsModelMetaData> | void): PostsModel;
 }
 
-type EagerCommentModel = {
-  readonly id: string;
-  readonly comment: string;
-  readonly profile_image?: string | null;
-  readonly comment_date?: string | null;
-  readonly postID: string;
-  readonly userID: string;
-  readonly user_name: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyCommentModel = {
-  readonly id: string;
-  readonly comment: string;
-  readonly profile_image?: string | null;
-  readonly comment_date?: string | null;
-  readonly postID: string;
-  readonly userID: string;
-  readonly user_name: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type CommentModel = LazyLoading extends LazyLoadingDisabled ? EagerCommentModel : LazyCommentModel
-
-export declare const CommentModel: (new (init: ModelInit<CommentModel, CommentModelMetaData>) => CommentModel) & {
-  copyOf(source: CommentModel, mutator: (draft: MutableModel<CommentModel, CommentModelMetaData>) => MutableModel<CommentModel, CommentModelMetaData> | void): CommentModel;
-}
-
 type EagerUsersModel = {
   readonly id: string;
   readonly user_name: string;
@@ -301,4 +271,34 @@ export declare type UsersModel = LazyLoading extends LazyLoadingDisabled ? Eager
 
 export declare const UsersModel: (new (init: ModelInit<UsersModel, UsersModelMetaData>) => UsersModel) & {
   copyOf(source: UsersModel, mutator: (draft: MutableModel<UsersModel, UsersModelMetaData>) => MutableModel<UsersModel, UsersModelMetaData> | void): UsersModel;
+}
+
+type EagerCommentModel = {
+  readonly id: string;
+  readonly comment: string;
+  readonly profile_image?: string | null;
+  readonly comment_date?: string | null;
+  readonly postID: string;
+  readonly userID: string;
+  readonly user_name: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyCommentModel = {
+  readonly id: string;
+  readonly comment: string;
+  readonly profile_image?: string | null;
+  readonly comment_date?: string | null;
+  readonly postID: string;
+  readonly userID: string;
+  readonly user_name: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type CommentModel = LazyLoading extends LazyLoadingDisabled ? EagerCommentModel : LazyCommentModel
+
+export declare const CommentModel: (new (init: ModelInit<CommentModel, CommentModelMetaData>) => CommentModel) & {
+  copyOf(source: CommentModel, mutator: (draft: MutableModel<CommentModel, CommentModelMetaData>) => MutableModel<CommentModel, CommentModelMetaData> | void): CommentModel;
 }

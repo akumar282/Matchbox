@@ -108,7 +108,7 @@ export default function LandingPage() {
   Aos.init({
     duration: 2500,
     delay: 400,
-  });
+  })
 
   // remake object for about section [leave this here]
   const { title, subtext } = about;
@@ -229,7 +229,7 @@ export default function LandingPage() {
       <div className="about-section">
         <div className="signup-stack">
           <h2 className="signText">
-            Sign Up To Get Access To Our Newsletter.
+            Sign Up To Get Access To Our Newsletter For Updates.
           </h2>
           <div className="signup-entry">
             <div className="TextFieldHolder">

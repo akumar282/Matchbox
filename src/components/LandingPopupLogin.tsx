@@ -44,18 +44,19 @@ export default function LandingPopupLogin(props) {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
+      console.log(values);
       if (await Auth.signIn(values.email, values.password)){
         localStorage.setItem('uuid', (await getCurrentUserAttributes()).at(0)!.value)
         localStorage.setItem('email', values.email)
         localStorage.setItem('isLoggedin', 'true')
-        console.log(localStorage.getItem('uuid'))
+        //console.log(localStorage.getItem('uuid'))
         const username = await getUserById(localStorage.getItem('uuid')!)
         localStorage.setItem('username', username.data.getUsersModel.user_name)
         localStorage.setItem('profileImage', username.data.getUsersModel.profile_image)
         localStorage.setItem('userVersion', username.data.getUsersModel._version)
-        console.log(username)
+        //console.log(username)
         
-        if (username.data.getUsersModel.new_user === true) {
+        if (username.data.getUsersModel.new_user) {
           navigate("/preferences")
         } else {
           navigate("/home")

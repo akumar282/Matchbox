@@ -13,6 +13,7 @@ import UserPreferencesPage from './Pages/UserPreferencesPage'
 import SavedProjects from './Pages/SavedProjects';
 import ProjectOverview from './Pages/ProjectOverview'
 import Inbox from './Pages/Inbox'
+import TempHomePage from './Pages/TempHomePage'
 
 const globalAuthState = {
   isAuthenticated: false,
@@ -34,7 +35,7 @@ function App () {
     <BrowserRouter>
       <Routes>
         <Route path='/*' element={<NotFound />} />
-        <Route path='/' element={<LandingPage />} />
+        <Route path='/' element={<TempHomePage />} />
         <Route path='/create-project' element={<CreateProject />} />
         <Route path='/discover' element={<DiscoverPage/>} />
         <Route path='/home' element={<HomePage />} />

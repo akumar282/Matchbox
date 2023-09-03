@@ -3,3 +3,5 @@ src\models
 **/*.jsx
 **/*.tsx
 **/*.ts
+
+amplify-codegen-temp\models

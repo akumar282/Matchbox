@@ -12,6 +12,7 @@ export const getNewsletterEmailModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -34,9 +35,11 @@ export const listNewsletterEmailModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -61,9 +64,11 @@ export const syncNewsletterEmailModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -92,6 +97,7 @@ export const searchNewsletterEmailModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       total
@@ -105,10 +111,13 @@ export const searchNewsletterEmailModels = /* GraphQL */ `
             buckets {
               key
               doc_count
+              __typename
             }
           }
         }
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -124,6 +133,7 @@ export const getConversationModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -148,9 +158,11 @@ export const listConversationModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -177,9 +189,11 @@ export const syncConversationModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -210,6 +224,7 @@ export const searchConversationModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       total
@@ -223,10 +238,13 @@ export const searchConversationModels = /* GraphQL */ `
             buckets {
               key
               doc_count
+              __typename
             }
           }
         }
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -244,6 +262,7 @@ export const getMessageModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -266,9 +285,11 @@ export const listMessageModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -297,9 +318,11 @@ export const syncMessageModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -332,6 +355,7 @@ export const searchMessageModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       total
@@ -345,10 +369,13 @@ export const searchMessageModels = /* GraphQL */ `
             buckets {
               key
               doc_count
+              __typename
             }
           }
         }
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -372,12 +399,14 @@ export const getPostsModel = /* GraphQL */ `
       post_comments {
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -408,9 +437,11 @@ export const listPostsModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -447,9 +478,11 @@ export const syncPostsModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -490,6 +523,7 @@ export const searchPostsModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       total
@@ -503,10 +537,13 @@ export const searchPostsModels = /* GraphQL */ `
             buckets {
               key
               doc_count
+              __typename
             }
           }
         }
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -521,10 +558,12 @@ export const getUsersModel = /* GraphQL */ `
       user_posts {
         nextToken
         startedAt
+        __typename
       }
       user_comments {
         nextToken
         startedAt
+        __typename
       }
       first_name
       last_name
@@ -535,10 +574,12 @@ export const getUsersModel = /* GraphQL */ `
       messages {
         nextToken
         startedAt
+        __typename
       }
       conversations {
         nextToken
         startedAt
+        __typename
       }
       lang_tag
       dev_type_tag
@@ -551,6 +592,7 @@ export const getUsersModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -584,9 +626,11 @@ export const listUsersModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -626,9 +670,11 @@ export const syncUsersModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -672,6 +718,7 @@ export const searchUsersModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       total
@@ -685,10 +732,13 @@ export const searchUsersModels = /* GraphQL */ `
             buckets {
               key
               doc_count
+              __typename
             }
           }
         }
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -707,6 +757,7 @@ export const getCommentModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -730,9 +781,11 @@ export const listCommentModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -762,9 +815,11 @@ export const syncCommentModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -798,6 +853,7 @@ export const searchCommentModels = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       total
@@ -811,10 +867,13 @@ export const searchCommentModels = /* GraphQL */ `
             buckets {
               key
               doc_count
+              __typename
             }
           }
         }
+        __typename
       }
+      __typename
     }
   }
 `;

@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif&family=Roboto&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: roboto-mono;
+  src: url("fonts/RobotoMono-Regular.ttf") format("truetype");
+}
 
 body {
   margin: 0;

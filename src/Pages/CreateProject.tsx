@@ -48,6 +48,7 @@ export default function CreateProject() {
     console.log(localStorage.getItem('uuid'))
     const uuidGen = uuidv4();
     const imageLink = await uploadImage(selectedFile!)
+    console.log(props.GithubLink)
     const result = await createPost(
       {
         input: {

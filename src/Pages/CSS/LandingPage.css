@@ -174,5 +174,8 @@
     display: flex;
     align-self: center;
     justify-self: center;
+}
 
+.logonew {
+  background-image: url(../../img/textlogo.png)
 }

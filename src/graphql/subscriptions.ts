@@ -14,6 +14,7 @@ export const onCreateNewsletterEmailModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -29,6 +30,7 @@ export const onUpdateNewsletterEmailModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -44,6 +46,7 @@ export const onDeleteNewsletterEmailModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -61,6 +64,7 @@ export const onCreateConversationModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -78,6 +82,7 @@ export const onUpdateConversationModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -95,6 +100,7 @@ export const onDeleteConversationModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -114,6 +120,7 @@ export const onCreateMessageModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -133,6 +140,7 @@ export const onUpdateMessageModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -152,6 +160,7 @@ export const onDeleteMessageModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -177,12 +186,14 @@ export const onCreatePostsModel = /* GraphQL */ `
       post_comments {
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -208,12 +219,14 @@ export const onUpdatePostsModel = /* GraphQL */ `
       post_comments {
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -239,12 +252,14 @@ export const onDeletePostsModel = /* GraphQL */ `
       post_comments {
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -261,10 +276,12 @@ export const onCreateUsersModel = /* GraphQL */ `
       user_posts {
         nextToken
         startedAt
+        __typename
       }
       user_comments {
         nextToken
         startedAt
+        __typename
       }
       first_name
       last_name
@@ -275,10 +292,12 @@ export const onCreateUsersModel = /* GraphQL */ `
       messages {
         nextToken
         startedAt
+        __typename
       }
       conversations {
         nextToken
         startedAt
+        __typename
       }
       lang_tag
       dev_type_tag
@@ -291,6 +310,7 @@ export const onCreateUsersModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -307,10 +327,12 @@ export const onUpdateUsersModel = /* GraphQL */ `
       user_posts {
         nextToken
         startedAt
+        __typename
       }
       user_comments {
         nextToken
         startedAt
+        __typename
       }
       first_name
       last_name
@@ -321,10 +343,12 @@ export const onUpdateUsersModel = /* GraphQL */ `
       messages {
         nextToken
         startedAt
+        __typename
       }
       conversations {
         nextToken
         startedAt
+        __typename
       }
       lang_tag
       dev_type_tag
@@ -337,6 +361,7 @@ export const onUpdateUsersModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -353,10 +378,12 @@ export const onDeleteUsersModel = /* GraphQL */ `
       user_posts {
         nextToken
         startedAt
+        __typename
       }
       user_comments {
         nextToken
         startedAt
+        __typename
       }
       first_name
       last_name
@@ -367,10 +394,12 @@ export const onDeleteUsersModel = /* GraphQL */ `
       messages {
         nextToken
         startedAt
+        __typename
       }
       conversations {
         nextToken
         startedAt
+        __typename
       }
       lang_tag
       dev_type_tag
@@ -383,6 +412,7 @@ export const onDeleteUsersModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -403,6 +433,7 @@ export const onCreateCommentModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -423,6 +454,7 @@ export const onUpdateCommentModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -443,6 +475,7 @@ export const onDeleteCommentModel = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;

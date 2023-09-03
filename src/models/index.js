@@ -73,15 +73,15 @@ const FrameworkTag = {
   "HEROKU": "HEROKU"
 };
 
-const { NewsletterEmailModel, ConversationModel, MessageModel, PostsModel, CommentModel, UsersModel } = initSchema(schema);
+const { NewsletterEmailModel, ConversationModel, MessageModel, PostsModel, UsersModel, CommentModel } = initSchema(schema);
 
 export {
   NewsletterEmailModel,
   ConversationModel,
   MessageModel,
   PostsModel,
-  CommentModel,
   UsersModel,
+  CommentModel,
   SizeTag,
   InterestTag,
   DevelopmentTag,
