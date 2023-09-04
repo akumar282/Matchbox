@@ -10,14 +10,51 @@ import linkedin from '../img/linkedin.svg'
 import instagram from '../img/instagram.svg'
 import discord from '../img/discord.svg'
 import tiktok from '../img/tiktok.svg'
-import Aos from "aos";
-import "aos/dist/aos.css";
+import awsconfig from '../aws-exports'
+import { Amplify } from 'aws-amplify'
+import * as yup from 'yup'
+import Aos from 'aos'
+import 'aos/dist/aos.css'
+import { createNewsletterEmail } from '../backend/mutations/newsletterMutations'
+import { useFormik } from 'formik'
+import { CreateNewsletterEmailModelPayload } from '../backend/types'
+Amplify.configure(awsconfig)
 
 export default function TempHomePage() {
 
   Aos.init({
     duration: 2500,
     delay: 400,
+  })
+  
+  async function sendToDatabase(values: any) {
+    const payload: CreateNewsletterEmailModelPayload= {
+      input: {
+        email: values.email,
+      },
+    };
+    const request = await createNewsletterEmail(payload).catch((error) =>
+      console.log(error)
+    );
+    console.log(request)
+  }
+  
+  const validationSchema = yup.object({
+    email: yup
+      .string()
+      .email('Enter a valid email')
+      .required('Email is required'),
+  })
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      sendToDatabase(values);
+      formik.resetForm();
+    },
   })
 
   return (
@@ -83,8 +120,10 @@ export default function TempHomePage() {
           <h3 className='text-black font-primary text-lg pt-10 text-center w-8/12'>Follow us on social media and join our community to stay updated and be notified when we launch</h3>
         </div>
         <div className='flex mt-10 flex-row justify-center'>
+          
           <input className='rounded-l-full lg:w-[36rem] pl-4 w-80 h-8 focus:outline-none focus:ring text-start focus:blue' type='email' name='email' id='email' placeholder='Sign-up to be notified!'></input>
-          <button type='submit' className='font-primary bg-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
+
+          <button onClick={() => formik.handleSubmit()} type='submit' className='font-primary bg-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
         </div>
         <div className='flex mt-10 mb-12 flex-row items-center lg:space-x-7'>
           <button className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={linkedin} />linkedin</button>
