@@ -38,7 +38,7 @@ export default function TempHomePage() {
     );
     console.log(request)
   }
-  
+  const [email, setEmail] = React.useState('');
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -52,8 +52,8 @@ export default function TempHomePage() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      sendToDatabase(values);
-      formik.resetForm();
+      sendToDatabase(values)
+      formik.resetForm()
     },
   })
 
@@ -121,9 +121,14 @@ export default function TempHomePage() {
         </div>
         <div className='flex mt-10 flex-row justify-center'>
           
-          <input className='rounded-l-full lg:w-[36rem] pl-4 w-80 h-8 focus:outline-none focus:ring text-start focus:blue' type='email' name='email' id='email' placeholder='Sign-up to be notified!'></input>
-
-          <button onClick={() => formik.handleSubmit()} type='submit' className='font-primary bg-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
+          <input className='rounded-l-full lg:w-[36rem] pl-4 w-80 h-8 focus:outline-none focus:ring text-start focus:blue' 
+          name='email' 
+          type='email'
+          id='email' 
+          value={formik.values.email} 
+          onChange={formik.handleChange} 
+          placeholder='Sign-up to be notified!'/>
+          <button type="submit" onClick={()=>formik.handleSubmit()} className='font-primary bg-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
         </div>
         <div className='flex mt-10 mb-12 flex-row items-center lg:space-x-7'>
           <button className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={linkedin} />linkedin</button>
