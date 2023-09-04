@@ -67,7 +67,7 @@ export default function TempNavBar() {
             <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z' />
           </svg>
         </li>
-        <li><button className='text-white bg-dark-purple font-primary text-base rounded-lg p-2 hover:text-white'>Register_</button></li>
+        <li><button className='text-white bg-fuchsia-400 hover:bg-fuchsia-300 font-primary text-base rounded-lg py-2 px-3 hover:text-white'>Register_</button></li>
       </ul>
       <style>{`
         .hideMenuNav {
