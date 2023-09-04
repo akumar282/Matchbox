@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import textlogo from '../img/textlogo.png'
 import BurgerMenu from './BurgerMenu'
+import NewLogo from '../img/NewLogo.png'
 
 export default function TempNavBar() {
 
@@ -40,15 +41,21 @@ export default function TempNavBar() {
               <line x1='6' y1='6' x2='18' y2='18' />
             </svg>
           </div>
+          <div >
+            <img className='w-50 h-40' src={NewLogo} alt="" />
+          </div>
           <ul className='flex flex-col items-center justify-between min-h-[250px]'>
-            <li className='border-b border-gray-400 my-8 uppercase'>
-              <a href='/home'>About</a>
+            <li className=' border-gray-400 mb-8 font-primary'>
+              <a href='/home'>Home_</a>
             </li>
-            <li className='border-b border-gray-400 my-8 uppercase'>
-              <a href='/portfolio'>Portfolio</a>
+            <li className=' border-gray-400 my-8 font-primary'>
+              <a href='/portfolio'>About_</a>
             </li>
-            <li className='border-b border-gray-400 my-8 uppercase'>
-              <a href='/contact'>Contact</a>
+            <li className=' border-gray-400 my-8 font-primary'>
+              <a href='/contact'>FAQ_</a>
+            </li>
+            <li className=' border-gray-400 my-8 font-primary'>
+              <a href='/contact'>Register_</a>
             </li>
           </ul>
         </div>

@@ -25,9 +25,9 @@ export default function TempHomePage() {
       <TempNavBar />
       <GitBranches/>
       <div className='flex flex-col items-center justify-center lg:flex-row'>
-        <div data-aos='fade-right' className='lg:pb-4 lg:pl-4 py-4'>
-          <img src={largetxt} className='md:pl-4 md:pb-4 py-4 px-4'></img>
-          <img src={bodytxt} className='md:pl-4 md:pb-4 pt-2 px-4'></img>
+        <div className='lg:pb-4 lg:pl-4 py-4'>
+          <img data-aos='fade-down' src={largetxt} className='md:pl-4 md:pb-4 py-4 px-4'></img>
+          <img data-aos='fade-right' src={bodytxt} className='md:pl-4 md:pb-4 pt-3 px-4'></img>
         </div>
         <div className='lg:pt-16 lg:pl-4 lg:pr-4 py-2 px-2'>
           <img data-aos='fade-left' src={NewLogo}></img>
@@ -83,7 +83,7 @@ export default function TempHomePage() {
           <h3 className='text-black font-primary text-lg pt-10 text-center w-8/12'>Follow us on social media and join our community to stay updated and be notified when we launch</h3>
         </div>
         <div className='flex mt-10 flex-row justify-center'>
-          <input className='rounded-l-full lg:w-[36rem] pl-4 w-80 h-8 focus:outline-none focus:ring text-start focus:blue' type='text' placeholder='Sign-up to be notified!' name='newsletter'></input>
+          <input className='rounded-l-full lg:w-[36rem] pl-4 w-80 h-8 focus:outline-none focus:ring text-start focus:blue' type='email' name='email' id='email' placeholder='Sign-up to be notified!'></input>
           <button type='submit' className='font-primary bg-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
         </div>
         <div className='flex mt-10 mb-12 flex-row items-center lg:space-x-7'>
