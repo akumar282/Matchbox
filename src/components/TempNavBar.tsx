@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import textlogo from '../img/textlogo.png'
 import BurgerMenu from './BurgerMenu'
@@ -6,10 +6,19 @@ import NewLogo from '../img/NewLogo.png'
 
 export default function TempNavBar() {
 
+
   const [BurgerOpen, setBurgerOpen] = useState(false)
 
   const toggleBurger = () => {
-    setBurgerOpen(!BurgerOpen)
+    setBurgerOpen(false)
+  }
+
+  const handleScroll = (_id: any) => {
+    const element = document.getElementById(_id)
+    if(element) {
+      element.scrollIntoView({behavior: 'smooth'})
+    }
+    toggleBurger()
   }
 
   const navigate = useNavigate()
@@ -46,35 +55,36 @@ export default function TempNavBar() {
           </div>
           <ul className='flex flex-col items-center justify-between min-h-[250px]'>
             <li className=' border-gray-400 mb-8 font-primary'>
-              <a href='/home'>Home_</a>
+              <button onClick={() => handleScroll('home')}>Home_</button>
             </li>
             <li className=' border-gray-400 my-8 font-primary'>
-              <a href='/portfolio'>About_</a>
+              <button onClick={() => handleScroll('about')}>About_</button>
             </li>
             <li className=' border-gray-400 my-8 font-primary'>
-              <a href='/contact'>FAQ_</a>
+              <button onClick={() => handleScroll('faq')}>FAQ_</button>
             </li>
             <li className=' border-gray-400 my-8 font-primary'>
-              <a href='/contact'>Register_</a>
+              <button onClick={() => handleScroll('register')}>Register_</button>
             </li>
           </ul>
         </div>
       </section>
 
-      <ul className='hidden absolute top-1/2 right-1 transform -translate-y-1/2 -translate-x-12 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6 max-w-screen-xl'>
-        <li><a className='text-black-500 font-primary text-base hover:text-gray-500' href='#'>Home_</a></li>
+      <ul className='hidden absolute top-1/2 right-1 transform -translate-y-1/2 -translate-x-12 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6 max-w-screen-xl'>
+        <li><button className='text-black-500 font-primary text-base pr-6 border-r border-black hover:text-gray-500' onClick={() => handleScroll('home')}>Home_</button></li>
         <li className='text-black-300'>
-          <svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' className='w-4 h-4 current-fill' viewBox='0 0 24 24'>
+          {/* <svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' className='w-4 h-4 current-fill' viewBox='0 0 24 24'>
             <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z' />
-          </svg>
+          </svg> */}
         </li>
-        <li><a className='text-black-500 font-primary text-base hover:text-gray-500' href='#'>About_</a></li>
+        <li><button onClick={() => handleScroll('about')}  className='text-black-500 font-primary text-base pr-6 border-r border-black -ml-6 hover:text-gray-500'>About_</button></li>
+        <li><button onClick={() => handleScroll('faq')} className='text-black-500 font-primary text-base pr-6 border-r border-black ml-2 hover:text-gray-500'>FAQ_</button></li>
         <li className='text-black-300'>
-          <svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' className='w-4 h-4 current-fill' viewBox='0 0 24 24'>
+          {/* <svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' className='w-4 h-4 current-fill' viewBox='0 0 24 24'>
             <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z' />
-          </svg>
+          </svg> */}
         </li>
-        <li><button className='text-white bg-fuchsia-400 hover:bg-fuchsia-300 font-primary text-base rounded-lg py-2 px-3 hover:text-white'>Register_</button></li>
+        <li><button onClick={() => handleScroll('register')} className='text-white bg-deep-pink hover:bg-fuchsia-300 font-primary -ml-6 text-base rounded-lg py-2 px-3 hover:text-white'>Register_</button></li>
       </ul>
       <style>{`
         .hideMenuNav {

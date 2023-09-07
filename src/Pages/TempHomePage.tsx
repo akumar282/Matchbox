@@ -1,6 +1,7 @@
 import TempNavBar from '../components/TempNavBar'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import React from 'react'
+import { useRef } from 'react'
 import GitBranches from '../components/Branches'
 import branchborder from '../img/branchborder.png'
 import bodytxt from '../img/bodytxt.png'
@@ -18,9 +19,20 @@ import 'aos/dist/aos.css'
 import { createNewsletterEmail } from '../backend/mutations/newsletterMutations'
 import { useFormik } from 'formik'
 import { CreateNewsletterEmailModelPayload } from '../backend/types'
+import CollapseAll from '../components/FAQ'
+import ButtonMailto from '../components/ButtonMailto'
 Amplify.configure(awsconfig)
 
 export default function TempHomePage() {
+
+  const handleScrollHome = (_id: any) => {
+    const element = document.getElementById(_id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const navigate = useNavigate()
 
   Aos.init({
     duration: 2500,
@@ -36,7 +48,6 @@ export default function TempHomePage() {
     const request = await createNewsletterEmail(payload).catch((error) =>
       console.log(error)
     );
-    console.log(request)
   }
   const [email, setEmail] = React.useState('');
   const validationSchema = yup.object({
@@ -57,11 +68,12 @@ export default function TempHomePage() {
     },
   })
 
+
   return (
     <div>
       <TempNavBar />
       <GitBranches/>
-      <div className='flex flex-col items-center justify-center lg:flex-row'>
+      <div id='home' className='flex flex-col items-center justify-center lg:flex-row'>
         <div className='lg:pb-4 lg:pl-4 py-4'>
           <img data-aos='fade-down' src={largetxt} className='md:pl-4 md:pb-4 py-4 px-4'></img>
           <img data-aos='fade-right' src={bodytxt} className='md:pl-4 md:pb-4 pt-3 px-4'></img>
@@ -71,10 +83,10 @@ export default function TempHomePage() {
         </div>
       </div>
       <div className='flex items-center justify-center px-8 space-x-4'>
-        <button className='bg-blue py-2 px-4 rounded-full text-white font-primary hover:bg-indigo-400'>Get Started</button>
-        <button className='bg-light-purple py-2 px-4 rounded-full text-black font-primary hover:bg-indigo-400'>Learn More</button>
+        <button className='bg-blue py-2 px-4 rounded-full text-white font-primary hover:bg-indigo-400' onClick={() => { handleScrollHome('register') }}>Get Notified</button>
+        <button className='bg-light-purple py-2 px-4 rounded-full text-black font-primary hover:bg-indigo-400' onClick={() => { handleScrollHome('about') }}>Learn More</button>
       </div>
-      <div className='bg-blue mt-8 pb-14 flex flex-col items-center justify-center'>
+      <div id='about' className='bg-blue mt-8 pb-14 flex flex-col items-center justify-center'>
         <div className='flex flex-col items-center text-center'>
           <h1 className='font-primary mx-8 mt-8 mb-10 text-white text-4xl'>Build. Execute. Deliver.</h1>
           <h3 className='font-primary text-lg mx-8 text-white w-7/12'>
@@ -112,8 +124,16 @@ export default function TempHomePage() {
             <h3 className='text-center text-white font-primary text-base w-64 mt-3'>Join any projects you've matched with and start contributing</h3>
           </div>
         </div>
+        <div>
+        </div>
       </div>
-      <div className='bg-purple flex flex-col items-center text-center'>
+      <div id='faq' className='bg-light-green flex flex-col items-center text-start py-12'>
+        <h1 className='font-primary mx-8 mb-8 text-white text-4xl'>
+          Any Questions?.
+        </h1>
+        <CollapseAll/>
+      </div>
+      <div id='register' className='bg-purple flex flex-col items-center text-center'>
         <div className='flex flex-col items-center text-center'>
           <h1 className='font-primary mx-8 mt-8 mb-4 text-black text-4xl text-center'>Stay Updated With Us.</h1>
           <h3 className='text-black font-primary text-lg pt-2 text-center w-8/12'>We're currently building this platform for you and partnering with others to bring you projects that you are passionate about</h3>
@@ -121,20 +141,23 @@ export default function TempHomePage() {
         </div>
         <div className='flex mt-10 flex-row justify-center'>
           
-          <input className='rounded-l-full lg:w-[36rem] pl-4 w-80 h-8 focus:outline-none focus:ring text-start focus:blue' 
+          <input className='font-primary rounded-l-full lg:w-[36rem] pl-4 w-80 h-8 focus:outline-none focus:ring text-start focus:blue-300' 
           name='email' 
           type='email'
           id='email' 
           value={formik.values.email} 
           onChange={formik.handleChange} 
-          placeholder='Sign-up to be notified!'/>
+          placeholder='Enter your email to be notified!'/>
           <button type="submit" onClick={()=>formik.handleSubmit()} className='font-primary bg-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
         </div>
-        <div className='flex mt-10 mb-12 flex-row items-center lg:space-x-7'>
-          <button className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={linkedin} />linkedin</button>
-          <button className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={discord} />discord</button>
-          <button className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={instagram} />instagram</button>
-          <button className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={tiktok} />tiktok</button>
+        <div className='flex mt-10 mb-10 flex-row items-center lg:space-x-7'>
+          <a href='https://discord.gg/6wgN9zYxxb'  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={linkedin} />linkedin</a>
+          <a href='https://discord.gg/6wgN9zYxxb' className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={discord} />discord</a>
+          <a href='https://instagram.com/gitmatch.io?igshid=NGVhN2U2NjQ0Yg=='  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={instagram} />instagram</a>
+          <a href='https://discord.gg/6wgN9zYxxb'  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={tiktok} />tiktok</a>
+        </div>
+        <div className='flex-row mb-4'>
+          <h1 className='font-primary text-center'>Further Questions? <ButtonMailto label='Contact Us!' mailto='mailto:info@gitmatch.io' /></h1>
         </div>
         <GitBranches/>
       </div>
