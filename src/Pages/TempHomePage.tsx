@@ -139,15 +139,16 @@ export default function TempHomePage() {
           <h3 className='text-black font-primary text-lg pt-2 text-center w-8/12'>We're currently building this platform for you and partnering with others to bring you projects that you are passionate about</h3>
           <h3 className='text-black font-primary text-lg pt-10 text-center w-8/12'>Follow us on social media and join our community to stay updated and be notified when we launch</h3>
         </div>
-        <div className='flex mt-10 flex-row justify-center'>
-          
-          <input className='font-primary rounded-l-full lg:w-[36rem] pl-4 w-80 h-8 focus:outline-none focus:ring text-start focus:blue-300' 
+        <div className='flex mt-10 flex-row justify-center gap-12'>
+          <div>
+          <input className='font-primary lg:w-[36rem] md:[25rem] w-[65vw] h-8 focus:outline-0  text-start' 
           name='email' 
           type='email'
           id='email' 
           value={formik.values.email} 
           onChange={formik.handleChange} 
-          placeholder='Enter your email to be notified!'/>
+          placeholder='Enter your email!'/>
+          </div>
           <button type="submit" onClick={()=>formik.handleSubmit()} className='font-primary bg-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
         </div>
         <div className='flex mt-10 mb-10 flex-row items-center lg:space-x-7'>
