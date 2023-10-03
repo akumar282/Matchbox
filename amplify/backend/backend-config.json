@@ -62,14 +62,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_auth_unhinged15d4ae3f_OpenSearchInstanceType": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "unhinged15d4ae3f"
-        }
-      ]
-    },
     "AMPLIFY_hosting_amplifyhosting_appId": {
       "usedBy": [
         {

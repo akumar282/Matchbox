@@ -152,10 +152,10 @@ export default function TempHomePage() {
           <button type="submit" onClick={()=>formik.handleSubmit()} className='font-primary bg-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
         </div>
         <div className='flex mt-10 mb-10 flex-row items-center lg:space-x-7'>
-          <a href='https://discord.gg/6wgN9zYxxb'  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={linkedin} />linkedin</a>
-          <a href='https://discord.gg/6wgN9zYxxb' className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={discord} />discord</a>
+          <a href='https://discord.gg/kTCrcaDzpN'  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={linkedin} />linkedin</a>
+          <a href='https://discord.gg/kTCrcaDzpN' className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={discord} />discord</a>
           <a href='https://instagram.com/gitmatch.io?igshid=NGVhN2U2NjQ0Yg=='  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={instagram} />instagram</a>
-          <a href='https://discord.gg/6wgN9zYxxb'  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={tiktok} />tiktok</a>
+          <a href='https://www.tiktok.com/@gitmatch?lang=en'  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={tiktok} />tiktok</a>
         </div>
         <div className='flex-row mb-4'>
           <h1 className='font-primary text-center'>Further Questions? <ButtonMailto label='Contact Us!' mailto='mailto:info@gitmatch.io' /></h1>

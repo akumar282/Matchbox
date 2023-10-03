@@ -35,7 +35,7 @@ function App () {
     <BrowserRouter>
       <Routes>
         <Route path='/*' element={<NotFound />} />
-        <Route path='/' element={<TempHomePage />} />
+        <Route path='/' element={<LandingPage />} />
         <Route path='/create-project' element={<CreateProject />} />
         <Route path='/discover' element={<DiscoverPage/>} />
         <Route path='/home' element={<HomePage />} />

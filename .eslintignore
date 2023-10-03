@@ -1,7 +1,5 @@
 src\models
 **/*.js
 **/*.jsx
-**/*.tsx
-**/*.ts
 
 amplify-codegen-temp\models
