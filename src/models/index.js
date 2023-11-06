@@ -3,88 +3,174 @@ import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
 const SizeTag = {
-  "LESS_FIVE": "LESS_FIVE",
-  "MORE_FIVE": "MORE_FIVE",
-  "MORE_TEN": "MORE_TEN",
-  "MORE_TWENTY_FIVE": "MORE_TWENTY_FIVE",
-  "MORE_FIFTY": "MORE_FIFTY",
-  "MORE_HUND": "MORE_HUND"
+  "SMALL": "SMALL",
+  "MEDIUM": "MEDIUM",
+  "LARGE": "LARGE"
 };
 
 const InterestTag = {
   "COMMUNICATION": "COMMUNICATION",
-  "CONNECTING": "CONNECTING",
   "ENVIRONMENT": "ENVIRONMENT",
   "EDUCATION": "EDUCATION",
   "ENTERTAINMENT": "ENTERTAINMENT",
-  "GAMING": "GAMING"
+  "GAMING": "GAMING",
+  "HEALTHCARE": "HEALTHCARE",
+  "LIFESTYLE": "LIFESTYLE"
 };
 
 const DevelopmentTag = {
-  "FRONTEND": "FRONTEND",
-  "BACKEND": "BACKEND",
+  "EMBEDDED_SYSTEMS": "EMBEDDED_SYSTEMS",
+  "FRONT_END": "FRONT_END",
+  "WEB": "WEB",
+  "GAME_DEVELOPMENT": "GAME_DEVELOPMENT",
+  "MOBILE_APP": "MOBILE_APP",
+  "COMPUTING": "COMPUTING",
+  "APPLICATION_PROGRAMMING": "APPLICATION_PROGRAMMING",
+  "DEVOPS": "DEVOPS",
   "FULL_STACK": "FULL_STACK",
-  "DESKTOP": "DESKTOP",
-  "WEB_DEV": "WEB_DEV",
-  "DATABASE": "DATABASE",
-  "MOBILE": "MOBILE",
+  "BACKEND": "BACKEND",
+  "DATA_SCIENCE": "DATA_SCIENCE",
   "CLOUD": "CLOUD",
-  "DEV_OPS": "DEV_OPS",
-  "CYBER_SEC": "CYBER_SEC"
+  "DATABASE": "DATABASE",
+  "CYBERSECURITY": "CYBERSECURITY"
 };
 
 const LanguageTag = {
-  "C_SHARP": "C_SHARP",
-  "C_PLUS_PLUS": "C_PLUS_PLUS",
   "C": "C",
   "JAVA": "JAVA",
   "PYTHON": "PYTHON",
-  "TYPESCRIPT": "TYPESCRIPT",
+  "C_PLUS_PLUS": "C_PLUS_PLUS",
+  "CUDA": "CUDA",
+  "C_SHARP": "C_SHARP",
   "JAVASCRIPT": "JAVASCRIPT",
-  "KOTLIN": "KOTLIN",
-  "SWIFT": "SWIFT",
-  "RUBY": "RUBY",
-  "RUST": "RUST",
-  "SQL": "SQL",
-  "PHP": "PHP",
   "HTML": "HTML",
   "CSS": "CSS",
+  "PHP": "PHP",
+  "VISUAL_BASIC_DOTNET": "VISUAL_BASIC_DOTNET",
+  "DOTNET": "DOTNET",
+  "R": "R",
   "GO": "GO",
+  "SWIFT": "SWIFT",
+  "PERL": "PERL",
+  "X86_ASSEMBLY": "X86_ASSEMBLY",
+  "ARM_ASSEMBLY": "ARM_ASSEMBLY",
+  "RUBY": "RUBY",
+  "MATLAB": "MATLAB",
+  "VISUAL_BASIC": "VISUAL_BASIC",
+  "GROOVY": "GROOVY",
+  "OBJECTIVE_C": "OBJECTIVE_C",
+  "OBJECTIVE_C_PLUS_PLUS": "OBJECTIVE_C_PLUS_PLUS",
+  "RUST": "RUST",
+  "SAS": "SAS",
+  "SCRATCH": "SCRATCH",
+  "WEB_ASSEMBLY": "WEB_ASSEMBLY",
+  "D": "D",
   "DART": "DART",
-  "SCALA": "SCALA"
+  "PL_SQL": "PL_SQL",
+  "SQL": "SQL",
+  "DELHPI": "DELHPI",
+  "KOTLIN": "KOTLIN",
+  "OPENEDGE_ABL": "OPENEDGE_ABL",
+  "JULIA": "JULIA",
+  "SCALA": "SCALA",
+  "LUA": "LUA",
+  "FORTRAN": "FORTRAN",
+  "COBOL": "COBOL",
+  "HASKELL": "HASKELL",
+  "VISUAL_BASIC_SCRIPT": "VISUAL_BASIC_SCRIPT",
+  "TYPESCRIPT": "TYPESCRIPT",
+  "BASH": "BASH",
+  "SHELL": "SHELL",
+  "CLOJURE": "CLOJURE",
+  "COFFEESCRIPT": "COFFEESCRIPT",
+  "LISP": "LISP",
+  "CRYSTAL": "CRYSTAL",
+  "F_SHARP": "F_SHARP",
+  "POSTSCRIPT": "POSTSCRIPT",
+  "HANDLEBARS": "HANDLEBARS"
 };
 
 const FrameworkTag = {
-  "REACT": "REACT",
-  "REACT_NATIVE": "REACT_NATIVE",
-  "ANGULAR": "ANGULAR",
-  "VUE": "VUE",
-  "NODE": "NODE",
-  "EXPRESS": "EXPRESS",
-  "WEB_SOCKET_IO": "WEB_SOCKET_IO",
   "DJANGO": "DJANGO",
+  "ANGULAR_JS": "ANGULAR_JS",
+  "JQUERY": "JQUERY",
+  "ASP_NET": "ASP_NET",
+  "GATSBY": "GATSBY",
+  "SVELTE": "SVELTE",
+  "YII": "YII",
+  "TURBOGEARS": "TURBOGEARS",
+  "YESOD": "YESOD",
+  "GROK": "GROK",
+  "MOJOLICIOUS": "MOJOLICIOUS",
+  "VAADIN": "VAADIN",
+  "RUBY_ON_RAILS": "RUBY_ON_RAILS",
+  "EXPRESS": "EXPRESS",
+  "JS": "JS",
+  "METEOR": "METEOR",
+  "CODEIGNITOR": "CODEIGNITOR",
+  "SYMFONY": "SYMFONY",
+  "APACHE_WICKET": "APACHE_WICKET",
+  "PHALCON": "PHALCON",
+  "BOOTSTRAP": "BOOTSTRAP",
+  "SILEX": "SILEX",
+  "FUELPHP": "FUELPHP",
+  "CHERRYPY": "CHERRYPY",
+  "QUIOXTE": "QUIOXTE",
+  "LARAVEL": "LARAVEL",
   "FLASK": "FLASK",
-  "MONGO_DB": "MONGO_DB",
-  "MY_SQL": "MY_SQL",
-  "POSTGRES_SQL": "POSTGRES_SQL",
-  "FIREBASE": "FIREBASE",
-  "AWS": "AWS",
-  "AZURE": "AZURE",
-  "HEROKU": "HEROKU"
+  "CAKEPHP": "CAKEPHP",
+  "NEXT_JS": "NEXT_JS",
+  "GRAILS": "GRAILS",
+  "SPARK": "SPARK",
+  "APACHE_STRUTS_1": "APACHE_STRUTS_1",
+  "WEB2_PY": "WEB2PY",
+  "APACHE_PLAY": "APACHE_PLAY"
 };
 
-const { NewsletterEmailModel, ConversationModel, MessageModel, PostsModel, UsersModel, CommentModel } = initSchema(schema);
+const DifficultyTag = {
+  "GOOD_FIRST_PROJECT": "GOOD_FIRST_PROJECT",
+  "EXPERIENCED_CONTRIBUTOR": "EXPERIENCED_CONTRIBUTOR",
+  "EXPERT": "EXPERT"
+};
+
+const ExperienceTag = {
+  "BEGINNER": "BEGINNER",
+  "MINIMAL_EXPERIENCE": "MINIMAL_EXPERIENCE",
+  "EXPERIENCED_CONTRIBUTOR": "EXPERIENCED_CONTRIBUTOR",
+  "EXPERT": "EXPERT"
+};
+
+const AccountTag = {
+  "DEVELOPER": "DEVELOPER",
+  "ORGANIZATION": "ORGANIZATION"
+};
+
+const ContributionTag = {
+  "PULL_REQUEST": "PULL_REQUEST",
+  "ISSUE": "ISSUE",
+  "COMMENT": "COMMENT",
+  "REVIEW": "REVIEW"
+};
+
+const { NewsletterEmailModel, UsersModel, ContributionsModel, ExperienceModel, PostsModel, ConversationModel, MessageModel, CommentModel, UsersConvo } = initSchema(schema);
 
 export {
   NewsletterEmailModel,
+  UsersModel,
+  ContributionsModel,
+  ExperienceModel,
+  PostsModel,
   ConversationModel,
   MessageModel,
-  PostsModel,
-  UsersModel,
   CommentModel,
+  UsersConvo,
   SizeTag,
   InterestTag,
   DevelopmentTag,
   LanguageTag,
-  FrameworkTag
+  FrameworkTag,
+  DifficultyTag,
+  ExperienceTag,
+  AccountTag,
+  ContributionTag
 };

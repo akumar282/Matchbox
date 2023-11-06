@@ -16,7 +16,7 @@ export async function getAllConversations(userID: ListConversationModelsQueryVar
 export async function getConversationById(id: string) {
   return await API.graphql(
     {
-      authMode: "API_KEY",
+      authMode: 'API_KEY',
       query: getConversationModel,
       variables: { id }
     }

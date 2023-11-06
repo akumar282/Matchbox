@@ -11,9 +11,6 @@ export const onCreateNewsletterEmailModel = /* GraphQL */ `
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
@@ -27,9 +24,6 @@ export const onUpdateNewsletterEmailModel = /* GraphQL */ `
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
@@ -43,123 +37,543 @@ export const onDeleteNewsletterEmailModel = /* GraphQL */ `
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const onCreateConversationModel = /* GraphQL */ `
-  subscription OnCreateConversationModel(
-    $filter: ModelSubscriptionConversationModelFilterInput
+export const onCreateUsersModel = /* GraphQL */ `
+  subscription OnCreateUsersModel(
+    $filter: ModelSubscriptionUsersModelFilterInput
   ) {
-    onCreateConversationModel(filter: $filter) {
+    onCreateUsersModel(filter: $filter) {
       id
-      user_one
-      user_two
-      messages
+      user_name
+      email
+      password
+      profile_image
+      user_posts {
+        items {
+          id
+          post_title
+          description
+          long_description
+          project_link
+          image_link
+          post_date
+          userID
+          creator_name
+          lang_tag
+          dev_type_tag
+          interest_tag
+          size_tag
+          framework_tag
+          difficulty_tag
+          contributor_limit
+          contributors
+          reported
+          experience_level
+          application
+          project_chat
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      user_comments {
+        items {
+          id
+          comment
+          profile_image
+          comment_date
+          parent_comment
+          replies
+          isReply
+          postID
+          userID
+          user_name
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      saved_posts
+      hide_posts
+      messages {
+        items {
+          id
+          message
+          from
+          message_date
+          conversationID
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      conversations {
+        items {
+          id
+          usersModelID
+          conversationModelID
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      new_user
+      contributions {
+        items {
+          id
+          author
+          type
+          description
+          link_to
+          point_value
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      user_experiences {
+        items {
+          id
+          user_id
+          org_name
+          start_date
+          end_date
+          description
+          lang_tag
+          dev_type_tag
+          framework_tag
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const onUpdateConversationModel = /* GraphQL */ `
-  subscription OnUpdateConversationModel(
-    $filter: ModelSubscriptionConversationModelFilterInput
+export const onUpdateUsersModel = /* GraphQL */ `
+  subscription OnUpdateUsersModel(
+    $filter: ModelSubscriptionUsersModelFilterInput
   ) {
-    onUpdateConversationModel(filter: $filter) {
+    onUpdateUsersModel(filter: $filter) {
       id
-      user_one
-      user_two
-      messages
+      user_name
+      email
+      password
+      profile_image
+      user_posts {
+        items {
+          id
+          post_title
+          description
+          long_description
+          project_link
+          image_link
+          post_date
+          userID
+          creator_name
+          lang_tag
+          dev_type_tag
+          interest_tag
+          size_tag
+          framework_tag
+          difficulty_tag
+          contributor_limit
+          contributors
+          reported
+          experience_level
+          application
+          project_chat
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      user_comments {
+        items {
+          id
+          comment
+          profile_image
+          comment_date
+          parent_comment
+          replies
+          isReply
+          postID
+          userID
+          user_name
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      saved_posts
+      hide_posts
+      messages {
+        items {
+          id
+          message
+          from
+          message_date
+          conversationID
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      conversations {
+        items {
+          id
+          usersModelID
+          conversationModelID
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      new_user
+      contributions {
+        items {
+          id
+          author
+          type
+          description
+          link_to
+          point_value
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      user_experiences {
+        items {
+          id
+          user_id
+          org_name
+          start_date
+          end_date
+          description
+          lang_tag
+          dev_type_tag
+          framework_tag
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const onDeleteConversationModel = /* GraphQL */ `
-  subscription OnDeleteConversationModel(
-    $filter: ModelSubscriptionConversationModelFilterInput
+export const onDeleteUsersModel = /* GraphQL */ `
+  subscription OnDeleteUsersModel(
+    $filter: ModelSubscriptionUsersModelFilterInput
   ) {
-    onDeleteConversationModel(filter: $filter) {
+    onDeleteUsersModel(filter: $filter) {
       id
-      user_one
-      user_two
-      messages
+      user_name
+      email
+      password
+      profile_image
+      user_posts {
+        items {
+          id
+          post_title
+          description
+          long_description
+          project_link
+          image_link
+          post_date
+          userID
+          creator_name
+          lang_tag
+          dev_type_tag
+          interest_tag
+          size_tag
+          framework_tag
+          difficulty_tag
+          contributor_limit
+          contributors
+          reported
+          experience_level
+          application
+          project_chat
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      user_comments {
+        items {
+          id
+          comment
+          profile_image
+          comment_date
+          parent_comment
+          replies
+          isReply
+          postID
+          userID
+          user_name
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      saved_posts
+      hide_posts
+      messages {
+        items {
+          id
+          message
+          from
+          message_date
+          conversationID
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      conversations {
+        items {
+          id
+          usersModelID
+          conversationModelID
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      new_user
+      contributions {
+        items {
+          id
+          author
+          type
+          description
+          link_to
+          point_value
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      user_experiences {
+        items {
+          id
+          user_id
+          org_name
+          start_date
+          end_date
+          description
+          lang_tag
+          dev_type_tag
+          framework_tag
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const onCreateMessageModel = /* GraphQL */ `
-  subscription OnCreateMessageModel(
-    $filter: ModelSubscriptionMessageModelFilterInput
+export const onCreateContributionsModel = /* GraphQL */ `
+  subscription OnCreateContributionsModel(
+    $filter: ModelSubscriptionContributionsModelFilterInput
   ) {
-    onCreateMessageModel(filter: $filter) {
+    onCreateContributionsModel(filter: $filter) {
       id
-      message
-      to
-      from
-      message_date
-      conversationID
+      author
+      type
+      description
+      link_to
+      point_value
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const onUpdateMessageModel = /* GraphQL */ `
-  subscription OnUpdateMessageModel(
-    $filter: ModelSubscriptionMessageModelFilterInput
+export const onUpdateContributionsModel = /* GraphQL */ `
+  subscription OnUpdateContributionsModel(
+    $filter: ModelSubscriptionContributionsModelFilterInput
   ) {
-    onUpdateMessageModel(filter: $filter) {
+    onUpdateContributionsModel(filter: $filter) {
       id
-      message
-      to
-      from
-      message_date
-      conversationID
+      author
+      type
+      description
+      link_to
+      point_value
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const onDeleteMessageModel = /* GraphQL */ `
-  subscription OnDeleteMessageModel(
-    $filter: ModelSubscriptionMessageModelFilterInput
+export const onDeleteContributionsModel = /* GraphQL */ `
+  subscription OnDeleteContributionsModel(
+    $filter: ModelSubscriptionContributionsModelFilterInput
   ) {
-    onDeleteMessageModel(filter: $filter) {
+    onDeleteContributionsModel(filter: $filter) {
       id
-      message
-      to
-      from
-      message_date
-      conversationID
+      author
+      type
+      description
+      link_to
+      point_value
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateExperienceModel = /* GraphQL */ `
+  subscription OnCreateExperienceModel(
+    $filter: ModelSubscriptionExperienceModelFilterInput
+  ) {
+    onCreateExperienceModel(filter: $filter) {
+      id
+      user_id
+      org_name
+      start_date
+      end_date
+      description
+      lang_tag
+      dev_type_tag
+      framework_tag
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateExperienceModel = /* GraphQL */ `
+  subscription OnUpdateExperienceModel(
+    $filter: ModelSubscriptionExperienceModelFilterInput
+  ) {
+    onUpdateExperienceModel(filter: $filter) {
+      id
+      user_id
+      org_name
+      start_date
+      end_date
+      description
+      lang_tag
+      dev_type_tag
+      framework_tag
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteExperienceModel = /* GraphQL */ `
+  subscription OnDeleteExperienceModel(
+    $filter: ModelSubscriptionExperienceModelFilterInput
+  ) {
+    onDeleteExperienceModel(filter: $filter) {
+      id
+      user_id
+      org_name
+      start_date
+      end_date
+      description
+      lang_tag
+      dev_type_tag
+      framework_tag
+      createdAt
+      updatedAt
       __typename
     }
   }
@@ -183,16 +597,34 @@ export const onCreatePostsModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      difficulty_tag
       post_comments {
+        items {
+          id
+          comment
+          profile_image
+          comment_date
+          parent_comment
+          replies
+          isReply
+          postID
+          userID
+          user_name
+          createdAt
+          updatedAt
+          __typename
+        }
         nextToken
-        startedAt
         __typename
       }
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
@@ -216,16 +648,34 @@ export const onUpdatePostsModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      difficulty_tag
       post_comments {
+        items {
+          id
+          comment
+          profile_image
+          comment_date
+          parent_comment
+          replies
+          isReply
+          postID
+          userID
+          user_name
+          createdAt
+          updatedAt
+          __typename
+        }
         nextToken
-        startedAt
         __typename
       }
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
@@ -249,169 +699,157 @@ export const onDeletePostsModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      difficulty_tag
       post_comments {
+        items {
+          id
+          comment
+          profile_image
+          comment_date
+          parent_comment
+          replies
+          isReply
+          postID
+          userID
+          user_name
+          createdAt
+          updatedAt
+          __typename
+        }
         nextToken
-        startedAt
         __typename
       }
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const onCreateUsersModel = /* GraphQL */ `
-  subscription OnCreateUsersModel(
-    $filter: ModelSubscriptionUsersModelFilterInput
+export const onCreateConversationModel = /* GraphQL */ `
+  subscription OnCreateConversationModel(
+    $filter: ModelSubscriptionConversationModelFilterInput
   ) {
-    onCreateUsersModel(filter: $filter) {
+    onCreateConversationModel(filter: $filter) {
       id
-      user_name
-      email
-      password
-      profile_image
-      user_posts {
+      users {
+        items {
+          id
+          usersModelID
+          conversationModelID
+          createdAt
+          updatedAt
+          __typename
+        }
         nextToken
-        startedAt
         __typename
       }
-      user_comments {
-        nextToken
-        startedAt
-        __typename
-      }
-      first_name
-      last_name
-      user_creation_date
-      dahublink
-      saved_posts
-      hide_posts
-      messages {
-        nextToken
-        startedAt
-        __typename
-      }
-      conversations {
-        nextToken
-        startedAt
-        __typename
-      }
-      lang_tag
-      dev_type_tag
-      interest_tag
-      size_tag
-      framework_tag
-      new_user
+      title
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const onUpdateUsersModel = /* GraphQL */ `
-  subscription OnUpdateUsersModel(
-    $filter: ModelSubscriptionUsersModelFilterInput
+export const onUpdateConversationModel = /* GraphQL */ `
+  subscription OnUpdateConversationModel(
+    $filter: ModelSubscriptionConversationModelFilterInput
   ) {
-    onUpdateUsersModel(filter: $filter) {
+    onUpdateConversationModel(filter: $filter) {
       id
-      user_name
-      email
-      password
-      profile_image
-      user_posts {
+      users {
+        items {
+          id
+          usersModelID
+          conversationModelID
+          createdAt
+          updatedAt
+          __typename
+        }
         nextToken
-        startedAt
         __typename
       }
-      user_comments {
-        nextToken
-        startedAt
-        __typename
-      }
-      first_name
-      last_name
-      user_creation_date
-      dahublink
-      saved_posts
-      hide_posts
-      messages {
-        nextToken
-        startedAt
-        __typename
-      }
-      conversations {
-        nextToken
-        startedAt
-        __typename
-      }
-      lang_tag
-      dev_type_tag
-      interest_tag
-      size_tag
-      framework_tag
-      new_user
+      title
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const onDeleteUsersModel = /* GraphQL */ `
-  subscription OnDeleteUsersModel(
-    $filter: ModelSubscriptionUsersModelFilterInput
+export const onDeleteConversationModel = /* GraphQL */ `
+  subscription OnDeleteConversationModel(
+    $filter: ModelSubscriptionConversationModelFilterInput
   ) {
-    onDeleteUsersModel(filter: $filter) {
+    onDeleteConversationModel(filter: $filter) {
       id
-      user_name
-      email
-      password
-      profile_image
-      user_posts {
+      users {
+        items {
+          id
+          usersModelID
+          conversationModelID
+          createdAt
+          updatedAt
+          __typename
+        }
         nextToken
-        startedAt
         __typename
       }
-      user_comments {
-        nextToken
-        startedAt
-        __typename
-      }
-      first_name
-      last_name
-      user_creation_date
-      dahublink
-      saved_posts
-      hide_posts
-      messages {
-        nextToken
-        startedAt
-        __typename
-      }
-      conversations {
-        nextToken
-        startedAt
-        __typename
-      }
-      lang_tag
-      dev_type_tag
-      interest_tag
-      size_tag
-      framework_tag
-      new_user
+      title
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateMessageModel = /* GraphQL */ `
+  subscription OnCreateMessageModel(
+    $filter: ModelSubscriptionMessageModelFilterInput
+  ) {
+    onCreateMessageModel(filter: $filter) {
+      id
+      message
+      from
+      message_date
+      conversationID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateMessageModel = /* GraphQL */ `
+  subscription OnUpdateMessageModel(
+    $filter: ModelSubscriptionMessageModelFilterInput
+  ) {
+    onUpdateMessageModel(filter: $filter) {
+      id
+      message
+      from
+      message_date
+      conversationID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteMessageModel = /* GraphQL */ `
+  subscription OnDeleteMessageModel(
+    $filter: ModelSubscriptionMessageModelFilterInput
+  ) {
+    onDeleteMessageModel(filter: $filter) {
+      id
+      message
+      from
+      message_date
+      conversationID
+      createdAt
+      updatedAt
       __typename
     }
   }
@@ -425,14 +863,14 @@ export const onCreateCommentModel = /* GraphQL */ `
       comment
       profile_image
       comment_date
+      parent_comment
+      replies
+      isReply
       postID
       userID
       user_name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
@@ -446,14 +884,14 @@ export const onUpdateCommentModel = /* GraphQL */ `
       comment
       profile_image
       comment_date
+      parent_comment
+      replies
+      isReply
       postID
       userID
       user_name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
@@ -467,14 +905,245 @@ export const onDeleteCommentModel = /* GraphQL */ `
       comment
       profile_image
       comment_date
+      parent_comment
+      replies
+      isReply
       postID
       userID
       user_name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateUsersConvo = /* GraphQL */ `
+  subscription OnCreateUsersConvo(
+    $filter: ModelSubscriptionUsersConvoFilterInput
+  ) {
+    onCreateUsersConvo(filter: $filter) {
+      id
+      usersModelID
+      conversationModelID
+      usersModel {
+        id
+        user_name
+        email
+        password
+        profile_image
+        user_posts {
+          nextToken
+          __typename
+        }
+        user_comments {
+          nextToken
+          __typename
+        }
+        first_name
+        last_name
+        user_creation_date
+        github_link
+        saved_posts
+        hide_posts
+        messages {
+          nextToken
+          __typename
+        }
+        conversations {
+          nextToken
+          __typename
+        }
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        new_user
+        contributions {
+          nextToken
+          __typename
+        }
+        credibility_score
+        involved_projects
+        experience_level
+        years_of_experience
+        user_type
+        user_experiences {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      conversationModel {
+        id
+        users {
+          nextToken
+          __typename
+        }
+        title
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateUsersConvo = /* GraphQL */ `
+  subscription OnUpdateUsersConvo(
+    $filter: ModelSubscriptionUsersConvoFilterInput
+  ) {
+    onUpdateUsersConvo(filter: $filter) {
+      id
+      usersModelID
+      conversationModelID
+      usersModel {
+        id
+        user_name
+        email
+        password
+        profile_image
+        user_posts {
+          nextToken
+          __typename
+        }
+        user_comments {
+          nextToken
+          __typename
+        }
+        first_name
+        last_name
+        user_creation_date
+        github_link
+        saved_posts
+        hide_posts
+        messages {
+          nextToken
+          __typename
+        }
+        conversations {
+          nextToken
+          __typename
+        }
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        new_user
+        contributions {
+          nextToken
+          __typename
+        }
+        credibility_score
+        involved_projects
+        experience_level
+        years_of_experience
+        user_type
+        user_experiences {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      conversationModel {
+        id
+        users {
+          nextToken
+          __typename
+        }
+        title
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteUsersConvo = /* GraphQL */ `
+  subscription OnDeleteUsersConvo(
+    $filter: ModelSubscriptionUsersConvoFilterInput
+  ) {
+    onDeleteUsersConvo(filter: $filter) {
+      id
+      usersModelID
+      conversationModelID
+      usersModel {
+        id
+        user_name
+        email
+        password
+        profile_image
+        user_posts {
+          nextToken
+          __typename
+        }
+        user_comments {
+          nextToken
+          __typename
+        }
+        first_name
+        last_name
+        user_creation_date
+        github_link
+        saved_posts
+        hide_posts
+        messages {
+          nextToken
+          __typename
+        }
+        conversations {
+          nextToken
+          __typename
+        }
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        new_user
+        contributions {
+          nextToken
+          __typename
+        }
+        credibility_score
+        involved_projects
+        experience_level
+        years_of_experience
+        user_type
+        user_experiences {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      conversationModel {
+        id
+        users {
+          nextToken
+          __typename
+        }
+        title
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
       __typename
     }
   }

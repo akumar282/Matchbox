@@ -15,7 +15,6 @@
     "test/backend/**/*",
     "src/backend/types.ts",
     "src/img/**/*.svg",
-    "src/svg.d.ts"
   ],
   "exclude": [
     "node_modules"

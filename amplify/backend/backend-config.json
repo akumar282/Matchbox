@@ -1,22 +1,33 @@
 {
   "api": {
-    "Unhinged": {
-      "dependsOn": [],
-      "generateModels": {
-        "providerPlugin": "awscloudformation",
-        "service": "AppSync"
-      },
+    "unhinged": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "unhingeda9f38461"
+        }
+      ],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authunhingeda9f38461"
+              }
+            },
             {
               "authenticationType": "AWS_IAM"
             }
           ],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
+              "apiKeyExpirationDate": "2024-01-04T04:40:41.928Z",
+              "apiKeyExpirationDays": 60,
+              "description": ""
             },
             "authenticationType": "API_KEY"
           }
@@ -27,33 +38,15 @@
     }
   },
   "auth": {
-    "unhinged15d4ae3f": {
+    "unhingeda9f38461": {
       "customAuth": false,
       "dependsOn": [],
-      "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [],
-          "passwordPolicyMinLength": 8
-        },
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      },
       "providerPlugin": "awscloudformation",
-      "service": "Cognito"
+      "service": "Cognito",
+      "serviceType": "imported"
     }
   },
+  "function": {},
   "hosting": {
     "amplifyhosting": {
       "providerPlugin": "awscloudformation",
@@ -62,6 +55,38 @@
     }
   },
   "parameters": {
+    "AMPLIFY_auth_unhingeda9f38461_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "unhingeda9f38461"
+        }
+      ]
+    },
+    "AMPLIFY_auth_unhingeda9f38461_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "unhingeda9f38461"
+        }
+      ]
+    },
+    "AMPLIFY_auth_unhingeda9f38461_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "unhingeda9f38461"
+        }
+      ]
+    },
+    "AMPLIFY_auth_unhingeda9f38461_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "unhingeda9f38461"
+        }
+      ]
+    },
     "AMPLIFY_hosting_amplifyhosting_appId": {
       "usedBy": [
         {

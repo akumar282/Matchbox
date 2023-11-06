@@ -46,7 +46,7 @@ export default function CollapseAll() {
           </p>
           <p className='mb-2 text-white dark:text-white-400'>
             <p>
-              It's challenging to search for projects to which you would contribute. It's a sea of repositories with no clear way to discover projects matching your interests.
+              It&apos;s challenging to search for projects to which you would contribute. It&apos;s a sea of repositories with no clear way to discover projects matching your interests.
             </p>
           </p>
           <p className='mb-2 text-white dark:text-white-400'>
@@ -66,7 +66,7 @@ export default function CollapseAll() {
           </p>
           <p className='mb-2 text-white dark:text-white-400'>
             <p>
-              After you join a project, we'll provide a space where you can collaborate and communcate with other contributors.
+              After you join a project, we&apos;ll provide a space where you can collaborate and communcate with other contributors.
             </p>
           </p>
         </Accordion.Content>

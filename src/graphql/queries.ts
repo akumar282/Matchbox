@@ -9,9 +9,6 @@ export const getNewsletterEmailModel = /* GraphQL */ `
       email
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
@@ -32,42 +29,9 @@ export const listNewsletterEmailModels = /* GraphQL */ `
         email
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         __typename
       }
       nextToken
-      startedAt
-      __typename
-    }
-  }
-`;
-export const syncNewsletterEmailModels = /* GraphQL */ `
-  query SyncNewsletterEmailModels(
-    $filter: ModelNewsletterEmailModelFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncNewsletterEmailModels(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        email
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      nextToken
-      startedAt
       __typename
     }
   }
@@ -94,9 +58,6 @@ export const searchNewsletterEmailModels = /* GraphQL */ `
         email
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         __typename
       }
       nextToken
@@ -121,92 +82,220 @@ export const searchNewsletterEmailModels = /* GraphQL */ `
     }
   }
 `;
-export const getConversationModel = /* GraphQL */ `
-  query GetConversationModel($id: ID!) {
-    getConversationModel(id: $id) {
+export const getUsersModel = /* GraphQL */ `
+  query GetUsersModel($id: ID!) {
+    getUsersModel(id: $id) {
       id
-      user_one
-      user_two
-      messages
+      user_name
+      email
+      password
+      profile_image
+      user_posts {
+        items {
+          id
+          post_title
+          description
+          long_description
+          project_link
+          image_link
+          post_date
+          userID
+          creator_name
+          lang_tag
+          dev_type_tag
+          interest_tag
+          size_tag
+          framework_tag
+          difficulty_tag
+          contributor_limit
+          contributors
+          reported
+          experience_level
+          application
+          project_chat
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      user_comments {
+        items {
+          id
+          comment
+          profile_image
+          comment_date
+          parent_comment
+          replies
+          isReply
+          postID
+          userID
+          user_name
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      saved_posts
+      hide_posts
+      messages {
+        items {
+          id
+          message
+          from
+          message_date
+          conversationID
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      conversations {
+        items {
+          id
+          usersModelID
+          conversationModelID
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      new_user
+      contributions {
+        items {
+          id
+          author
+          type
+          description
+          link_to
+          point_value
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      user_experiences {
+        items {
+          id
+          user_id
+          org_name
+          start_date
+          end_date
+          description
+          lang_tag
+          dev_type_tag
+          framework_tag
+          createdAt
+          updatedAt
+          __typename
+        }
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const listConversationModels = /* GraphQL */ `
-  query ListConversationModels(
-    $filter: ModelConversationModelFilterInput
+export const listUsersModels = /* GraphQL */ `
+  query ListUsersModels(
+    $filter: ModelUsersModelFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listConversationModels(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+    listUsersModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        user_one
-        user_two
-        messages
+        user_name
+        email
+        password
+        profile_image
+        user_posts {
+          nextToken
+          __typename
+        }
+        user_comments {
+          nextToken
+          __typename
+        }
+        first_name
+        last_name
+        user_creation_date
+        github_link
+        saved_posts
+        hide_posts
+        messages {
+          nextToken
+          __typename
+        }
+        conversations {
+          nextToken
+          __typename
+        }
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        new_user
+        contributions {
+          nextToken
+          __typename
+        }
+        credibility_score
+        involved_projects
+        experience_level
+        years_of_experience
+        user_type
+        user_experiences {
+          nextToken
+          __typename
+        }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         __typename
       }
       nextToken
-      startedAt
       __typename
     }
   }
 `;
-export const syncConversationModels = /* GraphQL */ `
-  query SyncConversationModels(
-    $filter: ModelConversationModelFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncConversationModels(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        user_one
-        user_two
-        messages
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      nextToken
-      startedAt
-      __typename
-    }
-  }
-`;
-export const searchConversationModels = /* GraphQL */ `
-  query SearchConversationModels(
-    $filter: SearchableConversationModelFilterInput
-    $sort: [SearchableConversationModelSortInput]
+export const searchUsersModels = /* GraphQL */ `
+  query SearchUsersModels(
+    $filter: SearchableUsersModelFilterInput
+    $sort: [SearchableUsersModelSortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableConversationModelAggregationInput]
+    $aggregates: [SearchableUsersModelAggregationInput]
   ) {
-    searchConversationModels(
+    searchUsersModels(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -216,14 +305,54 @@ export const searchConversationModels = /* GraphQL */ `
     ) {
       items {
         id
-        user_one
-        user_two
-        messages
+        user_name
+        email
+        password
+        profile_image
+        user_posts {
+          nextToken
+          __typename
+        }
+        user_comments {
+          nextToken
+          __typename
+        }
+        first_name
+        last_name
+        user_creation_date
+        github_link
+        saved_posts
+        hide_posts
+        messages {
+          nextToken
+          __typename
+        }
+        conversations {
+          nextToken
+          __typename
+        }
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        new_user
+        contributions {
+          nextToken
+          __typename
+        }
+        credibility_score
+        involved_projects
+        experience_level
+        years_of_experience
+        user_type
+        user_experiences {
+          nextToken
+          __typename
+        }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         __typename
       }
       nextToken
@@ -248,94 +377,58 @@ export const searchConversationModels = /* GraphQL */ `
     }
   }
 `;
-export const getMessageModel = /* GraphQL */ `
-  query GetMessageModel($id: ID!) {
-    getMessageModel(id: $id) {
+export const getContributionsModel = /* GraphQL */ `
+  query GetContributionsModel($id: ID!) {
+    getContributionsModel(id: $id) {
       id
-      message
-      to
-      from
-      message_date
-      conversationID
+      author
+      type
+      description
+      link_to
+      point_value
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const listMessageModels = /* GraphQL */ `
-  query ListMessageModels(
-    $filter: ModelMessageModelFilterInput
+export const listContributionsModels = /* GraphQL */ `
+  query ListContributionsModels(
+    $filter: ModelContributionsModelFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listMessageModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        message
-        to
-        from
-        message_date
-        conversationID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      nextToken
-      startedAt
-      __typename
-    }
-  }
-`;
-export const syncMessageModels = /* GraphQL */ `
-  query SyncMessageModels(
-    $filter: ModelMessageModelFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncMessageModels(
+    listContributionsModels(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
-      lastSync: $lastSync
     ) {
       items {
         id
-        message
-        to
-        from
-        message_date
-        conversationID
+        author
+        type
+        description
+        link_to
+        point_value
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         __typename
       }
       nextToken
-      startedAt
       __typename
     }
   }
 `;
-export const searchMessageModels = /* GraphQL */ `
-  query SearchMessageModels(
-    $filter: SearchableMessageModelFilterInput
-    $sort: [SearchableMessageModelSortInput]
+export const searchContributionsModels = /* GraphQL */ `
+  query SearchContributionsModels(
+    $filter: SearchableContributionsModelFilterInput
+    $sort: [SearchableContributionsModelSortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableMessageModelAggregationInput]
+    $aggregates: [SearchableContributionsModelAggregationInput]
   ) {
-    searchMessageModels(
+    searchContributionsModels(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -345,16 +438,114 @@ export const searchMessageModels = /* GraphQL */ `
     ) {
       items {
         id
-        message
-        to
-        from
-        message_date
-        conversationID
+        author
+        type
+        description
+        link_to
+        point_value
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+        __typename
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+              __typename
+            }
+          }
+        }
+        __typename
+      }
+      __typename
+    }
+  }
+`;
+export const getExperienceModel = /* GraphQL */ `
+  query GetExperienceModel($id: ID!) {
+    getExperienceModel(id: $id) {
+      id
+      user_id
+      org_name
+      start_date
+      end_date
+      description
+      lang_tag
+      dev_type_tag
+      framework_tag
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listExperienceModels = /* GraphQL */ `
+  query ListExperienceModels(
+    $filter: ModelExperienceModelFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listExperienceModels(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        user_id
+        org_name
+        start_date
+        end_date
+        description
+        lang_tag
+        dev_type_tag
+        framework_tag
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const searchExperienceModels = /* GraphQL */ `
+  query SearchExperienceModels(
+    $filter: SearchableExperienceModelFilterInput
+    $sort: [SearchableExperienceModelSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableExperienceModelAggregationInput]
+  ) {
+    searchExperienceModels(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        user_id
+        org_name
+        start_date
+        end_date
+        description
+        lang_tag
+        dev_type_tag
+        framework_tag
+        createdAt
+        updatedAt
         __typename
       }
       nextToken
@@ -396,16 +587,34 @@ export const getPostsModel = /* GraphQL */ `
       interest_tag
       size_tag
       framework_tag
+      difficulty_tag
       post_comments {
+        items {
+          id
+          comment
+          profile_image
+          comment_date
+          parent_comment
+          replies
+          isReply
+          postID
+          userID
+          user_name
+          createdAt
+          updatedAt
+          __typename
+        }
         nextToken
-        startedAt
         __typename
       }
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
@@ -432,56 +641,22 @@ export const listPostsModels = /* GraphQL */ `
         interest_tag
         size_tag
         framework_tag
+        difficulty_tag
+        post_comments {
+          nextToken
+          __typename
+        }
+        contributor_limit
+        contributors
+        reported
+        experience_level
+        application
+        project_chat
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         __typename
       }
       nextToken
-      startedAt
-      __typename
-    }
-  }
-`;
-export const syncPostsModels = /* GraphQL */ `
-  query SyncPostsModels(
-    $filter: ModelPostsModelFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPostsModels(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        post_title
-        description
-        long_description
-        project_link
-        image_link
-        post_date
-        userID
-        creator_name
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      nextToken
-      startedAt
       __typename
     }
   }
@@ -518,11 +693,19 @@ export const searchPostsModels = /* GraphQL */ `
         interest_tag
         size_tag
         framework_tag
+        difficulty_tag
+        post_comments {
+          nextToken
+          __typename
+        }
+        contributor_limit
+        contributors
+        reported
+        experience_level
+        application
+        project_chat
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         __typename
       }
       nextToken
@@ -547,147 +730,66 @@ export const searchPostsModels = /* GraphQL */ `
     }
   }
 `;
-export const getUsersModel = /* GraphQL */ `
-  query GetUsersModel($id: ID!) {
-    getUsersModel(id: $id) {
+export const getConversationModel = /* GraphQL */ `
+  query GetConversationModel($id: ID!) {
+    getConversationModel(id: $id) {
       id
-      user_name
-      email
-      password
-      profile_image
-      user_posts {
+      users {
+        items {
+          id
+          usersModelID
+          conversationModelID
+          createdAt
+          updatedAt
+          __typename
+        }
         nextToken
-        startedAt
         __typename
       }
-      user_comments {
-        nextToken
-        startedAt
-        __typename
-      }
-      first_name
-      last_name
-      user_creation_date
-      dahublink
-      saved_posts
-      hide_posts
-      messages {
-        nextToken
-        startedAt
-        __typename
-      }
-      conversations {
-        nextToken
-        startedAt
-        __typename
-      }
-      lang_tag
-      dev_type_tag
-      interest_tag
-      size_tag
-      framework_tag
-      new_user
+      title
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
 `;
-export const listUsersModels = /* GraphQL */ `
-  query ListUsersModels(
-    $filter: ModelUsersModelFilterInput
+export const listConversationModels = /* GraphQL */ `
+  query ListConversationModels(
+    $filter: ModelConversationModelFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listUsersModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        user_name
-        email
-        password
-        profile_image
-        first_name
-        last_name
-        user_creation_date
-        dahublink
-        saved_posts
-        hide_posts
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        new_user
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      nextToken
-      startedAt
-      __typename
-    }
-  }
-`;
-export const syncUsersModels = /* GraphQL */ `
-  query SyncUsersModels(
-    $filter: ModelUsersModelFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUsersModels(
+    listConversationModels(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
-      lastSync: $lastSync
     ) {
       items {
         id
-        user_name
-        email
-        password
-        profile_image
-        first_name
-        last_name
-        user_creation_date
-        dahublink
-        saved_posts
-        hide_posts
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        new_user
+        users {
+          nextToken
+          __typename
+        }
+        title
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         __typename
       }
       nextToken
-      startedAt
       __typename
     }
   }
 `;
-export const searchUsersModels = /* GraphQL */ `
-  query SearchUsersModels(
-    $filter: SearchableUsersModelFilterInput
-    $sort: [SearchableUsersModelSortInput]
+export const searchConversationModels = /* GraphQL */ `
+  query SearchConversationModels(
+    $filter: SearchableConversationModelFilterInput
+    $sort: [SearchableConversationModelSortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableUsersModelAggregationInput]
+    $aggregates: [SearchableConversationModelAggregationInput]
   ) {
-    searchUsersModels(
+    searchConversationModels(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -697,27 +799,98 @@ export const searchUsersModels = /* GraphQL */ `
     ) {
       items {
         id
-        user_name
-        email
-        password
-        profile_image
-        first_name
-        last_name
-        user_creation_date
-        dahublink
-        saved_posts
-        hide_posts
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        new_user
+        users {
+          nextToken
+          __typename
+        }
+        title
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+        __typename
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+              __typename
+            }
+          }
+        }
+        __typename
+      }
+      __typename
+    }
+  }
+`;
+export const getMessageModel = /* GraphQL */ `
+  query GetMessageModel($id: ID!) {
+    getMessageModel(id: $id) {
+      id
+      message
+      from
+      message_date
+      conversationID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listMessageModels = /* GraphQL */ `
+  query ListMessageModels(
+    $filter: ModelMessageModelFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMessageModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const searchMessageModels = /* GraphQL */ `
+  query SearchMessageModels(
+    $filter: SearchableMessageModelFilterInput
+    $sort: [SearchableMessageModelSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableMessageModelAggregationInput]
+  ) {
+    searchMessageModels(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
         __typename
       }
       nextToken
@@ -749,14 +922,14 @@ export const getCommentModel = /* GraphQL */ `
       comment
       profile_image
       comment_date
+      parent_comment
+      replies
+      isReply
       postID
       userID
       user_name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
   }
@@ -773,52 +946,17 @@ export const listCommentModels = /* GraphQL */ `
         comment
         profile_image
         comment_date
+        parent_comment
+        replies
+        isReply
         postID
         userID
         user_name
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         __typename
       }
       nextToken
-      startedAt
-      __typename
-    }
-  }
-`;
-export const syncCommentModels = /* GraphQL */ `
-  query SyncCommentModels(
-    $filter: ModelCommentModelFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncCommentModels(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        comment
-        profile_image
-        comment_date
-        postID
-        userID
-        user_name
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      nextToken
-      startedAt
       __typename
     }
   }
@@ -845,14 +983,14 @@ export const searchCommentModels = /* GraphQL */ `
         comment
         profile_image
         comment_date
+        parent_comment
+        replies
+        isReply
         postID
         userID
         user_name
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         __typename
       }
       nextToken
@@ -873,6 +1011,136 @@ export const searchCommentModels = /* GraphQL */ `
         }
         __typename
       }
+      __typename
+    }
+  }
+`;
+export const getUsersConvo = /* GraphQL */ `
+  query GetUsersConvo($id: ID!) {
+    getUsersConvo(id: $id) {
+      id
+      usersModelID
+      conversationModelID
+      usersModel {
+        id
+        user_name
+        email
+        password
+        profile_image
+        user_posts {
+          nextToken
+          __typename
+        }
+        user_comments {
+          nextToken
+          __typename
+        }
+        first_name
+        last_name
+        user_creation_date
+        github_link
+        saved_posts
+        hide_posts
+        messages {
+          nextToken
+          __typename
+        }
+        conversations {
+          nextToken
+          __typename
+        }
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        new_user
+        contributions {
+          nextToken
+          __typename
+        }
+        credibility_score
+        involved_projects
+        experience_level
+        years_of_experience
+        user_type
+        user_experiences {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      conversationModel {
+        id
+        users {
+          nextToken
+          __typename
+        }
+        title
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listUsersConvos = /* GraphQL */ `
+  query ListUsersConvos(
+    $filter: ModelUsersConvoFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsersConvos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        usersModel {
+          id
+          user_name
+          email
+          password
+          profile_image
+          first_name
+          last_name
+          user_creation_date
+          github_link
+          saved_posts
+          hide_posts
+          lang_tag
+          dev_type_tag
+          interest_tag
+          size_tag
+          framework_tag
+          difficulty_tag
+          new_user
+          credibility_score
+          involved_projects
+          experience_level
+          years_of_experience
+          user_type
+          createdAt
+          updatedAt
+          __typename
+        }
+        conversationModel {
+          id
+          title
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
       __typename
     }
   }

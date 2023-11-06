@@ -1,30 +1,22 @@
 {
   "version": 1,
   "serviceConfiguration": {
-    "apiName": "Unhinged",
+    "apiName": "unhinged",
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "keyDescription": "api key description",
-      "expirationTime": 30
+      "expirationTime": 60,
+      "apiKeyExpirationDate": "2024-01-04T04:40:41.928Z",
+      "keyDescription": ""
     },
     "additionalAuthTypes": [
       {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authunhingeda9f38461"
+      },
+      {
         "mode": "AWS_IAM"
       }
-    ],
-    "conflictResolution": {
-      "defaultResolutionStrategy": {
-        "type": "OPTIMISTIC_CONCURRENCY"
-      },
-      "perModelResolutionStrategy": [
-        {
-          "resolutionStrategy": {
-            "type": "OPTIMISTIC_CONCURRENCY"
-          },
-          "entityName": "ConversationModel"
-        }
-      ]
-    }
+    ]
   }
 }

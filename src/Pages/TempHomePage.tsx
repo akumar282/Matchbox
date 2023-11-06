@@ -1,9 +1,6 @@
 import TempNavBar from '../components/TempNavBar'
-import { Navigate, useNavigate } from 'react-router-dom'
 import React from 'react'
-import { useRef } from 'react'
 import GitBranches from '../components/Branches'
-import branchborder from '../img/branchborder.png'
 import bodytxt from '../img/bodytxt.png'
 import largetxt from '../img/largetxt.png'
 import NewLogo from '../img/NewLogo.png'
@@ -17,7 +14,7 @@ import * as yup from 'yup'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { createNewsletterEmail } from '../backend/mutations/newsletterMutations'
-import { useFormik } from 'formik'
+import { FormikValues, useFormik } from 'formik'
 import { CreateNewsletterEmailModelPayload } from '../backend/types'
 import CollapseAll from '../components/FAQ'
 import ButtonMailto from '../components/ButtonMailto'
@@ -25,31 +22,29 @@ Amplify.configure(awsconfig)
 
 export default function TempHomePage() {
 
-  const handleScrollHome = (_id: any) => {
+  const handleScrollHome = (_id: string) => {
     const element = document.getElementById(_id)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
-  const navigate = useNavigate()
 
   Aos.init({
     duration: 2500,
     delay: 400,
   })
   
-  async function sendToDatabase(values: any) {
+  async function sendToDatabase(values: FormikValues) {
     const payload: CreateNewsletterEmailModelPayload= {
       input: {
         email: values.email,
       },
-    };
-    const request = await createNewsletterEmail(payload).catch((error) =>
+    }
+    await createNewsletterEmail(payload).catch((error) =>
       console.log(error)
-    );
+    )
   }
-  const [email, setEmail] = React.useState('');
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -121,7 +116,7 @@ export default function TempHomePage() {
               3
             </span>
             <h3 className='text-center text-white font-primary text-xl pt-3'>Start Developing</h3>
-            <h3 className='text-center text-white font-primary text-base w-64 mt-3'>Join any projects you've matched with and start contributing</h3>
+            <h3 className='text-center text-white font-primary text-base w-64 mt-3'>Join any projects you&apos;ve matched with and start contributing</h3>
           </div>
         </div>
         <div>
@@ -136,18 +131,18 @@ export default function TempHomePage() {
       <div id='register' className='bg-purple flex flex-col items-center text-center'>
         <div className='flex flex-col items-center text-center'>
           <h1 className='font-primary mx-8 mt-8 mb-4 text-black text-4xl text-center'>Stay Updated With Us.</h1>
-          <h3 className='text-black font-primary text-lg pt-2 text-center w-8/12'>We're currently building this platform for you and partnering with others to bring you projects that you are passionate about</h3>
+          <h3 className='text-black font-primary text-lg pt-2 text-center w-8/12'>We&apos;re currently building this platform for you and partnering with others to bring you projects that you are passionate about</h3>
           <h3 className='text-black font-primary text-lg pt-10 text-center w-8/12'>Follow us on social media and join our community to stay updated and be notified when we launch</h3>
         </div>
         <div className='flex mt-10 flex-row justify-center gap-12'>
           <div>
-          <input className='font-primary lg:w-[36rem] md:[25rem] w-[65vw] h-8 focus:outline-0  text-start' 
-          name='email' 
-          type='email'
-          id='email' 
-          value={formik.values.email} 
-          onChange={formik.handleChange} 
-          placeholder='Enter your email!'/>
+            <input className='font-primary lg:w-[36rem] md:[25rem] w-[65vw] h-8 focus:outline-0  text-start' 
+              name='email' 
+              type='email'
+              id='email' 
+              value={formik.values.email} 
+              onChange={formik.handleChange} 
+              placeholder='Enter your email!'/>
           </div>
           <button type="submit" onClick={()=>formik.handleSubmit()} className='font-primary bg-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
         </div>

@@ -1,7 +1,5 @@
-import React, { useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
 import textlogo from '../img/textlogo.png'
-import BurgerMenu from './BurgerMenu'
 import NewLogo from '../img/NewLogo.png'
 
 export default function TempNavBar() {
@@ -13,7 +11,7 @@ export default function TempNavBar() {
     setBurgerOpen(false)
   }
 
-  const handleScroll = (_id: any) => {
+  const handleScroll = (_id: string) => {
     const element = document.getElementById(_id)
     if(element) {
       element.scrollIntoView({behavior: 'smooth'})
@@ -21,7 +19,6 @@ export default function TempNavBar() {
     toggleBurger()
   }
 
-  const navigate = useNavigate()
   return (
     <nav className='relative px-4 py-4 flex justify-start items-center  bg-purple'>
       <img className='w-32 ml-2 max-w-screen-xl' src={textlogo}></img>
@@ -73,16 +70,10 @@ export default function TempNavBar() {
       <ul className='hidden absolute top-1/2 right-1 transform -translate-y-1/2 -translate-x-12 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6 max-w-screen-xl'>
         <li><button className='text-black-500 font-primary text-base pr-6 border-r border-black hover:text-gray-500' onClick={() => handleScroll('home')}>Home_</button></li>
         <li className='text-black-300'>
-          {/* <svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' className='w-4 h-4 current-fill' viewBox='0 0 24 24'>
-            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z' />
-          </svg> */}
         </li>
         <li><button onClick={() => handleScroll('about')}  className='text-black-500 font-primary text-base pr-6 border-r border-black -ml-6 hover:text-gray-500'>About_</button></li>
         <li><button onClick={() => handleScroll('faq')} className='text-black-500 font-primary text-base pr-6 border-r border-black ml-2 hover:text-gray-500'>FAQ_</button></li>
         <li className='text-black-300'>
-          {/* <svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' className='w-4 h-4 current-fill' viewBox='0 0 24 24'>
-            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z' />
-          </svg> */}
         </li>
         <li><button onClick={() => handleScroll('register')} className='text-white bg-deep-pink hover:bg-fuchsia-300 font-primary -ml-6 text-base rounded-lg py-2 px-3 hover:text-white'>Register_</button></li>
       </ul>
@@ -106,8 +97,6 @@ export default function TempNavBar() {
         }
       `}</style>
     </nav>
-    
-    
   )
 
 }
