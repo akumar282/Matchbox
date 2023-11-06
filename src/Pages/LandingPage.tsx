@@ -1,4 +1,4 @@
-import TempNavBar from '../components/TempNavBar'
+import LandingPageNavBar from '../components/LandingPageNavBar'
 import React from 'react'
 import GitBranches from '../components/Branches'
 import bodytxt from '../img/bodytxt.png'
@@ -20,7 +20,7 @@ import CollapseAll from '../components/FAQ'
 import ButtonMailto from '../components/ButtonMailto'
 Amplify.configure(awsconfig)
 
-export default function TempHomePage() {
+export default function LandingPage(): React.JSX.Element {
 
   const handleScrollHome = (_id: string) => {
     const element = document.getElementById(_id)
@@ -66,7 +66,7 @@ export default function TempHomePage() {
 
   return (
     <div>
-      <TempNavBar />
+      <LandingPageNavBar />
       <GitBranches/>
       <div id='home' className='flex flex-col items-center justify-center lg:flex-row'>
         <div className='lg:pb-4 lg:pl-4 py-4'>
@@ -78,7 +78,7 @@ export default function TempHomePage() {
         </div>
       </div>
       <div className='flex items-center justify-center px-8 space-x-4'>
-        <button className='bg-blue py-2 px-4 rounded-full text-white font-primary hover:bg-indigo-400' onClick={() => { handleScrollHome('register') }}>Get Notified</button>
+        <button className='bg-blue py-2 px-4 rounded-full text-white font-primary hover:bg-indigo-400' onClick={() => { handleScrollHome('register') }}>Get Started</button>
         <button className='bg-light-purple py-2 px-4 rounded-full text-black font-primary hover:bg-indigo-400' onClick={() => { handleScrollHome('about') }}>Learn More</button>
       </div>
       <div id='about' className='bg-blue mt-8 pb-14 flex flex-col items-center justify-center'>
@@ -163,6 +163,5 @@ export default function TempHomePage() {
         </div>
       </div>
     </div>
-
   )
 }

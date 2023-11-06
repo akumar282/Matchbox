@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import textlogo from '../img/textlogo.png'
 import NewLogo from '../img/NewLogo.png'
 
-export default function TempNavBar() {
+export default function LandingPageNavBar() {
 
 
   const [BurgerOpen, setBurgerOpen] = useState(false)
