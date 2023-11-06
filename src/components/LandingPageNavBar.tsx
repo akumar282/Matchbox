@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import textlogo from '../img/textlogo.png'
 import NewLogo from '../img/NewLogo.png'
+import { useNavigate } from 'react-router-dom'
 
 export default function LandingPageNavBar() {
 
-
+  const navigate = useNavigate()
+  
   const [BurgerOpen, setBurgerOpen] = useState(false)
 
   const toggleBurger = () => {
@@ -21,7 +23,7 @@ export default function LandingPageNavBar() {
 
   return (
     <nav className='relative px-4 py-4 flex justify-start items-center  bg-purple'>
-      <img className='w-32 ml-2 max-w-screen-xl' src={textlogo}></img>
+      <button onClick={() => navigate('/')}><img className='w-32 ml-2 max-w-screen-xl' src={textlogo}></img></button>
 
       <section>
         <div className='lg:hidden' onClick={() => setBurgerOpen((prev) => !prev)}>
@@ -47,8 +49,8 @@ export default function LandingPageNavBar() {
               <line x1='6' y1='6' x2='18' y2='18' />
             </svg>
           </div>
-          <div >
-            <img className='w-50 h-40' src={NewLogo} alt="" />
+          <div>
+            <img className='w-50 h-40' src={NewLogo} alt=""/>
           </div>
           <ul className='flex flex-col items-center justify-between min-h-[250px]'>
             <li className=' border-gray-400 mb-8 font-primary'>

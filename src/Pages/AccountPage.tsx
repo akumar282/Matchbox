@@ -4,6 +4,7 @@ import GitBranches from '../components/Branches'
 import google from '../img/google.svg'
 import github from '../img/github.svg'
 import orline from '../img/orline.png'
+import SingleInputs from '../components/Inputs'
 import OAuthButtons from '../components/OAuthButtons'
 
 
@@ -23,6 +24,12 @@ export default function AccountPage() {
           <img className='w-20 sm:w-20 md:w-32 lg:w-40' src={orline} alt='or line' />
           <h1 className='px-4 font-primary text-lg'>or</h1>
           <img className='w-20 sm:w-20 md:w-32 lg:w-40' src={orline} alt='or line' />
+        </div>
+        <div className='flex flex-col items-center'>
+          <SingleInputs placeholder='First Name'/>
+          <SingleInputs placeholder='Last Name' />
+          <SingleInputs placeholder='Email' />
+          <SingleInputs placeholder='Password' />
         </div>
       </div>
     </div>
