@@ -12,7 +12,7 @@ export async function newUserSignUp(username: string, password: string, email: s
       password,
       attributes: {
         email,
-        'custom:userId': userId
+        'custom:id': userId
       },
       autoSignIn: {
         enabled: true
@@ -51,5 +51,5 @@ export async function changeUserPassword(props: {
       return Auth.changePassword(user, props.oldPassword, props.confirmPassword);
     })
     .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
 }

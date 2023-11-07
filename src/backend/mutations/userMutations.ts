@@ -1,4 +1,4 @@
-import { API, graphqlOperation } from 'aws-amplify'
+import { API } from 'aws-amplify'
 import { createUsersModel, deleteUsersModel, updateUsersModel } from '@graphql/mutations'
 import { 
   CreateUsersModelInput, 
@@ -11,25 +11,25 @@ import {
 import { GraphQLResult } from '@aws-amplify/api-graphql'
 
 export async function createUser(user: { input: CreateUsersModelInput}){
-  return await API.graphql<GraphQLResult<CreateUsersModelMutation>>(graphqlOperation({
+  return await API.graphql<GraphQLResult<CreateUsersModelMutation>>({
     query: createUsersModel,
     variables: user,
     authMode: 'API_KEY'
-  }))
+  })
 }
 
 export async function deleteUser(user: { input: DeleteUsersModelInput}) {
-  return await API.graphql<GraphQLResult<DeleteUsersModelMutation>>(graphqlOperation({
+  return await API.graphql<GraphQLResult<DeleteUsersModelMutation>>({
     query: deleteUsersModel,
     variables: user,
     authMode: 'API_KEY'
-  }))
+  })
 }
 
 export async function updateUser(user: { input: UpdateUsersModelInput }) {
-  return await API.graphql<GraphQLResult<UpdateUsersModelMutation>>(graphqlOperation({
+  return await API.graphql<GraphQLResult<UpdateUsersModelMutation>>({
     query: updateUsersModel,
     variables: user,
     authMode: 'API_KEY'
-  }))
+  })
 }

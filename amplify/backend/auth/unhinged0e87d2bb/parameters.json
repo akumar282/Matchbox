@@ -1,6 +1,6 @@
 {
   "authSelections": "userPoolOnly",
-  "resourceName": "unhingeda9f38461",
+  "resourceName": "unhinged0e87d2bb",
   "serviceType": "imported",
   "region": "us-west-2",
   "aliasAttributes": [
@@ -8,8 +8,7 @@
     "preferred_username"
   ],
   "requiredAttributes": [
-    "email",
-    "phone_number"
+    "email"
   ],
   "passwordPolicyMinLength": 8,
   "passwordPolicyCharacters": [
@@ -18,12 +17,9 @@
     "Requires Numbers",
     "Requires Symbols"
   ],
-  "mfaConfiguration": "ON",
+  "mfaConfiguration": "OFF",
   "autoVerifiedAttributes": [
     "email"
   ],
-  "mfaTypes": [
-    "SMS Text Message",
-    "TOTP"
-  ]
+  "mfaTypes": []
 }

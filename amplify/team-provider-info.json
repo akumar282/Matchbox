@@ -22,11 +22,11 @@
         }
       },
       "auth": {
-        "unhingeda9f38461": {
-          "userPoolId": "us-west-2_8Qv63toTH",
+        "unhinged0e87d2bb": {
+          "userPoolId": "us-west-2_cG3lVn8wl",
           "userPoolName": "gitmatchuserpoolstaging",
-          "webClientId": "oi0nbdd1cjs4t70gkfu2c9rp8",
-          "nativeClientId": "oi0nbdd1cjs4t70gkfu2c9rp8"
+          "webClientId": "4n234919pa5rla6e51ggdmaihs",
+          "nativeClientId": "4n234919pa5rla6e51ggdmaihs"
         }
       },
       "api": {
