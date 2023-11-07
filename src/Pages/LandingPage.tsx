@@ -15,8 +15,8 @@ import * as yup from 'yup'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { createNewsletterEmail } from '../backend/mutations/newsletterMutations'
+import { CreateNewsletterEmailModelInput } from '../API'
 import { FormikValues, useFormik } from 'formik'
-import { CreateNewsletterEmailModelPayload } from '../backend/types'
 import CollapseAll from '../components/FAQ'
 import ButtonMailto from '../components/ButtonMailto'
 
@@ -40,11 +40,12 @@ export default function LandingPage(): React.JSX.Element {
   })
   
   async function sendToDatabase(values: FormikValues) {
-    const payload: CreateNewsletterEmailModelPayload= {
+    const payload = {
       input: {
         email: values.email,
       },
-    }
+    } as { input: CreateNewsletterEmailModelInput }
+    
     await createNewsletterEmail(payload).catch((error) =>
       console.log(error)
     )

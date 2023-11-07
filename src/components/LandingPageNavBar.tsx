@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 export default function LandingPageNavBar() {
 
   const navigate = useNavigate()
-  
+
   const [BurgerOpen, setBurgerOpen] = useState(false)
 
   const toggleBurger = () => {
@@ -15,8 +15,8 @@ export default function LandingPageNavBar() {
 
   const handleScroll = (_id: string) => {
     const element = document.getElementById(_id)
-    if(element) {
-      element.scrollIntoView({behavior: 'smooth'})
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
     }
     toggleBurger()
   }
@@ -50,11 +50,11 @@ export default function LandingPageNavBar() {
             </svg>
           </div>
           <div>
-            <img className='w-50 h-40' src={NewLogo} alt=""/>
+            <img className='w-50 h-40' src={NewLogo} alt="" />
           </div>
           <ul className='flex flex-col items-center justify-between min-h-[250px]'>
             <li className=' border-gray-400 mb-8 font-primary'>
-              <button onClick={() => handleScroll('home')}>Home_</button>
+              <button onClick={() => navigate('/')}>Home_</button>
             </li>
             <li className=' border-gray-400 my-8 font-primary'>
               <button onClick={() => handleScroll('about')}>About_</button>
@@ -70,10 +70,10 @@ export default function LandingPageNavBar() {
       </section>
 
       <ul className='hidden absolute top-1/2 right-1 transform -translate-y-1/2 -translate-x-12 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6 max-w-screen-xl'>
-        <li><button className='text-black-500 font-primary text-base pr-6 border-r border-black hover:text-gray-500' onClick={() => handleScroll('home')}>Home_</button></li>
+        <li><button className='text-black-500 font-primary text-base pr-6 border-r border-black hover:text-gray-500' onClick={() => navigate('/')}>Home_</button></li>
         <li className='text-black-300'>
         </li>
-        <li><button onClick={() => handleScroll('about')}  className='text-black-500 font-primary text-base pr-6 border-r border-black -ml-6 hover:text-gray-500'>About_</button></li>
+        <li><button onClick={() => handleScroll('about')} className='text-black-500 font-primary text-base pr-6 border-r border-black -ml-6 hover:text-gray-500'>About_</button></li>
         <li><button onClick={() => handleScroll('faq')} className='text-black-500 font-primary text-base pr-6 border-r border-black ml-2 hover:text-gray-500'>FAQ_</button></li>
         <li className='text-black-300'>
         </li>

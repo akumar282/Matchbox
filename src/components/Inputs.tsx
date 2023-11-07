@@ -11,6 +11,6 @@ interface InputButtonProps {
 export default function SingleInputs(props: InputButtonProps) {
 
   return (
-    <input placeholder={props.placeholder} className='my-4 lg:w-[22rem] w-[16rem] text-start py-1 text-base rounded-lg border pl-2 border-slate-500 focus:outline-none focus:border-blue'></input>
+    <input placeholder={props.placeholder} className='my-3 lg:w-[23rem] w-[19rem] text-start py-1 text-base rounded-lg border pl-2 border-slate-500 focus:outline-none focus:border-blue'></input>
   )
 }
