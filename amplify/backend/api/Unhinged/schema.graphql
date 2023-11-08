@@ -178,9 +178,9 @@ type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [re
   contributions: [ContributionsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   credibility_score: Int
   involved_projects: [ID]
-  experience_level: [ExperienceTag]
+  experience_level: ExperienceTag
   years_of_experience: Int
-  user_type: [AccountTag]
+  user_type: AccountTag
   user_experiences: [ExperienceModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
 }
 

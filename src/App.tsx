@@ -1,9 +1,9 @@
 import './App.css'
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import LandingPage from './Pages/LandingPage'
-import SignUpPage from './Pages/SignUpPage'
-import LoginPage from './Pages/LoginPage'
+import LandingPage from './pages/LandingPage'
+import SignUpPage from './pages/SignUpPage'
+import LoginPage from './pages/LoginPage'
 
 function App () {
   

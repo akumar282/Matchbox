@@ -7,6 +7,7 @@ export interface CustomAttribute {
 
 export async function newUserSignUp(username: string, password: string, email: string, userId: string): Promise<string> {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const newUser = await Auth.signUp({
       username,
       password,
@@ -29,7 +30,7 @@ export async function getCurrentUserAttributes(): Promise<CustomAttribute[]> {
   try {
     const user = await Auth.currentAuthenticatedUser()
     const customAttributes: CustomAttribute[] = Object.entries(user.attributes)
-      .filter(([key, value]) => key.startsWith('custom:'))
+      .filter(([key]) => key.startsWith('custom:'))
       .map(([key, value]) => ({
         name: key.substring('custom:'.length),
         value: value as string
@@ -48,7 +49,7 @@ export async function changeUserPassword(props: {
 }): Promise<void> {
   Auth.currentAuthenticatedUser()
     .then((user) => {
-      return Auth.changePassword(user, props.oldPassword, props.confirmPassword);
+      return Auth.changePassword(user, props.oldPassword, props.confirmPassword)
     })
     .then((data) => console.log(data))
     .catch((err) => console.log(err))
