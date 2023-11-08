@@ -101,7 +101,7 @@ export default function SignUpPage() {
             <label className='pl-2 font-primary text-sm' >I agree to the <button onClick={() => navigate('/tos')} className='underline text-blue hover:text-indigo-400'>Terms and Conditions</button> </label>
           </div>
           <div className='pt-5'>
-            <button className='font-primary hover:bg-indigo-400 bg-blue text-white text-lg rounded-lg px-36 py-1' type='submit' onClick={() => formik.handleSubmit}>
+            <button className='font-primary hover:bg-indigo-400 bg-blue text-white text-lg rounded-lg px-36 py-2' type='submit' onClick={() => formik.handleSubmit}>
             Sign Up
             </button>
             <h1 className='font-primary text-center pt-5'>Already have an account? <button onClick={() => navigate('/login')} className='underline text-blue hover:text-indigo-400'>Login</button></h1>
