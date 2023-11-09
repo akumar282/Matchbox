@@ -22,12 +22,7 @@
         }
       },
       "auth": {
-        "unhinged0e87d2bb": {
-          "userPoolId": "us-west-2_cG3lVn8wl",
-          "userPoolName": "gitmatchuserpoolstaging",
-          "webClientId": "4n234919pa5rla6e51ggdmaihs",
-          "nativeClientId": "4n234919pa5rla6e51ggdmaihs"
-        }
+        "unhingedf9920fd0": {}
       },
       "api": {
         "unhinged": {}

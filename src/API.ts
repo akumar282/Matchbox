@@ -95,6 +95,8 @@ export type CreateUsersModelInput = {
   experience_level?: Array< ExperienceTag | null > | null,
   years_of_experience?: number | null,
   user_type?: Array< AccountTag | null > | null,
+  oauth_provider?: OAuthProvider | null,
+  oauth_id?: string | null,
 };
 
 export enum LanguageTag {
@@ -248,6 +250,12 @@ export enum AccountTag {
 }
 
 
+export enum OAuthProvider {
+  GOOGLE = "GOOGLE",
+  GITHUB = "GITHUB",
+}
+
+
 export type ModelUsersModelConditionInput = {
   user_name?: ModelStringInput | null,
   email?: ModelStringInput | null,
@@ -271,6 +279,8 @@ export type ModelUsersModelConditionInput = {
   experience_level?: ModelExperienceTagListInput | null,
   years_of_experience?: ModelIntInput | null,
   user_type?: ModelAccountTagListInput | null,
+  oauth_provider?: ModelOAuthProviderInput | null,
+  oauth_id?: ModelStringInput | null,
   and?: Array< ModelUsersModelConditionInput | null > | null,
   or?: Array< ModelUsersModelConditionInput | null > | null,
   not?: ModelUsersModelConditionInput | null,
@@ -367,6 +377,11 @@ export type ModelAccountTagListInput = {
   notContains?: AccountTag | null,
 };
 
+export type ModelOAuthProviderInput = {
+  eq?: OAuthProvider | null,
+  ne?: OAuthProvider | null,
+};
+
 export type UsersModel = {
   __typename: "UsersModel",
   id: string,
@@ -398,6 +413,8 @@ export type UsersModel = {
   years_of_experience?: number | null,
   user_type?: Array< AccountTag | null > | null,
   user_experiences?: ModelExperienceModelConnection | null,
+  oauth_provider?: OAuthProvider | null,
+  oauth_id?: string | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -572,6 +589,8 @@ export type UpdateUsersModelInput = {
   experience_level?: Array< ExperienceTag | null > | null,
   years_of_experience?: number | null,
   user_type?: Array< AccountTag | null > | null,
+  oauth_provider?: OAuthProvider | null,
+  oauth_id?: string | null,
 };
 
 export type DeleteUsersModelInput = {
@@ -1015,6 +1034,8 @@ export type ModelUsersModelFilterInput = {
   experience_level?: ModelExperienceTagListInput | null,
   years_of_experience?: ModelIntInput | null,
   user_type?: ModelAccountTagListInput | null,
+  oauth_provider?: ModelOAuthProviderInput | null,
+  oauth_id?: ModelStringInput | null,
   and?: Array< ModelUsersModelFilterInput | null > | null,
   or?: Array< ModelUsersModelFilterInput | null > | null,
   not?: ModelUsersModelFilterInput | null,
@@ -1042,6 +1063,7 @@ export type SearchableUsersModelFilterInput = {
   credibility_score?: SearchableIntFilterInput | null,
   involved_projects?: SearchableIDFilterInput | null,
   years_of_experience?: SearchableIntFilterInput | null,
+  oauth_id?: SearchableStringFilterInput | null,
   createdAt?: SearchableStringFilterInput | null,
   updatedAt?: SearchableStringFilterInput | null,
   lang_tag?: SearchableStringFilterInput | null,
@@ -1052,6 +1074,7 @@ export type SearchableUsersModelFilterInput = {
   difficulty_tag?: SearchableStringFilterInput | null,
   experience_level?: SearchableStringFilterInput | null,
   user_type?: SearchableStringFilterInput | null,
+  oauth_provider?: SearchableStringFilterInput | null,
   and?: Array< SearchableUsersModelFilterInput | null > | null,
   or?: Array< SearchableUsersModelFilterInput | null > | null,
   not?: SearchableUsersModelFilterInput | null,
@@ -1093,6 +1116,7 @@ export enum SearchableUsersModelSortableFields {
   credibility_score = "credibility_score",
   involved_projects = "involved_projects",
   years_of_experience = "years_of_experience",
+  oauth_id = "oauth_id",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
 }
@@ -1128,6 +1152,8 @@ export enum SearchableUsersModelAggregateField {
   experience_level = "experience_level",
   years_of_experience = "years_of_experience",
   user_type = "user_type",
+  oauth_provider = "oauth_provider",
+  oauth_id = "oauth_id",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
 }
@@ -1688,6 +1714,8 @@ export type ModelSubscriptionUsersModelFilterInput = {
   experience_level?: ModelSubscriptionStringInput | null,
   years_of_experience?: ModelSubscriptionIntInput | null,
   user_type?: ModelSubscriptionStringInput | null,
+  oauth_provider?: ModelSubscriptionStringInput | null,
+  oauth_id?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
 };
@@ -1984,6 +2012,8 @@ export type CreateUsersModelMutation = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    oauth_provider?: OAuthProvider | null,
+    oauth_id?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2128,6 +2158,8 @@ export type UpdateUsersModelMutation = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    oauth_provider?: OAuthProvider | null,
+    oauth_id?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2272,6 +2304,8 @@ export type DeleteUsersModelMutation = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    oauth_provider?: OAuthProvider | null,
+    oauth_id?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2823,6 +2857,8 @@ export type CreateUsersConvoMutation = {
         __typename: "ModelExperienceModelConnection",
         nextToken?: string | null,
       } | null,
+      oauth_provider?: OAuthProvider | null,
+      oauth_id?: string | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -2902,6 +2938,8 @@ export type UpdateUsersConvoMutation = {
         __typename: "ModelExperienceModelConnection",
         nextToken?: string | null,
       } | null,
+      oauth_provider?: OAuthProvider | null,
+      oauth_id?: string | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -2981,6 +3019,8 @@ export type DeleteUsersConvoMutation = {
         __typename: "ModelExperienceModelConnection",
         nextToken?: string | null,
       } | null,
+      oauth_provider?: OAuthProvider | null,
+      oauth_id?: string | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -3212,6 +3252,8 @@ export type GetUsersModelQuery = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    oauth_provider?: OAuthProvider | null,
+    oauth_id?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -3275,6 +3317,8 @@ export type ListUsersModelsQuery = {
         __typename: "ModelExperienceModelConnection",
         nextToken?: string | null,
       } | null,
+      oauth_provider?: OAuthProvider | null,
+      oauth_id?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -3343,6 +3387,8 @@ export type SearchUsersModelsQuery = {
         __typename: "ModelExperienceModelConnection",
         nextToken?: string | null,
       } | null,
+      oauth_provider?: OAuthProvider | null,
+      oauth_id?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -4040,6 +4086,8 @@ export type GetUsersConvoQuery = {
         __typename: "ModelExperienceModelConnection",
         nextToken?: string | null,
       } | null,
+      oauth_provider?: OAuthProvider | null,
+      oauth_id?: string | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -4098,6 +4146,8 @@ export type ListUsersConvosQuery = {
         experience_level?: Array< ExperienceTag | null > | null,
         years_of_experience?: number | null,
         user_type?: Array< AccountTag | null > | null,
+        oauth_provider?: OAuthProvider | null,
+        oauth_id?: string | null,
         createdAt: string,
         updatedAt: string,
       },
@@ -4295,6 +4345,8 @@ export type OnCreateUsersModelSubscription = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    oauth_provider?: OAuthProvider | null,
+    oauth_id?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4438,6 +4490,8 @@ export type OnUpdateUsersModelSubscription = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    oauth_provider?: OAuthProvider | null,
+    oauth_id?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4581,6 +4635,8 @@ export type OnDeleteUsersModelSubscription = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    oauth_provider?: OAuthProvider | null,
+    oauth_id?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -5113,6 +5169,8 @@ export type OnCreateUsersConvoSubscription = {
         __typename: "ModelExperienceModelConnection",
         nextToken?: string | null,
       } | null,
+      oauth_provider?: OAuthProvider | null,
+      oauth_id?: string | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -5191,6 +5249,8 @@ export type OnUpdateUsersConvoSubscription = {
         __typename: "ModelExperienceModelConnection",
         nextToken?: string | null,
       } | null,
+      oauth_provider?: OAuthProvider | null,
+      oauth_id?: string | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -5269,6 +5329,8 @@ export type OnDeleteUsersConvoSubscription = {
         __typename: "ModelExperienceModelConnection",
         nextToken?: string | null,
       } | null,
+      oauth_provider?: OAuthProvider | null,
+      oauth_id?: string | null,
       createdAt: string,
       updatedAt: string,
     },

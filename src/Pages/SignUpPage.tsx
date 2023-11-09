@@ -8,16 +8,27 @@ import orline from '../img/orline.png'
 import SingleInputs from '../components/Inputs'
 import OAuthButtons from '../components/OAuthButtons'
 import { standardSignUp } from '../backend/functions/credentials'
+import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
+import { Auth } from 'aws-amplify'
+import awsconfig from '../aws-exports'
+import { Amplify } from 'aws-amplify'
+import ErrorAlert, { warnStyle, warnXStyle} from '../components/alerts/errorAlert'
+Amplify.configure(awsconfig)
 
 
 export default function SignUpPage() {
 
   const [isChecked, setIsChecked] = React.useState(false)
+  const [showAlert, setShowAlert] = React.useState(false)
 
   const handleCheck = () => {
     setIsChecked(!isChecked) // Toggle the checked state
+  }
+
+  const closeAlert = () => {
+    setShowAlert(false)
   }
 
   const navigate = useNavigate()
@@ -47,8 +58,9 @@ export default function SignUpPage() {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       if(!isChecked){
-        alert('f slur')
+        setShowAlert(true)
       } else {
+        setShowAlert(false)
         standardSignUp(values.user_name, values.email, values.password) 
       }
       
@@ -61,10 +73,11 @@ export default function SignUpPage() {
       <GitBranches/>
       <div className='flex flex-col items-center justify-center lg:flex-col'>
         <div className='pt-10 flex flex-col items-center justify-center'>
+          {showAlert && <ErrorAlert show={showAlert} closeAlert={closeAlert} title='Warning' message='You must accept the Terms and Conditions.' closeStyle={warnXStyle} colorStyle={warnStyle} />}
           <h1 className='text-center font-primary text-4xl font-semibold'>Get Started</h1>
           <h2 className='text-center text-lg text-medium font-primary pt-4'>Create an account</h2>
-          <OAuthButtons label='Sign up with Google' src={google} />
-          <OAuthButtons label='Sign up with GitHub' src={github} />
+          <OAuthButtons onClick={() => Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google})} label='Sign up with Google' src={google} />
+          <OAuthButtons onClick={()=>console.log()} label='Sign up with GitHub' src={github} />
         </div>
         <div className='py-6 flex items-center'>
           <img className='w-20 sm:w-20 md:w-32 lg:w-40' src={orline} alt='or line' />

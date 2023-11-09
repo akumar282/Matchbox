@@ -7,7 +7,7 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "unhinged0e87d2bb"
+          "resourceName": "unhingedf9920fd0"
         }
       ],
       "output": {
@@ -16,7 +16,7 @@
             {
               "authenticationType": "AMAZON_COGNITO_USER_POOLS",
               "userPoolConfig": {
-                "userPoolId": "authunhinged0e87d2bb"
+                "userPoolId": "authunhingedf9920fd0"
               }
             },
             {
@@ -25,7 +25,7 @@
           ],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDate": "2024-01-06T11:38:00.199Z",
+              "apiKeyExpirationDate": "2024-01-07T07:53:37.308Z",
               "apiKeyExpirationDays": 60,
               "description": ""
             },
@@ -38,12 +38,31 @@
     }
   },
   "auth": {
-    "unhinged0e87d2bb": {
+    "unhingedf9920fd0": {
       "customAuth": false,
       "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [
+          "GOOGLE"
+        ],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
       "providerPlugin": "awscloudformation",
-      "service": "Cognito",
-      "serviceType": "imported"
+      "service": "Cognito"
     }
   },
   "function": {},
@@ -55,38 +74,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_auth_unhinged0e87d2bb_nativeClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "unhinged0e87d2bb"
-        }
-      ]
-    },
-    "AMPLIFY_auth_unhinged0e87d2bb_userPoolId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "unhinged0e87d2bb"
-        }
-      ]
-    },
-    "AMPLIFY_auth_unhinged0e87d2bb_userPoolName": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "unhinged0e87d2bb"
-        }
-      ]
-    },
-    "AMPLIFY_auth_unhinged0e87d2bb_webClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "unhinged0e87d2bb"
-        }
-      ]
-    },
     "AMPLIFY_hosting_amplifyhosting_appId": {
       "usedBy": [
         {

@@ -216,6 +216,8 @@ export const getUsersModel = /* GraphQL */ `
         nextToken
         __typename
       }
+      oauth_provider
+      oauth_id
       createdAt
       updatedAt
       __typename
@@ -277,6 +279,8 @@ export const listUsersModels = /* GraphQL */ `
           nextToken
           __typename
         }
+        oauth_provider
+        oauth_id
         createdAt
         updatedAt
         __typename
@@ -351,6 +355,8 @@ export const searchUsersModels = /* GraphQL */ `
           nextToken
           __typename
         }
+        oauth_provider
+        oauth_id
         createdAt
         updatedAt
         __typename
@@ -1069,6 +1075,8 @@ export const getUsersConvo = /* GraphQL */ `
           nextToken
           __typename
         }
+        oauth_provider
+        oauth_id
         createdAt
         updatedAt
         __typename
@@ -1125,6 +1133,8 @@ export const listUsersConvos = /* GraphQL */ `
           experience_level
           years_of_experience
           user_type
+          oauth_provider
+          oauth_id
           createdAt
           updatedAt
           __typename

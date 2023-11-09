@@ -152,6 +152,11 @@ enum ContributionTag {
   REVIEW
 }
 
+enum OAuthProvider {
+  GOOGLE
+  GITHUB
+}
+
 type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   user_name: String!
@@ -178,10 +183,12 @@ type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [re
   contributions: [ContributionsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   credibility_score: Int
   involved_projects: [ID]
-  experience_level: ExperienceTag
+  experience_level: [ExperienceTag]
   years_of_experience: Int
-  user_type: AccountTag
+  user_type: [AccountTag]
   user_experiences: [ExperienceModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  oauth_provider: OAuthProvider
+  oauth_id: String
 }
 
 type ContributionsModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {

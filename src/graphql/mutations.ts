@@ -181,6 +181,8 @@ export const createUsersModel = /* GraphQL */ `
         nextToken
         __typename
       }
+      oauth_provider
+      oauth_id
       createdAt
       updatedAt
       __typename
@@ -324,6 +326,8 @@ export const updateUsersModel = /* GraphQL */ `
         nextToken
         __typename
       }
+      oauth_provider
+      oauth_id
       createdAt
       updatedAt
       __typename
@@ -467,6 +471,8 @@ export const deleteUsersModel = /* GraphQL */ `
         nextToken
         __typename
       }
+      oauth_provider
+      oauth_id
       createdAt
       updatedAt
       __typename
@@ -998,6 +1004,8 @@ export const createUsersConvo = /* GraphQL */ `
           nextToken
           __typename
         }
+        oauth_provider
+        oauth_id
         createdAt
         updatedAt
         __typename
@@ -1076,6 +1084,8 @@ export const updateUsersConvo = /* GraphQL */ `
           nextToken
           __typename
         }
+        oauth_provider
+        oauth_id
         createdAt
         updatedAt
         __typename
@@ -1154,6 +1164,8 @@ export const deleteUsersConvo = /* GraphQL */ `
           nextToken
           __typename
         }
+        oauth_provider
+        oauth_id
         createdAt
         updatedAt
         __typename
