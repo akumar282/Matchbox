@@ -1,10 +1,8 @@
 import React from 'react'
 
 export const errorStyle: string = 'flex items-center text-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800'
-
 export const warnStyle: string = 'flex items-center text-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300'
-
-export const successStyle: string = 'flex items-center text-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400'
+export const successStyle: string = 'flex items-center text-center p-4 mb-4 text-sm text-green-800 rounded-lg border-green-300 bg-green-50 dark:bg-gray-800 dark:text-green-400'
 
 export const errorXStyle: string = 'w-4 h-4 text-red-800 dark:text-red-400 cursor-pointer'
 export const warnXStyle: string = 'w-4 h-4 text-yellow-800 dark:text-yellow-400 cursor-pointer'

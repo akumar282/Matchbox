@@ -72,6 +72,7 @@ export const createUsersModel = /* GraphQL */ `
           size_tag
           framework_tag
           difficulty_tag
+          cloud_provider_tag
           contributor_limit
           contributors
           reported
@@ -142,6 +143,7 @@ export const createUsersModel = /* GraphQL */ `
       size_tag
       framework_tag
       difficulty_tag
+      cloud_provider_tag
       new_user
       contributions {
         items {
@@ -217,6 +219,7 @@ export const updateUsersModel = /* GraphQL */ `
           size_tag
           framework_tag
           difficulty_tag
+          cloud_provider_tag
           contributor_limit
           contributors
           reported
@@ -287,6 +290,7 @@ export const updateUsersModel = /* GraphQL */ `
       size_tag
       framework_tag
       difficulty_tag
+      cloud_provider_tag
       new_user
       contributions {
         items {
@@ -362,6 +366,7 @@ export const deleteUsersModel = /* GraphQL */ `
           size_tag
           framework_tag
           difficulty_tag
+          cloud_provider_tag
           contributor_limit
           contributors
           reported
@@ -432,6 +437,7 @@ export const deleteUsersModel = /* GraphQL */ `
       size_tag
       framework_tag
       difficulty_tag
+      cloud_provider_tag
       new_user
       contributions {
         items {
@@ -617,6 +623,7 @@ export const createPostsModel = /* GraphQL */ `
       size_tag
       framework_tag
       difficulty_tag
+      cloud_provider_tag
       post_comments {
         items {
           id
@@ -669,6 +676,7 @@ export const updatePostsModel = /* GraphQL */ `
       size_tag
       framework_tag
       difficulty_tag
+      cloud_provider_tag
       post_comments {
         items {
           id
@@ -721,6 +729,7 @@ export const deletePostsModel = /* GraphQL */ `
       size_tag
       framework_tag
       difficulty_tag
+      cloud_provider_tag
       post_comments {
         items {
           id
@@ -990,6 +999,7 @@ export const createUsersConvo = /* GraphQL */ `
         size_tag
         framework_tag
         difficulty_tag
+        cloud_provider_tag
         new_user
         contributions {
           nextToken
@@ -1070,6 +1080,7 @@ export const updateUsersConvo = /* GraphQL */ `
         size_tag
         framework_tag
         difficulty_tag
+        cloud_provider_tag
         new_user
         contributions {
           nextToken
@@ -1150,6 +1161,7 @@ export const deleteUsersConvo = /* GraphQL */ `
         size_tag
         framework_tag
         difficulty_tag
+        cloud_provider_tag
         new_user
         contributions {
           nextToken

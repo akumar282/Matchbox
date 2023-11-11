@@ -100,5 +100,4 @@ export default function LandingPageNavBar() {
       `}</style>
     </nav>
   )
-
 }

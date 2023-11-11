@@ -127,6 +127,16 @@ enum FrameworkTag {
   APACHE_PLAY 
 }
 
+enum CloudProviderTag {
+  AMAZON_WEB_SERVICES
+  MICROSOFT_AZURE
+  GOOGLE_CLOUD_PLATFORM
+  SALESFORCE
+  IBM_CLOUD
+  HEROKU
+  NETAPP
+}
+
 enum DifficultyTag {
   GOOD_FIRST_PROJECT
   EXPERIENCED_CONTRIBUTOR
@@ -179,6 +189,7 @@ type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [re
   size_tag: [SizeTag]
   framework_tag: [FrameworkTag]
   difficulty_tag: [DifficultyTag]
+  cloud_provider_tag: [CloudProviderTag]
   new_user: Boolean
   contributions: [ContributionsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   credibility_score: Int
@@ -228,6 +239,7 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   size_tag: [SizeTag]
   framework_tag: [FrameworkTag]
   difficulty_tag: [DifficultyTag]
+  cloud_provider_tag: [CloudProviderTag]
   post_comments: [CommentModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
   contributor_limit: Int
   contributors: [ID]

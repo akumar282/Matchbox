@@ -89,6 +89,7 @@ export type CreateUsersModelInput = {
   size_tag?: Array< SizeTag | null > | null,
   framework_tag?: Array< FrameworkTag | null > | null,
   difficulty_tag?: Array< DifficultyTag | null > | null,
+  cloud_provider_tag?: Array< CloudProviderTag | null > | null,
   new_user?: boolean | null,
   credibility_score?: number | null,
   involved_projects?: Array< string | null > | null,
@@ -236,6 +237,17 @@ export enum DifficultyTag {
 }
 
 
+export enum CloudProviderTag {
+  AMAZON_WEB_SERVICES = "AMAZON_WEB_SERVICES",
+  MICROSOFT_AZURE = "MICROSOFT_AZURE",
+  GOOGLE_CLOUD_PLATFORM = "GOOGLE_CLOUD_PLATFORM",
+  SALESFORCE = "SALESFORCE",
+  IBM_CLOUD = "IBM_CLOUD",
+  HEROKU = "HEROKU",
+  NETAPP = "NETAPP",
+}
+
+
 export enum ExperienceTag {
   BEGINNER = "BEGINNER",
   MINIMAL_EXPERIENCE = "MINIMAL_EXPERIENCE",
@@ -273,6 +285,7 @@ export type ModelUsersModelConditionInput = {
   size_tag?: ModelSizeTagListInput | null,
   framework_tag?: ModelFrameworkTagListInput | null,
   difficulty_tag?: ModelDifficultyTagListInput | null,
+  cloud_provider_tag?: ModelCloudProviderTagListInput | null,
   new_user?: ModelBooleanInput | null,
   credibility_score?: ModelIntInput | null,
   involved_projects?: ModelIDInput | null,
@@ -344,6 +357,13 @@ export type ModelDifficultyTagListInput = {
   notContains?: DifficultyTag | null,
 };
 
+export type ModelCloudProviderTagListInput = {
+  eq?: Array< CloudProviderTag | null > | null,
+  ne?: Array< CloudProviderTag | null > | null,
+  contains?: CloudProviderTag | null,
+  notContains?: CloudProviderTag | null,
+};
+
 export type ModelBooleanInput = {
   ne?: boolean | null,
   eq?: boolean | null,
@@ -405,6 +425,7 @@ export type UsersModel = {
   size_tag?: Array< SizeTag | null > | null,
   framework_tag?: Array< FrameworkTag | null > | null,
   difficulty_tag?: Array< DifficultyTag | null > | null,
+  cloud_provider_tag?: Array< CloudProviderTag | null > | null,
   new_user?: boolean | null,
   contributions?: ModelContributionsModelConnection | null,
   credibility_score?: number | null,
@@ -442,6 +463,7 @@ export type PostsModel = {
   size_tag?: Array< SizeTag | null > | null,
   framework_tag?: Array< FrameworkTag | null > | null,
   difficulty_tag?: Array< DifficultyTag | null > | null,
+  cloud_provider_tag?: Array< CloudProviderTag | null > | null,
   post_comments?: ModelCommentModelConnection | null,
   contributor_limit?: number | null,
   contributors?: Array< string | null > | null,
@@ -583,6 +605,7 @@ export type UpdateUsersModelInput = {
   size_tag?: Array< SizeTag | null > | null,
   framework_tag?: Array< FrameworkTag | null > | null,
   difficulty_tag?: Array< DifficultyTag | null > | null,
+  cloud_provider_tag?: Array< CloudProviderTag | null > | null,
   new_user?: boolean | null,
   credibility_score?: number | null,
   involved_projects?: Array< string | null > | null,
@@ -695,6 +718,7 @@ export type CreatePostsModelInput = {
   size_tag?: Array< SizeTag | null > | null,
   framework_tag?: Array< FrameworkTag | null > | null,
   difficulty_tag?: Array< DifficultyTag | null > | null,
+  cloud_provider_tag?: Array< CloudProviderTag | null > | null,
   contributor_limit?: number | null,
   contributors?: Array< string | null > | null,
   reported?: boolean | null,
@@ -718,6 +742,7 @@ export type ModelPostsModelConditionInput = {
   size_tag?: ModelSizeTagListInput | null,
   framework_tag?: ModelFrameworkTagListInput | null,
   difficulty_tag?: ModelDifficultyTagListInput | null,
+  cloud_provider_tag?: ModelCloudProviderTagListInput | null,
   contributor_limit?: ModelIntInput | null,
   contributors?: ModelIDInput | null,
   reported?: ModelBooleanInput | null,
@@ -745,6 +770,7 @@ export type UpdatePostsModelInput = {
   size_tag?: Array< SizeTag | null > | null,
   framework_tag?: Array< FrameworkTag | null > | null,
   difficulty_tag?: Array< DifficultyTag | null > | null,
+  cloud_provider_tag?: Array< CloudProviderTag | null > | null,
   contributor_limit?: number | null,
   contributors?: Array< string | null > | null,
   reported?: boolean | null,
@@ -1028,6 +1054,7 @@ export type ModelUsersModelFilterInput = {
   size_tag?: ModelSizeTagListInput | null,
   framework_tag?: ModelFrameworkTagListInput | null,
   difficulty_tag?: ModelDifficultyTagListInput | null,
+  cloud_provider_tag?: ModelCloudProviderTagListInput | null,
   new_user?: ModelBooleanInput | null,
   credibility_score?: ModelIntInput | null,
   involved_projects?: ModelIDInput | null,
@@ -1072,6 +1099,7 @@ export type SearchableUsersModelFilterInput = {
   size_tag?: SearchableStringFilterInput | null,
   framework_tag?: SearchableStringFilterInput | null,
   difficulty_tag?: SearchableStringFilterInput | null,
+  cloud_provider_tag?: SearchableStringFilterInput | null,
   experience_level?: SearchableStringFilterInput | null,
   user_type?: SearchableStringFilterInput | null,
   oauth_provider?: SearchableStringFilterInput | null,
@@ -1146,6 +1174,7 @@ export enum SearchableUsersModelAggregateField {
   size_tag = "size_tag",
   framework_tag = "framework_tag",
   difficulty_tag = "difficulty_tag",
+  cloud_provider_tag = "cloud_provider_tag",
   new_user = "new_user",
   credibility_score = "credibility_score",
   involved_projects = "involved_projects",
@@ -1329,6 +1358,7 @@ export type ModelPostsModelFilterInput = {
   size_tag?: ModelSizeTagListInput | null,
   framework_tag?: ModelFrameworkTagListInput | null,
   difficulty_tag?: ModelDifficultyTagListInput | null,
+  cloud_provider_tag?: ModelCloudProviderTagListInput | null,
   contributor_limit?: ModelIntInput | null,
   contributors?: ModelIDInput | null,
   reported?: ModelBooleanInput | null,
@@ -1363,6 +1393,7 @@ export type SearchablePostsModelFilterInput = {
   size_tag?: SearchableStringFilterInput | null,
   framework_tag?: SearchableStringFilterInput | null,
   difficulty_tag?: SearchableStringFilterInput | null,
+  cloud_provider_tag?: SearchableStringFilterInput | null,
   experience_level?: SearchableStringFilterInput | null,
   and?: Array< SearchablePostsModelFilterInput | null > | null,
   or?: Array< SearchablePostsModelFilterInput | null > | null,
@@ -1416,6 +1447,7 @@ export enum SearchablePostsModelAggregateField {
   size_tag = "size_tag",
   framework_tag = "framework_tag",
   difficulty_tag = "difficulty_tag",
+  cloud_provider_tag = "cloud_provider_tag",
   contributor_limit = "contributor_limit",
   contributors = "contributors",
   reported = "reported",
@@ -1708,6 +1740,7 @@ export type ModelSubscriptionUsersModelFilterInput = {
   size_tag?: ModelSubscriptionStringInput | null,
   framework_tag?: ModelSubscriptionStringInput | null,
   difficulty_tag?: ModelSubscriptionStringInput | null,
+  cloud_provider_tag?: ModelSubscriptionStringInput | null,
   new_user?: ModelSubscriptionBooleanInput | null,
   credibility_score?: ModelSubscriptionIntInput | null,
   involved_projects?: ModelSubscriptionIDInput | null,
@@ -1778,6 +1811,7 @@ export type ModelSubscriptionPostsModelFilterInput = {
   size_tag?: ModelSubscriptionStringInput | null,
   framework_tag?: ModelSubscriptionStringInput | null,
   difficulty_tag?: ModelSubscriptionStringInput | null,
+  cloud_provider_tag?: ModelSubscriptionStringInput | null,
   contributor_limit?: ModelSubscriptionIntInput | null,
   contributors?: ModelSubscriptionIDInput | null,
   reported?: ModelSubscriptionBooleanInput | null,
@@ -1905,6 +1939,7 @@ export type CreateUsersModelMutation = {
         size_tag?: Array< SizeTag | null > | null,
         framework_tag?: Array< FrameworkTag | null > | null,
         difficulty_tag?: Array< DifficultyTag | null > | null,
+        cloud_provider_tag?: Array< CloudProviderTag | null > | null,
         contributor_limit?: number | null,
         contributors?: Array< string | null > | null,
         reported?: boolean | null,
@@ -1973,6 +2008,7 @@ export type CreateUsersModelMutation = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     new_user?: boolean | null,
     contributions?:  {
       __typename: "ModelContributionsModelConnection",
@@ -2051,6 +2087,7 @@ export type UpdateUsersModelMutation = {
         size_tag?: Array< SizeTag | null > | null,
         framework_tag?: Array< FrameworkTag | null > | null,
         difficulty_tag?: Array< DifficultyTag | null > | null,
+        cloud_provider_tag?: Array< CloudProviderTag | null > | null,
         contributor_limit?: number | null,
         contributors?: Array< string | null > | null,
         reported?: boolean | null,
@@ -2119,6 +2156,7 @@ export type UpdateUsersModelMutation = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     new_user?: boolean | null,
     contributions?:  {
       __typename: "ModelContributionsModelConnection",
@@ -2197,6 +2235,7 @@ export type DeleteUsersModelMutation = {
         size_tag?: Array< SizeTag | null > | null,
         framework_tag?: Array< FrameworkTag | null > | null,
         difficulty_tag?: Array< DifficultyTag | null > | null,
+        cloud_provider_tag?: Array< CloudProviderTag | null > | null,
         contributor_limit?: number | null,
         contributors?: Array< string | null > | null,
         reported?: boolean | null,
@@ -2265,6 +2304,7 @@ export type DeleteUsersModelMutation = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     new_user?: boolean | null,
     contributions?:  {
       __typename: "ModelContributionsModelConnection",
@@ -2457,6 +2497,7 @@ export type CreatePostsModelMutation = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     post_comments?:  {
       __typename: "ModelCommentModelConnection",
       items:  Array< {
@@ -2510,6 +2551,7 @@ export type UpdatePostsModelMutation = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     post_comments?:  {
       __typename: "ModelCommentModelConnection",
       items:  Array< {
@@ -2563,6 +2605,7 @@ export type DeletePostsModelMutation = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     post_comments?:  {
       __typename: "ModelCommentModelConnection",
       items:  Array< {
@@ -2843,6 +2886,7 @@ export type CreateUsersConvoMutation = {
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
       difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
       new_user?: boolean | null,
       contributions?:  {
         __typename: "ModelContributionsModelConnection",
@@ -2924,6 +2968,7 @@ export type UpdateUsersConvoMutation = {
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
       difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
       new_user?: boolean | null,
       contributions?:  {
         __typename: "ModelContributionsModelConnection",
@@ -3005,6 +3050,7 @@ export type DeleteUsersConvoMutation = {
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
       difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
       new_user?: boolean | null,
       contributions?:  {
         __typename: "ModelContributionsModelConnection",
@@ -3145,6 +3191,7 @@ export type GetUsersModelQuery = {
         size_tag?: Array< SizeTag | null > | null,
         framework_tag?: Array< FrameworkTag | null > | null,
         difficulty_tag?: Array< DifficultyTag | null > | null,
+        cloud_provider_tag?: Array< CloudProviderTag | null > | null,
         contributor_limit?: number | null,
         contributors?: Array< string | null > | null,
         reported?: boolean | null,
@@ -3213,6 +3260,7 @@ export type GetUsersModelQuery = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     new_user?: boolean | null,
     contributions?:  {
       __typename: "ModelContributionsModelConnection",
@@ -3303,6 +3351,7 @@ export type ListUsersModelsQuery = {
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
       difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
       new_user?: boolean | null,
       contributions?:  {
         __typename: "ModelContributionsModelConnection",
@@ -3373,6 +3422,7 @@ export type SearchUsersModelsQuery = {
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
       difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
       new_user?: boolean | null,
       contributions?:  {
         __typename: "ModelContributionsModelConnection",
@@ -3616,6 +3666,7 @@ export type GetPostsModelQuery = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     post_comments?:  {
       __typename: "ModelCommentModelConnection",
       items:  Array< {
@@ -3672,6 +3723,7 @@ export type ListPostsModelsQuery = {
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
       difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
       post_comments?:  {
         __typename: "ModelCommentModelConnection",
         nextToken?: string | null,
@@ -3718,6 +3770,7 @@ export type SearchPostsModelsQuery = {
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
       difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
       post_comments?:  {
         __typename: "ModelCommentModelConnection",
         nextToken?: string | null,
@@ -4072,6 +4125,7 @@ export type GetUsersConvoQuery = {
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
       difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
       new_user?: boolean | null,
       contributions?:  {
         __typename: "ModelContributionsModelConnection",
@@ -4140,6 +4194,7 @@ export type ListUsersConvosQuery = {
         size_tag?: Array< SizeTag | null > | null,
         framework_tag?: Array< FrameworkTag | null > | null,
         difficulty_tag?: Array< DifficultyTag | null > | null,
+        cloud_provider_tag?: Array< CloudProviderTag | null > | null,
         new_user?: boolean | null,
         credibility_score?: number | null,
         involved_projects?: Array< string | null > | null,
@@ -4238,6 +4293,7 @@ export type OnCreateUsersModelSubscription = {
         size_tag?: Array< SizeTag | null > | null,
         framework_tag?: Array< FrameworkTag | null > | null,
         difficulty_tag?: Array< DifficultyTag | null > | null,
+        cloud_provider_tag?: Array< CloudProviderTag | null > | null,
         contributor_limit?: number | null,
         contributors?: Array< string | null > | null,
         reported?: boolean | null,
@@ -4306,6 +4362,7 @@ export type OnCreateUsersModelSubscription = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     new_user?: boolean | null,
     contributions?:  {
       __typename: "ModelContributionsModelConnection",
@@ -4383,6 +4440,7 @@ export type OnUpdateUsersModelSubscription = {
         size_tag?: Array< SizeTag | null > | null,
         framework_tag?: Array< FrameworkTag | null > | null,
         difficulty_tag?: Array< DifficultyTag | null > | null,
+        cloud_provider_tag?: Array< CloudProviderTag | null > | null,
         contributor_limit?: number | null,
         contributors?: Array< string | null > | null,
         reported?: boolean | null,
@@ -4451,6 +4509,7 @@ export type OnUpdateUsersModelSubscription = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     new_user?: boolean | null,
     contributions?:  {
       __typename: "ModelContributionsModelConnection",
@@ -4528,6 +4587,7 @@ export type OnDeleteUsersModelSubscription = {
         size_tag?: Array< SizeTag | null > | null,
         framework_tag?: Array< FrameworkTag | null > | null,
         difficulty_tag?: Array< DifficultyTag | null > | null,
+        cloud_provider_tag?: Array< CloudProviderTag | null > | null,
         contributor_limit?: number | null,
         contributors?: Array< string | null > | null,
         reported?: boolean | null,
@@ -4596,6 +4656,7 @@ export type OnDeleteUsersModelSubscription = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     new_user?: boolean | null,
     contributions?:  {
       __typename: "ModelContributionsModelConnection",
@@ -4781,6 +4842,7 @@ export type OnCreatePostsModelSubscription = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     post_comments?:  {
       __typename: "ModelCommentModelConnection",
       items:  Array< {
@@ -4833,6 +4895,7 @@ export type OnUpdatePostsModelSubscription = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     post_comments?:  {
       __typename: "ModelCommentModelConnection",
       items:  Array< {
@@ -4885,6 +4948,7 @@ export type OnDeletePostsModelSubscription = {
     size_tag?: Array< SizeTag | null > | null,
     framework_tag?: Array< FrameworkTag | null > | null,
     difficulty_tag?: Array< DifficultyTag | null > | null,
+    cloud_provider_tag?: Array< CloudProviderTag | null > | null,
     post_comments?:  {
       __typename: "ModelCommentModelConnection",
       items:  Array< {
@@ -5155,6 +5219,7 @@ export type OnCreateUsersConvoSubscription = {
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
       difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
       new_user?: boolean | null,
       contributions?:  {
         __typename: "ModelContributionsModelConnection",
@@ -5235,6 +5300,7 @@ export type OnUpdateUsersConvoSubscription = {
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
       difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
       new_user?: boolean | null,
       contributions?:  {
         __typename: "ModelContributionsModelConnection",
@@ -5315,6 +5381,7 @@ export type OnDeleteUsersConvoSubscription = {
       size_tag?: Array< SizeTag | null > | null,
       framework_tag?: Array< FrameworkTag | null > | null,
       difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
       new_user?: boolean | null,
       contributions?:  {
         __typename: "ModelContributionsModelConnection",

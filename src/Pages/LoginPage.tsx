@@ -36,7 +36,7 @@ export default function LoginPage() {
         </div>
         <div className='pt-4'>
           <button className='font-primary hover:bg-indigo-400 bg-blue text-white text-lg rounded-lg px-36 py-1'>
-            Sign Up
+            Log In
           </button>
           <h1 className='font-primary text-start pt-5'>Don&apos;t have an account? <button onClick={() => navigate('/signup')} className='underline text-blue hover:text-indigo-400'>Sign-Up</button></h1>
         </div>

@@ -107,6 +107,7 @@ export const getUsersModel = /* GraphQL */ `
           size_tag
           framework_tag
           difficulty_tag
+          cloud_provider_tag
           contributor_limit
           contributors
           reported
@@ -177,6 +178,7 @@ export const getUsersModel = /* GraphQL */ `
       size_tag
       framework_tag
       difficulty_tag
+      cloud_provider_tag
       new_user
       contributions {
         items {
@@ -265,6 +267,7 @@ export const listUsersModels = /* GraphQL */ `
         size_tag
         framework_tag
         difficulty_tag
+        cloud_provider_tag
         new_user
         contributions {
           nextToken
@@ -341,6 +344,7 @@ export const searchUsersModels = /* GraphQL */ `
         size_tag
         framework_tag
         difficulty_tag
+        cloud_provider_tag
         new_user
         contributions {
           nextToken
@@ -594,6 +598,7 @@ export const getPostsModel = /* GraphQL */ `
       size_tag
       framework_tag
       difficulty_tag
+      cloud_provider_tag
       post_comments {
         items {
           id
@@ -648,6 +653,7 @@ export const listPostsModels = /* GraphQL */ `
         size_tag
         framework_tag
         difficulty_tag
+        cloud_provider_tag
         post_comments {
           nextToken
           __typename
@@ -700,6 +706,7 @@ export const searchPostsModels = /* GraphQL */ `
         size_tag
         framework_tag
         difficulty_tag
+        cloud_provider_tag
         post_comments {
           nextToken
           __typename
@@ -1061,6 +1068,7 @@ export const getUsersConvo = /* GraphQL */ `
         size_tag
         framework_tag
         difficulty_tag
+        cloud_provider_tag
         new_user
         contributions {
           nextToken
@@ -1127,6 +1135,7 @@ export const listUsersConvos = /* GraphQL */ `
           size_tag
           framework_tag
           difficulty_tag
+          cloud_provider_tag
           new_user
           credibility_score
           involved_projects
