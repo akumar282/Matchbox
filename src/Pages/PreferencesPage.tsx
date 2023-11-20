@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import LandingPageNavBar from '../components/LandingPageNavBar'
-import Tags from '../components/Tags'
 import { enumBundle, preferenceTags } from '../backend/types'
 import * as Preferences from './constants'
 import { CloudProviderTag, DevelopmentTag, DifficultyTag, ExperienceTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
+import Tags from '../components/Tags'
 
 
 export default function PreferencesPage() {
@@ -15,11 +15,13 @@ export default function PreferencesPage() {
   const [InterestTags, setInterestTags] = React.useState<InterestTag[]>([])
   const [CloudProviderTags, setCloudProviderTags] = React.useState<CloudProviderTag[]>([])
   const [DifficultyTags, setDifficultyTags] = React.useState<DifficultyTag[]>([])
-  const [ExperienceTags] = React.useState<ExperienceTag[]>([])
+  const [ExperienceTags, setExperienceTags] = React.useState<ExperienceTag[]>([])
   const [SizeTags, setSizeTags] = React.useState<SizeTag[]>([])
   const [checkedTags, setCheckedTags] = React.useState<preferenceTags[]>([])
 
-
+  React.useEffect(() => {
+    console.log(checkedTags)
+  }, [checkedTags])
 
   function generateTags(TagArr: preferenceTags[], typeTag: preferenceTags[]) {
     return TagArr.map((tag) => {
@@ -29,38 +31,65 @@ export default function PreferencesPage() {
       }
       return (
         <Tags
+          itemID={typeof typeTag}
           key={tag}
           bundle={bundle}
-          checked={typeTag.includes(tag)}
-          onClick={() => handleTagClick(tag, typeTag)}
-        />
+          checked={typeTag.includes(tag) && checkedTags.includes(tag)}
+          onClick={() => handleTagClick(tag, typeTag)} />
       )
     })
   }
 
-  function handleTagClick(tag: preferenceTags, typeTag?: preferenceTags[]) {
-    // Toggle the tag in the corresponding type state array
-    if (typeTag) {
-      if (typeTag.includes(tag)) {
-        typeTag = typeTag.filter((t) => t !== tag)
-      } else {
-        typeTag = [...typeTag, tag]
-      }
+  async function handleTagClick(tag: preferenceTags, typeTag: preferenceTags[]) {
+    // Create a new array based on the current state
+    const updatedTags = typeTag.includes(tag)
+      ? typeTag.filter((t) => t !== tag) && checkedTags.filter((t) => t !== tag)
+      : [...typeTag, tag]
+
+    const updatedCheckedTags = checkedTags.includes(tag)
+      ? checkedTags.filter((t) => t !== tag) && updatedTags.filter((t) => t !== tag)
+      : [...checkedTags, tag]
+
+    // Update the state with the new array
+    switch (typeTag) {
+    case LanguageTags:
+      setLanguageTags(updatedTags as LanguageTag[])
+      break
+    case FrameworkTags:
+      setFrameworkTags(updatedTags as FrameworkTag[])
+      break
+    case DevelopmentTags:
+      setDevelopmentTags(updatedTags as DevelopmentTag[])
+      break
+    case CloudProviderTags:
+      setCloudProviderTags(updatedTags as CloudProviderTag[])
+      break
+    case InterestTags:
+      setInterestTags(updatedTags as InterestTag[])
+      break
+    case DifficultyTags:
+      setDifficultyTags(updatedTags as DifficultyTag[])
+      break
+    case SizeTags:
+      setSizeTags(updatedTags as SizeTag[])
+      break
+    case checkedTags:
+      setCheckedTags(updatedCheckedTags)
+      break
+      // Add cases for other tag types as needed
+    default:
+      break
     }
 
-    // Toggle the tag in the checkedTags state array
-    if (checkedTags.includes(tag)) {
-      setCheckedTags(checkedTags.filter((t) => t !== tag))
-    } else {
-      setCheckedTags([...checkedTags, tag])
-    }
-    console.log(checkedTags)
-    console.log(typeTag)
+    // Update the checkedTags state
+    setCheckedTags(updatedCheckedTags)
+
+    console.log(updatedTags)
   }
 
   return (
     <div>
-      <LandingPageNavBar/>
+      <LandingPageNavBar />
       <div className='flex flex-row mt-6'>
         <div className='flex flex-col items-start mx-4 pl-2'>
           <h1 className='font-primary text-3xl font-semibold'>Project Preferences</h1>
@@ -89,6 +118,6 @@ export default function PreferencesPage() {
       </div>
 
     </div>
-    
+
   )
 }

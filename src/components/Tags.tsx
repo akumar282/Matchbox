@@ -1,7 +1,6 @@
 import React, { ButtonHTMLAttributes } from 'react'
 import { enumBundle } from '../backend/types'
 
-
 interface tagButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   bundle: enumBundle
   checked: boolean
@@ -21,7 +20,7 @@ function formatLabel(text: string) {
 
 export default function Tags(props: tagButton){
   return (
-    <button className={`rounded-lg hover:bg-violet-400 ${props.checked ? 'bg-violet-400' : 'bg-violet-300'} my-2 ml-3 px-3 py-2 font-primary`} onClick={props.onClick}>
+    <button itemID={props.typeTag} className={`rounded-lg hover:bg-violet-400 ${props.checked ? 'bg-violet-400' : 'bg-violet-300'} my-2 ml-3 px-3 py-2 font-primary`} onClick={props.onClick}>
       {formatLabel(props.bundle.value)}
       {props.checked && (
         <svg
