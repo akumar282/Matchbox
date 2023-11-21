@@ -21,60 +21,85 @@ export default function PreferencesPage() {
 
   React.useEffect(() => {
     console.log(checkedTags)
+    console.log(LanguageTags)
+
   }, [checkedTags])
 
-  function generateTags(TagArr: preferenceTags[], typeTag: preferenceTags[]) {
+  function generateTags(TagArr: preferenceTags[], typeTag: preferenceTags[], colorTag: string = 'bg-green-300') {
     return TagArr.map((tag) => {
       const bundle: enumBundle = {
         enumMap: tag,
         value: tag,
       }
+      const isChecked = checkedTags.includes(tag) && typeTag.includes(tag)
+      const tagClasses = `rounded-lg hover:bg-violet-400 ${isChecked ? 'bg-violet-400' : `${colorTag}`} my-2 ml-3 px-3 py-2 font-primary`
       return (
         <Tags
           itemID={typeof typeTag}
           key={tag}
           bundle={bundle}
-          checked={typeTag.includes(tag) && checkedTags.includes(tag)}
-          onClick={() => handleTagClick(tag, typeTag)} />
+          checked={isChecked}
+          onClick={() => handleTagClick(tag, typeTag)}
+          className={tagClasses}/>
       )
     })
   }
 
-  async function handleTagClick(tag: preferenceTags, typeTag: preferenceTags[]) {
-    // Create a new array based on the current state
-    const updatedTags = typeTag.includes(tag)
-      ? typeTag.filter((t) => t !== tag) && checkedTags.filter((t) => t !== tag)
-      : [...typeTag, tag]
+  function removeFromAll(tag: preferenceTags) {
+    setLanguageTags((prevTags) => prevTags.filter((t) => t !== tag))
+    setFrameworkTags((prevTags) => prevTags.filter((t) => t !== tag))
+    setDevelopmentTags((prevTags) => prevTags.filter((t) => t !== tag))
+    setInterestTags((prevTags) => prevTags.filter((t) => t !== tag))
+    setCloudProviderTags((prevTags) => prevTags.filter((t) => t !== tag))
+    setDifficultyTags((prevTags) => prevTags.filter((t) => t !== tag))
+    setSizeTags((prevTags) => prevTags.filter((t) => t !== tag))
+  }
 
-    const updatedCheckedTags = checkedTags.includes(tag)
-      ? checkedTags.filter((t) => t !== tag) && updatedTags.filter((t) => t !== tag)
-      : [...checkedTags, tag]
+  async function handleTagClick(tag: preferenceTags, typeTag: preferenceTags[]) {
+    const isTagIncluded = typeTag.includes(tag)
 
     // Update the state with the new array
     switch (typeTag) {
     case LanguageTags:
-      setLanguageTags(updatedTags as LanguageTag[])
+      setLanguageTags((prevTags) =>
+        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as LanguageTag[]
+      )
       break
     case FrameworkTags:
-      setFrameworkTags(updatedTags as FrameworkTag[])
+      setFrameworkTags((prevTags) =>
+        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as FrameworkTag[]
+      )
       break
     case DevelopmentTags:
-      setDevelopmentTags(updatedTags as DevelopmentTag[])
+      setDevelopmentTags((prevTags) =>
+        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as DevelopmentTag[]
+      )
       break
     case CloudProviderTags:
-      setCloudProviderTags(updatedTags as CloudProviderTag[])
+      setCloudProviderTags((prevTags) =>
+        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as CloudProviderTag[]
+      )
       break
     case InterestTags:
-      setInterestTags(updatedTags as InterestTag[])
+      setInterestTags((prevTags) =>
+        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as InterestTag[]
+      )
       break
     case DifficultyTags:
-      setDifficultyTags(updatedTags as DifficultyTag[])
+      setDifficultyTags((prevTags) =>
+        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as DifficultyTag[]
+      )
       break
     case SizeTags:
-      setSizeTags(updatedTags as SizeTag[])
+      setSizeTags((prevTags) =>
+        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as SizeTag[]
+      )
       break
     case checkedTags:
-      setCheckedTags(updatedCheckedTags)
+      setCheckedTags((prevTags) =>
+        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag]
+      )
+      removeFromAll(tag)
       break
       // Add cases for other tag types as needed
     default:
@@ -82,9 +107,12 @@ export default function PreferencesPage() {
     }
 
     // Update the checkedTags state
-    setCheckedTags(updatedCheckedTags)
-
-    console.log(updatedTags)
+    setCheckedTags((prevCheckedTags) => {
+      return isTagIncluded
+        ? prevCheckedTags.filter((t) => t !== tag)
+        : [...prevCheckedTags, tag]
+    })
+    //console.log(updatedTags)
   }
 
   return (
@@ -102,19 +130,19 @@ export default function PreferencesPage() {
       </div>
       <div className='bg-slate-200 mx-6 my-4 rounded-lg'>
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Languages</h1>
-        {generateTags(Preferences.Languages, LanguageTags)}
+        {generateTags(Preferences.Languages, LanguageTags, 'bg-green-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Frameworks</h1>
-        {generateTags(Preferences.Frameworks, FrameworkTags)}
+        {generateTags(Preferences.Frameworks, FrameworkTags, 'bg-rose-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Domains</h1>
-        {generateTags(Preferences.Developments, DevelopmentTags)}
+        {generateTags(Preferences.Developments, DevelopmentTags, 'bg-blue-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Cloud Computing</h1>
-        {generateTags(Preferences.CloudProviders, CloudProviderTags)}
+        {generateTags(Preferences.CloudProviders, CloudProviderTags, 'bg-amber-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Interests</h1>
-        {generateTags(Preferences.InterestTags, InterestTags)}
+        {generateTags(Preferences.InterestTags, InterestTags, 'bg-violet-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Difficulty</h1>
-        {generateTags(Preferences.Difficulty, DifficultyTags)}
+        {generateTags(Preferences.Difficulty, DifficultyTags, 'bg-orange-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Size</h1>
-        {generateTags(Preferences.Size, SizeTags)}
+        {generateTags(Preferences.Size, SizeTags, 'bg-lime-300')}
       </div>
 
     </div>

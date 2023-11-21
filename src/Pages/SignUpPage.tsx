@@ -111,13 +111,13 @@ export default function SignUpPage() {
           </div>
           <div className='ml-4 py-4'>
             <input type='radio' onChange={()=>console.log()} checked={isChecked} onClick={handleCheck}></input>
-            <label className='pl-2 font-primary text-sm' >I agree to the <button onClick={() => navigate('/tos')} className='underline text-blue hover:text-indigo-400'>Terms and Conditions</button> </label>
+            <label className='pl-2 font-primary text-sm' >I agree to the <button onClick={() => navigate('/tos')} className='underline text-secondary-blue hover:text-indigo-400'>Terms and Conditions</button> </label>
           </div>
           <div className='pt-5'>
-            <button className='font-primary hover:bg-indigo-400 bg-blue text-white text-lg rounded-lg px-36 py-2' type='submit' onClick={() => formik.handleSubmit}>
+            <button className='font-primary hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg px-36 py-2' type='submit' onClick={() => formik.handleSubmit}>
             Sign Up
             </button>
-            <h1 className='font-primary text-center pt-5'>Already have an account? <button onClick={() => navigate('/login')} className='underline text-blue hover:text-indigo-400'>Login</button></h1>
+            <h1 className='font-primary text-center pt-5'>Already have an account? <button onClick={() => navigate('/login')} className='underline text-secondary-blue hover:text-indigo-400'>Login</button></h1>
           </div>
         </form>
       </div>

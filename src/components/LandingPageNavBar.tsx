@@ -22,12 +22,12 @@ export default function LandingPageNavBar() {
   }
 
   return (
-    <nav className='relative px-4 py-4 flex justify-start items-center  bg-purple'>
+    <nav className='relative px-4 py-4 flex justify-start items-center  bg-primary-purple'>
       <button onClick={() => navigate('/')}><img className='w-32 ml-2 max-w-screen-xl' src={textlogo}></img></button>
 
       <section>
         <div className='lg:hidden' onClick={() => setBurgerOpen((prev) => !prev)}>
-          <button className='navbar-burger flex items-center text-blue-600 absolute right-1 transform -translate-y-1/2 -translate-x-1/2'>
+          <button className='navbar-burger flex items-center text-black absolute right-1 transform -translate-y-1/2 -translate-x-1/2'>
             <svg className='block h-4 w-4 fill-current' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
               <title>Mobile menu</title>
               <path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z'></path>
