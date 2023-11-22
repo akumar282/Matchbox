@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage'
 import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
 import PreferencesPage from './pages/PreferencesPage'
+import HomePage from './pages/HomePage'
 
 function App () {
   
@@ -16,6 +17,7 @@ function App () {
         <Route path='/signup' element={<SignUpPage/>}/>
         <Route path='/login' element={<LoginPage />} />
         <Route path='/setup' element={<PreferencesPage />} />
+        <Route path='/home' element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   )

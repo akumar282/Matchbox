@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import LandingPageNavBar from '../components/LandingPageNavBar'
 import { enumBundle, preferenceTags } from '../backend/types'
-import * as Preferences from './constants'
-import { CloudProviderTag, DevelopmentTag, DifficultyTag, ExperienceTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
+import { CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
 import Tags from '../components/Tags'
 
 
@@ -15,7 +13,6 @@ export default function PreferencesPage() {
   const [InterestTags, setInterestTags] = React.useState<InterestTag[]>([])
   const [CloudProviderTags, setCloudProviderTags] = React.useState<CloudProviderTag[]>([])
   const [DifficultyTags, setDifficultyTags] = React.useState<DifficultyTag[]>([])
-  const [ExperienceTags, setExperienceTags] = React.useState<ExperienceTag[]>([])
   const [SizeTags, setSizeTags] = React.useState<SizeTag[]>([])
   const [checkedTags, setCheckedTags] = React.useState<preferenceTags[]>([])
 
@@ -58,7 +55,6 @@ export default function PreferencesPage() {
   async function handleTagClick(tag: preferenceTags, typeTag: preferenceTags[]) {
     const isTagIncluded = typeTag.includes(tag)
 
-    // Update the state with the new array
     switch (typeTag) {
     case LanguageTags:
       setLanguageTags((prevTags) =>
@@ -101,7 +97,6 @@ export default function PreferencesPage() {
       )
       removeFromAll(tag)
       break
-      // Add cases for other tag types as needed
     default:
       break
     }
@@ -112,40 +107,36 @@ export default function PreferencesPage() {
         ? prevCheckedTags.filter((t) => t !== tag)
         : [...prevCheckedTags, tag]
     })
-    //console.log(updatedTags)
   }
 
   return (
     <div>
       <LandingPageNavBar />
       <div className='flex flex-row mt-6'>
-        <div className='flex flex-col items-start mx-4 pl-2'>
+        <div className='flex flex-col items-start mx-8 pl-2'>
           <h1 className='font-primary text-3xl font-semibold'>Project Preferences</h1>
           <h2 className='font-primary text-medium pt-1 pb-3'>We&apos;ll use this to match you with projects of your liking</h2>
           <div>
             {generateTags(checkedTags, checkedTags)}
           </div>
         </div>
-
       </div>
-      <div className='bg-slate-200 mx-6 my-4 rounded-lg'>
+      <div className='bg-slate-200 lg:mx-8 mx-6 my-4 rounded-lg'>
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Languages</h1>
-        {generateTags(Preferences.Languages, LanguageTags, 'bg-green-300')}
+        {generateTags([...Object.values(LanguageTag)], LanguageTags, 'bg-green-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Frameworks</h1>
-        {generateTags(Preferences.Frameworks, FrameworkTags, 'bg-rose-300')}
+        {generateTags([...Object.values(FrameworkTag)], FrameworkTags, 'bg-rose-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Domains</h1>
-        {generateTags(Preferences.Developments, DevelopmentTags, 'bg-blue-300')}
+        {generateTags([...Object.values(DevelopmentTag)], DevelopmentTags, 'bg-blue-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Cloud Computing</h1>
-        {generateTags(Preferences.CloudProviders, CloudProviderTags, 'bg-amber-300')}
+        {generateTags([...Object.values(CloudProviderTag)], CloudProviderTags, 'bg-amber-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Interests</h1>
-        {generateTags(Preferences.InterestTags, InterestTags, 'bg-violet-300')}
+        {generateTags([...Object.values(InterestTag)], InterestTags, 'bg-violet-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Difficulty</h1>
-        {generateTags(Preferences.Difficulty, DifficultyTags, 'bg-orange-300')}
+        {generateTags([...Object.values(DifficultyTag)], DifficultyTags, 'bg-orange-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Size</h1>
-        {generateTags(Preferences.Size, SizeTags, 'bg-lime-300')}
+        {generateTags([...Object.values(SizeTag)], SizeTags, 'bg-lime-300')}
       </div>
-
     </div>
-
   )
 }
