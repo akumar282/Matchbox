@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import textlogo from '../img/textlogo.png'
 import NewLogo from '../img/NewLogo.png'
-// import compass from '../img/compass.svg'
-// import home from '../img/home.svg'
-// import inbox from '../img/inbox.svg'
-// import logout from '../img/logout.svg'
-// import profile from '../img/profile.svg'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 export default function NavBar() {
 
   const navigate = useNavigate()
+  const location = useLocation()
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   const [BurgerOpen, setBurgerOpen] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  const handleToggleDropdown = () => {
+    setIsDropdownOpen((prevIsDropdownOpen) => !prevIsDropdownOpen)
+  }
 
   const toggleBurger = () => {
     setBurgerOpen(false)
@@ -26,9 +28,27 @@ export default function NavBar() {
     toggleBurger()
   }
 
+  const closeDropdown = () => {
+    setIsDropdownOpen(false)
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        closeDropdown()
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+
   return (
-    <nav className=' relative px-4 py-6 flex justify-start items-center '>
-      <button onClick={() => navigate('/')}><img className='w-36 ml-2 max-w-screen-xl' src={textlogo}></img></button>
+    <nav className=' relative px-4 py-6 flex   justify-start items-center '>
+      <button onClick={() => navigate('/home')}><img className='w-36 ml-2 max-w-screen-xl' style={{color: '#FF0000'}} src={textlogo}></img></button>
 
       <section>
         <div className='lg:hidden' onClick={() => setBurgerOpen((prev) => !prev)}>
@@ -77,8 +97,9 @@ export default function NavBar() {
       <ul className='hidden absolute top-1/2 right-1 transform -translate-y-1/2 -translate-x-12 lg:mx-auto lg:flex lg:items-center lg:w-auto max-w-screen-xl'>
         <li>
           <button 
-            className='flex flex-col items-center font-primary hover:text-slate-500 px-4 py-1' 
-            onClick={() => navigate('/')}>
+            className={`flex flex-col items-center font-primary px-4 py-1 ${location.pathname === '/home' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`} 
+            onClick={() => navigate('/home')}>
             <svg 
               xmlns='http://www.w3.org/2000/svg' 
               fill='none' viewBox='0 0 24 24' 
@@ -95,8 +116,9 @@ export default function NavBar() {
         </li>
         <li>
           <button
-            className='flex flex-col items-center font-primary hover:text-slate-500 px-4 py-1'
-            onClick={() => navigate('/')}>
+            className={`flex flex-col items-center font-primary px-4 py-1 ${location.pathname === '/discover' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}
+            onClick={() => navigate('/discover')}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none' viewBox='0 0 24 24'
@@ -113,8 +135,9 @@ export default function NavBar() {
         </li>
         <li>
           <button
-            className='flex flex-col items-center font-primary hover:text-slate-500 px-4 py-1'
-            onClick={() => navigate('/')}>
+            className={`flex flex-col items-center font-primary px-4 py-1 ${location.pathname === '/create-project' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}
+            onClick={() => navigate('/create-project')}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none' viewBox='0 0 24 24'
@@ -131,8 +154,9 @@ export default function NavBar() {
         </li>
         <li>
           <button
-            className='flex flex-col text-center items-center font-primary hover:text-slate-500 px-4 py-1'
-            onClick={() => navigate('/')}>
+            className={`flex flex-col items-center font-primary px-4 py-1 ${location.pathname === '/inbox' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}
+            onClick={() => navigate('/inbox')}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none' viewBox='0 0 24 24'
@@ -146,6 +170,63 @@ export default function NavBar() {
             </svg>
             Inbox
           </button>
+          
+        </li>
+        <li>
+          <div className='relative font-primary' ref={dropdownRef}>
+            <button
+              type='button'
+              className='flex text-sm rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 ml-6 mb-1'
+              id='user-menu-button'
+              aria-expanded={isDropdownOpen}
+              onClick={handleToggleDropdown}
+            >
+              <span className='sr-only'>Open user menu</span>
+              <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.2} stroke='currentColor' className='w-11 h-11'>
+                <path strokeLinecap='round' strokeLinejoin='round' d='M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z' />
+              </svg>
+            </button>
+            {/* Dropdown menu */}
+            <div
+              className={`absolute right-0 ${isDropdownOpen ? 'block' : 'hidden'}
+              z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
+              id='user-dropdown'
+            >
+              <div className='px-4 py-3 whitespace-nowrap'>
+                <span className='block text-sm text-gray-900 dark:text-white'>Full Name</span>
+                <span className='block text-sm text-gray-500 dark:text-gray-400'>
+                  Username
+                </span>
+              </div>
+              <ul className='py-2' aria-labelledby='user-menu-button'>
+                <li className='hover:bg-gray-100'>
+                  <button
+                    onClick={() => navigate('/profile')}
+                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'
+                  >
+                    Profile
+                  </button>
+                </li>
+                <li className='hover:bg-gray-100'>
+                  <button
+                    onClick={() => navigate('/settings')}
+                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'
+                  >
+                    Settings
+                  </button>
+                </li>
+                <li className='hover:bg-gray-100'>
+                  <button
+                    onClick={() => navigate('/')}
+                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'
+                  >
+                    Sign out
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+          </div>
         </li>
       </ul>
       <style>{`

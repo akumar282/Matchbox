@@ -86,7 +86,7 @@ export default function LandingPage(): React.JSX.Element {
         <button className='bg-secondary-blue py-2 px-4 rounded-full text-white font-primary hover:bg-indigo-400' onClick={() => { navigate('/signup') }}>Get Started</button>
         <button className='bg-light-purple py-2 px-4 rounded-full text-black font-primary hover:bg-indigo-400' onClick={() => { handleScrollHome('about') }}>Learn More</button>
       </div>
-      <div id='about' className='bg-secondary-blue mt-8 pb-14 flex flex-col items-center justify-center'>
+      <div id='about' className='bg-gradient-to-l from-rose-500 via-fuchsia-500 to-indigo-500 mt-8 pb-14 flex flex-col items-center justify-center'>
         <div className='flex flex-col items-center text-center'>
           <h1 className='font-primary mx-8 mt-8 mb-10 text-white text-4xl'>Build. Execute. Deliver.</h1>
           <h3 className='font-primary text-lg mx-8 text-white w-7/12'>
