@@ -20,11 +20,8 @@ export default function NavBar() {
     setBurgerOpen(false)
   }
 
-  const handleScroll = (_id: string) => {
-    const element = document.getElementById(_id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+  const handleNav = (_id: string) => {
+    navigate(`${_id}`)
     toggleBurger()
   }
 
@@ -78,17 +75,36 @@ export default function NavBar() {
             <img className='w-50 h-40' src={NewLogo} alt='' />
           </div>
           <ul className='flex flex-col items-center justify-between min-h-[250px]'>
-            <li className=' border-gray-400 mb-8 font-primary'>
-              <button onClick={() => navigate('/')}>Home_</button>
+            <li className={` border-gray-400 mb-4 font-primary ${location.pathname === '/home' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/home')} >Home</button>
             </li>
-            <li className=' border-gray-400 my-8 font-primary'>
-              <button onClick={() => handleScroll('about')}>About_</button>
+            <li className={` border-gray-400 my-4 font-primary ${location.pathname === '/discover' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/discover')}>Discover</button>
             </li>
-            <li className=' border-gray-400 my-8 font-primary'>
-              <button onClick={() => handleScroll('faq')}>FAQ_</button>
+            <li className={` border-gray-400 my-4 font-primary ${location.pathname === '/create-project' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/create-project')}>Create</button>
             </li>
-            <li className=' border-gray-400 my-8 font-primary'>
-              <button onClick={() => handleScroll('register')}>Register_</button>
+            <li className={` border-gray-400 my-4 font-primary ${location.pathname === '/inbox' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/inbox')}>Inbox</button>
+            </li>
+            <li className={` border-gray-400 my-4 font-primary ${location.pathname === '/profile' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/profile')}>Profile</button>
+            </li>
+            <li className={` border-gray-400 my-4 font-primary ${location.pathname === '/settings' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/settings')}>Settings</button>
+            </li>
+            <li className=' border-gray-400 my-4 font-primary flex flex-row items-center'>
+              <button className='mr-1 ' onClick={() => handleNav('/')}>Logout</button>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" transform='scale (-1, 1)' strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+              </svg>
+
             </li>
           </ul>
         </div>
