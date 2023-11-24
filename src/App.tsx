@@ -6,6 +6,11 @@ import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
 import PreferencesPage from './pages/PreferencesPage'
 import HomePage from './pages/HomePage'
+import Create from './pages/Create'
+import DiscoverPage from './pages/DiscoverPage'
+import Inbox from './pages/Inbox'
+import UserProfile from './pages/UserProfile'
+import Settings from './pages/Settings'
 
 function App () {
   
@@ -18,6 +23,11 @@ function App () {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/setup' element={<PreferencesPage />} />
         <Route path='/home' element={<HomePage />} />
+        <Route path='/create-project' element={<Create />} />
+        <Route path='/discover' element={<DiscoverPage />} />
+        <Route path='/inbox' element={<Inbox />} />
+        <Route path='/profile' element={<UserProfile />} />
+        <Route path='/settings' element={<Settings />} />
       </Routes>
     </BrowserRouter>
   )
