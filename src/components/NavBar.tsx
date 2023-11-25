@@ -49,15 +49,14 @@ export default function NavBar() {
 
       <section>
         <div className='lg:hidden' onClick={() => setBurgerOpen((prev) => !prev)}>
-          <button className='navbar-burger flex items-center text-black absolute right-1 transform -translate-y-1/2 -translate-x-1/2'>
-            <svg className='block h-4 w-4 fill-current' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
-              <title>Mobile menu</title>
-              <path d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z'></path>
+          <button className='navbar-burger flex items-center text-black absolute -right-2 transform -translate-y-1/2 -translate-x-1/2'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.2} stroke='currentColor' className='w-11 h-11'>
+              <path strokeLinecap='round' strokeLinejoin='round' d='M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z' />
             </svg>
           </button>
         </div>
         <div className={BurgerOpen ? 'showMenuNav' : 'hideMenuNav'}>
-          <div className='absolute top-0 right-0 px-8 py-8' onClick={() => setBurgerOpen(false)} >
+          <div className='absolute -top-3 -right-3 px-8 py-8' onClick={() => setBurgerOpen(false)} >
             <svg
               className='h-8 w-8 text-gray-600'
               viewBox='0 0 24 24'

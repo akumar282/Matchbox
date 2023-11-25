@@ -74,7 +74,7 @@ export default function SignUpPage() {
       <div className='flex flex-col items-center justify-center lg:flex-col'>
         <div className='pt-10 flex flex-col items-center justify-center'>
           {showAlert && <ErrorAlert show={showAlert} closeAlert={closeAlert} title='Warning' message='You must accept the Terms and Conditions.' closeStyle={warnXStyle} colorStyle={warnStyle} />}
-          <h1 className='text-center font-primary text-4xl font-semibold'>Get Started</h1>
+          <h1 className='text-center font-secondary text-4xl font-light'>Get Started</h1>
           <h2 className='text-center text-lg text-medium font-primary pt-4'>Create an account</h2>
           <OAuthButtons onClick={() => Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google})} label='Sign up with Google' src={google} />
           <OAuthButtons onClick={()=>console.log()} label='Sign up with GitHub' src={github} />

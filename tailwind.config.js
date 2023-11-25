@@ -7,6 +7,7 @@ export const theme = {
   extend: {
     fontFamily: {
       primary: 'roboto-mono',
+      secondary: 'roboto-bold',
     },
     colors: {
       'primary-purple': '#CDC7FD',
