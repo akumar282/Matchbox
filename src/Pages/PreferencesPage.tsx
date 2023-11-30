@@ -16,12 +16,6 @@ export default function PreferencesPage() {
   const [SizeTags, setSizeTags] = React.useState<SizeTag[]>([])
   const [checkedTags, setCheckedTags] = React.useState<preferenceTags[]>([])
 
-  React.useEffect(() => {
-    console.log(checkedTags)
-    console.log(LanguageTags)
-
-  }, [checkedTags])
-
   function generateTags(TagArr: preferenceTags[], typeTag: preferenceTags[], colorTag: string = 'bg-green-300') {
     return TagArr.map((tag) => {
       const bundle: enumBundle = {

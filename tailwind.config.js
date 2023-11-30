@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export const content = [
   './src/**/*.{js,jsx,ts,tsx}',
-  'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
+  'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+  './node_modules/tw-elements-react/dist/js/**/*.js',
 ];
 export const theme = {
   extend: {
@@ -20,5 +21,5 @@ export const theme = {
     }
   },
 };
-export const plugins = [require('flowbite/plugin')];
+export const plugins = [require('flowbite/plugin'), require('tw-elements-react/dist/plugin.cjs')];
 

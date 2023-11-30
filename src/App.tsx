@@ -11,6 +11,7 @@ import DiscoverPage from './pages/DiscoverPage'
 import Inbox from './pages/Inbox'
 import UserProfile from './pages/UserProfile'
 import Settings from './pages/Settings'
+import SavedPosts from './pages/SavedPosts'
 
 function App () {
   
@@ -28,6 +29,7 @@ function App () {
         <Route path='/inbox' element={<Inbox />} />
         <Route path='/profile' element={<UserProfile />} />
         <Route path='/settings' element={<Settings />} />
+        <Route path='/saved' element={<SavedPosts />} />
       </Routes>
     </BrowserRouter>
   )

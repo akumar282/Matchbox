@@ -7,7 +7,7 @@ import {
   CloudProviderTag,
   ExperienceTag,
   DifficultyTag
-} from '../API'
+} from '@api'
 
 export type preferenceTags = FrameworkTag | SizeTag | LanguageTag | InterestTag | DevelopmentTag | CloudProviderTag | ExperienceTag | DifficultyTag
 

@@ -9,8 +9,8 @@ Amplify.configure(awsconfig)
 export async function standardSignUp(username: string, email: string, password: string): Promise<string> {
   const uuidGen = uuidv4()
   try {
-    const congitoResult = await newUserSignUp(username, password, email, uuidGen)
-    if (congitoResult ===  'Success') {
+    const cognitoResult = await newUserSignUp(username, password, email, uuidGen)
+    if (cognitoResult ===  'Success') {
       await createUser(
         {
           input:{
@@ -32,7 +32,7 @@ export async function standardSignUp(username: string, email: string, password: 
       )
     }
 
-    return congitoResult
+    return cognitoResult
   } catch (error) {
     console.error(error)
     return 'Sign up failed'

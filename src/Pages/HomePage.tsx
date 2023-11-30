@@ -2,11 +2,13 @@ import React from 'react'
 import NavBar from '../components/NavBar'
 import { TrendIcon, FlaskIcon, MLIcon, CloudIcon } from '../components/Vectors'
 import CategoryButton from '../components/CategoryButton'
-import ProjectView from '../components/ProjectView'
-import dji_0043 from '../img/dji_0043.jpg'
-import strom from '../img/Strom.jpg'
+//import ProjectView from '../components/ProjectView'
+import { useNavigate } from 'react-router-dom'
 
 export default function HomePage() {
+
+  const navigate = useNavigate()
+
   return (
     <div>
       <NavBar />
@@ -15,7 +17,7 @@ export default function HomePage() {
           <h1 className='lg:text-3xl md:text-2xl font-secondary text-xl ml-4 mb-4 mt-2'>Welcome Back, Username</h1>
           <div className='grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 auto-cols-max text-start'>
             <CategoryButton bordercolor='border-r-rose-400' titleLabel='Trending Projects' imageIcon={() => <TrendIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
-            <CategoryButton bordercolor='border-r-violet-400'  titleLabel='Open Source Frameworks' imageIcon={() => <FlaskIcon className='h-8 w-8 text-black' viewBox='0 0 24 24' />} />
+            <CategoryButton bordercolor='border-r-violet-400' titleLabel='Open Source Frameworks' imageIcon={() => <FlaskIcon className='h-8 w-8 text-black' viewBox='0 0 24 24' />} />
             <CategoryButton bordercolor='border-r-yellow-300' titleLabel='Machine Learning/AI&#8197;&#8197;&#8197;' imageIcon={() => <MLIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
             <CategoryButton bordercolor='border-r-green-300' titleLabel='Cloud Computing&#8197;' imageIcon={() => <CloudIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
           </div>
@@ -26,7 +28,7 @@ export default function HomePage() {
           <h1 className='text-2xl font-primary ml-3 mt-3'>Get Started</h1>
           <h3 className='text-sm font-primary ml-3 mt-1'>Post your own project and build with community!</h3>
           <div className='w-full h-full flex items-center my-2 '>
-            <button className='border-4 border-dashed hover:bg-purple-300 border-purple-500 lg:h-44 h-28 rounded-[20px]  w-[97%] mx-auto flex flex-col items-center justify-center'>
+            <button onClick={() => navigate('/create-project')} className='border-4 shadow-lg border-dashed hover:bg-purple-300 border-purple-500 lg:h-44 h-28 rounded-[20px]  w-[97%] mx-auto flex flex-col items-center justify-center'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none' viewBox='0 0 24 24'
@@ -47,16 +49,7 @@ export default function HomePage() {
           <h3 className='text-sm font-primary ml-3 mt-1'>Projects that you want to look into:</h3>
           <div className='overflow-x-auto'>
             <div className='flex lg:grid lg:grid-cols-4 md:grid-cols-4'>
-              <ProjectView title='Project 1' image={dji_0043} github='ff' />
-              <ProjectView title='Project 2' image={strom} github='ff' />
-              <ProjectView title='Project 2' image={strom} github='ff' />
-              <ProjectView title='Project 2' image={dji_0043} github='ff' />
-              <ProjectView title='Project 2' image={dji_0043} github='ff' />
-              <ProjectView title='Project 2' image={dji_0043} github='ff' />
-              {/* <ProjectView title='Project 3' image={dji_0043} github='ff' />
-              <ProjectView title='Project 4' image={dji_0043} github='ff' />
-              <ProjectView title='Project 4' image={dji_0043} github='ff' />
-              <ProjectView title='Project 4' image={dji_0043} github='ff' /> */}
+              {/* Render Query Here */}
             </div>
           </div>
         </div>
@@ -65,16 +58,7 @@ export default function HomePage() {
           <h3 className='text-sm font-primary ml-3 mt-1'>Projects that you are currently contributing to:</h3>
           <div className='overflow-x-auto'>
             <div className='flex lg:grid lg:grid-cols-4 md:grid-cols-4'>
-              <ProjectView title='Project 1' image={dji_0043} github='ff' />
-              <ProjectView title='Project 2' image={strom} github='ff' />
-              <ProjectView title='Project 2' image={strom} github='ff' />
-              <ProjectView title='Project 2' image={dji_0043} github='ff' />
-              <ProjectView title='Project 2' image={dji_0043} github='ff' />
-              <ProjectView title='Project 2' image={dji_0043} github='ff' />
-              {/* <ProjectView title='Project 3' image={dji_0043} github='ff' />
-              <ProjectView title='Project 4' image={dji_0043} github='ff' />
-              <ProjectView title='Project 4' image={dji_0043} github='ff' />
-              <ProjectView title='Project 4' image={dji_0043} github='ff' /> */}
+              {/* Render Query Here */}
             </div>
           </div>
         </div>
