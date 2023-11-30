@@ -10,7 +10,7 @@ export default function HomePage() {
   const navigate = useNavigate()
 
   return (
-    <div>
+    <div className='flex flex-col min-h-screen'>
       <NavBar />
       <div className='bg-primary-purple flex justify-center'>
         <div className='my-3 items-start'>
@@ -23,7 +23,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className='bg-gray-200 '>
+      <div className='bg-gray-200 flex-grow'>
         <div className='max-w-[1070px] min-h-[200px] mx-auto pt-4'>
           <h1 className='text-2xl font-primary ml-3 mt-3'>Get Started</h1>
           <h3 className='text-sm font-primary ml-3 mt-1'>Post your own project and build with community!</h3>
@@ -64,7 +64,7 @@ export default function HomePage() {
         </div>
         <h1></h1>
       </div>
-      <div className='bg-secondary-blue flex flex-col items-center justify-center'>
+      <div className='bg-secondary-blue flex flex-col static bottom-0 items-center justify-center'>
         <div>
           <h1 className='text-base font-primary text-center text-white py-4 px-5'>Copyright © 2023 GitMatch</h1>
         </div>

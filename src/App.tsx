@@ -12,6 +12,7 @@ import Inbox from './pages/Inbox'
 import UserProfile from './pages/UserProfile'
 import Settings from './pages/Settings'
 import SavedPosts from './pages/SavedPosts'
+import NotFound from './pages/NotFound'
 
 function App () {
   
@@ -19,6 +20,7 @@ function App () {
     //create a saved state that can be updated by the user
     <BrowserRouter>
       <Routes>
+        <Route path='/*' element={<NotFound />} />
         <Route path='/' element={<LandingPage />} />
         <Route path='/signup' element={<SignUpPage/>}/>
         <Route path='/login' element={<LoginPage />} />

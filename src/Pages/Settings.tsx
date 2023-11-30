@@ -3,13 +3,33 @@ import NavBar from '../components/NavBar'
 
 export default function Settings() {
 
+  function accountInformation() {
+    return (
+      <div className='flex flex-col items-start pl-3 pt-2'>
+        <h1 className='font-primary text-xl'>User Profile</h1>
+        <h3 className='font-primary text-sm'>Your current saved information</h3>
+        <div className='flex flex-row items-start mt-3'>
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 25 25' strokeWidth={1.2} stroke='currentColor' height={90} width={90}>
+            <path strokeLinecap='round' strokeLinejoin='round' d='M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z' />
+          </svg>
+          <div className='flex flex-col items-start justify-center h-full'>
+            <h1 className='font-primary text-base'>Profile Picture</h1>
+            <h3 className='font-primary text-sm'>File Types: JPEG, PNG under 25 MB</h3>
+          </div>
+          <button className='bg-indigo-500 rounded-md hover:bg-indigo-200'>
+            Upload New Picture
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div>
       <NavBar/>
       <div className='bg-gray-300'> {/* background div*/}
         <div className='flex flex-row'> {/* split between settings pane and display */}
-          <div className='bg-gray-200 min-w-[280px] flex flex-col'> {/* settings pane items stacked */}
+          <div className=' hidden bg-gray-200 min-w-[280px] lg:flex flex-col '> {/* settings pane items stacked */}
             <div
               className='flex flex-row min-w-[100px] justify-between mx-auto mt-4'> {/*first settings block image and buttons side by side*/}
               <div className='mr-4'>
@@ -39,6 +59,9 @@ export default function Settings() {
                 </section>
               </div>
             </div>
+          </div>
+          <div className='flex grow'>
+            {accountInformation()}
           </div>
         </div>
       </div>
