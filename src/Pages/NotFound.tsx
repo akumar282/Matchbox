@@ -11,7 +11,7 @@ export default function NotFound() {
         <h1 className='px-2 font-primary text-2xl text-center'>404 | Oh no! We lost all the matches!</h1>
         <button onClick={() => navigate(-1)} className='hover:bg-slate-300 rounded-lg text-lg px-3 py-2 mt-4 mb-10 bg-primary-purple font-primary'>Go Back</button>
       </div>
-      <img src={helpy} alt={'Helpy animatronic GIF'} />
+      <img className='mr-12' src={helpy} alt={'Helpy animatronic GIF'} />
     </div>
   )
 }

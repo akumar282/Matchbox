@@ -1,12 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
 import NavBar from '../components/NavBar'
+import PreferencesComponent from '../components/PreferencesComponent'
 
 export default function Settings() {
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [pageIndex, setPageIndex] = useState<number>(0)
+  const components = [accountInformation(), PreferencesComponent()]
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const goToNextIndex = () => {
+    setPageIndex((prevIndex) => (prevIndex + 1) % components.length)
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const goToPreviousIndex = () => {
+    setPageIndex((prevIndex) =>
+      prevIndex === 0 ? components.length - 1 : prevIndex - 1
+    )
+  }
 
   function accountInformation() {
     return (
       <div className='flex flex-col items-start pl-4 pt-4'>
-        <h1 className='font-primary text-xl'>User Profile</h1>
+        <h1 className='font-primary text-3xl font-semibold'>User Profile</h1>
         <h3 className='font-primary text-sm'>Your current saved information</h3>
         <div className='flex flex-row flex-wrap items-start mt-3'>
           <div className='flex grow-0'>
@@ -22,7 +39,7 @@ export default function Settings() {
               <path
                 strokeLinecap='round'
                 strokeLinejoin='round'
-                d={`M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 
+                d={`M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963
                 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z`} />
             </svg>
           </div>
@@ -58,13 +75,17 @@ export default function Settings() {
             <div className='flex flex-col lg:items-center lg:justify-center  w-full'>
               <h1 className='pb-4'>Manage Password</h1>
               <div className='flex flex-col items-center w-5/6'>
-                <div className='flex flex-col text-sm pr-1 pb-1 w-full'>
-                  <label>First Name</label>
-                  <input className='rounded-md lg:w-full w-[250px]' name={'First Name'} type={'text'} id={'first_name'} placeholder={'User'}/>
+                <div className='flex flex-col text-sm pr-1 pb-2 w-full'>
+                  <label>Old Password</label>
+                  <input className='rounded-md lg:w-full w-[250px]' name={'Old Password'} type='password' id={'old_password'} placeholder={'********'}/>
+                </div>
+                <div className='flex flex-col text-sm pr-1 pb-2 w-full'>
+                  <label>New Password</label>
+                  <input className='rounded-md lg:w-full w-[250px]' name={'New Password'} type='password' id={'new_password'} placeholder={'********'}/>
                 </div>
                 <div className='flex flex-col text-sm pb-1 w-full'>
-                  <label>Last Name</label>
-                  <input className='rounded-md lg:w-full w-[250px]' name={'Last Name'} type={'text'} id={'last_name'} placeholder={'Name'} />
+                  <label>Confirm Password</label>
+                  <input className='rounded-md lg:w-full w-[250px]' name={'Confirm Password'} type='password' id={'confirm_password'} placeholder={'********'} />
                 </div>
               </div>
             </div>
@@ -75,11 +96,11 @@ export default function Settings() {
   }
 
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex flex-col h-screen'>
       <NavBar/>
-      <div className='bg-gray-300 flex-grow'> {/* background div*/}
-        <div className='flex flex-row'> {/* split between settings pane and display */}
-          <div className=' hidden bg-gray-200 min-w-[280px] lg:flex flex-col min-h-screen'> {/* settings pane items stacked */}
+      <div className='flex flex-row flex-grow bg-gray-300'> {/* background div*/}
+        <div className='flex flex-grow flex-row'> {/* split between settings pane and display */}
+          <div className=' hidden bg-gray-200 min-w-[280px] lg:flex flex-col'> {/* settings pane items stacked */}
             <div
               className='flex flex-row min-w-[100px] justify-between mx-auto mt-4'> {/*first settings block image and buttons side by side*/}
               <div className='mr-4'>
@@ -98,7 +119,7 @@ export default function Settings() {
               <div>
                 <section className='font-primary text-sm space-y-3 flex flex-col items-start'>
                   <h1 className='font-semibold mb-1'>Profile</h1>
-                  <button>Personal Information</button>
+                  <button onClick={() => setPageIndex(0)}>Personal Information</button>
                   <button>Notifications</button>
                 </section>
               </div>
@@ -123,13 +144,19 @@ export default function Settings() {
               <div>
                 <section className='font-primary text-sm space-y-3 mr-2 flex flex-col items-start'>
                   <h1 className='font-semibold mb-1'>Preferences</h1>
-                  <button>Project Preferences</button>
+                  <button onClick={() => setPageIndex(1)}>Project Preferences</button>
                 </section>
               </div>
             </div>
           </div>
-          <div className='flex grow justify-center'>
-            {accountInformation()}
+          <div className='flex flex-col justify-between  grow items-center'>
+            {components[pageIndex]}
+            <div className='bg-white grow-0 flex pt-3 static bottom-0 mt-4 justify-center w-full'>
+              <div className='flex font-primary space-x-3 text-lg flex-row'>
+                <button className='py-1 px-6 mb-3 bg-gray-300 rounded-full' onClick={goToPreviousIndex}>Back</button>
+                <button className='py-1 px-6 mb-3 bg-blue-700 rounded-full text-white' onClick={goToNextIndex}>Next</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
