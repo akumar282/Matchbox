@@ -154,7 +154,7 @@ export default function Settings() {
             <div className='bg-white grow-0 flex pt-3 static bottom-0 mt-4 justify-center w-full'>
               <div className='flex font-primary space-x-3 text-lg flex-row'>
                 <button className='py-1 px-6 mb-3 bg-gray-300 rounded-full' onClick={goToPreviousIndex}>Back</button>
-                <button className='py-1 px-6 mb-3 bg-blue-700 rounded-full text-white' onClick={goToNextIndex}>Next</button>
+                <button className='py-1 px-6 mb-3 bg-blue-700 rounded-full text-white' onClick={goToNextIndex}>NextT</button>
               </div>
             </div>
           </div>
