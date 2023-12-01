@@ -146,8 +146,9 @@ export default function LandingPage(): React.JSX.Element {
               type='email'
               id='email' 
               value={formik.values.email} 
-              onChange={formik.handleChange} 
-              placeholder='Enter your email!'/>
+              onChange={formik.handleChange}
+              placeholder='Enter your email!'
+            />
           </div>
           <button type="submit" onClick={()=>formik.handleSubmit()} className='font-primary bg-secondary-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
         </div>
