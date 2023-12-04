@@ -24,6 +24,8 @@ function formatLabel(text: string) {
   return text
 }
 
+
+
 export default function Tags(props: tagButton){
 
   return (
