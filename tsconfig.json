@@ -22,7 +22,7 @@
     "src/backend/**/*",
     "test/backend/**/*",
     "src/backend/types.ts",
-    "src/img/**/*.svg",
+    "src/img/**/*.svg"
   ],
   "exclude": [
     "node_modules"

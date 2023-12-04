@@ -179,6 +179,7 @@ type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [re
   last_name: String
   user_creation_date: AWSDateTime
   github_link: AWSURL
+  liked_posts: [ID]
   saved_posts: [ID]
   hide_posts: [ID]
   messages: [MessageModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
@@ -240,6 +241,9 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   framework_tag: [FrameworkTag]
   difficulty_tag: [DifficultyTag]
   cloud_provider_tag: [CloudProviderTag]
+  likes: Int
+  likes_users: [ID]
+  saves: Int
   post_comments: [CommentModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
   contributor_limit: Int
   contributors: [ID]
