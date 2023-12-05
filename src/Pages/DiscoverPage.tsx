@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import DiscoverComponent from '../components/DiscoverComponent'
 import {
@@ -10,7 +10,7 @@ import {
   InterestTag,
   LanguageTag,
   PostsModel,
-  SizeTag
+  SizeTag,
 } from '@api'
 
 
@@ -68,13 +68,11 @@ const ExamplePost2 : PostsModel = {
 
 const ExampleData : PostsModel[] = [
   ExamplePost,
-  ExamplePost2,
-  ExamplePost
+  ExamplePost2
 ]
 export default function DiscoverPage() {
-
   const [projectIndex, setProjectIndex] = useState<number>(0)
-  const [projects, setProjects] = useState<React.ReactNode[]>([])
+  const [projects, setProjects] = useState<PostsModel[]>([])
 
   const goToNextIndex = () => {
     setProjectIndex((prevIndex) => (prevIndex + 1) % projects.length)
@@ -87,29 +85,30 @@ export default function DiscoverPage() {
   }
 
   useEffect(() => {
-    const updatedProjects = ExampleData.map((x) => <DiscoverComponent key={x.id} data={x} />)
-    setProjects(updatedProjects)
-  }, [])
 
+    setProjects(ExampleData)
+  }, [])
 
   return (
     <div className='flex flex-col min-h-screen'>
       <NavBar />
       <div className='flex flex-col flex-grow justify-between bg-primary-purple'>
         <div className='mx-auto'>
-          {projects[projectIndex]}
+          {projects.map((x, index) => (<DiscoverComponent isVisible={index === projectIndex} key={x.id} data={x}/>))}
         </div>
         <div className='bg-white grow-0 flex pt-3 static bottom-0 mt-4 justify-center w-full'>
           <div className='flex font-primary space-x-3 text-lg flex-row'>
             <button
               className='py-1 px-6 mb-3 bg-gray-300 hover:bg-gray-200 rounded-full'
               onClick={goToPreviousIndex}
-            >Back
+            >
+              Back
             </button>
             <button
               className='py-1 px-6 mb-3 bg-blue-700 hover:bg-blue-400 rounded-full text-white'
               onClick={goToNextIndex}
-            >Next
+            >
+              Next
             </button>
           </div>
         </div>

@@ -21,5 +21,9 @@ export const theme = {
     }
   },
 };
-export const plugins = [require('flowbite/plugin'), require('tw-elements-react/dist/plugin.cjs')];
+export const plugins = [
+    require('flowbite/plugin'),
+    require('tw-elements-react/dist/plugin.cjs'),
+    require('tailwindcss-animated')
+];
 
