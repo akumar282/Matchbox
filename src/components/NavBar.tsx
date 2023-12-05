@@ -56,7 +56,7 @@ export default function NavBar() {
           </button>
         </div>
         <div className={BurgerOpen ? 'showMenuNav' : 'hideMenuNav'}>
-          <div className='absolute -top-3 -right-3 px-8 py-8' onClick={() => setBurgerOpen(false)} >
+          <div className='absolute top-0 right-0 px-8 py-8' onClick={() => setBurgerOpen(false)} >
             <svg
               className='h-8 w-8 text-gray-600'
               viewBox='0 0 24 24'
