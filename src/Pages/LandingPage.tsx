@@ -83,10 +83,10 @@ export default function LandingPage(): React.JSX.Element {
         </div>
       </div>
       <div className='flex items-center justify-center px-8 space-x-4'>
-        <button className='bg-blue py-2 px-4 rounded-full text-white font-primary hover:bg-indigo-400' onClick={() => { navigate('/signup') }}>Get Started</button>
+        <button className='bg-secondary-blue py-2 px-4 rounded-full text-white font-primary hover:bg-indigo-400' onClick={() => { navigate('/signup') }}>Get Started</button>
         <button className='bg-light-purple py-2 px-4 rounded-full text-black font-primary hover:bg-indigo-400' onClick={() => { handleScrollHome('about') }}>Learn More</button>
       </div>
-      <div id='about' className='bg-blue mt-8 pb-14 flex flex-col items-center justify-center'>
+      <div id='about' className='bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-lime-400 via-blue-200 to-purple-700 mt-8 pb-14 flex flex-col items-center justify-center'>
         <div className='flex flex-col items-center text-center'>
           <h1 className='font-primary mx-8 mt-8 mb-10 text-white text-4xl'>Build. Execute. Deliver.</h1>
           <h3 className='font-primary text-lg mx-8 text-white w-7/12'>
@@ -103,21 +103,21 @@ export default function LandingPage(): React.JSX.Element {
         </div>
         <div className='flex flex-col sm:flex-row items-start justify-center lg:space-x-10'> {/* <-- This div */}
           <div className='mb-8 sm:mb-0 sm:mx-4 flex-col justify-center'> {/* Add sm: classes for small screens */}
-            <span className='mx-24 inline-flex items-center justify-center rounded-full bg-purple w-16 h-16 text-center font-semibold text-2xl text-blue border-2 border-white'>
+            <span className='mx-24 inline-flex items-center justify-center rounded-full bg-primary-purple w-16 h-16 text-center font-semibold text-2xl text-secondary-blue border-2 border-white'>
               1
             </span>
             <h3 className='text-center text-white font-primary text-xl pt-3'>Join</h3>
             <h3 className='text-center text-white font-primary text-base break-words w-64 mt-3'>Create your account and fill out your project preferences</h3>
           </div>
           <div className='mb-8 sm:mb-0 sm:mx-4 flex-col justify-center'> {/* Add sm: classes for small screens */}
-            <span className='mx-24 inline-flex items-center justify-center rounded-full bg-purple w-16 h-16 text-center font-semibold text-2xl text-blue border-2 border-white'>
+            <span className='mx-24 inline-flex items-center justify-center rounded-full bg-primary-purple w-16 h-16 text-center font-semibold text-2xl text-secondary-blue border-2 border-white'>
               2
             </span>
             <h3 className='text-center text-white font-primary text-xl pt-3'>Get Matched</h3>
             <h3 className='text-center text-white font-primary text-base w-64 mt-3'>Our Algorithm matches you with software projects that you want to work on based on your interests</h3>
           </div>
           <div className='mb-8 sm:mb-0 sm:mx-4 flex-col justify-center'> {/* Add sm: classes for small screens */}
-            <span className='mx-24 inline-flex items-center justify-center rounded-full bg-purple w-16 h-16 text-center font-semibold text-2xl text-blue border-2 border-white'>
+            <span className='mx-24 inline-flex items-center justify-center rounded-full bg-primary-purple w-16 h-16 text-center font-semibold text-2xl text-secondary-blue border-2 border-white'>
               3
             </span>
             <h3 className='text-center text-white font-primary text-xl pt-3'>Start Developing</h3>
@@ -133,7 +133,7 @@ export default function LandingPage(): React.JSX.Element {
         </h1>
         <CollapseAll/>
       </div>
-      <div id='register' className='bg-purple flex flex-col items-center text-center'>
+      <div id='register' className='bg-primary-purple flex flex-col items-center text-center'>
         <div className='flex flex-col items-center text-center'>
           <h1 className='font-primary mx-8 mt-8 mb-4 text-black text-4xl text-center'>Stay Updated With Us.</h1>
           <h3 className='text-black font-primary text-lg pt-2 text-center w-8/12'>We&apos;re currently building this platform for you and partnering with others to bring you projects that you are passionate about</h3>
@@ -146,10 +146,11 @@ export default function LandingPage(): React.JSX.Element {
               type='email'
               id='email' 
               value={formik.values.email} 
-              onChange={formik.handleChange} 
-              placeholder='Enter your email!'/>
+              onChange={formik.handleChange}
+              placeholder='Enter your email!'
+            />
           </div>
-          <button type="submit" onClick={()=>formik.handleSubmit()} className='font-primary bg-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
+          <button type="submit" onClick={()=>formik.handleSubmit()} className='font-primary bg-secondary-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
         </div>
         <div className='flex mt-10 mb-10 flex-row items-center lg:space-x-7'>
           <a href='https://discord.gg/kTCrcaDzpN'  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={linkedin} />linkedin</a>
@@ -162,7 +163,7 @@ export default function LandingPage(): React.JSX.Element {
         </div>
         <GitBranches/>
       </div>
-      <div className='bg-blue flex flex-col items-center justify-center'>
+      <div className='bg-secondary-blue flex flex-col items-center justify-center'>
         <div>
           <h1 className='text-base font-primary text-center text-white py-4 px-5'>Copyright © 2023 GitMatch</h1>
         </div>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const ButtonMailto = ({ mailto, label }) => {
   return (
     <Link
-      className='font-primary underline text-blue'
+      className='font-primary underline text-secondary-blue'
       to='#'
       onClick={(e) => {
         window.location.href = mailto

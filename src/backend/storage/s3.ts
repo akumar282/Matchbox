@@ -1,4 +1,4 @@
-import { Storage } from 'aws-amplify'
+import {Storage} from 'aws-amplify'
 
 export async function uploadImage(file: File): Promise<string> {
   const filename = `${Date.now()}-${file.name}`
@@ -8,7 +8,6 @@ export async function uploadImage(file: File): Promise<string> {
   return result.key
 }
 
-export async function getImage(key: string): Promise<string> {
-  const url = await Storage.get(key, { expires: 604800 })
-  return url
+export async function getImage(key: string = 'defaultProjectKey'): Promise<string> {
+  return await Storage.get(key, {expires: 604800})
 }
