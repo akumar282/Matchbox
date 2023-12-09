@@ -23,7 +23,7 @@ export default function CommentSection(props: CommentSectionData) {
             rows={1} cols={40} placeholder={'Write your comment...'}/>
         </div>
         <div className='w-full flex lg:items-start lg:justify-start justify-center'>
-          <button className='bg-blue-700 mb-3 lg:ml-4 lg:w-2/12 w-[97%] rounded-lg px-2 py-2 text-white'>Post Comment</button>
+          <button className='bg-blue-700 mb-3 lg:ml-5 lg:w-2/12 w-[97%] rounded-lg px-2 py-2 text-white'>Post Comment</button>
         </div>
         <Comment/>
       </div>

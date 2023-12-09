@@ -34,6 +34,8 @@ enum DevelopmentTag {
   CLOUD
   DATABASE
   CYBERSECURITY
+  ARTIFICIAL_INTELLIGENCE
+  MACHINE_LEARNING
 }
 
 enum LanguageTag {

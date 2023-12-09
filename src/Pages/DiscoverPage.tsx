@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import DiscoverComponent from '../components/DiscoverComponent'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -7,10 +7,6 @@ import { Pagination, Navigation } from 'swiper/modules'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css'
-
-// import { Carousel } from '@material-tailwind/react'
-import { Carousel} from '@material-tailwind/react'
-import { ThemeProvider } from '@material-tailwind/react'
 import {
   CloudProviderTag,
   DevelopmentTag,

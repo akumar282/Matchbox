@@ -1,11 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import NavBar from '../components/NavBar'
 import { TrendIcon, FlaskIcon, MLIcon, CloudIcon } from '../components/Vectors'
 import CategoryButton from '../components/CategoryButton'
-//import ProjectView from '../components/ProjectView'
 import { useNavigate } from 'react-router-dom'
+import SeeAllComponent from '../components/SeeAll'
+import Saved from '../img/Saved.svg'
+import group from '../img/group.svg'
 
 export default function HomePage() {
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [joinedProjects, setJoinedProjects] = useState<React.ReactNode[]>([
+    <SeeAllComponent key={'End'} linkTo={'saved'} image={group} bodyText={'Your joined projects will appear here so you can choose which to work on'}/>
+  ])
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [savedProjects, setSavedProjects] = useState<React.ReactNode[]>([
+    <SeeAllComponent key={'End'} linkTo={'saved'} image={Saved} bodyText={'Your saved projects will appear here so you can choose which to work on'}/>
+  ])
 
   const navigate = useNavigate()
 
@@ -48,8 +59,9 @@ export default function HomePage() {
           <h1 className='text-2xl font-primary ml-3 mt-3'>Saved Projects</h1>
           <h3 className='text-sm font-primary ml-3 mt-1'>Projects that you want to look into:</h3>
           <div className='overflow-x-auto'>
-            <div className='flex lg:grid lg:grid-cols-4 md:grid-cols-4'>
+            <div className='flex mt-2 lg:grid lg:grid-cols-4 md:grid-cols-4'>
               {/* Render Query Here */}
+              {savedProjects}
             </div>
           </div>
         </div>
@@ -57,8 +69,9 @@ export default function HomePage() {
           <h1 className='text-2xl font-primary ml-3 mt-3'>Joined Projects</h1>
           <h3 className='text-sm font-primary ml-3 mt-1'>Projects that you are currently contributing to:</h3>
           <div className='overflow-x-auto'>
-            <div className='flex lg:grid lg:grid-cols-4 md:grid-cols-4'>
+            <div className='flex mt-2 lg:grid lg:grid-cols-4 md:grid-cols-4'>
               {/* Render Query Here */}
+              {joinedProjects}
             </div>
           </div>
         </div>

@@ -79,11 +79,11 @@ export default function DiscoverComponent(props: DiscoverProps) {
 
   return (
     <div className='flex flex-col pt-8 pb-12 lg:p-16 w-full z-10'>
-      <div className='flex lg:flex-row flex-col lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
-        <div className='lg:w-64 lg:h-40 w-[97%] h-44 space-y-2 bg-white rounded-lg '>
+      <div className='flex lg:flex-row flex-col lg:items-stretch items-center  lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
+        <div className='lg:w-64 lg:h-40 w-[97%] h-44 space-y-2 bg-white shadow-lg rounded-lg '>
           <img className='h-full w-full rounded-lg object-cover' src={NewLogo} alt='Project Thumbnail'/>
         </div>
-        <div className='bg-white rounded-lg lg:w-[800px] w-[97%] flex-auto font-primary justify-between space-y-2 flex items-center flex-col '>
+        <div className='bg-white rounded-lg lg:w-[800px] w-[97%] flex-auto shadow-lg font-primary justify-between space-y-2 flex items-center flex-col '>
           <h1 className='text-2xl pt-2'>{props.data.post_title}</h1>
           <h3 className='text-center text-lg'>{props.data.description}</h3>
           <div className='flex flex-row w-full  lg:justify-between justify-center'>
@@ -150,16 +150,16 @@ export default function DiscoverComponent(props: DiscoverProps) {
         </div>
       </div>
       <div className='flex flex-col space-y-3 mt-2 items-center'>
-        <div className='bg-slate-200 mx-auto lg:w-full w-[97%] rounded-lg'>
+        <div className='bg-slate-200 mx-auto shadow-lg lg:w-full w-[97%] rounded-lg'>
           {allTags.map(x => generateTags(x))}
         </div>
-        <div className='bg-white font-primary mx-auto lg:w-full  w-[97%] rounded-lg'>
+        <div className='bg-white font-primary shadow-lg mx-auto lg:w-full  w-[97%] rounded-lg'>
           <h1 className='p-3 text-xl'>Project Description</h1>
           <h3 className='p-3'>
             {props.data.long_description}
           </h3>
         </div>
-        <div className='flex lg:flex-row flex-col bg-white  lg:justify-center divide-gray-300 lg:divide-x-2 lg:divide-y-0 divide-y-2 font-primary mx-auto lg:w-full  w-[97%] rounded-lg'>
+        <div className='flex lg:flex-row flex-col bg-white shadow-lg  lg:justify-center divide-gray-300 lg:divide-x-2 lg:divide-y-0 divide-y-2 font-primary mx-auto lg:w-full  w-[97%] rounded-lg'>
           <button className='py-2 px-4 lg:rounded-none rounded-t-lg hover:bg-slate-300 '>
             <a className='flex flex-row items-center space-x-2' href={props.data.project_link!} target='_blank' rel='noreferrer'>
               <img src={github} alt={'GitHub Logo'} width={30} height={30} />
@@ -193,11 +193,11 @@ export default function DiscoverComponent(props: DiscoverProps) {
         </div>
       </div>
       <div className='lg:mt-6 mt-3 flex flex-col w-[97%] mx-auto items-center'>
-        <button className='font-primary hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2' >
+        <button className='font-primary shadow-lg hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2' >
           Join Project
         </button>
       </div>
-      <div className='flex lg:flex-row flex-col lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
+      <div className='flex lg:flex-row flex-col shadow-lg lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
         <CommentSection postID={'fdfdfd'}/>
       </div>
     </div>
