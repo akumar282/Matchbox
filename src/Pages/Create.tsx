@@ -1,118 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from '../components/NavBar'
-import NewLogo from '../img/NewLogo.png'
-import {CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag} from '../API'
-import {enumBundle, preferenceTags} from '../backend/types'
-import Tags from '../components/Tags'
-import {useNavigate} from 'react-router-dom'
+import CPrefrences from '../components/CPrefrences'
+import CInitial from '../components/CInitial'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination, Navigation } from 'swiper/modules'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import 'swiper/css'
 
 export default function Create() {
-
-  const [isChecked, setIsChecked] = React.useState(false)
-  const [LanguageTags, setLanguageTags] = React.useState<LanguageTag[]>([])
-  const [FrameworkTags, setFrameworkTags] = React.useState<FrameworkTag[]>([])
-  const [DevelopmentTags, setDevelopmentTags] = React.useState<DevelopmentTag[]>([])
-  const [InterestTags, setInterestTags] = React.useState<InterestTag[]>([])
-  const [CloudProviderTags, setCloudProviderTags] = React.useState<CloudProviderTag[]>([])
-  const [DifficultyTags, setDifficultyTags] = React.useState<DifficultyTag[]>([])
-  const [SizeTags, setSizeTags] = React.useState<SizeTag[]>([])
-  const [checkedTags, setCheckedTags] = React.useState<preferenceTags[]>([])
-
-  const handleCheck = () => {
-    setIsChecked(!isChecked) // Toggle the checked state
+  const [my_swiper, set_my_swiper] = useState({})
+  function next_slide() {
+    my_swiper.slideNext()
   }
-
-  const navigate = useNavigate()
-
-  function generateTags(TagArr: preferenceTags[], typeTag: preferenceTags[], colorTag: string = 'bg-green-300') {
-    return TagArr.map((tag) => {
-      const bundle: enumBundle = {
-        enumMap: tag,
-        value: tag,
-      }
-      const isChecked = checkedTags.includes(tag) && typeTag.includes(tag)
-      const tagClasses = `rounded-lg hover:bg-violet-400 ${isChecked ? 'bg-violet-400' : `${colorTag}`} my-2 ml-3 px-3 py-2 font-primary`
-      return (
-        <Tags
-          itemID={typeof typeTag}
-          key={tag}
-          bundle={bundle}
-          checked={isChecked}
-          onClick={() => handleTagClick(tag, typeTag)}
-          className={tagClasses}/>
-      )
-    })
+  function prev_slide() {
+    my_swiper.slidePrev()
   }
-
-  function removeFromAll(tag: preferenceTags) {
-    setLanguageTags((prevTags) => prevTags.filter((t) => t !== tag))
-    setFrameworkTags((prevTags) => prevTags.filter((t) => t !== tag))
-    setDevelopmentTags((prevTags) => prevTags.filter((t) => t !== tag))
-    setInterestTags((prevTags) => prevTags.filter((t) => t !== tag))
-    setCloudProviderTags((prevTags) => prevTags.filter((t) => t !== tag))
-    setDifficultyTags((prevTags) => prevTags.filter((t) => t !== tag))
-    setSizeTags((prevTags) => prevTags.filter((t) => t !== tag))
-  }
-
-  async function handleTagClick(tag: preferenceTags, typeTag: preferenceTags[]) {
-    const isTagIncluded = typeTag.includes(tag)
-
-    switch (typeTag) {
-    case LanguageTags:
-      setLanguageTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as LanguageTag[]
-      )
-      break
-    case FrameworkTags:
-      setFrameworkTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as FrameworkTag[]
-      )
-      break
-    case DevelopmentTags:
-      setDevelopmentTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as DevelopmentTag[]
-      )
-      break
-    case CloudProviderTags:
-      setCloudProviderTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as CloudProviderTag[]
-      )
-      break
-    case InterestTags:
-      setInterestTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as InterestTag[]
-      )
-      break
-    case DifficultyTags:
-      setDifficultyTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as DifficultyTag[]
-      )
-      break
-    case SizeTags:
-      setSizeTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as SizeTag[]
-      )
-      break
-    case checkedTags:
-      setCheckedTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag]
-      )
-      removeFromAll(tag)
-      break
-    default:
-      break
-    }
-
-    // Update the checkedTags state
-    setCheckedTags((prevCheckedTags) => {
-      return isTagIncluded
-        ? prevCheckedTags.filter((t) => t !== tag)
-        : [...prevCheckedTags, tag]
-    })
-  }
-
-
-
   return (
     <div>
       <NavBar />
@@ -122,105 +25,25 @@ export default function Create() {
           <h3 className='text-sm font-primary lg:ml-16 ml-4 mt-1'>Post your project to share it and grow it!:</h3>
         </div>
       </div>
-      <div className='bg-primary-purple flex flex-col min-h-screen'>
-        <div className='mx-auto bg-white mt-8 mb-8 lg:max-w-[1170px] w-[97%]  font-primary rounded-lg'>
-          <div className='flex flex-col'>
-            <div className='flex flex-col items-center space-y-4 mx-auto w-[93%] '>
-              <h1 className='pb-4 mt-3 text-xl'>Project Information</h1>
-              <div className='w-full flex lg:flex-row items-center lg:space-x-4 space-x-0 flex-col'>
-                <div className='lg:w-80 lg:h-48 grow-0 w-[97%] h-44 md:w-48 md:h-32 space-y-2 lg:mb-0 mb-4 bg-white shadow-lg rounded-lg '>
-                  <img className='h-full w-full rounded-lg grow-0 object-cover' src={NewLogo} alt='Project Thumbnail'/>
-                </div>
-                <div className='flex flex-grow flex-col w-full'>
-                  <div className='flex text-sm flex-col pb-2 w-full'>
-                    <label>First Name</label>
-                    <input
-                      className='rounded-md lg:w-full'
-                      name={'Project Title'}
-                      type='text'
-                      id={'project-name'}
-                      placeholder={'Enter Project Title...'}
-                    />
-                  </div>
-                  <div className='flex text-sm flex-col pb-2 w-full'>
-                    <label>Small Description (1-2 Sentence Description of the project)</label>
-                    <input
-                      className='rounded-md lg:w-full'
-                      name={'Last Name'}
-                      type='text'
-                      id={'last-name'}
-                      placeholder={'Name'}
-                    />
-                  </div>
-                  <div className='flex text-sm flex-col pb-1 w-full'>
-                    <label>Username</label>
-                    <input
-                      className='rounded-md lg:w-full'
-                      name={'Username'}
-                      type='text'
-                      id={'user_name'}
-                      placeholder={'@gitmatch.io'}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className='w-full text-sm'>
-                <h1>Check Repository Requirements: </h1>
-                <ul>
-                </ul>
-                <div className='flex lg:flex-row lg:space-x-2 flex-col'>
-                  <div className='flex flex-grow w-full'>
-                    <input
-                      className='rounded-md w-full'
-                      name={'Username'}
-                      type='text'
-                      id={'user_name'}
-                      placeholder={'@gitmatch.io'}
-                    />
-                  </div>
-                  <div className='lg:w-2/12 mt-2 lg:mt-0'>
-                    <button className='px-2 bg-blue-700 text-white lg:h-full h-10 lg:max-w-[180px] w-full rounded-lg'>Verify Repo</button>
-                  </div>
-                </div>
-              </div>
-              <div className='w-full text-sm'>
-                <label>Long Description (Describe your project in detail)</label>
-                <textarea className='w-full rounded-lg'/>
-              </div>
-            </div>
-            <div>
-              <div className='flex flex-row mt-6'>
-                <div className='flex flex-col items-start mx-8 lg:pl-1'>
-                  <h1 className='font-primary text-xl'>Project Preferences</h1>
-                  <h2 className='font-primary text-medium pt-1 pb-3'>Select tags to match people with your project </h2>
-                  <div>
-                    {generateTags(checkedTags, checkedTags)}
-                  </div>
-                </div>
-              </div>
-              <div className='bg-slate-200 lg:mx-8 mx-6 my-4 rounded-lg'>
-                <h1 className='px-4 py-2 text-bold font-primary text-base'>Languages</h1>
-                {generateTags([...Object.values(LanguageTag)], LanguageTags, 'bg-green-300')}
-                <h1 className='px-4 py-2 text-bold font-primary text-base'>Frameworks</h1>
-                {generateTags([...Object.values(FrameworkTag)], FrameworkTags, 'bg-rose-300')}
-                <h1 className='px-4 py-2 text-bold font-primary text-base'>Domains</h1>
-                {generateTags([...Object.values(DevelopmentTag)], DevelopmentTags, 'bg-blue-300')}
-                <h1 className='px-4 py-2 text-bold font-primary text-base'>Cloud Computing</h1>
-                {generateTags([...Object.values(CloudProviderTag)], CloudProviderTags, 'bg-amber-300')}
-                <h1 className='px-4 py-2 text-bold font-primary text-base'>Interests</h1>
-                {generateTags([...Object.values(InterestTag)], InterestTags, 'bg-violet-300')}
-                <h1 className='px-4 py-2 text-bold font-primary text-base'>Difficulty</h1>
-                {generateTags([...Object.values(DifficultyTag)], DifficultyTags, 'bg-orange-300')}
-                <h1 className='px-4 py-2 text-bold font-primary text-base'>Size</h1>
-                {generateTags([...Object.values(SizeTag)], SizeTags, 'bg-lime-300')}
-              </div>
-            </div>
-            <div className='lg:ml-4 py-4 ml-8 flex justify-center'>
-              <input type='radio' onChange={()=>console.log()} checked={isChecked} onClick={handleCheck}></input>
-              <label className='lg:pl-2 pl-4 font-primary text-sm' >I verify this post meets the <button onClick={() => navigate('/tos')} className='underline text-secondary-blue hover:text-indigo-400'>Community Guidelines</button> </label>
-            </div>
-          </div>
-        </div>
+      
+      <div className='bg-primary-purple flex flex-col items-center justify-center'>
+        <Swiper
+          modules={[Pagination, Navigation]}
+          spaceBetween={50}
+          slidesPerView={1}
+          navigation ={{
+            nextEl:'.swiper-button-next',
+            prevEl:'.swiper-button-prev'
+          }}
+          allowTouchMove={false}
+          onInit={(ev) => {
+            set_my_swiper(ev)
+          }}
+          className='.my_swiper max-w-[1170px] mx-auto w-[97%]'
+        >
+          <SwiperSlide>{<CInitial nextSlide={next_slide}/>}</SwiperSlide>
+          <SwiperSlide>{<CPrefrences nextSlide={next_slide} prevSlide={prev_slide}/>}</SwiperSlide>
+        </Swiper>
       </div>
     </div>
   )

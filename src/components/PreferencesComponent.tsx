@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { enumBundle, preferenceTags } from '../backend/types'
 import { CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
 import Tags from '../components/Tags'
 
-
-export default function PreferencesComponent() {
+interface Props {
+  setChecked : React.Dispatch<React.SetStateAction<preferenceTags[]>>
+}
+export default function PreferencesComponent(props: Props) {
 
   const [LanguageTags, setLanguageTags] = React.useState<LanguageTag[]>([])
   const [FrameworkTags, setFrameworkTags] = React.useState<FrameworkTag[]>([])
@@ -34,6 +36,9 @@ export default function PreferencesComponent() {
       )
     })
   }
+  useEffect(() => {
+    props.setChecked(checkedTags)
+  }, [checkedTags])
 
   function removeFromAll(tag: preferenceTags) {
     setLanguageTags((prevTags) => prevTags.filter((t) => t !== tag))
@@ -104,16 +109,14 @@ export default function PreferencesComponent() {
 
   return (
     <div>
-      <div className='flex flex-row mt-6'>
-        <div className='flex flex-col items-start mx-8 pl-2'>
-          <h1 className='font-primary text-3xl font-semibold'>Project Preferences</h1>
-          <h2 className='font-primary text-medium pt-1 pb-3'>We&apos;ll use this to match you with projects of your liking</h2>
+      <div className='flex flex-row'>
+        <div className='flex flex-col items-start pl-2'>
           <div>
             {generateTags(checkedTags, checkedTags)}
           </div>
         </div>
       </div>
-      <div className='bg-slate-200 lg:mx-8 mx-6 my-4 rounded-lg'>
+      <div className='bg-slate-200 my-4 p-1 rounded-lg'>
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Languages</h1>
         {generateTags([...Object.values(LanguageTag)], LanguageTags, 'bg-green-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Frameworks</h1>
