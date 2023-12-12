@@ -30,6 +30,18 @@
 .App-link {
   color: #61dafb;
 }
+.swiper-pagination-bullets {
+  bottom: initial!important;
+  top: 25px!important;
+}
+.swiper-pagination-bullet {
+  width: 15px!important;
+  height: 15px!important;
+  margin: 0 5px!important;
+}
+.swiper-pagination-bullet-active {
+  background: #fff!important;
+}
 
 @keyframes App-logo-spin {
   from {

@@ -80,6 +80,7 @@ const ExampleData : PostsModel[] = [
   ExamplePost2
 ]
 export default function DiscoverPage() {
+  
   const [projectIndex, setProjectIndex] = useState<number>(0)
   const [projects, setProjects] = useState<React.ReactNode[]>([])
   const [my_swiper, set_my_swiper] = useState({})
@@ -94,6 +95,9 @@ export default function DiscoverPage() {
       <div className='flex flex-col flex-grow justify-between bg-primary-purple'>
         <div className='flex-grow flex  justify-center overflow-visible'>
           <div className='max-w-screen-2xl w-full z-10 overflow-visible'>
+            <div className='flex items-center justify-center relative h-8'>
+              <div className='swiper-pagination'> </div>
+            </div>
             <Swiper
               modules={[Pagination, Navigation]}
               spaceBetween={50}
@@ -104,6 +108,7 @@ export default function DiscoverPage() {
               }}
               loop={true}
               pagination={{
+                el: '.swiper-pagination',
                 clickable: true,
                 dynamicBullets: true,
               }}
@@ -155,6 +160,6 @@ export default function DiscoverPage() {
       </div>
     </div>
   )
-
 }
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
