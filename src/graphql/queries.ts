@@ -108,6 +108,9 @@ export const getUsersModel = /* GraphQL */ `
           framework_tag
           difficulty_tag
           cloud_provider_tag
+          likes
+          likes_users
+          saves
           contributor_limit
           contributors
           reported
@@ -144,6 +147,7 @@ export const getUsersModel = /* GraphQL */ `
       last_name
       user_creation_date
       github_link
+      liked_posts
       saved_posts
       hide_posts
       messages {
@@ -205,6 +209,7 @@ export const getUsersModel = /* GraphQL */ `
           id
           user_id
           org_name
+          image_link
           start_date
           end_date
           description
@@ -251,6 +256,7 @@ export const listUsersModels = /* GraphQL */ `
         last_name
         user_creation_date
         github_link
+        liked_posts
         saved_posts
         hide_posts
         messages {
@@ -328,6 +334,7 @@ export const searchUsersModels = /* GraphQL */ `
         last_name
         user_creation_date
         github_link
+        liked_posts
         saved_posts
         hide_posts
         messages {
@@ -485,6 +492,7 @@ export const getExperienceModel = /* GraphQL */ `
       id
       user_id
       org_name
+      image_link
       start_date
       end_date
       description
@@ -512,6 +520,7 @@ export const listExperienceModels = /* GraphQL */ `
         id
         user_id
         org_name
+        image_link
         start_date
         end_date
         description
@@ -548,6 +557,7 @@ export const searchExperienceModels = /* GraphQL */ `
         id
         user_id
         org_name
+        image_link
         start_date
         end_date
         description
@@ -599,6 +609,9 @@ export const getPostsModel = /* GraphQL */ `
       framework_tag
       difficulty_tag
       cloud_provider_tag
+      likes
+      likes_users
+      saves
       post_comments {
         items {
           id
@@ -654,6 +667,9 @@ export const listPostsModels = /* GraphQL */ `
         framework_tag
         difficulty_tag
         cloud_provider_tag
+        likes
+        likes_users
+        saves
         post_comments {
           nextToken
           __typename
@@ -707,6 +723,9 @@ export const searchPostsModels = /* GraphQL */ `
         framework_tag
         difficulty_tag
         cloud_provider_tag
+        likes
+        likes_users
+        saves
         post_comments {
           nextToken
           __typename
@@ -1052,6 +1071,7 @@ export const getUsersConvo = /* GraphQL */ `
         last_name
         user_creation_date
         github_link
+        liked_posts
         saved_posts
         hide_posts
         messages {
@@ -1127,6 +1147,7 @@ export const listUsersConvos = /* GraphQL */ `
           last_name
           user_creation_date
           github_link
+          liked_posts
           saved_posts
           hide_posts
           lang_tag

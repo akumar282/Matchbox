@@ -218,6 +218,7 @@ type ExperienceModel @model @searchable @auth(rules: [{allow: public, operations
   id: ID!
   user_id: ID! @index(name: "byUsersModel")
   org_name: String!
+  image_link: String!
   start_date: AWSDate!
   end_date: AWSDate
   description: String!
