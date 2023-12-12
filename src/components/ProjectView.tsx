@@ -8,6 +8,8 @@ interface ProjectViewProps {
 }
 
 export default function ProjectView(props: ProjectViewProps) {
+
+
   return (
     <div>
       <button className=' flex flex-col items-start hover:bg-purple-300 rounded-lg mr-2 ml-2 mt-3 min-w-[220px] max-w-[220px] lg:max-w-[280px] min-h-[200px] bg-white'>

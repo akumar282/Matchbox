@@ -15,6 +15,7 @@ import { Auth } from 'aws-amplify'
 import awsconfig from '../aws-exports'
 import { Amplify } from 'aws-amplify'
 import ErrorAlert, { warnStyle, warnXStyle} from '../components/alerts/errorAlert'
+import MFAModal from '../components/MFAModal'
 Amplify.configure(awsconfig)
 
 
@@ -22,6 +23,7 @@ export default function SignUpPage() {
 
   const [isChecked, setIsChecked] = React.useState(false)
   const [showAlert, setShowAlert] = React.useState(false)
+  const [showModal, setShowModal] = React.useState(false)
 
   const handleCheck = () => {
     setIsChecked(!isChecked) // Toggle the checked state
@@ -61,7 +63,8 @@ export default function SignUpPage() {
         setShowAlert(true)
       } else {
         setShowAlert(false)
-        standardSignUp(values.user_name, values.email, values.password) 
+        standardSignUp(values.user_name, values.email, values.password)
+        setShowModal(true)
       }
       
     },
@@ -74,6 +77,7 @@ export default function SignUpPage() {
       <div className='flex flex-col items-center justify-center lg:flex-col'>
         <div className='pt-10 flex flex-col items-center justify-center'>
           {showAlert && <ErrorAlert show={showAlert} closeAlert={closeAlert} title='Warning' message='You must accept the Terms and Conditions.' closeStyle={warnXStyle} colorStyle={warnStyle} />}
+          <MFAModal setFunction={setShowModal} openModal={showModal}/>
           <h1 className='text-center font-secondary text-4xl font-light'>Get Started</h1>
           <h2 className='text-center text-lg text-medium font-primary pt-4'>Create an account</h2>
           <OAuthButtons onClick={() => Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google})} label='Sign up with Google' src={google} />

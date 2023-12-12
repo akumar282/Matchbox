@@ -69,6 +69,9 @@ export const onCreateUsersModel = /* GraphQL */ `
           framework_tag
           difficulty_tag
           cloud_provider_tag
+          likes
+          likes_users
+          saves
           contributor_limit
           contributors
           reported
@@ -105,6 +108,7 @@ export const onCreateUsersModel = /* GraphQL */ `
       last_name
       user_creation_date
       github_link
+      liked_posts
       saved_posts
       hide_posts
       messages {
@@ -166,6 +170,7 @@ export const onCreateUsersModel = /* GraphQL */ `
           id
           user_id
           org_name
+          image_link
           start_date
           end_date
           description
@@ -215,6 +220,9 @@ export const onUpdateUsersModel = /* GraphQL */ `
           framework_tag
           difficulty_tag
           cloud_provider_tag
+          likes
+          likes_users
+          saves
           contributor_limit
           contributors
           reported
@@ -251,6 +259,7 @@ export const onUpdateUsersModel = /* GraphQL */ `
       last_name
       user_creation_date
       github_link
+      liked_posts
       saved_posts
       hide_posts
       messages {
@@ -312,6 +321,7 @@ export const onUpdateUsersModel = /* GraphQL */ `
           id
           user_id
           org_name
+          image_link
           start_date
           end_date
           description
@@ -361,6 +371,9 @@ export const onDeleteUsersModel = /* GraphQL */ `
           framework_tag
           difficulty_tag
           cloud_provider_tag
+          likes
+          likes_users
+          saves
           contributor_limit
           contributors
           reported
@@ -397,6 +410,7 @@ export const onDeleteUsersModel = /* GraphQL */ `
       last_name
       user_creation_date
       github_link
+      liked_posts
       saved_posts
       hide_posts
       messages {
@@ -458,6 +472,7 @@ export const onDeleteUsersModel = /* GraphQL */ `
           id
           user_id
           org_name
+          image_link
           start_date
           end_date
           description
@@ -538,6 +553,7 @@ export const onCreateExperienceModel = /* GraphQL */ `
       id
       user_id
       org_name
+      image_link
       start_date
       end_date
       description
@@ -558,6 +574,7 @@ export const onUpdateExperienceModel = /* GraphQL */ `
       id
       user_id
       org_name
+      image_link
       start_date
       end_date
       description
@@ -578,6 +595,7 @@ export const onDeleteExperienceModel = /* GraphQL */ `
       id
       user_id
       org_name
+      image_link
       start_date
       end_date
       description
@@ -611,6 +629,9 @@ export const onCreatePostsModel = /* GraphQL */ `
       framework_tag
       difficulty_tag
       cloud_provider_tag
+      likes
+      likes_users
+      saves
       post_comments {
         items {
           id
@@ -663,6 +684,9 @@ export const onUpdatePostsModel = /* GraphQL */ `
       framework_tag
       difficulty_tag
       cloud_provider_tag
+      likes
+      likes_users
+      saves
       post_comments {
         items {
           id
@@ -715,6 +739,9 @@ export const onDeletePostsModel = /* GraphQL */ `
       framework_tag
       difficulty_tag
       cloud_provider_tag
+      likes
+      likes_users
+      saves
       post_comments {
         items {
           id
@@ -958,6 +985,7 @@ export const onCreateUsersConvo = /* GraphQL */ `
         last_name
         user_creation_date
         github_link
+        liked_posts
         saved_posts
         hide_posts
         messages {
@@ -1038,6 +1066,7 @@ export const onUpdateUsersConvo = /* GraphQL */ `
         last_name
         user_creation_date
         github_link
+        liked_posts
         saved_posts
         hide_posts
         messages {
@@ -1118,6 +1147,7 @@ export const onDeleteUsersConvo = /* GraphQL */ `
         last_name
         user_creation_date
         github_link
+        liked_posts
         saved_posts
         hide_posts
         messages {

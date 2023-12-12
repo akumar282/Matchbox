@@ -5,7 +5,9 @@ export default function Inbox() {
   return (
     <div>
       <NavBar />
-      <h1>Inbox Page</h1>
+      <div className='bg-primary-purple flex min-h-screen'>
+        
+      </div>
     </div>
   )
 }

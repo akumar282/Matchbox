@@ -109,7 +109,7 @@ export default function NavBar() {
         </div>
       </section>
 
-      <ul className='hidden absolute top-1/2 right-1 transform -translate-y-1/2 -translate-x-12 lg:mx-auto lg:flex lg:items-center lg:w-auto max-w-screen-xl'>
+      <ul className='hidden absolute top-1/2 right-1 transform -translate-y-1/2 -translate-x-12 lg:mx-auto lg:flex lg:items-center lg:w-auto max-w-screen-xl z-50'>
         <li>
           <button 
             className={`flex flex-col items-center font-primary px-4 py-1 ${location.pathname === '/home' ? 'text-indigo-600' : 'hover:text-slate-500'
@@ -204,7 +204,7 @@ export default function NavBar() {
             {/* Dropdown menu */}
             <div
               className={`absolute right-0 ${isDropdownOpen ? 'block' : 'hidden'}
-              z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
+               my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
               id='user-dropdown'
             >
               <div className='px-4 py-3 whitespace-nowrap'>
@@ -256,7 +256,7 @@ export default function NavBar() {
           top: 0;
           left: 0;
           background: white;
-          z-index: 10;
+          z-index: 100;
           display: flex;
           flex-direction: column;
           justify-content: space-evenly;
