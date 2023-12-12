@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import NavBar from '../components/NavBar'
 import CPrefrences from '../components/CPrefrences'
 import CInitial from '../components/CInitial'
+import CReview from '../components/CReview'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation } from 'swiper/modules'
 import 'swiper/css/pagination'
@@ -43,6 +44,7 @@ export default function Create() {
         >
           <SwiperSlide>{<CInitial nextSlide={next_slide}/>}</SwiperSlide>
           <SwiperSlide>{<CPrefrences nextSlide={next_slide} prevSlide={prev_slide}/>}</SwiperSlide>
+          <SwiperSlide>{<CReview/>}</SwiperSlide>
         </Swiper>
       </div>
     </div>
