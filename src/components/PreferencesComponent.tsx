@@ -1,10 +1,18 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { enumBundle, preferenceTags } from '../backend/types'
 import { CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
 import Tags from '../components/Tags'
 
 interface Props {
-  setChecked : React.Dispatch<React.SetStateAction<preferenceTags[]>>
+  setTags : React.Dispatch<React.SetStateAction<{
+    LanguageTags: LanguageTag[],
+    FrameworkTags: FrameworkTag[],
+    DevelopmentTags: DevelopmentTag[],
+    InterestTags: InterestTag[],
+    CloudProviderTags: CloudProviderTag[],
+    DifficultyTags: DifficultyTag[],
+    SizeTags: SizeTag[],
+  }>> 
 }
 export default function PreferencesComponent(props: Props) {
 
@@ -35,10 +43,22 @@ export default function PreferencesComponent(props: Props) {
           className={tagClasses}/>
       )
     })
+  } 
+  function updateTags() {
+    props.setTags({
+      LanguageTags,
+      FrameworkTags,
+      DevelopmentTags,
+      InterestTags,
+      CloudProviderTags,
+      DifficultyTags,
+      SizeTags,
+    })
   }
-  useEffect(() => {
-    props.setChecked(checkedTags)
-  }, [checkedTags])
+  React.useEffect(() => {
+    updateTags()
+  }, [LanguageTags, FrameworkTags, DevelopmentTags, InterestTags, CloudProviderTags, DifficultyTags, SizeTags])
+
 
   function removeFromAll(tag: preferenceTags) {
     setLanguageTags((prevTags) => prevTags.filter((t) => t !== tag))

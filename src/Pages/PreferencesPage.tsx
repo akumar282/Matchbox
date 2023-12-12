@@ -1,13 +1,27 @@
 import React from 'react'
 import LandingPageNavBar from '../components/LandingPageNavBar'
 import PreferencesComponent from '../components/PreferencesComponent'
-import { preferenceTags } from '../backend/types'
+import { CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
 
 export default function PreferencesPage() {
-  const [checkedTags, setCheckedTags] = React.useState<preferenceTags[]>([])
-  React.useEffect(() => {
-    console.log(checkedTags)
-  }, [checkedTags])
+  const [tags, setTags] = React.useState<{
+    LanguageTags: LanguageTag[],
+    FrameworkTags: FrameworkTag[],
+    DevelopmentTags: DevelopmentTag[],
+    InterestTags: InterestTag[],
+    CloudProviderTags: CloudProviderTag[],
+    DifficultyTags: DifficultyTag[],
+    SizeTags: SizeTag[],
+  }>({
+    LanguageTags: [],
+    FrameworkTags: [],
+    DevelopmentTags: [],
+    InterestTags: [],
+    CloudProviderTags: [],
+    DifficultyTags: [],
+    SizeTags: [],
+  })
+  console.log(tags)
   return (
     <div>
       <LandingPageNavBar />
@@ -16,7 +30,7 @@ export default function PreferencesPage() {
         <h2 className='font-primary text-medium pt-1 pb-3'>We&apos;ll use this to match you with projects of your liking</h2>
       </div>
       <div className='w-11/12 mx-auto mt-2 max-w-[1130px]'>
-        <PreferencesComponent setChecked = {setCheckedTags}/>
+        <PreferencesComponent setTags = {setTags}/>
       </div>
     </div>
   )

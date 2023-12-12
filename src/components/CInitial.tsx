@@ -83,10 +83,10 @@ export default function CInitial(props: Props) {
           <label className='lg:pl-2 pl-4 font-primary text-sm' >I verify this post meets the <button onClick={() => navigate('/tos')} className='underline text-secondary-blue hover:text-indigo-400'>Community Guidelines</button> </label>
         </div>
       </div>
-      <button className='w-3/5 p-1 rounded-md h-8 self-center bg-blue-700 text-white shadow-lg'
+      <button className='w-3/5 py-2 text-center rounded-md self-center bg-blue-700 text-white shadow-lg'
         onClick={props.nextSlide}
       >
-          Add Project Tags
+        Add Project Tags
       </button>
     </div>
   )
