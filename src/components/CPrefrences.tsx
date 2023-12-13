@@ -4,6 +4,15 @@ import { CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, Interest
 interface Props {
     nextSlide: () => void
     prevSlide: () => void
+    setAllTags: (tags: {
+        LanguageTags: LanguageTag[],
+        FrameworkTags: FrameworkTag[],
+        DevelopmentTags: DevelopmentTag[],
+        InterestTags: InterestTag[],
+        CloudProviderTags: CloudProviderTag[],
+        DifficultyTags: DifficultyTag[],
+        SizeTags: SizeTag[],
+      }) => void
     }
 
 export default function CPrefrences(props: Props) {
@@ -26,23 +35,31 @@ export default function CPrefrences(props: Props) {
       })
   
   useEffect(() => {
-    console.log(tags)
+    props.setAllTags(tags)
   }, [tags])
   
+  function nextSlide() {
+    if (tags.LanguageTags.length === 0) {
+      alert('Please select at least one language')
+      return
+    }
+    props.nextSlide()
+  }
+
   return (
     <div className='mx-auto bg-white mt-8 mb-8 lg:max-w-[1170px] w-[97%] font-primary rounded-lg pt-4 px-4 pb-2'>
-      <h1 className='text-2xl font-primary mt-3'>Setup Project Preferences</h1>
+      <h1 className='text-2xl font-primary mt-3 font-bold'>Setup Project Preferences</h1>
       <PreferencesComponent setTags = {setTags}/>
       <div className='flex gap-3 items-center justify-center'>
         <button
-          className='py-2 px-6 mb-3 w-1/5 bg-gray-300 hover:bg-gray-200 rounded-md'
+          className='py-2 px-6 mb-3 md:w-1/5 bg-gray-300 hover:bg-gray-200 rounded-md'
           onClick={props.prevSlide}
         >
             Go Back
         </button>
         <button
-          className='py-2 px-6 mb-3 w-1/5 bg-blue-700 hover:bg-blue-400 rounded-md text-white'
-          onClick={props.nextSlide}
+          className='py-2 px-6 mb-3 md:w-1/5  bg-blue-700 hover:bg-blue-400 rounded-md text-white'
+          onClick={() => nextSlide()}
         >
             Review
         </button>

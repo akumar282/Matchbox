@@ -3,7 +3,7 @@ import { enumBundle, preferenceTags } from '../backend/types'
 import { CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
 import Tags from '../components/Tags'
 
-interface Props {
+export interface PrefrencesProps {
   setTags : React.Dispatch<React.SetStateAction<{
     LanguageTags: LanguageTag[],
     FrameworkTags: FrameworkTag[],
@@ -14,7 +14,7 @@ interface Props {
     SizeTags: SizeTag[],
   }>> 
 }
-export default function PreferencesComponent(props: Props) {
+export default function PreferencesComponent(props: PrefrencesProps) {
 
   const [LanguageTags, setLanguageTags] = React.useState<LanguageTag[]>([])
   const [FrameworkTags, setFrameworkTags] = React.useState<FrameworkTag[]>([])
@@ -126,9 +126,17 @@ export default function PreferencesComponent(props: Props) {
         : [...prevCheckedTags, tag]
     })
   }
+  let style = ''
+  if (location.pathname === '/settings') {
+    style = 'mx-5 mt-6'
+  }
 
   return (
-    <div>
+    <div className={style}>
+      {location.pathname === '/settings' && <div>
+        <h1 className='font-primary text-3xl font-semibold pl-2'>Project Preferences</h1>
+        <h2 className='font-primary text-medium pt-1 pb-3 pl-2'>We&apos;ll use this to match you with projects of your liking</h2>
+      </div>}
       <div className='flex flex-row'>
         <div className='flex flex-col items-start pl-2'>
           <div>

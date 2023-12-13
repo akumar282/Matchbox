@@ -6,7 +6,6 @@ import NewLogo from '../img/NewLogo.png'
 import github from '../img/github.svg'
 import {enumBundle, preferenceTags} from '../backend/types'
 import Tags from './Tags'
-import {AnimatePresence, motion} from 'framer-motion'
 import CommentSection from './CommentSection'
 
 interface DiscoverProps {
