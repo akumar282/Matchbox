@@ -24,7 +24,14 @@ interface Props {
     SizeTags: SizeTag[];
   };
   prevSlide: () => void;
-
+  SelectedValues : {
+    projectTitle: string,
+    projectDescription: string,
+    projectUsername: string,
+    projectRepo: string,
+    projectLongDescription: string,
+    image: File | null
+  }
 }
 
 type tagRender = {
@@ -86,16 +93,16 @@ export default function CReview(props: Props) {
   return (
     <div className="flex flex-col pt-8 pb-12 lg:px-16 w-full z-10">
       <div className="flex lg:flex-row flex-col lg:items-stretch items-center  lg:space-y-0 space-y-3 lg:space-x-3 space-x-0">
-        <div className="lg:w-64 lg:h-40 w-[97%] h-44 space-y-2 bg-white shadow-lg rounded-lg ">
+        <div className="lg:w-1/3 lg:h-48 w-[97%] h-44 space-y-2 bg-white shadow-lg rounded-lg ">
           <img
-            className="h-full w-full rounded-lg object-cover"
-            src={NewLogo}
-            alt="Project Thumbnail"
+            className="rounded-lg h-full w-full object-cover"
+            src={props.SelectedValues.image ? URL.createObjectURL(props.SelectedValues.image) : NewLogo}
+            alt="Profile image"
           />
         </div>
         <div className="bg-white rounded-lg lg:w-[800px] w-[97%] flex-auto shadow-lg font-primary justify-between space-y-2 flex items-center flex-col ">
-          <h1 className="text-2xl pt-2">{}</h1>
-          <h3 className="text-center text-lg">{}</h3>
+          <h1 className="text-2xl pt-2">{props.SelectedValues.projectTitle}</h1>
+          <h3 className="text-center text-lg">{props.SelectedValues.projectDescription}</h3>
           <div className="flex flex-row w-full  lg:justify-between justify-center">
             <div className="lg:flex hidden">
               <button className="m-2">
@@ -179,7 +186,7 @@ export default function CReview(props: Props) {
         </div>
         <div className="bg-white font-primary shadow-lg mx-auto lg:w-full  w-[97%] rounded-lg">
           <h1 className="p-3 text-xl">Project Description</h1>
-          <h3 className="p-3">{/* {props.data.long_description} */}</h3>
+          <h3 className="p-3">{props.SelectedValues.projectLongDescription} </h3>
         </div>
         <div className="flex lg:flex-row flex-col bg-white shadow-lg  lg:justify-center divide-gray-300 lg:divide-x-2 lg:divide-y-0 divide-y-2 font-primary mx-auto lg:w-full  w-[97%] rounded-lg">
           <button className="py-2 px-4 lg:rounded-none rounded-t-lg hover:bg-slate-300 ">

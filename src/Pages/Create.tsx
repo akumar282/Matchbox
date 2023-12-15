@@ -85,7 +85,7 @@ export default function Create() {
         >
           <SwiperSlide>{<CInitial nextSlide={next_slide} setValues={setInitial}/>}</SwiperSlide>
           <SwiperSlide>{<CPrefrences nextSlide={next_slide} prevSlide={prev_slide} setAllTags={setTags}/>}</SwiperSlide>
-          <SwiperSlide>{<CReview SelectedTags={tags} prevSlide={prev_slide}/>}</SwiperSlide>
+          <SwiperSlide>{<CReview SelectedTags={tags} prevSlide={prev_slide} SelectedValues={inital}/> }</SwiperSlide>
         </Swiper>
       </div>
     </div>

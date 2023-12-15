@@ -68,7 +68,7 @@ export default function CInitial(props: Props) {
   }
   const navigate = useNavigate()
   return (
-    <div className='mx-auto bg-white mt-8 mb-8 lg:max-w-[1300px] w-[97%]  font-primary rounded-lg flex flex-col pb-4'>
+    <div className='mx-auto bg-white mt-8 mb-8 lg:max-w-[1300px] w-[97%] font-primary rounded-lg flex flex-col pb-4'>
       <div className='flex flex-col'>
         <div className='flex flex-col items-center space-y-4 mx-auto w-[93%] '>
           <h1 className='pb-4 mt-3 text-xl'>Project Information</h1>
@@ -149,7 +149,7 @@ export default function CInitial(props: Props) {
                 <label>Username</label>
                 <input
                   className='rounded-md lg:w-full'
-                  name={'Username'}
+                  name={'projectUsername'}
                   type='text'
                   id={'user_name'}
                   placeholder={'Enter Username...'}

@@ -107,6 +107,7 @@ export default function DiscoverPage() {
                 prevEl:'.swiper-button-prev'
               }}
               loop={true}
+              autoHeight={true}
               pagination={{
                 el: '.swiper-pagination',
                 clickable: true,
@@ -123,6 +124,7 @@ export default function DiscoverPage() {
               {projects.map((x, index) => (
                 <SwiperSlide className='z-1' key={index}>{x}</SwiperSlide>
               ))}
+              {/* come back to figure out a fixed item */}
               <button className='absolute z-50 right-2 top-1/2 transform -translate-y-1/2 rounded-full bg-white p-2 shadow-md hidden lg:flex'
                 onClick={() => my_swiper.slideNext()}
               > 
@@ -140,21 +142,22 @@ export default function DiscoverPage() {
             </Swiper>
           </div>
         </div>
-        
-        <div className='bg-white grow-0 flex pt-3 static bottom-0 mt-4 justify-center w-full'>
-          <div className='flex font-primary space-x-3 text-lg flex-row'>
-            <button
-              className='py-1 px-6 mb-3 bg-gray-300 hover:bg-gray-200 rounded-full'
-              onClick={() => my_swiper.slidePrev()}
-            >
+        <div className='h-12'>
+          <div className='fixed bg-white grow-0 flex pt-3 bottom-0 mt-4 justify-center w-full z-50'>
+            <div className='flex font-primary space-x-3 text-lg flex-row'>
+              <button
+                className='py-1 px-6 mb-3 bg-gray-300 hover:bg-gray-200 rounded-full'
+                onClick={() => my_swiper.slidePrev()}
+              >
               Back
-            </button>
-            <button
-              className='py-1 px-6 mb-3 bg-blue-700 hover:bg-blue-400 rounded-full text-white'
-              onClick={() => my_swiper.slideNext()}
-            >
+              </button>
+              <button
+                className='py-1 px-6 mb-3 bg-blue-700 hover:bg-blue-400 rounded-full text-white'
+                onClick={() => my_swiper.slideNext()}
+              >
               Next
-            </button>
+              </button>
+            </div>
           </div>
         </div>
       </div>
