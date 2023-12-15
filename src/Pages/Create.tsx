@@ -29,7 +29,25 @@ export default function Create() {
         DifficultyTags: [],
         SizeTags: [],
       })
+  // const [images, setImage] = useState<File | null>(null) 
+
   const [my_swiper, set_my_swiper] = useState<MySwiper | null>(null)
+  const [ inital , setInitial] = useState<{
+    projectTitle: string,
+    projectDescription: string,
+    projectUsername: string,
+    projectRepo: string,
+    projectLongDescription: string,
+    image: File | null
+  }>({
+    projectTitle: '',
+    projectDescription: '',
+    projectUsername: '',
+    projectRepo: '',
+    projectLongDescription: '',
+    image: null
+  })
+  console.log(inital)
   function next_slide() {
     my_swiper.slideNext()
   }
@@ -65,7 +83,7 @@ export default function Create() {
           }}
           className='.my_swiper max-w-[1170px] mx-auto w-[97%]'
         >
-          <SwiperSlide>{<CInitial nextSlide={next_slide}/>}</SwiperSlide>
+          <SwiperSlide>{<CInitial nextSlide={next_slide} setValues={setInitial}/>}</SwiperSlide>
           <SwiperSlide>{<CPrefrences nextSlide={next_slide} prevSlide={prev_slide} setAllTags={setTags}/>}</SwiperSlide>
           <SwiperSlide>{<CReview SelectedTags={tags} prevSlide={prev_slide}/>}</SwiperSlide>
         </Swiper>

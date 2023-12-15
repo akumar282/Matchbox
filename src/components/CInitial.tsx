@@ -1,10 +1,20 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
 import { FileInput, Label } from 'flowbite-react'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
 
 
 interface Props {
   nextSlide: () => void
+  setValues (values: {
+    projectTitle: string,
+    projectDescription: string,
+    projectUsername: string,
+    projectRepo: string,
+    projectLongDescription: string,
+    image: File | null
+  }): void
 }
 
 export default function CInitial(props: Props) {
@@ -14,13 +24,44 @@ export default function CInitial(props: Props) {
   const handleCheck = () => {
     setIsChecked(!isChecked) // Toggle the checked state
   }
- 
+  const validationSchema = yup.object({
+    projectTitle: yup.string().required('Required'),
+    projectDescription: yup.string().required('Required'),
+    projectRepo: yup.string().required('Required'),
+    projectLongDescription: yup.string().required('Required'),
+  })
+  const formik = useFormik({
+    initialValues: {
+      projectTitle: '',
+      projectDescription: '',
+      projectUsername: '',
+      projectRepo: '',
+      projectLongDescription: '',
+    },
+    onSubmit: values => {
+      console.log(values)
+      if (!isChecked) {
+        alert('Please verify that you have read the Community Guidelines') // add popup later
+        return
+      }
+      if (file === null) {
+        alert('Please upload a project image') // add popup later
+        return
+      }
+      props.setValues({...values, image: file})
+      props.nextSlide()
+    },
+    validationSchema: validationSchema,
+    validateOnChange: true,
+    validateOnBlur: false,
+  })
+
 
   function setImage(e) {
     const file = e.target.files[0]
     console.log(e.target.files[0].type)
     if (!file || !acceptedTypes.includes(file.type)) {
-      alert('Please upload a valid image (PNG, JPEG, JPG, or GIF)')
+      alert('Please upload a valid image (PNG, JPEG, JPG, or GIF)') // add popup later
       return
     }
     setFile(e.target.files[0])
@@ -84,20 +125,24 @@ export default function CInitial(props: Props) {
                 <label>Project Title</label>
                 <input
                   className='rounded-md lg:w-full'
-                  name={'Project Title'}
+                  name={'projectTitle'}
                   type='text'
                   id={'project-name'}
                   placeholder={'Enter Project Title...'}
+                  value={formik.values.projectTitle}
+                  onChange={formik.handleChange}
                 />
               </div>
               <div className='flex text-sm flex-col pb-2 w-full'>
                 <label>Small Description (1-2 Sentence Description of the project)</label>
                 <input
                   className='rounded-md lg:w-full'
-                  name={'Last Name'}
+                  name={'projectDescription'}
                   type='text'
                   id={'last-name'}
-                  placeholder={'Name'}
+                  placeholder={'Enter Small Description...'}
+                  value={formik.values.projectDescription}
+                  onChange={formik.handleChange}
                 />
               </div>
               <div className='flex text-sm flex-col pb-1 w-full'>
@@ -107,7 +152,9 @@ export default function CInitial(props: Props) {
                   name={'Username'}
                   type='text'
                   id={'user_name'}
-                  placeholder={'@gitmatch.io'}
+                  placeholder={'Enter Username...'}
+                  value={formik.values.projectUsername}
+                  onChange={formik.handleChange}
                 />
               </div>
             </div>
@@ -120,10 +167,12 @@ export default function CInitial(props: Props) {
               <div className='flex flex-grow w-full'>
                 <input
                   className='rounded-md w-full'
-                  name={'Username'}
+                  name={'projectRepo'}
                   type='text'
-                  id={'user_name'}
-                  placeholder={'@gitmatch.io'}
+                  id={'repository_link'}
+                  placeholder={'Enter Repository Link...'}
+                  value={formik.values.projectRepo}
+                  onChange={formik.handleChange}
                 />
               </div>
               <div className='lg:w-2/12 mt-2 lg:mt-0'>
@@ -133,16 +182,22 @@ export default function CInitial(props: Props) {
           </div>
           <div className='w-full text-sm'>
             <label>Long Description (Describe your project in detail)</label>
-            <textarea className='w-full rounded-lg'/>
+            <textarea className='w-full rounded-lg'
+              name={'projectLongDescription'}
+              id={'long_description'}
+              placeholder={'Enter Long Description...'}
+              value={formik.values.projectLongDescription}
+              onChange={formik.handleChange}
+            />
           </div>
         </div>
         <div className='lg:ml-4 py-4 ml-8 flex justify-center'>
-          <input type='radio' onChange={()=>console.log()} checked={isChecked} onClick={handleCheck}></input>
+          <input type='radio' onChange={()=> console.log()} checked={isChecked} onClick={handleCheck}></input>
           <label className='lg:pl-2 pl-4 font-primary text-sm' >I verify this post meets the <button onClick={() => navigate('/tos')} className='underline text-secondary-blue hover:text-indigo-400'>Community Guidelines</button> </label>
         </div>
       </div>
       <button className='w-3/5 py-2 text-center rounded-md self-center bg-blue-700 text-white shadow-lg'
-        onClick={props.nextSlide}
+        onClick={()=> formik.handleSubmit()}
       >
         Add Project Tags
       </button>
