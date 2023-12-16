@@ -59,6 +59,14 @@ const messages = [
     name: 'Them',
     message: 'Message'
   },
+  {
+    name: 'Them',
+    message: 'Message'
+  },
+  {
+    name: 'Them',
+    message: 'Message'
+  },
 ]
 
 export default function InboxChatMessages() {
@@ -78,7 +86,7 @@ export default function InboxChatMessages() {
       return (
         <div className='flex flex-col gap-1'>
           <div className='flex justify-start'>
-            <h1 className='bg-gray-100 rounded p-2'>
+            <h1 className='lg:bg-gray-100 md:bg-gray-100 bg-blue-500 lg:text-black md:text-black text-white rounded p-2'>
               {props.message}
             </h1>
           </div>

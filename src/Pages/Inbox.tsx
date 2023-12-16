@@ -6,9 +6,10 @@ import InboxChat from '../components/InboxChat'
 import InboxHolder from '../components/InboxHolder'
 
 export default function Inbox() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [screen, setScreen] = useState('inbox')
   return (
-    <div className='h-screen bg-primary-purple flex flex-col relative'>
+    <div className='h-screen bg-primary-purple flex flex-col relative overflow-hidden'>
       <NavBar />
       <div className='relative w-full h-full hidden lg:flex md:flex'>
         <div className='bg-white hidden lg:flex md:flex lg:max-w-[1300px] w-[90%] h-[90%] rounded-lg font-primary shadow-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
@@ -20,7 +21,7 @@ export default function Inbox() {
           </div>
         </div>
       </div>
-      <div className='bg-[#e2e2e2] lg:hidden md:hidden flex justify-center items-center gap-2 pt-2 w-full h-full'>
+      <div className='bg-[#f3f3f3] lg:hidden md:hidden flex justify-center items-center w-full h-full overflow-hidden'>
         {screen === 'inbox' ? <InboxHolder setScreen={setScreen}/> : <InboxChat setScreen={setScreen}/>}
       </div>
     </div>

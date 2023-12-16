@@ -51,6 +51,21 @@ export default function InboxHolder(props: {setScreen: React.Dispatch<React.SetS
             <InboxMessage/>
             <InboxMessage/>
             <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
+            <InboxMessage/>
           </div>
         </div>
       </div>
