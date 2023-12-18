@@ -35,14 +35,14 @@ export default function Create() {
   const [ inital , setInitial] = useState<{
     projectTitle: string,
     projectDescription: string,
-    projectUsername: string,
+    projectExternalLink: string,
     projectRepo: string,
     projectLongDescription: string,
     image: File | null
   }>({
     projectTitle: '',
     projectDescription: '',
-    projectUsername: '',
+    projectExternalLink: '',
     projectRepo: '',
     projectLongDescription: '',
     image: null
@@ -57,6 +57,7 @@ export default function Create() {
   useEffect(() => {
     my_swiper?.update()
   }, [tags])
+  
   return (
     <div className='min-h-screen outline bg-primary-purple'>
       <NavBar />

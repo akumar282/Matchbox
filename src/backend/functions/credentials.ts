@@ -35,6 +35,6 @@ export async function standardSignUp(username: string, email: string, password: 
     return cognitoResult
   } catch (error) {
     console.error(error)
-    return 'Sign up failed'
+    return 'Failed'
   }
 }

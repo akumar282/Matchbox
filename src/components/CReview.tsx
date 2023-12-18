@@ -27,7 +27,7 @@ interface Props {
   SelectedValues : {
     projectTitle: string,
     projectDescription: string,
-    projectUsername: string,
+    projectExternalLink: string,
     projectRepo: string,
     projectLongDescription: string,
     image: File | null
@@ -273,13 +273,13 @@ export default function CReview(props: Props) {
       <div className='mx-auto bg-white mt-8 w-full font-primary rounded-lg p-3'>
         <div className='flex gap-3 items-center justify-center'>
           <button
-            className='py-2 px-6 md:w-1/5 bg-gray-300 hover:bg-gray-200 rounded-md'
+            className='py-2 px-6 bg-gray-300 hover:bg-gray-200 rounded-md'
             onClick={props.prevSlide}
           >
             Go Back
           </button>
           <button
-            className='py-2 px-6 md:w-1/5  bg-blue-700 hover:bg-blue-400 rounded-md text-white'
+            className='py-2 px-6 bg-blue-700 hover:bg-blue-400 rounded-md text-white'
           >
             Create Project
           </button>

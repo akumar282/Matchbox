@@ -10,7 +10,7 @@ interface Props {
   setValues (values: {
     projectTitle: string,
     projectDescription: string,
-    projectUsername: string,
+    projectExternalLink: string,
     projectRepo: string,
     projectLongDescription: string,
     image: File | null
@@ -29,12 +29,13 @@ export default function CInitial(props: Props) {
     projectDescription: yup.string().required('Required'),
     projectRepo: yup.string().required('Required'),
     projectLongDescription: yup.string().required('Required'),
+    projectExternalLink: yup.string(),
   })
   const formik = useFormik({
     initialValues: {
       projectTitle: '',
       projectDescription: '',
-      projectUsername: '',
+      projectExternalLink: '',
       projectRepo: '',
       projectLongDescription: '',
     },
@@ -42,10 +43,6 @@ export default function CInitial(props: Props) {
       console.log(values)
       if (!isChecked) {
         alert('Please verify that you have read the Community Guidelines') // add popup later
-        return
-      }
-      if (file === null) {
-        alert('Please upload a project image') // add popup later
         return
       }
       props.setValues({...values, image: file})
@@ -121,7 +118,7 @@ export default function CInitial(props: Props) {
               </div>
             </div>
             <div className='flex flex-grow flex-col w-full lg:w-2/3'>
-              <div className='flex text-sm flex-col pb-2 w-full'>
+              <div className='flex text-sm flex-col w-full'>
                 <label>Project Title</label>
                 <input
                   className='rounded-md lg:w-full'
@@ -132,8 +129,9 @@ export default function CInitial(props: Props) {
                   value={formik.values.projectTitle}
                   onChange={formik.handleChange}
                 />
+                {formik.errors.projectTitle && formik.touched.projectTitle ? ( <div className='text-red-500 text-xs'>{formik.errors.projectTitle}</div>) : <div className='text-xs'> &nbsp;</div>}
               </div>
-              <div className='flex text-sm flex-col pb-2 w-full'>
+              <div className='flex text-sm flex-col w-full'>
                 <label>Small Description (1-2 Sentence Description of the project)</label>
                 <input
                   className='rounded-md lg:w-full'
@@ -144,16 +142,17 @@ export default function CInitial(props: Props) {
                   value={formik.values.projectDescription}
                   onChange={formik.handleChange}
                 />
+                {formik.errors.projectDescription && formik.touched.projectDescription ? ( <div className='text-red-500 text-xs'>{formik.errors.projectDescription}</div>) : <div className='text-xs'> &nbsp;</div>}
               </div>
-              <div className='flex text-sm flex-col pb-1 w-full'>
-                <label>Username</label>
+              <div className='flex text-sm flex-col w-full'>
+                <label>External Link</label>
                 <input
                   className='rounded-md lg:w-full'
-                  name={'projectUsername'}
+                  name={'projectExternalLink'}
                   type='text'
-                  id={'user_name'}
-                  placeholder={'Enter Username...'}
-                  value={formik.values.projectUsername}
+                  id={'projectExternalLink'}
+                  placeholder={'Enter External Link...'}
+                  value={formik.values.projectExternalLink}
                   onChange={formik.handleChange}
                 />
               </div>
@@ -164,7 +163,7 @@ export default function CInitial(props: Props) {
             <ul>
             </ul>
             <div className='flex lg:flex-row lg:space-x-2 flex-col'>
-              <div className='flex flex-grow w-full'>
+              <div className='flex flex-grow w-full flex-col lg:relative'>
                 <input
                   className='rounded-md w-full'
                   name={'projectRepo'}
@@ -174,11 +173,13 @@ export default function CInitial(props: Props) {
                   value={formik.values.projectRepo}
                   onChange={formik.handleChange}
                 />
+                {formik.errors.projectRepo && formik.touched.projectRepo ? ( <div className='text-red-500 text-xs lg:hidden'>{formik.errors.projectRepo}</div>) : <div className='text-xs lg:hidden'> &nbsp;</div>}
               </div>
               <div className='lg:w-2/12 mt-2 lg:mt-0'>
                 <button className='px-2 bg-blue-700 text-white lg:h-full h-10 lg:max-w-[180px] w-full rounded-lg'>Verify Repo</button>
               </div>
             </div>
+            {formik.errors.projectRepo && formik.touched.projectRepo ? ( <div className='text-red-500 text-xs lg:block hidden'>{formik.errors.projectRepo}</div>) : <div className='text-xs lg:block hidden'> &nbsp;</div>}
           </div>
           <div className='w-full text-sm'>
             <label>Long Description (Describe your project in detail)</label>
@@ -189,11 +190,12 @@ export default function CInitial(props: Props) {
               value={formik.values.projectLongDescription}
               onChange={formik.handleChange}
             />
+            {formik.errors.projectLongDescription && formik.touched.projectLongDescription ? ( <div className='text-red-500 text-xs'>{formik.errors.projectLongDescription}</div>) : <div className='text-xs'> &nbsp;</div>}
           </div>
         </div>
         <div className='lg:ml-4 py-4 ml-8 flex justify-center'>
           <input type='radio' onChange={()=> console.log()} checked={isChecked} onClick={handleCheck}></input>
-          <label className='lg:pl-2 pl-4 font-primary text-sm' >I verify this post meets the <button onClick={() => navigate('/tos')} className='underline text-secondary-blue hover:text-indigo-400'>Community Guidelines</button> </label>
+          <label className='lg:pl-2 pl-4 font-primary text-sm' >I verify this post meets the <a onClick={() => navigate('/tos')} className='underline text-secondary-blue hover:text-indigo-400 cursor-pointer'>Community Guidelines</a> </label>
         </div>
       </div>
       <button className='w-3/5 py-2 text-center rounded-md self-center bg-blue-700 text-white shadow-lg'
