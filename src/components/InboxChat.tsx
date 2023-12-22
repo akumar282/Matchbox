@@ -6,7 +6,13 @@ export default function InboxChat(props: {setScreen: React.Dispatch<React.SetSta
     console.log('back')
     props.setScreen('inbox')
   }
-  
+  //placeholder for actual array of messages
+  const messages = [
+    {
+      from: 'John Doe',
+      message: 'Hello, how are you?'
+    }
+  ]
   return (
     <main className='relative flex flex-col w-full h-full p-4'>
       <div className='flex justify-between items-center gap-1 border-b-2'>
@@ -28,7 +34,7 @@ export default function InboxChat(props: {setScreen: React.Dispatch<React.SetSta
         </button>
       </div>
       <div className='flex flex-col flex-grow overflow-y-auto overflow-hidden'>
-        <InboxChatMessages/>
+        <InboxChatMessages messages={messages}/>
       </div>
       <div className='flex justify-center items-center gap-2 pt-2'>
         <input type="text" placeholder='Type a message...' className='border-2 border-gray-100 w-full p-2' />

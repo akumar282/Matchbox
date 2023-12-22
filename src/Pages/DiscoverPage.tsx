@@ -97,5 +97,3 @@ export default function DiscoverPage() {
     </div>
   )
 }
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars

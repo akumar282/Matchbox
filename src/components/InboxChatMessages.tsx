@@ -1,10 +1,20 @@
 import React from 'react'
 
+type Message = {
+    from: string;
+    message: string;
+    message_date?: string;
+  }
+  interface InboxChatProps {
+    messages: Message[]
+  }
+export default function InboxChatMessages(props: InboxChatProps) {
 
-export default function InboxChatMessages() {
-
-  function ChatMessage(props: {name: string, message: string, myName: string}) {
-    if (props.name === props.myName) {
+  
+  function ChatMessage(props: {from: string, message: string}) {
+    //swap this out with the user's username
+    const myName = 'John Doe'
+    if (props.from === myName) {
       return (
         <div className='flex flex-col gap-1'>
           <div className='flex justify-end'>
@@ -27,10 +37,11 @@ export default function InboxChatMessages() {
     }
   }
 
-  const myName = 'Name'
   return (
     <div className='flex flex-col gap-4 p-4'>
-
+      {props.messages.map((message, index) => (
+        <ChatMessage key={index} from={message.from} message={message.message}/>
+      ))}
     </div>
   )
 }
