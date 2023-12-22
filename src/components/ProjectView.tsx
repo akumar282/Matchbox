@@ -12,10 +12,10 @@ export default function ProjectView(props: ProjectViewProps) {
 
   return (
     <div>
-      <button className=' flex flex-col items-start hover:bg-purple-300 rounded-lg mr-2 ml-2 mt-3 min-w-[220px] max-w-[220px] lg:max-w-[280px] min-h-[200px] bg-white'>
-        <div className='max-h-[120px] overflow-hidden'>
+      <button className='h-[220px] flex flex-col items-start hover:shadow-lg rounded-lg mr-2 ml-2 mt-3 w-[220px] lg:w-[280px] bg-white border border-gray-200'>
+        <div className='h-[170px] w-full overflow-hidden'>
           <a href='#'>
-            <img className='rounded-t-lg ' src={props.image} alt='Project Thumbnail' />
+            <img className='w-full h-full rounded-t-lg object-scale-down' src={props.image} alt='Project Thumbnail' />
           </a>
         </div>
         <div className='p-2 flex flex-row w-full justify-between'>

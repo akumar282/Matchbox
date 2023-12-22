@@ -44,7 +44,7 @@ export default function NavBar() {
   }, [])
 
   return (
-    <nav className=' relative px-4 py-5 flex   justify-start items-center '>
+    <nav className=' relative px-4 py-5 flex justify-start items-center bg-white'>
       <button onClick={() => navigate('/home')}><img className='w-36 ml-2 max-w-screen-xl' style={{color: '#FF0000'}} src={textlogo}></img></button>
 
       <section>

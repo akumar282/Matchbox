@@ -1,13 +1,29 @@
 import React, {useState} from 'react'
 import NavBar from '../components/NavBar'
 import PreferencesComponent from '../components/PreferencesComponent'
-
+import { CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
 export default function Settings() {
-
+  const [tags, setTags] = React.useState<{
+    LanguageTags: LanguageTag[],
+    FrameworkTags: FrameworkTag[],
+    DevelopmentTags: DevelopmentTag[],
+    InterestTags: InterestTag[],
+    CloudProviderTags: CloudProviderTag[],
+    DifficultyTags: DifficultyTag[],
+    SizeTags: SizeTag[],
+  }>({
+    LanguageTags: [],
+    FrameworkTags: [],
+    DevelopmentTags: [],
+    InterestTags: [],
+    CloudProviderTags: [],
+    DifficultyTags: [],
+    SizeTags: [],
+  })
+  console.log(tags)
   const [isChecked, setIsChecked] = React.useState(false)
   const [pageIndex, setPageIndex] = useState<number>(0)
-  const components = [accountInformation(), notificationInformation(), PreferencesComponent()]
-
+  const components = [accountInformation(), notificationInformation(), PreferencesComponent({ setTags })]
   function handleCheck (){
     setIsChecked(!isChecked) // Toggle the checked state
   }
@@ -21,6 +37,7 @@ export default function Settings() {
       prevIndex === 0 ? components.length - 1 : prevIndex - 1
     )
   }
+  
 
   function accountInformation() {
     return (
@@ -224,7 +241,7 @@ export default function Settings() {
               </div>
             </div>
           </div>
-          <div className='flex flex-col justify-between  grow items-center'>
+          <div className='flex flex-col justify-between grow items-center'>
             {components[pageIndex]}
             <div className='bg-white grow-0 flex pt-3 static bottom-0 mt-4 justify-center w-full'>
               <div className='flex font-primary space-x-3 text-lg flex-row'>

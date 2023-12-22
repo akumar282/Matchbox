@@ -18,7 +18,10 @@ export const theme = {
       'light-purple': '#E5DAFB',
       'light-green': '#6D60DC',
       'deep-pink': '#FF0099',
-    }
+    },
+    screen: {
+      '3xl': '1920px',
+    },
   },
 };
 export const plugins = [

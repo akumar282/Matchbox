@@ -13,6 +13,7 @@ import UserProfile from './pages/UserProfile'
 import Settings from './pages/Settings'
 import SavedPosts from './pages/SavedPosts'
 import NotFound from './pages/NotFound'
+import SingleView from './pages/SingleView'
 
 function App () {
   
@@ -28,6 +29,7 @@ function App () {
         <Route path='/home' element={<HomePage />} />
         <Route path='/create-project' element={<Create />} />
         <Route path='/discover' element={<DiscoverPage />} />
+        <Route path='/project/:id' element={<SingleView />} />
         <Route path='/inbox' element={<Inbox />} />
         <Route path='/profile' element={<UserProfile />} />
         <Route path='/settings' element={<Settings />} />

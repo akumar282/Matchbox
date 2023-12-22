@@ -3,8 +3,18 @@ import { enumBundle, preferenceTags } from '../backend/types'
 import { CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
 import Tags from '../components/Tags'
 
-
-export default function PreferencesComponent() {
+export interface PrefrencesProps {
+  setTags : React.Dispatch<React.SetStateAction<{
+    LanguageTags: LanguageTag[],
+    FrameworkTags: FrameworkTag[],
+    DevelopmentTags: DevelopmentTag[],
+    InterestTags: InterestTag[],
+    CloudProviderTags: CloudProviderTag[],
+    DifficultyTags: DifficultyTag[],
+    SizeTags: SizeTag[],
+  }>> 
+}
+export default function PreferencesComponent(props: PrefrencesProps) {
 
   const [LanguageTags, setLanguageTags] = React.useState<LanguageTag[]>([])
   const [FrameworkTags, setFrameworkTags] = React.useState<FrameworkTag[]>([])
@@ -33,7 +43,22 @@ export default function PreferencesComponent() {
           className={tagClasses}/>
       )
     })
+  } 
+  function updateTags() {
+    props.setTags({
+      LanguageTags,
+      FrameworkTags,
+      DevelopmentTags,
+      InterestTags,
+      CloudProviderTags,
+      DifficultyTags,
+      SizeTags,
+    })
   }
+  React.useEffect(() => {
+    updateTags()
+  }, [LanguageTags, FrameworkTags, DevelopmentTags, InterestTags, CloudProviderTags, DifficultyTags, SizeTags])
+
 
   function removeFromAll(tag: preferenceTags) {
     setLanguageTags((prevTags) => prevTags.filter((t) => t !== tag))
@@ -101,19 +126,25 @@ export default function PreferencesComponent() {
         : [...prevCheckedTags, tag]
     })
   }
+  let style = ''
+  if (location.pathname === '/settings') {
+    style = 'mx-5 mt-6'
+  }
 
   return (
-    <div>
-      <div className='flex flex-row mt-6'>
-        <div className='flex flex-col items-start mx-8 pl-2'>
-          <h1 className='font-primary text-3xl font-semibold'>Project Preferences</h1>
-          <h2 className='font-primary text-medium pt-1 pb-3'>We&apos;ll use this to match you with projects of your liking</h2>
+    <div className={style}>
+      {location.pathname === '/settings' && <div>
+        <h1 className='font-primary text-3xl font-semibold pl-2'>Project Preferences</h1>
+        <h2 className='font-primary text-medium pt-1 pb-3 pl-2'>We&apos;ll use this to match you with projects of your liking</h2>
+      </div>}
+      <div className='flex flex-row'>
+        <div className='flex flex-col items-start pl-2'>
           <div>
             {generateTags(checkedTags, checkedTags)}
           </div>
         </div>
       </div>
-      <div className='bg-slate-200 lg:mx-8 mx-6 my-4 rounded-lg'>
+      <div className='bg-slate-200 my-4 p-1 rounded-lg'>
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Languages</h1>
         {generateTags([...Object.values(LanguageTag)], LanguageTags, 'bg-green-300')}
         <h1 className='px-4 py-2 text-bold font-primary text-base'>Frameworks</h1>

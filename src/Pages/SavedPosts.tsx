@@ -34,7 +34,7 @@ export default function SavedPosts() {
   // }
 
   return (
-    <div>
+    <div className='flex flex-col h-screen'>
       <NavBar />
       <div className='bg-primary-purple'>
         <div className='max-w-[1070px] min-h-[70px] mx-auto pt-2 pb-3'>
@@ -42,7 +42,7 @@ export default function SavedPosts() {
           <h3 className='text-sm font-primary ml-3 mt-1'>Projects that you want to look into:</h3>
         </div>
       </div>
-      <div className='bg-gray-200'>
+      <div className='bg-gray-200 flex flex-grow'>
         <div className=' pt-3 pb-8 max-w-[1070px] mx-auto'>
           <div className='grid lg:grid-cols-4 md:grid-cols-4 grid-cols-1 place-items-center'>
             {/* Render Query Here */}

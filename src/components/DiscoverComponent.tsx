@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useEffect, useState} from 'react'
 import {CloudProviderTag, PostsModel} from '../API'
 import {getImage} from '../backend/storage/s3'
@@ -6,7 +5,6 @@ import NewLogo from '../img/NewLogo.png'
 import github from '../img/github.svg'
 import {enumBundle, preferenceTags} from '../backend/types'
 import Tags from './Tags'
-import {AnimatePresence, motion} from 'framer-motion'
 import CommentSection from './CommentSection'
 
 interface DiscoverProps {
@@ -78,8 +76,8 @@ export default function DiscoverComponent(props: DiscoverProps) {
   })
 
   return (
-    <div className='flex flex-col pt-8 pb-12 lg:p-16 w-full z-10'>
-      <div className='flex lg:flex-row flex-col lg:items-stretch items-center  lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
+    <div className='flex flex-col pt-8 pb-12 lg:px-16 w-full z-10'>
+      <div className='flex lg:flex-row flex-col lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
         <div className='lg:w-64 lg:h-40 w-[97%] h-44 space-y-2 bg-white shadow-lg rounded-lg '>
           <img className='h-full w-full rounded-lg object-cover' src={NewLogo} alt='Project Thumbnail'/>
         </div>
@@ -197,7 +195,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
           Join Project
         </button>
       </div>
-      <div className='flex lg:flex-row flex-col shadow-lg lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
+      <div className='flex lg:flex-row flex-col lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
         <CommentSection postID={'fdfdfd'}/>
       </div>
     </div>

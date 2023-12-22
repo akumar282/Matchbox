@@ -14,7 +14,7 @@ export default function SeeAllComponent(props: SeeAllProps) {
   return (
     <div>
       <button onClick={() => navigate(`/${props.linkTo}`)} className={`flex flex-col items-start 
-      rounded-[20px] mr-2 ml-2 mt-3 min-w-[220px] max-w-[220px] lg:max-w-[280px] min-h-[200px] 
+      rounded-[20px] mr-2 ml-2 mt-3 min-w-[220px] max-w-[220px] lg:max-w-[280px] h-[220px] 
       border-4 border-dashed hover:bg-purple-300 border-gray-500 justify-center`
       }>
         <div className='p-2 flex flex-col w-full justify-center space-y-2 items-center'>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Modal } from 'flowbite-react'
 import {Auth} from 'aws-amplify'
 import ErrorAlert, {
@@ -11,16 +11,18 @@ import ErrorAlert, {
 interface MFAProps {
   setFunction: React.Dispatch<React.SetStateAction<boolean>>
   openModal: boolean
+  user_name: string
 }
 
 export default function MFAModal(props: MFAProps){
 
   const [showAlert, setShowAlert] = React.useState(false)
-  const [code, setCode] = React.useState('')
+  const [code, setCode] = React.useState<string>('')
+  const [status, setStatus] = React.useState<string[]>([''])
 
   const success = ['Success', 'Sign Up Successful!', successXStyle, successStyle]
   const error = ['Error', 'Sign Up failed!', errorXStyle, errorStyle]
-
+ 
   const closeAlert = () => {
     setShowAlert(false)
   }
@@ -37,25 +39,30 @@ export default function MFAModal(props: MFAProps){
     )
   }
 
-  async function onSubmit(email: string, code: string) {
+  async function onSubmit(code: string) {
     try {
-      await Auth.confirmSignUp(email, code)
+      await Auth.confirmSignUp(props.user_name, code)
+      setStatus(success)
       setShowAlert(true)
-      displayAlert(success)
     } catch (e) {
+      setStatus(error)
       setShowAlert(true)
-      displayAlert(error)
     }
   }
+  useEffect(() => {
+    setShowAlert(false)
+    setCode('')
+  }, [props.openModal])
+
 
   return (
     <>
-      <Modal dismissible show={props.openModal} onClose={() => props.setFunction(false)}>
+      <Modal show={props.openModal} onClose={() => props.setFunction(false)}>
         <Modal.Header>MFA: Verify Account</Modal.Header>
         <Modal.Body>
-          {showAlert && displayAlert(success)}
+          {showAlert && displayAlert(status)}
           <div className='space-y-6 flex flex-col items-center justify-center'>
-            <h3 className='text-center'>Enter the code sent to ****@gmail.com here</h3>
+            <h3 className='text-center'>Enter the code sent to {props.user_name} here</h3>
             <input
               type='text'
               placeholder='Verification Code'
@@ -68,7 +75,7 @@ export default function MFAModal(props: MFAProps){
         <Modal.Footer>
           <button
             className='font-primary hover:bg-indigo-400 bg-secondary-blue text-white p-2 rounded-lg text-sm'
-            onClick={() => onSubmit(localStorage.getItem('email')!, code)}>Verify Account</button>
+            onClick={() => onSubmit(code)}>Verify Account</button>
         </Modal.Footer>
       </Modal>
     </>
