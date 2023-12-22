@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar'
 import InboxChat from '../components/InboxChat'
 import InboxHolder from '../components/InboxHolder'
 
+//todo make inboxholder take in messages as a array so we can map them as a messageItem
 export default function Inbox() {
   const [screen, setScreen] = useState('inbox')
   return (

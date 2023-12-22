@@ -15,7 +15,6 @@ import SavedPosts from './pages/SavedPosts'
 import NotFound from './pages/NotFound'
 import SingleView from './pages/SingleView'
 
-
 function App () {
 
   return (

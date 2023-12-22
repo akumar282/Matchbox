@@ -7,19 +7,13 @@ import Tags from './Tags'
 interface Props {
     job: {
         title: string,
-        company: string,
-        location: string,
-        from: string,
-        to: string,
-        current: boolean,
+        org_name: string,
+        start_date: string,
+        end_date: string,
         description: string,
-        LanguageTags: string[],
-        FrameworkTags: string[],
-        DevelopmentTags: string[],
-        InterestTags: string[],
-        CloudProviderTags: string[],
-        DifficultyTags: string[],
-        SizeTags: string[],
+        lang_tag: string[],
+        dev_type_tag: string[],
+        framework_tag: string[],
     }
 }
 
@@ -48,26 +42,14 @@ function generateTags(props: tagRender) {
 export default function ProfileWork(props: Props) {
   const allTags: tagRender[] = [
     {
-      tagType: props.job.LanguageTags as preferenceTags[],
+      tagType: props.job.lang_tag as preferenceTags[],
     },
     {
-      tagType: props.job.FrameworkTags as preferenceTags[],
+      tagType: props.job.dev_type_tag as preferenceTags[],
     },
     {
-      tagType: props.job.DevelopmentTags as preferenceTags[],
+      tagType: props.job.framework_tag as preferenceTags[],
     },
-    {
-      tagType: props.job.CloudProviderTags as preferenceTags[],
-    },
-    {
-      tagType: props.job.InterestTags as preferenceTags[],
-    },
-    {
-      tagType: props.job.DifficultyTags as preferenceTags[],
-    },
-    {
-      tagType: props.job.SizeTags as preferenceTags[],
-    }
   ]
   function convertDate(date: string) {
     const dateObj = new Date(date)
@@ -76,9 +58,9 @@ export default function ProfileWork(props: Props) {
 
   return (
     <div className='flex flex-col font-primary bg-gray-200 my-2 rounded-lg p-2'>
-      <h1 className='text-xl font-semibold pt-2'>{props.job.title}, {props.job.company}</h1>
+      <h1 className='text-xl font-semibold pt-2'>{props.job.title}, {props.job.org_name}</h1>
       <div className='flex flex-row pb-2'>
-        <h1 className='text-lg'>{convertDate(props.job.from)} - {convertDate(props.job.to)}</h1>
+        <h1 className='text-lg'>{convertDate(props.job.start_date)} - {props.job.end_date ? convertDate(props.job.end_date) : 'Present'}</h1>
       </div>
       <div className='flex flex-wrap gap-1 pb-2'>
         {allTags.map(x => generateTags(x))}

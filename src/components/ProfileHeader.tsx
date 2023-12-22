@@ -2,6 +2,7 @@ import React from 'react'
 import {enumBundle, preferenceTags} from '../backend/types'
 import Tags from './Tags'
 import github from '../img/github.svg'
+import { LanguageTag, FrameworkTag, DevelopmentTag, InterestTag, CloudProviderTag, DifficultyTag, SizeTag } from '../API'
 
 // TODO: Refactor Profile Page
 // TODO: Add props to injest user data
@@ -28,36 +29,51 @@ function generateTags(props: tagRender) {
     )
   })
 }
-      
-export default function ProfileHeader() {
+
+interface ProfileHeaderProps {
+  tags: {
+    lang_tag: LanguageTag[];
+    framework_tag: FrameworkTag[];
+    dev_type_tag: DevelopmentTag[];
+    interest_tag: InterestTag[];
+    cloud_provider_tag: CloudProviderTag[];
+    difficulty_tag: DifficultyTag[];
+    size_tag: SizeTag[];
+  };
+  bio: string,
+  user_name: string,
+  github: string
+}
+
+export default function ProfileHeader(props: ProfileHeaderProps) {
    
   const allTags: tagRender[] = [
     {
-      tagType: user.LanguageTags as preferenceTags[],
+      tagType: props.tags.lang_tag as preferenceTags[],
       renderColor: 'bg-green-300'
     },
     {
-      tagType: user.FrameworkTags as preferenceTags[],
+      tagType: props.tags.framework_tag as preferenceTags[],
       renderColor: 'bg-rose-300'
     },
     {
-      tagType: user.DevelopmentTags as preferenceTags[],
+      tagType: props.tags.dev_type_tag as preferenceTags[],
       renderColor: 'bg-blue-300'
     },
     {
-      tagType: user.CloudProviderTags as preferenceTags[],
+      tagType: props.tags.cloud_provider_tag as preferenceTags[],
       renderColor: 'bg-amber-300'
     },
     {
-      tagType: user.InterestTags as preferenceTags[],
+      tagType: props.tags.interest_tag as preferenceTags[],
       renderColor: 'bg-violet-300'
     },
     {
-      tagType: user.DifficultyTags as preferenceTags[],
+      tagType: props.tags.difficulty_tag as preferenceTags[],
       renderColor: 'bg-orange-300'
     },
     {
-      tagType: user.SizeTags as preferenceTags[],
+      tagType: props.tags.size_tag as preferenceTags[],
       renderColor: 'bg-lime-300'
     }
   ]
@@ -73,8 +89,8 @@ export default function ProfileHeader() {
               </svg>
             </div>
             <div className='flex flex-col justify-center items-center'>
-              <h1 className='text-2xl font-bold mt-4'>Username</h1>
-              <h1 className='text-lg font-semibold mt-1'>@username</h1>
+              <h1 className='text-2xl font-bold mt-4'>{props.user_name}</h1>
+              <h1 className='text-lg font-semibold mt-1'>@{props.user_name}</h1>
             </div>
           </div>
           <button className='rounded-full hover:bg-slate-300 px-2 py-2 w-12 h-12 mt-2 mr-2'>
@@ -85,11 +101,11 @@ export default function ProfileHeader() {
         </div>
         <div className='flex items-start ml-4 gap-2'>
           <h1 className='text-lg font-semibold'>Bio:</h1>
-          <h1 className='text-lg text'>{user.Bio}</h1>
+          <h1 className='text-lg text'>{props.bio}</h1>
         </div>
         <div className='flex items-center ml-2'>
           <button className='rounded-lg hover:bg-slate-300 px-2 py-2'>
-            <a className='flex flex-row items-center space-x-2' href={user.project_link!} target='_blank' rel='noreferrer'>
+            <a className='flex flex-row items-center space-x-2' href={props.github!} target='_blank' rel='noreferrer'>
               <img src={github} alt={'GitHub Logo'} width={30} height={30} />
               <h3>View GitHub Repository</h3>
             </a>

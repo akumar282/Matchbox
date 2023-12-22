@@ -8,8 +8,6 @@ interface ProjectViewProps {
 }
 
 export default function ProjectView(props: ProjectViewProps) {
-
-
   return (
     <div>
       <button className='h-[220px] flex flex-col items-start hover:shadow-lg rounded-lg mr-2 ml-2 mt-3 w-[220px] lg:w-[280px] bg-white border border-gray-200'>
