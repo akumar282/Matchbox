@@ -1,32 +1,6 @@
 import React from 'react'
-import ProjectView from './ProjectView'
-import NewLogo from '../img/NewLogo.png'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const projects = [
-  {
-    projecTitle: 'Matchbox',
-    image: NewLogo,
-  },
-  {
-    projecTitle: 'Matchbox 2',
-    image: NewLogo,
-  },
-  {
-    projecTitle: 'Matchbox 3',
-    image: NewLogo,
-  },
-  {
-    projecTitle: 'Matchbox 3',
-    image: NewLogo,
-  },
-  {
-    projecTitle: 'Matchbox 3',
-    image: NewLogo,
-  },
 
-]
-
-
+// TODO: Add props to injest user data
 export default function ProfileProjects() {
   return (
     <div className='rounded-lg mt-2 w-full px-2'>
@@ -42,9 +16,7 @@ export default function ProfileProjects() {
         <h1 className='text-lg font-primary mt-1'> Add your projects experience here</h1>
         <div className='overflow-x-auto'> 
           <div className='flex lg:grid lg:grid-cols-3 md:grid-cols-3 gap-2 mt-2'>
-            {projects.map((project, index) => 
-              <ProjectView key={index}title={project.projecTitle} image={project.image} github='https://github.com' />
-            )}
+
           </div>
         </div>
       </div>

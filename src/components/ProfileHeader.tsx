@@ -1,26 +1,15 @@
 import React from 'react'
 import {enumBundle, preferenceTags} from '../backend/types'
 import Tags from './Tags'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import github from '../img/github.svg'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const user = {
-  name: 'Username',
-  username: '@username',
-  Bio: 'This is a bio',
-  LanguageTags: ['Python', 'Java', 'C++'],
-  FrameworkTags: ['React', 'Vue', 'Angular'],
-  DevelopmentTags: ['Web', 'Mobile', 'Desktop'],
-  InterestTags: ['AI', 'ML', 'Data Science'],
-  CloudProviderTags: ['AWS', 'Azure', 'GCP'],
-  DifficultyTags: ['Beginner', 'Intermediate', 'Advanced'],
-  SizeTags: ['Small', 'Medium', 'Large'],
-  project_link: 'https://github.com'
+
+// TODO: Refactor Profile Page
+// TODO: Add props to injest user data
+
+type tagRender = {
+  tagType: preferenceTags[],
+  renderColor: string
 }
- type tagRender = {
-        tagType: preferenceTags[],
-        renderColor: string
-      }
       
 function generateTags(props: tagRender) {
   return props.tagType.map((tag) => {
@@ -28,7 +17,7 @@ function generateTags(props: tagRender) {
       enumMap: tag,
       value: tag,
     }
-      
+
     const tagClasses = `rounded-lg ${props.renderColor} my-2 ml-2 px-3 py-2 font-primary`
     return (
       <Tags
@@ -94,20 +83,6 @@ export default function ProfileHeader() {
             </svg>
           </button>
         </div>
-        {/* <div className='flex flex-row'>
-          <div className='flex flex-col justify-center items-center w-1/3'>
-            <h1 className='text-2xl font-bold'>1</h1>
-            <h1 className='text-lg font-semibold'>Projects</h1>
-          </div>
-          <div className='flex flex-col justify-center items-center w-1/3'>
-            <h1 className='text-2xl font-bold'>1</h1>
-            <h1 className='text-lg font-semibold'>Followers</h1>
-          </div>
-          <div className='flex flex-col justify-center items-center w-1/3'>
-            <h1 className='text-2xl font-bold'>1</h1>
-            <h1 className='text-lg font-semibold'>Following</h1>
-          </div>
-        </div> */}
         <div className='flex items-start ml-4 gap-2'>
           <h1 className='text-lg font-semibold'>Bio:</h1>
           <h1 className='text-lg text'>{user.Bio}</h1>

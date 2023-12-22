@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
-import CPrefrences from '../components/CPrefrences'
-import CInitial from '../components/CInitial'
-import CReview from '../components/CReview'
+import CreateProjectPreferences from '../components/CreateProjectPreferences'
+import CreateIntialScreen from '../components/CreateIntialScreen'
+import ReviewProject from '../components/ReviewProject'
 import { CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation } from 'swiper/modules'
@@ -84,9 +84,9 @@ export default function Create() {
           }}
           className='.my_swiper max-w-[1170px] mx-auto w-[97%]'
         >
-          <SwiperSlide>{<CInitial nextSlide={next_slide} setValues={setInitial}/>}</SwiperSlide>
-          <SwiperSlide>{<CPrefrences nextSlide={next_slide} prevSlide={prev_slide} setAllTags={setTags}/>}</SwiperSlide>
-          <SwiperSlide>{<CReview SelectedTags={tags} prevSlide={prev_slide} SelectedValues={inital}/> }</SwiperSlide>
+          <SwiperSlide>{<CreateIntialScreen nextSlide={next_slide} setValues={setInitial}/>}</SwiperSlide>
+          <SwiperSlide>{<CreateProjectPreferences nextSlide={next_slide} prevSlide={prev_slide} setAllTags={setTags}/>}</SwiperSlide>
+          <SwiperSlide>{<ReviewProject SelectedTags={tags} prevSlide={prev_slide} SelectedValues={inital}/> }</SwiperSlide>
         </Swiper>
       </div>
     </div>

@@ -58,7 +58,7 @@ function generateTags(props: tagRender) {
 }
 
 
-export default function CReview(props: Props) {
+export default function ReviewProject(props: Props) {
   const allTags: tagRender[] = [
     {
       tagType: props.SelectedTags.LanguageTags as preferenceTags[],

@@ -1,74 +1,6 @@
 import React from 'react'
 
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const messages = [
-  {
-    name: 'Name',
-    message: 'Message'
-  },
-  {
-    name: 'Them',
-    message: 'Message'
-  },
-  {
-    name: 'Name',
-    message: 'Message'
-  },
-  {
-    name: 'Them',
-    message: 'Message'
-  },
-  {
-    name: 'Name',
-    message: 'Message'
-  },
-  {
-    name: 'Them',
-    message: 'Message'
-  },
-  {
-    name: 'Name',
-    message: 'Message'
-  },
-  {
-    name: 'Them',
-    message: 'Message'
-  },
-  {
-    name: 'Name',
-    message: 'Message'
-  },
-  {
-    name: 'Them',
-    message: 'Message'
-  },
-  {
-    name: 'Name',
-    message: 'Message'
-  },
-  {
-    name: 'Them',
-    message: 'Message'
-  },
-  {
-    name: 'Name',
-    message: 'Message'
-  },
-  {
-    name: 'Them',
-    message: 'Message'
-  },
-  {
-    name: 'Them',
-    message: 'Message'
-  },
-  {
-    name: 'Them',
-    message: 'Message'
-  },
-]
-
 export default function InboxChatMessages() {
 
   function ChatMessage(props: {name: string, message: string, myName: string}) {
@@ -94,13 +26,11 @@ export default function InboxChatMessages() {
       )
     }
   }
+
   const myName = 'Name'
   return (
-    
     <div className='flex flex-col gap-4 p-4'>
-      {messages.map((message, index) => (
-        <ChatMessage key={index} name={message.name} message={message.message} myName={myName}/>
-      ))}
+
     </div>
   )
 }

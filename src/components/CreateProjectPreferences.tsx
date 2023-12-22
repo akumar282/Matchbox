@@ -15,7 +15,7 @@ interface Props {
       }) => void
     }
 
-export default function CPrefrences(props: Props) {
+export default function CreateProjectPreferences(props: Props) {
   const [tags, setTags] = React.useState<{
         LanguageTags: LanguageTag[],
         FrameworkTags: FrameworkTag[],
@@ -55,13 +55,13 @@ export default function CPrefrences(props: Props) {
           className='py-2 px-6 mb-3 md:w-1/5 bg-gray-300 hover:bg-gray-200 rounded-md'
           onClick={props.prevSlide}
         >
-            Go Back
+          Go Back
         </button>
         <button
           className='py-2 px-6 mb-3 md:w-1/5  bg-blue-700 hover:bg-blue-400 rounded-md text-white'
           onClick={() => nextSlide()}
         >
-            Review
+          Review
         </button>
       </div>
     </div>

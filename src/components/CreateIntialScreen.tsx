@@ -17,7 +17,7 @@ interface Props {
   }): void
 }
 
-export default function CInitial(props: Props) {
+export default function CreateIntialScreen(props: Props) {
   const [isChecked, setIsChecked] = React.useState(false)
   const [file, setFile] = React.useState<File | null>(null) 
   const acceptedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif']
@@ -65,6 +65,7 @@ export default function CInitial(props: Props) {
   }
   const navigate = useNavigate()
   return (
+    /* TODO: Remove random image*/
     <div className='mx-auto bg-white mt-8 mb-8 lg:max-w-[1300px] w-[97%] font-primary rounded-lg flex flex-col pb-4'>
       <div className='flex flex-col'>
         <div className='flex flex-col items-center space-y-4 mx-auto w-[93%] '>
@@ -72,16 +73,17 @@ export default function CInitial(props: Props) {
           <div className='w-full flex lg:flex-row items-center lg:space-x-4 space-x-0 flex-col'>
             <div className='lg:w-1/3 lg:h-48 grow-0 h-44 space-y-2 lg:mb-0 mb-4 bg-white shadow-lg rounded-lg '>
               <div className="flex w-full items-center justify-center h-full relative">
-                { file && <img
-                  className="absolute h-full w-full object-cover rounded-lg shadow-md bg-white"
-                  src={file ? URL.createObjectURL(file) : 'https://images.unsplash.com/photo-1612833609243-8b0e2c2e9e0a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29tcHV0ZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'}
-                  alt="Profile image"
-                />}
-                { file &&  <Label
-                  htmlFor="dropzone-file"
-                  className="absolute flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg z-50"
-                >
-                </Label> 
+                { 
+                  file && <img
+                    className="absolute h-full w-full object-cover rounded-lg shadow-md bg-white"
+                    src={file ? URL.createObjectURL(file) : 'https://images.unsplash.com/photo-1612833609243-8b0e2c2e9e0a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29tcHV0ZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'}
+                    alt="Profile image"/>
+                }
+                { 
+                  file &&  <Label
+                    htmlFor="dropzone-file"
+                    className="absolute flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg z-50">
+                  </Label> 
                 }
                 <Label
                   htmlFor="dropzone-file"

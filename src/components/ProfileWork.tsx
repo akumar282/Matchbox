@@ -2,6 +2,8 @@ import React from 'react'
 import {enumBundle, preferenceTags} from '../backend/types'
 import Tags from './Tags'
 
+
+// TODO: Refactor for schema
 interface Props {
     job: {
         title: string,
@@ -20,9 +22,10 @@ interface Props {
         SizeTags: string[],
     }
 }
+
 type tagRender = {
     tagType: preferenceTags[],
-  }
+}
   
 function generateTags(props: tagRender) {
   return props.tagType.map((tag) => {
@@ -55,25 +58,22 @@ export default function ProfileWork(props: Props) {
     },
     {
       tagType: props.job.CloudProviderTags as preferenceTags[],
-
     },
     {
       tagType: props.job.InterestTags as preferenceTags[],
-
     },
     {
       tagType: props.job.DifficultyTags as preferenceTags[],
-
     },
     {
       tagType: props.job.SizeTags as preferenceTags[],
-
     }
   ]
   function convertDate(date: string) {
     const dateObj = new Date(date)
     return dateObj.toLocaleString('default', { month: 'long' }) + ' ' + dateObj.getFullYear()
   }
+
   return (
     <div className='flex flex-col font-primary bg-gray-200 my-2 rounded-lg p-2'>
       <h1 className='text-xl font-semibold pt-2'>{props.job.title}, {props.job.company}</h1>

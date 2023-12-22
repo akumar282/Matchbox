@@ -4,6 +4,7 @@ import ProfileHeader from '../components/ProfileHeader'
 import ProfileProjects from '../components/ProfileProjects'
 import ProfileExperiences from '../components/ProfileExperiences'
 
+// TODO: None of the components take in data
 export default function UserProfile() {
   return (
     <div className='min-h-screen bg-primary-purple flex flex-col relative overflow-hidden'>

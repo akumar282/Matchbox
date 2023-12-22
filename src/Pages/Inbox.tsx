@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 import NavBar from '../components/NavBar'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import InboxChat from '../components/InboxChat'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import InboxHolder from '../components/InboxHolder'
 
 export default function Inbox() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [screen, setScreen] = useState('inbox')
   return (
     <div className='h-screen bg-primary-purple flex flex-col relative overflow-hidden'>

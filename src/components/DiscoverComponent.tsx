@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useEffect, useState} from 'react'
 import {CloudProviderTag, PostsModel} from '../API'
 import {getImage} from '../backend/storage/s3'

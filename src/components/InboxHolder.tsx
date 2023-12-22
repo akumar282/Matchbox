@@ -1,6 +1,8 @@
 import React from 'react'
 
 export default function InboxHolder(props: {setScreen: React.Dispatch<React.SetStateAction<string>>}) {
+
+  // TODO: This should be its own component
   function InboxMessage() {
     function handleBack() {
       console.log('back')
@@ -16,10 +18,10 @@ export default function InboxHolder(props: {setScreen: React.Dispatch<React.SetS
         </svg>
         <div className='flex flex-col gap-2 text-start overflow-hidden w-full'>
           <h1 className='truncate w-full'>
-              Nametfasdfsfsd
+            Name
           </h1>
           <h2 className='text-gray-400 text-sm truncate w-full'>
-              Message
+            Message
           </h2>
         </div>
       </button> 
@@ -32,7 +34,7 @@ export default function InboxHolder(props: {setScreen: React.Dispatch<React.SetS
           Recent Chats
         </h1>
         <label htmlFor="search" className="sr-only">
-            Search
+          Search
         </label>
         <input
           type="text"
@@ -44,7 +46,7 @@ export default function InboxHolder(props: {setScreen: React.Dispatch<React.SetS
       </div>
       <div className='flex-grow w-full p-4 flex flex-col gap-2 overflow-auto'>
         <h1>
-            Conversations
+          Conversations
         </h1>
         <div className='overflow-auto'>
           <div className='grid grid-cols-1 divide-y w-full'>

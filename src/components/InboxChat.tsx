@@ -28,7 +28,7 @@ export default function InboxChat(props: {setScreen: React.Dispatch<React.SetSta
         </button>
       </div>
       <div className='flex flex-col flex-grow overflow-y-auto overflow-hidden'>
-        <InboxChatMessages />
+        <InboxChatMessages/>
       </div>
       <div className='flex justify-center items-center gap-2 pt-2'>
         <input type="text" placeholder='Type a message...' className='border-2 border-gray-100 w-full p-2' />

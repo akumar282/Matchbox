@@ -1,6 +1,7 @@
 import React from 'react'
 import ProfileWork from './ProfileWork'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+// TODO: Refactor to injest data
 const experience = [
   {
     title: 'Software Engineer',
