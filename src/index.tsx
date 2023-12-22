@@ -4,14 +4,18 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import config from './aws-exports'
-import { Amplify } from 'aws-amplify'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import {Amplify, Storage} from 'aws-amplify'
 import { ThemeProvider } from '@material-tailwind/react'
 Amplify.configure(config)
+
+// TODO: Make storage private before deployment
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 root.render(
   <React.StrictMode>
     <ThemeProvider>
+      {/*Storage.configure({ level: 'private' })*/}
       <App />
     </ThemeProvider>
   </React.StrictMode>

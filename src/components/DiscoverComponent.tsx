@@ -65,6 +65,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
     }
   ]
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [projectImage, setProjectImage] = useState('')
 
   useEffect(() => {

@@ -24,11 +24,17 @@ export default function LoginPage() {
   const validationSchema = yup.object({
     username: yup
       .string()
+<<<<<<< HEAD
       .min(3, 'Username should be of minimum 2 characters')
       .required('username is required'),
     password: yup
       .string()
       .min(8, 'Password should be of minimum 8 characters')
+=======
+      .required('username is required'),
+    password: yup
+      .string()
+>>>>>>> 92989afb677692a7bb51e6bd0807c512bd6c172d
       .required('Password is required'),
   })
   const formik = useFormik({
@@ -54,6 +60,7 @@ export default function LoginPage() {
       <div className='flex flex-col items-center justify-center lg:flex-col'>
         {showAlert && <ErrorAlert show={showAlert} closeAlert={closeAlert} title='Error' message='Login Unsuccessful' closeStyle={errorXStyle} colorStyle={errorStyle} />}
         <div className='pt-10 flex flex-col items-center justify-center'>
+          {showAlert && <ErrorAlert show={showAlert} closeAlert={closeAlert} title='Error' message='Login Unsuccessful' closeStyle={errorXStyle} colorStyle={errorStyle} />}
           <h1 className='text-center font-primary text-4xl font-semibold'>Welcome Back!</h1>
           <h2 className='text-center text-lg text-medium font-primary pt-4'>Login to your account</h2>
           <OAuthButtons label='Login with Google' src={google} />

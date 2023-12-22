@@ -16,7 +16,7 @@ import NotFound from './pages/NotFound'
 import SingleView from './pages/SingleView'
 
 function App () {
-  
+
   return (
     //create a saved state that can be updated by the user
     <BrowserRouter>
