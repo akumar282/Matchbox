@@ -3,6 +3,7 @@ import React from 'react'
 
 export default function InboxChatMessages() {
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function ChatMessage(props: {name: string, message: string, myName: string}) {
     if (props.name === props.myName) {
       return (
@@ -27,6 +28,7 @@ export default function InboxChatMessages() {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const myName = 'Name'
   return (
     <div className='flex flex-col gap-4 p-4'>

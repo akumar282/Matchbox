@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {CloudProviderTag, PostsModel} from '../API'
+import {PostsModel} from '../API'
 import {getImage} from '../backend/storage/s3'
 import NewLogo from '../img/NewLogo.png'
 import github from '../img/github.svg'
@@ -66,6 +66,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
     }
   ]
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [projectImage, setProjectImage] = useState('')
 
   useEffect(() => {

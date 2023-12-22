@@ -24,11 +24,9 @@ export default function LoginPage() {
   const validationSchema = yup.object({
     username: yup
       .string()
-      .min(3, 'Username should be of minimum 2 characters')
       .required('username is required'),
     password: yup
       .string()
-      .min(8, 'Password should be of minimum 8 characters')
       .required('Password is required'),
   })
   const formik = useFormik({
@@ -52,8 +50,8 @@ export default function LoginPage() {
       <LandingPageNavBar />
       <GitBranches />
       <div className='flex flex-col items-center justify-center lg:flex-col'>
-        {showAlert && <ErrorAlert show={showAlert} closeAlert={closeAlert} title='Error' message='Login Unsuccessful' closeStyle={errorXStyle} colorStyle={errorStyle} />}
         <div className='pt-10 flex flex-col items-center justify-center'>
+          {showAlert && <ErrorAlert show={showAlert} closeAlert={closeAlert} title='Error' message='Login Unsuccessful' closeStyle={errorXStyle} colorStyle={errorStyle} />}
           <h1 className='text-center font-primary text-4xl font-semibold'>Welcome Back!</h1>
           <h2 className='text-center text-lg text-medium font-primary pt-4'>Login to your account</h2>
           <OAuthButtons label='Login with Google' src={google} />
@@ -89,10 +87,7 @@ export default function LoginPage() {
           </div>
         </div>
         <div className='pt-2'>
-          <button 
-            type='submit'
-            onClick={()=> formik.handleSubmit()}
-            className='font-primary hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg px-36 py-1'>
+          <button className='font-primary hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg px-36 py-2' type='submit' onClick={() => formik.handleSubmit}>
             Log In
           </button>
           <h1 className='font-primary text-start pt-5'>Don&apos;t have an account? <button onClick={() => navigate('/signup')} className='underline text-secondary-blue hover:text-indigo-400'>Sign-Up</button></h1>

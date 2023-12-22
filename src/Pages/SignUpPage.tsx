@@ -38,8 +38,8 @@ export default function SignUpPage() {
   const validationSchema = yup.object({
     user_name: yup
       .string()
-      .min(3, 'Username should be of minimum 2 characters')
-      .max(30, 'Username should be of maximum 20 characters')
+      .min(3, 'Username should be of minimum 3 characters')
+      .max(20, 'Username should be of maximum 20 characters')
       .required('Username is required'),
     email: yup
       .string()

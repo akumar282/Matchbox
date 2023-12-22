@@ -4,7 +4,7 @@ import React from 'react'
 interface OAuthButtonsProps {
   label: string
   src: string
-  onClick: any
+  onClick?: any
 }
 
 export default function OAuthButtons(props: OAuthButtonsProps) {
