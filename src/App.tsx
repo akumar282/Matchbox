@@ -14,7 +14,7 @@ import Settings from './pages/Settings'
 import SavedPosts from './pages/SavedPosts'
 import NotFound from './pages/NotFound'
 import SingleView from './pages/SingleView'
-
+// import AuthWrapper from './components/AuthWrapper'
 
 function App () {
 
@@ -22,11 +22,16 @@ function App () {
     //create a saved state that can be updated by the user
     <BrowserRouter>
       <Routes>
+        <Route path="/setup" element={
+          // <AuthWrapper>
+          <PreferencesPage />
+          // </AuthWrapper>
+        } />
         <Route path='/*' element={<NotFound />} />
         <Route path='/' element={<LandingPage />} />
         <Route path='/signup' element={<SignUpPage/>}/>
         <Route path='/login' element={<LoginPage />} />
-        <Route path='/setup' element={<PreferencesPage />} />
+
         <Route path='/home' element={<HomePage />} />
         <Route path='/create-project' element={<Create />} />
         <Route path='/discover' element={<DiscoverPage />} />

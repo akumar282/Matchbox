@@ -58,15 +58,16 @@ export default function SignUpPage() {
       password:''
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      if(!isChecked){
+    onSubmit: async (values) => {
+      if (!isChecked) {
         setShowAlert(true)
       } else {
         setShowAlert(false)
-        standardSignUp(values.user_name, values.email, values.password)
+        const result = await standardSignUp(values.user_name, values.email, values.password)
+        console.log(result)
         setShowModal(true)
       }
-      
+
     },
   })
 

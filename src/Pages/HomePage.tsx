@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import SeeAllComponent from '../components/SeeAll'
 import Saved from '../img/Saved.svg'
 import group from '../img/group.svg'
+import {getCurrentUserAttributes} from '../backend/auth'
 
 export default function HomePage() {
 
@@ -19,7 +20,7 @@ export default function HomePage() {
   ])
 
   const navigate = useNavigate()
-
+  getCurrentUserAttributes('id').then(x => console.log(x))
   return (
     <div className='flex flex-col min-h-screen'>
       <NavBar />

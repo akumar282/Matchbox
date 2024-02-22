@@ -7,6 +7,8 @@ import { Pagination, Navigation } from 'swiper/modules'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css'
+import fallback from './fallback/fallback.json'
+import {PostsModel} from '../API'
 
 // TODO: Add data and image fetching
 
@@ -18,7 +20,7 @@ export default function DiscoverPage() {
   const [my_swiper, set_my_swiper] = useState({})
 
   useEffect(() => {
-    let ExampleData
+    const ExampleData = fallback.data.items as unknown as PostsModel[]
     const updatedProjects = ExampleData.map((x) => <DiscoverComponent key={x.id} data={x} />)
     setProjects(updatedProjects)
   }, [])

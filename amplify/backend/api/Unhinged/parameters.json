@@ -2,6 +2,7 @@
   "AppSyncApiName": "unhinged",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
+  "CreateAPIKey": 1,
   "AuthCognitoUserPoolId": {
     "Fn::GetAtt": [
       "authunhingedf9920fd0",

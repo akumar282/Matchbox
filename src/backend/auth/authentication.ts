@@ -26,11 +26,11 @@ export async function newUserSignUp(username: string, password: string, email: s
   }
 }
 
-export async function getCurrentUserAttributes(): Promise<CustomAttribute[]> {
+export async function getCurrentUserAttributes(attr: string): Promise<CustomAttribute[]> {
   try {
     const user = await Auth.currentAuthenticatedUser()
     const customAttributes: CustomAttribute[] = Object.entries(user.attributes)
-      .filter(([key]) => key.startsWith('custom:'))
+      .filter(([key]) => key == (`custom:${attr}`))
       .map(([key, value]) => ({
         name: key.substring('custom:'.length),
         value: value as string

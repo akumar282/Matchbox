@@ -5,3 +5,5 @@ src/graphql/*
 amplify-codegen-temp\models
 
 amplify-codegen-temp\models\models
+
+amplify-codegen-temp/models/models
