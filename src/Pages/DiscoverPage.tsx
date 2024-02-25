@@ -9,21 +9,49 @@ import 'swiper/css/navigation'
 import 'swiper/css'
 import fallback from './fallback/fallback.json'
 import {PostsModel} from '../API'
+import { Auth } from 'aws-amplify'
+import {getCurrentUserAttributes} from '../backend/auth'
 
 // TODO: Add data and image fetching
 
+async function getDynamoUserId() {
+  try {
+    if (await Auth.currentAuthenticatedUser()) {
+      return getCurrentUserAttributes('id')
+    } else {
+      return null
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export default function DiscoverPage() {
-  
+
   const [projectIndex, setProjectIndex] = useState<number>(0)
   const [projects, setProjects] = useState<React.ReactNode[]>([])
   const [my_swiper, set_my_swiper] = useState({})
 
+
   useEffect(() => {
-    const ExampleData = fallback.data.items as unknown as PostsModel[]
-    const updatedProjects = ExampleData.map((x) => <DiscoverComponent key={x.id} data={x} />)
-    setProjects(updatedProjects)
+    const getProjects = async () => {
+      try {
+        const dynamoUserId = await getDynamoUserId()
+        const responseJson = await (await fetch(`https://3q03neb3ig.execute-api.us-west-2.amazonaws.com/prod/matches/${dynamoUserId?.at(0)?.value}`)).json()
+        const mappedItems = (responseJson.data.items as PostsModel[]).map(x => <DiscoverComponent key={x.id} data={x} />)
+        setProjects(mappedItems)
+      } catch (e) {
+        console.log(e + ' Falling back to existing json')
+        const ExampleData = fallback.data.items as unknown as PostsModel[]
+        const updatedProjects = ExampleData.map((x) => <DiscoverComponent key={x.id} data={x} />)
+        setProjects(updatedProjects)
+      }
+    }
+
+    getProjects().catch(console.error)
+
   }, [])
+
   return (
     <div className='flex flex-col min-h-screen'>
       <NavBar />

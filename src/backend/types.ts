@@ -1,4 +1,4 @@
-import { 
+import {
   FrameworkTag,
   SizeTag,
   LanguageTag,
@@ -6,7 +6,7 @@ import {
   DevelopmentTag,
   CloudProviderTag,
   ExperienceTag,
-  DifficultyTag
+  DifficultyTag, PostsModel
 } from '@api'
 
 export type preferenceTags = FrameworkTag | SizeTag | LanguageTag | InterestTag | DevelopmentTag | CloudProviderTag | ExperienceTag | DifficultyTag
@@ -14,4 +14,8 @@ export type preferenceTags = FrameworkTag | SizeTag | LanguageTag | InterestTag 
 export type enumBundle = {
   value: string
   enumMap: preferenceTags
+}
+
+export type PostsWImages = Omit<PostsModel, 'image_link'> & {
+  image: File;
 }
