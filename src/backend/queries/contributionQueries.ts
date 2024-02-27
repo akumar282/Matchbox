@@ -6,10 +6,10 @@ import {
   ListContributionsModelsQueryVariables,
   GetContributionsModelQueryVariables
 } from '@api'
-import { GraphQLResult } from '@aws-amplify/api-graphql'
+import { GraphQLQuery } from '@aws-amplify/api'
 
 export async function getContribution(contribution: { input: GetContributionsModelQueryVariables}){
-  return await API.graphql<GraphQLResult<GetContributionsModelQuery>>({
+  return await API.graphql<GraphQLQuery<GetContributionsModelQuery>>({
     query: getContributionsModel,
     variables: contribution,
     authMode: 'API_KEY'
@@ -17,7 +17,7 @@ export async function getContribution(contribution: { input: GetContributionsMod
 }
 
 export async function listContributions(contribution: { input: ListContributionsModelsQueryVariables}){
-  return await API.graphql<GraphQLResult<ListContributionsModelsQuery>>({
+  return await API.graphql<GraphQLQuery<ListContributionsModelsQuery>>({
     query: listContributionsModels,
     variables: contribution,
     authMode: 'API_KEY'

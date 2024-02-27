@@ -14,6 +14,7 @@ import Settings from './pages/Settings'
 import SavedPosts from './pages/SavedPosts'
 import NotFound from './pages/NotFound'
 import SingleView from './pages/SingleView'
+import LoadingScreen from './components/LoadingScreen'
 // import AuthWrapper from './components/AuthWrapper'
 
 function App () {
@@ -31,7 +32,6 @@ function App () {
         <Route path='/' element={<LandingPage />} />
         <Route path='/signup' element={<SignUpPage/>}/>
         <Route path='/login' element={<LoginPage />} />
-
         <Route path='/home' element={<HomePage />} />
         <Route path='/create-project' element={<Create />} />
         <Route path='/discover' element={<DiscoverPage />} />
@@ -40,6 +40,7 @@ function App () {
         <Route path='/profile' element={<UserProfile />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/saved' element={<SavedPosts />} />
+        <Route path='/load' element={<LoadingScreen />} />
       </Routes>
     </BrowserRouter>
   )

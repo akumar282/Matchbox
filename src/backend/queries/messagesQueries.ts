@@ -6,10 +6,10 @@ import {
   ListMessageModelsQueryVariables,
   GetMessageModelQueryVariables
 } from '@api'
-import { GraphQLResult } from '@aws-amplify/api-graphql'
+import { GraphQLQuery } from '@aws-amplify/api'
 
 export async function getMessage(message: { input: GetMessageModelQueryVariables}){
-  return await API.graphql<GraphQLResult<GetMessageModelQuery>>({
+  return await API.graphql<GraphQLQuery<GetMessageModelQuery>>({
     query: getMessageModel,
     variables: message,
     authMode: 'API_KEY'
@@ -17,7 +17,7 @@ export async function getMessage(message: { input: GetMessageModelQueryVariables
 }
 
 export async function listMessage(message: { input: ListMessageModelsQueryVariables}){
-  return await API.graphql<GraphQLResult<ListMessageModelsQuery>>({
+  return await API.graphql<GraphQLQuery<ListMessageModelsQuery>>({
     query: listMessageModels,
     variables: message,
     authMode: 'API_KEY'

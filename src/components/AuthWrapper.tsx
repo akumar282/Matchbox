@@ -19,7 +19,7 @@ export default function AuthWrapper({ children }: Props){
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [authToken, setAuthToken] = React.useState<CognitoUserSession>()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [userInfo, setUserInfo] = React.useState<userType>(null)
+  const [userInfo, setUserInfo] = React.useState<userType>()
 
   const navigate = useNavigate()
 

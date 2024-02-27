@@ -6,10 +6,10 @@ import {
   ListUsersModelsQueryVariables,
   GetUsersModelQueryVariables
 } from '@api'
-import { GraphQLResult } from '@aws-amplify/api-graphql'
+import { GraphQLQuery } from '@aws-amplify/api'
 
 export async function getUser(user: { input: GetUsersModelQueryVariables}){
-  return await API.graphql<GraphQLResult<GetUsersModelQuery>>({
+  return await API.graphql<GraphQLQuery<GetUsersModelQuery>>({
     query: getUsersModel,
     variables: user,
     authMode: 'API_KEY'
@@ -17,7 +17,7 @@ export async function getUser(user: { input: GetUsersModelQueryVariables}){
 }
 
 export async function listUsers(user: { input: ListUsersModelsQueryVariables}){
-  return await API.graphql<GraphQLResult<ListUsersModelsQuery>>({
+  return await API.graphql<GraphQLQuery<ListUsersModelsQuery>>({
     query: listUsersModels,
     variables: user,
     authMode: 'API_KEY'

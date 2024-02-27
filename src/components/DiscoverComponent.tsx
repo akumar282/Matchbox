@@ -197,7 +197,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
         </button>
       </div>
       <div className='flex lg:flex-row flex-col lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
-        <CommentSection postID={'fdfdfd'}/>
+        <CommentSection postID={props.data.id}/>
       </div>
     </div>
   )

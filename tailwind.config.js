@@ -6,6 +6,34 @@ export const content = [
 ];
 export const theme = {
   extend: {
+    animation: {
+      message1: 'typewriter 2s steps(21) forwards',
+      carat: 'typewriter 2s steps(19) forwards, blink 1s steps(21) infinite 2s'
+    },
+    keyframes: {
+      typewriter: {
+        to: {
+          left: '100%',
+        },
+      },
+      blink: {
+        '0%': {
+          opacity: '0',
+        },
+        '0.1%': {
+          opacity: '1',
+        },
+        '50%': {
+          opacity: '1',
+        },
+        '50.1%': {
+          opacity: '0',
+        },
+        '100%': {
+          opacity: '0',
+        },
+      },
+    },
     fontFamily: {
       primary: 'roboto-mono',
       secondary: 'roboto-bold',
