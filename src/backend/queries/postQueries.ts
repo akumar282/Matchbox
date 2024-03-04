@@ -8,7 +8,7 @@ import {
   GetPostsModelQueryVariables
 } from '@api'
 
-export async function getPost(post: { input: GetPostsModelQueryVariables}){
+export async function getPost(post: GetPostsModelQueryVariables){
   return await API.graphql<GraphQLQuery<GetPostsModelQuery>>({
     query: getPostsModel,
     variables: post,

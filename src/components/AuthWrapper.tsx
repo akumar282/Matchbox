@@ -6,6 +6,7 @@ import {getCurrentUserAttributes} from '../backend/auth'
 import {userContextType} from '../backend/types'
 import {getImage} from '../backend/storage/s3'
 import {getUser} from '../backend/queries/userQueries'
+import LoadingScreen from './LoadingScreen'
 
 interface Props {
   children: React.ReactNode
@@ -17,6 +18,7 @@ export default function AuthWrapper({ children }: Props){
   const [isLoggedIn, setLoggedIn] = React.useState(false)
   const [authToken, setAuthToken] = React.useState<CognitoUserSession>()
   const [userInfo, setUserInfo] = React.useState<userContextType>()
+  const [isLoading, setIsLoading] = React.useState(true)
 
   const navigate = useNavigate()
 
@@ -43,13 +45,19 @@ export default function AuthWrapper({ children }: Props){
         localStorage.setItem('profile_image', info.profile_image)
 
         setUserInfo(info)
+        setIsLoading(false)
       } catch (error) {
+        setIsLoading(false)
         navigate('/login')
       }
     }
 
     getData().catch(console.error)
   }, [navigate])
+
+  if (isLoading) {
+    return <LoadingScreen/>
+  }
 
   return isLoggedIn ? (
     <AuthContext.Provider value={userInfo}>

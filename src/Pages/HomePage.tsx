@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import NavBar from '../components/NavBar'
 import { TrendIcon, FlaskIcon, MLIcon, CloudIcon } from '../components/Vectors'
 import CategoryButton from '../components/CategoryButton'
@@ -7,8 +7,15 @@ import SeeAllComponent from '../components/SeeAll'
 import Saved from '../img/Saved.svg'
 import group from '../img/group.svg'
 import {getCurrentUserAttributes} from '../backend/auth'
+import {getUser} from '../backend/queries/userQueries'
+import {AuthContext} from '../components/AuthWrapper'
+import {getImage} from '../backend/storage/s3'
+import {getPost} from '../backend/queries/postQueries'
+import ProjectView from '../components/ProjectView'
 
 export default function HomePage() {
+
+  const userInfo = useContext(AuthContext)
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [joinedProjects, setJoinedProjects] = useState<React.ReactNode[]>([
@@ -18,9 +25,32 @@ export default function HomePage() {
   const [savedProjects, setSavedProjects] = useState<React.ReactNode[]>([
     <SeeAllComponent key={'End'} linkTo={'saved'} image={Saved} bodyText={'Your saved projects will appear here so you can choose which to work on'}/>
   ])
-
   const navigate = useNavigate()
   getCurrentUserAttributes('id').then(x => console.log(x))
+
+  useEffect(() => {
+    const getHomePageData = async () => {
+      const { data } = await getUser({id: userInfo!.id})
+      if (data && data.getUsersModel && data.getUsersModel.saved_posts) {
+        const itemsToGrab = data.getUsersModel.saved_posts.slice(0, 3)
+        for (const item of itemsToGrab) {
+          const {data} = await getPost({id: item!})
+          const imageUrl = await getImage(data?.getPostsModel?.image_link ?? undefined)
+          const mapToCard = (
+            <ProjectView
+              title={data!.getPostsModel!.post_title}
+              image={imageUrl}
+              github={data!.getPostsModel!.project_link ?? 'https://github.com'}
+            />
+          )
+          setSavedProjects((prevProjects) => [mapToCard, ...prevProjects])
+        }
+      }
+    }
+
+    getHomePageData().catch()
+  }, [])
+
   return (
     <div className='flex flex-col min-h-screen'>
       <NavBar />
@@ -60,8 +90,7 @@ export default function HomePage() {
           <h1 className='text-2xl font-primary ml-3 mt-3'>Saved Projects</h1>
           <h3 className='text-sm font-primary ml-3 mt-1'>Projects that you want to look into:</h3>
           <div className='overflow-x-auto'>
-            <div className='flex mt-2 lg:grid lg:grid-cols-4 md:grid-cols-4'>
-              {/* Render Query Here */}
+            <div className='flex mt-2 pb-1 lg:grid lg:grid-cols-4 md:grid-cols-4'>
               {savedProjects}
             </div>
           </div>
