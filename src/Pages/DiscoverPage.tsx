@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import NavBar from '../components/NavBar'
 import DiscoverComponent from '../components/DiscoverComponent'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -9,23 +9,10 @@ import 'swiper/css/navigation'
 import 'swiper/css'
 import fallback from './fallback/fallback.json'
 import {PostsModel} from '../API'
-import { Auth } from 'aws-amplify'
-import {getCurrentUserAttributes} from '../backend/auth'
 import LoadingScreen from '../components/LoadingScreen'
+import { AuthContext } from '../components/AuthWrapper'
 
 // TODO: Add data and image fetching
-
-async function getDynamoUserId() {
-  try {
-    if (await Auth.currentAuthenticatedUser()) {
-      return getCurrentUserAttributes('id')
-    } else {
-      return null
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 export default function DiscoverPage() {
 
@@ -33,7 +20,7 @@ export default function DiscoverPage() {
   const [projects, setProjects] = useState<React.ReactNode[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [my_swiper, set_my_swiper] = useState({})
-
+  const userInfo = useContext(AuthContext)
 
   useEffect(() => {
     const getProjects = async () => {
@@ -45,8 +32,8 @@ export default function DiscoverPage() {
         setLoading(false)
       } else {
         try {
-          const dynamoUserId = await getDynamoUserId()
-          const responseJson = await (await fetch(`https://3q03neb3ig.execute-api.us-west-2.amazonaws.com/prod/matches/${dynamoUserId?.at(0)?.value}`)).json()
+          const dynamoUserId = userInfo?.id
+          const responseJson = await (await fetch(`https://3q03neb3ig.execute-api.us-west-2.amazonaws.com/prod/matches/${dynamoUserId}`)).json()
           const mappedItems = (responseJson.data.items as PostsModel[]).map(x => <DiscoverComponent key={x.id} data={x} />)
           setProjects(mappedItems)
           setLoading(false)
@@ -147,5 +134,3 @@ export default function DiscoverPage() {
     </div>
   )
 }
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars

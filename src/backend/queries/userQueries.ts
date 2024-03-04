@@ -8,7 +8,7 @@ import {
 } from '@api'
 import { GraphQLQuery } from '@aws-amplify/api'
 
-export async function getUser(user: { input: GetUsersModelQueryVariables}){
+export async function getUser(user:  GetUsersModelQueryVariables){
   return await API.graphql<GraphQLQuery<GetUsersModelQuery>>({
     query: getUsersModel,
     variables: user,

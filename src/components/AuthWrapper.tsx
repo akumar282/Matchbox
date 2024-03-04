@@ -1,50 +1,59 @@
-import React, {useEffect} from 'react'
+import React, {createContext, useEffect} from 'react'
 import {Auth} from 'aws-amplify'
 import {useNavigate} from 'react-router-dom'
 import { CognitoUserSession} from 'amazon-cognito-identity-js'
 import {getCurrentUserAttributes} from '../backend/auth'
+import {userContextType} from '../backend/types'
+import {getImage} from '../backend/storage/s3'
+import {getUser} from '../backend/queries/userQueries'
 
 interface Props {
-  children: React.ReactElement
+  children: React.ReactNode
 }
 
-interface userType {
-  id: string,
-  name?: string,
-  userName: string
-}
+export const AuthContext = createContext<userContextType | undefined>(undefined)
 
 export default function AuthWrapper({ children }: Props){
   const [isLoggedIn, setLoggedIn] = React.useState(false)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [authToken, setAuthToken] = React.useState<CognitoUserSession>()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [userInfo, setUserInfo] = React.useState<userType>()
+  const [userInfo, setUserInfo] = React.useState<userContextType>()
 
   const navigate = useNavigate()
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const currUser = await Auth.currentAuthenticatedUser()
-        setLoggedIn(true)
-        const tokenInfo = await Auth.currentSession()
-        setAuthToken(tokenInfo)
+        setLoggedIn(await Auth.currentAuthenticatedUser())
+        setAuthToken(await Auth.currentSession())
         const [attribute] = await getCurrentUserAttributes('id')
-        const info: userType = {
+        const info: userContextType = {
           id: attribute.value,
-          userName: currUser.userName,
+          authToken: authToken
         }
+
+        const { data } = await getUser({id: info.id})
+        if (data && data.getUsersModel && data.getUsersModel.profile_image && data.getUsersModel.user_name) {
+          info.profile_image = await getImage(data.getUsersModel.profile_image)
+          info.userName = data.getUsersModel.user_name
+        } else {
+          info.profile_image = await getImage()
+          info.userName = 'nosession'
+        }
+
+        localStorage.setItem('profile_image', info.profile_image)
+
         setUserInfo(info)
       } catch (error) {
-        // This will catch any error from Auth.currentAuthenticatedUser(), including not being authenticated
-        console.error(error)
-        navigate('/')
+        navigate('/login')
       }
     }
 
     getData().catch(console.error)
   }, [navigate])
 
-  return isLoggedIn ? children : null
+  return isLoggedIn ? (
+    <AuthContext.Provider value={userInfo}>
+      {children}
+    </AuthContext.Provider>
+  ) : null
 }

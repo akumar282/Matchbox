@@ -3,7 +3,7 @@ import { enumBundle, preferenceTags } from '../backend/types'
 import { CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
 import Tags from '../components/Tags'
 
-export interface PrefrencesProps {
+export interface PreferencesProps {
   setTags : React.Dispatch<React.SetStateAction<{
     LanguageTags: LanguageTag[],
     FrameworkTags: FrameworkTag[],
@@ -14,7 +14,7 @@ export interface PrefrencesProps {
     SizeTags: SizeTag[],
   }>> 
 }
-export default function PreferencesComponent(props: PrefrencesProps) {
+export default function PreferencesComponent(props: PreferencesProps) {
 
   const [LanguageTags, setLanguageTags] = React.useState<LanguageTag[]>([])
   const [FrameworkTags, setFrameworkTags] = React.useState<FrameworkTag[]>([])

@@ -40,7 +40,7 @@ export default function CommentSection(props: CommentSectionData) {
   function noCommentsAvail() {
 
     return (
-      <div className="w-[97%] py-3 flex bg-slate-200 rounded-lg mb-2 flex-col items-center">
+      <div className="w-[97%] py-3 flex bg-slate-200 text-center rounded-lg mb-2 flex-col items-center">
         <div>
           <h3>No comments yet... Be the first to write one!</h3>
         </div>
