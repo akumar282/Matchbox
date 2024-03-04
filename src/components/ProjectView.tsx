@@ -1,14 +1,8 @@
 import React from 'react'
 import github from '../img/github.svg'
-
-interface ProjectViewProps {
-  title: string
-  image: string
-  github: string
-}
+import {ProjectViewProps} from '../functions/sharedProps'
 
 export default function ProjectView(props: ProjectViewProps) {
-
 
   return (
     <div>
