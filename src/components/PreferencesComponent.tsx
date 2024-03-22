@@ -74,49 +74,49 @@ export default function PreferencesComponent(props: PreferencesProps) {
     const isTagIncluded = typeTag.includes(tag)
 
     switch (typeTag) {
-    case LanguageTags:
-      setLanguageTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as LanguageTag[]
-      )
-      break
-    case FrameworkTags:
-      setFrameworkTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as FrameworkTag[]
-      )
-      break
-    case DevelopmentTags:
-      setDevelopmentTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as DevelopmentTag[]
-      )
-      break
-    case CloudProviderTags:
-      setCloudProviderTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as CloudProviderTag[]
-      )
-      break
-    case InterestTags:
-      setInterestTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as InterestTag[]
-      )
-      break
-    case DifficultyTags:
-      setDifficultyTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as DifficultyTag[]
-      )
-      break
-    case SizeTags:
-      setSizeTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as SizeTag[]
-      )
-      break
-    case checkedTags:
-      setCheckedTags((prevTags) =>
-        isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag]
-      )
-      removeFromAll(tag)
-      break
-    default:
-      break
+      case LanguageTags:
+        setLanguageTags((prevTags) =>
+          isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as LanguageTag[]
+        )
+        break
+      case FrameworkTags:
+        setFrameworkTags((prevTags) =>
+          isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as FrameworkTag[]
+        )
+        break
+      case DevelopmentTags:
+        setDevelopmentTags((prevTags) =>
+          isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as DevelopmentTag[]
+        )
+        break
+      case CloudProviderTags:
+        setCloudProviderTags((prevTags) =>
+          isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as CloudProviderTag[]
+        )
+        break
+      case InterestTags:
+        setInterestTags((prevTags) =>
+          isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as InterestTag[]
+        )
+        break
+      case DifficultyTags:
+        setDifficultyTags((prevTags) =>
+          isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as DifficultyTag[]
+        )
+        break
+      case SizeTags:
+        setSizeTags((prevTags) =>
+          isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag] as SizeTag[]
+        )
+        break
+      case checkedTags:
+        setCheckedTags((prevTags) =>
+          isTagIncluded ? prevTags.filter((t) => t !== tag) : [...prevTags, tag]
+        )
+        removeFromAll(tag)
+        break
+      default:
+        break
     }
 
     // Update the checkedTags state

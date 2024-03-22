@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import SeeAllComponent from '../components/SeeAll'
 import Saved from '../img/Saved.svg'
 import group from '../img/group.svg'
-import {getCurrentUserAttributes} from '../backend/auth'
 import {getUser} from '../backend/queries/userQueries'
 import {AuthContext} from '../components/AuthWrapper'
 import {getImage} from '../backend/storage/s3'
@@ -26,7 +25,6 @@ export default function HomePage() {
     <SeeAllComponent key={'End'} linkTo={'saved'} image={Saved} bodyText={'Your saved projects will appear here so you can choose which to work on'}/>
   ])
   const navigate = useNavigate()
-  getCurrentUserAttributes('id').then(x => console.log(x))
 
   useEffect(() => {
     const getHomePageData = async () => {
@@ -38,6 +36,8 @@ export default function HomePage() {
           const imageUrl = await getImage(data?.getPostsModel?.image_link ?? undefined)
           const mapToCard = (
             <ProjectView
+              id={item!}
+              key={item}
               title={data!.getPostsModel!.post_title}
               image={imageUrl}
               github={data!.getPostsModel!.project_link ?? 'https://github.com'}
@@ -56,12 +56,12 @@ export default function HomePage() {
       <NavBar />
       <div className='bg-primary-purple flex justify-center'>
         <div className='my-3 items-start'>
-          <h1 className='lg:text-3xl md:text-2xl font-secondary text-xl ml-4 mb-4 mt-2'>Welcome Back, Username</h1>
+          <h1 className='lg:text-3xl md:text-2xl font-secondary text-xl ml-4 mb-4 mt-2'>Welcome Back, {userInfo?.userName}!</h1>
           <div className='grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 auto-cols-max text-start'>
             <CategoryButton bordercolor='border-r-rose-400' titleLabel='Trending Projects' imageIcon={() => <TrendIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
-            <CategoryButton bordercolor='border-r-violet-400' titleLabel='Open Source Frameworks' imageIcon={() => <FlaskIcon className='h-8 w-8 text-black' viewBox='0 0 24 24' />} />
-            <CategoryButton bordercolor='border-r-yellow-300' titleLabel='Machine Learning/AI&#8197;&#8197;&#8197;' imageIcon={() => <MLIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
-            <CategoryButton bordercolor='border-r-green-300' titleLabel='Cloud Computing&#8197;' imageIcon={() => <CloudIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
+            <CategoryButton bordercolor='border-r-violet-400' titleLabel='Open Source Frameworks' onClick={() => navigate('/browse/frameworks')} imageIcon={() => <FlaskIcon className='h-8 w-8 text-black' viewBox='0 0 24 24' />} />
+            <CategoryButton bordercolor='border-r-yellow-300' titleLabel='Machine Learning/AI&#8197;&#8197;&#8197;' onClick={() => navigate('/browse/ai_mach')} imageIcon={() => <MLIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
+            <CategoryButton bordercolor='border-r-green-300' titleLabel='Cloud Computing&#8197;' onClick={() => navigate('/browse/cloud_computing')} imageIcon={() => <CloudIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
           </div>
         </div>
       </div>

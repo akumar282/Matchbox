@@ -6,11 +6,19 @@ import {getPost} from '../backend/queries/postQueries'
 import {getImage} from '../backend/storage/s3'
 import github from '../img/github.svg'
 import {ProjectViewProps} from '../functions/sharedProps'
+import {useNavigate} from 'react-router-dom'
+
 
 function SavedProjectView(props: ProjectViewProps) {
+
+  const navigate = useNavigate()
+
   return (
     <div>
-      <button className=' flex flex-col items-start hover:bg-purple-300 rounded-lg mr-2 ml-2 mt-3 min-h-[170px] bg-white'>
+      <button
+        className=' flex flex-col items-start hover:bg-purple-300 rounded-lg mr-2 ml-2 mt-3 min-h-[170px] bg-white'
+        onClick={() => navigate(`/project/${props.id}`)}
+      >
         <div className="max-h-[130px] overflow-hidden">
           <a href="#">
             <img className="w-full h-full rounded-t-lg object-cover" src={props.image} alt="Project Thumbnail"/>
@@ -46,6 +54,8 @@ export default function SavedPosts() {
           const imageUrl = await getImage(data?.getPostsModel?.image_link ?? undefined)
           const mapToCard = (
             <SavedProjectView
+              id={item!}
+              key={item}
               title={data!.getPostsModel!.post_title}
               image={imageUrl}
               github={data!.getPostsModel!.project_link ?? 'https://github.com'}

@@ -16,6 +16,7 @@ import NotFound from './pages/NotFound'
 import SingleView from './pages/SingleView'
 import LoadingScreen from './components/LoadingScreen'
 import AuthWrapper from './components/AuthWrapper'
+import Browse from './pages/Browse'
 
 function App () {
 
@@ -44,6 +45,8 @@ function App () {
           <Route path='/profile' element={<UserProfile />} />
           <Route path='/settings' element={<Settings />} />
           <Route path='/saved' element={<SavedPosts />} />
+          <Route path='/browse/:params' element={<Browse/>} />
+          <Route path='/trending' element={<Browse/>} />
         </Route>
       </Routes>
     </BrowserRouter>

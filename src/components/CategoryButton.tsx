@@ -7,8 +7,9 @@ interface CategoryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
 }
 
 export default function CategoryButton(props: CategoryButtonProps) {
+
   return (
-    <button className={`bg-white rounded-lg px-3 py-1 lg:mx-2 mx-1 my-1 shadow-lg hover:bg-slate-300 text-black font-bold border border-r-4 ${props.bordercolor}`}>
+    <button className={`bg-white rounded-lg px-3 py-1 lg:mx-2 mx-1 my-1 shadow-lg hover:bg-slate-300 text-black font-bold border border-r-4 ${props.bordercolor}`} onClick={props.onClick}>
       <div className='flex flex-row items-start '>
         <div className='flex flex-col'>
           <div className='my-2'>{props.imageIcon()}</div>

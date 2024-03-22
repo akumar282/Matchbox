@@ -100,7 +100,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
                 </svg>
               </button>
             </div>
-            <h3 className='text-xs pb-3'>{'Posted by: ' + props.data.creator_name}</h3>
+
             <div className='lg:flex hidden'>
               <button className='m-2'>
                 <svg
