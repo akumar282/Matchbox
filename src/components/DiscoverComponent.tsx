@@ -3,37 +3,18 @@ import {PostsModel} from '../API'
 import {getImage} from '../backend/storage/s3'
 import NewLogo from '../img/NewLogo.png'
 import github from '../img/github.svg'
-import {enumBundle, preferenceTags} from '../backend/types'
-import Tags from './Tags'
+import { preferenceTags} from '../backend/types'
 import CommentSection from './CommentSection'
+import {generateTags, tagRender} from '../functions/helpers'
+import {useNavigate} from 'react-router-dom'
 
 interface DiscoverProps {
   data: PostsModel
 }
 
-type tagRender = {
-  tagType: preferenceTags[],
-  renderColor: string
-}
-
-function generateTags(props: tagRender) {
-  return props.tagType.map((tag) => {
-    const bundle: enumBundle = {
-      enumMap: tag,
-      value: tag,
-    }
-
-    const tagClasses = `rounded-lg ${props.renderColor} my-2 ml-2 px-3 py-2 font-primary`
-    return (
-      <Tags
-        key={tag}
-        bundle={bundle}
-        checked={false}
-        className={tagClasses}/>
-    )
-  })
-}
 export default function DiscoverComponent(props: DiscoverProps) {
+
+  const navigate = useNavigate()
 
   const allTags: tagRender[] = [
     {
@@ -85,33 +66,35 @@ export default function DiscoverComponent(props: DiscoverProps) {
         <div className='bg-white rounded-lg lg:w-[800px] w-[97%] flex-auto shadow-lg font-primary justify-between space-y-2 flex items-center flex-col '>
           <h1 className='text-2xl pt-2'>{props.data.post_title}</h1>
           <h3 className='text-center text-lg'>{props.data.description}</h3>
-          <div className='flex flex-row w-full  lg:justify-between justify-center'>
-            <div className='lg:flex hidden'>
-              <button className='m-2'>
+          <div className="flex flex-row w-full  lg:justify-between justify-center">
+            <div className="lg:flex hidden">
+              <button className="m-2">
                 <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none' viewBox='0 0 24 24'
-                  strokeWidth={1.5} stroke='currentColor'
-                  className='w-6 h-6'>
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none" viewBox="0 0 24 24"
+                  strokeWidth={1.5} stroke="currentColor"
+                  className="w-6 h-6">
                   <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z' />
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"/>
                 </svg>
               </button>
             </div>
-
-            <div className='lg:flex hidden'>
-              <button className='m-2'>
+            <button onClick={() => navigate(`/view/profile/${props.data.userID}`)}>
+              <h3 className="text-xs pb-3">{'Posted by: ' + props.data.creator_name}</h3>
+            </button>
+            <div className="lg:flex hidden">
+              <button className="m-2">
                 <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none' viewBox='0 0 24 24'
-                  strokeWidth={1.5} stroke='currentColor'
-                  className='w-6 h-6'>
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none" viewBox="0 0 24 24"
+                  strokeWidth={1.5} stroke="currentColor"
+                  className="w-6 h-6">
                   <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z' />
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
                 </svg>
               </button>
             </div>

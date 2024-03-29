@@ -1,37 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import {PostsModel} from '../API'
-import {enumBundle, preferenceTags} from '../backend/types'
-import Tags from './Tags'
+import {preferenceTags} from '../backend/types'
 import {getImage} from '../backend/storage/s3'
 import github from '../img/github.svg'
 import {useNavigate} from 'react-router-dom'
+import {generateTags, tagRender} from '../functions/helpers'
 
 interface BrowseProps {
   data: PostsModel
 }
 
-type tagRender = {
-  tagType: preferenceTags[],
-  renderColor: string
-}
-
-function generateTags(props: tagRender) {
-  return props.tagType.map((tag) => {
-    const bundle: enumBundle = {
-      enumMap: tag,
-      value: tag,
-    }
-
-    const tagClasses = `rounded-lg ${props.renderColor} my-2 ml-2 px-3 py-2 font-primary`
-    return (
-      <Tags
-        key={tag}
-        bundle={bundle}
-        checked={false}
-        className={tagClasses}/>
-    )
-  })
-}
 export default function BrowseComponent(props: BrowseProps) {
 
   const navigate = useNavigate()

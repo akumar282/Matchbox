@@ -30,3 +30,8 @@ export interface userContextType {
   profile_image?: string,
   authToken?: CognitoUserSession
 }
+
+export interface paginatedPostsVariables {
+  id: string,
+  nextToken: string
+}

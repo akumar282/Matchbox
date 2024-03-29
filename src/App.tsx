@@ -47,6 +47,7 @@ function App () {
           <Route path='/saved' element={<SavedPosts />} />
           <Route path='/browse/:params' element={<Browse/>} />
           <Route path='/trending' element={<Browse/>} />
+          <Route path='/view/profile/:id' element={<UserProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>

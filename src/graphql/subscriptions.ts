@@ -62,6 +62,7 @@ export const onCreateUsersModel = /* GraphQL */ `subscription OnCreateUsersModel
     email
     password
     profile_image
+    bio
     user_posts {
       nextToken
       __typename
@@ -126,6 +127,7 @@ export const onUpdateUsersModel = /* GraphQL */ `subscription OnUpdateUsersModel
     email
     password
     profile_image
+    bio
     user_posts {
       nextToken
       __typename
@@ -190,6 +192,7 @@ export const onDeleteUsersModel = /* GraphQL */ `subscription OnDeleteUsersModel
     email
     password
     profile_image
+    bio
     user_posts {
       nextToken
       __typename
@@ -404,6 +407,7 @@ export const onCreatePostsModel = /* GraphQL */ `subscription OnCreatePostsModel
     experience_level
     application
     project_chat
+    counter
     createdAt
     updatedAt
     __typename
@@ -446,6 +450,7 @@ export const onUpdatePostsModel = /* GraphQL */ `subscription OnUpdatePostsModel
     experience_level
     application
     project_chat
+    counter
     createdAt
     updatedAt
     __typename
@@ -488,6 +493,7 @@ export const onDeletePostsModel = /* GraphQL */ `subscription OnDeletePostsModel
     experience_level
     application
     project_chat
+    counter
     createdAt
     updatedAt
     __typename
@@ -690,6 +696,7 @@ export const onCreateUsersConvo = /* GraphQL */ `subscription OnCreateUsersConvo
       email
       password
       profile_image
+      bio
       first_name
       last_name
       user_creation_date
@@ -745,6 +752,7 @@ export const onUpdateUsersConvo = /* GraphQL */ `subscription OnUpdateUsersConvo
       email
       password
       profile_image
+      bio
       first_name
       last_name
       user_creation_date
@@ -800,6 +808,7 @@ export const onDeleteUsersConvo = /* GraphQL */ `subscription OnDeleteUsersConvo
       email
       password
       profile_image
+      bio
       first_name
       last_name
       user_creation_date

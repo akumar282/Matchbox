@@ -101,6 +101,7 @@ export const getUsersModel = /* GraphQL */ `query GetUsersModel($id: ID!) {
     email
     password
     profile_image
+    bio
     user_posts {
       nextToken
       __typename
@@ -168,6 +169,7 @@ export const listUsersModels = /* GraphQL */ `query ListUsersModels(
       email
       password
       profile_image
+      bio
       first_name
       last_name
       user_creation_date
@@ -224,6 +226,7 @@ export const searchUsersModels = /* GraphQL */ `query SearchUsersModels(
       email
       password
       profile_image
+      bio
       first_name
       last_name
       user_creation_date
@@ -510,6 +513,7 @@ export const getPostsModel = /* GraphQL */ `query GetPostsModel($id: ID!) {
     experience_level
     application
     project_chat
+    counter
     createdAt
     updatedAt
     __typename
@@ -551,6 +555,7 @@ export const listPostsModels = /* GraphQL */ `query ListPostsModels(
       experience_level
       application
       project_chat
+      counter
       createdAt
       updatedAt
       __typename
@@ -605,6 +610,7 @@ export const searchPostsModels = /* GraphQL */ `query SearchPostsModels(
       experience_level
       application
       project_chat
+      counter
       createdAt
       updatedAt
       __typename
@@ -932,6 +938,7 @@ export const getUsersConvo = /* GraphQL */ `query GetUsersConvo($id: ID!) {
       email
       password
       profile_image
+      bio
       first_name
       last_name
       user_creation_date

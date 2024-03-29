@@ -11,8 +11,6 @@ export default function SingleView() {
   const { id } = useParams()
 
   const navigate = useNavigate()
-  console.log(id)
-
   useEffect(() => {
 
     const getPageData =  async () => {

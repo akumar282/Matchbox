@@ -175,6 +175,7 @@ type UsersModel @model @searchable @aws_cognito_user_pools @aws_iam @auth(rules:
   email: String!
   password: String!
   profile_image: String
+  bio: String
   user_posts: [PostsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   user_comments: [CommentModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   first_name: String
@@ -254,6 +255,7 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   experience_level: [ExperienceTag]
   application: Boolean
   project_chat: ID! @index(name: "byConversationModel")
+  counter: Int
 }
 
 type ConversationModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {

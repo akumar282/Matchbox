@@ -66,6 +66,7 @@ export const createUsersModel = /* GraphQL */ `mutation CreateUsersModel(
     email
     password
     profile_image
+    bio
     user_posts {
       nextToken
       __typename
@@ -131,6 +132,7 @@ export const updateUsersModel = /* GraphQL */ `mutation UpdateUsersModel(
     email
     password
     profile_image
+    bio
     user_posts {
       nextToken
       __typename
@@ -196,6 +198,7 @@ export const deleteUsersModel = /* GraphQL */ `mutation DeleteUsersModel(
     email
     password
     profile_image
+    bio
     user_posts {
       nextToken
       __typename
@@ -417,6 +420,7 @@ export const createPostsModel = /* GraphQL */ `mutation CreatePostsModel(
     experience_level
     application
     project_chat
+    counter
     createdAt
     updatedAt
     __typename
@@ -460,6 +464,7 @@ export const updatePostsModel = /* GraphQL */ `mutation UpdatePostsModel(
     experience_level
     application
     project_chat
+    counter
     createdAt
     updatedAt
     __typename
@@ -503,6 +508,7 @@ export const deletePostsModel = /* GraphQL */ `mutation DeletePostsModel(
     experience_level
     application
     project_chat
+    counter
     createdAt
     updatedAt
     __typename
@@ -715,6 +721,7 @@ export const createUsersConvo = /* GraphQL */ `mutation CreateUsersConvo(
       email
       password
       profile_image
+      bio
       first_name
       last_name
       user_creation_date
@@ -771,6 +778,7 @@ export const updateUsersConvo = /* GraphQL */ `mutation UpdateUsersConvo(
       email
       password
       profile_image
+      bio
       first_name
       last_name
       user_creation_date
@@ -827,6 +835,7 @@ export const deleteUsersConvo = /* GraphQL */ `mutation DeleteUsersConvo(
       email
       password
       profile_image
+      bio
       first_name
       last_name
       user_creation_date
