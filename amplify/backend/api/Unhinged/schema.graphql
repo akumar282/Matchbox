@@ -9,6 +9,12 @@ enum SizeTag {
   LARGE
 }
 
+enum NotificationType {
+  EMAIL_AND_NEWSLETTER
+  EMAIL_ONLY
+  NONE
+}
+
 enum InterestTag {
   COMMUNICATION
   ENVIRONMENT
@@ -101,13 +107,15 @@ enum FrameworkTag {
   GATSBY
   SVELTE
   YII
+  REACT_JS
+  REACT_NATIVE
   TURBOGEARS
   YESOD
   GROK
   MOJOLICIOUS
   VAADIN
   RUBY_ON_RAILS
-  EXPRESS JS
+  EXPRESS_JS
   METEOR
   CODEIGNITOR
   SYMFONY
@@ -200,10 +208,12 @@ type UsersModel @model @searchable @aws_cognito_user_pools @aws_iam @auth(rules:
   involved_projects: [ID]
   experience_level: [ExperienceTag]
   years_of_experience: Int
-  user_type: [AccountTag]
+  user_type: AccountTag
   user_experiences: [ExperienceModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   oauth_provider: OAuthProvider
   oauth_id: String
+  external_link: [ExternalLink]
+  notification_type: NotificationType
 }
 
 type ContributionsModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
@@ -256,6 +266,7 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   application: Boolean
   project_chat: ID! @index(name: "byConversationModel")
   counter: Int
+  external_link: [ExternalLink]
 }
 
 type ConversationModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
@@ -283,4 +294,10 @@ type CommentModel @model @searchable @auth(rules: [{allow: public, operations: [
   postID: ID! @index(name: "byPostsModel")
   userID: ID! @index(name: "byUsersModel")
   user_name: String!
+}
+
+type ExternalLink @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  name: String,
+  link: AWSURL
 }

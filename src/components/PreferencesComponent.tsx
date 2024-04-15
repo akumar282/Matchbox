@@ -134,11 +134,12 @@ export default function PreferencesComponent(props: PreferencesProps) {
   return (
     <div className={style}>
       {location.pathname === '/settings' && <div>
-        <h1 className='font-primary text-3xl font-semibold pl-2'>Project Preferences</h1>
-        <h2 className='font-primary text-medium pt-1 pb-3 pl-2'>We&apos;ll use this to match you with projects of your liking</h2>
+        <h1 className="font-primary text-3xl font-semibold pl-2">Project Preferences</h1>
+        <h2 className="font-primary text-medium pt-1 pb-1 pl-2">We&apos;ll use this to match you with projects of your liking</h2>
+        <h2 className="font-primary text-xs pt-1 pb-3 pl-2">Note: This will overwrite your previous preference selection</h2>
       </div>}
-      <div className='flex flex-row'>
-        <div className='flex flex-col items-start pl-2'>
+      <div className="flex flex-row">
+        <div className="flex flex-col items-start pl-2">
           <div>
             {generateTags(checkedTags, checkedTags)}
           </div>

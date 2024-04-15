@@ -1,12 +1,15 @@
 import React from 'react'
 import {enumBundle, preferenceTags} from '../backend/types'
 import Tags from '../components/Tags'
+import {Auth} from 'aws-amplify'
+import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth'
 
 
 export type tagRender = {
   tagType: preferenceTags[],
   renderColor: string
 }
+
 export function imageOrDefault(img: string, size: string = 'w-11 h-11') {
   if (!img) {
     return (
@@ -64,3 +67,12 @@ export function convertISOToMonthYear(isoString: string) {
   return `${month} ${year}`
 }
 
+export async function federatedSignIn() {
+  console.log('hello')
+  await Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google})
+  const current = await Auth.currentAuthenticatedUser()
+  console.log(current)
+  const tos = JSON.stringify(current)
+  localStorage.setItem('test', tos)
+
+}

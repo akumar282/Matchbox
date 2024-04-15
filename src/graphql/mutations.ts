@@ -113,6 +113,15 @@ export const createUsersModel = /* GraphQL */ `mutation CreateUsersModel(
     }
     oauth_provider
     oauth_id
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
+    notification_type
     createdAt
     updatedAt
     __typename
@@ -179,6 +188,15 @@ export const updateUsersModel = /* GraphQL */ `mutation UpdateUsersModel(
     }
     oauth_provider
     oauth_id
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
+    notification_type
     createdAt
     updatedAt
     __typename
@@ -245,6 +263,15 @@ export const deleteUsersModel = /* GraphQL */ `mutation DeleteUsersModel(
     }
     oauth_provider
     oauth_id
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
+    notification_type
     createdAt
     updatedAt
     __typename
@@ -421,6 +448,14 @@ export const createPostsModel = /* GraphQL */ `mutation CreatePostsModel(
     application
     project_chat
     counter
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -465,6 +500,14 @@ export const updatePostsModel = /* GraphQL */ `mutation UpdatePostsModel(
     application
     project_chat
     counter
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -509,6 +552,14 @@ export const deletePostsModel = /* GraphQL */ `mutation DeletePostsModel(
     application
     project_chat
     counter
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -707,6 +758,57 @@ export const deleteCommentModel = /* GraphQL */ `mutation DeleteCommentModel(
   APITypes.DeleteCommentModelMutationVariables,
   APITypes.DeleteCommentModelMutation
 >;
+export const createExternalLink = /* GraphQL */ `mutation CreateExternalLink(
+  $input: CreateExternalLinkInput!
+  $condition: ModelExternalLinkConditionInput
+) {
+  createExternalLink(input: $input, condition: $condition) {
+    id
+    name
+    link
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateExternalLinkMutationVariables,
+  APITypes.CreateExternalLinkMutation
+>;
+export const updateExternalLink = /* GraphQL */ `mutation UpdateExternalLink(
+  $input: UpdateExternalLinkInput!
+  $condition: ModelExternalLinkConditionInput
+) {
+  updateExternalLink(input: $input, condition: $condition) {
+    id
+    name
+    link
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateExternalLinkMutationVariables,
+  APITypes.UpdateExternalLinkMutation
+>;
+export const deleteExternalLink = /* GraphQL */ `mutation DeleteExternalLink(
+  $input: DeleteExternalLinkInput!
+  $condition: ModelExternalLinkConditionInput
+) {
+  deleteExternalLink(input: $input, condition: $condition) {
+    id
+    name
+    link
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteExternalLinkMutationVariables,
+  APITypes.DeleteExternalLinkMutation
+>;
 export const createUsersConvo = /* GraphQL */ `mutation CreateUsersConvo(
   $input: CreateUsersConvoInput!
   $condition: ModelUsersConvoConditionInput
@@ -744,6 +846,7 @@ export const createUsersConvo = /* GraphQL */ `mutation CreateUsersConvo(
       user_type
       oauth_provider
       oauth_id
+      notification_type
       createdAt
       updatedAt
       __typename
@@ -801,6 +904,7 @@ export const updateUsersConvo = /* GraphQL */ `mutation UpdateUsersConvo(
       user_type
       oauth_provider
       oauth_id
+      notification_type
       createdAt
       updatedAt
       __typename
@@ -858,6 +962,7 @@ export const deleteUsersConvo = /* GraphQL */ `mutation DeleteUsersConvo(
       user_type
       oauth_provider
       oauth_id
+      notification_type
       createdAt
       updatedAt
       __typename

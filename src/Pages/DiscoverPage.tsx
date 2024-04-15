@@ -12,8 +12,6 @@ import {PostsModel} from '../API'
 import LoadingScreen from '../components/LoadingScreen'
 import { AuthContext } from '../components/AuthWrapper'
 
-// TODO: Add data and image fetching
-
 export default function DiscoverPage() {
 
   const [projectIndex, setProjectIndex] = useState<number>(0)
@@ -34,6 +32,7 @@ export default function DiscoverPage() {
         try {
           const dynamoUserId = userInfo?.id
           const responseJson = await (await fetch(`https://3q03neb3ig.execute-api.us-west-2.amazonaws.com/prod/matches/${dynamoUserId}`)).json()
+          console.log(responseJson)
           const mappedItems = (responseJson.data.items as PostsModel[]).map(x => <DiscoverComponent key={x.id} data={x} />)
           setProjects(mappedItems)
           setLoading(false)

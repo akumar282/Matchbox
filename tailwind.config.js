@@ -38,6 +38,9 @@ export const theme = {
       primary: 'roboto-mono',
       secondary: 'roboto-bold',
     },
+    fontWeight: {
+      tableThin: '50'
+    },
     colors: {
       'primary-purple': '#CDC7FD',
       'secondary-blue': '#4D3DD0',

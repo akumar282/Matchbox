@@ -182,6 +182,7 @@ type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [re
   years_of_experience: Int
   user_type: [AccountTag]
   user_experiences: [ExperienceModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  external_link: [ExternalLink] @hasMany(indexName: "byExternalLink", fields: ["id"])
 }
 
 type ContributionsModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
@@ -228,6 +229,7 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   experience_level: [ExperienceTag]
   application: Boolean
   project_chat: ID! @index(name: "byConversationModel")
+  external_link: [ExternalLink] @hasMany(indexName: "byExternalLink", fields: ["id"])
 }
 
 type ConversationModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
@@ -255,4 +257,10 @@ type CommentModel @model @searchable @auth(rules: [{allow: public, operations: [
   postID: ID! @index(name: "byPostsModel")
   userID: ID! @index(name: "byUsersModel")
   user_name: String!
+}
+
+type ExternalLink @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  name: String,
+  link: AWSURL
 }

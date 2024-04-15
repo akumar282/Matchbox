@@ -100,7 +100,7 @@ export default function ProfileHeader(props: userData) {
           <h1 className='text-2xl font-primary ml-3 mt-3'>Your Projects</h1>
           <h3 className='text-sm font-primary ml-3 mt-1'>Projects that you are collaborating on:</h3>
           <div className='overflow-x-auto'>
-            <div className='flex mt-2 lg:grid lg:grid-cols-4 md:grid-cols-4'>
+            <div className='flex mt-2 lg:grid lg:grid-cols-4 md:grid-cols-4 md:grid'>
               {props.projects}
             </div>
           </div>

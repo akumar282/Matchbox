@@ -16,14 +16,18 @@
       "@backend/*": ["src/backend/*"],
       "@api": ["src/API.ts"],
       "@graphql/*": ["src/graphql/*"],
-      "@aws-exports": ["src/aws-exports.ts"],
+      "@aws-exports": ["src/aws-exports.ts"]
     },
+    "typeRoots": [
+      "src/types"
+    ]
   },
   "include": [
     "src/backend/**/*",
     "test/backend/**/*",
     "src/backend/types.ts",
-    "src/img/**/*.svg"
+    "src/img/**/*.svg",
+    "src/types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules"

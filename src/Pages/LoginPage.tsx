@@ -12,6 +12,8 @@ import ErrorAlert, {errorStyle, errorXStyle} from '../components/alerts/errorAle
 
 import * as yup from 'yup'
 import { useFormik } from 'formik'
+// import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth'
+import {federatedSignIn} from '../functions/helpers'
 
 
 export default function LoginPage() {
@@ -49,17 +51,19 @@ export default function LoginPage() {
     <div className='flex flex-col'>
       <LandingPageNavBar/>
       <GitBranches/>
-      <form onSubmit={formik.handleSubmit}>
-        <div className='flex flex-col items-center justify-center lg:flex-col'>
-          <div className='pt-10 flex flex-col items-center justify-center'>
-            {showAlert &&
-              <ErrorAlert show={showAlert} closeAlert={closeAlert} title='Error' message='Login Unsuccessful'
-                closeStyle={errorXStyle} colorStyle={errorStyle}/>}
-            <h1 className='text-center font-secondary text-4xl font-light'>Welcome Back!</h1>
-            <h2 className='text-center text-lg text-medium font-primary pt-4'>Login to your account</h2>
-            <OAuthButtons label='Login with Google' src={google}/>
-            <OAuthButtons label='Login with GitHub' src={github}/>
-          </div>
+
+      <div className='flex flex-col items-center justify-center lg:flex-col'>
+
+        <div className='pt-10 flex flex-col items-center justify-center'>
+          {showAlert &&
+            <ErrorAlert show={showAlert} closeAlert={closeAlert} title='Error' message='Login Unsuccessful'
+              closeStyle={errorXStyle} colorStyle={errorStyle}/>}
+          <h1 className='text-center font-secondary text-4xl font-light'>Welcome Back!</h1>
+          <h2 className='text-center text-lg text-medium font-primary pt-4'>Login to your account</h2>
+          <OAuthButtons label='Login with Google' onClick={ () => federatedSignIn()} src={google}/>
+          <OAuthButtons label='Login with GitHub' src={github}/>
+        </div>
+        <form onSubmit={formik.handleSubmit} className='flex flex-col items-center justify-center lg:flex-col'>
           <div className='py-6 flex items-center'>
             <img className='w-20 sm:w-20 md:w-32 lg:w-40' src={orline} alt='or line'/>
             <h1 className='px-4 font-primary text-lg'>or</h1>
@@ -103,8 +107,8 @@ export default function LoginPage() {
               onClick={() => navigate('/signup')}
               className='underline text-secondary-blue hover:text-indigo-400'>Sign-Up</button></h1>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   )
 }

@@ -19,10 +19,10 @@ export default function ProjectView(props: ProjectViewProps) {
           </a>
         </div>
         <div className='p-2 flex flex-row w-full justify-between'>
-          <h5 className='text-xl font-primary font-light leading-tight'>
+          <h5 className='text-xl font-primary font-light leading-tight flex-shrink overflow-hidden text-ellipsis whitespace-nowrap'>
             {props.title}
           </h5>
-          <button className='pr-1'>
+          <button className='pr-1 flex-shrink-0'>
             <a href={props.github}>
               <img src={github} alt='GitHub Link' className='w-6 h-6' />
             </a>

@@ -148,6 +148,15 @@ export const getUsersModel = /* GraphQL */ `query GetUsersModel($id: ID!) {
     }
     oauth_provider
     oauth_id
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
+    notification_type
     createdAt
     updatedAt
     __typename
@@ -192,6 +201,7 @@ export const listUsersModels = /* GraphQL */ `query ListUsersModels(
       user_type
       oauth_provider
       oauth_id
+      notification_type
       createdAt
       updatedAt
       __typename
@@ -249,6 +259,7 @@ export const searchUsersModels = /* GraphQL */ `query SearchUsersModels(
       user_type
       oauth_provider
       oauth_id
+      notification_type
       createdAt
       updatedAt
       __typename
@@ -514,6 +525,14 @@ export const getPostsModel = /* GraphQL */ `query GetPostsModel($id: ID!) {
     application
     project_chat
     counter
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -927,6 +946,91 @@ export const searchCommentModels = /* GraphQL */ `query SearchCommentModels(
   APITypes.SearchCommentModelsQueryVariables,
   APITypes.SearchCommentModelsQuery
 >;
+export const getExternalLink = /* GraphQL */ `query GetExternalLink($id: ID!) {
+  getExternalLink(id: $id) {
+    id
+    name
+    link
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetExternalLinkQueryVariables,
+  APITypes.GetExternalLinkQuery
+>;
+export const listExternalLinks = /* GraphQL */ `query ListExternalLinks(
+  $filter: ModelExternalLinkFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listExternalLinks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListExternalLinksQueryVariables,
+  APITypes.ListExternalLinksQuery
+>;
+export const searchExternalLinks = /* GraphQL */ `query SearchExternalLinks(
+  $filter: SearchableExternalLinkFilterInput
+  $sort: [SearchableExternalLinkSortInput]
+  $limit: Int
+  $nextToken: String
+  $from: Int
+  $aggregates: [SearchableExternalLinkAggregationInput]
+) {
+  searchExternalLinks(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+    from: $from
+    aggregates: $aggregates
+  ) {
+    items {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    total
+    aggregateItems {
+      name
+      result {
+        ... on SearchableAggregateScalarResult {
+          value
+        }
+        ... on SearchableAggregateBucketResult {
+          buckets {
+            key
+            doc_count
+            __typename
+          }
+        }
+      }
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.SearchExternalLinksQueryVariables,
+  APITypes.SearchExternalLinksQuery
+>;
 export const getUsersConvo = /* GraphQL */ `query GetUsersConvo($id: ID!) {
   getUsersConvo(id: $id) {
     id
@@ -961,6 +1065,7 @@ export const getUsersConvo = /* GraphQL */ `query GetUsersConvo($id: ID!) {
       user_type
       oauth_provider
       oauth_id
+      notification_type
       createdAt
       updatedAt
       __typename

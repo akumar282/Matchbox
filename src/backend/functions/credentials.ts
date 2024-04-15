@@ -19,13 +19,16 @@ export async function standardSignUp(username: string, email: string, password: 
             email: email,
             password: 'password',
             user_creation_date: new Date().toISOString(),
-            saved_posts: [],
             lang_tag: [],
             dev_type_tag: [],
             interest_tag: [],
             size_tag: [],
             framework_tag: [],
             difficulty_tag: [],
+            cloud_provider_tag: [],
+            liked_posts: [],
+            saved_posts: [],
+            experience_level: [],
             new_user: true,
           }
         }

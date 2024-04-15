@@ -36,7 +36,7 @@ export default function SingleView() {
     <div className='flex flex-col min-h-screen'>
       <NavBar/>
       <div className='flex flex-col flex-grow justify-between bg-primary-purple'>
-        <div className='flex-grow flex  justify-center overflow-visible'>
+        <div className='flex-grow flex justify-center overflow-visible'>
           <div className='max-w-screen-2xl w-full z-10 overflow-visible'>
             {project}
           </div>

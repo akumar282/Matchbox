@@ -109,6 +109,15 @@ export const onCreateUsersModel = /* GraphQL */ `subscription OnCreateUsersModel
     }
     oauth_provider
     oauth_id
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
+    notification_type
     createdAt
     updatedAt
     __typename
@@ -174,6 +183,15 @@ export const onUpdateUsersModel = /* GraphQL */ `subscription OnUpdateUsersModel
     }
     oauth_provider
     oauth_id
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
+    notification_type
     createdAt
     updatedAt
     __typename
@@ -239,6 +257,15 @@ export const onDeleteUsersModel = /* GraphQL */ `subscription OnDeleteUsersModel
     }
     oauth_provider
     oauth_id
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
+    notification_type
     createdAt
     updatedAt
     __typename
@@ -408,6 +435,14 @@ export const onCreatePostsModel = /* GraphQL */ `subscription OnCreatePostsModel
     application
     project_chat
     counter
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -451,6 +486,14 @@ export const onUpdatePostsModel = /* GraphQL */ `subscription OnUpdatePostsModel
     application
     project_chat
     counter
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -494,6 +537,14 @@ export const onDeletePostsModel = /* GraphQL */ `subscription OnDeletePostsModel
     application
     project_chat
     counter
+    external_link {
+      id
+      name
+      link
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -683,6 +734,54 @@ export const onDeleteCommentModel = /* GraphQL */ `subscription OnDeleteCommentM
   APITypes.OnDeleteCommentModelSubscriptionVariables,
   APITypes.OnDeleteCommentModelSubscription
 >;
+export const onCreateExternalLink = /* GraphQL */ `subscription OnCreateExternalLink(
+  $filter: ModelSubscriptionExternalLinkFilterInput
+) {
+  onCreateExternalLink(filter: $filter) {
+    id
+    name
+    link
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateExternalLinkSubscriptionVariables,
+  APITypes.OnCreateExternalLinkSubscription
+>;
+export const onUpdateExternalLink = /* GraphQL */ `subscription OnUpdateExternalLink(
+  $filter: ModelSubscriptionExternalLinkFilterInput
+) {
+  onUpdateExternalLink(filter: $filter) {
+    id
+    name
+    link
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateExternalLinkSubscriptionVariables,
+  APITypes.OnUpdateExternalLinkSubscription
+>;
+export const onDeleteExternalLink = /* GraphQL */ `subscription OnDeleteExternalLink(
+  $filter: ModelSubscriptionExternalLinkFilterInput
+) {
+  onDeleteExternalLink(filter: $filter) {
+    id
+    name
+    link
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteExternalLinkSubscriptionVariables,
+  APITypes.OnDeleteExternalLinkSubscription
+>;
 export const onCreateUsersConvo = /* GraphQL */ `subscription OnCreateUsersConvo(
   $filter: ModelSubscriptionUsersConvoFilterInput
 ) {
@@ -719,6 +818,7 @@ export const onCreateUsersConvo = /* GraphQL */ `subscription OnCreateUsersConvo
       user_type
       oauth_provider
       oauth_id
+      notification_type
       createdAt
       updatedAt
       __typename
@@ -775,6 +875,7 @@ export const onUpdateUsersConvo = /* GraphQL */ `subscription OnUpdateUsersConvo
       user_type
       oauth_provider
       oauth_id
+      notification_type
       createdAt
       updatedAt
       __typename
@@ -831,6 +932,7 @@ export const onDeleteUsersConvo = /* GraphQL */ `subscription OnDeleteUsersConvo
       user_type
       oauth_provider
       oauth_id
+      notification_type
       createdAt
       updatedAt
       __typename

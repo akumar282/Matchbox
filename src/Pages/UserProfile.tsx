@@ -63,15 +63,17 @@ export default function UserProfile() {
       })
       if (data && data.getUsersModel) {
         const { items } = data.getUsersModel.user_posts as ModelPostsModelConnection
+        const newProjects: React.ReactNode[] = []
         for (const item of items) {
           if(item) {
             const imageUrl = await getImage(item.image_link ?? undefined)
             const mapToCard = (
               <ProjectView key={item.id} id={item.id} title={item.post_title} image={imageUrl} github={item.project_link!}/>
             )
-            setUserProjects((prevProjects) => [mapToCard, ...prevProjects])
+            newProjects.push(mapToCard)
           }
         }
+        setUserProjects(newProjects)
       }
     }
 

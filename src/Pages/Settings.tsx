@@ -1,8 +1,14 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import NavBar from '../components/NavBar'
-import PreferencesComponent from '../components/PreferencesComponent'
-import { CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag } from '../API'
+import PreferencesComponent, { PreferencesProps } from '../components/PreferencesComponent'
+import {CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag} from '../API'
+import {updateUser} from '../backend/mutations/userMutations'
+import {AuthContext} from '../components/AuthWrapper'
+
 export default function Settings() {
+
+  const userInfo = useContext(AuthContext)
+
   const [tags, setTags] = React.useState<{
     LanguageTags: LanguageTag[],
     FrameworkTags: FrameworkTag[],
@@ -21,11 +27,51 @@ export default function Settings() {
     SizeTags: [],
   })
   console.log(tags)
-  const [isChecked, setIsChecked] = React.useState(false)
+
+  const useOnSubmitTags = async () => {
+    if (userInfo && userInfo.id) {
+      const updateUserFn = await updateUser({
+        input: {
+          id: userInfo.id,
+          lang_tag: tags.LanguageTags,
+          dev_type_tag: tags.DevelopmentTags,
+          interest_tag: tags.InterestTags,
+          size_tag: tags.SizeTags,
+          framework_tag: tags.FrameworkTags,
+          difficulty_tag: tags.DifficultyTags,
+          cloud_provider_tag: tags.CloudProviderTags,
+        }
+      })
+      console.log(updateUserFn)
+    }
+  }
+
+  function PreferencesModule(props: PreferencesProps) {
+
+    const shouldRenderButton = Object.values(tags).some(tagArray => tagArray.length > 0)
+
+    return (
+      <>
+        {PreferencesComponent(props)}
+        <div className="flex justify-center mt-8">
+          {shouldRenderButton &&
+            <button
+              className="font-primary hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg px-24 py-2"
+              onClick={() => useOnSubmitTags()}>
+              Submit
+            </button>
+          }
+        </div>
+      </>
+    )
+  }
+
+  const [isChecked, setIsChecked] = React.useState(0)
   const [pageIndex, setPageIndex] = useState<number>(0)
-  const components = [accountInformation(), notificationInformation(), PreferencesComponent({ setTags })]
-  function handleCheck (){
-    setIsChecked(!isChecked) // Toggle the checked state
+  const components = [accountInformation(), notificationInformation(), PreferencesModule({setTags})]
+
+  function handleCheck (option: number){
+    setIsChecked(option)
   }
 
   const goToNextIndex = () => {
@@ -151,23 +197,25 @@ export default function Settings() {
 
   function notificationInformation() {
     return (
-      <div className='flex flex-col items-center lg:w-6/12 pt-6'>
-        <h1 className='font-primary text-3xl font-semibold'>Notifications</h1>
-        <h3 className='font-primary text-sm'>Your current notification settings</h3>
-        <div className='flex flex-col font-primary mt-6 lg:w-full w-[97%] bg-white rounded-lg shadow-xl'>
-          <div className='py-4 lg:w-full w-full'>
+      <div className='flex flex-col items-center lg:w-3/12 pt-6'>
+        <div className='flex flex-col items-center'>
+          <h1 className="font-primary text-3xl font-semibold">Notifications</h1>
+          <h3 className="font-primary text-sm text-center">Your current notification settings</h3>
+        </div>
+        <div className="flex flex-col font-primary mt-6 lg:w-full w-[96%] bg-white rounded-lg shadow-xl">
+          <div className="py-4 lg:w-full w-full">
             <div className='flex flex-col items-center space-y-3 w-5/6  mx-auto'>
               <h1 className='pb-4 mt-3 text-center'>Set Notification Preferences</h1>
               <div className='w-full'>
-                <input type='radio' onChange={()=>console.log()} checked={isChecked} onClick={handleCheck}></input>
+                <input type='radio' onChange={()=>console.log()} checked={isChecked === 0} onClick={() => handleCheck(0)}></input>
                 <label className='pl-2 font-primary text-sm' >Allow email notifications and newsletter</label>
               </div>
               <div className='w-full'>
-                <input type='radio' onChange={()=>console.log()} checked={isChecked} onClick={handleCheck}></input>
+                <input type='radio' onChange={()=>console.log()} checked={isChecked === 1} onClick={() => handleCheck(1)}></input>
                 <label className='pl-2 font-primary text-sm' >Allow email notifications only</label>
               </div>
               <div className='w-full'>
-                <input type='radio' onChange={()=>console.log()} checked={isChecked} onClick={handleCheck}></input>
+                <input type='radio' onChange={()=>console.log()} checked={isChecked === 2} onClick={() => handleCheck(2)}></input>
                 <label className='pl-2 font-primary text-sm' >No notifications (Except MFA)</label>
               </div>
               <button className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4'>Submit</button>

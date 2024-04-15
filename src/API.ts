@@ -97,9 +97,10 @@ export type CreateUsersModelInput = {
   involved_projects?: Array< string | null > | null,
   experience_level?: Array< ExperienceTag | null > | null,
   years_of_experience?: number | null,
-  user_type?: Array< AccountTag | null > | null,
+  user_type?: AccountTag | null,
   oauth_provider?: OAuthProvider | null,
   oauth_id?: string | null,
+  notification_type?: NotificationType | null,
 };
 
 export enum LanguageTag {
@@ -204,14 +205,15 @@ export enum FrameworkTag {
   GATSBY = "GATSBY",
   SVELTE = "SVELTE",
   YII = "YII",
+  REACT_JS = "REACT_JS",
+  REACT_NATIVE = "REACT_NATIVE",
   TURBOGEARS = "TURBOGEARS",
   YESOD = "YESOD",
   GROK = "GROK",
   MOJOLICIOUS = "MOJOLICIOUS",
   VAADIN = "VAADIN",
   RUBY_ON_RAILS = "RUBY_ON_RAILS",
-  EXPRESS = "EXPRESS",
-  JS = "JS",
+  EXPRESS_JS = "EXPRESS_JS",
   METEOR = "METEOR",
   CODEIGNITOR = "CODEIGNITOR",
   SYMFONY = "SYMFONY",
@@ -272,6 +274,13 @@ export enum OAuthProvider {
 }
 
 
+export enum NotificationType {
+  EMAIL_AND_NEWSLETTER = "EMAIL_AND_NEWSLETTER",
+  EMAIL_ONLY = "EMAIL_ONLY",
+  NONE = "NONE",
+}
+
+
 export type ModelUsersModelConditionInput = {
   user_name?: ModelStringInput | null,
   email?: ModelStringInput | null,
@@ -297,9 +306,10 @@ export type ModelUsersModelConditionInput = {
   involved_projects?: ModelIDInput | null,
   experience_level?: ModelExperienceTagListInput | null,
   years_of_experience?: ModelIntInput | null,
-  user_type?: ModelAccountTagListInput | null,
+  user_type?: ModelAccountTagInput | null,
   oauth_provider?: ModelOAuthProviderInput | null,
   oauth_id?: ModelStringInput | null,
+  notification_type?: ModelNotificationTypeInput | null,
   and?: Array< ModelUsersModelConditionInput | null > | null,
   or?: Array< ModelUsersModelConditionInput | null > | null,
   not?: ModelUsersModelConditionInput | null,
@@ -396,16 +406,19 @@ export type ModelExperienceTagListInput = {
   notContains?: ExperienceTag | null,
 };
 
-export type ModelAccountTagListInput = {
-  eq?: Array< AccountTag | null > | null,
-  ne?: Array< AccountTag | null > | null,
-  contains?: AccountTag | null,
-  notContains?: AccountTag | null,
+export type ModelAccountTagInput = {
+  eq?: AccountTag | null,
+  ne?: AccountTag | null,
 };
 
 export type ModelOAuthProviderInput = {
   eq?: OAuthProvider | null,
   ne?: OAuthProvider | null,
+};
+
+export type ModelNotificationTypeInput = {
+  eq?: NotificationType | null,
+  ne?: NotificationType | null,
 };
 
 export type UsersModel = {
@@ -440,10 +453,12 @@ export type UsersModel = {
   involved_projects?: Array< string | null > | null,
   experience_level?: Array< ExperienceTag | null > | null,
   years_of_experience?: number | null,
-  user_type?: Array< AccountTag | null > | null,
+  user_type?: AccountTag | null,
   user_experiences?: ModelExperienceModelConnection | null,
   oauth_provider?: OAuthProvider | null,
   oauth_id?: string | null,
+  external_link?:  Array<ExternalLink | null > | null,
+  notification_type?: NotificationType | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -483,6 +498,7 @@ export type PostsModel = {
   application?: boolean | null,
   project_chat: string,
   counter?: number | null,
+  external_link?:  Array<ExternalLink | null > | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -505,6 +521,15 @@ export type CommentModel = {
   postID: string,
   userID: string,
   user_name: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ExternalLink = {
+  __typename: "ExternalLink",
+  id: string,
+  name?: string | null,
+  link?: string | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -626,9 +651,10 @@ export type UpdateUsersModelInput = {
   involved_projects?: Array< string | null > | null,
   experience_level?: Array< ExperienceTag | null > | null,
   years_of_experience?: number | null,
-  user_type?: Array< AccountTag | null > | null,
+  user_type?: AccountTag | null,
   oauth_provider?: OAuthProvider | null,
   oauth_id?: string | null,
+  notification_type?: NotificationType | null,
 };
 
 export type DeleteUsersModelInput = {
@@ -909,6 +935,30 @@ export type DeleteCommentModelInput = {
   id: string,
 };
 
+export type CreateExternalLinkInput = {
+  id?: string | null,
+  name?: string | null,
+  link?: string | null,
+};
+
+export type ModelExternalLinkConditionInput = {
+  name?: ModelStringInput | null,
+  link?: ModelStringInput | null,
+  and?: Array< ModelExternalLinkConditionInput | null > | null,
+  or?: Array< ModelExternalLinkConditionInput | null > | null,
+  not?: ModelExternalLinkConditionInput | null,
+};
+
+export type UpdateExternalLinkInput = {
+  id: string,
+  name?: string | null,
+  link?: string | null,
+};
+
+export type DeleteExternalLinkInput = {
+  id: string,
+};
+
 export type CreateUsersConvoInput = {
   id?: string | null,
   usersModelID: string,
@@ -1092,9 +1142,10 @@ export type ModelUsersModelFilterInput = {
   involved_projects?: ModelIDInput | null,
   experience_level?: ModelExperienceTagListInput | null,
   years_of_experience?: ModelIntInput | null,
-  user_type?: ModelAccountTagListInput | null,
+  user_type?: ModelAccountTagInput | null,
   oauth_provider?: ModelOAuthProviderInput | null,
   oauth_id?: ModelStringInput | null,
+  notification_type?: ModelNotificationTypeInput | null,
   and?: Array< ModelUsersModelFilterInput | null > | null,
   or?: Array< ModelUsersModelFilterInput | null > | null,
   not?: ModelUsersModelFilterInput | null,
@@ -1137,6 +1188,7 @@ export type SearchableUsersModelFilterInput = {
   experience_level?: SearchableStringFilterInput | null,
   user_type?: SearchableStringFilterInput | null,
   oauth_provider?: SearchableStringFilterInput | null,
+  notification_type?: SearchableStringFilterInput | null,
   and?: Array< SearchableUsersModelFilterInput | null > | null,
   or?: Array< SearchableUsersModelFilterInput | null > | null,
   not?: SearchableUsersModelFilterInput | null,
@@ -1221,6 +1273,7 @@ export enum SearchableUsersModelAggregateField {
   user_type = "user_type",
   oauth_provider = "oauth_provider",
   oauth_id = "oauth_id",
+  notification_type = "notification_type",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
 }
@@ -1734,6 +1787,69 @@ export type SearchableCommentModelConnection = {
   aggregateItems:  Array<SearchableAggregateResult | null >,
 };
 
+export type ModelExternalLinkFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  link?: ModelStringInput | null,
+  and?: Array< ModelExternalLinkFilterInput | null > | null,
+  or?: Array< ModelExternalLinkFilterInput | null > | null,
+  not?: ModelExternalLinkFilterInput | null,
+};
+
+export type ModelExternalLinkConnection = {
+  __typename: "ModelExternalLinkConnection",
+  items:  Array<ExternalLink | null >,
+  nextToken?: string | null,
+};
+
+export type SearchableExternalLinkFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  name?: SearchableStringFilterInput | null,
+  link?: SearchableStringFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  and?: Array< SearchableExternalLinkFilterInput | null > | null,
+  or?: Array< SearchableExternalLinkFilterInput | null > | null,
+  not?: SearchableExternalLinkFilterInput | null,
+};
+
+export type SearchableExternalLinkSortInput = {
+  field?: SearchableExternalLinkSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableExternalLinkSortableFields {
+  id = "id",
+  name = "name",
+  link = "link",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableExternalLinkAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableExternalLinkAggregateField,
+};
+
+export enum SearchableExternalLinkAggregateField {
+  id = "id",
+  name = "name",
+  link = "link",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableExternalLinkConnection = {
+  __typename: "SearchableExternalLinkConnection",
+  items:  Array<ExternalLink | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
 export type ModelUsersConvoFilterInput = {
   id?: ModelIDInput | null,
   usersModelID?: ModelIDInput | null,
@@ -1809,6 +1925,7 @@ export type ModelSubscriptionUsersModelFilterInput = {
   user_type?: ModelSubscriptionStringInput | null,
   oauth_provider?: ModelSubscriptionStringInput | null,
   oauth_id?: ModelSubscriptionStringInput | null,
+  notification_type?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
   or?: Array< ModelSubscriptionUsersModelFilterInput | null > | null,
 };
@@ -1919,6 +2036,14 @@ export type ModelSubscriptionCommentModelFilterInput = {
   or?: Array< ModelSubscriptionCommentModelFilterInput | null > | null,
 };
 
+export type ModelSubscriptionExternalLinkFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  link?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionExternalLinkFilterInput | null > | null,
+  or?: Array< ModelSubscriptionExternalLinkFilterInput | null > | null,
+};
+
 export type ModelSubscriptionUsersConvoFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   usersModelID?: ModelSubscriptionIDInput | null,
@@ -2025,13 +2150,22 @@ export type CreateUsersModelMutation = {
     involved_projects?: Array< string | null > | null,
     experience_level?: Array< ExperienceTag | null > | null,
     years_of_experience?: number | null,
-    user_type?: Array< AccountTag | null > | null,
+    user_type?: AccountTag | null,
     user_experiences?:  {
       __typename: "ModelExperienceModelConnection",
       nextToken?: string | null,
     } | null,
     oauth_provider?: OAuthProvider | null,
     oauth_id?: string | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    notification_type?: NotificationType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2090,13 +2224,22 @@ export type UpdateUsersModelMutation = {
     involved_projects?: Array< string | null > | null,
     experience_level?: Array< ExperienceTag | null > | null,
     years_of_experience?: number | null,
-    user_type?: Array< AccountTag | null > | null,
+    user_type?: AccountTag | null,
     user_experiences?:  {
       __typename: "ModelExperienceModelConnection",
       nextToken?: string | null,
     } | null,
     oauth_provider?: OAuthProvider | null,
     oauth_id?: string | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    notification_type?: NotificationType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2155,13 +2298,22 @@ export type DeleteUsersModelMutation = {
     involved_projects?: Array< string | null > | null,
     experience_level?: Array< ExperienceTag | null > | null,
     years_of_experience?: number | null,
-    user_type?: Array< AccountTag | null > | null,
+    user_type?: AccountTag | null,
     user_experiences?:  {
       __typename: "ModelExperienceModelConnection",
       nextToken?: string | null,
     } | null,
     oauth_provider?: OAuthProvider | null,
     oauth_id?: string | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    notification_type?: NotificationType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2331,6 +2483,14 @@ export type CreatePostsModelMutation = {
     application?: boolean | null,
     project_chat: string,
     counter?: number | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2374,6 +2534,14 @@ export type UpdatePostsModelMutation = {
     application?: boolean | null,
     project_chat: string,
     counter?: number | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2417,6 +2585,14 @@ export type DeletePostsModelMutation = {
     application?: boolean | null,
     project_chat: string,
     counter?: number | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2602,6 +2778,54 @@ export type DeleteCommentModelMutation = {
   } | null,
 };
 
+export type CreateExternalLinkMutationVariables = {
+  input: CreateExternalLinkInput,
+  condition?: ModelExternalLinkConditionInput | null,
+};
+
+export type CreateExternalLinkMutation = {
+  createExternalLink?:  {
+    __typename: "ExternalLink",
+    id: string,
+    name?: string | null,
+    link?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateExternalLinkMutationVariables = {
+  input: UpdateExternalLinkInput,
+  condition?: ModelExternalLinkConditionInput | null,
+};
+
+export type UpdateExternalLinkMutation = {
+  updateExternalLink?:  {
+    __typename: "ExternalLink",
+    id: string,
+    name?: string | null,
+    link?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteExternalLinkMutationVariables = {
+  input: DeleteExternalLinkInput,
+  condition?: ModelExternalLinkConditionInput | null,
+};
+
+export type DeleteExternalLinkMutation = {
+  deleteExternalLink?:  {
+    __typename: "ExternalLink",
+    id: string,
+    name?: string | null,
+    link?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type CreateUsersConvoMutationVariables = {
   input: CreateUsersConvoInput,
   condition?: ModelUsersConvoConditionInput | null,
@@ -2640,9 +2864,10 @@ export type CreateUsersConvoMutation = {
       involved_projects?: Array< string | null > | null,
       experience_level?: Array< ExperienceTag | null > | null,
       years_of_experience?: number | null,
-      user_type?: Array< AccountTag | null > | null,
+      user_type?: AccountTag | null,
       oauth_provider?: OAuthProvider | null,
       oauth_id?: string | null,
+      notification_type?: NotificationType | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -2696,9 +2921,10 @@ export type UpdateUsersConvoMutation = {
       involved_projects?: Array< string | null > | null,
       experience_level?: Array< ExperienceTag | null > | null,
       years_of_experience?: number | null,
-      user_type?: Array< AccountTag | null > | null,
+      user_type?: AccountTag | null,
       oauth_provider?: OAuthProvider | null,
       oauth_id?: string | null,
+      notification_type?: NotificationType | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -2752,9 +2978,10 @@ export type DeleteUsersConvoMutation = {
       involved_projects?: Array< string | null > | null,
       experience_level?: Array< ExperienceTag | null > | null,
       years_of_experience?: number | null,
-      user_type?: Array< AccountTag | null > | null,
+      user_type?: AccountTag | null,
       oauth_provider?: OAuthProvider | null,
       oauth_id?: string | null,
+      notification_type?: NotificationType | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -2896,13 +3123,22 @@ export type GetUsersModelQuery = {
     involved_projects?: Array< string | null > | null,
     experience_level?: Array< ExperienceTag | null > | null,
     years_of_experience?: number | null,
-    user_type?: Array< AccountTag | null > | null,
+    user_type?: AccountTag | null,
     user_experiences?:  {
       __typename: "ModelExperienceModelConnection",
       nextToken?: string | null,
     } | null,
     oauth_provider?: OAuthProvider | null,
     oauth_id?: string | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    notification_type?: NotificationType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2944,9 +3180,10 @@ export type ListUsersModelsQuery = {
       involved_projects?: Array< string | null > | null,
       experience_level?: Array< ExperienceTag | null > | null,
       years_of_experience?: number | null,
-      user_type?: Array< AccountTag | null > | null,
+      user_type?: AccountTag | null,
       oauth_provider?: OAuthProvider | null,
       oauth_id?: string | null,
+      notification_type?: NotificationType | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -2993,9 +3230,10 @@ export type SearchUsersModelsQuery = {
       involved_projects?: Array< string | null > | null,
       experience_level?: Array< ExperienceTag | null > | null,
       years_of_experience?: number | null,
-      user_type?: Array< AccountTag | null > | null,
+      user_type?: AccountTag | null,
       oauth_provider?: OAuthProvider | null,
       oauth_id?: string | null,
+      notification_type?: NotificationType | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -3241,6 +3479,14 @@ export type GetPostsModelQuery = {
     application?: boolean | null,
     project_chat: string,
     counter?: number | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -3613,6 +3859,83 @@ export type SearchCommentModelsQuery = {
   } | null,
 };
 
+export type GetExternalLinkQueryVariables = {
+  id: string,
+};
+
+export type GetExternalLinkQuery = {
+  getExternalLink?:  {
+    __typename: "ExternalLink",
+    id: string,
+    name?: string | null,
+    link?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListExternalLinksQueryVariables = {
+  filter?: ModelExternalLinkFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListExternalLinksQuery = {
+  listExternalLinks?:  {
+    __typename: "ModelExternalLinkConnection",
+    items:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type SearchExternalLinksQueryVariables = {
+  filter?: SearchableExternalLinkFilterInput | null,
+  sort?: Array< SearchableExternalLinkSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableExternalLinkAggregationInput | null > | null,
+};
+
+export type SearchExternalLinksQuery = {
+  searchExternalLinks?:  {
+    __typename: "SearchableExternalLinkConnection",
+    items:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
 export type GetUsersConvoQueryVariables = {
   id: string,
 };
@@ -3650,9 +3973,10 @@ export type GetUsersConvoQuery = {
       involved_projects?: Array< string | null > | null,
       experience_level?: Array< ExperienceTag | null > | null,
       years_of_experience?: number | null,
-      user_type?: Array< AccountTag | null > | null,
+      user_type?: AccountTag | null,
       oauth_provider?: OAuthProvider | null,
       oauth_id?: string | null,
+      notification_type?: NotificationType | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -3783,13 +4107,22 @@ export type OnCreateUsersModelSubscription = {
     involved_projects?: Array< string | null > | null,
     experience_level?: Array< ExperienceTag | null > | null,
     years_of_experience?: number | null,
-    user_type?: Array< AccountTag | null > | null,
+    user_type?: AccountTag | null,
     user_experiences?:  {
       __typename: "ModelExperienceModelConnection",
       nextToken?: string | null,
     } | null,
     oauth_provider?: OAuthProvider | null,
     oauth_id?: string | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    notification_type?: NotificationType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -3847,13 +4180,22 @@ export type OnUpdateUsersModelSubscription = {
     involved_projects?: Array< string | null > | null,
     experience_level?: Array< ExperienceTag | null > | null,
     years_of_experience?: number | null,
-    user_type?: Array< AccountTag | null > | null,
+    user_type?: AccountTag | null,
     user_experiences?:  {
       __typename: "ModelExperienceModelConnection",
       nextToken?: string | null,
     } | null,
     oauth_provider?: OAuthProvider | null,
     oauth_id?: string | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    notification_type?: NotificationType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -3911,13 +4253,22 @@ export type OnDeleteUsersModelSubscription = {
     involved_projects?: Array< string | null > | null,
     experience_level?: Array< ExperienceTag | null > | null,
     years_of_experience?: number | null,
-    user_type?: Array< AccountTag | null > | null,
+    user_type?: AccountTag | null,
     user_experiences?:  {
       __typename: "ModelExperienceModelConnection",
       nextToken?: string | null,
     } | null,
     oauth_provider?: OAuthProvider | null,
     oauth_id?: string | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    notification_type?: NotificationType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4080,6 +4431,14 @@ export type OnCreatePostsModelSubscription = {
     application?: boolean | null,
     project_chat: string,
     counter?: number | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4122,6 +4481,14 @@ export type OnUpdatePostsModelSubscription = {
     application?: boolean | null,
     project_chat: string,
     counter?: number | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4164,6 +4531,14 @@ export type OnDeletePostsModelSubscription = {
     application?: boolean | null,
     project_chat: string,
     counter?: number | null,
+    external_link?:  Array< {
+      __typename: "ExternalLink",
+      id: string,
+      name?: string | null,
+      link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4340,6 +4715,51 @@ export type OnDeleteCommentModelSubscription = {
   } | null,
 };
 
+export type OnCreateExternalLinkSubscriptionVariables = {
+  filter?: ModelSubscriptionExternalLinkFilterInput | null,
+};
+
+export type OnCreateExternalLinkSubscription = {
+  onCreateExternalLink?:  {
+    __typename: "ExternalLink",
+    id: string,
+    name?: string | null,
+    link?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateExternalLinkSubscriptionVariables = {
+  filter?: ModelSubscriptionExternalLinkFilterInput | null,
+};
+
+export type OnUpdateExternalLinkSubscription = {
+  onUpdateExternalLink?:  {
+    __typename: "ExternalLink",
+    id: string,
+    name?: string | null,
+    link?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteExternalLinkSubscriptionVariables = {
+  filter?: ModelSubscriptionExternalLinkFilterInput | null,
+};
+
+export type OnDeleteExternalLinkSubscription = {
+  onDeleteExternalLink?:  {
+    __typename: "ExternalLink",
+    id: string,
+    name?: string | null,
+    link?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type OnCreateUsersConvoSubscriptionVariables = {
   filter?: ModelSubscriptionUsersConvoFilterInput | null,
 };
@@ -4377,9 +4797,10 @@ export type OnCreateUsersConvoSubscription = {
       involved_projects?: Array< string | null > | null,
       experience_level?: Array< ExperienceTag | null > | null,
       years_of_experience?: number | null,
-      user_type?: Array< AccountTag | null > | null,
+      user_type?: AccountTag | null,
       oauth_provider?: OAuthProvider | null,
       oauth_id?: string | null,
+      notification_type?: NotificationType | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -4432,9 +4853,10 @@ export type OnUpdateUsersConvoSubscription = {
       involved_projects?: Array< string | null > | null,
       experience_level?: Array< ExperienceTag | null > | null,
       years_of_experience?: number | null,
-      user_type?: Array< AccountTag | null > | null,
+      user_type?: AccountTag | null,
       oauth_provider?: OAuthProvider | null,
       oauth_id?: string | null,
+      notification_type?: NotificationType | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -4487,9 +4909,10 @@ export type OnDeleteUsersConvoSubscription = {
       involved_projects?: Array< string | null > | null,
       experience_level?: Array< ExperienceTag | null > | null,
       years_of_experience?: number | null,
-      user_type?: Array< AccountTag | null > | null,
+      user_type?: AccountTag | null,
       oauth_provider?: OAuthProvider | null,
       oauth_id?: string | null,
+      notification_type?: NotificationType | null,
       createdAt: string,
       updatedAt: string,
     },

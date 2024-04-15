@@ -17,10 +17,10 @@ import SingleView from './pages/SingleView'
 import LoadingScreen from './components/LoadingScreen'
 import AuthWrapper from './components/AuthWrapper'
 import Browse from './pages/Browse'
+import ProjectJoined from './pages/ProjectJoined'
 
 function App () {
 
-  // eslint-disable-next-line react/prop-types
   const ProtectedRoutes: React.FC = () => (
     <AuthWrapper>
       <Outlet />
@@ -48,6 +48,8 @@ function App () {
           <Route path='/browse/:params' element={<Browse/>} />
           <Route path='/trending' element={<Browse/>} />
           <Route path='/view/profile/:id' element={<UserProfile />} />
+          <Route path='/joined/project/:id' element={<ProjectJoined/>} />
+          <Route path='/joined/project' element={<ProjectJoined/>} />
         </Route>
       </Routes>
     </BrowserRouter>
