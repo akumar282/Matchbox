@@ -1,16 +1,16 @@
 import React, {useEffect} from 'react'
-import {githubIssue} from '../backend/types'
+import {githubPullRequestSimple} from '../backend/types'
 
-interface IssuesTableProps {
-  gitIssues: githubIssue[]
+interface PullRequestsTableProps {
+  gitPulls: githubPullRequestSimple[]
 }
 
-interface IssueRowProps {
-  githubIssue: githubIssue,
+interface PullRequestRowProps {
+  githubPull: githubPullRequestSimple,
   index: number
 }
 
-export function IssueRow(props: IssueRowProps) {
+export function PullRequestRow(props: PullRequestRowProps) {
 
   const rowStyle = (props.index % 2 != 0) ? 'bg-gray-100' : ''
 
@@ -18,19 +18,19 @@ export function IssueRow(props: IssueRowProps) {
     <tr className={rowStyle}>
       <td>
         <div className='flex flex-row'>
-          <a href={props.githubIssue.html_url} target='_blank' rel="noreferrer">
+          <a href={props.githubPull.html_url} target='_blank' rel="noreferrer">
             <div className='flex px-4 py-3 flex-col space-y-2 text-sm'>
-              <h1>{props.githubIssue.title}</h1>
-              <h3 className='text-xs'>#{props.githubIssue.number} by {props.githubIssue.user?.login}</h3>
+              <h1>{props.githubPull.title}</h1>
+              <h3 className='text-xs'>#{props.githubPull.number} by {props.githubPull.user?.login}</h3>
             </div>
           </a>
         </div>
       </td>
       <td className='hidden lg:table-cell'>
         <div className='px-3 py-3 flex flex-row justify-center'>
-          {props.githubIssue.user != null ?
-            <a href={props.githubIssue.user?.html_url} target='_blank' rel='noreferrer'>
-              <img src={props.githubIssue.user?.avatar_url} alt='Author Profile Image'
+          {props.githubPull.user != null ?
+            <a href={props.githubPull.user?.html_url} target='_blank' rel='noreferrer'>
+              <img src={props.githubPull.user?.avatar_url} alt='Author Profile Image'
                 className='rounded-full object-cover overflow-hidden max-w-9 max-h-9'/>
             </a>
             :
@@ -41,9 +41,9 @@ export function IssueRow(props: IssueRowProps) {
       </td>
       <td className='hidden lg:table-cell'>
         <div className='px-3 py-3 flex flex-row justify-center'>
-          {props.githubIssue.assignee != null ?
-            <a href={props.githubIssue.assignee?.html_url} target='_blank' rel='noreferrer'>
-              <img src={props.githubIssue.assignee?.avatar_url} alt='Author Profile Image'
+          {props.githubPull.assignee != null ?
+            <a href={props.githubPull.assignee?.html_url} target='_blank' rel='noreferrer'>
+              <img src={props.githubPull.assignee?.avatar_url} alt='Author Profile Image'
                 className='rounded-full object-cover overflow-hidden max-w-9 max-h-9'/>
             </a>
             :
@@ -56,23 +56,23 @@ export function IssueRow(props: IssueRowProps) {
   )
 }
 
-export default function IssuesTable(props: IssuesTableProps) {
+export default function PullRequestsTable(props: PullRequestsTableProps) {
 
   const [tabOpenIssues, setTabOpenIssues] = React.useState<boolean>(true)
   const [openIssues, setOpenIssues] = React.useState<React.ReactElement[]>([])
   const [closedIssues, setClosedIssues] = React.useState<React.ReactElement[]>([])
 
   useEffect(() => {
-    
     const filterData = async () => {
+
       setOpenIssues(
-        (props.gitIssues.filter(x => x.state != 'closed') as githubIssue[])
-          .map((x, index) => <IssueRow githubIssue={x} index={index} key={index}/> )
+        (props.gitPulls.filter(x => x.state != 'closed') as githubPullRequestSimple[])
+          .map((x, index) => <PullRequestRow githubPull={x} index={index} key={index}/>)
       )
 
       setClosedIssues(
-        (props.gitIssues.filter(x => x.state === 'closed') as githubIssue[])
-          .map((x, index) => <IssueRow githubIssue={x} index={index} key={index}/>)
+        (props.gitPulls.filter(x => x.state === 'closed') as githubPullRequestSimple[])
+          .map((x, index) => <PullRequestRow githubPull={x} index={index} key={index}/>)
       )
     }
 
@@ -121,10 +121,9 @@ export default function IssuesTable(props: IssuesTableProps) {
                       width={16}
                     >
                       <path
-                        d={`M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 
-                      7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 
-                      0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 
-                      10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z`}
+                        d={`M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 
+                        0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 
+                        0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z`}
                       />
                     </svg>
                     <h1>Closed</h1>

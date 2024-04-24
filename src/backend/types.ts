@@ -39,6 +39,10 @@ export interface paginatedPostsVariables {
 }
 
 export type githubIssue = components['schemas']['issue']
+export type githubContributors = components['schemas']['contributor']
+export type githubPullRequest = components['schemas']['pull-request']
+export type githubPullRequestSimple = components['schemas']['pull-request-simple']
+
 export type listRepoIssuesParameters = Endpoints['GET /repos/{owner}/{repo}/issues']['parameters']
 export type listRepoIssuesResponse = Endpoints['GET /repos/{owner}/{repo}/issues']['response']
 export type listRepoIssuesRequest = Endpoints['GET /repos/{owner}/{repo}/issues']['request']
