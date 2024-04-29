@@ -667,6 +667,10 @@ export const getConversationModel = /* GraphQL */ `query GetConversationModel($i
       __typename
     }
     title
+    messages {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -754,6 +758,40 @@ export const getMessageModel = /* GraphQL */ `query GetMessageModel($id: ID!) {
     id
     message
     from
+    senderInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
     message_date
     conversationID
     createdAt

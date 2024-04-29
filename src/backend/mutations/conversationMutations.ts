@@ -8,10 +8,10 @@ import {
   UpdateConversationModelInput,
   UpdateConversationModelMutation
 } from '@api'
-import { GraphQLResult } from '@aws-amplify/api-graphql'
+import {GraphQLQuery} from '@aws-amplify/api'
 
 export async function createConversation(conversation: { input: CreateConversationModelInput}){
-  return await API.graphql<GraphQLResult<CreateConversationModelMutation>>({
+  return await API.graphql<GraphQLQuery<CreateConversationModelMutation>>({
     query: createConversationModel,
     variables: conversation,
     authMode: 'API_KEY'
@@ -19,7 +19,7 @@ export async function createConversation(conversation: { input: CreateConversati
 }
 
 export async function deleteConversation(conversation: { input: DeleteConversationModelInput}) {
-  return await API.graphql<GraphQLResult<DeleteConversationModelMutation>>({
+  return await API.graphql<GraphQLQuery<DeleteConversationModelMutation>>({
     query: deleteConversationModel,
     variables: conversation,
     authMode: 'API_KEY'
@@ -27,7 +27,7 @@ export async function deleteConversation(conversation: { input: DeleteConversati
 }
 
 export async function updateConversation(conversation: { input: UpdateConversationModelInput }) {
-  return await API.graphql<GraphQLResult<UpdateConversationModelMutation>>({
+  return await API.graphql<GraphQLQuery<UpdateConversationModelMutation>>({
     query: updateConversationModel,
     variables: conversation,
     authMode: 'API_KEY'

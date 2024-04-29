@@ -7,6 +7,7 @@ import IssuesTable from '../components/IssuesTable'
 import PullRequestsTable from '../components/PullRequestsTable'
 import {getPost} from '../backend/queries/postQueries'
 import {githubIssue, githubPullRequestSimple} from '../backend/types'
+import {createSub, createSub2} from '../backend/subscriptions/subscriptions'
 
 export default function ProjectJoined(props) {
 
@@ -28,6 +29,12 @@ export default function ProjectJoined(props) {
           setGitIssues(await (await fetch(`https://api.github.com/repos/${repoInfo}/issues?state=all`)).json() as githubIssue[])
         }
       }
+      // const sub = createSub
+      // console.log(sub)
+      createSub2((value) => {
+        console.log('huh')
+        console.log(value)
+      })
     }
 
     getPageData().catch(x => console.log(x))

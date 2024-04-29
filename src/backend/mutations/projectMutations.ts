@@ -8,10 +8,10 @@ import {
   UpdatePostsModelInput, 
   UpdatePostsModelMutation
 } from '@api'
-import { GraphQLResult } from '@aws-amplify/api-graphql'
+import { GraphQLQuery } from '@aws-amplify/api'
 
 export async function createPost(post: { input: CreatePostsModelInput}){
-  return await API.graphql<GraphQLResult<CreatePostsModelMutation>>({
+  return await API.graphql<GraphQLQuery<CreatePostsModelMutation>>({
     query: createPostsModel,
     variables: post,
     authMode: 'API_KEY'
@@ -19,7 +19,7 @@ export async function createPost(post: { input: CreatePostsModelInput}){
 }
 
 export async function deletePost(post: { input: DeletePostsModelInput}) {
-  return await API.graphql<GraphQLResult<DeletePostsModelMutation>>({
+  return await API.graphql<GraphQLQuery<DeletePostsModelMutation>>({
     query: deletePostsModel,
     variables: post,
     authMode: 'API_KEY'
@@ -27,7 +27,7 @@ export async function deletePost(post: { input: DeletePostsModelInput}) {
 }
 
 export async function updatePost(post: { input: UpdatePostsModelInput }) {
-  return await API.graphql<GraphQLResult<UpdatePostsModelMutation>>({
+  return await API.graphql<GraphQLQuery<UpdatePostsModelMutation>>({
     query: updatePostsModel,
     variables: post,
     authMode: 'API_KEY'

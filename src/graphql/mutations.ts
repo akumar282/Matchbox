@@ -580,6 +580,10 @@ export const createConversationModel = /* GraphQL */ `mutation CreateConversatio
       __typename
     }
     title
+    messages {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -600,6 +604,10 @@ export const updateConversationModel = /* GraphQL */ `mutation UpdateConversatio
       __typename
     }
     title
+    messages {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -620,6 +628,10 @@ export const deleteConversationModel = /* GraphQL */ `mutation DeleteConversatio
       __typename
     }
     title
+    messages {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -637,6 +649,40 @@ export const createMessageModel = /* GraphQL */ `mutation CreateMessageModel(
     id
     message
     from
+    senderInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
     message_date
     conversationID
     createdAt
@@ -656,6 +702,40 @@ export const updateMessageModel = /* GraphQL */ `mutation UpdateMessageModel(
     id
     message
     from
+    senderInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
     message_date
     conversationID
     createdAt
@@ -675,6 +755,40 @@ export const deleteMessageModel = /* GraphQL */ `mutation DeleteMessageModel(
     id
     message
     from
+    senderInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
     message_date
     conversationID
     createdAt

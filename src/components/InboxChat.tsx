@@ -1,7 +1,12 @@
 import React from 'react'
 import InboxChatMessages from './InboxChatMessages'
 
-export default function InboxChat(props: {setScreen: React.Dispatch<React.SetStateAction<string>>}) {
+
+interface InboxChatProps {
+  setScreen: React.Dispatch<React.SetStateAction<string>>
+  currentChatId: React.Dispatch<React.SetStateAction<string | null>>
+}
+export default function InboxChat(props: InboxChatProps) {
   function handleBack() {
     console.log('back')
     props.setScreen('inbox')
@@ -36,7 +41,6 @@ export default function InboxChat(props: {setScreen: React.Dispatch<React.SetSta
           Send
         </button>
       </div>
-      
     </main>
   )
 }

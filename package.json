@@ -60,6 +60,7 @@
     "@craco/craco": "^5.9.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@types/jest": "^29.5.12",
     "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",
     "@typescript-eslint/eslint-plugin": "^6.7.4",

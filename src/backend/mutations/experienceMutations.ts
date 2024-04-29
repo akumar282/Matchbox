@@ -8,10 +8,10 @@ import {
   UpdateExperienceModelInput,
   UpdateExperienceModelMutation
 } from '@api'
-import { GraphQLResult } from '@aws-amplify/api-graphql'
+import { GraphQLQuery } from '@aws-amplify/api'
 
 export async function createExperience(experience: { input: CreateExperienceModelInput}){
-  return await API.graphql<GraphQLResult<CreateExperienceModelMutation>>({
+  return await API.graphql<GraphQLQuery<CreateExperienceModelMutation>>({
     query: createExperienceModel,
     variables: experience,
     authMode: 'API_KEY'
@@ -19,7 +19,7 @@ export async function createExperience(experience: { input: CreateExperienceMode
 }
 
 export async function deleteExperience(experience: { input: DeleteExperienceModelInput}) {
-  return await API.graphql<GraphQLResult<DeleteExperienceModelMutation>>({
+  return await API.graphql<GraphQLQuery<DeleteExperienceModelMutation>>({
     query: deleteExperienceModel,
     variables: experience,
     authMode: 'API_KEY'
@@ -27,7 +27,7 @@ export async function deleteExperience(experience: { input: DeleteExperienceMode
 }
 
 export async function updateExperience(experience: { input: UpdateExperienceModelInput }) {
-  return await API.graphql<GraphQLResult<UpdateExperienceModelMutation>>({
+  return await API.graphql<GraphQLQuery<UpdateExperienceModelMutation>>({
     query: updateExperienceModel,
     variables: experience,
     authMode: 'API_KEY'

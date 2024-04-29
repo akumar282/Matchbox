@@ -8,10 +8,10 @@ import {
   UpdateCommentModelInput,
   UpdateCommentModelMutation
 } from '@api'
-import { GraphQLResult } from '@aws-amplify/api-graphql'
+import { GraphQLQuery } from '@aws-amplify/api'
 
 export async function createComment(comment: { input: CreateCommentModelInput}){
-  return await API.graphql<GraphQLResult<CreateCommentModelMutation>>({
+  return await API.graphql<GraphQLQuery<CreateCommentModelMutation>>({
     query: createCommentModel,
     variables: comment,
     authMode: 'API_KEY'
@@ -19,7 +19,7 @@ export async function createComment(comment: { input: CreateCommentModelInput}){
 }
 
 export async function deleteComment(comment: { input: DeleteCommentModelInput}) {
-  return await API.graphql<GraphQLResult<DeleteCommentModelMutation>>({
+  return await API.graphql<GraphQLQuery<DeleteCommentModelMutation>>({
     query: deleteCommentModel,
     variables: comment,
     authMode: 'API_KEY'
@@ -27,7 +27,7 @@ export async function deleteComment(comment: { input: DeleteCommentModelInput}) 
 }
 
 export async function updateComment(comment: { input: UpdateCommentModelInput }) {
-  return await API.graphql<GraphQLResult<UpdateCommentModelMutation>>({
+  return await API.graphql<GraphQLQuery<UpdateCommentModelMutation>>({
     query: updateCommentModel,
     variables: comment,
     authMode: 'API_KEY'

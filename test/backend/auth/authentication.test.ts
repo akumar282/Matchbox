@@ -1,6 +1,7 @@
-import { newUserSignUp } from '../../../src/backend/auth'
+import { newUserSignUp } from '@backend/auth'
 import { Amplify } from 'aws-amplify'
 import awsconfig from '@aws-exports'
+import {describe ,test, expect} from '@jest/globals'
 Amplify.configure(awsconfig)
 
 

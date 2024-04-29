@@ -564,6 +564,10 @@ export const onCreateConversationModel = /* GraphQL */ `subscription OnCreateCon
       __typename
     }
     title
+    messages {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -583,6 +587,10 @@ export const onUpdateConversationModel = /* GraphQL */ `subscription OnUpdateCon
       __typename
     }
     title
+    messages {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -602,6 +610,10 @@ export const onDeleteConversationModel = /* GraphQL */ `subscription OnDeleteCon
       __typename
     }
     title
+    messages {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -618,6 +630,40 @@ export const onCreateMessageModel = /* GraphQL */ `subscription OnCreateMessageM
     id
     message
     from
+    senderInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
     message_date
     conversationID
     createdAt
@@ -636,6 +682,40 @@ export const onUpdateMessageModel = /* GraphQL */ `subscription OnUpdateMessageM
     id
     message
     from
+    senderInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
     message_date
     conversationID
     createdAt
@@ -654,6 +734,40 @@ export const onDeleteMessageModel = /* GraphQL */ `subscription OnDeleteMessageM
     id
     message
     from
+    senderInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
     message_date
     conversationID
     createdAt

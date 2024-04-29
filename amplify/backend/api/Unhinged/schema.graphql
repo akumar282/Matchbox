@@ -273,13 +273,15 @@ type ConversationModel @model @searchable @auth(rules: [{allow: public, operatio
   id: ID!
   users: [UsersModel] @manyToMany(relationName: "UsersConvo")
   title: String
+  messages: [MessageModel] @hasMany(indexName: "byConversationModel", fields: ["id"])
 }
 
 type MessageModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   message: String!
   from: ID! @index(name: "byUsersModel")
-  message_date: AWSDateTime
+  senderInfo: UsersModel @belongsTo(fields: ["from"])
+  message_date: AWSDateTime!
   conversationID: ID! @index(name: "byConversationModel")
 }
 
