@@ -1,51 +1,40 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useEffect, useRef, useState } from 'react'
 import { UsersConvo } from '../API'
 
 interface InboxMessageProps {
   setScreen: React.Dispatch<React.SetStateAction<string>>
   currentChatId: React.Dispatch<React.SetStateAction<string | null>>
-  chatData: UsersConvo;
+  isSelected: boolean
+  onSelectChat: (id: string | null) => void
+  chatData: UsersConvo
 }
 
 export default function InboxMessage(props: InboxMessageProps) {
   const convoRef = useRef<HTMLButtonElement>(null)
-  const [isSelected, setSelected] = useState<boolean>(false)
 
   function handleClickToChat() {
+    console.log('Updating currentChatId to', props.chatData.conversationModel.id)
+
     console.log('click to chat')
     props.setScreen('chat')
     props.currentChatId(props.chatData.conversationModel.id)
-    setSelected(true)
+    props.onSelectChat(props.chatData.conversationModel.id)
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const closeConvo = () => {
     console.log('close conversation')
     props.setScreen('inbox')
     props.currentChatId(null)
-    setSelected(false)
+    props.onSelectChat(null)
   }
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      // Check if the clicked area is not part of the conversation UI and is not an overlay or modal
-      if (convoRef.current && !convoRef.current.contains(event.target as Node) && !document.querySelector('.modal-active')) {
-        closeConvo()
-      }
-    }
-
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
 
   return (
     <button
       ref={convoRef}
       onClick={handleClickToChat}
-      className={`w-full h-max flex items-center gap-4 py-1 hover:bg-[#ececec] rounded-lg ${isSelected ? 'bg-[#ececec]' : ''}`}
+      className={`w-full h-max flex items-center gap-4 py-1 hover:bg-[#ececec] rounded-lg ${props.isSelected ? 'bg-[#ececec]' : ''}`}
     >
       <div className='pl-2 flex flex-row items-center space-x-2'>
         <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor'

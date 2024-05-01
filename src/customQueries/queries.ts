@@ -20,7 +20,7 @@ export const getTotalPostsNumber = `
   }
 `
 
-export const getMessagesQuery = `
+export const  getMessagesQuery = `
   query getMessagesConvoQuery($id: ID!, $nextToken: String) {
     getConversationModel(id: $id) {
       messages(nextToken: $nextToken) {

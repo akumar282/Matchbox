@@ -9,6 +9,12 @@ enum SizeTag {
   LARGE
 }
 
+enum NotificationType {
+  EMAIL_AND_NEWSLETTER
+  EMAIL_ONLY
+  NONE
+}
+
 enum InterestTag {
   COMMUNICATION
   ENVIRONMENT
@@ -34,6 +40,8 @@ enum DevelopmentTag {
   CLOUD
   DATABASE
   CYBERSECURITY
+  ARTIFICIAL_INTELLIGENCE
+  MACHINE_LEARNING
 }
 
 enum LanguageTag {
@@ -99,13 +107,15 @@ enum FrameworkTag {
   GATSBY
   SVELTE
   YII
+  REACT_JS
+  REACT_NATIVE
   TURBOGEARS
   YESOD
   GROK
   MOJOLICIOUS
   VAADIN
   RUBY_ON_RAILS
-  EXPRESS JS
+  EXPRESS_JS
   METEOR
   CODEIGNITOR
   SYMFONY
@@ -124,7 +134,17 @@ enum FrameworkTag {
   SPARK
   APACHE_STRUTS_1
   WEB2PY
-  APACHE_PLAY 
+  APACHE_PLAY
+}
+
+enum CloudProviderTag {
+  AMAZON_WEB_SERVICES
+  MICROSOFT_AZURE
+  GOOGLE_CLOUD_PLATFORM
+  SALESFORCE
+  IBM_CLOUD
+  HEROKU
+  NETAPP
 }
 
 enum DifficultyTag {
@@ -152,18 +172,25 @@ enum ContributionTag {
   REVIEW
 }
 
-type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+enum OAuthProvider {
+  GOOGLE
+  GITHUB
+}
+
+type UsersModel @model @searchable @aws_cognito_user_pools @aws_iam @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   user_name: String!
   email: String!
   password: String!
   profile_image: String
+  bio: String
   user_posts: [PostsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   user_comments: [CommentModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   first_name: String
   last_name: String
   user_creation_date: AWSDateTime
   github_link: AWSURL
+  liked_posts: [ID]
   saved_posts: [ID]
   hide_posts: [ID]
   messages: [MessageModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
@@ -174,15 +201,19 @@ type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [re
   size_tag: [SizeTag]
   framework_tag: [FrameworkTag]
   difficulty_tag: [DifficultyTag]
+  cloud_provider_tag: [CloudProviderTag]
   new_user: Boolean
   contributions: [ContributionsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   credibility_score: Int
   involved_projects: [ID]
   experience_level: [ExperienceTag]
   years_of_experience: Int
-  user_type: [AccountTag]
+  user_type: AccountTag
   user_experiences: [ExperienceModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
-  external_link: [ExternalLink] @hasMany(indexName: "byExternalLink", fields: ["id"])
+  oauth_provider: OAuthProvider
+  oauth_id: String
+  external_link: [ExternalLink]
+  notification_type: NotificationType
 }
 
 type ContributionsModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
@@ -198,6 +229,7 @@ type ExperienceModel @model @searchable @auth(rules: [{allow: public, operations
   id: ID!
   user_id: ID! @index(name: "byUsersModel")
   org_name: String!
+  image_link: String!
   start_date: AWSDate!
   end_date: AWSDate
   description: String!
@@ -222,6 +254,10 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   size_tag: [SizeTag]
   framework_tag: [FrameworkTag]
   difficulty_tag: [DifficultyTag]
+  cloud_provider_tag: [CloudProviderTag]
+  likes: Int
+  likes_users: [ID]
+  saves: Int
   post_comments: [CommentModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
   contributor_limit: Int
   contributors: [ID]
@@ -229,20 +265,23 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   experience_level: [ExperienceTag]
   application: Boolean
   project_chat: ID! @index(name: "byConversationModel")
-  external_link: [ExternalLink] @hasMany(indexName: "byExternalLink", fields: ["id"])
+  counter: Int
+  external_link: [ExternalLink]
 }
 
 type ConversationModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   users: [UsersModel] @manyToMany(relationName: "UsersConvo")
   title: String
+  messages: [MessageModel] @hasMany(indexName: "byConversationModel", fields: ["id"])
 }
 
 type MessageModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   message: String!
   from: ID! @index(name: "byUsersModel")
-  message_date: AWSDateTime
+  senderInfo: UsersModel @belongsTo(fields: ["from"])
+  message_date: AWSDateTime!
   conversationID: ID! @index(name: "byConversationModel")
 }
 
