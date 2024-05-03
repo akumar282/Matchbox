@@ -82,9 +82,9 @@ export default function Create() {
           onInit={(ev) => {
             set_my_swiper(ev)
           }}
-          className='.my_swiper max-w-[1170px] mx-auto w-[97%]'
+          className='.my_swiper max-w-[1170px] mx-auto w-[97%] min-h-[700px]'
         >
-          <SwiperSlide>{<CreateIntialScreen nextSlide={next_slide} setValues={setInitial}/>}</SwiperSlide>
+          <SwiperSlide>{<CreateIntialScreen nextSlide={next_slide} setValues={setInitial} mySwiper={my_swiper}/>}</SwiperSlide>
           <SwiperSlide>{<CreateProjectPreferences nextSlide={next_slide} prevSlide={prev_slide} setAllTags={setTags}/>}</SwiperSlide>
           <SwiperSlide>{<ReviewProject SelectedTags={tags} prevSlide={prev_slide} SelectedValues={inital}/> }</SwiperSlide>
         </Swiper>

@@ -7,7 +7,6 @@ import IssuesTable from '../components/IssuesTable'
 import PullRequestsTable from '../components/PullRequestsTable'
 import {getPost} from '../backend/queries/postQueries'
 import {githubIssue, githubPullRequestSimple} from '../backend/types'
-import {createSub, createSub2} from '../backend/subscriptions/subscriptions'
 
 export default function ProjectJoined(props) {
 
@@ -29,12 +28,6 @@ export default function ProjectJoined(props) {
           setGitIssues(await (await fetch(`https://api.github.com/repos/${repoInfo}/issues?state=all`)).json() as githubIssue[])
         }
       }
-      // const sub = createSub
-      // console.log(sub)
-      createSub2((value) => {
-        console.log('huh')
-        console.log(value)
-      })
     }
 
     getPageData().catch(x => console.log(x))
@@ -51,17 +44,17 @@ export default function ProjectJoined(props) {
             <button className={`mx-5 h-full hover:bg-gray-200 rounded-lg p-2 ${pageIndex === 0 ? 'text-indigo-600 bg-gray-200' : ''}`} onClick={() => setPageIndex(0)}>
               <div className='flex flex-row items-center space-x-2'>
                 <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
+                  className='fill-current'
+                  xmlns='http://www.w3.org/2000/svg'
                   height={16}
-                  viewBox="0 0 16 16"
-                  version="1.1"
-                  stroke="currentColor"
+                  viewBox='0 0 16 16'
+                  version='1.1'
+                  stroke='currentColor'
                   strokeWidth={0}
                   width={16}
                 >
-                  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/>
-                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"/>
+                  <path d='M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z'/>
+                  <path d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z'/>
                 </svg>
                 <h3>Issues</h3>
               </div>

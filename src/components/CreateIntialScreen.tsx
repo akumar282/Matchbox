@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { FileInput, Label } from 'flowbite-react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import {githubRepoHealth} from '../backend/types'
+import VerifyRepo from './VerifyRepo'
 
 
 interface Props {
@@ -15,15 +17,30 @@ interface Props {
     projectLongDescription: string,
     image: File | null
   }): void
+  mySwiper: unknown
 }
 
 export default function CreateIntialScreen(props: Props) {
   const [isChecked, setIsChecked] = React.useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [repoHealth, setRepoHealth] = React.useState<githubRepoHealth>()
+  const [verifyClicked, setVerifyClicked] = React.useState<boolean>(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [validRepo, setValidRepo] = React.useState<boolean>()
   const [file, setFile] = React.useState<File | null>(null) 
   const acceptedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif']
   const handleCheck = () => {
     setIsChecked(!isChecked) // Toggle the checked state
   }
+
+  useEffect(() => {
+    if (props.mySwiper) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      props.mySwiper.update()
+    }
+  }, [verifyClicked, validRepo, repoHealth])
+
   const validationSchema = yup.object({
     projectTitle: yup.string().required('Required'),
     projectDescription: yup.string().required('Required'),
@@ -53,6 +70,57 @@ export default function CreateIntialScreen(props: Props) {
     validateOnBlur: false,
   })
 
+  function isValidUrl(str: string) {
+    const pattern = new RegExp(
+      '^([a-zA-Z]+:\\/\\/)?' +
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
+      '((\\d{1,3}\\.){3}\\d{1,3}))' +
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
+      '(\\?[;&a-z\\d%_.~+=-]*)?' +
+      '(\\#[-a-z\\d_]*)?$',
+      'i'
+    )
+    return pattern.test(str)
+  }
+
+  const useSubmit = async () => {
+    if(isValidUrl(formik.values.projectRepo)) {
+      let repoInfo = formik.values.projectRepo
+      repoInfo = repoInfo?.replace('https://github.com/', '')
+      const data = await (await fetch(`https://api.github.com/repos/${repoInfo}/community/profile`)).json()
+      if(data.message === 'Not Found') {
+        setValidRepo(false)
+        setVerifyClicked(true)
+      } else {
+
+        setRepoHealth(data)
+        setValidRepo(true)
+        setVerifyClicked(true)
+      }
+    }
+  }
+
+  function renderStatusOrNot() {
+    if(verifyClicked === true && validRepo === true && repoHealth != null) {
+      if (repoHealth.health_percentage) {
+        return (
+          <div className='overflow-visible'>
+            <VerifyRepo data={repoHealth}/>
+          </div>
+        )
+      }
+    } else if (verifyClicked === true && validRepo === false && repoHealth === undefined) {
+      return (
+        <div>
+          <h3 className='text-red-500'>Invalid Repository URL</h3>
+        </div>
+      )
+    } else {
+      return (
+        <div/>
+      )
+    }
+  }
 
   function setImage(e) {
     const file = e.target.files[0]
@@ -63,12 +131,14 @@ export default function CreateIntialScreen(props: Props) {
     }
     setFile(e.target.files[0])
   }
+
   const navigate = useNavigate()
+
   return (
     /* TODO: Remove random image*/
     <div className='mx-auto bg-white mt-8 mb-8 lg:max-w-[1300px] w-[97%] font-primary rounded-lg flex flex-col pb-4'>
       <div className='flex flex-col'>
-        <div className='flex flex-col items-center space-y-4 mx-auto w-[93%] '>
+        <div className='flex flex-col items-center space-y-4 mx-auto w-[93%] overflow-visible '>
           <h1 className='pb-4 mt-3 text-xl'>Project Information</h1>
           <div className='w-full flex lg:flex-row items-center lg:space-x-4 space-x-0 flex-col'>
             <div className='lg:w-1/3 lg:h-48 grow-0 h-44 space-y-2 lg:mb-0 mb-4 bg-white shadow-lg rounded-lg '>
@@ -160,30 +230,41 @@ export default function CreateIntialScreen(props: Props) {
               </div>
             </div>
           </div>
-          <div className='w-full text-sm'>
+          <div className="w-full text-sm">
+            {/*<form>*/}
             <h1>Repository Link: </h1>
             <ul>
             </ul>
-            <div className='flex lg:flex-row lg:space-x-2 flex-col'>
-              <div className='flex flex-grow w-full flex-col lg:relative'>
+            <div className="flex lg:flex-row lg:space-x-2 flex-col">
+              <div className="flex flex-grow w-full flex-col lg:relative">
                 <input
-                  className='rounded-md w-full'
+                  className="rounded-md w-full"
                   name={'projectRepo'}
-                  type='text'
+                  type="text"
                   id={'repository_link'}
                   placeholder={'Enter Repository Link...'}
                   value={formik.values.projectRepo}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.projectRepo && formik.touched.projectRepo ? ( <div className='text-red-500 text-xs lg:hidden'>{formik.errors.projectRepo}</div>) : <div className='text-xs lg:hidden'> &nbsp;</div>}
+                {formik.errors.projectRepo && formik.touched.projectRepo ? (
+                  <div className="text-red-500 text-xs lg:hidden">{formik.errors.projectRepo}</div>) :
+                  <div className="text-xs lg:hidden"> &nbsp;</div>}
               </div>
-              <div className='lg:w-2/12 mt-2 lg:mt-0'>
-                <button className='px-2 bg-blue-700 text-white lg:h-full h-10 lg:max-w-[180px] w-full rounded-lg'>Verify Repo</button>
+              <div className="lg:w-2/12 mt-2 lg:mt-0">
+                <button
+                  className="px-2 bg-blue-700 text-white lg:h-full h-10 lg:max-w-[180px] w-full rounded-lg"
+                  onClick={() => useSubmit()}>Verify Repo
+                </button>
               </div>
             </div>
-            {formik.errors.projectRepo && formik.touched.projectRepo ? ( <div className='text-red-500 text-xs lg:block hidden'>{formik.errors.projectRepo}</div>) : <div className='text-xs lg:block hidden'> &nbsp;</div>}
+            {formik.errors.projectRepo && formik.touched.projectRepo ? (
+              <div className="text-red-500 text-xs lg:block hidden">{formik.errors.projectRepo}</div>) :
+              <div className="text-xs lg:block hidden"> &nbsp;</div>}
+            {/*</form>*/}
+            {renderStatusOrNot()}
+            <div></div>
           </div>
-          <div className='w-full text-sm'>
+          <div className="w-full text-sm">
             <label>Long Description (Describe your project in detail)</label>
             <textarea className='w-full rounded-lg'
               name={'projectLongDescription'}

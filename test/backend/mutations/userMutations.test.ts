@@ -5,10 +5,6 @@ import { CreateUsersModelInput, DevelopmentTag, UpdateUsersModelInput } from '@a
 import {describe ,test, expect} from '@jest/globals'
 Amplify.configure(awsconfig)
 
-
-
-
-
 describe('Mutation Tests', () => {
 
   test.skip('Create user', async () => {

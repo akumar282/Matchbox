@@ -12,15 +12,12 @@ import {paginatedPostsQuery} from '../customQueries/queries'
 import ProjectView from '../components/ProjectView'
 import {useParams} from 'react-router-dom'
 
-// TODO: None of the components take in data
 export default function UserProfile() {
-
 
   const userInfo = useContext(AuthContext)
   const [userData, setUserData] = React.useState<UsersModel>()
   const [profilePic, setProfilePic] = React.useState<string>()
   const [postsNum, setPostsNum] = React.useState<number>()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userProjects, setUserProjects] = useState<React.ReactNode[]>([])
   const [editable, setEditable] = useState<boolean>(false)
 

@@ -97,10 +97,19 @@ export default function ProfileHeader(props: userData) {
       </div>
       <div className='bg-white rounded-lg px-2 py-2 w-full mt-6 font-primary'>
         <div className='items-start pt-3 pb-8 max-w-[1070px] mx-auto'>
-          <h1 className='text-2xl font-primary ml-3 mt-3'>Your Projects</h1>
-          <h3 className='text-sm font-primary ml-3 mt-1'>Projects that you are collaborating on:</h3>
-          <div className='overflow-x-auto'>
-            <div className='flex mt-2 lg:grid lg:grid-cols-4 md:grid-cols-4 md:grid'>
+          {props.editable ? (
+            <>
+              <h1 className="text-2xl font-primary ml-3 mt-3">Your Projects</h1>
+              <h3 className="text-sm font-primary ml-3 mt-1">Projects that you are collaborating on:</h3>
+            </>
+          ) : (
+            <>
+              <h1 className="text-2xl font-primary ml-3 mt-3">{data.user_name}&apos;s Projects</h1>
+              <h3 className="text-sm font-primary ml-3 mt-1">Projects that {data.user_name} is collaborating on:</h3>
+            </>
+          )}
+          <div className="overflow-x-auto">
+            <div className="flex mt-2 lg:grid lg:grid-cols-4 md:grid-cols-4 md:grid">
               {props.projects}
             </div>
           </div>

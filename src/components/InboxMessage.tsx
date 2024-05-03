@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { UsersConvo } from '../API'
 
 interface InboxMessageProps {
@@ -14,20 +13,9 @@ export default function InboxMessage(props: InboxMessageProps) {
   const convoRef = useRef<HTMLButtonElement>(null)
 
   function handleClickToChat() {
-    console.log('Updating currentChatId to', props.chatData.conversationModel.id)
-
-    console.log('click to chat')
     props.setScreen('chat')
     props.currentChatId(props.chatData.conversationModel.id)
     props.onSelectChat(props.chatData.conversationModel.id)
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const closeConvo = () => {
-    console.log('close conversation')
-    props.setScreen('inbox')
-    props.currentChatId(null)
-    props.onSelectChat(null)
   }
 
   return (

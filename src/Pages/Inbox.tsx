@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import NavBar from '../components/NavBar'
-import InboxChat, {InboxChatProps} from '../components/InboxChat'
+import InboxChat from '../components/InboxChat'
 import InboxHolder from '../components/InboxHolder'
 import {API} from 'aws-amplify'
 import {GraphQLQuery} from '@aws-amplify/api'
@@ -13,7 +13,6 @@ import {AuthContext} from '../components/AuthWrapper'
 
 export default function Inbox() {
   const [screen, setScreen] = useState('inbox')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentChatId, setCurrentChatId] = useState<string | null>(null)
   const [allChats, setAllChats] = useState<(UsersConvo | null)[]>([])
   const userInfo = useContext(AuthContext)
@@ -36,12 +35,12 @@ export default function Inbox() {
   }, [userInfo])
 
 
-  const inboxChatProps: InboxChatProps = {
-    chatId: currentChatId,
-    screenState: screen,
-    setScreen: setScreen,
-    currentChatId: setCurrentChatId
-  }
+  // const inboxChatProps: InboxChatProps = {
+  //   chatId: currentChatId,
+  //   screenState: screen,
+  //   setScreen: setScreen,
+  //   currentChatId: setCurrentChatId
+  // }
 
 
   return (
@@ -58,7 +57,7 @@ export default function Inbox() {
             />
           </div>
           <div className='w-[70%] hidden lg:flex md:flex font-primary rounded-r-lg'>
-            <InboxChat {...inboxChatProps}
+            <InboxChat chatId={currentChatId} setScreen={setScreen} currentChatId={setCurrentChatId} screenState={screen}
             />
           </div>
         </div>
@@ -71,7 +70,7 @@ export default function Inbox() {
             setScreen={setScreen}
             currentChatId={setCurrentChatId}
           /> :
-          <InboxChat {...inboxChatProps}
+          <InboxChat chatId={currentChatId} setScreen={setScreen} currentChatId={setCurrentChatId} screenState={screen}
           />
         }
       </div>

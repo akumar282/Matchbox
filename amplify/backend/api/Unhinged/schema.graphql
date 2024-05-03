@@ -212,7 +212,7 @@ type UsersModel @model @searchable @aws_cognito_user_pools @aws_iam @auth(rules:
   user_experiences: [ExperienceModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   oauth_provider: OAuthProvider
   oauth_id: String
-  external_link: [ExternalLink]
+  external_link: String
   notification_type: NotificationType
 }
 
@@ -266,7 +266,7 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   application: Boolean
   project_chat: ID! @index(name: "byConversationModel")
   counter: Int
-  external_link: [ExternalLink]
+  external_link: String
 }
 
 type ConversationModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
