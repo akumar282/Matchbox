@@ -148,14 +148,7 @@ export const getUsersModel = /* GraphQL */ `query GetUsersModel($id: ID!) {
     }
     oauth_provider
     oauth_id
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     notification_type
     createdAt
     updatedAt
@@ -201,6 +194,7 @@ export const listUsersModels = /* GraphQL */ `query ListUsersModels(
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -259,6 +253,7 @@ export const searchUsersModels = /* GraphQL */ `query SearchUsersModels(
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -525,14 +520,7 @@ export const getPostsModel = /* GraphQL */ `query GetPostsModel($id: ID!) {
     application
     project_chat
     counter
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     createdAt
     updatedAt
     __typename
@@ -575,6 +563,7 @@ export const listPostsModels = /* GraphQL */ `query ListPostsModels(
       application
       project_chat
       counter
+      external_link
       createdAt
       updatedAt
       __typename
@@ -630,6 +619,7 @@ export const searchPostsModels = /* GraphQL */ `query SearchPostsModels(
       application
       project_chat
       counter
+      external_link
       createdAt
       updatedAt
       __typename
@@ -787,6 +777,7 @@ export const getMessageModel = /* GraphQL */ `query GetMessageModel($id: ID!) {
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -1103,6 +1094,7 @@ export const getUsersConvo = /* GraphQL */ `query GetUsersConvo($id: ID!) {
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt

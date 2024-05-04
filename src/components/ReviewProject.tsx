@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import NewLogo from '../img/NewLogo.png'
 import github from '../img/github.svg'
 import {
@@ -12,6 +12,13 @@ import {
 } from '../API'
 import {enumBundle, preferenceTags} from '../backend/types'
 import Tags from './Tags'
+import {AuthContext} from './AuthWrapper'
+import {createConversation} from '../backend/mutations/conversationMutations'
+import {createPost} from '../backend/mutations/projectMutations'
+import {uploadImage} from '../backend/storage/s3'
+import {v4 as uuidv4} from 'uuid'
+import {getImageBlob} from '../functions/helpers'
+import {createConvo} from '../backend/mutations/userConvoMutations'
 
 interface Props {
   SelectedTags: {
@@ -57,8 +64,70 @@ function generateTags(props: tagRender) {
   })
 }
 
-
 export default function ReviewProject(props: Props) {
+
+  const userInfo = useContext(AuthContext)
+
+  const { SelectedValues } = props
+  const { SelectedTags } = props
+
+  const useSubmit = async () => {
+    if(userInfo && userInfo.id) {
+
+      const createProjectChat = await createConversation({
+        input: {
+          title: SelectedValues.projectTitle +' Chat',
+        }
+      })
+
+      await createConvo({
+        input: {
+          conversationModelID: createProjectChat?.data?.createConversationModel?.id ? createProjectChat.data.createConversationModel.id : 'no convo chat set',
+          usersModelID: userInfo.id,
+        }
+      })
+
+      let imageLink: string = ''
+      if(SelectedValues.image) {
+        imageLink = await uploadImage(SelectedValues.image ? SelectedValues.image : NewLogo as File)
+      } else {
+        const imageBlob = await getImageBlob(NewLogo)
+        imageLink = await uploadImage(imageBlob)
+      }
+
+
+      await createPost({
+        input: {
+          id: uuidv4(),
+          post_title: SelectedValues.projectTitle,
+          userID: userInfo.id,
+          project_chat: createProjectChat?.data?.createConversationModel?.id ? createProjectChat.data.createConversationModel.id : 'no project chat set',
+          creator_name: userInfo.userName,
+          lang_tag: SelectedTags.LanguageTags,
+          dev_type_tag: SelectedTags.DevelopmentTags,
+          interest_tag: SelectedTags.InterestTags,
+          size_tag: SelectedTags.SizeTags,
+          framework_tag: SelectedTags.FrameworkTags,
+          difficulty_tag: SelectedTags.DifficultyTags,
+          cloud_provider_tag: SelectedTags.CloudProviderTags,
+          project_link: SelectedValues.projectRepo,
+          long_description: SelectedValues.projectLongDescription,
+          description: SelectedValues.projectDescription,
+          external_link: SelectedValues.projectExternalLink,
+          post_date: new Date().toISOString(),
+          likes_users: [],
+          likes: 0,
+          saves: 0,
+          contributors: [],
+          image_link: imageLink,
+          reported: false,
+          application: false,
+          counter: 1
+        }
+      })
+    }
+  }
+
   const allTags: tagRender[] = [
     {
       tagType: props.SelectedTags.LanguageTags as preferenceTags[],
@@ -280,6 +349,7 @@ export default function ReviewProject(props: Props) {
           </button>
           <button
             className='py-2 px-6 bg-blue-700 hover:bg-blue-400 rounded-md text-white'
+            onClick={() => useSubmit()}
           >
             Create Project
           </button>

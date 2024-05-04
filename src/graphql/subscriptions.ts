@@ -109,14 +109,7 @@ export const onCreateUsersModel = /* GraphQL */ `subscription OnCreateUsersModel
     }
     oauth_provider
     oauth_id
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     notification_type
     createdAt
     updatedAt
@@ -183,14 +176,7 @@ export const onUpdateUsersModel = /* GraphQL */ `subscription OnUpdateUsersModel
     }
     oauth_provider
     oauth_id
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     notification_type
     createdAt
     updatedAt
@@ -257,14 +243,7 @@ export const onDeleteUsersModel = /* GraphQL */ `subscription OnDeleteUsersModel
     }
     oauth_provider
     oauth_id
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     notification_type
     createdAt
     updatedAt
@@ -435,14 +414,7 @@ export const onCreatePostsModel = /* GraphQL */ `subscription OnCreatePostsModel
     application
     project_chat
     counter
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     createdAt
     updatedAt
     __typename
@@ -486,14 +458,7 @@ export const onUpdatePostsModel = /* GraphQL */ `subscription OnUpdatePostsModel
     application
     project_chat
     counter
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     createdAt
     updatedAt
     __typename
@@ -537,14 +502,7 @@ export const onDeletePostsModel = /* GraphQL */ `subscription OnDeletePostsModel
     application
     project_chat
     counter
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     createdAt
     updatedAt
     __typename
@@ -659,6 +617,7 @@ export const onCreateMessageModel = /* GraphQL */ `subscription OnCreateMessageM
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -711,6 +670,7 @@ export const onUpdateMessageModel = /* GraphQL */ `subscription OnUpdateMessageM
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -763,6 +723,7 @@ export const onDeleteMessageModel = /* GraphQL */ `subscription OnDeleteMessageM
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -932,6 +893,7 @@ export const onCreateUsersConvo = /* GraphQL */ `subscription OnCreateUsersConvo
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -989,6 +951,7 @@ export const onUpdateUsersConvo = /* GraphQL */ `subscription OnUpdateUsersConvo
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -1046,6 +1009,7 @@ export const onDeleteUsersConvo = /* GraphQL */ `subscription OnDeleteUsersConvo
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt

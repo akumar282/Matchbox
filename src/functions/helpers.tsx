@@ -67,6 +67,15 @@ export function convertISOToMonthYear(isoString: string) {
   return `${month} ${year}`
 }
 
+export async function getImageBlob(imagePath: string): Promise<File> {
+  const response = await fetch(imagePath)
+  const blob = await response.blob()
+  return new File([blob], 'NewLogo.png', {
+    type: blob.type,
+    lastModified: new Date().getTime()
+  })
+}
+
 export async function federatedSignIn() {
   console.log('hello')
   await Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google})

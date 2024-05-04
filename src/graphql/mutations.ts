@@ -113,14 +113,7 @@ export const createUsersModel = /* GraphQL */ `mutation CreateUsersModel(
     }
     oauth_provider
     oauth_id
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     notification_type
     createdAt
     updatedAt
@@ -188,14 +181,7 @@ export const updateUsersModel = /* GraphQL */ `mutation UpdateUsersModel(
     }
     oauth_provider
     oauth_id
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     notification_type
     createdAt
     updatedAt
@@ -263,14 +249,7 @@ export const deleteUsersModel = /* GraphQL */ `mutation DeleteUsersModel(
     }
     oauth_provider
     oauth_id
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     notification_type
     createdAt
     updatedAt
@@ -448,14 +427,7 @@ export const createPostsModel = /* GraphQL */ `mutation CreatePostsModel(
     application
     project_chat
     counter
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     createdAt
     updatedAt
     __typename
@@ -500,14 +472,7 @@ export const updatePostsModel = /* GraphQL */ `mutation UpdatePostsModel(
     application
     project_chat
     counter
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     createdAt
     updatedAt
     __typename
@@ -552,14 +517,7 @@ export const deletePostsModel = /* GraphQL */ `mutation DeletePostsModel(
     application
     project_chat
     counter
-    external_link {
-      id
-      name
-      link
-      createdAt
-      updatedAt
-      __typename
-    }
+    external_link
     createdAt
     updatedAt
     __typename
@@ -678,6 +636,7 @@ export const createMessageModel = /* GraphQL */ `mutation CreateMessageModel(
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -731,6 +690,7 @@ export const updateMessageModel = /* GraphQL */ `mutation UpdateMessageModel(
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -784,6 +744,7 @@ export const deleteMessageModel = /* GraphQL */ `mutation DeleteMessageModel(
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -960,6 +921,7 @@ export const createUsersConvo = /* GraphQL */ `mutation CreateUsersConvo(
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -1018,6 +980,7 @@ export const updateUsersConvo = /* GraphQL */ `mutation UpdateUsersConvo(
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt
@@ -1076,6 +1039,7 @@ export const deleteUsersConvo = /* GraphQL */ `mutation DeleteUsersConvo(
       user_type
       oauth_provider
       oauth_id
+      external_link
       notification_type
       createdAt
       updatedAt

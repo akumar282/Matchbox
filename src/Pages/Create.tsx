@@ -9,7 +9,7 @@ import { Pagination, Navigation } from 'swiper/modules'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css'
-import { Swiper as MySwiper } from 'swiper/types' 
+import { Swiper as MySwiper } from 'swiper/types'
 
 export default function Create() {
   const [tags, setTags] = useState<{
@@ -29,7 +29,6 @@ export default function Create() {
         DifficultyTags: [],
         SizeTags: [],
       })
-  // const [images, setImage] = useState<File | null>(null) 
 
   const [my_swiper, set_my_swiper] = useState<MySwiper | null>(null)
   const [ inital , setInitial] = useState<{
@@ -47,7 +46,7 @@ export default function Create() {
     projectLongDescription: '',
     image: null
   })
-  console.log(inital)
+
   function next_slide() {
     my_swiper.slideNext()
   }

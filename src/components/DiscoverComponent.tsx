@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {PostsModel} from '../API'
 import {getImage} from '../backend/storage/s3'
-import NewLogo from '../img/NewLogo.png'
 import github from '../img/github.svg'
 import { preferenceTags} from '../backend/types'
 import CommentSection from './CommentSection'
@@ -61,7 +60,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
     <div className='flex flex-col pt-8 pb-12 lg:px-16 w-full z-10'>
       <div className='flex lg:flex-row flex-col lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
         <div className='lg:w-64 lg:h-40 w-[97%] h-44 space-y-2 bg-white shadow-lg rounded-lg '>
-          <img className='h-full w-full rounded-lg object-cover' src={NewLogo} alt='Project Thumbnail'/>
+          <img className='h-full w-full rounded-lg object-cover' src={projectImage} alt='Project Thumbnail'/>
         </div>
         <div className='bg-white rounded-lg lg:w-[800px] w-[97%] flex-auto shadow-lg font-primary justify-between space-y-2 flex items-center flex-col '>
           <h1 className='text-2xl pt-2'>{props.data.post_title}</h1>
