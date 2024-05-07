@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import NavBar from '../components/NavBar'
 import DiscoverComponent from '../components/DiscoverComponent'
 import { PostsModel } from '../API'
 import {useNavigate, useParams} from 'react-router-dom'
 import {getPost} from '../backend/queries/postQueries'
+import {AuthContext} from '../components/AuthWrapper'
 
 export default function SingleView() {
   const [project, setProjectData] = useState<React.ReactElement>()
@@ -11,15 +12,16 @@ export default function SingleView() {
   const { id } = useParams()
 
   const navigate = useNavigate()
+  const userInfo = useContext(AuthContext)
   useEffect(() => {
 
     const getPageData =  async () => {
-      if (id) {
+      if (id && userInfo && userInfo.id) {
         const { data } = await getPost({id: id})
         if (data) {
           console.log(data)
           const project = (
-            <DiscoverComponent data={data.getPostsModel as PostsModel}/>
+            <DiscoverComponent data={data.getPostsModel as PostsModel} editable={userInfo.id === data.getPostsModel?.userID}/>
           )
           setProjectData(project)
         }

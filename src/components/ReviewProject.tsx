@@ -14,11 +14,12 @@ import {enumBundle, preferenceTags} from '../backend/types'
 import Tags from './Tags'
 import {AuthContext} from './AuthWrapper'
 import {createConversation} from '../backend/mutations/conversationMutations'
-import {createPost} from '../backend/mutations/projectMutations'
+import {createPost, updatePost} from '../backend/mutations/projectMutations'
 import {uploadImage} from '../backend/storage/s3'
 import {v4 as uuidv4} from 'uuid'
 import {getImageBlob} from '../functions/helpers'
 import {createConvo} from '../backend/mutations/userConvoMutations'
+import {useNavigate} from 'react-router-dom'
 
 interface Props {
   SelectedTags: {
@@ -39,6 +40,8 @@ interface Props {
     projectLongDescription: string,
     image: File | null
   }
+  editable: boolean
+  editPostId?: string
 }
 
 type tagRender = {
@@ -67,6 +70,7 @@ function generateTags(props: tagRender) {
 export default function ReviewProject(props: Props) {
 
   const userInfo = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const { SelectedValues } = props
   const { SelectedTags } = props
@@ -96,7 +100,7 @@ export default function ReviewProject(props: Props) {
       }
 
 
-      await createPost({
+      const postMut = await createPost({
         input: {
           id: uuidv4(),
           post_title: SelectedValues.projectTitle,
@@ -125,6 +129,52 @@ export default function ReviewProject(props: Props) {
           counter: 1
         }
       })
+
+      if (postMut && postMut.data && postMut.data.createPostsModel) {
+        navigate(`/project/${postMut.data.createPostsModel.id}`)
+      } else {
+        navigate('/404')
+      }
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const useUpdatePost = async () => {
+    if(userInfo && userInfo.id && props.editPostId && props.editable) {
+
+      let imageLink: string = ''
+      if(SelectedValues.image) {
+        imageLink = await uploadImage(SelectedValues.image ? SelectedValues.image : NewLogo as File)
+      } else {
+        const imageBlob = await getImageBlob(NewLogo)
+        imageLink = await uploadImage(imageBlob)
+      }
+
+
+      const postMut = await updatePost({
+        input: {
+          id: props.editPostId,
+          post_title: SelectedValues.projectTitle,
+          lang_tag: SelectedTags.LanguageTags,
+          dev_type_tag: SelectedTags.DevelopmentTags,
+          interest_tag: SelectedTags.InterestTags,
+          size_tag: SelectedTags.SizeTags,
+          framework_tag: SelectedTags.FrameworkTags,
+          difficulty_tag: SelectedTags.DifficultyTags,
+          cloud_provider_tag: SelectedTags.CloudProviderTags,
+          project_link: SelectedValues.projectRepo,
+          long_description: SelectedValues.projectLongDescription,
+          description: SelectedValues.projectDescription,
+          external_link: SelectedValues.projectExternalLink,
+          image_link: imageLink,
+        }
+      })
+
+      if (postMut && postMut.data && postMut.data.updatePostsModel) {
+        navigate(`/project/${postMut.data.updatePostsModel.id}`)
+      } else {
+        navigate('/404')
+      }
     }
   }
 
@@ -347,12 +397,22 @@ export default function ReviewProject(props: Props) {
           >
             Go Back
           </button>
-          <button
-            className='py-2 px-6 bg-blue-700 hover:bg-blue-400 rounded-md text-white'
-            onClick={() => useSubmit()}
-          >
-            Create Project
-          </button>
+          {props.editable && props.editPostId ?
+            <button
+              className='py-2 px-6 bg-blue-700 hover:bg-blue-400 rounded-md text-white'
+              onClick={() => useUpdatePost()}
+            >
+              Update Project
+            </button>
+            :
+            <button
+              className='py-2 px-6 bg-blue-700 hover:bg-blue-400 rounded-md text-white'
+              onClick={() => useSubmit()}
+            >
+              Create Project
+            </button>
+          }
+
         </div>
       </div>
     </div>

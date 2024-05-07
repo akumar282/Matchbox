@@ -9,6 +9,7 @@ import {useNavigate} from 'react-router-dom'
 
 interface DiscoverProps {
   data: PostsModel
+  editable?: boolean
 }
 
 export default function DiscoverComponent(props: DiscoverProps) {
@@ -136,7 +137,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
         </div>
         <div className='bg-white font-primary shadow-lg mx-auto lg:w-full  w-[97%] rounded-lg'>
           <h1 className='p-3 text-xl'>Project Description</h1>
-          <h3 className='p-3'>
+          <h3 className='p-3 break-words'>
             {props.data.long_description}
           </h3>
         </div>
@@ -174,9 +175,19 @@ export default function DiscoverComponent(props: DiscoverProps) {
         </div>
       </div>
       <div className='lg:mt-6 mt-3 flex flex-col w-[97%] mx-auto items-center'>
-        <button className='font-primary shadow-lg hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2' >
-          Join Project
-        </button>
+        {props.editable === true ?
+          <button
+            className="font-primary shadow-lg hover:bg-red-600 bg-red-500 text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2"
+            onClick={() => navigate(`/project/edit/${props.data.id}`)}
+          >
+            Edit Project
+          </button>
+          :
+          <button
+            className="font-primary shadow-lg hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2">
+            Join Project
+          </button>
+        }
       </div>
       <div className='flex lg:flex-row flex-col lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
         <CommentSection postID={props.data.id}/>

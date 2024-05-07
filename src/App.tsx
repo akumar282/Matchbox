@@ -6,7 +6,6 @@ import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
 import PreferencesPage from './pages/PreferencesPage'
 import HomePage from './pages/HomePage'
-import Create from './pages/Create'
 import DiscoverPage from './pages/DiscoverPage'
 import Inbox from './pages/Inbox'
 import UserProfile from './pages/UserProfile'
@@ -18,6 +17,8 @@ import LoadingScreen from './components/LoadingScreen'
 import AuthWrapper from './components/AuthWrapper'
 import Browse from './pages/Browse'
 import ProjectJoined from './pages/ProjectJoined'
+import EditPost from './pages/EditPost'
+import CreatePost from './pages/CreatePost'
 
 function App () {
 
@@ -38,7 +39,7 @@ function App () {
         <Route element={<ProtectedRoutes />} >
           <Route path="/setup" element={<PreferencesPage />} />
           <Route path='/home' element={<HomePage />} />
-          <Route path='/create-project' element={<Create />} />
+          <Route path='/create-project' element={<CreatePost />} />
           <Route path='/discover' element={<DiscoverPage />} />
           <Route path='/project/:id' element={<SingleView />} />
           <Route path='/inbox' element={<Inbox />} />
@@ -50,6 +51,9 @@ function App () {
           <Route path='/view/profile/:id' element={<UserProfile />} />
           <Route path='/joined/project/:id' element={<ProjectJoined/>} />
           <Route path='/joined/project' element={<ProjectJoined/>} />
+          <Route path='/project/owner/:id' element={<SingleView />}/>
+          <Route path='/profile/edit/:id' element={<UserProfile />} />
+          <Route path='/project/edit/:id' element={<EditPost />}/>
         </Route>
       </Routes>
     </BrowserRouter>

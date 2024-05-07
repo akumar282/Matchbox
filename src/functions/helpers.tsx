@@ -1,8 +1,6 @@
 import React from 'react'
 import {enumBundle, preferenceTags} from '../backend/types'
 import Tags from '../components/Tags'
-import {Auth} from 'aws-amplify'
-import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth'
 
 
 export type tagRender = {
@@ -74,14 +72,4 @@ export async function getImageBlob(imagePath: string): Promise<File> {
     type: blob.type,
     lastModified: new Date().getTime()
   })
-}
-
-export async function federatedSignIn() {
-  console.log('hello')
-  await Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google})
-  const current = await Auth.currentAuthenticatedUser()
-  console.log(current)
-  const tos = JSON.stringify(current)
-  localStorage.setItem('test', tos)
-
 }

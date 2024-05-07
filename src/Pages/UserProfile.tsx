@@ -44,8 +44,6 @@ export default function UserProfile() {
 
     const aggregateData = async  () => {
       const { data } = await aggregatePosts({id: currentId})
-      console.log(data)
-      console.log(data?.searchPostsModels?.aggregateItems[0]?.result)
       if (data && data.searchPostsModels) {
         const { value } = data?.searchPostsModels?.aggregateItems[0]?.result as SearchableAggregateScalarResult
         setPostsNum(value)

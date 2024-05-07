@@ -12,8 +12,7 @@ import ErrorAlert, {errorStyle, errorXStyle} from '../components/alerts/errorAle
 
 import * as yup from 'yup'
 import { useFormik } from 'formik'
-// import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth'
-import {federatedSignIn} from '../functions/helpers'
+import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth'
 
 
 export default function LoginPage() {
@@ -60,7 +59,7 @@ export default function LoginPage() {
               closeStyle={errorXStyle} colorStyle={errorStyle}/>}
           <h1 className='text-center font-secondary text-4xl font-light'>Welcome Back!</h1>
           <h2 className='text-center text-lg text-medium font-primary pt-4'>Login to your account</h2>
-          <OAuthButtons label='Login with Google' onClick={ () => federatedSignIn()} src={google}/>
+          <OAuthButtons label='Login with Google' onClick={ () => Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google})} src={google}/>
           <OAuthButtons label='Login with GitHub' src={github}/>
         </div>
         <form onSubmit={formik.handleSubmit} className='flex flex-col items-center justify-center lg:flex-col'>

@@ -6,6 +6,14 @@ import * as yup from 'yup'
 import {githubRepoHealth} from '../backend/types'
 import VerifyRepo from './VerifyRepo'
 
+interface SelectedValues {
+  projectTitle: string,
+  projectDescription: string,
+  projectExternalLink: string,
+  projectRepo: string,
+  projectLongDescription: string,
+  image: File | null
+}
 
 interface Props {
   nextSlide: () => void
@@ -17,7 +25,9 @@ interface Props {
     projectLongDescription: string,
     image: File | null
   }): void
-  mySwiper: unknown
+  mySwiper: unknown,
+  editable: boolean,
+  selectedValues: SelectedValues
 }
 
 export default function CreateIntialScreen(props: Props) {
@@ -41,6 +51,33 @@ export default function CreateIntialScreen(props: Props) {
     }
   }, [verifyClicked, validRepo, repoHealth])
 
+  useEffect(() => {
+    if (props.editable && props.selectedValues) {
+      props.setValues({
+        projectTitle: props.selectedValues.projectTitle,
+        projectDescription: props.selectedValues.projectDescription,
+        projectExternalLink: props.selectedValues.projectExternalLink,
+        projectRepo: props.selectedValues.projectRepo,
+        projectLongDescription: props.selectedValues.projectLongDescription,
+        image: props.selectedValues.image
+      })
+
+    }
+  }, [])
+
+  useEffect(() => {
+    if (props.editable && props.selectedValues) {
+      formik.setValues({
+        projectTitle: props.selectedValues.projectTitle,
+        projectDescription: props.selectedValues.projectDescription,
+        projectExternalLink: props.selectedValues.projectExternalLink,
+        projectRepo: props.selectedValues.projectRepo,
+        projectLongDescription: props.selectedValues.projectLongDescription
+      }, false) // The second argument 'false' prevents validation on setValues
+      setFile(props.selectedValues.image)
+    }
+  }, [props.selectedValues])
+
   const validationSchema = yup.object({
     projectTitle: yup.string().required('Required'),
     projectDescription: yup.string().required('Required'),
@@ -50,14 +87,13 @@ export default function CreateIntialScreen(props: Props) {
   })
   const formik = useFormik({
     initialValues: {
-      projectTitle: '',
-      projectDescription: '',
-      projectExternalLink: '',
-      projectRepo: '',
-      projectLongDescription: '',
+      projectTitle: props.selectedValues.projectTitle || '',
+      projectDescription: props.selectedValues.projectDescription || '',
+      projectExternalLink: props.selectedValues.projectExternalLink || '',
+      projectRepo: props.selectedValues.projectRepo || '',
+      projectLongDescription: props.selectedValues.projectLongDescription || '',
     },
     onSubmit: values => {
-      console.log(values)
       if (!isChecked) {
         alert('Please verify that you have read the Community Guidelines') // add popup later
         return
@@ -124,7 +160,6 @@ export default function CreateIntialScreen(props: Props) {
 
   function setImage(e) {
     const file = e.target.files[0]
-    console.log(e.target.files[0].type)
     if (!file || !acceptedTypes.includes(file.type)) {
       alert('Please upload a valid image (PNG, JPEG, JPG, or GIF)') // add popup later
       return
@@ -143,17 +178,17 @@ export default function CreateIntialScreen(props: Props) {
           <div className='w-full flex lg:flex-row items-center lg:space-x-4 space-x-0 flex-col'>
             <div className='lg:w-1/3 lg:h-48 grow-0 h-44 space-y-2 lg:mb-0 mb-4 bg-white shadow-lg rounded-lg '>
               <div className="flex w-full items-center justify-center h-full relative">
-                { 
+                {
                   file && <img
                     className="absolute h-full w-full object-cover rounded-lg shadow-md bg-white"
                     src={file ? URL.createObjectURL(file) : 'https://images.unsplash.com/photo-1612833609243-8b0e2c2e9e0a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29tcHV0ZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'}
                     alt="Profile image"/>
                 }
-                { 
+                {
                   file &&  <Label
                     htmlFor="dropzone-file"
                     className="absolute flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg z-50">
-                  </Label> 
+                  </Label>
                 }
                 <Label
                   htmlFor="dropzone-file"
