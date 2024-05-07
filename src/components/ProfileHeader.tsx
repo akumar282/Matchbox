@@ -47,8 +47,6 @@ export default function ProfileHeader(props: userData) {
     }
   ]
 
-  console.log(props.postsNum)
-
   return (
     <>
       <div className='bg-white rounded-lg w-full px-2 py-2 font-primary'>

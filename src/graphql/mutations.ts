@@ -82,6 +82,14 @@ export const createUsersModel = /* GraphQL */ `mutation CreateUsersModel(
     liked_posts
     saved_posts
     hide_posts
+    saved {
+      nextToken
+      __typename
+    }
+    hidden {
+      nextToken
+      __typename
+    }
     messages {
       nextToken
       __typename
@@ -150,6 +158,14 @@ export const updateUsersModel = /* GraphQL */ `mutation UpdateUsersModel(
     liked_posts
     saved_posts
     hide_posts
+    saved {
+      nextToken
+      __typename
+    }
+    hidden {
+      nextToken
+      __typename
+    }
     messages {
       nextToken
       __typename
@@ -218,6 +234,14 @@ export const deleteUsersModel = /* GraphQL */ `mutation DeleteUsersModel(
     liked_posts
     saved_posts
     hide_posts
+    saved {
+      nextToken
+      __typename
+    }
+    hidden {
+      nextToken
+      __typename
+    }
     messages {
       nextToken
       __typename
@@ -883,6 +907,465 @@ export const deleteExternalLink = /* GraphQL */ `mutation DeleteExternalLink(
 ` as GeneratedMutation<
   APITypes.DeleteExternalLinkMutationVariables,
   APITypes.DeleteExternalLinkMutation
+>;
+export const createSavedPostModel = /* GraphQL */ `mutation CreateSavedPostModel(
+  $input: CreateSavedPostModelInput!
+  $condition: ModelSavedPostModelConditionInput
+) {
+  createSavedPostModel(input: $input, condition: $condition) {
+    id
+    saved_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateSavedPostModelMutationVariables,
+  APITypes.CreateSavedPostModelMutation
+>;
+export const updateSavedPostModel = /* GraphQL */ `mutation UpdateSavedPostModel(
+  $input: UpdateSavedPostModelInput!
+  $condition: ModelSavedPostModelConditionInput
+) {
+  updateSavedPostModel(input: $input, condition: $condition) {
+    id
+    saved_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateSavedPostModelMutationVariables,
+  APITypes.UpdateSavedPostModelMutation
+>;
+export const deleteSavedPostModel = /* GraphQL */ `mutation DeleteSavedPostModel(
+  $input: DeleteSavedPostModelInput!
+  $condition: ModelSavedPostModelConditionInput
+) {
+  deleteSavedPostModel(input: $input, condition: $condition) {
+    id
+    saved_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteSavedPostModelMutationVariables,
+  APITypes.DeleteSavedPostModelMutation
+>;
+export const createHiddenPostModel = /* GraphQL */ `mutation CreateHiddenPostModel(
+  $input: CreateHiddenPostModelInput!
+  $condition: ModelHiddenPostModelConditionInput
+) {
+  createHiddenPostModel(input: $input, condition: $condition) {
+    id
+    hidden_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateHiddenPostModelMutationVariables,
+  APITypes.CreateHiddenPostModelMutation
+>;
+export const updateHiddenPostModel = /* GraphQL */ `mutation UpdateHiddenPostModel(
+  $input: UpdateHiddenPostModelInput!
+  $condition: ModelHiddenPostModelConditionInput
+) {
+  updateHiddenPostModel(input: $input, condition: $condition) {
+    id
+    hidden_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateHiddenPostModelMutationVariables,
+  APITypes.UpdateHiddenPostModelMutation
+>;
+export const deleteHiddenPostModel = /* GraphQL */ `mutation DeleteHiddenPostModel(
+  $input: DeleteHiddenPostModelInput!
+  $condition: ModelHiddenPostModelConditionInput
+) {
+  deleteHiddenPostModel(input: $input, condition: $condition) {
+    id
+    hidden_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteHiddenPostModelMutationVariables,
+  APITypes.DeleteHiddenPostModelMutation
+>;
+export const createLikedPostModel = /* GraphQL */ `mutation CreateLikedPostModel(
+  $input: CreateLikedPostModelInput!
+  $condition: ModelLikedPostModelConditionInput
+) {
+  createLikedPostModel(input: $input, condition: $condition) {
+    id
+    liked_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateLikedPostModelMutationVariables,
+  APITypes.CreateLikedPostModelMutation
+>;
+export const updateLikedPostModel = /* GraphQL */ `mutation UpdateLikedPostModel(
+  $input: UpdateLikedPostModelInput!
+  $condition: ModelLikedPostModelConditionInput
+) {
+  updateLikedPostModel(input: $input, condition: $condition) {
+    id
+    liked_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateLikedPostModelMutationVariables,
+  APITypes.UpdateLikedPostModelMutation
+>;
+export const deleteLikedPostModel = /* GraphQL */ `mutation DeleteLikedPostModel(
+  $input: DeleteLikedPostModelInput!
+  $condition: ModelLikedPostModelConditionInput
+) {
+  deleteLikedPostModel(input: $input, condition: $condition) {
+    id
+    liked_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteLikedPostModelMutationVariables,
+  APITypes.DeleteLikedPostModelMutation
 >;
 export const createUsersConvo = /* GraphQL */ `mutation CreateUsersConvo(
   $input: CreateUsersConvoInput!

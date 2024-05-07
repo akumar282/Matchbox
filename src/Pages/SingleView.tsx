@@ -19,7 +19,6 @@ export default function SingleView() {
       if (id && userInfo && userInfo.id) {
         const { data } = await getPost({id: id})
         if (data) {
-          console.log(data)
           const project = (
             <DiscoverComponent data={data.getPostsModel as PostsModel} editable={userInfo.id === data.getPostsModel?.userID}/>
           )

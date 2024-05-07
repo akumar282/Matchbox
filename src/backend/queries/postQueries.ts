@@ -17,7 +17,7 @@ export async function getPost(post: GetPostsModelQueryVariables){
   })
 }
 
-export async function listPosts(post:  ListPostsModelsQueryVariables){
+export async function listPosts(post: ListPostsModelsQueryVariables){
   return await API.graphql<GraphQLQuery<ListPostsModelsQuery>>({
     query: listPostsModels,
     variables: post,

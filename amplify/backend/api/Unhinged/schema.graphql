@@ -193,6 +193,8 @@ type UsersModel @model @searchable @aws_cognito_user_pools @aws_iam @auth(rules:
   liked_posts: [ID]
   saved_posts: [ID]
   hide_posts: [ID]
+  saved: [SavedPostModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  hidden: [HiddenPostModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   messages: [MessageModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   conversations: [ConversationModel] @manyToMany(relationName: "UsersConvo")
   lang_tag: [LanguageTag]
@@ -302,4 +304,31 @@ type ExternalLink @model @searchable @auth(rules: [{allow: public, operations: [
   id: ID!
   name: String,
   link: AWSURL
+}
+
+type SavedPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  saved_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @hasOne(fields: ["postID"])
+  count: Int
+}
+
+type HiddenPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  hidden_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @hasOne(fields: ["postID"])
+  count: Int
+}
+
+type LikedPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  liked_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @hasOne(fields: ["postID"])
+  count: Int
 }

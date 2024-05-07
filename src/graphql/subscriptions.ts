@@ -78,6 +78,14 @@ export const onCreateUsersModel = /* GraphQL */ `subscription OnCreateUsersModel
     liked_posts
     saved_posts
     hide_posts
+    saved {
+      nextToken
+      __typename
+    }
+    hidden {
+      nextToken
+      __typename
+    }
     messages {
       nextToken
       __typename
@@ -145,6 +153,14 @@ export const onUpdateUsersModel = /* GraphQL */ `subscription OnUpdateUsersModel
     liked_posts
     saved_posts
     hide_posts
+    saved {
+      nextToken
+      __typename
+    }
+    hidden {
+      nextToken
+      __typename
+    }
     messages {
       nextToken
       __typename
@@ -212,6 +228,14 @@ export const onDeleteUsersModel = /* GraphQL */ `subscription OnDeleteUsersModel
     liked_posts
     saved_posts
     hide_posts
+    saved {
+      nextToken
+      __typename
+    }
+    hidden {
+      nextToken
+      __typename
+    }
     messages {
       nextToken
       __typename
@@ -856,6 +880,456 @@ export const onDeleteExternalLink = /* GraphQL */ `subscription OnDeleteExternal
 ` as GeneratedSubscription<
   APITypes.OnDeleteExternalLinkSubscriptionVariables,
   APITypes.OnDeleteExternalLinkSubscription
+>;
+export const onCreateSavedPostModel = /* GraphQL */ `subscription OnCreateSavedPostModel(
+  $filter: ModelSubscriptionSavedPostModelFilterInput
+) {
+  onCreateSavedPostModel(filter: $filter) {
+    id
+    saved_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateSavedPostModelSubscriptionVariables,
+  APITypes.OnCreateSavedPostModelSubscription
+>;
+export const onUpdateSavedPostModel = /* GraphQL */ `subscription OnUpdateSavedPostModel(
+  $filter: ModelSubscriptionSavedPostModelFilterInput
+) {
+  onUpdateSavedPostModel(filter: $filter) {
+    id
+    saved_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateSavedPostModelSubscriptionVariables,
+  APITypes.OnUpdateSavedPostModelSubscription
+>;
+export const onDeleteSavedPostModel = /* GraphQL */ `subscription OnDeleteSavedPostModel(
+  $filter: ModelSubscriptionSavedPostModelFilterInput
+) {
+  onDeleteSavedPostModel(filter: $filter) {
+    id
+    saved_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteSavedPostModelSubscriptionVariables,
+  APITypes.OnDeleteSavedPostModelSubscription
+>;
+export const onCreateHiddenPostModel = /* GraphQL */ `subscription OnCreateHiddenPostModel(
+  $filter: ModelSubscriptionHiddenPostModelFilterInput
+) {
+  onCreateHiddenPostModel(filter: $filter) {
+    id
+    hidden_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateHiddenPostModelSubscriptionVariables,
+  APITypes.OnCreateHiddenPostModelSubscription
+>;
+export const onUpdateHiddenPostModel = /* GraphQL */ `subscription OnUpdateHiddenPostModel(
+  $filter: ModelSubscriptionHiddenPostModelFilterInput
+) {
+  onUpdateHiddenPostModel(filter: $filter) {
+    id
+    hidden_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateHiddenPostModelSubscriptionVariables,
+  APITypes.OnUpdateHiddenPostModelSubscription
+>;
+export const onDeleteHiddenPostModel = /* GraphQL */ `subscription OnDeleteHiddenPostModel(
+  $filter: ModelSubscriptionHiddenPostModelFilterInput
+) {
+  onDeleteHiddenPostModel(filter: $filter) {
+    id
+    hidden_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteHiddenPostModelSubscriptionVariables,
+  APITypes.OnDeleteHiddenPostModelSubscription
+>;
+export const onCreateLikedPostModel = /* GraphQL */ `subscription OnCreateLikedPostModel(
+  $filter: ModelSubscriptionLikedPostModelFilterInput
+) {
+  onCreateLikedPostModel(filter: $filter) {
+    id
+    liked_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateLikedPostModelSubscriptionVariables,
+  APITypes.OnCreateLikedPostModelSubscription
+>;
+export const onUpdateLikedPostModel = /* GraphQL */ `subscription OnUpdateLikedPostModel(
+  $filter: ModelSubscriptionLikedPostModelFilterInput
+) {
+  onUpdateLikedPostModel(filter: $filter) {
+    id
+    liked_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateLikedPostModelSubscriptionVariables,
+  APITypes.OnUpdateLikedPostModelSubscription
+>;
+export const onDeleteLikedPostModel = /* GraphQL */ `subscription OnDeleteLikedPostModel(
+  $filter: ModelSubscriptionLikedPostModelFilterInput
+) {
+  onDeleteLikedPostModel(filter: $filter) {
+    id
+    liked_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteLikedPostModelSubscriptionVariables,
+  APITypes.OnDeleteLikedPostModelSubscription
 >;
 export const onCreateUsersConvo = /* GraphQL */ `subscription OnCreateUsersConvo(
   $filter: ModelSubscriptionUsersConvoFilterInput

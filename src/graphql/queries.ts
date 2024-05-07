@@ -117,6 +117,14 @@ export const getUsersModel = /* GraphQL */ `query GetUsersModel($id: ID!) {
     liked_posts
     saved_posts
     hide_posts
+    saved {
+      nextToken
+      __typename
+    }
+    hidden {
+      nextToken
+      __typename
+    }
     messages {
       nextToken
       __typename
@@ -1059,6 +1067,375 @@ export const searchExternalLinks = /* GraphQL */ `query SearchExternalLinks(
 ` as GeneratedQuery<
   APITypes.SearchExternalLinksQueryVariables,
   APITypes.SearchExternalLinksQuery
+>;
+export const getSavedPostModel = /* GraphQL */ `query GetSavedPostModel($id: ID!) {
+  getSavedPostModel(id: $id) {
+    id
+    saved_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetSavedPostModelQueryVariables,
+  APITypes.GetSavedPostModelQuery
+>;
+export const listSavedPostModels = /* GraphQL */ `query ListSavedPostModels(
+  $filter: ModelSavedPostModelFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSavedPostModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      saved_at
+      userID
+      postID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListSavedPostModelsQueryVariables,
+  APITypes.ListSavedPostModelsQuery
+>;
+export const searchSavedPostModels = /* GraphQL */ `query SearchSavedPostModels(
+  $filter: SearchableSavedPostModelFilterInput
+  $sort: [SearchableSavedPostModelSortInput]
+  $limit: Int
+  $nextToken: String
+  $from: Int
+  $aggregates: [SearchableSavedPostModelAggregationInput]
+) {
+  searchSavedPostModels(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+    from: $from
+    aggregates: $aggregates
+  ) {
+    items {
+      id
+      saved_at
+      userID
+      postID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    total
+    aggregateItems {
+      name
+      result {
+        ... on SearchableAggregateScalarResult {
+          value
+        }
+        ... on SearchableAggregateBucketResult {
+          buckets {
+            key
+            doc_count
+            __typename
+          }
+        }
+      }
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.SearchSavedPostModelsQueryVariables,
+  APITypes.SearchSavedPostModelsQuery
+>;
+export const getHiddenPostModel = /* GraphQL */ `query GetHiddenPostModel($id: ID!) {
+  getHiddenPostModel(id: $id) {
+    id
+    hidden_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetHiddenPostModelQueryVariables,
+  APITypes.GetHiddenPostModelQuery
+>;
+export const listHiddenPostModels = /* GraphQL */ `query ListHiddenPostModels(
+  $filter: ModelHiddenPostModelFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listHiddenPostModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      hidden_at
+      userID
+      postID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListHiddenPostModelsQueryVariables,
+  APITypes.ListHiddenPostModelsQuery
+>;
+export const searchHiddenPostModels = /* GraphQL */ `query SearchHiddenPostModels(
+  $filter: SearchableHiddenPostModelFilterInput
+  $sort: [SearchableHiddenPostModelSortInput]
+  $limit: Int
+  $nextToken: String
+  $from: Int
+  $aggregates: [SearchableHiddenPostModelAggregationInput]
+) {
+  searchHiddenPostModels(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+    from: $from
+    aggregates: $aggregates
+  ) {
+    items {
+      id
+      hidden_at
+      userID
+      postID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    total
+    aggregateItems {
+      name
+      result {
+        ... on SearchableAggregateScalarResult {
+          value
+        }
+        ... on SearchableAggregateBucketResult {
+          buckets {
+            key
+            doc_count
+            __typename
+          }
+        }
+      }
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.SearchHiddenPostModelsQueryVariables,
+  APITypes.SearchHiddenPostModelsQuery
+>;
+export const getLikedPostModel = /* GraphQL */ `query GetLikedPostModel($id: ID!) {
+  getLikedPostModel(id: $id) {
+    id
+    liked_at
+    userID
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      contributors
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetLikedPostModelQueryVariables,
+  APITypes.GetLikedPostModelQuery
+>;
+export const listLikedPostModels = /* GraphQL */ `query ListLikedPostModels(
+  $filter: ModelLikedPostModelFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listLikedPostModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      liked_at
+      userID
+      postID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListLikedPostModelsQueryVariables,
+  APITypes.ListLikedPostModelsQuery
+>;
+export const searchLikedPostModels = /* GraphQL */ `query SearchLikedPostModels(
+  $filter: SearchableLikedPostModelFilterInput
+  $sort: [SearchableLikedPostModelSortInput]
+  $limit: Int
+  $nextToken: String
+  $from: Int
+  $aggregates: [SearchableLikedPostModelAggregationInput]
+) {
+  searchLikedPostModels(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+    from: $from
+    aggregates: $aggregates
+  ) {
+    items {
+      id
+      liked_at
+      userID
+      postID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    total
+    aggregateItems {
+      name
+      result {
+        ... on SearchableAggregateScalarResult {
+          value
+        }
+        ... on SearchableAggregateBucketResult {
+          buckets {
+            key
+            doc_count
+            __typename
+          }
+        }
+      }
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.SearchLikedPostModelsQueryVariables,
+  APITypes.SearchLikedPostModelsQuery
 >;
 export const getUsersConvo = /* GraphQL */ `query GetUsersConvo($id: ID!) {
   getUsersConvo(id: $id) {

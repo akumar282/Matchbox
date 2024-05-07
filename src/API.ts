@@ -440,6 +440,8 @@ export type UsersModel = {
   liked_posts?: Array< string | null > | null,
   saved_posts?: Array< string | null > | null,
   hide_posts?: Array< string | null > | null,
+  saved?: ModelSavedPostModelConnection | null,
+  hidden?: ModelHiddenPostModelConnection | null,
   messages?: ModelMessageModelConnection | null,
   conversations?: ModelUsersConvoConnection | null,
   lang_tag?: Array< LanguageTag | null > | null,
@@ -523,6 +525,42 @@ export type CommentModel = {
   postID: string,
   userID: string,
   user_name: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelSavedPostModelConnection = {
+  __typename: "ModelSavedPostModelConnection",
+  items:  Array<SavedPostModel | null >,
+  nextToken?: string | null,
+};
+
+export type SavedPostModel = {
+  __typename: "SavedPostModel",
+  id: string,
+  saved_at?: string | null,
+  userID: string,
+  postID: string,
+  postInfo?: PostsModel | null,
+  count?: number | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelHiddenPostModelConnection = {
+  __typename: "ModelHiddenPostModelConnection",
+  items:  Array<HiddenPostModel | null >,
+  nextToken?: string | null,
+};
+
+export type HiddenPostModel = {
+  __typename: "HiddenPostModel",
+  id: string,
+  hidden_at?: string | null,
+  userID: string,
+  postID: string,
+  postInfo?: PostsModel | null,
+  count?: number | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -964,6 +1002,108 @@ export type UpdateExternalLinkInput = {
 };
 
 export type DeleteExternalLinkInput = {
+  id: string,
+};
+
+export type CreateSavedPostModelInput = {
+  id?: string | null,
+  saved_at?: string | null,
+  userID: string,
+  postID: string,
+  count?: number | null,
+};
+
+export type ModelSavedPostModelConditionInput = {
+  saved_at?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
+  postID?: ModelIDInput | null,
+  count?: ModelIntInput | null,
+  and?: Array< ModelSavedPostModelConditionInput | null > | null,
+  or?: Array< ModelSavedPostModelConditionInput | null > | null,
+  not?: ModelSavedPostModelConditionInput | null,
+};
+
+export type UpdateSavedPostModelInput = {
+  id: string,
+  saved_at?: string | null,
+  userID?: string | null,
+  postID?: string | null,
+  count?: number | null,
+};
+
+export type DeleteSavedPostModelInput = {
+  id: string,
+};
+
+export type CreateHiddenPostModelInput = {
+  id?: string | null,
+  hidden_at?: string | null,
+  userID: string,
+  postID: string,
+  count?: number | null,
+};
+
+export type ModelHiddenPostModelConditionInput = {
+  hidden_at?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
+  postID?: ModelIDInput | null,
+  count?: ModelIntInput | null,
+  and?: Array< ModelHiddenPostModelConditionInput | null > | null,
+  or?: Array< ModelHiddenPostModelConditionInput | null > | null,
+  not?: ModelHiddenPostModelConditionInput | null,
+};
+
+export type UpdateHiddenPostModelInput = {
+  id: string,
+  hidden_at?: string | null,
+  userID?: string | null,
+  postID?: string | null,
+  count?: number | null,
+};
+
+export type DeleteHiddenPostModelInput = {
+  id: string,
+};
+
+export type CreateLikedPostModelInput = {
+  id?: string | null,
+  liked_at?: string | null,
+  userID: string,
+  postID: string,
+  count?: number | null,
+};
+
+export type ModelLikedPostModelConditionInput = {
+  liked_at?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
+  postID?: ModelIDInput | null,
+  count?: ModelIntInput | null,
+  and?: Array< ModelLikedPostModelConditionInput | null > | null,
+  or?: Array< ModelLikedPostModelConditionInput | null > | null,
+  not?: ModelLikedPostModelConditionInput | null,
+};
+
+export type LikedPostModel = {
+  __typename: "LikedPostModel",
+  id: string,
+  liked_at?: string | null,
+  userID: string,
+  postID: string,
+  postInfo?: PostsModel | null,
+  count?: number | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateLikedPostModelInput = {
+  id: string,
+  liked_at?: string | null,
+  userID?: string | null,
+  postID?: string | null,
+  count?: number | null,
+};
+
+export type DeleteLikedPostModelInput = {
   id: string,
 };
 
@@ -1866,6 +2006,207 @@ export type SearchableExternalLinkConnection = {
   aggregateItems:  Array<SearchableAggregateResult | null >,
 };
 
+export type ModelSavedPostModelFilterInput = {
+  id?: ModelIDInput | null,
+  saved_at?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
+  postID?: ModelIDInput | null,
+  count?: ModelIntInput | null,
+  and?: Array< ModelSavedPostModelFilterInput | null > | null,
+  or?: Array< ModelSavedPostModelFilterInput | null > | null,
+  not?: ModelSavedPostModelFilterInput | null,
+};
+
+export type SearchableSavedPostModelFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  saved_at?: SearchableStringFilterInput | null,
+  userID?: SearchableIDFilterInput | null,
+  postID?: SearchableIDFilterInput | null,
+  count?: SearchableIntFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  and?: Array< SearchableSavedPostModelFilterInput | null > | null,
+  or?: Array< SearchableSavedPostModelFilterInput | null > | null,
+  not?: SearchableSavedPostModelFilterInput | null,
+};
+
+export type SearchableSavedPostModelSortInput = {
+  field?: SearchableSavedPostModelSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableSavedPostModelSortableFields {
+  id = "id",
+  saved_at = "saved_at",
+  userID = "userID",
+  postID = "postID",
+  count = "count",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableSavedPostModelAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableSavedPostModelAggregateField,
+};
+
+export enum SearchableSavedPostModelAggregateField {
+  id = "id",
+  saved_at = "saved_at",
+  userID = "userID",
+  postID = "postID",
+  count = "count",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableSavedPostModelConnection = {
+  __typename: "SearchableSavedPostModelConnection",
+  items:  Array<SavedPostModel | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
+export type ModelHiddenPostModelFilterInput = {
+  id?: ModelIDInput | null,
+  hidden_at?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
+  postID?: ModelIDInput | null,
+  count?: ModelIntInput | null,
+  and?: Array< ModelHiddenPostModelFilterInput | null > | null,
+  or?: Array< ModelHiddenPostModelFilterInput | null > | null,
+  not?: ModelHiddenPostModelFilterInput | null,
+};
+
+export type SearchableHiddenPostModelFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  hidden_at?: SearchableStringFilterInput | null,
+  userID?: SearchableIDFilterInput | null,
+  postID?: SearchableIDFilterInput | null,
+  count?: SearchableIntFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  and?: Array< SearchableHiddenPostModelFilterInput | null > | null,
+  or?: Array< SearchableHiddenPostModelFilterInput | null > | null,
+  not?: SearchableHiddenPostModelFilterInput | null,
+};
+
+export type SearchableHiddenPostModelSortInput = {
+  field?: SearchableHiddenPostModelSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableHiddenPostModelSortableFields {
+  id = "id",
+  hidden_at = "hidden_at",
+  userID = "userID",
+  postID = "postID",
+  count = "count",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableHiddenPostModelAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableHiddenPostModelAggregateField,
+};
+
+export enum SearchableHiddenPostModelAggregateField {
+  id = "id",
+  hidden_at = "hidden_at",
+  userID = "userID",
+  postID = "postID",
+  count = "count",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableHiddenPostModelConnection = {
+  __typename: "SearchableHiddenPostModelConnection",
+  items:  Array<HiddenPostModel | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
+export type ModelLikedPostModelFilterInput = {
+  id?: ModelIDInput | null,
+  liked_at?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
+  postID?: ModelIDInput | null,
+  count?: ModelIntInput | null,
+  and?: Array< ModelLikedPostModelFilterInput | null > | null,
+  or?: Array< ModelLikedPostModelFilterInput | null > | null,
+  not?: ModelLikedPostModelFilterInput | null,
+};
+
+export type ModelLikedPostModelConnection = {
+  __typename: "ModelLikedPostModelConnection",
+  items:  Array<LikedPostModel | null >,
+  nextToken?: string | null,
+};
+
+export type SearchableLikedPostModelFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  liked_at?: SearchableStringFilterInput | null,
+  userID?: SearchableIDFilterInput | null,
+  postID?: SearchableIDFilterInput | null,
+  count?: SearchableIntFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  and?: Array< SearchableLikedPostModelFilterInput | null > | null,
+  or?: Array< SearchableLikedPostModelFilterInput | null > | null,
+  not?: SearchableLikedPostModelFilterInput | null,
+};
+
+export type SearchableLikedPostModelSortInput = {
+  field?: SearchableLikedPostModelSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableLikedPostModelSortableFields {
+  id = "id",
+  liked_at = "liked_at",
+  userID = "userID",
+  postID = "postID",
+  count = "count",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableLikedPostModelAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableLikedPostModelAggregateField,
+};
+
+export enum SearchableLikedPostModelAggregateField {
+  id = "id",
+  liked_at = "liked_at",
+  userID = "userID",
+  postID = "postID",
+  count = "count",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableLikedPostModelConnection = {
+  __typename: "SearchableLikedPostModelConnection",
+  items:  Array<LikedPostModel | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
 export type ModelUsersConvoFilterInput = {
   id?: ModelIDInput | null,
   usersModelID?: ModelIDInput | null,
@@ -2062,6 +2403,36 @@ export type ModelSubscriptionExternalLinkFilterInput = {
   or?: Array< ModelSubscriptionExternalLinkFilterInput | null > | null,
 };
 
+export type ModelSubscriptionSavedPostModelFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  saved_at?: ModelSubscriptionStringInput | null,
+  userID?: ModelSubscriptionIDInput | null,
+  postID?: ModelSubscriptionIDInput | null,
+  count?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionSavedPostModelFilterInput | null > | null,
+  or?: Array< ModelSubscriptionSavedPostModelFilterInput | null > | null,
+};
+
+export type ModelSubscriptionHiddenPostModelFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  hidden_at?: ModelSubscriptionStringInput | null,
+  userID?: ModelSubscriptionIDInput | null,
+  postID?: ModelSubscriptionIDInput | null,
+  count?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionHiddenPostModelFilterInput | null > | null,
+  or?: Array< ModelSubscriptionHiddenPostModelFilterInput | null > | null,
+};
+
+export type ModelSubscriptionLikedPostModelFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  liked_at?: ModelSubscriptionStringInput | null,
+  userID?: ModelSubscriptionIDInput | null,
+  postID?: ModelSubscriptionIDInput | null,
+  count?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionLikedPostModelFilterInput | null > | null,
+  or?: Array< ModelSubscriptionLikedPostModelFilterInput | null > | null,
+};
+
 export type ModelSubscriptionUsersConvoFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   usersModelID?: ModelSubscriptionIDInput | null,
@@ -2144,6 +2515,14 @@ export type CreateUsersModelMutation = {
     liked_posts?: Array< string | null > | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    saved?:  {
+      __typename: "ModelSavedPostModelConnection",
+      nextToken?: string | null,
+    } | null,
+    hidden?:  {
+      __typename: "ModelHiddenPostModelConnection",
+      nextToken?: string | null,
+    } | null,
     messages?:  {
       __typename: "ModelMessageModelConnection",
       nextToken?: string | null,
@@ -2211,6 +2590,14 @@ export type UpdateUsersModelMutation = {
     liked_posts?: Array< string | null > | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    saved?:  {
+      __typename: "ModelSavedPostModelConnection",
+      nextToken?: string | null,
+    } | null,
+    hidden?:  {
+      __typename: "ModelHiddenPostModelConnection",
+      nextToken?: string | null,
+    } | null,
     messages?:  {
       __typename: "ModelMessageModelConnection",
       nextToken?: string | null,
@@ -2278,6 +2665,14 @@ export type DeleteUsersModelMutation = {
     liked_posts?: Array< string | null > | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    saved?:  {
+      __typename: "ModelSavedPostModelConnection",
+      nextToken?: string | null,
+    } | null,
+    hidden?:  {
+      __typename: "ModelHiddenPostModelConnection",
+      nextToken?: string | null,
+    } | null,
     messages?:  {
       __typename: "ModelMessageModelConnection",
       nextToken?: string | null,
@@ -2919,6 +3314,456 @@ export type DeleteExternalLinkMutation = {
   } | null,
 };
 
+export type CreateSavedPostModelMutationVariables = {
+  input: CreateSavedPostModelInput,
+  condition?: ModelSavedPostModelConditionInput | null,
+};
+
+export type CreateSavedPostModelMutation = {
+  createSavedPostModel?:  {
+    __typename: "SavedPostModel",
+    id: string,
+    saved_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateSavedPostModelMutationVariables = {
+  input: UpdateSavedPostModelInput,
+  condition?: ModelSavedPostModelConditionInput | null,
+};
+
+export type UpdateSavedPostModelMutation = {
+  updateSavedPostModel?:  {
+    __typename: "SavedPostModel",
+    id: string,
+    saved_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteSavedPostModelMutationVariables = {
+  input: DeleteSavedPostModelInput,
+  condition?: ModelSavedPostModelConditionInput | null,
+};
+
+export type DeleteSavedPostModelMutation = {
+  deleteSavedPostModel?:  {
+    __typename: "SavedPostModel",
+    id: string,
+    saved_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateHiddenPostModelMutationVariables = {
+  input: CreateHiddenPostModelInput,
+  condition?: ModelHiddenPostModelConditionInput | null,
+};
+
+export type CreateHiddenPostModelMutation = {
+  createHiddenPostModel?:  {
+    __typename: "HiddenPostModel",
+    id: string,
+    hidden_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateHiddenPostModelMutationVariables = {
+  input: UpdateHiddenPostModelInput,
+  condition?: ModelHiddenPostModelConditionInput | null,
+};
+
+export type UpdateHiddenPostModelMutation = {
+  updateHiddenPostModel?:  {
+    __typename: "HiddenPostModel",
+    id: string,
+    hidden_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteHiddenPostModelMutationVariables = {
+  input: DeleteHiddenPostModelInput,
+  condition?: ModelHiddenPostModelConditionInput | null,
+};
+
+export type DeleteHiddenPostModelMutation = {
+  deleteHiddenPostModel?:  {
+    __typename: "HiddenPostModel",
+    id: string,
+    hidden_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateLikedPostModelMutationVariables = {
+  input: CreateLikedPostModelInput,
+  condition?: ModelLikedPostModelConditionInput | null,
+};
+
+export type CreateLikedPostModelMutation = {
+  createLikedPostModel?:  {
+    __typename: "LikedPostModel",
+    id: string,
+    liked_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateLikedPostModelMutationVariables = {
+  input: UpdateLikedPostModelInput,
+  condition?: ModelLikedPostModelConditionInput | null,
+};
+
+export type UpdateLikedPostModelMutation = {
+  updateLikedPostModel?:  {
+    __typename: "LikedPostModel",
+    id: string,
+    liked_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteLikedPostModelMutationVariables = {
+  input: DeleteLikedPostModelInput,
+  condition?: ModelLikedPostModelConditionInput | null,
+};
+
+export type DeleteLikedPostModelMutation = {
+  deleteLikedPostModel?:  {
+    __typename: "LikedPostModel",
+    id: string,
+    liked_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type CreateUsersConvoMutationVariables = {
   input: CreateUsersConvoInput,
   condition?: ModelUsersConvoConditionInput | null,
@@ -3195,6 +4040,14 @@ export type GetUsersModelQuery = {
     liked_posts?: Array< string | null > | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    saved?:  {
+      __typename: "ModelSavedPostModelConnection",
+      nextToken?: string | null,
+    } | null,
+    hidden?:  {
+      __typename: "ModelHiddenPostModelConnection",
+      nextToken?: string | null,
+    } | null,
     messages?:  {
       __typename: "ModelMessageModelConnection",
       nextToken?: string | null,
@@ -4061,6 +4914,351 @@ export type SearchExternalLinksQuery = {
   } | null,
 };
 
+export type GetSavedPostModelQueryVariables = {
+  id: string,
+};
+
+export type GetSavedPostModelQuery = {
+  getSavedPostModel?:  {
+    __typename: "SavedPostModel",
+    id: string,
+    saved_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListSavedPostModelsQueryVariables = {
+  filter?: ModelSavedPostModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSavedPostModelsQuery = {
+  listSavedPostModels?:  {
+    __typename: "ModelSavedPostModelConnection",
+    items:  Array< {
+      __typename: "SavedPostModel",
+      id: string,
+      saved_at?: string | null,
+      userID: string,
+      postID: string,
+      count?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type SearchSavedPostModelsQueryVariables = {
+  filter?: SearchableSavedPostModelFilterInput | null,
+  sort?: Array< SearchableSavedPostModelSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableSavedPostModelAggregationInput | null > | null,
+};
+
+export type SearchSavedPostModelsQuery = {
+  searchSavedPostModels?:  {
+    __typename: "SearchableSavedPostModelConnection",
+    items:  Array< {
+      __typename: "SavedPostModel",
+      id: string,
+      saved_at?: string | null,
+      userID: string,
+      postID: string,
+      count?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
+export type GetHiddenPostModelQueryVariables = {
+  id: string,
+};
+
+export type GetHiddenPostModelQuery = {
+  getHiddenPostModel?:  {
+    __typename: "HiddenPostModel",
+    id: string,
+    hidden_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListHiddenPostModelsQueryVariables = {
+  filter?: ModelHiddenPostModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListHiddenPostModelsQuery = {
+  listHiddenPostModels?:  {
+    __typename: "ModelHiddenPostModelConnection",
+    items:  Array< {
+      __typename: "HiddenPostModel",
+      id: string,
+      hidden_at?: string | null,
+      userID: string,
+      postID: string,
+      count?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type SearchHiddenPostModelsQueryVariables = {
+  filter?: SearchableHiddenPostModelFilterInput | null,
+  sort?: Array< SearchableHiddenPostModelSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableHiddenPostModelAggregationInput | null > | null,
+};
+
+export type SearchHiddenPostModelsQuery = {
+  searchHiddenPostModels?:  {
+    __typename: "SearchableHiddenPostModelConnection",
+    items:  Array< {
+      __typename: "HiddenPostModel",
+      id: string,
+      hidden_at?: string | null,
+      userID: string,
+      postID: string,
+      count?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
+export type GetLikedPostModelQueryVariables = {
+  id: string,
+};
+
+export type GetLikedPostModelQuery = {
+  getLikedPostModel?:  {
+    __typename: "LikedPostModel",
+    id: string,
+    liked_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListLikedPostModelsQueryVariables = {
+  filter?: ModelLikedPostModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLikedPostModelsQuery = {
+  listLikedPostModels?:  {
+    __typename: "ModelLikedPostModelConnection",
+    items:  Array< {
+      __typename: "LikedPostModel",
+      id: string,
+      liked_at?: string | null,
+      userID: string,
+      postID: string,
+      count?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type SearchLikedPostModelsQueryVariables = {
+  filter?: SearchableLikedPostModelFilterInput | null,
+  sort?: Array< SearchableLikedPostModelSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableLikedPostModelAggregationInput | null > | null,
+};
+
+export type SearchLikedPostModelsQuery = {
+  searchLikedPostModels?:  {
+    __typename: "SearchableLikedPostModelConnection",
+    items:  Array< {
+      __typename: "LikedPostModel",
+      id: string,
+      liked_at?: string | null,
+      userID: string,
+      postID: string,
+      count?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
 export type GetUsersConvoQueryVariables = {
   id: string,
 };
@@ -4209,6 +5407,14 @@ export type OnCreateUsersModelSubscription = {
     liked_posts?: Array< string | null > | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    saved?:  {
+      __typename: "ModelSavedPostModelConnection",
+      nextToken?: string | null,
+    } | null,
+    hidden?:  {
+      __typename: "ModelHiddenPostModelConnection",
+      nextToken?: string | null,
+    } | null,
     messages?:  {
       __typename: "ModelMessageModelConnection",
       nextToken?: string | null,
@@ -4275,6 +5481,14 @@ export type OnUpdateUsersModelSubscription = {
     liked_posts?: Array< string | null > | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    saved?:  {
+      __typename: "ModelSavedPostModelConnection",
+      nextToken?: string | null,
+    } | null,
+    hidden?:  {
+      __typename: "ModelHiddenPostModelConnection",
+      nextToken?: string | null,
+    } | null,
     messages?:  {
       __typename: "ModelMessageModelConnection",
       nextToken?: string | null,
@@ -4341,6 +5555,14 @@ export type OnDeleteUsersModelSubscription = {
     liked_posts?: Array< string | null > | null,
     saved_posts?: Array< string | null > | null,
     hide_posts?: Array< string | null > | null,
+    saved?:  {
+      __typename: "ModelSavedPostModelConnection",
+      nextToken?: string | null,
+    } | null,
+    hidden?:  {
+      __typename: "ModelHiddenPostModelConnection",
+      nextToken?: string | null,
+    } | null,
     messages?:  {
       __typename: "ModelMessageModelConnection",
       nextToken?: string | null,
@@ -4956,6 +6178,447 @@ export type OnDeleteExternalLinkSubscription = {
     id: string,
     name?: string | null,
     link?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateSavedPostModelSubscriptionVariables = {
+  filter?: ModelSubscriptionSavedPostModelFilterInput | null,
+};
+
+export type OnCreateSavedPostModelSubscription = {
+  onCreateSavedPostModel?:  {
+    __typename: "SavedPostModel",
+    id: string,
+    saved_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateSavedPostModelSubscriptionVariables = {
+  filter?: ModelSubscriptionSavedPostModelFilterInput | null,
+};
+
+export type OnUpdateSavedPostModelSubscription = {
+  onUpdateSavedPostModel?:  {
+    __typename: "SavedPostModel",
+    id: string,
+    saved_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteSavedPostModelSubscriptionVariables = {
+  filter?: ModelSubscriptionSavedPostModelFilterInput | null,
+};
+
+export type OnDeleteSavedPostModelSubscription = {
+  onDeleteSavedPostModel?:  {
+    __typename: "SavedPostModel",
+    id: string,
+    saved_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateHiddenPostModelSubscriptionVariables = {
+  filter?: ModelSubscriptionHiddenPostModelFilterInput | null,
+};
+
+export type OnCreateHiddenPostModelSubscription = {
+  onCreateHiddenPostModel?:  {
+    __typename: "HiddenPostModel",
+    id: string,
+    hidden_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateHiddenPostModelSubscriptionVariables = {
+  filter?: ModelSubscriptionHiddenPostModelFilterInput | null,
+};
+
+export type OnUpdateHiddenPostModelSubscription = {
+  onUpdateHiddenPostModel?:  {
+    __typename: "HiddenPostModel",
+    id: string,
+    hidden_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteHiddenPostModelSubscriptionVariables = {
+  filter?: ModelSubscriptionHiddenPostModelFilterInput | null,
+};
+
+export type OnDeleteHiddenPostModelSubscription = {
+  onDeleteHiddenPostModel?:  {
+    __typename: "HiddenPostModel",
+    id: string,
+    hidden_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateLikedPostModelSubscriptionVariables = {
+  filter?: ModelSubscriptionLikedPostModelFilterInput | null,
+};
+
+export type OnCreateLikedPostModelSubscription = {
+  onCreateLikedPostModel?:  {
+    __typename: "LikedPostModel",
+    id: string,
+    liked_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateLikedPostModelSubscriptionVariables = {
+  filter?: ModelSubscriptionLikedPostModelFilterInput | null,
+};
+
+export type OnUpdateLikedPostModelSubscription = {
+  onUpdateLikedPostModel?:  {
+    __typename: "LikedPostModel",
+    id: string,
+    liked_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteLikedPostModelSubscriptionVariables = {
+  filter?: ModelSubscriptionLikedPostModelFilterInput | null,
+};
+
+export type OnDeleteLikedPostModelSubscription = {
+  onDeleteLikedPostModel?:  {
+    __typename: "LikedPostModel",
+    id: string,
+    liked_at?: string | null,
+    userID: string,
+    postID: string,
+    postInfo?:  {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      contributors?: Array< string | null > | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    count?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,
