@@ -58,6 +58,7 @@ export default function UserProfile() {
       })
       if (data && data.getUsersModel) {
         const { items } = data.getUsersModel.user_posts as ModelPostsModelConnection
+        console.log(items)
         const newProjects: React.ReactNode[] = []
         for (const item of items) {
           if(item) {

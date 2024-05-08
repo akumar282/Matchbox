@@ -64,10 +64,56 @@ export const onCreateUsersModel = /* GraphQL */ `subscription OnCreateUsersModel
     profile_image
     bio
     user_posts {
+      items {
+        id
+        post_title
+        description
+        long_description
+        project_link
+        image_link
+        post_date
+        userID
+        creator_name
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        cloud_provider_tag
+        likes
+        likes_users
+        saves
+        contributor_limit
+        reported
+        experience_level
+        application
+        project_chat
+        counter
+        external_link
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     user_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -79,18 +125,70 @@ export const onCreateUsersModel = /* GraphQL */ `subscription OnCreateUsersModel
     saved_posts
     hide_posts
     saved {
+      items {
+        id
+        saved_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     hidden {
+      items {
+        id
+        hidden_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    joined {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     conversations {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -103,6 +201,17 @@ export const onCreateUsersModel = /* GraphQL */ `subscription OnCreateUsersModel
     cloud_provider_tag
     new_user
     contributions {
+      items {
+        id
+        author
+        type
+        description
+        link_to
+        point_value
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -112,6 +221,21 @@ export const onCreateUsersModel = /* GraphQL */ `subscription OnCreateUsersModel
     years_of_experience
     user_type
     user_experiences {
+      items {
+        id
+        user_id
+        org_name
+        image_link
+        start_date
+        end_date
+        description
+        lang_tag
+        dev_type_tag
+        framework_tag
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -139,10 +263,56 @@ export const onUpdateUsersModel = /* GraphQL */ `subscription OnUpdateUsersModel
     profile_image
     bio
     user_posts {
+      items {
+        id
+        post_title
+        description
+        long_description
+        project_link
+        image_link
+        post_date
+        userID
+        creator_name
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        cloud_provider_tag
+        likes
+        likes_users
+        saves
+        contributor_limit
+        reported
+        experience_level
+        application
+        project_chat
+        counter
+        external_link
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     user_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -154,18 +324,70 @@ export const onUpdateUsersModel = /* GraphQL */ `subscription OnUpdateUsersModel
     saved_posts
     hide_posts
     saved {
+      items {
+        id
+        saved_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     hidden {
+      items {
+        id
+        hidden_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    joined {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     conversations {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -178,6 +400,17 @@ export const onUpdateUsersModel = /* GraphQL */ `subscription OnUpdateUsersModel
     cloud_provider_tag
     new_user
     contributions {
+      items {
+        id
+        author
+        type
+        description
+        link_to
+        point_value
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -187,6 +420,21 @@ export const onUpdateUsersModel = /* GraphQL */ `subscription OnUpdateUsersModel
     years_of_experience
     user_type
     user_experiences {
+      items {
+        id
+        user_id
+        org_name
+        image_link
+        start_date
+        end_date
+        description
+        lang_tag
+        dev_type_tag
+        framework_tag
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -214,10 +462,56 @@ export const onDeleteUsersModel = /* GraphQL */ `subscription OnDeleteUsersModel
     profile_image
     bio
     user_posts {
+      items {
+        id
+        post_title
+        description
+        long_description
+        project_link
+        image_link
+        post_date
+        userID
+        creator_name
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        cloud_provider_tag
+        likes
+        likes_users
+        saves
+        contributor_limit
+        reported
+        experience_level
+        application
+        project_chat
+        counter
+        external_link
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     user_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -229,18 +523,70 @@ export const onDeleteUsersModel = /* GraphQL */ `subscription OnDeleteUsersModel
     saved_posts
     hide_posts
     saved {
+      items {
+        id
+        saved_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     hidden {
+      items {
+        id
+        hidden_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    joined {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     conversations {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -253,6 +599,17 @@ export const onDeleteUsersModel = /* GraphQL */ `subscription OnDeleteUsersModel
     cloud_provider_tag
     new_user
     contributions {
+      items {
+        id
+        author
+        type
+        description
+        link_to
+        point_value
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -262,6 +619,21 @@ export const onDeleteUsersModel = /* GraphQL */ `subscription OnDeleteUsersModel
     years_of_experience
     user_type
     user_experiences {
+      items {
+        id
+        user_id
+        org_name
+        image_link
+        start_date
+        end_date
+        description
+        lang_tag
+        dev_type_tag
+        framework_tag
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -428,11 +800,39 @@ export const onCreatePostsModel = /* GraphQL */ `subscription OnCreatePostsModel
     likes_users
     saves
     post_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     contributor_limit
-    contributors
+    contributors {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
     reported
     experience_level
     application
@@ -472,11 +872,39 @@ export const onUpdatePostsModel = /* GraphQL */ `subscription OnUpdatePostsModel
     likes_users
     saves
     post_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     contributor_limit
-    contributors
+    contributors {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
     reported
     experience_level
     application
@@ -516,11 +944,39 @@ export const onDeletePostsModel = /* GraphQL */ `subscription OnDeletePostsModel
     likes_users
     saves
     post_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     contributor_limit
-    contributors
+    contributors {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
     reported
     experience_level
     application
@@ -542,11 +998,29 @@ export const onCreateConversationModel = /* GraphQL */ `subscription OnCreateCon
   onCreateConversationModel(filter: $filter) {
     id
     users {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     title
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -565,11 +1039,29 @@ export const onUpdateConversationModel = /* GraphQL */ `subscription OnUpdateCon
   onUpdateConversationModel(filter: $filter) {
     id
     users {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     title
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -588,11 +1080,29 @@ export const onDeleteConversationModel = /* GraphQL */ `subscription OnDeleteCon
   onDeleteConversationModel(filter: $filter) {
     id
     users {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     title
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -619,6 +1129,14 @@ export const onCreateMessageModel = /* GraphQL */ `subscription OnCreateMessageM
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -626,6 +1144,26 @@ export const onCreateMessageModel = /* GraphQL */ `subscription OnCreateMessageM
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -634,11 +1172,19 @@ export const onCreateMessageModel = /* GraphQL */ `subscription OnCreateMessageM
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -672,6 +1218,14 @@ export const onUpdateMessageModel = /* GraphQL */ `subscription OnUpdateMessageM
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -679,6 +1233,26 @@ export const onUpdateMessageModel = /* GraphQL */ `subscription OnUpdateMessageM
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -687,11 +1261,19 @@ export const onUpdateMessageModel = /* GraphQL */ `subscription OnUpdateMessageM
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -725,6 +1307,14 @@ export const onDeleteMessageModel = /* GraphQL */ `subscription OnDeleteMessageM
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -732,6 +1322,26 @@ export const onDeleteMessageModel = /* GraphQL */ `subscription OnDeleteMessageM
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -740,11 +1350,19 @@ export const onDeleteMessageModel = /* GraphQL */ `subscription OnDeleteMessageM
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -909,8 +1527,15 @@ export const onCreateSavedPostModel = /* GraphQL */ `subscription OnCreateSavedP
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -959,8 +1584,15 @@ export const onUpdateSavedPostModel = /* GraphQL */ `subscription OnUpdateSavedP
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1009,8 +1641,15 @@ export const onDeleteSavedPostModel = /* GraphQL */ `subscription OnDeleteSavedP
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1059,8 +1698,15 @@ export const onCreateHiddenPostModel = /* GraphQL */ `subscription OnCreateHidde
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1109,8 +1755,15 @@ export const onUpdateHiddenPostModel = /* GraphQL */ `subscription OnUpdateHidde
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1159,8 +1812,15 @@ export const onDeleteHiddenPostModel = /* GraphQL */ `subscription OnDeleteHidde
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1209,8 +1869,15 @@ export const onCreateLikedPostModel = /* GraphQL */ `subscription OnCreateLikedP
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1259,8 +1926,15 @@ export const onUpdateLikedPostModel = /* GraphQL */ `subscription OnUpdateLikedP
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1309,8 +1983,15 @@ export const onDeleteLikedPostModel = /* GraphQL */ `subscription OnDeleteLikedP
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1331,6 +2012,390 @@ export const onDeleteLikedPostModel = /* GraphQL */ `subscription OnDeleteLikedP
   APITypes.OnDeleteLikedPostModelSubscriptionVariables,
   APITypes.OnDeleteLikedPostModelSubscription
 >;
+export const onCreateJoinedPostModel = /* GraphQL */ `subscription OnCreateJoinedPostModel(
+  $filter: ModelSubscriptionJoinedPostModelFilterInput
+) {
+  onCreateJoinedPostModel(filter: $filter) {
+    id
+    joined_at
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      contributions {
+        nextToken
+        __typename
+      }
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      post_comments {
+        nextToken
+        __typename
+      }
+      contributor_limit
+      contributors {
+        nextToken
+        __typename
+      }
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateJoinedPostModelSubscriptionVariables,
+  APITypes.OnCreateJoinedPostModelSubscription
+>;
+export const onUpdateJoinedPostModel = /* GraphQL */ `subscription OnUpdateJoinedPostModel(
+  $filter: ModelSubscriptionJoinedPostModelFilterInput
+) {
+  onUpdateJoinedPostModel(filter: $filter) {
+    id
+    joined_at
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      contributions {
+        nextToken
+        __typename
+      }
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      post_comments {
+        nextToken
+        __typename
+      }
+      contributor_limit
+      contributors {
+        nextToken
+        __typename
+      }
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateJoinedPostModelSubscriptionVariables,
+  APITypes.OnUpdateJoinedPostModelSubscription
+>;
+export const onDeleteJoinedPostModel = /* GraphQL */ `subscription OnDeleteJoinedPostModel(
+  $filter: ModelSubscriptionJoinedPostModelFilterInput
+) {
+  onDeleteJoinedPostModel(filter: $filter) {
+    id
+    joined_at
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      contributions {
+        nextToken
+        __typename
+      }
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      post_comments {
+        nextToken
+        __typename
+      }
+      contributor_limit
+      contributors {
+        nextToken
+        __typename
+      }
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteJoinedPostModelSubscriptionVariables,
+  APITypes.OnDeleteJoinedPostModelSubscription
+>;
 export const onCreateUsersConvo = /* GraphQL */ `subscription OnCreateUsersConvo(
   $filter: ModelSubscriptionUsersConvoFilterInput
 ) {
@@ -1345,6 +2410,14 @@ export const onCreateUsersConvo = /* GraphQL */ `subscription OnCreateUsersConvo
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -1352,6 +2425,26 @@ export const onCreateUsersConvo = /* GraphQL */ `subscription OnCreateUsersConvo
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -1360,11 +2453,19 @@ export const onCreateUsersConvo = /* GraphQL */ `subscription OnCreateUsersConvo
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -1375,7 +2476,15 @@ export const onCreateUsersConvo = /* GraphQL */ `subscription OnCreateUsersConvo
     }
     conversationModel {
       id
+      users {
+        nextToken
+        __typename
+      }
       title
+      messages {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1403,6 +2512,14 @@ export const onUpdateUsersConvo = /* GraphQL */ `subscription OnUpdateUsersConvo
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -1410,6 +2527,26 @@ export const onUpdateUsersConvo = /* GraphQL */ `subscription OnUpdateUsersConvo
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -1418,11 +2555,19 @@ export const onUpdateUsersConvo = /* GraphQL */ `subscription OnUpdateUsersConvo
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -1433,7 +2578,15 @@ export const onUpdateUsersConvo = /* GraphQL */ `subscription OnUpdateUsersConvo
     }
     conversationModel {
       id
+      users {
+        nextToken
+        __typename
+      }
       title
+      messages {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1461,6 +2614,14 @@ export const onDeleteUsersConvo = /* GraphQL */ `subscription OnDeleteUsersConvo
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -1468,6 +2629,26 @@ export const onDeleteUsersConvo = /* GraphQL */ `subscription OnDeleteUsersConvo
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -1476,11 +2657,19 @@ export const onDeleteUsersConvo = /* GraphQL */ `subscription OnDeleteUsersConvo
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -1491,7 +2680,15 @@ export const onDeleteUsersConvo = /* GraphQL */ `subscription OnDeleteUsersConvo
     }
     conversationModel {
       id
+      users {
+        nextToken
+        __typename
+      }
       title
+      messages {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename

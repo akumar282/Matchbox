@@ -195,6 +195,7 @@ type UsersModel @model @searchable @aws_cognito_user_pools @aws_iam @auth(rules:
   hide_posts: [ID]
   saved: [SavedPostModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   hidden: [HiddenPostModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  joined: [JoinedPostModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   messages: [MessageModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   conversations: [ConversationModel] @manyToMany(relationName: "UsersConvo")
   lang_tag: [LanguageTag]
@@ -262,7 +263,7 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   saves: Int
   post_comments: [CommentModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
   contributor_limit: Int
-  contributors: [ID]
+  contributors: [JoinedPostModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
   reported: Boolean
   experience_level: [ExperienceTag]
   application: Boolean
@@ -330,5 +331,15 @@ type LikedPostModel @model @searchable @auth(rules: [{allow: public, operations:
   userID: ID! @index(name: "byUsersModel")
   postID: ID! @index(name: "byPostsModel")
   postInfo: PostsModel @hasOne(fields: ["postID"])
+  count: Int
+}
+
+type JoinedPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  joined_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  userInfo: UsersModel @belongsTo(fields: ["userID"])
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @belongsTo(fields: ["postID"])
   count: Int
 }

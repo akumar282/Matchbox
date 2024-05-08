@@ -6,11 +6,10 @@ import { useNavigate } from 'react-router-dom'
 import SeeAllComponent from '../components/SeeAll'
 import Saved from '../img/Saved.svg'
 import group from '../img/group.svg'
-import {getUser} from '../backend/queries/userQueries'
 import {AuthContext} from '../components/AuthWrapper'
 import {getImage} from '../backend/storage/s3'
-import {getPost} from '../backend/queries/postQueries'
 import ProjectView from '../components/ProjectView'
+import {listSavedPosts} from '../backend/queries/savedPostQueries'
 
 export default function HomePage() {
 
@@ -28,26 +27,36 @@ export default function HomePage() {
 
   useEffect(() => {
     const getHomePageData = async () => {
-      const { data } = await getUser({id: userInfo!.id})
-      if (data && data.getUsersModel && data.getUsersModel.saved_posts) {
-        const itemsToGrab = data.getUsersModel.saved_posts.slice(0, 3)
-        for (const item of itemsToGrab) {
-          const {data} = await getPost({id: item!})
-          const imageUrl = await getImage(data?.getPostsModel?.image_link ?? undefined)
-          const mapToCard = (
-            <ProjectView
-              id={item!}
-              key={item}
-              title={data!.getPostsModel!.post_title}
-              image={imageUrl}
-              github={data!.getPostsModel!.project_link ?? 'https://github.com'}
-            />
-          )
-          setSavedProjects((prevProjects) => [mapToCard, ...prevProjects])
+      if(userInfo && userInfo.id) {
+        const { data } = await listSavedPosts({
+          filter: {
+            userID: {
+              eq: userInfo.id
+            }
+          }
+        })
+        if (data && data.listSavedPostModels && data.listSavedPostModels.items) {
+          const itemsToGrab = data.listSavedPostModels.items
+          for (const item of itemsToGrab) {
+            if (item && item.postInfo) {
+              const imageUrl = await getImage(item.postInfo.image_link ? item.postInfo.image_link : 'NewLogo.png')
+              const mapToCard = (
+                <ProjectView
+                  id={item.postInfo.id}
+                  key={item.postInfo.id}
+                  title={item.postInfo.post_title}
+                  image={imageUrl}
+                  github={item.postInfo.project_link ? item.postInfo.project_link : 'https://github.com'}
+                />
+              )
+              setSavedProjects((prevProjects) => [mapToCard, ...prevProjects])
+            }
+
+          }
         }
       }
-    }
 
+    }
     getHomePageData().catch()
   }, [])
 

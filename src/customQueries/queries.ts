@@ -95,7 +95,6 @@ export const paginatedPostsQuery = `
           updatedAt
           userID
           contributor_limit
-          contributors
           application
           reported
         }

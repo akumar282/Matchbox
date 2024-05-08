@@ -68,10 +68,56 @@ export const createUsersModel = /* GraphQL */ `mutation CreateUsersModel(
     profile_image
     bio
     user_posts {
+      items {
+        id
+        post_title
+        description
+        long_description
+        project_link
+        image_link
+        post_date
+        userID
+        creator_name
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        cloud_provider_tag
+        likes
+        likes_users
+        saves
+        contributor_limit
+        reported
+        experience_level
+        application
+        project_chat
+        counter
+        external_link
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     user_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -83,18 +129,70 @@ export const createUsersModel = /* GraphQL */ `mutation CreateUsersModel(
     saved_posts
     hide_posts
     saved {
+      items {
+        id
+        saved_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     hidden {
+      items {
+        id
+        hidden_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    joined {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     conversations {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -107,6 +205,17 @@ export const createUsersModel = /* GraphQL */ `mutation CreateUsersModel(
     cloud_provider_tag
     new_user
     contributions {
+      items {
+        id
+        author
+        type
+        description
+        link_to
+        point_value
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -116,6 +225,21 @@ export const createUsersModel = /* GraphQL */ `mutation CreateUsersModel(
     years_of_experience
     user_type
     user_experiences {
+      items {
+        id
+        user_id
+        org_name
+        image_link
+        start_date
+        end_date
+        description
+        lang_tag
+        dev_type_tag
+        framework_tag
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -144,10 +268,56 @@ export const updateUsersModel = /* GraphQL */ `mutation UpdateUsersModel(
     profile_image
     bio
     user_posts {
+      items {
+        id
+        post_title
+        description
+        long_description
+        project_link
+        image_link
+        post_date
+        userID
+        creator_name
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        cloud_provider_tag
+        likes
+        likes_users
+        saves
+        contributor_limit
+        reported
+        experience_level
+        application
+        project_chat
+        counter
+        external_link
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     user_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -159,18 +329,70 @@ export const updateUsersModel = /* GraphQL */ `mutation UpdateUsersModel(
     saved_posts
     hide_posts
     saved {
+      items {
+        id
+        saved_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     hidden {
+      items {
+        id
+        hidden_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    joined {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     conversations {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -183,6 +405,17 @@ export const updateUsersModel = /* GraphQL */ `mutation UpdateUsersModel(
     cloud_provider_tag
     new_user
     contributions {
+      items {
+        id
+        author
+        type
+        description
+        link_to
+        point_value
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -192,6 +425,21 @@ export const updateUsersModel = /* GraphQL */ `mutation UpdateUsersModel(
     years_of_experience
     user_type
     user_experiences {
+      items {
+        id
+        user_id
+        org_name
+        image_link
+        start_date
+        end_date
+        description
+        lang_tag
+        dev_type_tag
+        framework_tag
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -220,10 +468,56 @@ export const deleteUsersModel = /* GraphQL */ `mutation DeleteUsersModel(
     profile_image
     bio
     user_posts {
+      items {
+        id
+        post_title
+        description
+        long_description
+        project_link
+        image_link
+        post_date
+        userID
+        creator_name
+        lang_tag
+        dev_type_tag
+        interest_tag
+        size_tag
+        framework_tag
+        difficulty_tag
+        cloud_provider_tag
+        likes
+        likes_users
+        saves
+        contributor_limit
+        reported
+        experience_level
+        application
+        project_chat
+        counter
+        external_link
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     user_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -235,18 +529,70 @@ export const deleteUsersModel = /* GraphQL */ `mutation DeleteUsersModel(
     saved_posts
     hide_posts
     saved {
+      items {
+        id
+        saved_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     hidden {
+      items {
+        id
+        hidden_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+    joined {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     conversations {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -259,6 +605,17 @@ export const deleteUsersModel = /* GraphQL */ `mutation DeleteUsersModel(
     cloud_provider_tag
     new_user
     contributions {
+      items {
+        id
+        author
+        type
+        description
+        link_to
+        point_value
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -268,6 +625,21 @@ export const deleteUsersModel = /* GraphQL */ `mutation DeleteUsersModel(
     years_of_experience
     user_type
     user_experiences {
+      items {
+        id
+        user_id
+        org_name
+        image_link
+        start_date
+        end_date
+        description
+        lang_tag
+        dev_type_tag
+        framework_tag
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -441,11 +813,39 @@ export const createPostsModel = /* GraphQL */ `mutation CreatePostsModel(
     likes_users
     saves
     post_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     contributor_limit
-    contributors
+    contributors {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
     reported
     experience_level
     application
@@ -486,11 +886,39 @@ export const updatePostsModel = /* GraphQL */ `mutation UpdatePostsModel(
     likes_users
     saves
     post_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     contributor_limit
-    contributors
+    contributors {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
     reported
     experience_level
     application
@@ -531,11 +959,39 @@ export const deletePostsModel = /* GraphQL */ `mutation DeletePostsModel(
     likes_users
     saves
     post_comments {
+      items {
+        id
+        comment
+        profile_image
+        comment_date
+        parent_comment
+        replies
+        isReply
+        postID
+        userID
+        user_name
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     contributor_limit
-    contributors
+    contributors {
+      items {
+        id
+        joined_at
+        userID
+        postID
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
     reported
     experience_level
     application
@@ -558,11 +1014,29 @@ export const createConversationModel = /* GraphQL */ `mutation CreateConversatio
   createConversationModel(input: $input, condition: $condition) {
     id
     users {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     title
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -582,11 +1056,29 @@ export const updateConversationModel = /* GraphQL */ `mutation UpdateConversatio
   updateConversationModel(input: $input, condition: $condition) {
     id
     users {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     title
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -606,11 +1098,29 @@ export const deleteConversationModel = /* GraphQL */ `mutation DeleteConversatio
   deleteConversationModel(input: $input, condition: $condition) {
     id
     users {
+      items {
+        id
+        usersModelID
+        conversationModelID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
     title
     messages {
+      items {
+        id
+        message
+        from
+        message_date
+        conversationID
+        createdAt
+        updatedAt
+        __typename
+      }
       nextToken
       __typename
     }
@@ -638,6 +1148,14 @@ export const createMessageModel = /* GraphQL */ `mutation CreateMessageModel(
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -645,6 +1163,26 @@ export const createMessageModel = /* GraphQL */ `mutation CreateMessageModel(
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -653,11 +1191,19 @@ export const createMessageModel = /* GraphQL */ `mutation CreateMessageModel(
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -692,6 +1238,14 @@ export const updateMessageModel = /* GraphQL */ `mutation UpdateMessageModel(
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -699,6 +1253,26 @@ export const updateMessageModel = /* GraphQL */ `mutation UpdateMessageModel(
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -707,11 +1281,19 @@ export const updateMessageModel = /* GraphQL */ `mutation UpdateMessageModel(
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -746,6 +1328,14 @@ export const deleteMessageModel = /* GraphQL */ `mutation DeleteMessageModel(
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -753,6 +1343,26 @@ export const deleteMessageModel = /* GraphQL */ `mutation DeleteMessageModel(
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -761,11 +1371,19 @@ export const deleteMessageModel = /* GraphQL */ `mutation DeleteMessageModel(
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -937,8 +1555,15 @@ export const createSavedPostModel = /* GraphQL */ `mutation CreateSavedPostModel
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -988,8 +1613,15 @@ export const updateSavedPostModel = /* GraphQL */ `mutation UpdateSavedPostModel
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1039,8 +1671,15 @@ export const deleteSavedPostModel = /* GraphQL */ `mutation DeleteSavedPostModel
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1090,8 +1729,15 @@ export const createHiddenPostModel = /* GraphQL */ `mutation CreateHiddenPostMod
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1141,8 +1787,15 @@ export const updateHiddenPostModel = /* GraphQL */ `mutation UpdateHiddenPostMod
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1192,8 +1845,15 @@ export const deleteHiddenPostModel = /* GraphQL */ `mutation DeleteHiddenPostMod
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1243,8 +1903,15 @@ export const createLikedPostModel = /* GraphQL */ `mutation CreateLikedPostModel
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1294,8 +1961,15 @@ export const updateLikedPostModel = /* GraphQL */ `mutation UpdateLikedPostModel
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1345,8 +2019,15 @@ export const deleteLikedPostModel = /* GraphQL */ `mutation DeleteLikedPostModel
       likes
       likes_users
       saves
+      post_comments {
+        nextToken
+        __typename
+      }
       contributor_limit
-      contributors
+      contributors {
+        nextToken
+        __typename
+      }
       reported
       experience_level
       application
@@ -1367,6 +2048,393 @@ export const deleteLikedPostModel = /* GraphQL */ `mutation DeleteLikedPostModel
   APITypes.DeleteLikedPostModelMutationVariables,
   APITypes.DeleteLikedPostModelMutation
 >;
+export const createJoinedPostModel = /* GraphQL */ `mutation CreateJoinedPostModel(
+  $input: CreateJoinedPostModelInput!
+  $condition: ModelJoinedPostModelConditionInput
+) {
+  createJoinedPostModel(input: $input, condition: $condition) {
+    id
+    joined_at
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      contributions {
+        nextToken
+        __typename
+      }
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      post_comments {
+        nextToken
+        __typename
+      }
+      contributor_limit
+      contributors {
+        nextToken
+        __typename
+      }
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateJoinedPostModelMutationVariables,
+  APITypes.CreateJoinedPostModelMutation
+>;
+export const updateJoinedPostModel = /* GraphQL */ `mutation UpdateJoinedPostModel(
+  $input: UpdateJoinedPostModelInput!
+  $condition: ModelJoinedPostModelConditionInput
+) {
+  updateJoinedPostModel(input: $input, condition: $condition) {
+    id
+    joined_at
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      contributions {
+        nextToken
+        __typename
+      }
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      post_comments {
+        nextToken
+        __typename
+      }
+      contributor_limit
+      contributors {
+        nextToken
+        __typename
+      }
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateJoinedPostModelMutationVariables,
+  APITypes.UpdateJoinedPostModelMutation
+>;
+export const deleteJoinedPostModel = /* GraphQL */ `mutation DeleteJoinedPostModel(
+  $input: DeleteJoinedPostModelInput!
+  $condition: ModelJoinedPostModelConditionInput
+) {
+  deleteJoinedPostModel(input: $input, condition: $condition) {
+    id
+    joined_at
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      contributions {
+        nextToken
+        __typename
+      }
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      post_comments {
+        nextToken
+        __typename
+      }
+      contributor_limit
+      contributors {
+        nextToken
+        __typename
+      }
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteJoinedPostModelMutationVariables,
+  APITypes.DeleteJoinedPostModelMutation
+>;
 export const createUsersConvo = /* GraphQL */ `mutation CreateUsersConvo(
   $input: CreateUsersConvoInput!
   $condition: ModelUsersConvoConditionInput
@@ -1382,6 +2450,14 @@ export const createUsersConvo = /* GraphQL */ `mutation CreateUsersConvo(
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -1389,6 +2465,26 @@ export const createUsersConvo = /* GraphQL */ `mutation CreateUsersConvo(
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -1397,11 +2493,19 @@ export const createUsersConvo = /* GraphQL */ `mutation CreateUsersConvo(
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -1412,7 +2516,15 @@ export const createUsersConvo = /* GraphQL */ `mutation CreateUsersConvo(
     }
     conversationModel {
       id
+      users {
+        nextToken
+        __typename
+      }
       title
+      messages {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1441,6 +2553,14 @@ export const updateUsersConvo = /* GraphQL */ `mutation UpdateUsersConvo(
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -1448,6 +2568,26 @@ export const updateUsersConvo = /* GraphQL */ `mutation UpdateUsersConvo(
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -1456,11 +2596,19 @@ export const updateUsersConvo = /* GraphQL */ `mutation UpdateUsersConvo(
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -1471,7 +2619,15 @@ export const updateUsersConvo = /* GraphQL */ `mutation UpdateUsersConvo(
     }
     conversationModel {
       id
+      users {
+        nextToken
+        __typename
+      }
       title
+      messages {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -1500,6 +2656,14 @@ export const deleteUsersConvo = /* GraphQL */ `mutation DeleteUsersConvo(
       password
       profile_image
       bio
+      user_posts {
+        nextToken
+        __typename
+      }
+      user_comments {
+        nextToken
+        __typename
+      }
       first_name
       last_name
       user_creation_date
@@ -1507,6 +2671,26 @@ export const deleteUsersConvo = /* GraphQL */ `mutation DeleteUsersConvo(
       liked_posts
       saved_posts
       hide_posts
+      saved {
+        nextToken
+        __typename
+      }
+      hidden {
+        nextToken
+        __typename
+      }
+      joined {
+        nextToken
+        __typename
+      }
+      messages {
+        nextToken
+        __typename
+      }
+      conversations {
+        nextToken
+        __typename
+      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -1515,11 +2699,19 @@ export const deleteUsersConvo = /* GraphQL */ `mutation DeleteUsersConvo(
       difficulty_tag
       cloud_provider_tag
       new_user
+      contributions {
+        nextToken
+        __typename
+      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
+      user_experiences {
+        nextToken
+        __typename
+      }
       oauth_provider
       oauth_id
       external_link
@@ -1530,7 +2722,15 @@ export const deleteUsersConvo = /* GraphQL */ `mutation DeleteUsersConvo(
     }
     conversationModel {
       id
+      users {
+        nextToken
+        __typename
+      }
       title
+      messages {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
