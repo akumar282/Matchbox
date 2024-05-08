@@ -10,6 +10,7 @@ import {AuthContext} from '../components/AuthWrapper'
 import {getImage} from '../backend/storage/s3'
 import ProjectView from '../components/ProjectView'
 import {listSavedPosts} from '../backend/queries/savedPostQueries'
+import {ModelSavedPostModelConnection} from '../API'
 
 export default function HomePage() {
 
@@ -35,9 +36,10 @@ export default function HomePage() {
             }
           }
         })
+        console.log(data)
         if (data && data.listSavedPostModels && data.listSavedPostModels.items) {
-          const itemsToGrab = data.listSavedPostModels.items
-          for (const item of itemsToGrab) {
+          const { items } = data.listSavedPostModels as ModelSavedPostModelConnection
+          for (const item of items) {
             if (item && item.postInfo) {
               const imageUrl = await getImage(item.postInfo.image_link ? item.postInfo.image_link : 'NewLogo.png')
               const mapToCard = (

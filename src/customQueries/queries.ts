@@ -103,3 +103,55 @@ export const paginatedPostsQuery = `
     }
   }
 `
+
+export const listSavedPostModelsCustom = `
+  query ListSavedPostModels(
+    $filter: ModelSavedPostModelFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSavedPostModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        saved_at
+        userID 
+        postID
+        postInfo {
+          cloud_provider_tag
+          counter
+          createdAt
+          creator_name
+          description
+          dev_type_tag
+          difficulty_tag
+          experience_level
+          framework_tag
+          id
+          image_link
+          interest_tag
+          lang_tag
+          likes
+          likes_users
+          long_description
+          post_date
+          post_title
+          project_chat
+          project_link
+          saves
+          size_tag
+          updatedAt
+          userID
+          contributor_limit
+          application
+          reported
+        }
+        count
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`

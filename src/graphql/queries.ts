@@ -103,56 +103,10 @@ export const getUsersModel = /* GraphQL */ `query GetUsersModel($id: ID!) {
     profile_image
     bio
     user_posts {
-      items {
-        id
-        post_title
-        description
-        long_description
-        project_link
-        image_link
-        post_date
-        userID
-        creator_name
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        likes
-        likes_users
-        saves
-        contributor_limit
-        reported
-        experience_level
-        application
-        project_chat
-        counter
-        external_link
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
     user_comments {
-      items {
-        id
-        comment
-        profile_image
-        comment_date
-        parent_comment
-        replies
-        isReply
-        postID
-        userID
-        user_name
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
@@ -164,70 +118,22 @@ export const getUsersModel = /* GraphQL */ `query GetUsersModel($id: ID!) {
     saved_posts
     hide_posts
     saved {
-      items {
-        id
-        saved_at
-        userID
-        postID
-        count
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
     hidden {
-      items {
-        id
-        hidden_at
-        userID
-        postID
-        count
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
     joined {
-      items {
-        id
-        joined_at
-        userID
-        postID
-        count
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
     messages {
-      items {
-        id
-        message
-        from
-        message_date
-        conversationID
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
     conversations {
-      items {
-        id
-        usersModelID
-        conversationModelID
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
@@ -240,17 +146,6 @@ export const getUsersModel = /* GraphQL */ `query GetUsersModel($id: ID!) {
     cloud_provider_tag
     new_user
     contributions {
-      items {
-        id
-        author
-        type
-        description
-        link_to
-        point_value
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
@@ -260,21 +155,6 @@ export const getUsersModel = /* GraphQL */ `query GetUsersModel($id: ID!) {
     years_of_experience
     user_type
     user_experiences {
-      items {
-        id
-        user_id
-        org_name
-        image_link
-        start_date
-        end_date
-        description
-        lang_tag
-        dev_type_tag
-        framework_tag
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
@@ -304,14 +184,6 @@ export const listUsersModels = /* GraphQL */ `query ListUsersModels(
       password
       profile_image
       bio
-      user_posts {
-        nextToken
-        __typename
-      }
-      user_comments {
-        nextToken
-        __typename
-      }
       first_name
       last_name
       user_creation_date
@@ -319,26 +191,6 @@ export const listUsersModels = /* GraphQL */ `query ListUsersModels(
       liked_posts
       saved_posts
       hide_posts
-      saved {
-        nextToken
-        __typename
-      }
-      hidden {
-        nextToken
-        __typename
-      }
-      joined {
-        nextToken
-        __typename
-      }
-      messages {
-        nextToken
-        __typename
-      }
-      conversations {
-        nextToken
-        __typename
-      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -347,19 +199,11 @@ export const listUsersModels = /* GraphQL */ `query ListUsersModels(
       difficulty_tag
       cloud_provider_tag
       new_user
-      contributions {
-        nextToken
-        __typename
-      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
-      user_experiences {
-        nextToken
-        __typename
-      }
       oauth_provider
       oauth_id
       external_link
@@ -399,14 +243,6 @@ export const searchUsersModels = /* GraphQL */ `query SearchUsersModels(
       password
       profile_image
       bio
-      user_posts {
-        nextToken
-        __typename
-      }
-      user_comments {
-        nextToken
-        __typename
-      }
       first_name
       last_name
       user_creation_date
@@ -414,26 +250,6 @@ export const searchUsersModels = /* GraphQL */ `query SearchUsersModels(
       liked_posts
       saved_posts
       hide_posts
-      saved {
-        nextToken
-        __typename
-      }
-      hidden {
-        nextToken
-        __typename
-      }
-      joined {
-        nextToken
-        __typename
-      }
-      messages {
-        nextToken
-        __typename
-      }
-      conversations {
-        nextToken
-        __typename
-      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -442,19 +258,11 @@ export const searchUsersModels = /* GraphQL */ `query SearchUsersModels(
       difficulty_tag
       cloud_provider_tag
       new_user
-      contributions {
-        nextToken
-        __typename
-      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
-      user_experiences {
-        nextToken
-        __typename
-      }
       oauth_provider
       oauth_id
       external_link
@@ -714,36 +522,11 @@ export const getPostsModel = /* GraphQL */ `query GetPostsModel($id: ID!) {
     likes_users
     saves
     post_comments {
-      items {
-        id
-        comment
-        profile_image
-        comment_date
-        parent_comment
-        replies
-        isReply
-        postID
-        userID
-        user_name
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
     contributor_limit
     contributors {
-      items {
-        id
-        joined_at
-        userID
-        postID
-        count
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
@@ -788,15 +571,7 @@ export const listPostsModels = /* GraphQL */ `query ListPostsModels(
       likes
       likes_users
       saves
-      post_comments {
-        nextToken
-        __typename
-      }
       contributor_limit
-      contributors {
-        nextToken
-        __typename
-      }
       reported
       experience_level
       application
@@ -851,15 +626,7 @@ export const searchPostsModels = /* GraphQL */ `query SearchPostsModels(
       likes
       likes_users
       saves
-      post_comments {
-        nextToken
-        __typename
-      }
       contributor_limit
-      contributors {
-        nextToken
-        __typename
-      }
       reported
       experience_level
       application
@@ -899,29 +666,11 @@ export const getConversationModel = /* GraphQL */ `query GetConversationModel($i
   getConversationModel(id: $id) {
     id
     users {
-      items {
-        id
-        usersModelID
-        conversationModelID
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
     title
     messages {
-      items {
-        id
-        message
-        from
-        message_date
-        conversationID
-        createdAt
-        updatedAt
-        __typename
-      }
       nextToken
       __typename
     }
@@ -946,15 +695,7 @@ export const listConversationModels = /* GraphQL */ `query ListConversationModel
   ) {
     items {
       id
-      users {
-        nextToken
-        __typename
-      }
       title
-      messages {
-        nextToken
-        __typename
-      }
       createdAt
       updatedAt
       __typename
@@ -985,15 +726,7 @@ export const searchConversationModels = /* GraphQL */ `query SearchConversationM
   ) {
     items {
       id
-      users {
-        nextToken
-        __typename
-      }
       title
-      messages {
-        nextToken
-        __typename
-      }
       createdAt
       updatedAt
       __typename
@@ -1035,14 +768,6 @@ export const getMessageModel = /* GraphQL */ `query GetMessageModel($id: ID!) {
       password
       profile_image
       bio
-      user_posts {
-        nextToken
-        __typename
-      }
-      user_comments {
-        nextToken
-        __typename
-      }
       first_name
       last_name
       user_creation_date
@@ -1050,26 +775,6 @@ export const getMessageModel = /* GraphQL */ `query GetMessageModel($id: ID!) {
       liked_posts
       saved_posts
       hide_posts
-      saved {
-        nextToken
-        __typename
-      }
-      hidden {
-        nextToken
-        __typename
-      }
-      joined {
-        nextToken
-        __typename
-      }
-      messages {
-        nextToken
-        __typename
-      }
-      conversations {
-        nextToken
-        __typename
-      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -1078,19 +783,11 @@ export const getMessageModel = /* GraphQL */ `query GetMessageModel($id: ID!) {
       difficulty_tag
       cloud_provider_tag
       new_user
-      contributions {
-        nextToken
-        __typename
-      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
-      user_experiences {
-        nextToken
-        __typename
-      }
       oauth_provider
       oauth_id
       external_link
@@ -1120,41 +817,6 @@ export const listMessageModels = /* GraphQL */ `query ListMessageModels(
       id
       message
       from
-      senderInfo {
-        id
-        user_name
-        email
-        password
-        profile_image
-        bio
-        first_name
-        last_name
-        user_creation_date
-        github_link
-        liked_posts
-        saved_posts
-        hide_posts
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        new_user
-        credibility_score
-        involved_projects
-        experience_level
-        years_of_experience
-        user_type
-        oauth_provider
-        oauth_id
-        external_link
-        notification_type
-        createdAt
-        updatedAt
-        __typename
-      }
       message_date
       conversationID
       createdAt
@@ -1189,41 +851,6 @@ export const searchMessageModels = /* GraphQL */ `query SearchMessageModels(
       id
       message
       from
-      senderInfo {
-        id
-        user_name
-        email
-        password
-        profile_image
-        bio
-        first_name
-        last_name
-        user_creation_date
-        github_link
-        liked_posts
-        saved_posts
-        hide_posts
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        new_user
-        credibility_score
-        involved_projects
-        experience_level
-        years_of_experience
-        user_type
-        oauth_provider
-        oauth_id
-        external_link
-        notification_type
-        createdAt
-        updatedAt
-        __typename
-      }
       message_date
       conversationID
       createdAt
@@ -1472,15 +1099,7 @@ export const getSavedPostModel = /* GraphQL */ `query GetSavedPostModel($id: ID!
       likes
       likes_users
       saves
-      post_comments {
-        nextToken
-        __typename
-      }
       contributor_limit
-      contributors {
-        nextToken
-        __typename
-      }
       reported
       experience_level
       application
@@ -1512,37 +1131,6 @@ export const listSavedPostModels = /* GraphQL */ `query ListSavedPostModels(
       saved_at
       userID
       postID
-      postInfo {
-        id
-        post_title
-        description
-        long_description
-        project_link
-        image_link
-        post_date
-        userID
-        creator_name
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        likes
-        likes_users
-        saves
-        contributor_limit
-        reported
-        experience_level
-        application
-        project_chat
-        counter
-        external_link
-        createdAt
-        updatedAt
-        __typename
-      }
       count
       createdAt
       updatedAt
@@ -1577,37 +1165,6 @@ export const searchSavedPostModels = /* GraphQL */ `query SearchSavedPostModels(
       saved_at
       userID
       postID
-      postInfo {
-        id
-        post_title
-        description
-        long_description
-        project_link
-        image_link
-        post_date
-        userID
-        creator_name
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        likes
-        likes_users
-        saves
-        contributor_limit
-        reported
-        experience_level
-        application
-        project_chat
-        counter
-        external_link
-        createdAt
-        updatedAt
-        __typename
-      }
       count
       createdAt
       updatedAt
@@ -1664,15 +1221,7 @@ export const getHiddenPostModel = /* GraphQL */ `query GetHiddenPostModel($id: I
       likes
       likes_users
       saves
-      post_comments {
-        nextToken
-        __typename
-      }
       contributor_limit
-      contributors {
-        nextToken
-        __typename
-      }
       reported
       experience_level
       application
@@ -1704,37 +1253,6 @@ export const listHiddenPostModels = /* GraphQL */ `query ListHiddenPostModels(
       hidden_at
       userID
       postID
-      postInfo {
-        id
-        post_title
-        description
-        long_description
-        project_link
-        image_link
-        post_date
-        userID
-        creator_name
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        likes
-        likes_users
-        saves
-        contributor_limit
-        reported
-        experience_level
-        application
-        project_chat
-        counter
-        external_link
-        createdAt
-        updatedAt
-        __typename
-      }
       count
       createdAt
       updatedAt
@@ -1769,37 +1287,6 @@ export const searchHiddenPostModels = /* GraphQL */ `query SearchHiddenPostModel
       hidden_at
       userID
       postID
-      postInfo {
-        id
-        post_title
-        description
-        long_description
-        project_link
-        image_link
-        post_date
-        userID
-        creator_name
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        likes
-        likes_users
-        saves
-        contributor_limit
-        reported
-        experience_level
-        application
-        project_chat
-        counter
-        external_link
-        createdAt
-        updatedAt
-        __typename
-      }
       count
       createdAt
       updatedAt
@@ -1856,15 +1343,7 @@ export const getLikedPostModel = /* GraphQL */ `query GetLikedPostModel($id: ID!
       likes
       likes_users
       saves
-      post_comments {
-        nextToken
-        __typename
-      }
       contributor_limit
-      contributors {
-        nextToken
-        __typename
-      }
       reported
       experience_level
       application
@@ -1896,37 +1375,6 @@ export const listLikedPostModels = /* GraphQL */ `query ListLikedPostModels(
       liked_at
       userID
       postID
-      postInfo {
-        id
-        post_title
-        description
-        long_description
-        project_link
-        image_link
-        post_date
-        userID
-        creator_name
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        likes
-        likes_users
-        saves
-        contributor_limit
-        reported
-        experience_level
-        application
-        project_chat
-        counter
-        external_link
-        createdAt
-        updatedAt
-        __typename
-      }
       count
       createdAt
       updatedAt
@@ -1961,37 +1409,6 @@ export const searchLikedPostModels = /* GraphQL */ `query SearchLikedPostModels(
       liked_at
       userID
       postID
-      postInfo {
-        id
-        post_title
-        description
-        long_description
-        project_link
-        image_link
-        post_date
-        userID
-        creator_name
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        likes
-        likes_users
-        saves
-        contributor_limit
-        reported
-        experience_level
-        application
-        project_chat
-        counter
-        external_link
-        createdAt
-        updatedAt
-        __typename
-      }
       count
       createdAt
       updatedAt
@@ -2034,14 +1451,6 @@ export const getJoinedPostModel = /* GraphQL */ `query GetJoinedPostModel($id: I
       password
       profile_image
       bio
-      user_posts {
-        nextToken
-        __typename
-      }
-      user_comments {
-        nextToken
-        __typename
-      }
       first_name
       last_name
       user_creation_date
@@ -2049,26 +1458,6 @@ export const getJoinedPostModel = /* GraphQL */ `query GetJoinedPostModel($id: I
       liked_posts
       saved_posts
       hide_posts
-      saved {
-        nextToken
-        __typename
-      }
-      hidden {
-        nextToken
-        __typename
-      }
-      joined {
-        nextToken
-        __typename
-      }
-      messages {
-        nextToken
-        __typename
-      }
-      conversations {
-        nextToken
-        __typename
-      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -2077,19 +1466,11 @@ export const getJoinedPostModel = /* GraphQL */ `query GetJoinedPostModel($id: I
       difficulty_tag
       cloud_provider_tag
       new_user
-      contributions {
-        nextToken
-        __typename
-      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
-      user_experiences {
-        nextToken
-        __typename
-      }
       oauth_provider
       oauth_id
       external_link
@@ -2119,15 +1500,7 @@ export const getJoinedPostModel = /* GraphQL */ `query GetJoinedPostModel($id: I
       likes
       likes_users
       saves
-      post_comments {
-        nextToken
-        __typename
-      }
       contributor_limit
-      contributors {
-        nextToken
-        __typename
-      }
       reported
       experience_level
       application
@@ -2158,73 +1531,7 @@ export const listJoinedPostModels = /* GraphQL */ `query ListJoinedPostModels(
       id
       joined_at
       userID
-      userInfo {
-        id
-        user_name
-        email
-        password
-        profile_image
-        bio
-        first_name
-        last_name
-        user_creation_date
-        github_link
-        liked_posts
-        saved_posts
-        hide_posts
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        new_user
-        credibility_score
-        involved_projects
-        experience_level
-        years_of_experience
-        user_type
-        oauth_provider
-        oauth_id
-        external_link
-        notification_type
-        createdAt
-        updatedAt
-        __typename
-      }
       postID
-      postInfo {
-        id
-        post_title
-        description
-        long_description
-        project_link
-        image_link
-        post_date
-        userID
-        creator_name
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        likes
-        likes_users
-        saves
-        contributor_limit
-        reported
-        experience_level
-        application
-        project_chat
-        counter
-        external_link
-        createdAt
-        updatedAt
-        __typename
-      }
       count
       createdAt
       updatedAt
@@ -2258,73 +1565,7 @@ export const searchJoinedPostModels = /* GraphQL */ `query SearchJoinedPostModel
       id
       joined_at
       userID
-      userInfo {
-        id
-        user_name
-        email
-        password
-        profile_image
-        bio
-        first_name
-        last_name
-        user_creation_date
-        github_link
-        liked_posts
-        saved_posts
-        hide_posts
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        new_user
-        credibility_score
-        involved_projects
-        experience_level
-        years_of_experience
-        user_type
-        oauth_provider
-        oauth_id
-        external_link
-        notification_type
-        createdAt
-        updatedAt
-        __typename
-      }
       postID
-      postInfo {
-        id
-        post_title
-        description
-        long_description
-        project_link
-        image_link
-        post_date
-        userID
-        creator_name
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        likes
-        likes_users
-        saves
-        contributor_limit
-        reported
-        experience_level
-        application
-        project_chat
-        counter
-        external_link
-        createdAt
-        updatedAt
-        __typename
-      }
       count
       createdAt
       updatedAt
@@ -2367,14 +1608,6 @@ export const getUsersConvo = /* GraphQL */ `query GetUsersConvo($id: ID!) {
       password
       profile_image
       bio
-      user_posts {
-        nextToken
-        __typename
-      }
-      user_comments {
-        nextToken
-        __typename
-      }
       first_name
       last_name
       user_creation_date
@@ -2382,26 +1615,6 @@ export const getUsersConvo = /* GraphQL */ `query GetUsersConvo($id: ID!) {
       liked_posts
       saved_posts
       hide_posts
-      saved {
-        nextToken
-        __typename
-      }
-      hidden {
-        nextToken
-        __typename
-      }
-      joined {
-        nextToken
-        __typename
-      }
-      messages {
-        nextToken
-        __typename
-      }
-      conversations {
-        nextToken
-        __typename
-      }
       lang_tag
       dev_type_tag
       interest_tag
@@ -2410,19 +1623,11 @@ export const getUsersConvo = /* GraphQL */ `query GetUsersConvo($id: ID!) {
       difficulty_tag
       cloud_provider_tag
       new_user
-      contributions {
-        nextToken
-        __typename
-      }
       credibility_score
       involved_projects
       experience_level
       years_of_experience
       user_type
-      user_experiences {
-        nextToken
-        __typename
-      }
       oauth_provider
       oauth_id
       external_link
@@ -2433,15 +1638,7 @@ export const getUsersConvo = /* GraphQL */ `query GetUsersConvo($id: ID!) {
     }
     conversationModel {
       id
-      users {
-        nextToken
-        __typename
-      }
       title
-      messages {
-        nextToken
-        __typename
-      }
       createdAt
       updatedAt
       __typename
@@ -2465,48 +1662,6 @@ export const listUsersConvos = /* GraphQL */ `query ListUsersConvos(
       id
       usersModelID
       conversationModelID
-      usersModel {
-        id
-        user_name
-        email
-        password
-        profile_image
-        bio
-        first_name
-        last_name
-        user_creation_date
-        github_link
-        liked_posts
-        saved_posts
-        hide_posts
-        lang_tag
-        dev_type_tag
-        interest_tag
-        size_tag
-        framework_tag
-        difficulty_tag
-        cloud_provider_tag
-        new_user
-        credibility_score
-        involved_projects
-        experience_level
-        years_of_experience
-        user_type
-        oauth_provider
-        oauth_id
-        external_link
-        notification_type
-        createdAt
-        updatedAt
-        __typename
-      }
-      conversationModel {
-        id
-        title
-        createdAt
-        updatedAt
-        __typename
-      }
       createdAt
       updatedAt
       __typename

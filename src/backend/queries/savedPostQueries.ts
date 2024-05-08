@@ -1,12 +1,13 @@
 import { API } from 'aws-amplify'
 import { GraphQLQuery } from '@aws-amplify/api'
-import { getSavedPostModel, listSavedPostModels } from '@graphql/queries'
+import { getSavedPostModel } from '@graphql/queries'
 import {
   GetSavedPostModelQuery,
   ListSavedPostModelsQuery,
   ListSavedPostModelsQueryVariables,
   GetSavedPostModelQueryVariables
 } from '@api'
+import {listSavedPostModelsCustom} from '../../customQueries/queries'
 
 export async function getSavedPost(post: GetSavedPostModelQueryVariables){
   return await API.graphql<GraphQLQuery<GetSavedPostModelQuery>>({
@@ -18,7 +19,7 @@ export async function getSavedPost(post: GetSavedPostModelQueryVariables){
 
 export async function listSavedPosts(post: ListSavedPostModelsQueryVariables){
   return await API.graphql<GraphQLQuery<ListSavedPostModelsQuery>>({
-    query: listSavedPostModels,
+    query: listSavedPostModelsCustom,
     variables: post,
     authMode: 'API_KEY'
   })
