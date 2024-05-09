@@ -14,7 +14,7 @@ export default function InboxChatMessages(props: ChatMessageProps) {
       {props.loggedInUserId === props.senderId ?
         <div className='flex flex-col gap-1'>
           <div className='flex justify-end'>
-            <h1 className='bg-purple-600 text-white rounded-lg p-2 whitespace-normal break-words'>
+            <h1 className='bg-purple-600 max-w-[300px] text-white rounded-lg p-2 whitespace-normal break-words'>
               {props.message}
             </h1>
           </div>

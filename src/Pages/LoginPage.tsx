@@ -56,7 +56,8 @@ export default function LoginPage() {
         <div className='pt-10 flex flex-col items-center justify-center'>
           {showAlert &&
             <ErrorAlert show={showAlert} closeAlert={closeAlert} title='Error' message='Login Unsuccessful'
-              closeStyle={errorXStyle} colorStyle={errorStyle}/>}
+              closeStyle={errorXStyle} colorStyle={errorStyle}/>
+          }
           <h1 className='text-center font-secondary text-4xl font-light'>Welcome Back!</h1>
           <h2 className='text-center text-lg text-medium font-primary pt-4'>Login to your account</h2>
           <OAuthButtons label='Login with Google' onClick={ () => Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google})} src={google}/>

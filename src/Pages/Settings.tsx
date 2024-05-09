@@ -19,16 +19,30 @@ import {useFormik} from 'formik'
 import * as yup from 'yup'
 import {imageOrDefault} from '../functions/helpers'
 import {uploadImage} from '../backend/storage/s3'
+import { Auth } from 'aws-amplify'
+import ErrorAlert, {errorStyle, errorXStyle, successStyle, successXStyle} from '../components/alerts/errorAlert'
 
 export default function Settings() {
 
   const userInfo = useContext(AuthContext)
   const [isChecked, setIsChecked] = React.useState(0)
   const [pageIndex, setPageIndex] = useState<number>(0)
+  const [passwordError, setPasswordError] = useState<boolean>(false)
+  const [passwordSuccess, setPasswordSuccess] = useState<boolean>(false)
+  const [userUpdateError, setUserUpdateError] = useState<boolean>(false)
+  const [userUpdateSuccess, setUserUpdateSuccess] = useState<boolean>(false)
   const [userData, setUserData] = useState<UsersModel>()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [file, setFile] = useState<File | null>(null)
-  console.log(file)
+
+  const closeErrorAlert = () => {
+    setPasswordError(false)
+    setUserUpdateError(false)
+  }
+
+  const closeSuccessAlert = () => {
+    setPasswordSuccess(false)
+    setUserUpdateSuccess(false)
+  }
 
   const [tags, setTags] = React.useState<{
     LanguageTags: LanguageTag[],
@@ -74,6 +88,7 @@ export default function Settings() {
       }, false)
     }
   }, [userData])
+
 
   const useOnSubmitTags = async () => {
     if (userInfo && userInfo.id) {
@@ -123,30 +138,71 @@ export default function Settings() {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      if (userInfo && userInfo.id) {
-        let input
-        if (file) {
-          const imageLink = await uploadImage(file)
-          input = {
-            id: userInfo.id,
-            first_name: values.first_name,
-            last_name: values.last_name,
-            email: values.email,
-            profile_image: imageLink
+      try{
+        if (userInfo && userInfo.id) {
+          let input
+          if (file) {
+            const imageLink = await uploadImage(file)
+            input = {
+              id: userInfo.id,
+              first_name: values.first_name,
+              last_name: values.last_name,
+              email: values.email,
+              profile_image: imageLink
+            }
+            console.log(imageLink)
+          } else {
+            input = {
+              id: userInfo.id,
+              first_name: values.first_name,
+              last_name: values.last_name,
+              email: values.email
+            }
           }
-          console.log(imageLink)
-        } else {
-          input = {
-            id: userInfo.id,
-            first_name: values.first_name,
-            last_name: values.last_name,
-            email: values.email
-          }
+          const result = await updateUser({
+            input
+          })
+          console.log(result)
+          setUserUpdateSuccess(true)
         }
-        const result = await updateUser({
-          input
-        })
-        console.log(result)
+      } catch (e) {
+        setUserUpdateError(true)
+      }
+    },
+  })
+
+  const validationSchemaPassword = yup.object({
+    old_password: yup
+      .string()
+      .min(8, 'Password should be a minimum of 8 characters'),
+    new_password: yup
+      .string()
+      .min(8, 'Password should be a minimum of 8 characters'),
+    confirm_password: yup
+      .string()
+      .min(8, 'Password should be a minimum of 8 characters')
+  })
+
+  const formikPassword = useFormik({
+    initialValues: {
+      old_password: '',
+      new_password: '',
+      confirm_password: '',
+    },
+    validationSchema: validationSchemaPassword,
+    onSubmit: async (values) => {
+      if (userInfo && userInfo.id) {
+        try {
+          if(values.new_password === values.confirm_password) {
+            const user = await Auth.currentAuthenticatedUser()
+            const data = await Auth.changePassword(user, values.old_password, values.confirm_password)
+            if(data === 'SUCCESS') {
+              setPasswordSuccess(true)
+            }
+          }
+        } catch (e) {
+          setPasswordError(true)
+        }
       }
     },
   })
@@ -193,6 +249,14 @@ export default function Settings() {
   function accountInformation() {
     return (
       <div className='flex flex-col items-center pt-6'>
+        {userUpdateError &&
+          <ErrorAlert show={userUpdateError} closeAlert={closeErrorAlert} title='Error' message='Information Change Unsuccessful'
+            closeStyle={errorXStyle} colorStyle={errorStyle}/>
+        }
+        {userUpdateSuccess &&
+          <ErrorAlert show={userUpdateSuccess} closeAlert={closeSuccessAlert} title='Success' message='Information Change Successful'
+            closeStyle={successXStyle} colorStyle={successStyle}/>
+        }
         <h1 className='font-primary text-3xl font-semibold'>User Profile</h1>
         <h3 className='font-primary text-sm'>Your current saved information</h3>
         <div className='flex flex-col font-primary mt-6 lg:w-full w-[97%] bg-white rounded-lg shadow-xl mx-auto'>
@@ -251,6 +315,11 @@ export default function Settings() {
                     value={formik.values.first_name}
                     onChange={formik.handleChange}
                   />
+                  {formik.errors.first_name && formik.touched.first_name ? 
+                    (<div className='text-red-500 text-xs'>{formik.errors.first_name}</div>) 
+                    :
+                    (<div className='text-xs'> &nbsp;</div>)
+                  }
                 </div>
                 <div className='flex text-sm flex-col pb-2 w-full'>
                   <label>Last Name</label>
@@ -263,6 +332,11 @@ export default function Settings() {
                     value={formik.values.last_name}
                     onChange={formik.handleChange}
                   />
+                  {formik.errors.last_name && formik.touched.last_name ?
+                    (<div className='text-red-500 text-xs'>{formik.errors.last_name}</div>)
+                    :
+                    (<div className='text-xs'> &nbsp;</div>)
+                  }
                 </div>
                 <div className='flex text-sm flex-col pb-1 w-full'>
                   <label>Email</label>
@@ -275,10 +349,18 @@ export default function Settings() {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                   />
+                  {formik.errors.email && formik.touched.email ?
+                    (<div className='text-red-500 text-xs'>{formik.errors.email}</div>)
+                    :
+                    (<div className='text-xs'> &nbsp;</div>)
+                  }
                 </div>
               </div>
               <div className='flex flex-col items-center w-5/6 mx-auto'>
-                <button className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4'>Submit</button>
+                <button
+                  onClick={() => formik.handleSubmit}
+                  className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4'>Submit
+                </button>
               </div>
             </form>
           </div>
@@ -290,47 +372,81 @@ export default function Settings() {
   function passwordInformation() {
     return (
       <div className='flex flex-col w-full items-center pt-6'>
+        {passwordError &&
+          <ErrorAlert show={passwordError} closeAlert={closeErrorAlert} title='Error' message='Password Change Unsuccessful'
+            closeStyle={errorXStyle} colorStyle={errorStyle}/>
+        }
+        {passwordSuccess &&
+          <ErrorAlert show={passwordSuccess} closeAlert={closeSuccessAlert} title='Success' message='Password Change Successful'
+            closeStyle={successXStyle} colorStyle={successStyle}/>
+        }
         <h1 className='font-primary text-3xl font-semibold'>User Profile</h1>
         <h3 className='font-primary text-sm'>Your current saved information</h3>
         <div className='flex flex-col font-primary mt-6 lg:w-3/6 w-[97%] bg-white rounded-lg shadow-xl'>
           <div className='py-4 lg:w-full space-y-4 w-full'>
-            <div className='flex flex-col items-center w-5/6 mx-auto'>
-              <h1 className='pb-4 mt-3'>Manage Password</h1>
-              <div className='w-full'>
-                <div className='flex text-sm flex-col pb-2 w-full'>
-                  <label>Old Password</label>
-                  <input
-                    className='rounded-md lg:w-full'
-                    name={'Old Password'}
-                    type='password'
-                    id={'old_password'}
-                    placeholder={'********'}
-                  />
+            <form onSubmit={formikPassword.handleSubmit}>
+              <div className='flex flex-col items-center w-5/6 mx-auto'>
+                <h1 className='pb-4 mt-3'>Manage Password</h1>
+                <div className='w-full'>
+                  <div className='flex text-sm flex-col pb-2 w-full'>
+                    <label>Old Password</label>
+                    <input
+                      className='rounded-md lg:w-full'
+                      name={'old_password'}
+                      type='password'
+                      id={'old_password'}
+                      placeholder={'********'}
+                      value={formikPassword.values.old_password}
+                      onChange={formikPassword.handleChange}
+                    />
+                    {formikPassword.errors.old_password && formikPassword.touched.old_password ?
+                      (<div className='text-red-500 text-xs'>{formikPassword.errors.old_password}</div>)
+                      :
+                      (<div className='text-xs'> &nbsp;</div>)
+                    }
+                  </div>
+                  <div className='flex text-sm flex-col pb-2 w-full'>
+                    <label>New Password</label>
+                    <input
+                      className='rounded-md lg:w-full'
+                      name={'new_password'}
+                      type='password'
+                      id={'new_password'}
+                      placeholder={'********'}
+                      value={formikPassword.values.new_password}
+                      onChange={formikPassword.handleChange}
+                    />
+                    {formikPassword.errors.new_password && formikPassword.touched.new_password ?
+                      (<div className='text-red-500 text-xs'>{formikPassword.errors.new_password}</div>)
+                      :
+                      (<div className='text-xs'> &nbsp;</div>)
+                    }
+                  </div>
+                  <div className='flex text-sm flex-col pb-1 w-full'>
+                    <label>Confirm Password</label>
+                    <input
+                      className='rounded-md lg:w-full'
+                      name={'confirm_password'}
+                      type='password'
+                      id={'confirm_password'}
+                      placeholder={'********'}
+                      value={formikPassword.values.confirm_password}
+                      onChange={formikPassword.handleChange}
+                    />
+                    {formikPassword.errors.confirm_password && formikPassword.touched.confirm_password ?
+                      (<div className='text-red-500 text-xs'>{formikPassword.errors.confirm_password}</div>)
+                      :
+                      (<div className='text-xs'> &nbsp;</div>)
+                    }
+                  </div>
                 </div>
-                <div className='flex text-sm flex-col pb-2 w-full'>
-                  <label>New Password</label>
-                  <input
-                    className='rounded-md lg:w-full'
-                    name={'New Password'}
-                    type='password'
-                    id={'new_password'}
-                    placeholder={'********'}
-                  />
-                </div>
-                <div className='flex text-sm flex-col pb-1 w-full'>
-                  <label>Confirm Password</label>
-                  <input
-                    className='rounded-md lg:w-full'
-                    name={'Confirm Password'}
-                    type='password'
-                    id={'confirm_password'}
-                    placeholder={'********'}
-                  />
-                </div>
+                <button
+                  type='submit'
+                  onSubmit={() => formikPassword.handleSubmit}
+                  className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4'>Submit
+                </button>
               </div>
-              <button className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4'>Submit
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
