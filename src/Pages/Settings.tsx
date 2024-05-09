@@ -1,13 +1,34 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import NavBar from '../components/NavBar'
 import PreferencesComponent, { PreferencesProps } from '../components/PreferencesComponent'
-import {CloudProviderTag, DevelopmentTag, DifficultyTag, FrameworkTag, InterestTag, LanguageTag, SizeTag} from '../API'
+import {
+  CloudProviderTag,
+  DevelopmentTag,
+  DifficultyTag,
+  FrameworkTag,
+  InterestTag,
+  LanguageTag,
+  NotificationType,
+  SizeTag,
+  UsersModel
+} from '../API'
 import {updateUser} from '../backend/mutations/userMutations'
 import {AuthContext} from '../components/AuthWrapper'
+import {getUser} from '../backend/queries/userQueries'
+import {useFormik} from 'formik'
+import * as yup from 'yup'
+import {imageOrDefault} from '../functions/helpers'
+import {uploadImage} from '../backend/storage/s3'
 
 export default function Settings() {
 
   const userInfo = useContext(AuthContext)
+  const [isChecked, setIsChecked] = React.useState(0)
+  const [pageIndex, setPageIndex] = useState<number>(0)
+  const [userData, setUserData] = useState<UsersModel>()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [file, setFile] = useState<File | null>(null)
+  console.log(file)
 
   const [tags, setTags] = React.useState<{
     LanguageTags: LanguageTag[],
@@ -26,11 +47,37 @@ export default function Settings() {
     DifficultyTags: [],
     SizeTags: [],
   })
-  console.log(tags)
+
+  const notificationToNum = [...Object.values(NotificationType)]
+
+  useEffect(() => {
+    const getSettingsData = async () => {
+      if (userInfo && userInfo.id) {
+        const {data} = await getUser({id: userInfo.id})
+        if(data && data.getUsersModel && data.getUsersModel.notification_type) {
+          const currentNotifcationType = notificationToNum.indexOf(data.getUsersModel.notification_type)
+          setIsChecked(currentNotifcationType)
+          setUserData(data.getUsersModel as UsersModel)
+        }
+      }
+    }
+
+    getSettingsData().catch()
+  }, [])
+
+  useEffect(() => {
+    if (userData) {
+      formik.setValues({
+        first_name: userData.first_name ? userData.first_name : '',
+        last_name: userData.last_name ? userData.last_name : '',
+        email: userData.email,
+      }, false)
+    }
+  }, [userData])
 
   const useOnSubmitTags = async () => {
     if (userInfo && userInfo.id) {
-      const updateUserFn = await updateUser({
+      await updateUser({
         input: {
           id: userInfo.id,
           lang_tag: tags.LanguageTags,
@@ -42,9 +89,67 @@ export default function Settings() {
           cloud_provider_tag: tags.CloudProviderTags,
         }
       })
-      console.log(updateUserFn)
     }
   }
+
+  const useOnSubmitNotification = async () => {
+    if (userInfo && userInfo.id) {
+      await updateUser({
+        input: {
+          id: userInfo.id,
+          notification_type: notificationToNum[isChecked]
+        }
+      })
+    }
+  }
+
+  const validationSchema = yup.object({
+    first_name: yup
+      .string()
+      .min(1, 'Name should be a minimum of 1 character'),
+    last_name: yup
+      .string()
+      .min(1, 'Message should be a minimum of 1 character'),
+    email: yup
+      .string()
+      .min(1, 'Email should be a minimum of 1 character')
+  })
+
+  const formik = useFormik({
+    initialValues: {
+      first_name: '',
+      last_name: '',
+      email: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      if (userInfo && userInfo.id) {
+        let input
+        if (file) {
+          const imageLink = await uploadImage(file)
+          input = {
+            id: userInfo.id,
+            first_name: values.first_name,
+            last_name: values.last_name,
+            email: values.email,
+            profile_image: imageLink
+          }
+          console.log(imageLink)
+        } else {
+          input = {
+            id: userInfo.id,
+            first_name: values.first_name,
+            last_name: values.last_name,
+            email: values.email
+          }
+        }
+        const result = await updateUser({
+          input
+        })
+        console.log(result)
+      }
+    },
+  })
 
   function PreferencesModule(props: PreferencesProps) {
 
@@ -53,10 +158,10 @@ export default function Settings() {
     return (
       <>
         {PreferencesComponent(props)}
-        <div className="flex justify-center mt-8">
+        <div className='flex justify-center mt-8'>
           {shouldRenderButton &&
             <button
-              className="font-primary hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg px-24 py-2"
+              className='font-primary hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg px-24 py-2'
               onClick={() => useOnSubmitTags()}>
               Submit
             </button>
@@ -66,9 +171,7 @@ export default function Settings() {
     )
   }
 
-  const [isChecked, setIsChecked] = React.useState(0)
-  const [pageIndex, setPageIndex] = useState<number>(0)
-  const components = [accountInformation(), notificationInformation(), PreferencesModule({setTags})]
+
 
   function handleCheck (option: number){
     setIsChecked(option)
@@ -83,111 +186,150 @@ export default function Settings() {
       prevIndex === 0 ? components.length - 1 : prevIndex - 1
     )
   }
-  
+
+  const components = [accountInformation(), passwordInformation(), notificationInformation(), PreferencesModule({setTags})]
+
 
   function accountInformation() {
     return (
       <div className='flex flex-col items-center pt-6'>
         <h1 className='font-primary text-3xl font-semibold'>User Profile</h1>
         <h3 className='font-primary text-sm'>Your current saved information</h3>
-        <div className='flex flex-col font-primary mt-6 lg:w-full w-[97%] bg-white rounded-lg shadow-xl'>
+        <div className='flex flex-col font-primary mt-6 lg:w-full w-[97%] bg-white rounded-lg shadow-xl mx-auto'>
           <div className='py-4 lg:w-full space-y-4 w-full'>
             <div className='flex flex-col items-center w-5/6 mx-auto'>
               <div className='flex flex-row flex-wrap items-center mt-3'>
-                <div className=''>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    className='mx-auto'
-                    viewBox='0 0 25 25'
-                    strokeWidth={1}
-                    stroke='currentColor'
-                    height={85}
-                    width={85}>
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d={`M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963
-                0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z`} />
-                  </svg>
-                </div>
-                <div className='flex flex-col items-start lg:justify-center lg:h-full'>
-                  <h1 className='font-primary text-base'>Profile Picture</h1>
-                  <h3 className='font-primary text-sm'>File Types: JPEG, PNG under 25 MB</h3>
+                <div className='flex flex-row items-center'>
+                  <div className='mr-2'>
+                    {!file ?
+                      imageOrDefault(localStorage.getItem('profile_image')!, 'w-20 h-20')
+                      :
+                      <div className='w-20 h-20 rounded-full overflow-hidden'>
+                        <img
+                          className='object-cover w-full h-full'
+                          src={file ? URL.createObjectURL(file) : 'https://default-image.jpg'}
+                          alt='Profile Image Upload'
+                        />
+                      </div>
+                    }
+                  </div>
+                  <div className='flex flex-col items-start lg:justify-center lg:h-full'>
+                    <h1 className='font-primary text-base'>Profile Picture</h1>
+                    <h3 className='font-primary text-sm'>File Types: JPEG, PNG under 25 MB</h3>
+                  </div>
                 </div>
                 <div className='flex flex-col lg:items-start lg:justify-center lg:mt-0 mt-4 mx-auto lg:h-full'>
-                  <button className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white text-sm mb-3 py-2 px-4 mt-4'>
-                    Upload New Picture
-                  </button>
+                  <div className='flex items-center'>
+                    <input
+                      type='file'
+                      id='file'
+                      className='hidden'
+                      onChange={(e) => {
+                        e.target.files ? setFile(e.target.files[0]) : console.log('null')
+                      }}
+                    />
+                    <label
+                      htmlFor='file'
+                      className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white text-sm mb-3 py-2 px-4 mt-4 cursor-pointer'>
+                      Upload New Picture
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className='flex flex-col items-center w-5/6 mx-auto'>
-              <h1 className='pb-4 mt-3'>Account Information</h1>
-              <div className='flex text-sm flex-col pb-2 w-full'>
-                <label>First Name</label>
-                <input
-                  className='rounded-md lg:w-full'
-                  name={'First Name'}
-                  type='text'
-                  id={'first-name'}
-                  placeholder={'User'}
-                />
+            <form onSubmit={formik.handleSubmit}>
+              <div className='flex flex-col items-center w-5/6 mx-auto'>
+                <h1 className='pb-4 mt-3'>Account Information</h1>
+                <div className='flex text-sm flex-col pb-2 w-full'>
+                  <label>First Name</label>
+                  <input
+                    className='rounded-md lg:w-full'
+                    name={'first_name'}
+                    type='text'
+                    id={'first_name'}
+                    placeholder={userData?.first_name ? userData?.first_name : 'First Name'}
+                    value={formik.values.first_name}
+                    onChange={formik.handleChange}
+                  />
+                </div>
+                <div className='flex text-sm flex-col pb-2 w-full'>
+                  <label>Last Name</label>
+                  <input
+                    className='rounded-md lg:w-full'
+                    name={'last_name'}
+                    type='text'
+                    id={'last_name'}
+                    placeholder={userData?.last_name ? userData?.last_name : 'Last Name'}
+                    value={formik.values.last_name}
+                    onChange={formik.handleChange}
+                  />
+                </div>
+                <div className='flex text-sm flex-col pb-1 w-full'>
+                  <label>Email</label>
+                  <input
+                    className='rounded-md lg:w-full'
+                    name={'email'}
+                    type='text'
+                    id={'email'}
+                    placeholder={userData?.email}
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                  />
+                </div>
               </div>
-              <div className='flex text-sm flex-col pb-2 w-full'>
-                <label>Last Name</label>
-                <input
-                  className='rounded-md lg:w-full'
-                  name={'Last Name'}
-                  type='text'
-                  id={'last-name'}
-                  placeholder={'Name'}
-                />
+              <div className='flex flex-col items-center w-5/6 mx-auto'>
+                <button className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4'>Submit</button>
               </div>
-              <div className='flex text-sm flex-col pb-1 w-full'>
-                <label>Username</label>
-                <input
-                  className='rounded-md lg:w-full'
-                  name={'Username'}
-                  type='text'
-                  id={'user_name'}
-                  placeholder={'@gitmatch.io'}
-                />
-              </div>
-            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  function passwordInformation() {
+    return (
+      <div className='flex flex-col w-full items-center pt-6'>
+        <h1 className='font-primary text-3xl font-semibold'>User Profile</h1>
+        <h3 className='font-primary text-sm'>Your current saved information</h3>
+        <div className='flex flex-col font-primary mt-6 lg:w-3/6 w-[97%] bg-white rounded-lg shadow-xl'>
+          <div className='py-4 lg:w-full space-y-4 w-full'>
             <div className='flex flex-col items-center w-5/6 mx-auto'>
               <h1 className='pb-4 mt-3'>Manage Password</h1>
-              <div className='flex text-sm flex-col pb-2 w-full'>
-                <label>Old Password</label>
-                <input
-                  className='rounded-md lg:w-full'
-                  name={'Old Password'}
-                  type='password'
-                  id={'old_password'}
-                  placeholder={'********'}
-                />
+              <div className='w-full'>
+                <div className='flex text-sm flex-col pb-2 w-full'>
+                  <label>Old Password</label>
+                  <input
+                    className='rounded-md lg:w-full'
+                    name={'Old Password'}
+                    type='password'
+                    id={'old_password'}
+                    placeholder={'********'}
+                  />
+                </div>
+                <div className='flex text-sm flex-col pb-2 w-full'>
+                  <label>New Password</label>
+                  <input
+                    className='rounded-md lg:w-full'
+                    name={'New Password'}
+                    type='password'
+                    id={'new_password'}
+                    placeholder={'********'}
+                  />
+                </div>
+                <div className='flex text-sm flex-col pb-1 w-full'>
+                  <label>Confirm Password</label>
+                  <input
+                    className='rounded-md lg:w-full'
+                    name={'Confirm Password'}
+                    type='password'
+                    id={'confirm_password'}
+                    placeholder={'********'}
+                  />
+                </div>
               </div>
-              <div className='flex text-sm flex-col pb-2 w-full'>
-                <label>New Password</label>
-                <input
-                  className='rounded-md lg:w-full'
-                  name={'New Password'}
-                  type='password'
-                  id={'new_password'}
-                  placeholder={'********'}
-                />
-              </div>
-              <div className='flex text-sm flex-col pb-1 w-full'>
-                <label>Confirm Password</label>
-                <input
-                  className='rounded-md lg:w-full'
-                  name={'Confirm Password'}
-                  type='password'
-                  id={'confirm_password'}
-                  placeholder={'********'}
-                />
-              </div>
-              <button className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4'>Submit</button>
+              <button className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4'>Submit
+              </button>
             </div>
           </div>
         </div>
@@ -197,28 +339,36 @@ export default function Settings() {
 
   function notificationInformation() {
     return (
-      <div className='flex flex-col items-center lg:w-3/12 pt-6'>
+      <div className='flex flex-col items-center w-full pt-6'>
         <div className='flex flex-col items-center'>
-          <h1 className="font-primary text-3xl font-semibold">Notifications</h1>
-          <h3 className="font-primary text-sm text-center">Your current notification settings</h3>
+          <h1 className='font-primary text-3xl font-semibold'>Notifications</h1>
+          <h3 className='font-primary text-sm text-center'>Your current notification settings</h3>
         </div>
-        <div className="flex flex-col font-primary mt-6 lg:w-full w-[96%] bg-white rounded-lg shadow-xl">
-          <div className="py-4 lg:w-full w-full">
+        <div className='flex flex-col font-primary mt-6 lg:w-3/6 w-[97%] bg-white rounded-lg shadow-xl'>
+          <div className='py-4 lg:w-full w-full'>
             <div className='flex flex-col items-center space-y-3 w-5/6  mx-auto'>
               <h1 className='pb-4 mt-3 text-center'>Set Notification Preferences</h1>
               <div className='w-full'>
-                <input type='radio' onChange={()=>console.log()} checked={isChecked === 0} onClick={() => handleCheck(0)}></input>
-                <label className='pl-2 font-primary text-sm' >Allow email notifications and newsletter</label>
+                <input type='radio' onChange={() => console.log()} checked={isChecked === 0}
+                  onClick={() => handleCheck(0)}></input>
+                <label className='pl-2 font-primary text-sm'>Allow email notifications and newsletter</label>
               </div>
               <div className='w-full'>
-                <input type='radio' onChange={()=>console.log()} checked={isChecked === 1} onClick={() => handleCheck(1)}></input>
-                <label className='pl-2 font-primary text-sm' >Allow email notifications only</label>
+                <input type='radio' onChange={() => console.log()} checked={isChecked === 1}
+                  onClick={() => handleCheck(1)}></input>
+                <label className='pl-2 font-primary text-sm'>Allow email notifications only</label>
               </div>
               <div className='w-full'>
-                <input type='radio' onChange={()=>console.log()} checked={isChecked === 2} onClick={() => handleCheck(2)}></input>
-                <label className='pl-2 font-primary text-sm' >No notifications (Except MFA)</label>
+                <input type='radio' onChange={() => console.log()} checked={isChecked === 2}
+                  onClick={() => handleCheck(2)}></input>
+                <label className='pl-2 font-primary text-sm'>No notifications (Except MFA)</label>
               </div>
-              <button className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4'>Submit</button>
+              <button
+                className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4'
+                onClick={() => useOnSubmitNotification()}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>
@@ -257,7 +407,12 @@ export default function Settings() {
                   </button>
                   <button
                     className={` ${pageIndex === 1 ? ' border-b-4 border-primary-purple' : ''}`}
-                    onClick={() => setPageIndex(1)}>Notifications</button>
+                    onClick={() => setPageIndex(1)}>Password
+                  </button>
+                  <button
+                    className={` ${pageIndex === 2 ? ' border-b-4 border-primary-purple' : ''}`}
+                    onClick={() => setPageIndex(2)}>Notifications
+                  </button>
                 </section>
               </div>
             </div>
@@ -282,8 +437,8 @@ export default function Settings() {
                 <section className='font-primary text-sm space-y-3 mr-2 flex flex-col items-start'>
                   <h1 className='font-semibold mb-1'>Preferences</h1>
                   <button
-                    className={` ${pageIndex === 2 ? ' border-b-4 border-primary-purple' : ''}`}
-                    onClick={() => setPageIndex(2)}>Project Preferences
+                    className={` ${pageIndex === 3 ? ' border-b-4 border-primary-purple' : ''}`}
+                    onClick={() => setPageIndex(3)}>Project Preferences
                   </button>
                 </section>
               </div>

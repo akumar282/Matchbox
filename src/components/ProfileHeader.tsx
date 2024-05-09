@@ -52,9 +52,9 @@ export default function ProfileHeader(props: userData) {
       <div className='bg-white rounded-lg w-full px-2 py-2 font-primary'>
         <div className='flex flex-col'>
           <div className='flex justify-between w-full'>
-            <div className='flex flex-col md:flex-row lg:flex-row'>
-              <div className='w-32 h-32 rounded-full'>
-                {imageOrDefault(props.picture, 'w-32 h-32')}
+            <div className='flex flex-col mt-4 lg:ml-4 space-x-4 md:flex-row lg:flex-row'>
+              <div className='w-28 h-28 lg:m-0 ml-4 rounded-full'>
+                {imageOrDefault(props.picture, 'w-28 h-28')}
               </div>
               <div className='flex flex-col justify-center items-start ml-2'>
                 <h1 className='text-2xl font-bold mt-4'>{data.first_name} {data.last_name}</h1>

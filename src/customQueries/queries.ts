@@ -117,19 +117,12 @@ export const listSavedPostModelsCustom = `
         userID 
         postID
         postInfo {
-          cloud_provider_tag
           counter
           createdAt
           creator_name
           description
-          dev_type_tag
-          difficulty_tag
-          experience_level
-          framework_tag
           id
           image_link
-          interest_tag
-          lang_tag
           likes
           likes_users
           long_description
@@ -138,12 +131,8 @@ export const listSavedPostModelsCustom = `
           project_chat
           project_link
           saves
-          size_tag
           updatedAt
           userID
-          contributor_limit
-          application
-          reported
         }
         count
         createdAt
@@ -152,6 +141,47 @@ export const listSavedPostModelsCustom = `
       }
       nextToken
       __typename
+    }
+  }
+`
+
+export const listJoinedPostModelsCustom = `
+  query ListJoinedPostModels(
+    $filter: ModelJoinedPostModelFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listJoinedPostModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        count
+        createdAt
+        id
+        joined_at
+        postID
+        postInfo {
+          userID
+          cloud_provider_tag
+          contributor_limit
+          counter
+          createdAt
+          creator_name
+          description
+          dev_type_tag
+          difficulty_tag
+          id
+          likes
+          likes_users
+          long_description
+          post_title
+          post_date
+          project_chat
+          project_link
+          updatedAt
+        }
+        userID
+        updatedAt
+      }
+      nextToken
     }
   }
 `

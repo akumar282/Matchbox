@@ -10,24 +10,24 @@ import {AuthContext} from '../components/AuthWrapper'
 import {getImage} from '../backend/storage/s3'
 import ProjectView from '../components/ProjectView'
 import {listSavedPosts} from '../backend/queries/savedPostQueries'
-import {ModelSavedPostModelConnection} from '../API'
+import {ModelJoinedPostModelConnection, ModelSavedPostModelConnection} from '../API'
+import {listJoinedPosts} from '../backend/queries/joinedPostQueries'
 
 export default function HomePage() {
 
   const userInfo = useContext(AuthContext)
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [joinedProjects, setJoinedProjects] = useState<React.ReactNode[]>([
     <SeeAllComponent key={'End'} linkTo={'saved'} image={group} bodyText={'Your joined projects will appear here so you can choose which to work on'}/>
   ])
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [savedProjects, setSavedProjects] = useState<React.ReactNode[]>([
     <SeeAllComponent key={'End'} linkTo={'saved'} image={Saved} bodyText={'Your saved projects will appear here so you can choose which to work on'}/>
   ])
   const navigate = useNavigate()
 
   useEffect(() => {
-    const getHomePageData = async () => {
+    const getHomePageSavedData = async () => {
       if(userInfo && userInfo.id) {
         const { data } = await listSavedPosts({
           filter: {
@@ -36,7 +36,6 @@ export default function HomePage() {
             }
           }
         })
-        console.log(data)
         if (data && data.listSavedPostModels && data.listSavedPostModels.items) {
           const { items } = data.listSavedPostModels as ModelSavedPostModelConnection
           for (const item of items) {
@@ -53,13 +52,43 @@ export default function HomePage() {
               )
               setSavedProjects((prevProjects) => [mapToCard, ...prevProjects])
             }
-
           }
         }
       }
-
     }
-    getHomePageData().catch()
+
+    const getHomePageJoinedData = async () => {
+      if(userInfo && userInfo.id) {
+        const { data } = await listJoinedPosts({
+          filter: {
+            userID: {
+              eq: userInfo.id
+            }
+          }
+        })
+        if (data && data.listJoinedPostModels && data.listJoinedPostModels.items) {
+          const { items } = data.listJoinedPostModels as ModelJoinedPostModelConnection
+          for (const item of items) {
+            if (item && item.postInfo) {
+              const imageUrl = await getImage(item.postInfo.image_link ? item.postInfo.image_link : 'NewLogo.png')
+              const mapToCard = (
+                <ProjectView
+                  id={item.postInfo.id}
+                  key={item.postInfo.id}
+                  title={item.postInfo.post_title}
+                  image={imageUrl}
+                  github={item.postInfo.project_link ? item.postInfo.project_link : 'https://github.com'}
+                />
+              )
+              setJoinedProjects((prevProjects) => [mapToCard, ...prevProjects])
+            }
+          }
+        }
+      }
+    }
+
+    getHomePageSavedData().catch()
+    getHomePageJoinedData().catch()
   }, [])
 
   return (
