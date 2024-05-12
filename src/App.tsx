@@ -37,7 +37,7 @@ function App () {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/load' element={<LoadingScreen />} />
         <Route element={<ProtectedRoutes />} >
-          <Route path="/setup" element={<PreferencesPage />} />
+          <Route path='/setup' element={<PreferencesPage />} />
           <Route path='/home' element={<HomePage />} />
           <Route path='/create-project' element={<CreatePost />} />
           <Route path='/discover' element={<DiscoverPage />} />

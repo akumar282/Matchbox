@@ -6,6 +6,7 @@ module.exports = {
     '^@api$': '<rootDir>/src/API.ts',
     '^@graphql/(.*)$': '<rootDir>/src/graphql/$1',
     '^@aws-exports$': '<rootDir>/src/aws-exports.ts',
+    '^@utils/(.*)$': '<rootDir>/src/functions/$1'
   },
   globals: {
     'ts-jest': {

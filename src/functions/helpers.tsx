@@ -1,6 +1,8 @@
 import React from 'react'
 import {enumBundle, preferenceTags} from '../backend/types'
 import Tags from '../components/Tags'
+import {listUserConvos} from '../backend/queries/userConvoQueries'
+import {getConversation} from '../backend/queries/conversationQueries'
 
 
 export type tagRender = {
@@ -72,4 +74,37 @@ export async function getImageBlob(imagePath: string): Promise<File> {
     type: blob.type,
     lastModified: new Date().getTime()
   })
+}
+
+export const doesDmExist = async (userOne: string, userTwo: string)  => {
+  const partOne = await listUserConvos({
+    filter: {
+      usersModelID: {
+        eq: userOne
+      }
+    }
+  })
+  const partTwo = await listUserConvos({
+    filter: {
+      usersModelID: {
+        eq: userTwo
+      }
+    }
+  })
+  if(partTwo && partOne && partOne.data && partTwo.data && partOne.data.listUsersConvos && partTwo.data.listUsersConvos){
+    const commonConversations = partOne.data.listUsersConvos.items
+      .map(convo => convo?.conversationModelID)
+      .filter(convoID => new Set(partTwo.data?.listUsersConvos?.items.map(convo => convo?.conversationModelID)).has(convoID))
+    if(commonConversations.length === 0) {
+      return false
+    } else if (commonConversations.length >= 1) {
+      for(const id of commonConversations) {
+        const { data } = await getConversation({id: id ? id : '0'})
+        if(data && data.getConversationModel && (data.getConversationModel.title === null || data.getConversationModel.title === undefined)){
+          return true
+        }
+      }
+    }
+  }
+  return false
 }

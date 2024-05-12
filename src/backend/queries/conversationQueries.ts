@@ -8,7 +8,7 @@ import {
 } from '@api'
 import { GraphQLQuery } from '@aws-amplify/api'
 
-export async function getConversation(conversation: { input: GetConversationModelQueryVariables}){
+export async function getConversation(conversation: GetConversationModelQueryVariables){
   return await API.graphql<GraphQLQuery<GetConversationModelQuery>>({
     query: getConversationModel,
     variables: conversation,
@@ -16,7 +16,7 @@ export async function getConversation(conversation: { input: GetConversationMode
   })
 }
 
-export async function listConversation(conversation: { input: ListConversationModelsQueryVariables}){
+export async function listConversation(conversation: ListConversationModelsQueryVariables){
   return await API.graphql<GraphQLQuery<ListConversationModelsQuery>>({
     query: listConversationModels,
     variables: conversation,

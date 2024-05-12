@@ -3,6 +3,7 @@ import {UsersModel} from '../API'
 import {convertISOToMonthYear, generateTags, imageOrDefault, tagRender} from '../functions/helpers'
 import {preferenceTags} from '../backend/types'
 import github from '../img/github.svg'
+import {useNavigate} from 'react-router-dom'
 
 interface userData {
   data: UsersModel
@@ -15,6 +16,7 @@ interface userData {
 export default function ProfileHeader(props: userData) {
 
   const { data } = props
+  const navigate = useNavigate()
 
   const allTags: tagRender[] = [
     {
@@ -62,7 +64,7 @@ export default function ProfileHeader(props: userData) {
               </div>
             </div>
             {props.editable ? (
-              <button className='rounded-full hover:bg-slate-300 px-2 py-2 w-12 h-12 mt-2 mr-2'>
+              <button className='rounded-full hover:bg-slate-300 px-2 py-2 w-12 h-12 mt-2 mr-2' onClick={() => navigate('/settings')}>
                 <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5}
                   stroke='currentColor'>
                   <path strokeLinecap='round' strokeLinejoin='round'

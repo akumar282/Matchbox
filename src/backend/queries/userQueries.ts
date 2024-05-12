@@ -16,7 +16,7 @@ export async function getUser(user:  GetUsersModelQueryVariables){
   })
 }
 
-export async function listUsers(user: { input: ListUsersModelsQueryVariables}){
+export async function listUsers(user: ListUsersModelsQueryVariables){
   return await API.graphql<GraphQLQuery<ListUsersModelsQuery>>({
     query: listUsersModels,
     variables: user,

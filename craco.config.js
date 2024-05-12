@@ -8,6 +8,7 @@ module.exports = {
       '@api': path.resolve(__dirname, 'src/API.ts'),
       '@graphql': path.resolve(__dirname, 'src/graphql'),
       '@aws-exports': path.resolve(__dirname, 'src/aws-exports.ts'),
+      '@utils': path.resolve(__dirname, 'src/functions')
     },
     configure: {
       experiments: {

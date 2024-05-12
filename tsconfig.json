@@ -16,7 +16,8 @@
       "@backend/*": ["src/backend/*"],
       "@api": ["src/API.ts"],
       "@graphql/*": ["src/graphql/*"],
-      "@aws-exports": ["src/aws-exports.ts"]
+      "@aws-exports": ["src/aws-exports.ts"],
+      "@utils/*": ["src/functions/*"]
     },
     "typeRoots": [
       "src/types"

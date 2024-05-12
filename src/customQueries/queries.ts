@@ -185,3 +185,24 @@ export const listJoinedPostModelsCustom = `
     }
   }
 `
+
+export const listUserConvoCustom = `
+  query ListConvoModels(
+    $filter: ModelUsersConvoFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsersConvos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        conversationModelID
+        createdAt
+        id
+        updatedAt
+        usersModelID
+        usersModel {
+          user_name
+        }
+      }
+    }
+  }
+`

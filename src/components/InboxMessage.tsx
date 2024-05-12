@@ -1,5 +1,9 @@
-import React, { useRef } from 'react'
-import { UsersConvo } from '../API'
+import React, {useEffect, useRef, useState} from 'react'
+import {UsersConvo} from '../API'
+import {API} from 'aws-amplify'
+import {GraphQLQuery} from '@aws-amplify/api'
+import {listUserConvoCustom} from '../customQueries/queries'
+import {ListUsersConvosQueryCustom} from '../backend/types'
 
 interface InboxMessageProps {
   setScreen: React.Dispatch<React.SetStateAction<string>>
@@ -11,12 +15,40 @@ interface InboxMessageProps {
 
 export default function InboxMessage(props: InboxMessageProps) {
   const convoRef = useRef<HTMLButtonElement>(null)
+  const [altTitle, setAltTitle] = useState<string | null>( null)
 
   function handleClickToChat() {
     props.setScreen('chat')
     props.currentChatId(props.chatData.conversationModel.id)
     props.onSelectChat(props.chatData.conversationModel.id)
   }
+
+  useEffect(() => {
+    const useTitle = async () => {
+      let determineTitle = ''
+      const { data } = await API.graphql<GraphQLQuery<ListUsersConvosQueryCustom>>({
+        query: listUserConvoCustom,
+        variables: {
+          filter: {
+            conversationModelID: {
+              eq: props.chatData.conversationModel.id
+            }
+          }},
+        authMode: 'API_KEY'
+      })
+      if(data && data.listUsersConvos && data.listUsersConvos.items) {
+        data.listUsersConvos.items.forEach((x) => {
+          determineTitle += x?.usersModel.user_name
+        })
+      }
+      setAltTitle(determineTitle)
+    }
+
+    if(props.chatData.conversationModel.title === null) {
+      useTitle().catch()
+    }
+  }, [])
+
 
   return (
     <button
@@ -32,7 +64,7 @@ export default function InboxMessage(props: InboxMessageProps) {
         </svg>
         <div className='flex flex-col gap-2 text-start overflow-hidden w-full'>
           <h1 className='truncate w-full'>
-            {props.chatData.conversationModel.title}
+            {props.chatData.conversationModel.title === null ? altTitle : props.chatData.conversationModel.title}
           </h1>
         </div>
       </div>

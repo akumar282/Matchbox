@@ -13,6 +13,9 @@ import {createHiddenPost} from '../backend/mutations/hiddenPostMutations'
 import {listSavedPosts} from '../backend/queries/savedPostQueries'
 import {createLikedPost, deleteLikedPost} from '../backend/mutations/likedPostMutations'
 import {listLikedPosts} from '../backend/queries/likedPostQueries'
+import JoinModal from './JoinModal'
+import {listJoinedPosts} from '../backend/queries/joinedPostQueries'
+import ConversationModal from './ConversationModal'
 
 interface DiscoverProps {
   data: PostsModel
@@ -23,7 +26,10 @@ interface DiscoverProps {
 
 export default function DiscoverComponent(props: DiscoverProps) {
   const [saved, setSaved] = useState<boolean>(false)
+  const [showModalJoin, setShowModalJoin] = React.useState(false)
+  const [showModalConvo, setShowModalConvo] = React.useState(false)
   const [liked, setLiked] = useState<boolean>(false)
+  const [joined, setJoined] = useState<boolean>(false)
 
   const navigate = useNavigate()
   const userInfo = useContext(AuthContext)
@@ -61,6 +67,39 @@ export default function DiscoverComponent(props: DiscoverProps) {
   ]
 
   const [projectImage, setProjectImage] = useState('')
+  
+  function determineButton(joined: boolean){
+    if(props.editable && !joined) {
+      return (
+        <button
+          className='font-primary shadow-lg hover:bg-red-600 bg-red-500 text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'
+          onClick={() => navigate(`/project/edit/${props.data.id}`)}
+        >
+          Edit Project
+        </button>
+      )
+    }
+    if (joined && !props.editable) {
+      return (
+        <button
+          className='font-primary shadow-lg hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'
+          onClick={() => navigate(`/joined/project/${props.data.id}`)}
+        >
+          Go to Dashboard
+        </button>
+      )
+    }
+    if (!joined && !props.editable) {
+      return (
+        <button
+          className='font-primary shadow-lg hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'
+          onClick={() => setShowModalJoin(true)}
+        >
+          Join Project
+        </button>
+      )
+    }
+  }
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -103,6 +142,29 @@ export default function DiscoverComponent(props: DiscoverProps) {
       }
     }
     fetchLiked().catch()
+  }, [])
+
+  useEffect(() => {
+    const fetchJoined = async () => {
+      if(userInfo && userInfo.id) {
+        const savedBody = await listJoinedPosts({
+          filter: {
+            postID: {
+              eq: props.data.id
+            },
+            userID: {
+              eq: userInfo.id
+            }
+          }
+        })
+        const { data } = savedBody
+        if(data && data.listJoinedPostModels) {
+          const exists = data.listJoinedPostModels.items?.pop()
+          setJoined(!!exists)
+        }
+      }
+    }
+    fetchJoined().catch()
   }, [])
 
   const useSavePost = async () => {
@@ -191,8 +253,11 @@ export default function DiscoverComponent(props: DiscoverProps) {
     }
   }
 
+
   return (
     <div className='flex flex-col pt-8 pb-12 lg:px-16 w-full z-10'>
+      <JoinModal setFunction={setShowModalJoin} openModal={showModalJoin} project_id={props.data.id} project_name={props.data.post_title} chat_id={props.data.project_chat}/>
+      <ConversationModal setFunction={setShowModalConvo} openModal={showModalConvo} owner_name={props.data.creator_name ? props.data.creator_name : props.data.userID} owner_id={props.data.userID}/>
       <div className='flex lg:flex-row flex-col lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
         <div className='lg:w-64 lg:h-40 w-[97%] h-44 space-y-2 bg-white shadow-lg rounded-lg '>
           <img className='h-full w-full rounded-lg object-cover' src={projectImage} alt='Project Thumbnail'/>
@@ -200,8 +265,8 @@ export default function DiscoverComponent(props: DiscoverProps) {
         <div className='bg-white rounded-lg lg:w-[800px] w-[97%] flex-auto shadow-lg font-primary justify-between space-y-2 flex items-center flex-col '>
           <h1 className='text-2xl pt-2'>{props.data.post_title}</h1>
           <h3 className='text-center text-lg'>{props.data.description}</h3>
-          <div className='flex flex-row w-full  lg:justify-between justify-center'>
-            <div className='lg:flex hidden'>
+          <div className='flex flex-row w-full md:justify-between  lg:justify-between justify-center'>
+            <div className='lg:flex md:flex hidden'>
               <button
                 className={`m-2 ${saved ? 'text-yellow-400' : ''}`}
                 onClick={() => useSavePost()}
@@ -228,7 +293,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
             <button onClick={() => navigate(`/view/profile/${props.data.userID}`)}>
               <h3 className='text-xs pb-3'>{'Posted by: ' + props.data.creator_name}</h3>
             </button>
-            <div className='lg:flex hidden'>
+            <div className='lg:flex md:flex hidden'>
               <button
                 className={`m-2 ${liked ? 'text-red-500' : ''}`}
                 onClick={() => useLikedPost()}
@@ -319,7 +384,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
               <h3>View GitHub Repository</h3>
             </a>
           </button>
-          <button className='flex flex-row items-center hover:bg-slate-300  space-x-2 py-2 px-4 '>
+          <button className='flex flex-row items-center hover:bg-slate-300  space-x-2 py-2 px-4 ' disabled={joined} onClick={() => setShowModalConvo(true)}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none' viewBox='0 0 24 24'
@@ -417,19 +482,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
         </div>
       </div>
       <div className='lg:mt-6 mt-3 flex flex-col w-[97%] mx-auto items-center'>
-        {props.editable === true ?
-          <button
-            className='font-primary shadow-lg hover:bg-red-600 bg-red-500 text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'
-            onClick={() => navigate(`/project/edit/${props.data.id}`)}
-          >
-            Edit Project
-          </button>
-          :
-          <button
-            className='font-primary shadow-lg hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'>
-            Join Project
-          </button>
-        }
+        {determineButton(joined)}
       </div>
       <div className='flex lg:flex-row flex-col lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
         <CommentSection postID={props.data.id}/>

@@ -6,7 +6,7 @@ import {
   DevelopmentTag,
   CloudProviderTag,
   ExperienceTag,
-  DifficultyTag, PostsModel
+  DifficultyTag, PostsModel, UsersModel
 } from '@api'
 import { CognitoUserSession } from 'amazon-cognito-identity-js'
 import {Endpoints} from '@octokit/types'
@@ -49,3 +49,20 @@ export type githubHealthPercentage = components['schemas']['community-profile'][
 export type listRepoIssuesParameters = Endpoints['GET /repos/{owner}/{repo}/issues']['parameters']
 export type listRepoIssuesResponse = Endpoints['GET /repos/{owner}/{repo}/issues']['response']
 export type listRepoIssuesRequest = Endpoints['GET /repos/{owner}/{repo}/issues']['request']
+
+
+export type ListUsersConvosQueryCustom = {
+  listUsersConvos?:  {
+    __typename: 'ModelUsersConvoConnection',
+    items:  Array< {
+      __typename: 'UsersConvo',
+      id: string,
+      usersModelID: string,
+      conversationModelID: string,
+      createdAt: string,
+      updatedAt: string,
+      usersModel: UsersModel,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+}

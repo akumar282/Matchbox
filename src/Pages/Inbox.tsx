@@ -35,14 +35,6 @@ export default function Inbox() {
   }, [userInfo])
 
 
-  // const inboxChatProps: InboxChatProps = {
-  //   chatId: currentChatId,
-  //   screenState: screen,
-  //   setScreen: setScreen,
-  //   currentChatId: setCurrentChatId
-  // }
-
-
   return (
     <div className='h-screen bg-primary-purple flex flex-col relative overflow-hidden'>
       <NavBar />

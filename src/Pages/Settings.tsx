@@ -138,34 +138,37 @@ export default function Settings() {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      try{
-        if (userInfo && userInfo.id) {
-          let input
-          if (file) {
-            const imageLink = await uploadImage(file)
-            input = {
-              id: userInfo.id,
-              first_name: values.first_name,
-              last_name: values.last_name,
-              email: values.email,
-              profile_image: imageLink
-            }
-            console.log(imageLink)
-          } else {
-            input = {
-              id: userInfo.id,
-              first_name: values.first_name,
-              last_name: values.last_name,
-              email: values.email
-            }
-          }
-          const result = await updateUser({
-            input
-          })
-          console.log(result)
-          setUserUpdateSuccess(true)
+      try {
+        const user = await Auth.currentAuthenticatedUser()
+        if (!userInfo || !userInfo.id || !userData || !user) {
+          throw new Error('User authentication or data is missing.')
         }
+
+        const input = {
+          id: userInfo.id,
+          first_name: values.first_name,
+          last_name: values.last_name,
+        }
+
+        if (file) {
+          const imageLink = await uploadImage(file)
+          input['profile_image'] = imageLink
+        }
+
+        if (values.email !== userData.email) {
+          const result = await Auth.updateUserAttributes(user, {
+            email: values.email
+          })
+          if (result !== 'SUCCESS') {
+            throw new Error('Failed to update email.')
+          }
+          input['email'] = values.email
+        }
+
+        await updateUser({ input })
+        setUserUpdateSuccess(true)
       } catch (e) {
+        console.error('Update failed:', e)
         setUserUpdateError(true)
       }
     },
