@@ -25,7 +25,7 @@ export default function DiscoverPage() {
       const sessionData = sessionStorage.getItem('projectsData')
       if (sessionData) {
         const projectsData = JSON.parse(sessionData)
-        const updatedProjects = projectsData.map((x) => <DiscoverComponent key={x.id} data={x} />)
+        const updatedProjects = projectsData.map((x) => <DiscoverComponent key={x.id} data={x} editable={false} />)
         setProjects(updatedProjects)
         setLoading(false)
       } else {
@@ -33,14 +33,14 @@ export default function DiscoverPage() {
           const dynamoUserId = userInfo?.id
           const responseJson = await (await fetch(`https://3q03neb3ig.execute-api.us-west-2.amazonaws.com/prod/matches/${dynamoUserId}`)).json()
           console.log(responseJson)
-          const mappedItems = (responseJson.data.items as PostsModel[]).map(x => <DiscoverComponent key={x.id} data={x} />)
+          const mappedItems = (responseJson.data.items as PostsModel[]).map(x => <DiscoverComponent key={x.id} data={x} editable={false} />)
           setProjects(mappedItems)
           setLoading(false)
           sessionStorage.setItem('projectsData', JSON.stringify(responseJson.data.items))
         } catch (e) {
           console.log(e + ' Falling back to existing json')
           const ExampleData = fallback.data.items as unknown as PostsModel[]
-          const updatedProjects = ExampleData.map((x) => <DiscoverComponent key={x.id} data={x} />)
+          const updatedProjects = ExampleData.map((x) => <DiscoverComponent key={x.id} data={x} editable={false} />)
           setProjects(updatedProjects)
           setLoading(false)
         }

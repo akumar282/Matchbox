@@ -886,7 +886,41 @@ export const getCommentModel = /* GraphQL */ `query GetCommentModel($id: ID!) {
   getCommentModel(id: $id) {
     id
     comment
-    profile_image
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
     comment_date
     parent_comment
     replies
@@ -912,7 +946,6 @@ export const listCommentModels = /* GraphQL */ `query ListCommentModels(
     items {
       id
       comment
-      profile_image
       comment_date
       parent_comment
       replies
@@ -951,7 +984,6 @@ export const searchCommentModels = /* GraphQL */ `query SearchCommentModels(
     items {
       id
       comment
-      profile_image
       comment_date
       parent_comment
       replies

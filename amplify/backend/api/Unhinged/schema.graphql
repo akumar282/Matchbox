@@ -291,7 +291,7 @@ type MessageModel @model @searchable @auth(rules: [{allow: public, operations: [
 type CommentModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   comment: String!
-  profile_image: String
+  userInfo: UsersModel @belongsTo(fields: ["userID"])
   comment_date: AWSDateTime
   parent_comment: ID
   replies: Int

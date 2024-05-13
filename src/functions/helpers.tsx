@@ -67,6 +67,47 @@ export function convertISOToMonthYear(isoString: string) {
   return `${month} ${year}`
 }
 
+export function convertISOToMonthDayYear(isoString: string) {
+  const date = new Date(isoString)
+
+  const monthNames = [
+    'January', 'February', 'March',
+    'April', 'May', 'June',
+    'July', 'August', 'September',
+    'October', 'November', 'December'
+  ]
+
+  const month = monthNames[date.getMonth()]
+  const year = date.getFullYear()
+  const day= date.getDate()
+
+  return `${month} ${day} ${year}`
+}
+
+export function timeSince(isoString: string): string {
+  const now = new Date()
+  const pastDate = new Date(isoString)
+
+  if (isNaN(pastDate.getTime())) {
+    return 'Invalid date'
+  }
+
+  const differenceInMilliseconds = now.getTime() - pastDate.getTime()
+  const minutes = differenceInMilliseconds / (1000 * 60)
+
+  if (minutes < 60) {
+    return `${Math.floor(minutes)} minutes ago`
+  } else {
+    const hours = minutes / 60
+    if (hours < 24) {
+      return `${Math.floor(hours)} hours ago`
+    } else {
+      const days = hours / 24
+      return `${Math.floor(days)} days ago`
+    }
+  }
+}
+
 export async function getImageBlob(imagePath: string): Promise<File> {
   const response = await fetch(imagePath)
   const blob = await response.blob()

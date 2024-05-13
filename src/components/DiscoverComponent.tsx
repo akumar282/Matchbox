@@ -19,7 +19,7 @@ import ConversationModal from './ConversationModal'
 
 interface DiscoverProps {
   data: PostsModel
-  editable?: boolean
+  editable: boolean
   saved?: boolean
   liked?: boolean
 }
@@ -253,6 +253,10 @@ export default function DiscoverComponent(props: DiscoverProps) {
     }
   }
 
+  function isDisabled(): boolean {
+    return joined || props.editable
+  }
+
 
   return (
     <div className='flex flex-col pt-8 pb-12 lg:px-16 w-full z-10'>
@@ -384,7 +388,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
               <h3>View GitHub Repository</h3>
             </a>
           </button>
-          <button className='flex flex-row items-center hover:bg-slate-300  space-x-2 py-2 px-4 ' disabled={joined} onClick={() => setShowModalConvo(true)}>
+          <button className='flex flex-row items-center hover:bg-slate-300  space-x-2 py-2 px-4 ' disabled={isDisabled()} onClick={() => setShowModalConvo(true)}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none' viewBox='0 0 24 24'

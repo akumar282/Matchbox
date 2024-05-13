@@ -1,5 +1,5 @@
 import { API } from 'aws-amplify'
-import { getCommentModel, listCommentModels } from '@graphql/queries'
+import { getCommentModel } from '@graphql/queries'
 import {
   GetCommentModelQuery,
   ListCommentModelsQuery,
@@ -7,6 +7,7 @@ import {
   GetCommentModelQueryVariables
 } from '@api'
 import { GraphQLQuery } from '@aws-amplify/api'
+import {listCommentsCustom} from '../../customQueries/queries'
 
 export async function getComment(comment: { input: GetCommentModelQueryVariables}){
   return await API.graphql<GraphQLQuery<GetCommentModelQuery>>({
@@ -16,9 +17,9 @@ export async function getComment(comment: { input: GetCommentModelQueryVariables
   })
 }
 
-export async function listComment(comment: { input: ListCommentModelsQueryVariables}){
+export async function listComment(comment: ListCommentModelsQueryVariables){
   return await API.graphql<GraphQLQuery<ListCommentModelsQuery>>({
-    query: listCommentModels,
+    query: listCommentsCustom,
     variables: comment,
     authMode: 'API_KEY'
   })

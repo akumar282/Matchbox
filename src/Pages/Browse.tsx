@@ -28,7 +28,6 @@ export default function Browse() {
 
   const { params } = useParams()
   const navigate = useNavigate()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [projects, setProjects] = useState<React.ReactNode[]>([])
   const userInfo = useContext(AuthContext)
 
@@ -43,7 +42,6 @@ export default function Browse() {
 
         const { data } = await getUser({id: userInfo!.id})
         if (data && data.getUsersModel && data.getUsersModel.saved_posts) {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { data } = await listPosts(
             {
               filter: {
@@ -85,13 +83,13 @@ export default function Browse() {
           <h1 className='text-2xl font-primary ml-4 mt-3'>Browse Projects</h1>
         </div>
       </div>
-      <div className='bg-gray-200 flex flex-grow'>
-        <div className=' pt-3 pb-8 max-w-[1070px] flex items-center flex-col mx-auto'>
-
-          {projects}
+      <div className='bg-gray-200 flex flex-grow overflow-hidden'>
+        <div className='pt-3 pb-8 max-w-[1070px] flex items-center flex-col mx-auto h-full'>
+          <div className='overflow-auto w-full h-full hide-scrollbar'>
+            {projects}
+          </div>
         </div>
       </div>
-
     </div>
   )
 }

@@ -206,3 +206,33 @@ export const listUserConvoCustom = `
     }
   }
 `
+
+export const listCommentsCustom = `
+  query ListCommentModels(
+    $filter: ModelCommentModelFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCommentModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        comment
+        comment_date
+        createdAt
+        id
+        isReply
+        parent_comment
+        postID
+        replies
+        updatedAt
+        userID
+        user_name
+        userInfo {
+          user_name
+          profile_image
+        }
+      }
+      nextToken
+      __typename
+    }
+  }
+`

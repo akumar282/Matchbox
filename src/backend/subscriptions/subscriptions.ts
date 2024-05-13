@@ -2,9 +2,11 @@ import { API } from 'aws-amplify'
 import { GraphQLSubscription } from '@aws-amplify/api'
 import * as subscriptions from '../../graphql/subscriptions'
 import {
+  OnCreateCommentModelSubscription, OnCreateCommentModelSubscriptionVariables,
   OnCreateMessageModelSubscription,
   OnCreateMessageModelSubscriptionVariables,
-  OnCreateNewsletterEmailModelSubscription, OnCreateNewsletterEmailModelSubscriptionVariables
+  OnCreateNewsletterEmailModelSubscription,
+  OnCreateNewsletterEmailModelSubscriptionVariables
 } from '@api'
 
 export const createSub = API.graphql<GraphQLSubscription<OnCreateNewsletterEmailModelSubscription>>({
@@ -27,6 +29,16 @@ export function createSubNewsletter(callback, variables?: OnCreateNewsletterEmai
 export function createMessageSubscription(callback, variables: OnCreateMessageModelSubscriptionVariables) {
   return API.graphql<GraphQLSubscription<OnCreateMessageModelSubscription>>({
     query: subscriptions.onCreateMessageModel,
+    variables
+  }).subscribe({
+    next: ({value }) => callback(value),
+    error: (error) => console.warn(error)
+  })
+}
+
+export function createCommentSubscription(callback, variables: OnCreateCommentModelSubscriptionVariables) {
+  return API.graphql<GraphQLSubscription<OnCreateCommentModelSubscription>>({
+    query: subscriptions.onCreateCommentModel,
     variables
   }).subscribe({
     next: ({value }) => callback(value),
