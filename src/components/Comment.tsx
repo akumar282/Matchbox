@@ -15,8 +15,9 @@ export default function Comment(props: CommentProps){
     const fetchImage = async () => {
       props.data.userInfo?.profile_image ? setCommentImage(await getImage(props.data.userInfo.profile_image)) : setCommentImage(await getImage())
     }
+    console.log('im typing')
     fetchImage().catch()
-  })
+  }, [props.data.userInfo?.profile_image])
 
   return (
     <div className='w-[97%] flex bg-slate-200 rounded-lg mb-2 flex-col'>

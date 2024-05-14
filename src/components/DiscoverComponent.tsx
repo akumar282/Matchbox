@@ -87,7 +87,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
     if (joined && !props.editable) {
       return (
         <button
-          className='font-primary shadow-lg hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'
+          className='font-primary shadow-lg hover:bg-indigo-400 bg-emerald-300 text-black text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'
           onClick={() => navigate(`/joined/project/${props.data.id}`)}
         >
           Go to Dashboard
