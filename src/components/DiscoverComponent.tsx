@@ -16,6 +16,8 @@ import {listLikedPosts} from '../backend/queries/likedPostQueries'
 import JoinModal from './JoinModal'
 import {listJoinedPosts} from '../backend/queries/joinedPostQueries'
 import ConversationModal from './ConversationModal'
+import ErrorAlert, {successStyle, successXStyle} from './alerts/errorAlert'
+import ReportPostModal from './ReportPostModal'
 
 interface DiscoverProps {
   data: PostsModel
@@ -26,7 +28,10 @@ interface DiscoverProps {
 
 export default function DiscoverComponent(props: DiscoverProps) {
   const [saved, setSaved] = useState<boolean>(false)
+  const [copySuccess, setCopySuccess] = useState<boolean>(false)
   const [showModalJoin, setShowModalJoin] = React.useState(false)
+  const [showReport, setShowReport] = React.useState(false)
+
   const [showModalConvo, setShowModalConvo] = React.useState(false)
   const [liked, setLiked] = useState<boolean>(false)
   const [joined, setJoined] = useState<boolean>(false)
@@ -107,6 +112,8 @@ export default function DiscoverComponent(props: DiscoverProps) {
     }
     fetchImage()
   })
+
+
 
   useEffect(() => {
     const fetchSaved = async () => {
@@ -237,7 +244,14 @@ export default function DiscoverComponent(props: DiscoverProps) {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const triggerCopyAlert = () => {
+    navigator.clipboard.writeText(`https://gitmatch.io/project/${props.data.id}`).catch()
+    setCopySuccess(true)
+    setTimeout(() => {
+      setCopySuccess(false)
+    }, 3000)  }
+
+
   const useHidePost = async () => {
     if(userInfo && userInfo.id) {
       const log = await createHiddenPost({
@@ -260,8 +274,12 @@ export default function DiscoverComponent(props: DiscoverProps) {
 
   return (
     <div className='flex flex-col pt-8 pb-12 lg:px-16 w-full z-10'>
+      {copySuccess &&
+        <ErrorAlert show={copySuccess} closeAlert={triggerCopyAlert} title='Success' message='Link copied to clipboard' closeStyle={successXStyle} colorStyle={successStyle}/>
+      }
       <JoinModal setFunction={setShowModalJoin} openModal={showModalJoin} project_id={props.data.id} project_name={props.data.post_title} chat_id={props.data.project_chat}/>
       <ConversationModal setFunction={setShowModalConvo} openModal={showModalConvo} owner_name={props.data.creator_name ? props.data.creator_name : props.data.userID} owner_id={props.data.userID}/>
+      <ReportPostModal setFunction={setShowReport} openModal={showReport} user_name={props.data.post_title} post_id={props.data.id}/>
       <div className='flex lg:flex-row flex-col lg:items-stretch items-center lg:space-y-0 space-y-3 lg:space-x-3 space-x-0'>
         <div className='lg:w-64 lg:h-40 w-[97%] h-44 space-y-2 bg-white shadow-lg rounded-lg '>
           <img className='h-full w-full rounded-lg object-cover' src={projectImage} alt='Project Thumbnail'/>
@@ -413,7 +431,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
             </svg>
             <h3>Contact Project Owner</h3>
           </button>
-          <button className='flex flex-row items-center hover:bg-slate-300 space-x-2 py-2 px-4'>
+          <button className='flex flex-row items-center hover:bg-slate-300 space-x-2 py-2 px-4' onClick={() => triggerCopyAlert()}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -435,7 +453,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
             </svg>
             <h3>Share</h3>
           </button>
-          <button className='flex flex-row items-center hover:bg-slate-300 space-x-2  py-2 px-4'>
+          <button className='flex flex-row items-center hover:bg-slate-300 space-x-2  py-2 px-4' onClick={() => setShowReport(true)}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -457,7 +475,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
             </svg>
             <h3>Report</h3>
           </button>
-          <button className='flex flex-row items-center space-x-2 hover:bg-slate-300 lg:rounded-none rounded-b-lg  py-2 px-4 '>
+          <button className='flex flex-row items-center space-x-2 hover:bg-slate-300 lg:rounded-none rounded-b-lg  py-2 px-4 ' onClick={() => useHidePost()}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
