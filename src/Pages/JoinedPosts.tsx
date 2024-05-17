@@ -5,11 +5,11 @@ import {getImage} from '../backend/storage/s3'
 import github from '../img/github.svg'
 import {ProjectViewProps} from '../functions/sharedProps'
 import {useNavigate} from 'react-router-dom'
-import {listSavedPosts} from '../backend/queries/savedPostQueries'
-import {SavedPostModel} from '../API'
+import {JoinedPostModel} from '../API'
+import {listJoinedPosts} from '../backend/queries/joinedPostQueries'
 
 
-function SavedProjectView(props: ProjectViewProps) {
+function JoinedProjectView(props: ProjectViewProps) {
 
   const navigate = useNavigate()
 
@@ -38,29 +38,29 @@ function SavedProjectView(props: ProjectViewProps) {
     </div>
   )
 }
-export default function SavedPosts() {
+export default function JoinedPosts() {
 
   const userInfo = useContext(AuthContext)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [savedProjects, setSavedProjects] = useState<React.ReactNode[]>([])
+  const [joinedProjects, setJoinedProjects] = useState<React.ReactNode[]>([])
 
   useEffect(() => {
     const getHomePageData = async () => {
       if(userInfo && userInfo.id) {
-        const { data } = await listSavedPosts({
+        const { data } = await listJoinedPosts({
           filter: {
             userID: {
               eq: userInfo.id
             }
           }
         })
-        if (data && data.listSavedPostModels && data.listSavedPostModels.items) {
-          const itemsToGrab = data.listSavedPostModels.items as SavedPostModel[]
+        if (data && data.listJoinedPostModels && data.listJoinedPostModels.items) {
+          const itemsToGrab = data.listJoinedPostModels.items as JoinedPostModel[]
           for (const item of itemsToGrab) {
             if (item && item.postInfo) {
               const imageUrl = await getImage(item.postInfo.image_link ? item.postInfo.image_link : 'NewLogo.png')
               const mapToCard = (
-                <SavedProjectView
+                <JoinedProjectView
                   id={item.postInfo.id}
                   key={item.postInfo.id}
                   title={item.postInfo.post_title}
@@ -68,7 +68,7 @@ export default function SavedPosts() {
                   github={item.postInfo.project_link ? item.postInfo.project_link : 'https://github.com'}
                 />
               )
-              setSavedProjects((prevProjects) => [mapToCard, ...prevProjects])
+              setJoinedProjects((prevProjects) => [mapToCard, ...prevProjects])
             }
 
           }
@@ -85,15 +85,15 @@ export default function SavedPosts() {
       <NavBar />
       <div className='bg-primary-purple'>
         <div className='max-w-[1070px] min-h-[70px] mx-auto pt-2 pb-3'>
-          <h1 className='text-2xl font-primary ml-4 mt-3'>Saved Projects</h1>
-          <h3 className='text-sm font-primary ml-4 mt-1'>Projects that you want to look into:</h3>
+          <h1 className='text-2xl font-primary ml-4 mt-3'>Joined Projects</h1>
+          <h3 className='text-sm font-primary ml-4 mt-1'>Projects that you want are contributing to:</h3>
         </div>
       </div>
       <div className='bg-gray-200 flex flex-grow'>
         <div className=' pt-3 pb-8 max-w-[1070px] mx-auto'>
           <div className='grid lg:grid-cols-4 md:grid-cols-4 grid-cols-1 place-items-center'>
             {/* Render Query Here */}
-            {savedProjects}
+            {joinedProjects}
           </div>
         </div>
       </div>

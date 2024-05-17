@@ -31,7 +31,6 @@ export default function DiscoverComponent(props: DiscoverProps) {
   const [copySuccess, setCopySuccess] = useState<boolean>(false)
   const [showModalJoin, setShowModalJoin] = React.useState(false)
   const [showReport, setShowReport] = React.useState(false)
-
   const [showModalConvo, setShowModalConvo] = React.useState(false)
   const [liked, setLiked] = useState<boolean>(false)
   const [joined, setJoined] = useState<boolean>(false)

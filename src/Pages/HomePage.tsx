@@ -18,7 +18,7 @@ export default function HomePage() {
   const userInfo = useContext(AuthContext)
 
   const [joinedProjects, setJoinedProjects] = useState<React.ReactNode[]>([
-    <SeeAllComponent key={'End'} linkTo={'saved'} image={group} bodyText={'Your joined projects will appear here so you can choose which to work on'}/>
+    <SeeAllComponent key={'End'} linkTo={'joined'} image={group} bodyText={'Your joined projects will appear here so you can choose which to work on'}/>
   ])
 
   const [savedProjects, setSavedProjects] = useState<React.ReactNode[]>([

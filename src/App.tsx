@@ -19,6 +19,7 @@ import Browse from './pages/Browse'
 import ProjectJoined from './pages/ProjectJoined'
 import EditPost from './pages/EditPost'
 import CreatePost from './pages/CreatePost'
+import JoinedPosts from './pages/JoinedPosts'
 import awsconfig from './aws-exports'
 import {Amplify} from 'aws-amplify'
 
@@ -70,6 +71,7 @@ function App () {
           <Route path='/profile' element={<UserProfile />} />
           <Route path='/settings' element={<Settings />} />
           <Route path='/saved' element={<SavedPosts />} />
+          <Route path='/joined' element={<JoinedPosts />} />
           <Route path='/browse/:params' element={<Browse/>} />
           <Route path='/trending' element={<Browse/>} />
           <Route path='/view/profile/:id' element={<UserProfile />} />
