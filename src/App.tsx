@@ -1,5 +1,5 @@
 import './App.css'
-import React from 'react'
+import React, {useEffect} from 'react'
 import {BrowserRouter, Routes, Route, Outlet} from 'react-router-dom'
 import LandingPage from './pages/LandingPage'
 import SignUpPage from './pages/SignUpPage'
@@ -19,8 +19,32 @@ import Browse from './pages/Browse'
 import ProjectJoined from './pages/ProjectJoined'
 import EditPost from './pages/EditPost'
 import CreatePost from './pages/CreatePost'
+import awsconfig from './aws-exports'
+import {Amplify} from 'aws-amplify'
 
 function App () {
+
+  useEffect(() => {
+    const isLocalhost = Boolean(
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '[::1]' ||
+      window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
+    )
+
+    const [localRedirectSignIn, productionRedirectSignIn] = awsconfig.oauth.redirectSignIn.split(',')
+    const [localRedirectSignOut, productionRedirectSignOut] = awsconfig.oauth.redirectSignOut.split(',')
+
+    const updatedAwsConfig = {
+      ...awsconfig,
+      oauth: {
+        ...awsconfig.oauth,
+        redirectSignIn: isLocalhost ? localRedirectSignIn : productionRedirectSignIn,
+        redirectSignOut: isLocalhost ? localRedirectSignOut : productionRedirectSignOut,
+      }
+    }
+
+    Amplify.configure(updatedAwsConfig)
+  }, [])
 
   const ProtectedRoutes: React.FC = () => (
     <AuthWrapper>

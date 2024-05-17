@@ -3,18 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import LandingPageNavBar from '../components/LandingPageNavBar'
 import GitBranches from '../components/Branches'
 import google from '../img/google.svg'
-import github from '../img/github.svg'
 import orline from '../img/orline.png'
 import SingleInputs from '../components/Inputs'
 import OAuthButtons from '../components/OAuthButtons'
-import {Amplify, Auth} from 'aws-amplify'
+import {Auth} from 'aws-amplify'
 import ErrorAlert, {errorStyle, errorXStyle} from '../components/alerts/errorAlert'
-
 import * as yup from 'yup'
 import { useFormik } from 'formik'
 import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth'
-import awsconfig from '../aws-exports'
-Amplify.configure(awsconfig)
 
 export default function LoginPage() {
   
@@ -62,7 +58,6 @@ export default function LoginPage() {
           <h1 className='text-center font-secondary text-4xl font-light'>Welcome Back!</h1>
           <h2 className='text-center text-lg text-medium font-primary pt-4'>Login to your account</h2>
           <OAuthButtons label='Login with Google' onClick={ () => Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google})} src={google}/>
-          <OAuthButtons label='Login with GitHub' src={github}/>
         </div>
         <form onSubmit={formik.handleSubmit} className='flex flex-col items-center justify-center lg:flex-col'>
           <div className='py-6 flex items-center'>

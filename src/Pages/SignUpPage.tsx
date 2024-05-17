@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import LandingPageNavBar from '../components/LandingPageNavBar'
 import GitBranches from '../components/Branches'
 import google from '../img/google.svg'
-import github from '../img/github.svg'
 import orline from '../img/orline.png'
 import SingleInputs from '../components/Inputs'
 import OAuthButtons from '../components/OAuthButtons'
@@ -12,12 +11,8 @@ import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { Auth } from 'aws-amplify'
-import awsconfig from '../aws-exports'
-import { Amplify } from 'aws-amplify'
 import ErrorAlert, { warnStyle, warnXStyle} from '../components/alerts/errorAlert'
 import MFAModal from '../components/MFAModal'
-Amplify.configure(awsconfig)
-
 
 export default function SignUpPage() {
 
@@ -82,7 +77,6 @@ export default function SignUpPage() {
           <h1 className='text-center font-secondary text-4xl font-light'>Get Started</h1>
           <h2 className='text-center text-lg text-medium font-primary pt-4'>Create an account</h2>
           <OAuthButtons onClick={() => Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google})} label='Sign up with Google' src={google} />
-          <OAuthButtons onClick={()=>console.log()} label='Sign up with GitHub' src={github} />
         </div>
         <div className='py-6 flex items-center'>
           <img className='w-20 sm:w-20 md:w-32 lg:w-40' src={orline} alt='or line' />
