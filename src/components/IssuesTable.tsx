@@ -77,7 +77,7 @@ export default function IssuesTable(props: IssuesTableProps) {
     }
 
     filterData().catch()
-  }, [])
+  }, [props.gitIssues])
 
   return (
     <div className='lg:w-full w-[97%] mx-auto bg-white rounded-lg border-gray-300 border-2 overflow-visible'>

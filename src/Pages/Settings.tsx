@@ -210,6 +210,13 @@ export default function Settings() {
     },
   })
 
+  function isDisabled(): boolean {
+    if(userData){
+      return !!userData.oauth_id
+    }
+    return true
+  }
+
   function PreferencesModule(props: PreferencesProps) {
 
     const shouldRenderButton = Object.values(tags).some(tagArray => tagArray.length > 0)
@@ -390,6 +397,11 @@ export default function Settings() {
             <form onSubmit={formikPassword.handleSubmit}>
               <div className='flex flex-col items-center w-5/6 mx-auto'>
                 <h1 className='pb-4 mt-3'>Manage Password</h1>
+                {isDisabled() ?
+                  <h3 className='text-red-500'>You cannot change your password as you have a managed account</h3>
+                  :
+                  <></>
+                }
                 <div className='w-full'>
                   <div className='flex text-sm flex-col pb-2 w-full'>
                     <label>Old Password</label>
@@ -401,6 +413,7 @@ export default function Settings() {
                       placeholder={'********'}
                       value={formikPassword.values.old_password}
                       onChange={formikPassword.handleChange}
+                      disabled={isDisabled()}
                     />
                     {formikPassword.errors.old_password && formikPassword.touched.old_password ?
                       (<div className='text-red-500 text-xs'>{formikPassword.errors.old_password}</div>)
@@ -418,6 +431,7 @@ export default function Settings() {
                       placeholder={'********'}
                       value={formikPassword.values.new_password}
                       onChange={formikPassword.handleChange}
+                      disabled={isDisabled()}
                     />
                     {formikPassword.errors.new_password && formikPassword.touched.new_password ?
                       (<div className='text-red-500 text-xs'>{formikPassword.errors.new_password}</div>)
@@ -435,6 +449,7 @@ export default function Settings() {
                       placeholder={'********'}
                       value={formikPassword.values.confirm_password}
                       onChange={formikPassword.handleChange}
+                      disabled={isDisabled()}
                     />
                     {formikPassword.errors.confirm_password && formikPassword.touched.confirm_password ?
                       (<div className='text-red-500 text-xs'>{formikPassword.errors.confirm_password}</div>)

@@ -37,6 +37,7 @@ export default function AuthWrapper({ children }: Props){
         if (data && data.getUsersModel && data.getUsersModel.profile_image && data.getUsersModel.user_name) {
           info.profile_image = await getImage(data.getUsersModel.profile_image)
           info.userName = data.getUsersModel.user_name
+          info.new_user = data.getUsersModel.new_user
         } else {
           info.profile_image = await getImage()
           info.userName = 'nosession'
@@ -46,6 +47,9 @@ export default function AuthWrapper({ children }: Props){
 
         setUserInfo(info)
         setIsLoading(false)
+        if(info.new_user === true) {
+          navigate('/setup')
+        }
       } catch (error) {
         setIsLoading(false)
         navigate('/login')

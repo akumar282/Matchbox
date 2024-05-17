@@ -51,7 +51,7 @@ export default function ProfileHeader(props: userData) {
 
   return (
     <>
-      <div className='bg-white rounded-lg w-full px-2 py-2 font-primary'>
+      <div className='bg-white rounded-lg w-full px-2 py-2 '>
         <div className='flex flex-col'>
           <div className='flex justify-between w-full'>
             <div className='flex flex-col mt-4 lg:ml-4 space-x-4 md:flex-row lg:flex-row'>
@@ -59,8 +59,8 @@ export default function ProfileHeader(props: userData) {
                 {imageOrDefault(props.picture, 'w-28 h-28')}
               </div>
               <div className='flex flex-col justify-center items-start ml-2'>
-                <h1 className='text-2xl font-bold mt-4'>{data.first_name} {data.last_name}</h1>
-                <h1 className='text-lg font-semibold mt-1'>@{data.user_name}</h1>
+                <h1 className='text-2xl mt-4 font-secondary font-thin'>{data.first_name} {data.last_name}</h1>
+                <h1 className='text-lg font-secondary font-thin mt-1'>@{data.user_name}</h1>
               </div>
             </div>
             {props.editable ? (
@@ -75,11 +75,11 @@ export default function ProfileHeader(props: userData) {
               <div/>
             )}
           </div>
-          <div className='flex flex-col items-start lg:ml-3 ml-2 my-3 gap-2'>
+          <div className='flex flex-col font-primary items-start lg:ml-3 ml-2 my-3 gap-2'>
             <h1 className='text-md text'>Joined {convertISOToMonthYear(data.createdAt)}</h1>
             <h1 className='text-md text'>{props.postsNum} Posts</h1>
           </div>
-          <div className='flex items-center ml-2'>
+          <div className='flex items-center font-primary ml-2'>
             <button className='rounded-lg hover:bg-slate-300 px-2 py-2'>
               { props.editable ?
                 (data.github_link ?

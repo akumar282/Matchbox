@@ -7,13 +7,14 @@ import github from '../img/github.svg'
 import orline from '../img/orline.png'
 import SingleInputs from '../components/Inputs'
 import OAuthButtons from '../components/OAuthButtons'
-import { Auth } from 'aws-amplify'
+import {Amplify, Auth} from 'aws-amplify'
 import ErrorAlert, {errorStyle, errorXStyle} from '../components/alerts/errorAlert'
 
 import * as yup from 'yup'
 import { useFormik } from 'formik'
 import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth'
-
+import awsconfig from '../aws-exports'
+Amplify.configure(awsconfig)
 
 export default function LoginPage() {
   

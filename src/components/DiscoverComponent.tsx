@@ -76,18 +76,26 @@ export default function DiscoverComponent(props: DiscoverProps) {
   function determineButton(joined: boolean){
     if(props.editable && !joined) {
       return (
-        <button
-          className='font-primary shadow-lg hover:bg-red-600 bg-red-500 text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'
-          onClick={() => navigate(`/project/edit/${props.data.id}`)}
-        >
-          Edit Project
-        </button>
+        <div className='lg:space-x-4 space-y-3'>
+          <button
+            className="font-primary shadow-lg hover:bg-red-600 bg-red-500 text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2"
+            onClick={() => navigate(`/project/edit/${props.data.id}`)}
+          >
+            Edit Project
+          </button>
+          <button
+            className="font-primary shadow-lg hover:bg-indigo-400 bg-emerald-300 text-black text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2"
+            onClick={() => navigate(`/joined/project/${props.data.id}`)}
+          >
+            Go to Dashboard
+          </button>
+        </div>
       )
     }
     if (joined && !props.editable) {
       return (
         <button
-          className='font-primary shadow-lg hover:bg-indigo-400 bg-emerald-300 text-black text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'
+          className="font-primary shadow-lg hover:bg-indigo-400 bg-emerald-300 text-black text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2"
           onClick={() => navigate(`/joined/project/${props.data.id}`)}
         >
           Go to Dashboard
@@ -110,7 +118,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
     const fetchImage = async () => {
       props.data.image_link ? setProjectImage(await getImage(props.data.image_link)) : setProjectImage(await getImage())
     }
-    fetchImage()
+    fetchImage().catch()
   })
 
 

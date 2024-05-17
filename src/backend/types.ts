@@ -27,7 +27,7 @@ export interface userContextType {
   id: string,
   userName?: string,
   email?: string,
-  new_user?: boolean,
+  new_user?: boolean | null,
   credibility_score?: number,
   profile_image?: string,
   authToken?: CognitoUserSession

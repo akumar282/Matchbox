@@ -47,7 +47,7 @@ export default function Create(props: CreateEditPostProps) {
       })
 
   const [my_swiper, set_my_swiper] = useState<MySwiper | null>(null)
-  const [ inital , setInitial] = useState<{
+  const [inital , setInitial] = useState<{
     projectTitle: string,
     projectDescription: string,
     projectExternalLink: string,

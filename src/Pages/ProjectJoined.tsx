@@ -1,32 +1,41 @@
 /* eslint-disable */
 import React, {useContext, useEffect, useState} from 'react'
-import {useParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import {AuthContext} from '../components/AuthWrapper'
 import NavBar from '../components/NavBar'
 import IssuesTable from '../components/IssuesTable'
 import PullRequestsTable from '../components/PullRequestsTable'
 import {getPost} from '../backend/queries/postQueries'
 import {githubIssue, githubPullRequestSimple} from '../backend/types'
+import {PostsModel} from '../API'
 
 export default function ProjectJoined(props) {
 
+  const navigate = useNavigate()
   const { id } = useParams()
-  const userInfo = useContext(AuthContext)
   const [gitPulls, setGitPulls] = useState<githubPullRequestSimple[]>([])
+  const [repoData, setRepoData] = useState<PostsModel | null>(null)
   const [gitIssues, setGitIssues] = useState<githubIssue[]>([])
+  const [fetchFail, setFetchFail] = useState<boolean>(false)
   const [pageIndex, setPageIndex] = useState<number>(0)
 
   useEffect(() => {
 
     const getPageData =  async () => {
-      if (id) {
-        const { data } = await getPost({id: id})
-        if (data && data.getPostsModel) {
-          let repoInfo = data.getPostsModel.project_link
-          repoInfo = repoInfo?.replace('https://github.com/', '')
-          setGitPulls(await (await fetch(`https://api.github.com/repos/${repoInfo}/pulls?state=all`)).json() as githubPullRequestSimple[])
-          setGitIssues(await (await fetch(`https://api.github.com/repos/${repoInfo}/issues?state=all`)).json() as githubIssue[])
+      try{
+        if (id) {
+          const { data } = await getPost({id: id})
+          if (data && data.getPostsModel) {
+            setRepoData(data.getPostsModel as PostsModel)
+            let repoInfo = data.getPostsModel.project_link
+            repoInfo = repoInfo?.replace('https://github.com/', '')
+            setGitPulls(await (await fetch(`https://api.github.com/repos/${repoInfo}/pulls?state=all`)).json() as githubPullRequestSimple[])
+            setGitIssues(await (await fetch(`https://api.github.com/repos/${repoInfo}/issues?state=all`)).json() as githubIssue[])
+          }
         }
+      } catch (e) {
+        setFetchFail(true)
+        navigate('/404')
       }
     }
 
@@ -38,9 +47,14 @@ export default function ProjectJoined(props) {
   return (
     <div className='flex flex-col'>
       <NavBar/>
-      <div className='flex justify-center bg-primary-purple h-screen w-full'>
+      <div className='flex justify-center bg-primary-purple flex-grow min-h-screen lg:pb-0 pb-8 w-full'>
         <div className='max-w-[1070px] flex-grow pt-8 justify-center'>
-          <div className='lg:w-full w-[97%] flex flex-row bg-white rounded-lg py-1 font-primary text-sm space-x-3 mx-auto mb-3'>
+          <div
+            className="lg:w-full w-[97%] flex flex-row bg-white rounded-lg py-1 font-primary text-xl space-x-3 mx-auto mb-5">
+            <h1 className='ml-2'>{repoData?.post_title} Dashboard</h1>
+          </div>
+          <div
+            className='lg:w-full w-[97%] flex flex-row bg-white rounded-lg py-1 font-primary text-sm space-x-3 mx-auto mb-3'>
             <button className={`mx-5 h-full hover:bg-gray-200 rounded-lg p-2 ${pageIndex === 0 ? 'text-indigo-600 bg-gray-200' : ''}`} onClick={() => setPageIndex(0)}>
               <div className='flex flex-row items-center space-x-2'>
                 <svg

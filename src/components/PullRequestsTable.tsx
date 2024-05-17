@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import {githubPullRequestSimple} from '../backend/types'
+import {useNavigate} from 'react-router-dom'
 
 interface PullRequestsTableProps {
   gitPulls: githubPullRequestSimple[]
@@ -58,23 +59,30 @@ export function PullRequestRow(props: PullRequestRowProps) {
 
 export default function PullRequestsTable(props: PullRequestsTableProps) {
 
+  const navigate = useNavigate()
   const [tabOpenIssues, setTabOpenIssues] = React.useState<boolean>(true)
   const [openIssues, setOpenIssues] = React.useState<React.ReactElement[]>([])
   const [closedIssues, setClosedIssues] = React.useState<React.ReactElement[]>([])
 
   useEffect(() => {
     const filterData = async () => {
+      try{
+        setOpenIssues(
+          (props.gitPulls.filter(x => x.state != 'closed') as githubPullRequestSimple[])
+            .map((x, index) => <PullRequestRow githubPull={x} index={index} key={index}/>)
+        )
 
-      setOpenIssues(
-        (props.gitPulls.filter(x => x.state != 'closed') as githubPullRequestSimple[])
-          .map((x, index) => <PullRequestRow githubPull={x} index={index} key={index}/>)
-      )
-
-      setClosedIssues(
-        (props.gitPulls.filter(x => x.state === 'closed') as githubPullRequestSimple[])
-          .map((x, index) => <PullRequestRow githubPull={x} index={index} key={index}/>)
-      )
+        setClosedIssues(
+          (props.gitPulls.filter(x => x.state === 'closed') as githubPullRequestSimple[])
+            .map((x, index) => <PullRequestRow githubPull={x} index={index} key={index}/>)
+        )
+      } catch (e) {
+        navigate('/404')
+      }
     }
+
+
+
 
     filterData().catch()
   }, [])

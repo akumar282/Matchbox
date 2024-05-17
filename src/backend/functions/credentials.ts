@@ -18,6 +18,7 @@ export async function standardSignUp(username: string, email: string, password: 
             user_name: username,
             email: email,
             password: 'password',
+            profile_image: 'defaultimg4.JPG',
             user_creation_date: new Date().toISOString(),
             lang_tag: [],
             dev_type_tag: [],

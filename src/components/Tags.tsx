@@ -30,20 +30,23 @@ export default function Tags(props: tagButton){
 
   return (
     <button itemID={props.typeTag} className={props.className} onClick={props.onClick}>
-      {formatLabel(props.bundle.value)}
-      {props.checked && (
-        <svg
-          fill='none'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          strokeWidth='2'
-          viewBox='0 0 22 22'
-          stroke='currentColor'
-          className='flex-shrink-0 inline w-4 h-4 ml-1 mb-1'
-        >
-          <path d='M6 18L18 6M6 6l12 12'></path>
-        </svg>
-      )}
+      <div className='flex flex-row items-center'>
+        {formatLabel(props.bundle.value)}
+        {props.checked && (
+          <svg
+            fill='none'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='2'
+            viewBox='0 0 22 22'
+            stroke='currentColor'
+            className='flex-shrink-0 inline w-4 h-4 ml-1 mt-1 mb-1'
+          >
+            <path d='M6 18L18 6M6 6l12 12'></path>
+          </svg>
+        )}
+      </div>
+
     </button>
   )
 
