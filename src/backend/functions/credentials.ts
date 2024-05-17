@@ -1,10 +1,6 @@
 import { newUserSignUp } from '@backend/auth'
 import { createUser } from '@backend/mutations/userMutations'
 import { v4 as uuidv4 } from 'uuid'
-import { Amplify } from 'aws-amplify'
-import awsconfig from '@aws-exports'
-Amplify.configure(awsconfig)
-
 
 export async function standardSignUp(username: string, email: string, password: string): Promise<string> {
   const uuidGen = uuidv4()

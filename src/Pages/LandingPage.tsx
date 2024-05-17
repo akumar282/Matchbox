@@ -9,8 +9,6 @@ import linkedin from '../img/linkedin.svg'
 import instagram from '../img/instagram.svg'
 import discord from '../img/discord.svg'
 import tiktok from '../img/tiktok.svg'
-import awsconfig from '../aws-exports'
-import { Amplify } from 'aws-amplify'
 import * as yup from 'yup'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
@@ -19,8 +17,6 @@ import { CreateNewsletterEmailModelInput } from '../API'
 import { FormikValues, useFormik } from 'formik'
 import CollapseAll from '../components/FAQ'
 import ButtonMailto from '../components/ButtonMailto'
-
-Amplify.configure(awsconfig)
 
 export default function LandingPage(): React.JSX.Element {
   

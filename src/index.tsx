@@ -3,11 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import config from './aws-exports'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import {Amplify, Storage} from 'aws-amplify'
 import { ThemeProvider } from '@material-tailwind/react'
-Amplify.configure(config)
 
 // TODO: Make storage private before deployment
 
