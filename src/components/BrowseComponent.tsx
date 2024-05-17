@@ -56,7 +56,7 @@ export default function BrowseComponent(props: BrowseProps) {
   })
 
   return (
-    <div className='flex flex-col bg-white rounded-[20px] pb-2 mb-16 items-center shadow-lg w-[97%]'>
+    <div className='flex flex-col bg-white rounded-[20px] pb-2 mb-16 mx-auto items-center shadow-lg w-[97%]'>
       <button className='flex flex-col lg:flex-row p-2' onClick={() => navigate(`/project/${props.data.id}`)}>
         <div className='lg:w-64 lg:h-40 w-[97%] h-44 space-y-2 bg-white shadow-sm rounded-lg '>
           <img className='h-full w-full rounded-lg object-cover' src={projectImage} alt='Project Thumbnail'/>
