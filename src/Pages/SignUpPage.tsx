@@ -85,46 +85,58 @@ export default function SignUpPage() {
         </div>
         <form onSubmit={formik.handleSubmit}>
           <div className='flex flex-col items-center'>
-            <div> 
-              <SingleInputs 
-                name='user_name' 
-                type='user_name' 
-                id='user_name'  
-                value={formik.values.user_name} 
-                onChange={formik.handleChange} 
+            <div>
+              <SingleInputs
+                name='user_name'
+                type='user_name'
+                id='user_name'
+                value={formik.values.user_name}
+                onChange={formik.handleChange}
                 placeholder='Username'/>
-              {formik.errors.user_name && formik.touched.user_name ? ( <div className='text-red-500 text-xs'>{formik.errors.user_name}</div>) : <div className='text-xs'> &nbsp;</div>}
+              {formik.errors.user_name && formik.touched.user_name ? (
+                <div className='text-red-500 text-xs'>{formik.errors.user_name}</div>) :
+                <div className='text-xs'> &nbsp;</div>}
             </div>
-            <div> 
-              <SingleInputs 
-                name='email' 
-                type='email' 
-                id='email' 
-                value={formik.values.email} 
-                onChange={formik.handleChange} 
-                placeholder='Email' />
-              {formik.errors.email && formik.touched.email ? ( <div className='text-red-500 text-xs'>{formik.errors.email}</div>) : <div className='text-xs'> &nbsp;</div>}
+            <div>
+              <SingleInputs
+                name='email'
+                type='email'
+                id='email'
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                placeholder='Email'/>
+              {formik.errors.email && formik.touched.email ? (
+                <div className='text-red-500 text-xs'>{formik.errors.email}</div>) :
+                <div className='text-xs'> &nbsp;</div>}
             </div>
-            <div> 
-              <SingleInputs 
-                name='password' 
-                type='password' 
-                id='password' 
-                value={formik.values.password} 
-                onChange={formik.handleChange} 
-                placeholder='Password' />
-              {formik.errors.password && formik.touched.password ? ( <div className='text-red-500 text-xs'>{formik.errors.password}</div>) : <div className='text-xs'> &nbsp;</div>}
+            <div>
+              <SingleInputs
+                name='password'
+                type='password'
+                id='password'
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                placeholder='Password'/>
+              {formik.errors.password && formik.touched.password ? (
+                <div className='text-red-500 text-xs'>{formik.errors.password}</div>) :
+                <div className='text-xs'> &nbsp;</div>}
             </div>
           </div>
-          <div className='ml-4 py-4'>
-            <input type='radio' onChange={()=>console.log()} checked={isChecked} onClick={handleCheck}></input>
-            <label className='pl-2 font-primary text-sm' >I agree to the <a onClick={() => navigate('/tos')} className='underline text-secondary-blue hover:text-indigo-400 cursor-pointer'>Terms and Conditions</a> </label>
+          <div className='mx-auto py-4'>
+            <input type='radio' onChange={() => console.log()} checked={isChecked} onClick={handleCheck}></input>
+            <label className='pl-2 font-primary text-sm'>I agree to the <a onClick={() => navigate('/tos')}
+              className='underline text-secondary-blue hover:text-indigo-400 cursor-pointer'>Terms
+              and Conditions</a> </label>
           </div>
-          <div className='pt-5'>
-            <button className='font-primary hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg px-36 py-2' type='submit' onClick={() => formik.handleSubmit}>
-            Sign Up
+          <div className='pt-2 flex flex-col items-center'>
+            <button
+              className='font-primary hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg px-32 py-2'
+              type='submit' onClick={() => formik.handleSubmit}>
+              <h1 className='w-full'>Log In</h1>
             </button>
-            <h1 className='font-primary text-center pt-5'>Already have an account? <button onClick={() => navigate('/login')} className='underline text-secondary-blue hover:text-indigo-400'>Login</button></h1>
+            <h1 className='font-primary text-center pt-5'>Already have an account? <button
+              onClick={() => navigate('/login')}
+              className='underline text-secondary-blue hover:text-indigo-400'>Login</button></h1>
           </div>
         </form>
       </div>

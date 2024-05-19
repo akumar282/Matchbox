@@ -536,6 +536,7 @@ export const getPostsModel = /* GraphQL */ `query GetPostsModel($id: ID!) {
     project_chat
     counter
     external_link
+    random_index
     createdAt
     updatedAt
     __typename
@@ -578,6 +579,7 @@ export const listPostsModels = /* GraphQL */ `query ListPostsModels(
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -633,6 +635,7 @@ export const searchPostsModels = /* GraphQL */ `query SearchPostsModels(
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1138,6 +1141,7 @@ export const getSavedPostModel = /* GraphQL */ `query GetSavedPostModel($id: ID!
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1260,6 +1264,7 @@ export const getHiddenPostModel = /* GraphQL */ `query GetHiddenPostModel($id: I
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1382,6 +1387,7 @@ export const getLikedPostModel = /* GraphQL */ `query GetLikedPostModel($id: ID!
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1539,6 +1545,7 @@ export const getJoinedPostModel = /* GraphQL */ `query GetJoinedPostModel($id: I
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename

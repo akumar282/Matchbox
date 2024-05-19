@@ -96,11 +96,11 @@ export default function LoginPage() {
           </div>
           <div className='pt-2 flex flex-col items-center'>
             <button
-              className='font-primary hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg px-36 py-2'
+              className='font-primary hover:bg-indigo-400 bg-secondary-blue text-white text-lg rounded-lg px-32 py-2'
               type='submit' onClick={() => formik.handleSubmit}>
-              Log In
+              <h1 className='w-full'>Log In</h1>
             </button>
-            <h1 className='font-primary text-start pt-5'>Don&apos;t have an account? <button
+            <h1 className='font-primary text-center w-full pt-5'>Don&apos;t have an account? <button
               onClick={() => navigate('/signup')}
               className='underline text-secondary-blue hover:text-indigo-400'>Sign-Up</button></h1>
           </div>

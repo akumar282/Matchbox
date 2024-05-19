@@ -454,6 +454,7 @@ export const onCreatePostsModel = /* GraphQL */ `subscription OnCreatePostsModel
     project_chat
     counter
     external_link
+    random_index
     createdAt
     updatedAt
     __typename
@@ -501,6 +502,7 @@ export const onUpdatePostsModel = /* GraphQL */ `subscription OnUpdatePostsModel
     project_chat
     counter
     external_link
+    random_index
     createdAt
     updatedAt
     __typename
@@ -548,6 +550,7 @@ export const onDeletePostsModel = /* GraphQL */ `subscription OnDeletePostsModel
     project_chat
     counter
     external_link
+    random_index
     createdAt
     updatedAt
     __typename
@@ -1039,6 +1042,7 @@ export const onCreateSavedPostModel = /* GraphQL */ `subscription OnCreateSavedP
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1088,6 +1092,7 @@ export const onUpdateSavedPostModel = /* GraphQL */ `subscription OnUpdateSavedP
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1137,6 +1142,7 @@ export const onDeleteSavedPostModel = /* GraphQL */ `subscription OnDeleteSavedP
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1186,6 +1192,7 @@ export const onCreateHiddenPostModel = /* GraphQL */ `subscription OnCreateHidde
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1235,6 +1242,7 @@ export const onUpdateHiddenPostModel = /* GraphQL */ `subscription OnUpdateHidde
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1284,6 +1292,7 @@ export const onDeleteHiddenPostModel = /* GraphQL */ `subscription OnDeleteHidde
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1333,6 +1342,7 @@ export const onCreateLikedPostModel = /* GraphQL */ `subscription OnCreateLikedP
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1382,6 +1392,7 @@ export const onUpdateLikedPostModel = /* GraphQL */ `subscription OnUpdateLikedP
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1431,6 +1442,7 @@ export const onDeleteLikedPostModel = /* GraphQL */ `subscription OnDeleteLikedP
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1515,6 +1527,7 @@ export const onCreateJoinedPostModel = /* GraphQL */ `subscription OnCreateJoine
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1599,6 +1612,7 @@ export const onUpdateJoinedPostModel = /* GraphQL */ `subscription OnUpdateJoine
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1683,6 +1697,7 @@ export const onDeleteJoinedPostModel = /* GraphQL */ `subscription OnDeleteJoine
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename

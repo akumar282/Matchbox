@@ -467,6 +467,7 @@ export const createPostsModel = /* GraphQL */ `mutation CreatePostsModel(
     project_chat
     counter
     external_link
+    random_index
     createdAt
     updatedAt
     __typename
@@ -515,6 +516,7 @@ export const updatePostsModel = /* GraphQL */ `mutation UpdatePostsModel(
     project_chat
     counter
     external_link
+    random_index
     createdAt
     updatedAt
     __typename
@@ -563,6 +565,7 @@ export const deletePostsModel = /* GraphQL */ `mutation DeletePostsModel(
     project_chat
     counter
     external_link
+    random_index
     createdAt
     updatedAt
     __typename
@@ -1067,6 +1070,7 @@ export const createSavedPostModel = /* GraphQL */ `mutation CreateSavedPostModel
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1117,6 +1121,7 @@ export const updateSavedPostModel = /* GraphQL */ `mutation UpdateSavedPostModel
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1167,6 +1172,7 @@ export const deleteSavedPostModel = /* GraphQL */ `mutation DeleteSavedPostModel
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1217,6 +1223,7 @@ export const createHiddenPostModel = /* GraphQL */ `mutation CreateHiddenPostMod
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1267,6 +1274,7 @@ export const updateHiddenPostModel = /* GraphQL */ `mutation UpdateHiddenPostMod
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1317,6 +1325,7 @@ export const deleteHiddenPostModel = /* GraphQL */ `mutation DeleteHiddenPostMod
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1367,6 +1376,7 @@ export const createLikedPostModel = /* GraphQL */ `mutation CreateLikedPostModel
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1417,6 +1427,7 @@ export const updateLikedPostModel = /* GraphQL */ `mutation UpdateLikedPostModel
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1467,6 +1478,7 @@ export const deleteLikedPostModel = /* GraphQL */ `mutation DeleteLikedPostModel
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1552,6 +1564,7 @@ export const createJoinedPostModel = /* GraphQL */ `mutation CreateJoinedPostMod
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1637,6 +1650,7 @@ export const updateJoinedPostModel = /* GraphQL */ `mutation UpdateJoinedPostMod
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename
@@ -1722,6 +1736,7 @@ export const deleteJoinedPostModel = /* GraphQL */ `mutation DeleteJoinedPostMod
       project_chat
       counter
       external_link
+      random_index
       createdAt
       updatedAt
       __typename

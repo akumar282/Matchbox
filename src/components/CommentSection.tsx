@@ -17,6 +17,7 @@ export default function CommentSection(props: CommentSectionData) {
 
   const [nextToken, setNextToken] = useState<string | null>(null)
   const [commentsData, setCommentsData] = useState<CommentModel[]>([])
+  const [toggle, setToggle] = useState(false)
   const [isError, setError] = useState<boolean>()
 
   const userInfo = useContext(AuthContext)
@@ -40,7 +41,7 @@ export default function CommentSection(props: CommentSectionData) {
     }
 
     getFiveComments().catch()
-  }, [props.postID])
+  }, [props.postID, toggle])
 
   useEffect(() => {
     if(props.postID) {
@@ -107,6 +108,10 @@ export default function CommentSection(props: CommentSectionData) {
     }
   }
 
+  const handleButtonClick = () => {
+    setToggle(prev => !prev)
+  }
+
   function noCommentsAvail() {
 
     return (
@@ -146,7 +151,7 @@ export default function CommentSection(props: CommentSectionData) {
         </form>
 
         {commentsData && commentsData.length > 0 ? (
-          commentsData?.map(x => <Comment key={x.id} data={x}/>)
+          commentsData?.map(x => <Comment key={x.id} data={x} setFunction={setToggle}/>)
         ) : (
           noCommentsAvail()
         )}
