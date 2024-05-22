@@ -98,7 +98,7 @@ export default function HomePage() {
         <div className='my-3 items-start'>
           <h1 className='lg:text-3xl md:text-2xl font-secondary text-xl ml-4 mb-4 mt-2'>Welcome Back, {userInfo?.userName}!</h1>
           <div className='grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 auto-cols-max text-start'>
-            <CategoryButton bordercolor='border-r-rose-400' titleLabel='Trending Projects' imageIcon={() => <TrendIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
+            <CategoryButton bordercolor='border-r-rose-400' titleLabel='Trending Projects' onClick={() => navigate('/browse/trending')} imageIcon={() => <TrendIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
             <CategoryButton bordercolor='border-r-violet-400' titleLabel='Open Source Frameworks' onClick={() => navigate('/browse/frameworks')} imageIcon={() => <FlaskIcon className='h-8 w-8 text-black' viewBox='0 0 24 24' />} />
             <CategoryButton bordercolor='border-r-yellow-300' titleLabel='Machine Learning/AI&#8197;&#8197;&#8197;' onClick={() => navigate('/browse/ai_mach')} imageIcon={() => <MLIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
             <CategoryButton bordercolor='border-r-green-300' titleLabel='Cloud Computing&#8197;' onClick={() => navigate('/browse/cloud_computing')} imageIcon={() => <CloudIcon className='h-8 w-8' viewBox='0 0 24 24' />} />

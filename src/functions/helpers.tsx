@@ -149,3 +149,24 @@ export const doesDmExist = async (userOne: string, userTwo: string)  => {
   }
   return false
 }
+
+export async function requestWithBody(
+  path: string,
+  url: string,
+  body: object,
+  method: 'POST' | 'GET' | 'HEAD' | 'OPTIONS' | 'PUT' | 'PATCH' | 'DELETE'
+) {
+  const postRequest = {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json',
+      'host' : new URL(url).hostname,
+    },
+    protocol: 'https:',
+    hostname: new URL(url).hostname,
+    body: JSON.stringify(body),
+    path: path
+  }
+  const requestURI = url.concat(postRequest.path)
+  return await fetch(requestURI, postRequest)
+}

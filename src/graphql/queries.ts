@@ -133,6 +133,10 @@ export const getUsersModel = /* GraphQL */ `query GetUsersModel($id: ID!) {
       nextToken
       __typename
     }
+    contributor_notes {
+      nextToken
+      __typename
+    }
     conversations {
       nextToken
       __typename
@@ -527,6 +531,10 @@ export const getPostsModel = /* GraphQL */ `query GetPostsModel($id: ID!) {
     }
     contributor_limit
     contributors {
+      nextToken
+      __typename
+    }
+    contributor_notes {
       nextToken
       __typename
     }
@@ -1634,6 +1642,171 @@ export const searchJoinedPostModels = /* GraphQL */ `query SearchJoinedPostModel
 ` as GeneratedQuery<
   APITypes.SearchJoinedPostModelsQueryVariables,
   APITypes.SearchJoinedPostModelsQuery
+>;
+export const getContributorNotesModel = /* GraphQL */ `query GetContributorNotesModel($id: ID!) {
+  getContributorNotesModel(id: $id) {
+    id
+    posted_at
+    pinned
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      random_index
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetContributorNotesModelQueryVariables,
+  APITypes.GetContributorNotesModelQuery
+>;
+export const listContributorNotesModels = /* GraphQL */ `query ListContributorNotesModels(
+  $filter: ModelContributorNotesModelFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listContributorNotesModels(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      posted_at
+      pinned
+      userID
+      postID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListContributorNotesModelsQueryVariables,
+  APITypes.ListContributorNotesModelsQuery
+>;
+export const searchContributorNotesModels = /* GraphQL */ `query SearchContributorNotesModels(
+  $filter: SearchableContributorNotesModelFilterInput
+  $sort: [SearchableContributorNotesModelSortInput]
+  $limit: Int
+  $nextToken: String
+  $from: Int
+  $aggregates: [SearchableContributorNotesModelAggregationInput]
+) {
+  searchContributorNotesModels(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+    from: $from
+    aggregates: $aggregates
+  ) {
+    items {
+      id
+      posted_at
+      pinned
+      userID
+      postID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    total
+    aggregateItems {
+      name
+      result {
+        ... on SearchableAggregateScalarResult {
+          value
+        }
+        ... on SearchableAggregateBucketResult {
+          buckets {
+            key
+            doc_count
+            __typename
+          }
+        }
+      }
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.SearchContributorNotesModelsQueryVariables,
+  APITypes.SearchContributorNotesModelsQuery
 >;
 export const getUsersConvo = /* GraphQL */ `query GetUsersConvo($id: ID!) {
   getUsersConvo(id: $id) {

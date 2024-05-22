@@ -94,6 +94,10 @@ export const onCreateUsersModel = /* GraphQL */ `subscription OnCreateUsersModel
       nextToken
       __typename
     }
+    contributor_notes {
+      nextToken
+      __typename
+    }
     conversations {
       nextToken
       __typename
@@ -173,6 +177,10 @@ export const onUpdateUsersModel = /* GraphQL */ `subscription OnUpdateUsersModel
       nextToken
       __typename
     }
+    contributor_notes {
+      nextToken
+      __typename
+    }
     conversations {
       nextToken
       __typename
@@ -249,6 +257,10 @@ export const onDeleteUsersModel = /* GraphQL */ `subscription OnDeleteUsersModel
       __typename
     }
     messages {
+      nextToken
+      __typename
+    }
+    contributor_notes {
       nextToken
       __typename
     }
@@ -448,6 +460,10 @@ export const onCreatePostsModel = /* GraphQL */ `subscription OnCreatePostsModel
       nextToken
       __typename
     }
+    contributor_notes {
+      nextToken
+      __typename
+    }
     reported
     experience_level
     application
@@ -496,6 +512,10 @@ export const onUpdatePostsModel = /* GraphQL */ `subscription OnUpdatePostsModel
       nextToken
       __typename
     }
+    contributor_notes {
+      nextToken
+      __typename
+    }
     reported
     experience_level
     application
@@ -541,6 +561,10 @@ export const onDeletePostsModel = /* GraphQL */ `subscription OnDeletePostsModel
     }
     contributor_limit
     contributors {
+      nextToken
+      __typename
+    }
+    contributor_notes {
       nextToken
       __typename
     }
@@ -1711,6 +1735,264 @@ export const onDeleteJoinedPostModel = /* GraphQL */ `subscription OnDeleteJoine
 ` as GeneratedSubscription<
   APITypes.OnDeleteJoinedPostModelSubscriptionVariables,
   APITypes.OnDeleteJoinedPostModelSubscription
+>;
+export const onCreateContributorNotesModel = /* GraphQL */ `subscription OnCreateContributorNotesModel(
+  $filter: ModelSubscriptionContributorNotesModelFilterInput
+) {
+  onCreateContributorNotesModel(filter: $filter) {
+    id
+    posted_at
+    pinned
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      random_index
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateContributorNotesModelSubscriptionVariables,
+  APITypes.OnCreateContributorNotesModelSubscription
+>;
+export const onUpdateContributorNotesModel = /* GraphQL */ `subscription OnUpdateContributorNotesModel(
+  $filter: ModelSubscriptionContributorNotesModelFilterInput
+) {
+  onUpdateContributorNotesModel(filter: $filter) {
+    id
+    posted_at
+    pinned
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      random_index
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateContributorNotesModelSubscriptionVariables,
+  APITypes.OnUpdateContributorNotesModelSubscription
+>;
+export const onDeleteContributorNotesModel = /* GraphQL */ `subscription OnDeleteContributorNotesModel(
+  $filter: ModelSubscriptionContributorNotesModelFilterInput
+) {
+  onDeleteContributorNotesModel(filter: $filter) {
+    id
+    posted_at
+    pinned
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      random_index
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteContributorNotesModelSubscriptionVariables,
+  APITypes.OnDeleteContributorNotesModelSubscription
 >;
 export const onCreateUsersConvo = /* GraphQL */ `subscription OnCreateUsersConvo(
   $filter: ModelSubscriptionUsersConvoFilterInput

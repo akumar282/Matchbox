@@ -98,6 +98,10 @@ export const createUsersModel = /* GraphQL */ `mutation CreateUsersModel(
       nextToken
       __typename
     }
+    contributor_notes {
+      nextToken
+      __typename
+    }
     conversations {
       nextToken
       __typename
@@ -178,6 +182,10 @@ export const updateUsersModel = /* GraphQL */ `mutation UpdateUsersModel(
       nextToken
       __typename
     }
+    contributor_notes {
+      nextToken
+      __typename
+    }
     conversations {
       nextToken
       __typename
@@ -255,6 +263,10 @@ export const deleteUsersModel = /* GraphQL */ `mutation DeleteUsersModel(
       __typename
     }
     messages {
+      nextToken
+      __typename
+    }
+    contributor_notes {
       nextToken
       __typename
     }
@@ -461,6 +473,10 @@ export const createPostsModel = /* GraphQL */ `mutation CreatePostsModel(
       nextToken
       __typename
     }
+    contributor_notes {
+      nextToken
+      __typename
+    }
     reported
     experience_level
     application
@@ -510,6 +526,10 @@ export const updatePostsModel = /* GraphQL */ `mutation UpdatePostsModel(
       nextToken
       __typename
     }
+    contributor_notes {
+      nextToken
+      __typename
+    }
     reported
     experience_level
     application
@@ -556,6 +576,10 @@ export const deletePostsModel = /* GraphQL */ `mutation DeletePostsModel(
     }
     contributor_limit
     contributors {
+      nextToken
+      __typename
+    }
+    contributor_notes {
       nextToken
       __typename
     }
@@ -1750,6 +1774,267 @@ export const deleteJoinedPostModel = /* GraphQL */ `mutation DeleteJoinedPostMod
 ` as GeneratedMutation<
   APITypes.DeleteJoinedPostModelMutationVariables,
   APITypes.DeleteJoinedPostModelMutation
+>;
+export const createContributorNotesModel = /* GraphQL */ `mutation CreateContributorNotesModel(
+  $input: CreateContributorNotesModelInput!
+  $condition: ModelContributorNotesModelConditionInput
+) {
+  createContributorNotesModel(input: $input, condition: $condition) {
+    id
+    posted_at
+    pinned
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      random_index
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateContributorNotesModelMutationVariables,
+  APITypes.CreateContributorNotesModelMutation
+>;
+export const updateContributorNotesModel = /* GraphQL */ `mutation UpdateContributorNotesModel(
+  $input: UpdateContributorNotesModelInput!
+  $condition: ModelContributorNotesModelConditionInput
+) {
+  updateContributorNotesModel(input: $input, condition: $condition) {
+    id
+    posted_at
+    pinned
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      random_index
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateContributorNotesModelMutationVariables,
+  APITypes.UpdateContributorNotesModelMutation
+>;
+export const deleteContributorNotesModel = /* GraphQL */ `mutation DeleteContributorNotesModel(
+  $input: DeleteContributorNotesModelInput!
+  $condition: ModelContributorNotesModelConditionInput
+) {
+  deleteContributorNotesModel(input: $input, condition: $condition) {
+    id
+    posted_at
+    pinned
+    userID
+    userInfo {
+      id
+      user_name
+      email
+      password
+      profile_image
+      bio
+      first_name
+      last_name
+      user_creation_date
+      github_link
+      liked_posts
+      saved_posts
+      hide_posts
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      new_user
+      credibility_score
+      involved_projects
+      experience_level
+      years_of_experience
+      user_type
+      oauth_provider
+      oauth_id
+      external_link
+      notification_type
+      createdAt
+      updatedAt
+      __typename
+    }
+    postID
+    postInfo {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      random_index
+      createdAt
+      updatedAt
+      __typename
+    }
+    count
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteContributorNotesModelMutationVariables,
+  APITypes.DeleteContributorNotesModelMutation
 >;
 export const createUsersConvo = /* GraphQL */ `mutation CreateUsersConvo(
   $input: CreateUsersConvoInput!

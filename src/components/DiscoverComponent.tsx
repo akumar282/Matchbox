@@ -4,7 +4,7 @@ import {getImage} from '../backend/storage/s3'
 import github from '../img/github.svg'
 import { preferenceTags} from '../backend/types'
 import CommentSection from './CommentSection'
-import {generateTags, tagRender} from '../functions/helpers'
+import {generateTags, requestWithBody, tagRender} from '../functions/helpers'
 import {useNavigate} from 'react-router-dom'
 import {createSavedPost, deleteSavedPost} from '../backend/mutations/savedPostMutations'
 import {v4 as uuidv4} from 'uuid'
@@ -229,6 +229,15 @@ export default function DiscoverComponent(props: DiscoverProps) {
           }
         })
         setLiked(true)
+        const body = {
+          userId: userInfo.id
+        }
+        await requestWithBody(
+          `likes/${props.data.id}`,
+          'https://w1zlpbuw67.execute-api.us-west-2.amazonaws.com/prod/',
+          body,
+          'POST'
+        )
       } else {
         const savedBody = await listLikedPosts({
           filter: {
@@ -246,6 +255,16 @@ export default function DiscoverComponent(props: DiscoverProps) {
             }
           })
           setLiked(false)
+          const body = {
+            userId: userInfo.id
+          }
+          await requestWithBody(
+            `likes/${props.data.id}`,
+            'https://w1zlpbuw67.execute-api.us-west-2.amazonaws.com/prod/',
+            body,
+            'POST'
+          )
+
         }
       }
     }
