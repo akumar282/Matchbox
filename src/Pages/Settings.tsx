@@ -85,6 +85,7 @@ export default function Settings() {
         first_name: userData.first_name ? userData.first_name : '',
         last_name: userData.last_name ? userData.last_name : '',
         email: userData.email,
+        bio: userData.bio ? userData.bio: ''
       }, false)
     }
   }, [userData])
