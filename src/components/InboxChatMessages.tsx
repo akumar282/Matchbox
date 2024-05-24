@@ -23,7 +23,7 @@ export default function InboxChatMessages(props: ChatMessageProps) {
         <div className='flex flex-col gap-1'>
           <div className='flex justify-start'>
             <h1
-              className='lg:bg-gray-100 md:bg-gray-100 bg-gray-500 lg:text-black md:text-black text-white rounded-lg font-primary p-2 whitespace-normal break-words'
+              className='lg:bg-gray-100 md:bg-gray-100 bg-gray-500 max-w-[300px] lg:text-black md:text-black text-white rounded-lg font-primary p-2 whitespace-normal break-words'
             >
               {props.message}
             </h1>

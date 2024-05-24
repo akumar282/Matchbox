@@ -9,7 +9,6 @@ import ErrorAlert, {
 import {AuthContext} from './AuthWrapper'
 import {createJoinedPost} from '../backend/mutations/joinedPostMutations'
 import {useNavigate} from 'react-router-dom'
-import {listUserConvos} from '../backend/queries/userConvoQueries'
 import {createConvo} from '../backend/mutations/userConvoMutations'
 
 interface MFAProps {
@@ -57,24 +56,12 @@ export default function JoinModal(props: MFAProps){
             count: 1
           }
         })
-        const { data } = await listUserConvos({
-          filter: {
-            conversationModelID: {
-              eq: props.chat_id
-            },
-            usersModelID: {
-              eq: userInfo.id
-            }
+        await createConvo({
+          input: {
+            usersModelID: userInfo.id,
+            conversationModelID: props.chat_id,
           }
         })
-        if(data && data.listUsersConvos && data.listUsersConvos.items.pop()) {
-          await createConvo({
-            input: {
-              usersModelID: userInfo.id,
-              conversationModelID: props.chat_id,
-            }
-          })
-        }
         setStatus(success)
         navigate(`/joined/project/${props.project_id}`)
       }

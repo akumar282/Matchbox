@@ -122,7 +122,6 @@ export default function ReviewProject(props: Props) {
           likes_users: [],
           likes: 0,
           saves: 0,
-          contributors: [],
           image_link: imageLink,
           reported: false,
           application: false,
