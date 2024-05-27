@@ -81,15 +81,21 @@ export default function UserProfile() {
 
   return (
     <div className='min-h-screen bg-primary-purple flex flex-col relative overflow-hidden'>
-      <NavBar />
+      <NavBar/>
       <div className='max-w-[1070px] mx-auto w-[97%] h-full flex flex-col rounded-lg  mt-4'>
         <h1></h1>
         {userData ? (
-          <ProfileHeader data={userData} picture={profilePic!} postsNum={postsNum ?? 0} projects={userProjects} editable={editable} />
+          <ProfileHeader data={userData} picture={profilePic!} postsNum={postsNum ?? 0} projects={userProjects}
+            editable={editable}/>
         ) : (
           <div/>
         )}
         {/*<ProfileProjects />*/}
+      </div>
+      <div className='bg-secondary-blue flex flex-col static mt-10 bottom-0 items-center justify-center'>
+        <div>
+          <h1 className='text-base font-primary text-center text-white py-4 px-5'>Copyright © 2023 GitMatch</h1>
+        </div>
       </div>
     </div>
   )

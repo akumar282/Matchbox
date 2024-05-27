@@ -1783,6 +1783,7 @@ export const createContributorNotesModel = /* GraphQL */ `mutation CreateContrib
     id
     posted_at
     pinned
+    note
     userID
     userInfo {
       id
@@ -1870,6 +1871,7 @@ export const updateContributorNotesModel = /* GraphQL */ `mutation UpdateContrib
     id
     posted_at
     pinned
+    note
     userID
     userInfo {
       id
@@ -1957,6 +1959,7 @@ export const deleteContributorNotesModel = /* GraphQL */ `mutation DeleteContrib
     id
     posted_at
     pinned
+    note
     userID
     userInfo {
       id

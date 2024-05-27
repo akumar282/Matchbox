@@ -1743,6 +1743,7 @@ export const onCreateContributorNotesModel = /* GraphQL */ `subscription OnCreat
     id
     posted_at
     pinned
+    note
     userID
     userInfo {
       id
@@ -1829,6 +1830,7 @@ export const onUpdateContributorNotesModel = /* GraphQL */ `subscription OnUpdat
     id
     posted_at
     pinned
+    note
     userID
     userInfo {
       id
@@ -1915,6 +1917,7 @@ export const onDeleteContributorNotesModel = /* GraphQL */ `subscription OnDelet
     id
     posted_at
     pinned
+    note
     userID
     userInfo {
       id

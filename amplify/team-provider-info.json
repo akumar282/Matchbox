@@ -26,6 +26,9 @@
       },
       "storage": {
         "s3unhingedstorage98feb2cc": {}
+      },
+      "custom": {
+        "gitmatchstagingcustomresolverrandomlist": {}
       }
     }
   }

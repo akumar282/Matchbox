@@ -8,6 +8,7 @@ import PullRequestsTable from '../components/PullRequestsTable'
 import {getPost} from '../backend/queries/postQueries'
 import {githubIssue, githubPullRequestSimple} from '../backend/types'
 import {PostsModel} from '../API'
+import ContributorNotes from '../components/ContributorNotes'
 
 export default function ProjectJoined(props) {
 
@@ -51,11 +52,13 @@ export default function ProjectJoined(props) {
         <div className='max-w-[1070px] flex-grow pt-8 justify-center'>
           <div
             className="lg:w-full w-[97%] flex flex-row bg-white rounded-lg py-1 font-primary text-xl space-x-3 mx-auto mb-5">
-            <h1 className='ml-2'>{repoData?.post_title} Dashboard</h1>
+            <h1 className='ml-2 text-2xl'>{repoData?.post_title} Dashboard</h1>
           </div>
           <div
             className='lg:w-full w-[97%] flex flex-row bg-white rounded-lg py-1 font-primary text-sm space-x-3 mx-auto mb-3'>
-            <button className={`mx-5 h-full hover:bg-gray-200 rounded-lg p-2 ${pageIndex === 0 ? 'text-indigo-600 bg-gray-200' : ''}`} onClick={() => setPageIndex(0)}>
+            <button
+              className={`mx-5 h-full hover:bg-gray-200 rounded-lg p-2 ${pageIndex === 0 ? 'text-indigo-600 bg-gray-200' : ''}`}
+              onClick={() => setPageIndex(0)}>
               <div className='flex flex-row items-center space-x-2'>
                 <svg
                   className='fill-current'
@@ -73,7 +76,9 @@ export default function ProjectJoined(props) {
                 <h3>Issues</h3>
               </div>
             </button>
-            <button className={`mx-5 h-full hover:bg-gray-200 rounded-lg p-2 ${pageIndex === 1 ? 'text-indigo-600 bg-gray-200' : ''}`} onClick={() => setPageIndex(1)}>
+            <button
+              className={`mx-5 h-full hover:bg-gray-200 rounded-lg p-2 ${pageIndex === 1 ? 'text-indigo-600 bg-gray-200' : ''}`}
+              onClick={() => setPageIndex(1)}>
               <div className='flex flex-row items-center space-x-2'>
                 <svg
                   className='fill-current'
@@ -99,7 +104,19 @@ export default function ProjectJoined(props) {
               </div>
             </button>
           </div>
-          {pageIndex === 0 ? <IssuesTable gitIssues={gitIssues} /> : <PullRequestsTable gitPulls={gitPulls} />}
+          {pageIndex === 0 ? <IssuesTable gitIssues={gitIssues}/> : <PullRequestsTable gitPulls={gitPulls}/>}
+          <div className='mx-auto mb-12'>
+            {id ?
+              <ContributorNotes postID={id}/>
+              :
+              <></>
+            }
+          </div>
+        </div>
+      </div>
+      <div className='bg-secondary-blue flex flex-col static bottom-0 items-center justify-center'>
+        <div>
+          <h1 className='text-base font-primary text-center text-white py-4 px-5'>Copyright © 2023 GitMatch</h1>
         </div>
       </div>
     </div>

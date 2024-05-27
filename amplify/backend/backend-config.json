@@ -65,6 +65,23 @@
       "service": "Cognito"
     }
   },
+  "custom": {
+    "gitmatchstagingcustomresolverrandomlist": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIKeyOutput",
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "unhinged"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "customCDK"
+    }
+  },
   "function": {},
   "hosting": {
     "amplifyhosting": {

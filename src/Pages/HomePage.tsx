@@ -140,7 +140,6 @@ export default function HomePage() {
           <h3 className='text-sm font-primary ml-3 mt-1'>Projects that you are currently contributing to:</h3>
           <div className='overflow-x-auto'>
             <div className='flex mt-2 lg:grid lg:grid-cols-4 md:grid-cols-4'>
-              {/* Render Query Here */}
               {joinedProjects}
             </div>
           </div>

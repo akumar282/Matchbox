@@ -563,6 +563,7 @@ export type ContributorNotesModel = {
   id: string,
   posted_at?: string | null,
   pinned?: boolean | null,
+  note?: string | null,
   userID: string,
   userInfo?: UsersModel | null,
   postID: string,
@@ -1181,6 +1182,7 @@ export type CreateContributorNotesModelInput = {
   id?: string | null,
   posted_at?: string | null,
   pinned?: boolean | null,
+  note?: string | null,
   userID: string,
   postID: string,
   count?: number | null,
@@ -1189,6 +1191,7 @@ export type CreateContributorNotesModelInput = {
 export type ModelContributorNotesModelConditionInput = {
   posted_at?: ModelStringInput | null,
   pinned?: ModelBooleanInput | null,
+  note?: ModelStringInput | null,
   userID?: ModelIDInput | null,
   postID?: ModelIDInput | null,
   count?: ModelIntInput | null,
@@ -1201,6 +1204,7 @@ export type UpdateContributorNotesModelInput = {
   id: string,
   posted_at?: string | null,
   pinned?: boolean | null,
+  note?: string | null,
   userID?: string | null,
   postID?: string | null,
   count?: number | null,
@@ -1232,6 +1236,97 @@ export type UpdateUsersConvoInput = {
 
 export type DeleteUsersConvoInput = {
   id: string,
+};
+
+export type customPostsModelFilterInput = {
+  id?: customSearchableIDFilterInput | null,
+  post_title?: customSearchableStringFilterInput | null,
+  description?: customSearchableStringFilterInput | null,
+  long_description?: customSearchableStringFilterInput | null,
+  project_link?: customSearchableStringFilterInput | null,
+  image_link?: customSearchableStringFilterInput | null,
+  post_date?: customSearchableStringFilterInput | null,
+  userID?: customSearchableIDFilterInput | null,
+  creator_name?: customSearchableStringFilterInput | null,
+  likes?: customSearchableIntFilterInput | null,
+  likes_users?: customSearchableIDFilterInput | null,
+  saves?: customSearchableIntFilterInput | null,
+  contributor_limit?: customSearchableIntFilterInput | null,
+  reported?: customSearchableBooleanFilterInput | null,
+  application?: customSearchableBooleanFilterInput | null,
+  project_chat?: customSearchableIDFilterInput | null,
+  counter?: customSearchableIntFilterInput | null,
+  external_link?: customSearchableStringFilterInput | null,
+  random_index?: customSearchableIntFilterInput | null,
+  createdAt?: customSearchableStringFilterInput | null,
+  updatedAt?: customSearchableStringFilterInput | null,
+  lang_tag?: customSearchableStringFilterInput | null,
+  dev_type_tag?: customSearchableStringFilterInput | null,
+  interest_tag?: customSearchableStringFilterInput | null,
+  size_tag?: customSearchableStringFilterInput | null,
+  framework_tag?: customSearchableStringFilterInput | null,
+  difficulty_tag?: customSearchableStringFilterInput | null,
+  cloud_provider_tag?: customSearchableStringFilterInput | null,
+  experience_level?: customSearchableStringFilterInput | null,
+  and?: Array< customPostsModelFilterInput | null > | null,
+  or?: Array< customPostsModelFilterInput | null > | null,
+  not?: customPostsModelFilterInput | null,
+};
+
+export type customSearchableIDFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type customSearchableStringFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type customSearchableIntFilterInput = {
+  ne?: number | null,
+  gt?: number | null,
+  lt?: number | null,
+  gte?: number | null,
+  lte?: number | null,
+  eq?: number | null,
+  range?: Array< number | null > | null,
+};
+
+export type customSearchableBooleanFilterInput = {
+  eq?: boolean | null,
+  ne?: boolean | null,
+};
+
+export type customSearchablePostsModelConnection = {
+  __typename: "customSearchablePostsModelConnection",
+  items:  Array<PostsModel | null >,
+  nextToken?: string | null,
+  total?: number | null,
 };
 
 export type ModelNewsletterEmailModelFilterInput = {
@@ -2375,6 +2470,7 @@ export type ModelContributorNotesModelFilterInput = {
   id?: ModelIDInput | null,
   posted_at?: ModelStringInput | null,
   pinned?: ModelBooleanInput | null,
+  note?: ModelStringInput | null,
   userID?: ModelIDInput | null,
   postID?: ModelIDInput | null,
   count?: ModelIntInput | null,
@@ -2387,6 +2483,7 @@ export type SearchableContributorNotesModelFilterInput = {
   id?: SearchableIDFilterInput | null,
   posted_at?: SearchableStringFilterInput | null,
   pinned?: SearchableBooleanFilterInput | null,
+  note?: SearchableStringFilterInput | null,
   userID?: SearchableIDFilterInput | null,
   postID?: SearchableIDFilterInput | null,
   count?: SearchableIntFilterInput | null,
@@ -2406,6 +2503,7 @@ export enum SearchableContributorNotesModelSortableFields {
   id = "id",
   posted_at = "posted_at",
   pinned = "pinned",
+  note = "note",
   userID = "userID",
   postID = "postID",
   count = "count",
@@ -2424,6 +2522,7 @@ export enum SearchableContributorNotesModelAggregateField {
   id = "id",
   posted_at = "posted_at",
   pinned = "pinned",
+  note = "note",
   userID = "userID",
   postID = "postID",
   count = "count",
@@ -2679,6 +2778,7 @@ export type ModelSubscriptionContributorNotesModelFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   posted_at?: ModelSubscriptionStringInput | null,
   pinned?: ModelSubscriptionBooleanInput | null,
+  note?: ModelSubscriptionStringInput | null,
   userID?: ModelSubscriptionIDInput | null,
   postID?: ModelSubscriptionIDInput | null,
   count?: ModelSubscriptionIntInput | null,
@@ -4433,6 +4533,7 @@ export type CreateContributorNotesModelMutation = {
     id: string,
     posted_at?: string | null,
     pinned?: boolean | null,
+    note?: string | null,
     userID: string,
     userInfo?:  {
       __typename: "UsersModel",
@@ -4519,6 +4620,7 @@ export type UpdateContributorNotesModelMutation = {
     id: string,
     posted_at?: string | null,
     pinned?: boolean | null,
+    note?: string | null,
     userID: string,
     userInfo?:  {
       __typename: "UsersModel",
@@ -4605,6 +4707,7 @@ export type DeleteContributorNotesModelMutation = {
     id: string,
     posted_at?: string | null,
     pinned?: boolean | null,
+    note?: string | null,
     userID: string,
     userInfo?:  {
       __typename: "UsersModel",
@@ -4851,6 +4954,52 @@ export type DeleteUsersConvoMutation = {
     },
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type ListRandomPostsModelQueryQueryVariables = {
+  filter?: customPostsModelFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListRandomPostsModelQueryQuery = {
+  listRandomPostsModelQuery?:  {
+    __typename: "customSearchablePostsModelConnection",
+    items:  Array< {
+      __typename: "PostsModel",
+      id: string,
+      post_title: string,
+      description?: string | null,
+      long_description?: string | null,
+      project_link?: string | null,
+      image_link?: string | null,
+      post_date?: string | null,
+      userID: string,
+      creator_name?: string | null,
+      lang_tag?: Array< LanguageTag | null > | null,
+      dev_type_tag?: Array< DevelopmentTag | null > | null,
+      interest_tag?: Array< InterestTag | null > | null,
+      size_tag?: Array< SizeTag | null > | null,
+      framework_tag?: Array< FrameworkTag | null > | null,
+      difficulty_tag?: Array< DifficultyTag | null > | null,
+      cloud_provider_tag?: Array< CloudProviderTag | null > | null,
+      likes?: number | null,
+      likes_users?: Array< string | null > | null,
+      saves?: number | null,
+      contributor_limit?: number | null,
+      reported?: boolean | null,
+      experience_level?: Array< ExperienceTag | null > | null,
+      application?: boolean | null,
+      project_chat: string,
+      counter?: number | null,
+      external_link?: string | null,
+      random_index?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
   } | null,
 };
 
@@ -6383,6 +6532,7 @@ export type GetContributorNotesModelQuery = {
     id: string,
     posted_at?: string | null,
     pinned?: boolean | null,
+    note?: string | null,
     userID: string,
     userInfo?:  {
       __typename: "UsersModel",
@@ -6472,6 +6622,7 @@ export type ListContributorNotesModelsQuery = {
       id: string,
       posted_at?: string | null,
       pinned?: boolean | null,
+      note?: string | null,
       userID: string,
       postID: string,
       count?: number | null,
@@ -6499,6 +6650,7 @@ export type SearchContributorNotesModelsQuery = {
       id: string,
       posted_at?: string | null,
       pinned?: boolean | null,
+      note?: string | null,
       userID: string,
       postID: string,
       count?: number | null,
@@ -8303,6 +8455,7 @@ export type OnCreateContributorNotesModelSubscription = {
     id: string,
     posted_at?: string | null,
     pinned?: boolean | null,
+    note?: string | null,
     userID: string,
     userInfo?:  {
       __typename: "UsersModel",
@@ -8388,6 +8541,7 @@ export type OnUpdateContributorNotesModelSubscription = {
     id: string,
     posted_at?: string | null,
     pinned?: boolean | null,
+    note?: string | null,
     userID: string,
     userInfo?:  {
       __typename: "UsersModel",
@@ -8473,6 +8627,7 @@ export type OnDeleteContributorNotesModelSubscription = {
     id: string,
     posted_at?: string | null,
     pinned?: boolean | null,
+    note?: string | null,
     userID: string,
     userInfo?:  {
       __typename: "UsersModel",

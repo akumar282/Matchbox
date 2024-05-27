@@ -8,6 +8,57 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const listRandomPostsModelQuery = /* GraphQL */ `query ListRandomPostsModelQuery(
+  $filter: customPostsModelFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listRandomPostsModelQuery(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      post_title
+      description
+      long_description
+      project_link
+      image_link
+      post_date
+      userID
+      creator_name
+      lang_tag
+      dev_type_tag
+      interest_tag
+      size_tag
+      framework_tag
+      difficulty_tag
+      cloud_provider_tag
+      likes
+      likes_users
+      saves
+      contributor_limit
+      reported
+      experience_level
+      application
+      project_chat
+      counter
+      external_link
+      random_index
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    total
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListRandomPostsModelQueryQueryVariables,
+  APITypes.ListRandomPostsModelQueryQuery
+>;
 export const getNewsletterEmailModel = /* GraphQL */ `query GetNewsletterEmailModel($id: ID!) {
   getNewsletterEmailModel(id: $id) {
     id
@@ -1648,6 +1699,7 @@ export const getContributorNotesModel = /* GraphQL */ `query GetContributorNotes
     id
     posted_at
     pinned
+    note
     userID
     userInfo {
       id
@@ -1741,6 +1793,7 @@ export const listContributorNotesModels = /* GraphQL */ `query ListContributorNo
       id
       posted_at
       pinned
+      note
       userID
       postID
       count
@@ -1776,6 +1829,7 @@ export const searchContributorNotesModels = /* GraphQL */ `query SearchContribut
       id
       posted_at
       pinned
+      note
       userID
       postID
       count

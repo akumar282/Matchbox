@@ -351,9 +351,109 @@ type ContributorNotesModel @model @searchable @auth(rules: [{allow: public, oper
   id: ID!
   posted_at: AWSDateTime
   pinned: Boolean
+  note: String
   userID: ID! @index(name: "byUsersModel")
   userInfo: UsersModel @belongsTo(fields: ["userID"])
   postID: ID! @index(name: "byPostsModel")
   postInfo: PostsModel @belongsTo(fields: ["postID"])
   count: Int
+}
+
+input customSearchableIDFilterInput {
+  ne: ID
+  gt: ID
+  lt: ID
+  gte: ID
+  lte: ID
+  eq: ID
+  match: ID
+  matchPhrase: ID
+  matchPhrasePrefix: ID
+  multiMatch: ID
+  exists: Boolean
+  wildcard: ID
+  regexp: ID
+  range: [ID]
+}
+
+input customSearchableIntFilterInput {
+  ne: Int
+  gt: Int
+  lt: Int
+  gte: Int
+  lte: Int
+  eq: Int
+  range: [Int]
+}
+
+input customSearchableStringFilterInput {
+  ne: String
+  gt: String
+  lt: String
+  gte: String
+  lte: String
+  eq: String
+  match: String
+  matchPhrase: String
+  matchPhrasePrefix: String
+  multiMatch: String
+  exists: Boolean
+  wildcard: String
+  regexp: String
+  range: [String]
+}
+
+input customSearchableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input customPostsModelFilterInput {
+  id: customSearchableIDFilterInput
+  post_title: customSearchableStringFilterInput
+  description: customSearchableStringFilterInput
+  long_description: customSearchableStringFilterInput
+  project_link: customSearchableStringFilterInput
+  image_link: customSearchableStringFilterInput
+  post_date: customSearchableStringFilterInput
+  userID: customSearchableIDFilterInput
+  creator_name: customSearchableStringFilterInput
+  likes: customSearchableIntFilterInput
+  likes_users: customSearchableIDFilterInput
+  saves: customSearchableIntFilterInput
+  contributor_limit: customSearchableIntFilterInput
+  reported: customSearchableBooleanFilterInput
+  application: customSearchableBooleanFilterInput
+  project_chat: customSearchableIDFilterInput
+  counter: customSearchableIntFilterInput
+  external_link: customSearchableStringFilterInput
+  random_index: customSearchableIntFilterInput
+  createdAt: customSearchableStringFilterInput
+  updatedAt: customSearchableStringFilterInput
+  lang_tag: customSearchableStringFilterInput
+  dev_type_tag: customSearchableStringFilterInput
+  interest_tag: customSearchableStringFilterInput
+  size_tag: customSearchableStringFilterInput
+  framework_tag: customSearchableStringFilterInput
+  difficulty_tag: customSearchableStringFilterInput
+  cloud_provider_tag: customSearchableStringFilterInput
+  experience_level: customSearchableStringFilterInput
+  and: [customPostsModelFilterInput]
+  or: [customPostsModelFilterInput]
+  not: customPostsModelFilterInput
+}
+
+type customSearchablePostsModelConnection @aws_api_key @aws_iam {
+  items: [PostsModel]!
+  nextToken: String
+  total: Int
+}
+
+type Query {
+  listRandomPostsModelQuery(
+    filter: customPostsModelFilterInput,
+    limit: Int,
+    nextToken: String,
+  ): customSearchablePostsModelConnection
+  @aws_api_key @aws_iam
 }

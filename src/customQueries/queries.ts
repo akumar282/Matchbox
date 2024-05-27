@@ -236,3 +236,28 @@ export const listCommentsCustom = `
     }
   }
 `
+
+export const listNotesCustom = `
+  query ListContributorNotesModels(
+    $filter: ModelContributorNotesModelFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listContributorNotesModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        note
+        posted_at
+        id
+        postID
+        updatedAt
+        userID
+        userInfo {
+          user_name
+          profile_image
+        }
+      }
+      nextToken
+      __typename
+    }
+  }
+`

@@ -4,12 +4,40 @@ export const content = [
   'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
   './node_modules/tw-elements-react/dist/js/**/*.js',
 ];
+
+export const corePlugins = {
+  tableLayout: true
+}
 export const theme = {
   extend: {
     animation: {
       message1: 'typewriter 2s steps(21) forwards',
       carat: 'typewriter 2s steps(19) forwards, blink 1s steps(21) infinite 2s'
     },
+    typography: (theme) => ({
+      DEFAULT: {
+        css: {
+          h1: {
+            fontSize: theme('fontSize.3xl'), // Tailwind utility for 3xl font size
+            fontWeight: theme('fontWeight.bold'),
+            marginBottom: theme('spacing.4'), // Adjust spacing as needed
+            color: theme('colors.gray.800') // Adjust color as needed
+          },
+          h2: {
+            fontSize: theme('fontSize.2xl'),
+            fontWeight: theme('fontWeight.bold'),
+            marginBottom: theme('spacing.3'),
+            color: theme('colors.gray.700')
+          },
+          h3: {
+            fontSize: theme('fontSize.xl'),
+            fontWeight: theme('fontWeight.semibold'),
+            marginBottom: theme('spacing.2'),
+            color: theme('colors.gray.600')
+          },
+        },
+      },
+    }),
     keyframes: {
       typewriter: {
         to: {
@@ -58,5 +86,6 @@ export const theme = {
 export const plugins = [
   require('flowbite/plugin'),
   require('tw-elements-react/dist/plugin.cjs'),
-  require('tailwindcss-animated')
+  require('tailwindcss-animated'),
+  require('@tailwindcss/typography')
 ];

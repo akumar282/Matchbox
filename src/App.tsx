@@ -76,7 +76,6 @@ function App () {
           <Route path='/trending' element={<Browse/>} />
           <Route path='/view/profile/:id' element={<UserProfile />} />
           <Route path='/joined/project/:id' element={<ProjectJoined/>} />
-          <Route path='/joined/project' element={<ProjectJoined/>} />
           <Route path='/project/owner/:id' element={<SingleView />}/>
           <Route path='/profile/edit/:id' element={<UserProfile />} />
           <Route path='/project/edit/:id' element={<EditPost />}/>
