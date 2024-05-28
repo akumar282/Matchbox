@@ -50,9 +50,9 @@ export default function Browse() {
               }
             })
             if (data && data.searchPostsModels && data.searchPostsModels.items) {
-              data.searchPostsModels.items.forEach(x => {
+              data.searchPostsModels.items.forEach((x, index) => {
                 const mapToCard = (
-                  <BrowseComponent data={x as PostsModel}/>
+                  <BrowseComponent key={index} data={x as PostsModel}/>
                 )
                 setProjects((prevProjects) => [mapToCard, ...prevProjects])
               })
@@ -73,9 +73,9 @@ export default function Browse() {
               }
             )
             if (data && data.listPostsModels && data.listPostsModels.items) {
-              data.listPostsModels.items.forEach(x => {
+              data.listPostsModels.items.forEach((x, index) => {
                 const mapToCard = (
-                  <BrowseComponent data={x as PostsModel}/>
+                  <BrowseComponent key={index} data={x as PostsModel}/>
                 )
                 setProjects((prevProjects) => [mapToCard, ...prevProjects])
               })

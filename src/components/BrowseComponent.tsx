@@ -90,22 +90,24 @@ export default function BrowseComponent(props: BrowseProps) {
 
   return (
     <div className='flex flex-col bg-white rounded-[20px] pb-2 mb-16 mx-auto items-center shadow-lg w-[97%]'>
-      {copySuccess &&
-        <ErrorAlert show={copySuccess} closeAlert={triggerCopyAlert} title='Success' message='Link copied to clipboard' closeStyle={successXStyle} colorStyle={successStyle}/>
-      }
+      <div className='mt-4'>
+        {copySuccess &&
+          <ErrorAlert show={copySuccess} closeAlert={triggerCopyAlert} title='Success' message='Link copied to clipboard' closeStyle={successXStyle} colorStyle={successStyle}/>
+        }
+      </div>
       <ConversationModal setFunction={setShowModalConvo} openModal={showModalConvo} owner_name={props.data.creator_name ? props.data.creator_name : props.data.userID} owner_id={props.data.userID}/>
       <ReportPostModal setFunction={setShowReport} openModal={showReport} user_name={props.data.post_title} post_id={props.data.id}/>
-      <button className='flex flex-col lg:flex-row p-2' onClick={() => navigate(`/project/${props.data.id}`)}>
-        <div className='lg:w-64 lg:h-40 w-[97%] h-44 space-y-2 bg-white shadow-sm rounded-lg '>
+      <button className='flex flex-col lg:flex-row pb-2 px-2 w-full' onClick={() => navigate(`/project/${props.data.id}`)}>
+        <div className='lg:w-64 lg:h-40 w-[97%] ml-3 h-44 space-y-2 bg-white shadow-sm rounded-lg '>
           <img className='h-full w-full rounded-lg object-cover' src={projectImage} alt='Project Thumbnail'/>
         </div>
-        <div className='font-primary flex flex-col items-center space-y-3'>
+        <div className='font-primary flex flex-col mx-auto items-center space-y-3'>
           <h1 className='text-2xl pt-2'>{props.data.post_title}</h1>
           <h3 className='text-center text-lg'>{props.data.description}</h3>
           <h3 className='text-xs pb-3'>{'Posted by: ' + props.data.creator_name}</h3>
         </div>
       </button>
-      <div className='p-2 flex flex-wrap'>
+      <div className='p-2'>
         {allTags.map(x => generateTags(x))}
       </div>
       <div

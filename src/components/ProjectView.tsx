@@ -9,7 +9,7 @@ export default function ProjectView(props: ProjectViewProps) {
 
   return (
     <div>
-      <button
+      <div
         className='h-[220px] flex flex-col rounded-[20px] items-start hover:shadow-lg hover:bg-primary-purple mr-2 ml-2 mt-3 w-[220px] lg:w-[251.5px] bg-white border border-gray-200'
         onClick={() => navigate(`/project/${props.id}`)}
       >
@@ -28,7 +28,7 @@ export default function ProjectView(props: ProjectViewProps) {
             </a>
           </button>
         </div>
-      </button>
+      </div>
     </div>
   )
 }
