@@ -85,7 +85,8 @@ export default function Settings() {
         first_name: userData.first_name ? userData.first_name : '',
         last_name: userData.last_name ? userData.last_name : '',
         email: userData.email,
-        bio: userData.bio ? userData.bio: ''
+        bio: userData.bio ? userData.bio: '',
+        github_link: userData.github_link ? userData.github_link: ''
       }, false)
     }
   }, [userData])
@@ -130,6 +131,9 @@ export default function Settings() {
       .string(),
     email: yup
       .string()
+      .min(1, 'Email should be a minimum of 1 character'),
+    github_link: yup
+      .string()
       .min(1, 'Email should be a minimum of 1 character')
   })
 
@@ -139,6 +143,7 @@ export default function Settings() {
       last_name: '',
       bio: '',
       email: '',
+      github_link: ''
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -152,7 +157,8 @@ export default function Settings() {
           id: userInfo.id,
           first_name: values.first_name,
           last_name: values.last_name,
-          bio: values.bio
+          bio: values.bio,
+          github_link: values.github_link
         }
 
         if (file) {
@@ -317,82 +323,100 @@ export default function Settings() {
               </div>
             </div>
             <form onSubmit={formik.handleSubmit}>
-              <div className="flex flex-col items-center w-5/6 mx-auto">
-                <h1 className="pb-4 mt-3">Account Information</h1>
-                <div className="flex text-sm flex-col pb-2 w-full">
+              <div className='flex flex-col items-center w-5/6 mx-auto'>
+                <h1 className='pb-4 mt-3'>Account Information</h1>
+                <div className='flex text-sm flex-col pb-2 w-full'>
                   <label>First Name</label>
                   <input
-                    className="rounded-md lg:w-full"
+                    className='rounded-md lg:w-full'
                     name={'first_name'}
-                    type="text"
+                    type='text'
                     id={'first_name'}
                     placeholder={userData?.first_name ? userData?.first_name : 'First Name'}
                     value={formik.values.first_name}
                     onChange={formik.handleChange}
                   />
                   {formik.errors.first_name && formik.touched.first_name ?
-                    (<div className="text-red-500 text-xs">{formik.errors.first_name}</div>)
+                    (<div className='text-red-500 text-xs'>{formik.errors.first_name}</div>)
                     :
-                    (<div className="text-xs"> &nbsp;</div>)
+                    (<div className='text-xs'> &nbsp;</div>)
                   }
                 </div>
-                <div className="flex text-sm flex-col pb-2 w-full">
+                <div className='flex text-sm flex-col pb-2 w-full'>
                   <label>Last Name</label>
                   <input
-                    className="rounded-md lg:w-full"
+                    className='rounded-md lg:w-full'
                     name={'last_name'}
-                    type="text"
+                    type='text'
                     id={'last_name'}
                     placeholder={userData?.last_name ? userData?.last_name : 'Last Name'}
                     value={formik.values.last_name}
                     onChange={formik.handleChange}
                   />
                   {formik.errors.last_name && formik.touched.last_name ?
-                    (<div className="text-red-500 text-xs">{formik.errors.last_name}</div>)
+                    (<div className='text-red-500 text-xs'>{formik.errors.last_name}</div>)
                     :
-                    (<div className="text-xs"> &nbsp;</div>)
+                    (<div className='text-xs'> &nbsp;</div>)
                   }
                 </div>
-                <div className="flex text-sm flex-col pb-2 w-full">
+                <div className='flex text-sm flex-col pb-2 w-full'>
                   <label>Bio</label>
                   <input
-                    className="rounded-md lg:w-full"
+                    className='rounded-md lg:w-full'
                     name={'bio'}
-                    type="text"
+                    type='text'
                     id={'bio'}
                     placeholder={userData?.bio ? userData?.bio : 'Bio'}
                     value={formik.values.bio}
                     onChange={formik.handleChange}
                   />
                   {formik.errors.bio && formik.touched.bio ?
-                    (<div className="text-red-500 text-xs">{formik.errors.bio}</div>)
+                    (<div className='text-red-500 text-xs'>{formik.errors.bio}</div>)
                     :
-                    (<div className="text-xs"> &nbsp;</div>)
+                    (<div className='text-xs'> &nbsp;</div>)
                   }
                 </div>
-                <div className="flex text-sm flex-col pb-1 w-full">
+                <div className='flex text-sm flex-col pb-2 w-full'>
                   <label>Email</label>
                   <input
-                    className="rounded-md lg:w-full disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                    className='rounded-md lg:w-full disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none'
                     disabled={isDisabled()}
                     name={'email'}
-                    type="text"
+                    type='text'
                     id={'email'}
                     placeholder={userData?.email}
                     value={formik.values.email}
                     onChange={formik.handleChange}
                   />
                   {formik.errors.email && formik.touched.email ?
-                    (<div className="text-red-500 text-xs">{formik.errors.email}</div>)
+                    (<div className='text-red-500 text-xs'>{formik.errors.email}</div>)
                     :
-                    (<div className="text-xs"> &nbsp;</div>)
+                    (<div className='text-xs'> &nbsp;</div>)
+                  }
+                </div>
+                <div className='flex text-sm flex-col pb-1 w-full'>
+                  <label>GitHub Profile</label>
+                  <input
+                    className='rounded-md lg:w-full disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none'
+                    disabled={isDisabled()}
+                    name={'github_link'}
+                    type='text'
+                    id={'github_link'}
+                    placeholder={userData?.github_link ? userData.github_link : 'GitHub'}
+                    value={formik.values.github_link}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.errors.github_link && formik.touched.github_link ?
+                    (<div className='text-red-500 text-xs'>{formik.errors.github_link}</div>)
+                    :
+                    (<div className='text-xs'> &nbsp;</div>)
                   }
                 </div>
               </div>
-              <div className="flex flex-col items-center w-5/6 mx-auto">
+              <div className='flex flex-col items-center w-5/6 mx-auto'>
                 <button
                   onClick={() => formik.handleSubmit}
-                  className="bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4">Submit
+                  className='bg-blue-700 hover:bg-blue-400 rounded-lg text-white mb-3 py-2 px-4 mt-4'>Submit
                 </button>
               </div>
             </form>
@@ -404,14 +428,15 @@ export default function Settings() {
 
   function passwordInformation() {
     return (
-      <div className="flex flex-col w-full items-center pt-6">
+      <div className='flex flex-col w-full items-center pt-6'>
         {passwordError &&
-          <ErrorAlert show={passwordError} closeAlert={closeErrorAlert} title="Error"
-            message="Password Change Unsuccessful"
+          <ErrorAlert show={passwordError} closeAlert={closeErrorAlert} title='Error'
+            message='Password Change Unsuccessful'
             closeStyle={errorXStyle} colorStyle={errorStyle}/>
         }
         {passwordSuccess &&
-          <ErrorAlert show={passwordSuccess} closeAlert={closeSuccessAlert} title='Success' message='Password Change Successful'
+          <ErrorAlert show={passwordSuccess} closeAlert={closeSuccessAlert} title='Success'
+            message='Password Change Successful'
             closeStyle={successXStyle} colorStyle={successStyle}/>
         }
         <h1 className='font-primary text-3xl font-semibold'>User Profile</h1>

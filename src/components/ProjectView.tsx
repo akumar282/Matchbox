@@ -15,7 +15,7 @@ export default function ProjectView(props: ProjectViewProps) {
       >
         <div className='h-[170px] w-full overflow-hidden'>
           <a href='#'>
-            <img className='w-full h-full rounded-t-lg object-scale-down' src={props.image} alt='Project Thumbnail' />
+            <img className='w-full h-full rounded-t-lg object-cover' src={props.image} alt='Project Thumbnail' />
           </a>
         </div>
         <div className='p-2 flex flex-row w-full justify-between'>

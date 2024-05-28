@@ -122,7 +122,7 @@ export default function SignUpPage() {
                 <div className='text-xs'> &nbsp;</div>}
             </div>
           </div>
-          <div className='mx-auto py-4'>
+          <div className='mx-auto justify-center py-4'>
             <input type='radio' onChange={() => console.log()} checked={isChecked} onClick={handleCheck}></input>
             <label className='pl-2 font-primary text-sm'>I agree to the <a onClick={() => navigate('/tos')}
               className='underline text-secondary-blue hover:text-indigo-400 cursor-pointer'>Terms
@@ -136,7 +136,7 @@ export default function SignUpPage() {
             </button>
             <h1 className='font-primary text-center pt-5'>Already have an account? <button
               onClick={() => navigate('/login')}
-              className='underline text-secondary-blue hover:text-indigo-400'>Login</button></h1>
+              className='underline text-secondary-blue hover:text-indigo-400'>Log In</button></h1>
           </div>
         </form>
       </div>

@@ -61,7 +61,7 @@ export default function CreateProjectPreferences(props: Props) {
     <div className='mx-auto bg-white mt-8 mb-8 lg:max-w-[1170px] w-[97%] font-primary rounded-lg pt-4 px-4 pb-2'>
       <h1 className='text-2xl font-primary mt-3 font-bold'>Setup Project Preferences</h1>
       { props.editable ?
-        <h2 className="font-primary text-xs pt-1 pb-3">Note: This will overwrite your previous preference
+        <h2 className='font-primary text-xs pt-1 pb-3'>Note: This will overwrite your previous preference
           selection
         </h2>
         :
@@ -69,7 +69,7 @@ export default function CreateProjectPreferences(props: Props) {
         </>
       }
       <PreferencesComponent setTags={setTags}/>
-      <div className="flex gap-3 items-center justify-center">
+      <div className='flex gap-3 items-center justify-center'>
         <button
           className='py-2 px-6 mb-3 md:w-1/5 bg-gray-300 hover:bg-gray-200 rounded-md'
           onClick={props.prevSlide}

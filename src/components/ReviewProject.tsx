@@ -119,6 +119,7 @@ export default function ReviewProject(props: Props) {
           description: SelectedValues.projectDescription,
           external_link: SelectedValues.projectExternalLink,
           post_date: new Date().toISOString(),
+          experience_level: [],
           likes_users: [],
           likes: 0,
           saves: 0,

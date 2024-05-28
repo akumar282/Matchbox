@@ -170,7 +170,6 @@ export default function CreateIntialScreen(props: Props) {
   const navigate = useNavigate()
 
   return (
-    /* TODO: Remove random image*/
     <div className='mx-auto bg-white mt-8 mb-8 lg:max-w-[1300px] w-[97%] font-primary rounded-lg flex flex-col pb-4'>
       <div className='flex flex-col'>
         <div className='flex flex-col items-center space-y-4 mx-auto w-[93%] overflow-visible '>

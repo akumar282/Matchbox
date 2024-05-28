@@ -63,7 +63,7 @@ export default function LandingPageNavBar() {
               <button onClick={() => handleScroll('faq')}>FAQ_</button>
             </li>
             <li className=' border-gray-400 my-8 font-primary'>
-              <button onClick={() => handleScroll('register')}>Register_</button>
+              <button onClick={() => navigate('/signup')}>Get Started_</button>
             </li>
           </ul>
         </div>
@@ -77,7 +77,7 @@ export default function LandingPageNavBar() {
         <li><button onClick={() => handleScroll('faq')} className='text-black-500 font-primary text-base pr-6 border-r border-black ml-2 hover:text-gray-500'>FAQ_</button></li>
         <li className='text-black-300'>
         </li>
-        <li><button onClick={() => handleScroll('register')} className='text-white bg-deep-pink hover:bg-fuchsia-300 font-primary -ml-6 text-base rounded-lg py-2 px-3 hover:text-white'>Register_</button></li>
+        <li><button onClick={() => navigate('/signup')} className='text-white bg-deep-pink hover:bg-fuchsia-300 font-primary -ml-6 text-base rounded-lg py-2 px-3 hover:text-white'>Get Started_</button></li>
       </ul>
       <style>{`
         .hideMenuNav {

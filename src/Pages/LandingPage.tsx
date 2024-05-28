@@ -123,17 +123,17 @@ export default function LandingPage(): React.JSX.Element {
         <div>
         </div>
       </div>
-      <div id='faq' className='bg-light-green flex flex-col items-center text-start py-12'>
+      <div id='faq' className='bg-gradient-to-r from-emerald-500 to-green-400 flex flex-col items-center text-start py-12'>
         <h1 className='font-primary mx-8 mb-8 text-white text-4xl'>
           Any Questions?.
         </h1>
         <CollapseAll/>
       </div>
-      <div id='register' className='bg-primary-purple flex flex-col items-center text-center'>
+      <div id='register' className='bg-primary-purple text-black to-sky-600 flex flex-col items-center text-center'>
         <div className='flex flex-col items-center text-center'>
-          <h1 className='font-primary mx-8 mt-8 mb-4 text-black text-4xl text-center'>Stay Updated With Us.</h1>
-          <h3 className='text-black font-primary text-lg pt-2 text-center w-8/12'>We&apos;re currently building this platform for you and partnering with others to bring you projects that you are passionate about</h3>
-          <h3 className='text-black font-primary text-lg pt-10 text-center w-8/12'>Follow us on social media and join our community to stay updated and be notified when we launch</h3>
+          <h1 className='font-primary mx-8 mt-8 mb-4 text-black text-4xl text-center'>We&apos;re Here!.</h1>
+          <h3 className='font-primary text-lg pt-2 text-center w-8/12'>We&apos;re just launched this platform and are continuing to build to bring you projects that you are passionate about</h3>
+          <h3 className='font-primary text-lg pt-10 text-center w-8/12'>Follow us on social media and join our community to stay updated and be notified of new project, resources, and features!</h3>
         </div>
         <div className='flex mt-10 flex-row justify-center gap-12'>
           <div>
@@ -154,14 +154,20 @@ export default function LandingPage(): React.JSX.Element {
           <a href='https://instagram.com/gitmatch.io?igshid=NGVhN2U2NjQ0Yg=='  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={instagram} />instagram</a>
           <a href='https://www.tiktok.com/@gitmatch?lang=en'  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={tiktok} />tiktok</a>
         </div>
-        <div className='flex-row mb-4'>
-          <h1 className='font-primary text-center'>Further Questions? <ButtonMailto label='Contact Us!' mailto='mailto:info@gitmatch.io' /></h1>
+        <div className="items-center pt-4 pb-10">
+          <button onClick={() => navigate('/signup')} className="text-white text-2xl bg-secondary-blue hover:bg-fuchsia-300 font-primary rounded-lg py-3 px-4 hover:text-white">
+            Get Started
+          </button>
+        </div>
+        <div className="flex-row mb-4">
+          <h1 className="font-primary text-center">Further Questions? <ButtonMailto label="Contact Us!" mailto="mailto:info@gitmatch.io"/>
+          </h1>
         </div>
         <GitBranches/>
       </div>
       <div className='bg-secondary-blue flex flex-col items-center justify-center'>
         <div>
-          <h1 className='text-base font-primary text-center text-white py-4 px-5'>Copyright © 2023 GitMatch</h1>
+          <h1 className='text-base font-primary text-center text-white py-4 px-5'>Copyright © 2024 GitMatch</h1>
         </div>
       </div>
     </div>

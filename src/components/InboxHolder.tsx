@@ -18,9 +18,9 @@ export default function InboxHolder(props: InboxHolderProps) {
     }
   }, [selectedChatId])
 
-  return ( 
-    <main className='w-full h-full font-primary flex flex-col'>
-      <div className='px-4 pt-4 flex flex-col gap-4 relative'>
+  return (
+    <main className='w-full h-full flex flex-col overflow-hidden'>
+      <div className='px-4 pt-4 flex flex-col gap-4'>
         <h1 className='font-bold text-xl'>
           Recent Chats
         </h1>
@@ -35,27 +35,25 @@ export default function InboxHolder(props: InboxHolderProps) {
           placeholder='Search Messages'
         />
       </div>
-      <div className='flex-grow w-full p-4 flex flex-col gap-2'>
+      <div className='flex-grow w-full p-4 flex flex-col gap-2 overflow-hidden'>
         <h1>
           Conversations
         </h1>
-        <div className='overflow-hidden' key={'div-one'}>
-          <div className='grid grid-cols-1 divide-y w-full' key={'div-two'}>
-            {props.allChatsData
-              .map((x) =>
-                <InboxMessage
-                  currentChatId={props.currentChatId}
-                  setScreen={props.setScreen}
-                  key={x.conversationModel.id}
-                  chatData={x}
-                  isSelected={selectedChatId === x.conversationModel.id}
-                  onSelectChat={handleChatSelection}
-                />
-              )
-            }
+        <div className='overflow-y-auto overflow-x-hidden h-full'>
+          <div className='grid grid-cols-1 divide-y w-full'>
+            {props.allChatsData.map((x) =>
+              <InboxMessage
+                currentChatId={props.currentChatId}
+                setScreen={props.setScreen}
+                key={x.conversationModel.id}
+                chatData={x}
+                isSelected={selectedChatId === x.conversationModel.id}
+                onSelectChat={handleChatSelection}
+              />
+            )}
           </div>
         </div>
       </div>
-    </main> 
+    </main>
   )
 }

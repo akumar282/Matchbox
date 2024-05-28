@@ -80,9 +80,9 @@ export default function UserProfile() {
   }, [id, location.pathname])
 
   return (
-    <div className='min-h-screen bg-primary-purple flex flex-col relative overflow-hidden'>
+    <div className='bg-primary-purple flex flex-col min-h-screen relative overflow-hidden'>
       <NavBar/>
-      <div className='max-w-[1070px] mx-auto w-[97%] h-full flex flex-col rounded-lg  mt-4'>
+      <div className='max-w-[1070px] mx-auto w-[97%] flex-grow flex flex-col rounded-lg mt-4 mb-10'>
         <h1></h1>
         {userData ? (
           <ProfileHeader data={userData} picture={profilePic!} postsNum={postsNum ?? 0} projects={userProjects}
@@ -92,11 +92,12 @@ export default function UserProfile() {
         )}
         {/*<ProfileProjects />*/}
       </div>
-      <div className='bg-secondary-blue flex flex-col static mt-10 bottom-0 items-center justify-center'>
-        <div>
-          <h1 className='text-base font-primary text-center text-white py-4 px-5'>Copyright © 2023 GitMatch</h1>
-        </div>
+      <div className='bg-secondary-blue flex mt-auto items-center justify-center'>
+        <h1 className='text-base font-primary text-center text-white py-4 px-5'>
+          Copyright © 2023 GitMatch
+        </h1>
       </div>
     </div>
+
   )
 }
