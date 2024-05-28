@@ -19,7 +19,7 @@ export default function InboxHolder(props: InboxHolderProps) {
   }, [selectedChatId])
 
   return (
-    <main className='w-full h-full flex flex-col overflow-hidden'>
+    <main className='w-full font-primary h-full flex flex-col overflow-hidden'>
       <div className='px-4 pt-4 flex flex-col gap-4'>
         <h1 className='font-bold text-xl'>
           Recent Chats

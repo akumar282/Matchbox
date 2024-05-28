@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
 import {AuthContext} from '../components/AuthWrapper'
 import NavBar from '../components/NavBar'
@@ -45,6 +45,10 @@ export default function ProjectJoined(props) {
     getPageData().catch(x => console.log(x))
 
   }, [id])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
 
   return (

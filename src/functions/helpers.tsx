@@ -1,8 +1,8 @@
 import React from 'react'
-import {enumBundle, preferenceTags} from '../backend/types'
+import {enumBundle, preferenceTags} from '@backend/types'
 import Tags from '../components/Tags'
-import {listUserConvos} from '../backend/queries/userConvoQueries'
-import {getConversation} from '../backend/queries/conversationQueries'
+import {listUserConvos} from '@backend/queries/userConvoQueries'
+import {getConversation} from '@backend/queries/conversationQueries'
 
 
 export type tagRender = {

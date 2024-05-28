@@ -11,13 +11,6 @@ import {
   OnCreateNewsletterEmailModelSubscriptionVariables
 } from '@api'
 
-export const createSub = API.graphql<GraphQLSubscription<OnCreateNewsletterEmailModelSubscription>>({
-  query: subscriptions.onCreateNewsletterEmailModel
-}).subscribe({
-  next: ({ provider, value }) => console.log({ provider, value }),
-  error: (error) => console.warn(error)
-})
-
 export function createSubNewsletter(callback, variables?: OnCreateNewsletterEmailModelSubscriptionVariables) {
   return API.graphql<GraphQLSubscription<OnCreateNewsletterEmailModelSubscription>>({
     query: subscriptions.onCreateNewsletterEmailModel,

@@ -1,6 +1,6 @@
 import LandingPageNavBar from '../components/LandingPageNavBar'
 import { useNavigate } from 'react-router-dom'
-import React from 'react'
+import React, {useState} from 'react'
 import GitBranches from '../components/Branches'
 import bodytxt from '../img/bodytxt.png'
 import largetxt from '../img/largetxt.png'
@@ -17,10 +17,12 @@ import { CreateNewsletterEmailModelInput } from '../API'
 import { FormikValues, useFormik } from 'formik'
 import CollapseAll from '../components/FAQ'
 import ButtonMailto from '../components/ButtonMailto'
+import ErrorAlert, {successStyle, successXStyle} from '../components/alerts/errorAlert'
 
 export default function LandingPage(): React.JSX.Element {
   
   const navigate = useNavigate()
+  const [success, setSuccess] = useState(false)
 
   const handleScrollHome = (_id: string) => {
     const element = document.getElementById(_id)
@@ -61,12 +63,34 @@ export default function LandingPage(): React.JSX.Element {
     onSubmit: (values) => {
       sendToDatabase(values)
       formik.resetForm()
+      setSuccess(true)
     },
   })
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const closeErrorAlert = () => {
+    setSuccess(false)
+  }
+
+  const closeSuccessAlert = () => {
+    setSuccess(false)
+  }
 
 
   return (
     <div>
+      <div className="fixed top-0 left-0 right-0 z-50 w-[97%] mx-auto mt-4">
+        {success &&
+          <ErrorAlert
+            show={success}
+            closeAlert={closeSuccessAlert}
+            title='Success'
+            message='Email Submitted!'
+            closeStyle={successXStyle} colorStyle={successStyle}
+          />
+        }
+      </div>
+
       <LandingPageNavBar />
       <GitBranches/>
       <div id='home' className='flex flex-col items-center justify-center lg:flex-row'>

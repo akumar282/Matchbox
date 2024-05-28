@@ -143,7 +143,7 @@ export default function InboxChat(props: InboxChatProps) {
       }
 
       <form onSubmit={formik.handleSubmit}>
-        <div className='flex justify-center items-center gap-2 pt-2'>
+        <div className='flex justify-center font-primary items-center gap-2 pt-2'>
           <input
             type='text'
             placeholder='Type a message...'
