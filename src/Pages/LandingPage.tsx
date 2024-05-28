@@ -67,11 +67,6 @@ export default function LandingPage(): React.JSX.Element {
     },
   })
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const closeErrorAlert = () => {
-    setSuccess(false)
-  }
-
   const closeSuccessAlert = () => {
     setSuccess(false)
   }
@@ -79,7 +74,7 @@ export default function LandingPage(): React.JSX.Element {
 
   return (
     <div>
-      <div className="fixed top-0 left-0 right-0 z-50 w-[97%] mx-auto mt-4">
+      <div className='fixed top-0 left-0 right-0 z-50 w-[97%] mx-auto mt-4'>
         {success &&
           <ErrorAlert
             show={success}
@@ -170,7 +165,7 @@ export default function LandingPage(): React.JSX.Element {
               placeholder='Enter your email!'
             />
           </div>
-          <button type="submit" onClick={()=>formik.handleSubmit()} className='font-primary bg-secondary-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
+          <button type='submit' onClick={()=>formik.handleSubmit()} className='font-primary bg-secondary-blue hover:bg-indigo-400 text-white rounded-r-full -ml-12 px-4'>Register</button>
         </div>
         <div className='flex mt-10 mb-10 flex-row items-center lg:space-x-7'>
           <a href='https://discord.gg/kTCrcaDzpN'  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={linkedin} />linkedin</a>
@@ -178,13 +173,13 @@ export default function LandingPage(): React.JSX.Element {
           <a href='https://instagram.com/gitmatch.io?igshid=NGVhN2U2NjQ0Yg=='  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={instagram} />instagram</a>
           <a href='https://www.tiktok.com/@gitmatch?lang=en'  className='font-primary text-md text-center flex-col justify-center'><img className='mx-7 w-12 h-12' src={tiktok} />tiktok</a>
         </div>
-        <div className="items-center pt-4 pb-10">
-          <button onClick={() => navigate('/signup')} className="text-white text-2xl bg-[#8000FF] hover:bg-fuchsia-300 font-primary rounded-lg py-3 px-4 hover:text-white">
+        <div className='items-center pt-4 pb-10'>
+          <button onClick={() => navigate('/signup')} className='text-white text-2xl bg-[#8000FF] hover:bg-fuchsia-300 font-primary rounded-lg py-3 px-4 hover:text-white'>
             Get Started
           </button>
         </div>
-        <div className="flex-row mb-4">
-          <h1 className="font-primary text-center">Further Questions? <ButtonMailto label="Contact Us!" mailto="mailto:info@gitmatch.io"/>
+        <div className='flex-row mb-4'>
+          <h1 className='font-primary text-center'>Further Questions? <ButtonMailto label='Contact Us!' mailto='mailto:info@gitmatch.io'/>
           </h1>
         </div>
         <GitBranches/>
