@@ -45,7 +45,7 @@ export type githubPullRequestSimple = components['schemas']['pull-request-simple
 export type githubRepoHealth = components['schemas']['community-profile']
 export type githubHealthFiles = components['schemas']['community-profile']['files']
 export type githubHealthPercentage = components['schemas']['community-profile']['health_percentage']
-
+export type githubRepoInfoMinimal = components['schemas']['minimal-repository']
 export type listRepoIssuesParameters = Endpoints['GET /repos/{owner}/{repo}/issues']['parameters']
 export type listRepoIssuesResponse = Endpoints['GET /repos/{owner}/{repo}/issues']['response']
 export type listRepoIssuesRequest = Endpoints['GET /repos/{owner}/{repo}/issues']['request']
