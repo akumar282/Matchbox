@@ -141,6 +141,7 @@ export const doesDmExist = async (userOne: string, userTwo: string)  => {
     } else if (commonConversations.length >= 1) {
       for(const id of commonConversations) {
         const { data } = await getConversation({id: id ? id : '0'})
+        console.log(data)
         if(data && data.getConversationModel && (data.getConversationModel.title === null || data.getConversationModel.title === undefined)){
           return true
         }

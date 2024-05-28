@@ -4,7 +4,7 @@ import {getImage} from '../backend/storage/s3'
 import github from '../img/github.svg'
 import { preferenceTags} from '../backend/types'
 import CommentSection from './CommentSection'
-import {generateTags, requestWithBody, tagRender} from '../functions/helpers'
+import {doesDmExist, generateTags, requestWithBody, tagRender} from '../functions/helpers'
 import {useNavigate} from 'react-router-dom'
 import {createSavedPost, deleteSavedPost} from '../backend/mutations/savedPostMutations'
 import {v4 as uuidv4} from 'uuid'
@@ -31,6 +31,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
   const [copySuccess, setCopySuccess] = useState<boolean>(false)
   const [showModalJoin, setShowModalJoin] = React.useState(false)
   const [showReport, setShowReport] = React.useState(false)
+  const [dmWithOwner, setDmWithOwner] = React.useState(false)
   const [showModalConvo, setShowModalConvo] = React.useState(false)
   const [liked, setLiked] = useState<boolean>(false)
   const [joined, setJoined] = useState<boolean>(false)
@@ -120,7 +121,15 @@ export default function DiscoverComponent(props: DiscoverProps) {
     fetchImage().catch()
   })
 
-
+  useEffect(() => {
+    const checkDm = async () => {
+      if(userInfo && userInfo.id){
+        const data = await doesDmExist(props.data.userID, userInfo.id)
+        setDmWithOwner(data)
+      }
+    }
+    checkDm().catch()
+  }, [])
 
   useEffect(() => {
     const fetchSaved = async () => {
@@ -293,6 +302,8 @@ export default function DiscoverComponent(props: DiscoverProps) {
     }
   }
 
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function isDisabled(): boolean {
     return joined || props.editable
   }
@@ -432,7 +443,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
               <h3>View GitHub Repository</h3>
             </a>
           </button>
-          <button className='flex flex-row items-center hover:bg-slate-300  space-x-2 py-2 px-4 ' disabled={isDisabled()} onClick={() => setShowModalConvo(true)}>
+          <button className='flex flex-row items-center hover:bg-slate-300  space-x-2 py-2 px-4 ' disabled={dmWithOwner} onClick={() => setShowModalConvo(true)}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none' viewBox='0 0 24 24'
