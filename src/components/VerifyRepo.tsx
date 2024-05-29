@@ -26,21 +26,21 @@ function setProgress(percent: githubHealthPercentage) {
   const warningSvg = (color: string) => {
     return (
       <div className={color}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-          className="w-10 h-10">
-          <path strokeLinecap="round" strokeLinejoin="round"
-            d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"/>
+        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor'
+          className='w-10 h-10'>
+          <path strokeLinecap='round' strokeLinejoin='round'
+            d='M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z'/>
         </svg>
       </div>
     )
   }
 
   const goodSvg =  (
-    <div className="text-lime-500">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-        stroke="currentColor" className="w-10 h-10">
-        <path strokeLinecap="round" strokeLinejoin="round"
-          d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+    <div className='text-lime-500'>
+      <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5}
+        stroke='currentColor' className='w-10 h-10'>
+        <path strokeLinecap='round' strokeLinejoin='round'
+          d='M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'/>
       </svg>
     </div>
   )
@@ -70,10 +70,10 @@ function progressBar(percent: githubHealthPercentage) {
   const props = setProgress(percent)
 
   return (
-    <div className="pt-3 pb-3">
-      <div className="flex flex-row pb-2 space-x-2 items-center">
+    <div className='pt-3 pb-3'>
+      <div className='flex flex-row pb-2 space-x-2 items-center'>
         {props.image}
-        <h3 className="text-base font-medium text-black">{props.string}</h3>
+        <h3 className='text-base font-medium text-black'>{props.string}</h3>
       </div>
       <Progress progress={percent} color={props.color}/>
     </div>
@@ -86,11 +86,11 @@ function validOrNot(docs: githubHealthFiles) {
     if (value !== null) {
       validList.push(
         <div className='flex flex-row items-center space-x-2' key={key}>
-          <div className="text-lime-500">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-              stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round"
-                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+          <div className='text-lime-500'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5}
+              stroke='currentColor' className='w-6 h-6'>
+              <path strokeLinecap='round' strokeLinejoin='round'
+                d='M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'/>
             </svg>
 
           </div>
@@ -99,12 +99,12 @@ function validOrNot(docs: githubHealthFiles) {
       )
     } else {
       validList.push(
-        <div className="flex flex-row items-center space-x-2" key={key}>
-          <div className="text-yellow-300">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-              stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round"
-                d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+        <div className='flex flex-row items-center space-x-2' key={key}>
+          <div className='text-yellow-300'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5}
+              stroke='currentColor' className='w-6 h-6'>
+              <path strokeLinecap='round' strokeLinejoin='round'
+                d='m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'/>
             </svg>
           </div>
           <h1>{formatText(key)}</h1>

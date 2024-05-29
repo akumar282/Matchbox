@@ -103,13 +103,13 @@ export default function Create(props: CreateEditPostProps) {
         <div className='lg:max-w-[1070px] bg-gray-300 min-h-[70px] mx-auto pt-2 pb-3'>
           {props.edit === true ? (
             <>
-              <h1 className="text-2xl font-primary lg:ml-16 ml-4 mt-3">Edit Project</h1>
-              <h3 className="text-sm font-primary lg:ml-16 ml-4 mt-1">Edit your project information:</h3>
+              <h1 className='text-2xl font-primary lg:ml-16 ml-4 mt-3'>Edit Project</h1>
+              <h3 className='text-sm font-primary lg:ml-16 ml-4 mt-1'>Edit your project information:</h3>
             </>
           ) : (
             <>
-              <h1 className="text-2xl font-primary lg:ml-16 ml-4 mt-3">Create Project</h1>
-              <h3 className="text-sm font-primary lg:ml-16 ml-4 mt-1">Post your project to share it and grow it!:</h3>
+              <h1 className='text-2xl font-primary lg:ml-16 ml-4 mt-3'>Create Project</h1>
+              <h3 className='text-sm font-primary lg:ml-16 ml-4 mt-1'>Post your project to share it and grow it!:</h3>
             </>
           )}
         </div>

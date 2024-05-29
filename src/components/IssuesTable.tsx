@@ -18,7 +18,7 @@ export function IssueRow(props: IssueRowProps) {
     <tr className={rowStyle}>
       <td>
         <div className='flex flex-row'>
-          <a href={props.githubIssue.html_url} target='_blank' rel="noreferrer">
+          <a href={props.githubIssue.html_url} target='_blank' rel='noreferrer'>
             <div className='flex px-4 py-3 flex-col space-y-2 text-sm'>
               <h1>{props.githubIssue.title}</h1>
               <h3 className='text-xs'>#{props.githubIssue.number} by {props.githubIssue.user?.login}</h3>

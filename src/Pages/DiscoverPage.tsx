@@ -92,18 +92,18 @@ export default function DiscoverPage() {
                   className='absolute z-50 right-2 top-1/2 transform -translate-y-1/2 rounded-full bg-white p-2 shadow-md hidden lg:flex'
                   onClick={() => my_swiper.slideNext()}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                    stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+                  <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5}
+                    stroke='currentColor' className='w-6 h-6'>
+                    <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5'/>
                   </svg>
                 </button>
                 <button
                   className='absolute z-50 left-2 top-1/2 transform -translate-y-1/2 rounded-full bg-white p-2 shadow-md hidden lg:flex'
                   onClick={() => my_swiper.slidePrev()}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                    stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+                  <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5}
+                    stroke='currentColor' className='w-6 h-6'>
+                    <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5'/>
                   </svg>
                 </button>
               </Swiper>

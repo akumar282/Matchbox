@@ -193,7 +193,11 @@ type UsersModel @model @searchable @aws_cognito_user_pools @aws_iam @auth(rules:
   liked_posts: [ID]
   saved_posts: [ID]
   hide_posts: [ID]
+  saved: [SavedPostModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  hidden: [HiddenPostModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  joined: [JoinedPostModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   messages: [MessageModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  contributor_notes: [ContributorNotesModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   conversations: [ConversationModel] @manyToMany(relationName: "UsersConvo")
   lang_tag: [LanguageTag]
   dev_type_tag: [DevelopmentTag]
@@ -212,7 +216,7 @@ type UsersModel @model @searchable @aws_cognito_user_pools @aws_iam @auth(rules:
   user_experiences: [ExperienceModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
   oauth_provider: OAuthProvider
   oauth_id: String
-  external_link: [ExternalLink]
+  external_link: String
   notification_type: NotificationType
 }
 
@@ -260,13 +264,15 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   saves: Int
   post_comments: [CommentModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
   contributor_limit: Int
-  contributors: [ID]
+  contributors: [JoinedPostModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
+  contributor_notes: [ContributorNotesModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
   reported: Boolean
   experience_level: [ExperienceTag]
   application: Boolean
   project_chat: ID! @index(name: "byConversationModel")
   counter: Int
-  external_link: [ExternalLink]
+  external_link: String
+  random_index: Int
 }
 
 type ConversationModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
@@ -288,7 +294,7 @@ type MessageModel @model @searchable @auth(rules: [{allow: public, operations: [
 type CommentModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   comment: String!
-  profile_image: String
+  userInfo: UsersModel @belongsTo(fields: ["userID"])
   comment_date: AWSDateTime
   parent_comment: ID
   replies: Int
@@ -302,4 +308,152 @@ type ExternalLink @model @searchable @auth(rules: [{allow: public, operations: [
   id: ID!
   name: String,
   link: AWSURL
+}
+
+type SavedPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  saved_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @hasOne(fields: ["postID"])
+  count: Int
+}
+
+type HiddenPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  hidden_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @hasOne(fields: ["postID"])
+  count: Int
+}
+
+type LikedPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  liked_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @hasOne(fields: ["postID"])
+  count: Int
+}
+
+type JoinedPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  joined_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  userInfo: UsersModel @belongsTo(fields: ["userID"])
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @belongsTo(fields: ["postID"])
+  count: Int
+}
+
+type ContributorNotesModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  posted_at: AWSDateTime
+  pinned: Boolean
+  note: String
+  userID: ID! @index(name: "byUsersModel")
+  userInfo: UsersModel @belongsTo(fields: ["userID"])
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @belongsTo(fields: ["postID"])
+  count: Int
+}
+
+input customSearchableIDFilterInput {
+  ne: ID
+  gt: ID
+  lt: ID
+  gte: ID
+  lte: ID
+  eq: ID
+  match: ID
+  matchPhrase: ID
+  matchPhrasePrefix: ID
+  multiMatch: ID
+  exists: Boolean
+  wildcard: ID
+  regexp: ID
+  range: [ID]
+}
+
+input customSearchableIntFilterInput {
+  ne: Int
+  gt: Int
+  lt: Int
+  gte: Int
+  lte: Int
+  eq: Int
+  range: [Int]
+}
+
+input customSearchableStringFilterInput {
+  ne: String
+  gt: String
+  lt: String
+  gte: String
+  lte: String
+  eq: String
+  match: String
+  matchPhrase: String
+  matchPhrasePrefix: String
+  multiMatch: String
+  exists: Boolean
+  wildcard: String
+  regexp: String
+  range: [String]
+}
+
+input customSearchableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input customPostsModelFilterInput {
+  id: customSearchableIDFilterInput
+  post_title: customSearchableStringFilterInput
+  description: customSearchableStringFilterInput
+  long_description: customSearchableStringFilterInput
+  project_link: customSearchableStringFilterInput
+  image_link: customSearchableStringFilterInput
+  post_date: customSearchableStringFilterInput
+  userID: customSearchableIDFilterInput
+  creator_name: customSearchableStringFilterInput
+  likes: customSearchableIntFilterInput
+  likes_users: customSearchableIDFilterInput
+  saves: customSearchableIntFilterInput
+  contributor_limit: customSearchableIntFilterInput
+  reported: customSearchableBooleanFilterInput
+  application: customSearchableBooleanFilterInput
+  project_chat: customSearchableIDFilterInput
+  counter: customSearchableIntFilterInput
+  external_link: customSearchableStringFilterInput
+  random_index: customSearchableIntFilterInput
+  createdAt: customSearchableStringFilterInput
+  updatedAt: customSearchableStringFilterInput
+  lang_tag: customSearchableStringFilterInput
+  dev_type_tag: customSearchableStringFilterInput
+  interest_tag: customSearchableStringFilterInput
+  size_tag: customSearchableStringFilterInput
+  framework_tag: customSearchableStringFilterInput
+  difficulty_tag: customSearchableStringFilterInput
+  cloud_provider_tag: customSearchableStringFilterInput
+  experience_level: customSearchableStringFilterInput
+  and: [customPostsModelFilterInput]
+  or: [customPostsModelFilterInput]
+  not: customPostsModelFilterInput
+}
+
+type customSearchablePostsModelConnection @aws_api_key @aws_iam {
+  items: [PostsModel]!
+  nextToken: String
+  total: Int
+}
+
+type Query {
+  listRandomPostsModelQuery(
+    filter: customPostsModelFilterInput,
+    limit: Int,
+    nextToken: String,
+  ): customSearchablePostsModelConnection
+  @aws_api_key @aws_iam
 }

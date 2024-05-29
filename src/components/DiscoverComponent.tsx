@@ -78,13 +78,13 @@ export default function DiscoverComponent(props: DiscoverProps) {
       return (
         <div className='lg:space-x-4 space-y-3'>
           <button
-            className="font-primary shadow-lg hover:bg-red-600 bg-red-500 text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2"
+            className='font-primary shadow-lg hover:bg-red-600 bg-red-500 text-white text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'
             onClick={() => navigate(`/project/edit/${props.data.id}`)}
           >
             Edit Project
           </button>
           <button
-            className="font-primary shadow-lg hover:bg-indigo-400 bg-emerald-300 text-black text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2"
+            className='font-primary shadow-lg hover:bg-indigo-400 bg-emerald-300 text-black text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'
             onClick={() => navigate(`/joined/project/${props.data.id}`)}
           >
             Go to Dashboard
@@ -95,7 +95,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
     if (joined && !props.editable) {
       return (
         <button
-          className="font-primary shadow-lg hover:bg-indigo-400 bg-emerald-300 text-black text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2"
+          className='font-primary shadow-lg hover:bg-indigo-400 bg-emerald-300 text-black text-lg rounded-lg lg:px-36 w-full lg:w-[45%] py-2'
           onClick={() => navigate(`/joined/project/${props.data.id}`)}
         >
           Go to Dashboard

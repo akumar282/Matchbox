@@ -19,13 +19,13 @@ function SavedProjectView(props: ProjectViewProps) {
         className=' flex flex-col items-start hover:bg-purple-300 rounded-lg mr-2 ml-2 mt-3 min-h-[170px] bg-white'
         onClick={() => navigate(`/project/${props.id}`)}
       >
-        <div className="max-h-[130px] overflow-hidden">
-          <a href="#">
-            <img className="w-full h-full rounded-t-lg object-cover" src={props.image} alt="Project Thumbnail"/>
+        <div className='max-h-[130px] overflow-hidden'>
+          <a href='#'>
+            <img className='w-full h-full rounded-t-lg object-cover' src={props.image} alt='Project Thumbnail'/>
           </a>
         </div>
-        <div className="p-2 flex flex-row w-full justify-between">
-          <h5 className="text-xl font-primary font-light leading-tight">
+        <div className='p-2 flex flex-row w-full justify-between'>
+          <h5 className='text-xl font-primary font-light leading-tight'>
             {props.title}
           </h5>
           <button className=''>

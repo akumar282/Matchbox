@@ -50,7 +50,7 @@ export default function LandingPageNavBar() {
             </svg>
           </div>
           <div>
-            <img className='w-50 h-40' src={NewLogo} alt="" />
+            <img className='w-50 h-40' src={NewLogo} alt='' />
           </div>
           <ul className='flex flex-col items-center justify-between min-h-[250px]'>
             <li className=' border-gray-400 mb-8 font-primary'>

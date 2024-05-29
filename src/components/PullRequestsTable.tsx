@@ -19,7 +19,7 @@ export function PullRequestRow(props: PullRequestRowProps) {
     <tr className={rowStyle}>
       <td>
         <div className='flex flex-row'>
-          <a href={props.githubPull.html_url} target='_blank' rel="noreferrer">
+          <a href={props.githubPull.html_url} target='_blank' rel='noreferrer'>
             <div className='flex px-4 py-3 flex-col space-y-2 text-sm'>
               <h1>{props.githubPull.title}</h1>
               <h3 className='text-xs'>#{props.githubPull.number} by {props.githubPull.user?.login}</h3>
