@@ -38,10 +38,11 @@ export default function InboxMessage(props: InboxMessageProps) {
       })
       if(data && data.listUsersConvos && data.listUsersConvos.items) {
         data.listUsersConvos.items.forEach((x) => {
-          determineTitle += x?.usersModel.user_name
+          determineTitle += ' & '+x?.usersModel.user_name
         })
       }
-      setAltTitle(determineTitle)
+      const finalTitle = determineTitle.slice(3)
+      setAltTitle(finalTitle)
     }
 
     if(props.chatData.conversationModel.title === null) {
