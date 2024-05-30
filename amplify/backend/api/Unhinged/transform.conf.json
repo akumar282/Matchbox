@@ -1,16 +1,4 @@
 {
     "Version": 5,
-    "ElasticsearchWarning": true,
-    "ResolverConfig": {
-        "project": {
-            "ConflictHandler": "OPTIMISTIC_CONCURRENCY",
-            "ConflictDetection": "VERSION"
-        },
-        "models": {
-            "ConversationModel": {
-                "ConflictHandler": "OPTIMISTIC_CONCURRENCY",
-                "ConflictDetection": "VERSION"
-            }
-        }
-    }
+    "ElasticsearchWarning": true
 }

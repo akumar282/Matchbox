@@ -8,6 +8,32 @@
   src: url("fonts/RobotoMono-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: 'roboto-bold';
+  src: url("fonts/RobotoMono-SemiBold.ttf") format("truetype");
+}
+
+.markdown h1 {
+  @apply text-2xl font-bold mb-4;
+}
+
+.markdown h2 {
+  @apply text-xl font-semibold mb-3;
+}
+
+.markdown h3 {
+  @apply text-lg font-medium mb-2;
+}
+
+.markdown p {
+  @apply mb-4;
+}
+
+
+.markdown th, .markdown td {
+  @apply border border-black p-2;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -20,4 +46,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.strict-circle {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  max-width: 36px;
+  max-height: 36px;
+  aspect-ratio: 1 / 1;
 }

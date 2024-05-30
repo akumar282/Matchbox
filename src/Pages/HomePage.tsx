@@ -1,150 +1,174 @@
-import React from "react";
-import Navbar from "../components/NavBar";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import { Button, IconButton } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useContext } from 'react';
-import { useEffect, useState } from "react";
-import "./CSS/HomePage.css";
-import { getPostsByUser, getPostById } from "../backend/queries/postQueries";
-import { getUserById } from "../backend/queries/userQueries";
-import { getImage } from "../backend/storage/s3";
+import React, {useContext, useEffect, useState} from 'react'
+import NavBar from '../components/NavBar'
+import { TrendIcon, FlaskIcon, MLIcon, CloudIcon } from '../components/Vectors'
+import CategoryButton from '../components/CategoryButton'
+import { useNavigate } from 'react-router-dom'
+import SeeAllComponent from '../components/SeeAll'
+import Saved from '../img/Saved.svg'
+import group from '../img/group.svg'
+import {AuthContext} from '../components/AuthWrapper'
+import {getImage} from '../backend/storage/s3'
+import ProjectView from '../components/ProjectView'
+import {listSavedPosts} from '../backend/queries/savedPostQueries'
+import {ModelJoinedPostModelConnection, ModelSavedPostModelConnection} from '../API'
+import {listJoinedPosts} from '../backend/queries/joinedPostQueries'
 
 export default function HomePage() {
-  const navigate = useNavigate();
-  const [homeState, setHomeState] = useState<any>("Home"); 
-  const [HomeActive, setHomeActive] = useState<any>(true);
-  const [SavedActive, setSavedActive] = useState<any>(false);
-  const [projectsAll, setProjectsAll] = useState<any[]>([]);
-  const [savedAll, setSavedAll] = useState<any[]>([]);
+
+  const userInfo = useContext(AuthContext)
+
+  const [joinedProjects, setJoinedProjects] = useState<React.ReactNode[]>([
+    <SeeAllComponent key={'End'} linkTo={'joined'} image={group} bodyText={'Your joined projects will appear here so you can choose which to work on'}/>
+  ])
+
+  const [savedProjects, setSavedProjects] = useState<React.ReactNode[]>([
+    <SeeAllComponent key={'End'} linkTo={'saved'} image={Saved} bodyText={'Your saved projects will appear here so you can choose which to work on'}/>
+  ])
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      const result = await getPostsByUser({
-        filter: {
-          userID: {
-            eq: localStorage.getItem('uuid')!
+    const getHomePageSavedData = async () => {
+      if(userInfo && userInfo.id) {
+        const { data } = await listSavedPosts({
+          filter: {
+            userID: {
+              eq: userInfo.id
+            }
+          }
+        })
+        if (data && data.listSavedPostModels && data.listSavedPostModels.items) {
+          const { items } = data.listSavedPostModels as ModelSavedPostModelConnection
+          for (const item of items) {
+            if (item && item.postInfo) {
+              const imageUrl = await getImage(item.postInfo.image_link ? item.postInfo.image_link : 'NewLogo.png')
+              const mapToCard = (
+                <ProjectView
+                  id={item.postInfo.id}
+                  key={item.postInfo.id}
+                  title={item.postInfo.post_title}
+                  image={imageUrl}
+                  github={item.postInfo.project_link ? item.postInfo.project_link : 'https://github.com'}
+                />
+              )
+              setSavedProjects((prevProjects) => [mapToCard, ...prevProjects])
+            }
           }
         }
-      });
-      const filteredProjects = result.data.listPostsModels.items.filter(x => x._deleted !== true);
-      setProjectsAll(filteredProjects);
-    };
-
-    const usersSavedProjects = async () => {
-      const savedProjects: any[] = [];
-      const result = await getUserById(localStorage.getItem('uuid')!);
-      if(result.data.getUsersModel.saved_posts) {
-        for (const id of result.data.getUsersModel.saved_posts){
-          const project = await getPostById(id);
-          savedProjects.push(project.data.getPostsModel);
-        }
-      } else {
-        console.log('no saved projects');
       }
-      setSavedAll(savedProjects);
     }
 
-    fetchProjects();
-    usersSavedProjects();
-  }, []);
-
-  function handleCreate() {
-    navigate("/create-project");
-  }
-  const CustomHomePage = (props: any) => {
-    if (homeState === "Home") {
-    return (
-      <>
-       <div className="CreateProject" onClick={() => handleCreate()}>
-          <AddCircleOutlineIcon fontSize="large" className="Creaticon" />
-          <h1 className="CreateText">Create Project</h1>
-        </div>
-        {projectsAll.map((tag) => (
-          <CustomSavedProjects user={tag} key={tag.post_title} State = {homeState}/>
-        ))}    
-      </>
-    );
-  } else {
-    // add code for saved projects
-    if (savedAll.length > 0) {
-      return (
-        <>
-          {savedAll.map((tag) => (
-            <CustomSavedProjects user={tag} key={tag.post_title} State = {homeState}/>
-          ))}    
-        </>
-      );
-    } else {
-    return ( 
-      <h1 className="ProjectTitle">No Projects Saved</h1>
-    );
+    const getHomePageJoinedData = async () => {
+      if(userInfo && userInfo.id) {
+        const { data } = await listJoinedPosts({
+          filter: {
+            userID: {
+              eq: userInfo.id
+            }
+          }
+        })
+        if (data && data.listJoinedPostModels && data.listJoinedPostModels.items) {
+          const { items } = data.listJoinedPostModels as ModelJoinedPostModelConnection
+          for (const item of items) {
+            if (item && item.postInfo) {
+              const imageUrl = await getImage(item.postInfo.image_link ? item.postInfo.image_link : 'NewLogo.png')
+              const mapToCard = (
+                <ProjectView
+                  id={item.postInfo.id}
+                  key={item.postInfo.id}
+                  title={item.postInfo.post_title}
+                  image={imageUrl}
+                  github={item.postInfo.project_link ? item.postInfo.project_link : 'https://github.com'}
+                />
+              )
+              setJoinedProjects((prevProjects) => [mapToCard, ...prevProjects])
+            }
+          }
+        }
+      }
     }
-  }
-}
-  const CustomSwtich = (props: any) => {
-    function handleHome() {
-      setHomeState("Home");
-      setHomeActive(true);
-      setSavedActive(false);
-    }
-    function handleSaved() {
-      setHomeState("Saved");
-      setHomeActive(false);
-      setSavedActive(true);
-    }
-    return (
-      <div className="HomeSwitch">
-      <button className={HomeActive ? "ActiveHomeButton" : "HomeButton"} onClick={() => handleHome()}>Home</button>
-      <button className={SavedActive ? "ActiveHomeButton" : "HomeButton"} onClick={() => handleSaved()}>Saved</button>
-     </div>
-    );
-  }
-  return  (
-    <div className="HomePage">
-      <Navbar />
-      <CustomSwtich/>
-      <div className="HomeMain">
-       <CustomHomePage />
-      </div>
-    </div>
-  );
-}
 
-const CustomSavedProjects = (props: any) => {
-  const [imageSrc, setImageSrc] = useState("");
-  const navigate = useNavigate();
-  useEffect(() => {
-    const fetchImage = async () => {
-      const src = await getImage(props.user.image_link);
-      setImageSrc(src);
-    };
+    getHomePageSavedData().catch()
+    getHomePageJoinedData().catch()
+  }, [])
 
-    fetchImage();
-  }, [props.user.image_link]);
-  function projectClick() {
-    props.user.state = props.State;
-    navigate("/project-overview/" + props.user.post_title, { state: props.user});
-  }
   return (
-    <div className="HomeSavedProjects" onClick={projectClick}>
-      <div className="SavedImgCont">
-        <img
-          className="SavedImg"
-          src={imageSrc}
-          alt="Project Image"
-        />
-      </div>
-      <h1 className="ProjectTitle">{props.user.post_title}</h1>
-      <div className="SavedProjectInfo">
-        <div className="ProjectShow">
-          <IconButton href={props.user.project_link}>
-            {" "}
-            <GitHubIcon />{" "}
-          </IconButton>
+    <div className='flex flex-col min-h-screen'>
+      <NavBar/>
+      <div className='bg-primary-purple flex justify-center'>
+        <div className='my-3 items-start'>
+          <h1 className='lg:text-3xl md:text-2xl font-secondary text-xl ml-4 mb-4 mt-2'>Welcome
+            Back, {userInfo?.userName}!</h1>
+          <div className='grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 auto-cols-max text-start'>
+            <CategoryButton bordercolor='border-r-rose-400' titleLabel='Trending Projects'
+              onClick={() => navigate('/browse/trending')}
+              imageIcon={() => <TrendIcon className='h-8 w-8' viewBox='0 0 24 24'/>}/>
+            <CategoryButton bordercolor='border-r-violet-400' titleLabel='Open Source Frameworks'
+              onClick={() => navigate('/browse/frameworks')}
+              imageIcon={() => <FlaskIcon className='h-8 w-8 text-black' viewBox='0 0 24 24'/>}/>
+            <CategoryButton bordercolor='border-r-yellow-300' titleLabel='Machine Learning/AI&#8197;&#8197;&#8197;'
+              onClick={() => navigate('/browse/ai_mach')}
+              imageIcon={() => <MLIcon className='h-8 w-8' viewBox='0 0 24 24'/>}/>
+            <CategoryButton bordercolor='border-r-green-300' titleLabel='Cloud Computing&#8197;'
+              onClick={() => navigate('/browse/cloud_computing')}
+              imageIcon={() => <CloudIcon className='h-8 w-8' viewBox='0 0 24 24'/>}/>
+          </div>
         </div>
       </div>
+      <div className='bg-gray-200 flex-grow'>
+        <div className='max-w-[1070px] min-h-[200px] mx-auto pt-4'>
+          <h1 className='text-2xl font-primary ml-3 mt-3'>Get Started</h1>
+          <h3 className='text-sm font-primary ml-3 mt-1'>Post your own project and build with community!</h3>
+          <div className='w-full h-full flex items-center my-2 '>
+            <button onClick={() => navigate('/create-project')}
+              className='border-4 shadow-lg border-dashed hover:bg-purple-300 border-purple-500 lg:h-44 h-28 rounded-[20px]  w-[97%] mx-auto flex flex-col items-center justify-center'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none' viewBox='0 0 24 24'
+                strokeWidth={1.5}
+                stroke='currentColor'
+                className='w-9 h-9 text-color-white'>
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'/>
+              </svg>
+              <h1 className='text-lg mt-1 font-primary'>Create Project</h1>
+            </button>
+          </div>
+        </div>
+        <div className='items-start pt-3  max-w-[1070px] mx-auto'>
+          <h1 className='text-2xl font-primary ml-3 mt-3'>Saved Projects</h1>
+          <h3 className='text-sm font-primary ml-3 mt-1'>Projects that you want to look into:</h3>
+          <div className='overflow-x-auto'>
+            <div className='flex mt-2 pb-1 lg:grid lg:grid-cols-4 md:grid-cols-4'>
+              {savedProjects}
+            </div>
+          </div>
+        </div>
+        <div className='items-start pt-3 pb-8 max-w-[1070px] mx-auto'>
+          <h1 className='text-2xl font-primary ml-3 mt-3'>Joined Projects</h1>
+          <h3 className='text-sm font-primary ml-3 mt-1'>Projects that you are currently contributing to:</h3>
+          <div className='overflow-x-auto'>
+            <div className='flex mt-2 lg:grid lg:grid-cols-4 md:grid-cols-4'>
+              {joinedProjects}
+            </div>
+          </div>
+        </div>
+        <h1></h1>
+      </div>
+      <div className='bg-secondary-blue flex items-center text-white justify-center relative px-5 py-4'>
+        <h1 className='text-base font-primary text-center text-white z-10'>Copyright © 2024 GitMatch</h1>
+        <button
+          className='absolute right-4 top-1/2 transform -translate-y-1/2 p-2 focus:outline-none focus:ring-2 focus:ring-white'
+          onClick={() => navigate('/help')}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+            stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round"
+              d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"/>
+          </svg>
+        </button>
+      </div>
     </div>
-  );
-};
+  )
+}

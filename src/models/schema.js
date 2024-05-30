@@ -63,8 +63,8 @@ export const schema = {
                 }
             ]
         },
-        "ConversationModel": {
-            "name": "ConversationModel",
+        "UsersModel": {
+            "name": "UsersModel",
             "fields": {
                 "id": {
                     "name": "id",
@@ -73,24 +73,491 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "user_one": {
-                    "name": "user_one",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "user_two": {
-                    "name": "user_two",
+                "user_name": {
+                    "name": "user_name",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "password": {
+                    "name": "password",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "profile_image": {
+                    "name": "profile_image",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "user_posts": {
+                    "name": "user_posts",
+                    "isArray": true,
+                    "type": {
+                        "model": "PostsModel"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "userID"
+                    }
+                },
+                "user_comments": {
+                    "name": "user_comments",
+                    "isArray": true,
+                    "type": {
+                        "model": "CommentModel"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "userID"
+                    }
+                },
+                "first_name": {
+                    "name": "first_name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "last_name": {
+                    "name": "last_name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "user_creation_date": {
+                    "name": "user_creation_date",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "github_link": {
+                    "name": "github_link",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "saved_posts": {
+                    "name": "saved_posts",
+                    "isArray": true,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "hide_posts": {
+                    "name": "hide_posts",
+                    "isArray": true,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "messages": {
                     "name": "messages",
                     "isArray": true,
+                    "type": {
+                        "model": "MessageModel"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "from"
+                    }
+                },
+                "conversations": {
+                    "name": "conversations",
+                    "isArray": true,
+                    "type": {
+                        "model": "UsersConvo"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "usersModel"
+                    }
+                },
+                "lang_tag": {
+                    "name": "lang_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "LanguageTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "dev_type_tag": {
+                    "name": "dev_type_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "DevelopmentTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "interest_tag": {
+                    "name": "interest_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "InterestTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "size_tag": {
+                    "name": "size_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "SizeTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "framework_tag": {
+                    "name": "framework_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "FrameworkTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "difficulty_tag": {
+                    "name": "difficulty_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "DifficultyTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "new_user": {
+                    "name": "new_user",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "contributions": {
+                    "name": "contributions",
+                    "isArray": true,
+                    "type": {
+                        "model": "ContributionsModel"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "author"
+                    }
+                },
+                "credibility_score": {
+                    "name": "credibility_score",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "involved_projects": {
+                    "name": "involved_projects",
+                    "isArray": true,
                     "type": "ID",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "experience_level": {
+                    "name": "experience_level",
+                    "isArray": true,
+                    "type": {
+                        "enum": "ExperienceTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "years_of_experience": {
+                    "name": "years_of_experience",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "user_type": {
+                    "name": "user_type",
+                    "isArray": true,
+                    "type": {
+                        "enum": "AccountTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "user_experiences": {
+                    "name": "user_experiences",
+                    "isArray": true,
+                    "type": {
+                        "model": "ExperienceModel"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "user_id"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UsersModels",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "delete",
+                                    "update"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "ContributionsModel": {
+            "name": "ContributionsModel",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "author": {
+                    "name": "author",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": true,
+                    "type": {
+                        "enum": "ContributionTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "link_to": {
+                    "name": "link_to",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "point_value": {
+                    "name": "point_value",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "ContributionsModels",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUsersModel",
+                        "fields": [
+                            "author"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "delete",
+                                    "update"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "ExperienceModel": {
+            "name": "ExperienceModel",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "user_id": {
+                    "name": "user_id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "org_name": {
+                    "name": "org_name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "start_date": {
+                    "name": "start_date",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "end_date": {
+                    "name": "end_date",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "lang_tag": {
+                    "name": "lang_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "LanguageTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "dev_type_tag": {
+                    "name": "dev_type_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "DevelopmentTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "framework_tag": {
+                    "name": "framework_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "FrameworkTag"
+                    },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true
@@ -113,7 +580,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "ConversationModels",
+            "pluralName": "ExperienceModels",
             "attributes": [
                 {
                     "type": "model",
@@ -128,116 +595,7 @@ export const schema = {
                     "properties": {
                         "name": "byUsersModel",
                         "fields": [
-                            "user_one"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "delete",
-                                    "update"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "MessageModel": {
-            "name": "MessageModel",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "message": {
-                    "name": "message",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "to": {
-                    "name": "to",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "from": {
-                    "name": "from",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "message_date": {
-                    "name": "message_date",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "conversationID": {
-                    "name": "conversationID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "MessageModels",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "searchable",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUsersModel",
-                        "fields": [
-                            "from"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byConversationModel",
-                        "fields": [
-                            "conversationID"
+                            "user_id"
                         ]
                     }
                 },
@@ -375,6 +733,16 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
+                "difficulty_tag": {
+                    "name": "difficulty_tag",
+                    "isArray": true,
+                    "type": {
+                        "enum": "DifficultyTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "post_comments": {
                     "name": "post_comments",
                     "isArray": true,
@@ -388,6 +756,52 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "postID"
                     }
+                },
+                "contributor_limit": {
+                    "name": "contributor_limit",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "contributors": {
+                    "name": "contributors",
+                    "isArray": true,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "reported": {
+                    "name": "reported",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "experience_level": {
+                    "name": "experience_level",
+                    "isArray": true,
+                    "type": {
+                        "enum": "ExperienceTag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "application": {
+                    "name": "application",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "project_chat": {
+                    "name": "project_chat",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -427,6 +841,15 @@ export const schema = {
                     }
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "byConversationModel",
+                        "fields": [
+                            "project_chat"
+                        ]
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -444,8 +867,8 @@ export const schema = {
                 }
             ]
         },
-        "UsersModel": {
-            "name": "UsersModel",
+        "ConversationModel": {
+            "name": "ConversationModel",
             "fields": {
                 "id": {
                     "name": "id",
@@ -454,188 +877,24 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "user_name": {
-                    "name": "user_name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "email": {
-                    "name": "email",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "password": {
-                    "name": "password",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "profile_image": {
-                    "name": "profile_image",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "user_posts": {
-                    "name": "user_posts",
+                "users": {
+                    "name": "users",
                     "isArray": true,
                     "type": {
-                        "model": "PostsModel"
+                        "model": "UsersConvo"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "userID"
+                        "associatedWith": "conversationModel"
                     }
                 },
-                "user_comments": {
-                    "name": "user_comments",
-                    "isArray": true,
-                    "type": {
-                        "model": "CommentModel"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "userID"
-                    }
-                },
-                "first_name": {
-                    "name": "first_name",
+                "title": {
+                    "name": "title",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "last_name": {
-                    "name": "last_name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "user_creation_date": {
-                    "name": "user_creation_date",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "dahublink": {
-                    "name": "dahublink",
-                    "isArray": false,
-                    "type": "AWSURL",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "saved_posts": {
-                    "name": "saved_posts",
-                    "isArray": true,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "hide_posts": {
-                    "name": "hide_posts",
-                    "isArray": true,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "messages": {
-                    "name": "messages",
-                    "isArray": true,
-                    "type": {
-                        "model": "MessageModel"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "from"
-                    }
-                },
-                "conversations": {
-                    "name": "conversations",
-                    "isArray": true,
-                    "type": {
-                        "model": "ConversationModel"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "user_one"
-                    }
-                },
-                "lang_tag": {
-                    "name": "lang_tag",
-                    "isArray": true,
-                    "type": {
-                        "enum": "LanguageTag"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "dev_type_tag": {
-                    "name": "dev_type_tag",
-                    "isArray": true,
-                    "type": {
-                        "enum": "DevelopmentTag"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "interest_tag": {
-                    "name": "interest_tag",
-                    "isArray": true,
-                    "type": {
-                        "enum": "InterestTag"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "size_tag": {
-                    "name": "size_tag",
-                    "isArray": true,
-                    "type": {
-                        "enum": "SizeTag"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "framework_tag": {
-                    "name": "framework_tag",
-                    "isArray": true,
-                    "type": {
-                        "enum": "FrameworkTag"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "new_user": {
-                    "name": "new_user",
-                    "isArray": false,
-                    "type": "Boolean",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -657,7 +916,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "UsersModels",
+            "pluralName": "ConversationModels",
             "attributes": [
                 {
                     "type": "model",
@@ -666,6 +925,108 @@ export const schema = {
                 {
                     "type": "searchable",
                     "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "delete",
+                                    "update"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "MessageModel": {
+            "name": "MessageModel",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "message": {
+                    "name": "message",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "from": {
+                    "name": "from",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "message_date": {
+                    "name": "message_date",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "conversationID": {
+                    "name": "conversationID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "MessageModels",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUsersModel",
+                        "fields": [
+                            "from"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byConversationModel",
+                        "fields": [
+                            "conversationID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -713,6 +1074,27 @@ export const schema = {
                     "name": "comment_date",
                     "isArray": false,
                     "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "parent_comment": {
+                    "name": "parent_comment",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "replies": {
+                    "name": "replies",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "isReply": {
+                    "name": "isReply",
+                    "isArray": false,
+                    "type": "Boolean",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -800,92 +1182,259 @@ export const schema = {
                     }
                 }
             ]
+        },
+        "UsersConvo": {
+            "name": "UsersConvo",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "usersModel": {
+                    "name": "usersModel",
+                    "isArray": false,
+                    "type": {
+                        "model": "UsersModel"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "usersModelID"
+                    }
+                },
+                "conversationModel": {
+                    "name": "conversationModel",
+                    "isArray": false,
+                    "type": {
+                        "model": "ConversationModel"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "conversationModelID"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UsersConvos",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUsersModel",
+                        "fields": [
+                            "usersModelID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byConversationModel",
+                        "fields": [
+                            "conversationModelID"
+                        ]
+                    }
+                }
+            ]
         }
     },
     "enums": {
         "SizeTag": {
             "name": "SizeTag",
             "values": [
-                "LESS_FIVE",
-                "MORE_FIVE",
-                "MORE_TEN",
-                "MORE_TWENTY_FIVE",
-                "MORE_FIFTY",
-                "MORE_HUND"
+                "SMALL",
+                "MEDIUM",
+                "LARGE"
             ]
         },
         "InterestTag": {
             "name": "InterestTag",
             "values": [
                 "COMMUNICATION",
-                "CONNECTING",
                 "ENVIRONMENT",
                 "EDUCATION",
                 "ENTERTAINMENT",
-                "GAMING"
+                "GAMING",
+                "HEALTHCARE",
+                "LIFESTYLE"
             ]
         },
         "DevelopmentTag": {
             "name": "DevelopmentTag",
             "values": [
-                "FRONTEND",
-                "BACKEND",
+                "EMBEDDED_SYSTEMS",
+                "FRONT_END",
+                "WEB",
+                "GAME_DEVELOPMENT",
+                "MOBILE_APP",
+                "COMPUTING",
+                "APPLICATION_PROGRAMMING",
+                "DEVOPS",
                 "FULL_STACK",
-                "DESKTOP",
-                "WEB_DEV",
-                "DATABASE",
-                "MOBILE",
+                "BACKEND",
+                "DATA_SCIENCE",
                 "CLOUD",
-                "DEV_OPS",
-                "CYBER_SEC"
+                "DATABASE",
+                "CYBERSECURITY"
             ]
         },
         "LanguageTag": {
             "name": "LanguageTag",
             "values": [
-                "C_SHARP",
-                "C_PLUS_PLUS",
                 "C",
                 "JAVA",
                 "PYTHON",
-                "TYPESCRIPT",
+                "C_PLUS_PLUS",
+                "CUDA",
+                "C_SHARP",
                 "JAVASCRIPT",
-                "KOTLIN",
-                "SWIFT",
-                "RUBY",
-                "RUST",
-                "SQL",
-                "PHP",
                 "HTML",
                 "CSS",
+                "PHP",
+                "VISUAL_BASIC_DOTNET",
+                "DOTNET",
+                "R",
                 "GO",
+                "SWIFT",
+                "PERL",
+                "X86_ASSEMBLY",
+                "ARM_ASSEMBLY",
+                "RUBY",
+                "MATLAB",
+                "VISUAL_BASIC",
+                "GROOVY",
+                "OBJECTIVE_C",
+                "OBJECTIVE_C_PLUS_PLUS",
+                "RUST",
+                "SAS",
+                "SCRATCH",
+                "WEB_ASSEMBLY",
+                "D",
                 "DART",
-                "SCALA"
+                "PL_SQL",
+                "SQL",
+                "DELHPI",
+                "KOTLIN",
+                "OPENEDGE_ABL",
+                "JULIA",
+                "SCALA",
+                "LUA",
+                "FORTRAN",
+                "COBOL",
+                "HASKELL",
+                "VISUAL_BASIC_SCRIPT",
+                "TYPESCRIPT",
+                "BASH",
+                "SHELL",
+                "CLOJURE",
+                "COFFEESCRIPT",
+                "LISP",
+                "CRYSTAL",
+                "F_SHARP",
+                "POSTSCRIPT",
+                "HANDLEBARS"
             ]
         },
         "FrameworkTag": {
             "name": "FrameworkTag",
             "values": [
-                "REACT",
-                "REACT_NATIVE",
-                "ANGULAR",
-                "VUE",
-                "NODE",
-                "EXPRESS",
-                "WEB_SOCKET_IO",
                 "DJANGO",
+                "ANGULAR_JS",
+                "JQUERY",
+                "ASP_NET",
+                "GATSBY",
+                "SVELTE",
+                "YII",
+                "TURBOGEARS",
+                "YESOD",
+                "GROK",
+                "MOJOLICIOUS",
+                "VAADIN",
+                "RUBY_ON_RAILS",
+                "EXPRESS",
+                "JS",
+                "METEOR",
+                "CODEIGNITOR",
+                "SYMFONY",
+                "APACHE_WICKET",
+                "PHALCON",
+                "BOOTSTRAP",
+                "SILEX",
+                "FUELPHP",
+                "CHERRYPY",
+                "QUIOXTE",
+                "LARAVEL",
                 "FLASK",
-                "MONGO_DB",
-                "MY_SQL",
-                "POSTGRES_SQL",
-                "FIREBASE",
-                "AWS",
-                "AZURE",
-                "HEROKU"
+                "CAKEPHP",
+                "NEXT_JS",
+                "GRAILS",
+                "SPARK",
+                "APACHE_STRUTS_1",
+                "WEB2PY",
+                "APACHE_PLAY"
+            ]
+        },
+        "DifficultyTag": {
+            "name": "DifficultyTag",
+            "values": [
+                "GOOD_FIRST_PROJECT",
+                "EXPERIENCED_CONTRIBUTOR",
+                "EXPERT"
+            ]
+        },
+        "ExperienceTag": {
+            "name": "ExperienceTag",
+            "values": [
+                "BEGINNER",
+                "MINIMAL_EXPERIENCE",
+                "EXPERIENCED_CONTRIBUTOR",
+                "EXPERT"
+            ]
+        },
+        "AccountTag": {
+            "name": "AccountTag",
+            "values": [
+                "DEVELOPER",
+                "ORGANIZATION"
+            ]
+        },
+        "ContributionTag": {
+            "name": "ContributionTag",
+            "values": [
+                "PULL_REQUEST",
+                "ISSUE",
+                "COMMENT",
+                "REVIEW"
             ]
         }
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "e2ef06954bdd805ffc347b0bf1179179"
+    "version": "d1fc7213ac0ffcb5335a5794c14b68cc"
 };

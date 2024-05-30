@@ -12,11 +12,8 @@
       "AmplifyAppId": "dnpxlnk1ec683"
     },
     "categories": {
-      "auth": {
-        "unhinged15d4ae3f": {}
-      },
-      "storage": {
-        "s3unhingedstorage98feb2cc": {}
+      "api": {
+        "unhinged": {}
       },
       "hosting": {
         "amplifyhosting": {
@@ -24,40 +21,14 @@
           "type": "manual"
         }
       },
-      "api": {
-        "Unhinged": {}
-      }
-    }
-  },
-  "production": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-unhinged-production-222319-authRole",
-      "UnauthRoleArn": "arn:aws:iam::739292628626:role/amplify-unhinged-production-222319-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::739292628626:role/amplify-unhinged-production-222319-authRole",
-      "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-unhinged-production-222319-deployment",
-      "UnauthRoleName": "amplify-unhinged-production-222319-unauthRole",
-      "StackName": "amplify-unhinged-production-222319",
-      "StackId": "arn:aws:cloudformation:us-west-2:739292628626:stack/amplify-unhinged-production-222319/cb8d5c70-e0cd-11ed-b746-02554e1f9c33",
-      "AmplifyAppId": "dnpxlnk1ec683"
-    },
-    "categories": {
       "auth": {
-        "unhinged15d4ae3f": {
-          "OpenSearchInstanceType": "t2.medium.elasticsearch"
-        }
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "dnpxlnk1ec683",
-          "type": "manual"
-        }
-      },
-      "api": {
-        "Unhinged": {}
+        "unhingedf9920fd0": {}
       },
       "storage": {
         "s3unhingedstorage98feb2cc": {}
+      },
+      "custom": {
+        "gitmatchcustomresolverrandomlist": {}
       }
     }
   }

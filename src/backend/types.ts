@@ -1,92 +1,68 @@
-import { 
-  CreateUsersModelInput, 
-  UpdateUsersModelInput,
-  DeleteUsersModelInput, 
-  CreatePostsModelInput, 
-  UpdatePostsModelInput,
-  DeletePostsModelInput,
-  CreateCommentModelInput,
-  UpdateCommentModelInput,
-  DeleteCommentModelInput,
-  CreateNewsletterEmailModelInput,
-  UpdateNewsletterEmailModelInput,
-  DeleteNewsletterEmailModelInput,
-  CreateConversationModelInput,
-  UpdateConversationModelInput,
-  DeleteConversationModelInput,
-  CreateMessageModelInput,
-  UpdateMessageModelInput,
-  DeleteMessageModelInput,
-} from '../API'
+import {
+  FrameworkTag,
+  SizeTag,
+  LanguageTag,
+  InterestTag,
+  DevelopmentTag,
+  CloudProviderTag,
+  ExperienceTag,
+  DifficultyTag, PostsModel, UsersModel
+} from '@api'
+import { CognitoUserSession } from 'amazon-cognito-identity-js'
+import {Endpoints} from '@octokit/types'
+import {components} from '@octokit/openapi-types'
 
-export type CreateUsersPayload = {
-  input: CreateUsersModelInput
+export type preferenceTags = FrameworkTag | SizeTag | LanguageTag | InterestTag | DevelopmentTag | CloudProviderTag | ExperienceTag | DifficultyTag
+
+export type enumBundle = {
+  value: string
+  enumMap: preferenceTags
 }
 
-export type UpdateUsersModelPayload = {
-  input: UpdateUsersModelInput
+export type PostsWImages = Omit<PostsModel, 'image_link'> & {
+  image: File;
 }
 
-export type DeleteUserModelPayload = { 
-  input: DeleteUsersModelInput
+export interface userContextType {
+  id: string,
+  userName?: string,
+  email?: string,
+  new_user?: boolean | null,
+  credibility_score?: number,
+  profile_image?: string,
+  authToken?: CognitoUserSession
 }
 
-export type CreatePostsModelPayload = {
-  input: CreatePostsModelInput
+export interface paginatedPostsVariables {
+  id: string,
+  nextToken: string
 }
 
-export type UpdatePostsModelPayload = {
-  input: UpdatePostsModelInput
-}
+export type githubIssue = components['schemas']['issue']
+export type githubContributors = components['schemas']['contributor']
+export type githubPullRequest = components['schemas']['pull-request']
+export type githubPullRequestSimple = components['schemas']['pull-request-simple']
+export type githubRepoHealth = components['schemas']['community-profile']
+export type githubHealthFiles = components['schemas']['community-profile']['files']
+export type githubHealthPercentage = components['schemas']['community-profile']['health_percentage']
+export type githubRepoInfoMinimal = components['schemas']['minimal-repository']
+export type listRepoIssuesParameters = Endpoints['GET /repos/{owner}/{repo}/issues']['parameters']
+export type listRepoIssuesResponse = Endpoints['GET /repos/{owner}/{repo}/issues']['response']
+export type listRepoIssuesRequest = Endpoints['GET /repos/{owner}/{repo}/issues']['request']
 
-export type DeletePostsModelPayload = { 
-  input: DeletePostsModelInput
-}
 
-export type CreateNewsletterEmailModelPayload = {
-  input: CreateNewsletterEmailModelInput
-}
-
-export type UpdateNewsletterEmailModelPayload = {
-  input: UpdateNewsletterEmailModelInput
-}
-
-export type DeleteNewsletterEmailModelPayload = { 
-  input: DeleteNewsletterEmailModelInput
-}
-
-export type CreateCommentModelPayload = {
-  input: CreateCommentModelInput
-}
-
-export type UpdateCommentModelPayload = {
-  input: UpdateCommentModelInput
-}
-
-export type DeleteCommentModelPayload = {
-  input: DeleteCommentModelInput
-}
-
-export type CreateConversationModelPayload = {
-  input: CreateConversationModelInput
-}
-
-export type UpdateConversationModelPayload = {
-  input: UpdateConversationModelInput
-}
-
-export type DeleteConversationModelPayload = {
-  input: DeleteConversationModelInput
-}
-
-export type CreateMessageModelPayload = {
-  input: CreateMessageModelInput
-}
-
-export type UpdateMessageModelPayload = {
-  input: UpdateMessageModelInput
-}
-
-export type DeleteMessageModelPayload = {
-  input: DeleteMessageModelInput
+export type ListUsersConvosQueryCustom = {
+  listUsersConvos?:  {
+    __typename: 'ModelUsersConvoConnection',
+    items:  Array< {
+      __typename: 'UsersConvo',
+      id: string,
+      usersModelID: string,
+      conversationModelID: string,
+      createdAt: string,
+      updatedAt: string,
+      usersModel: UsersModel,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 }

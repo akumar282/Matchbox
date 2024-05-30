@@ -4,90 +4,242 @@ type NewsletterEmailModel @model @searchable @auth(rules: [{allow: public}]) {
 }
 
 enum SizeTag {
-  LESS_FIVE
-  MORE_FIVE
-  MORE_TEN
-  MORE_TWENTY_FIVE
-  MORE_FIFTY
-  MORE_HUND
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum NotificationType {
+  EMAIL_AND_NEWSLETTER
+  EMAIL_ONLY
+  NONE
 }
 
 enum InterestTag {
   COMMUNICATION
-  CONNECTING
   ENVIRONMENT
   EDUCATION
   ENTERTAINMENT
   GAMING
+  HEALTHCARE
+  LIFESTYLE
 }
 
 enum DevelopmentTag {
-  FRONTEND
-  BACKEND
+  EMBEDDED_SYSTEMS
+  FRONT_END
+  WEB
+  GAME_DEVELOPMENT
+  MOBILE_APP
+  COMPUTING
+  APPLICATION_PROGRAMMING
+  DEVOPS
   FULL_STACK
-  DESKTOP
-  WEB_DEV
-  DATABASE
-  MOBILE
+  BACKEND
+  DATA_SCIENCE
   CLOUD
-  DEV_OPS
-  CYBER_SEC
+  DATABASE
+  CYBERSECURITY
+  ARTIFICIAL_INTELLIGENCE
+  MACHINE_LEARNING
 }
 
 enum LanguageTag {
-  C_SHARP
-  C_PLUS_PLUS
   C
   JAVA
   PYTHON
-  TYPESCRIPT
+  C_PLUS_PLUS
+  CUDA
+  C_SHARP
   JAVASCRIPT
-  KOTLIN
-  SWIFT
-  RUBY
-  RUST
-  SQL
-  PHP
   HTML
   CSS
+  PHP
+  VISUAL_BASIC_DOTNET
+  DOTNET
+  R
   GO
+  SWIFT
+  PERL
+  X86_ASSEMBLY
+  ARM_ASSEMBLY
+  RUBY
+  MATLAB
+  VISUAL_BASIC
+  GROOVY
+  OBJECTIVE_C
+  OBJECTIVE_C_PLUS_PLUS
+  RUST
+  SAS
+  SCRATCH
+  WEB_ASSEMBLY
+  D
   DART
+  PL_SQL
+  SQL
+  DELHPI
+  KOTLIN
+  OPENEDGE_ABL
+  JULIA
   SCALA
+  LUA
+  FORTRAN
+  COBOL
+  HASKELL
+  VISUAL_BASIC_SCRIPT
+  TYPESCRIPT
+  BASH
+  SHELL
+  CLOJURE
+  COFFEESCRIPT
+  LISP
+  CRYSTAL
+  F_SHARP
+  POSTSCRIPT
+  HANDLEBARS
 }
 
 enum FrameworkTag {
-  REACT
-  REACT_NATIVE
-  ANGULAR
-  VUE 
-  NODE
-  EXPRESS
-  WEB_SOCKET_IO
   DJANGO
+  ANGULAR_JS
+  JQUERY
+  ASP_NET
+  GATSBY
+  SVELTE
+  YII
+  REACT_JS
+  REACT_NATIVE
+  TURBOGEARS
+  YESOD
+  GROK
+  MOJOLICIOUS
+  VAADIN
+  RUBY_ON_RAILS
+  EXPRESS_JS
+  METEOR
+  CODEIGNITOR
+  SYMFONY
+  APACHE_WICKET
+  PHALCON
+  BOOTSTRAP
+  SILEX
+  FUELPHP
+  CHERRYPY
+  QUIOXTE
+  LARAVEL
   FLASK
-  MONGO_DB
-  MY_SQL
-  POSTGRES_SQL
-  FIREBASE
-  AWS
-  AZURE
+  CAKEPHP
+  NEXT_JS
+  GRAILS
+  SPARK
+  APACHE_STRUTS_1
+  WEB2PY
+  APACHE_PLAY 
+}
+
+enum CloudProviderTag {
+  AMAZON_WEB_SERVICES
+  MICROSOFT_AZURE
+  GOOGLE_CLOUD_PLATFORM
+  SALESFORCE
+  IBM_CLOUD
   HEROKU
+  NETAPP
 }
 
-type ConversationModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
-  id: ID!
-  user_one: ID! @index(name: "byUsersModel")
-  user_two: String!
-  messages: [ID]
+enum DifficultyTag {
+  GOOD_FIRST_PROJECT
+  EXPERIENCED_CONTRIBUTOR
+  EXPERT
 }
 
-type MessageModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+enum ExperienceTag {
+  BEGINNER
+  MINIMAL_EXPERIENCE
+  EXPERIENCED_CONTRIBUTOR
+  EXPERT
+}
+
+enum AccountTag {
+  DEVELOPER
+  ORGANIZATION
+}
+
+enum ContributionTag {
+  PULL_REQUEST
+  ISSUE
+  COMMENT
+  REVIEW
+}
+
+enum OAuthProvider {
+  GOOGLE
+  GITHUB
+}
+
+type UsersModel @model @searchable @aws_cognito_user_pools @aws_iam @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
-  message: String!
-  to: String!
-  from: ID! @index(name: "byUsersModel")
-  message_date: AWSDateTime
-  conversationID: ID! @index(name: "byConversationModel")
+  user_name: String!
+  email: String!
+  password: String!
+  profile_image: String
+  bio: String
+  user_posts: [PostsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  user_comments: [CommentModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  first_name: String
+  last_name: String
+  user_creation_date: AWSDateTime
+  github_link: AWSURL
+  liked_posts: [ID]
+  saved_posts: [ID]
+  hide_posts: [ID]
+  saved: [SavedPostModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  hidden: [HiddenPostModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  joined: [JoinedPostModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  messages: [MessageModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  contributor_notes: [ContributorNotesModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  conversations: [ConversationModel] @manyToMany(relationName: "UsersConvo")
+  lang_tag: [LanguageTag]
+  dev_type_tag: [DevelopmentTag]
+  interest_tag: [InterestTag]
+  size_tag: [SizeTag]
+  framework_tag: [FrameworkTag]
+  difficulty_tag: [DifficultyTag]
+  cloud_provider_tag: [CloudProviderTag]
+  new_user: Boolean
+  contributions: [ContributionsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  credibility_score: Int
+  involved_projects: [ID]
+  experience_level: [ExperienceTag]
+  years_of_experience: Int
+  user_type: AccountTag
+  user_experiences: [ExperienceModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
+  oauth_provider: OAuthProvider
+  oauth_id: String
+  external_link: String
+  notification_type: NotificationType
+}
+
+type ContributionsModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  author: ID! @index(name: "byUsersModel")
+  type: [ContributionTag]
+  description: String
+  link_to: AWSURL
+  point_value: Int
+}
+
+type ExperienceModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  user_id: ID! @index(name: "byUsersModel")
+  org_name: String!
+  image_link: String!
+  start_date: AWSDate!
+  end_date: AWSDate
+  description: String!
+  lang_tag: [LanguageTag]
+  dev_type_tag: [DevelopmentTag]
+  framework_tag: [FrameworkTag]
 }
 
 type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
@@ -105,39 +257,203 @@ type PostsModel @model @searchable @auth(rules: [{allow: public, operations: [re
   interest_tag: [InterestTag]
   size_tag: [SizeTag]
   framework_tag: [FrameworkTag]
+  difficulty_tag: [DifficultyTag]
+  cloud_provider_tag: [CloudProviderTag]
+  likes: Int
+  likes_users: [ID]
+  saves: Int
   post_comments: [CommentModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
+  contributor_limit: Int
+  contributors: [JoinedPostModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
+  contributor_notes: [ContributorNotesModel] @hasMany(indexName: "byPostsModel", fields: ["id"])
+  reported: Boolean
+  experience_level: [ExperienceTag]
+  application: Boolean
+  project_chat: ID! @index(name: "byConversationModel")
+  counter: Int
+  external_link: String
+  random_index: Int
 }
 
-type UsersModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+type ConversationModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
-  user_name: String!
-  email: String!
-  password: String!
-  profile_image: String
-  user_posts: [PostsModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
-  user_comments: [CommentModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
-  first_name: String
-  last_name: String
-  user_creation_date: AWSDateTime
-  dahublink: AWSURL
-  saved_posts: [ID]
-  hide_posts: [ID]
-  messages: [MessageModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
-  conversations: [ConversationModel] @hasMany(indexName: "byUsersModel", fields: ["id"])
-  lang_tag: [LanguageTag]
-  dev_type_tag: [DevelopmentTag]
-  interest_tag: [InterestTag]
-  size_tag: [SizeTag]
-  framework_tag: [FrameworkTag]
-  new_user: Boolean
+  users: [UsersModel] @manyToMany(relationName: "UsersConvo")
+  title: String
+  messages: [MessageModel] @hasMany(indexName: "byConversationModel", fields: ["id"])
+}
+
+type MessageModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  message: String!
+  from: ID! @index(name: "byUsersModel")
+  senderInfo: UsersModel @belongsTo(fields: ["from"])
+  message_date: AWSDateTime!
+  conversationID: ID! @index(name: "byConversationModel")
 }
 
 type CommentModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
   id: ID!
   comment: String!
-  profile_image: String
+  userInfo: UsersModel @belongsTo(fields: ["userID"])
   comment_date: AWSDateTime
+  parent_comment: ID
+  replies: Int
+  isReply: Boolean
   postID: ID! @index(name: "byPostsModel")
   userID: ID! @index(name: "byUsersModel")
   user_name: String!
+}
+
+type ExternalLink @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  name: String,
+  link: AWSURL
+}
+
+type SavedPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  saved_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @hasOne(fields: ["postID"])
+  count: Int
+}
+
+type HiddenPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  hidden_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @hasOne(fields: ["postID"])
+  count: Int
+}
+
+type LikedPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  liked_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @hasOne(fields: ["postID"])
+  count: Int
+}
+
+type JoinedPostModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  joined_at: AWSDateTime
+  userID: ID! @index(name: "byUsersModel")
+  userInfo: UsersModel @belongsTo(fields: ["userID"])
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @belongsTo(fields: ["postID"])
+  count: Int
+}
+
+type ContributorNotesModel @model @searchable @auth(rules: [{allow: public, operations: [read, create, delete, update]}]) {
+  id: ID!
+  posted_at: AWSDateTime
+  pinned: Boolean
+  note: String
+  userID: ID! @index(name: "byUsersModel")
+  userInfo: UsersModel @belongsTo(fields: ["userID"])
+  postID: ID! @index(name: "byPostsModel")
+  postInfo: PostsModel @belongsTo(fields: ["postID"])
+  count: Int
+}
+
+input customSearchableIDFilterInput {
+  ne: ID
+  gt: ID
+  lt: ID
+  gte: ID
+  lte: ID
+  eq: ID
+  match: ID
+  matchPhrase: ID
+  matchPhrasePrefix: ID
+  multiMatch: ID
+  exists: Boolean
+  wildcard: ID
+  regexp: ID
+  range: [ID]
+}
+
+input customSearchableIntFilterInput {
+  ne: Int
+  gt: Int
+  lt: Int
+  gte: Int
+  lte: Int
+  eq: Int
+  range: [Int]
+}
+
+input customSearchableStringFilterInput {
+  ne: String
+  gt: String
+  lt: String
+  gte: String
+  lte: String
+  eq: String
+  match: String
+  matchPhrase: String
+  matchPhrasePrefix: String
+  multiMatch: String
+  exists: Boolean
+  wildcard: String
+  regexp: String
+  range: [String]
+}
+
+input customSearchableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input customPostsModelFilterInput {
+  id: customSearchableIDFilterInput
+  post_title: customSearchableStringFilterInput
+  description: customSearchableStringFilterInput
+  long_description: customSearchableStringFilterInput
+  project_link: customSearchableStringFilterInput
+  image_link: customSearchableStringFilterInput
+  post_date: customSearchableStringFilterInput
+  userID: customSearchableIDFilterInput
+  creator_name: customSearchableStringFilterInput
+  likes: customSearchableIntFilterInput
+  likes_users: customSearchableIDFilterInput
+  saves: customSearchableIntFilterInput
+  contributor_limit: customSearchableIntFilterInput
+  reported: customSearchableBooleanFilterInput
+  application: customSearchableBooleanFilterInput
+  project_chat: customSearchableIDFilterInput
+  counter: customSearchableIntFilterInput
+  external_link: customSearchableStringFilterInput
+  random_index: customSearchableIntFilterInput
+  createdAt: customSearchableStringFilterInput
+  updatedAt: customSearchableStringFilterInput
+  lang_tag: customSearchableStringFilterInput
+  dev_type_tag: customSearchableStringFilterInput
+  interest_tag: customSearchableStringFilterInput
+  size_tag: customSearchableStringFilterInput
+  framework_tag: customSearchableStringFilterInput
+  difficulty_tag: customSearchableStringFilterInput
+  cloud_provider_tag: customSearchableStringFilterInput
+  experience_level: customSearchableStringFilterInput
+  and: [customPostsModelFilterInput]
+  or: [customPostsModelFilterInput]
+  not: customPostsModelFilterInput
+}
+
+type customSearchablePostsModelConnection @aws_api_key @aws_iam {
+  items: [PostsModel]!
+  nextToken: String
+  total: Int
+}
+
+type Query {
+  listRandomPostsModelQuery(
+    filter: customPostsModelFilterInput,
+    limit: Int,
+    nextToken: String,
+  ): customSearchablePostsModelConnection
+  @aws_api_key @aws_iam
 }

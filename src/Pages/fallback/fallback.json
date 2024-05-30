@@ -1,0 +1,205 @@
+{
+  "data": {
+    "items": [
+      {
+        "id": "e8fbd460-b264-4122-a0f2-04e47cb623a1",
+        "post_title": "StudyMeetEat JSON",
+        "description": "DubMeets is a web platform that allows students to create and join study sessions based on their classes.",
+        "long_description": "We wanted to give students the ability to create their own study sessions and choose in-person locations to meet up with other students who share their academic goals. Students can collaborate with other students who share their academic interests and choose in-person locations to meet up for their study sessions. Students can show their interest by hitting attend on these meetings.",
+        "project_link": "https://github.com/akumar282/StudyMeetEat",
+        "image_link": "NewLogo.png",
+        "post_date": "2024-01-28T23:21:00.000Z",
+        "userID": "e3b7bc79-a71c-439c-b362-4ab9208fc7dc",
+        "creator_name": null,
+        "lang_tag": [
+          "TYPESCRIPT",
+          "JAVASCRIPT",
+          "HTML",
+          "CSS"
+        ],
+        "dev_type_tag": [
+          "FRONT_END",
+          "BACKEND",
+          "FULL_STACK",
+          "WEB"
+        ],
+        "interest_tag": [
+          "LIFESTYLE",
+          "COMMUNICATION"
+        ],
+        "size_tag": [
+          "SMALL"
+        ],
+        "framework_tag": [
+          "EXPRESS"
+        ],
+        "difficulty_tag": [
+          "GOOD_FIRST_PROJECT"
+        ],
+        "cloud_provider_tag": [
+          "AMAZON_WEB_SERVICES"
+        ],
+        "likes": null,
+        "likes_users": [],
+        "saves": null,
+        "post_comments": {
+          "nextToken": null,
+          "__typename": "ModelCommentModelConnection"
+        },
+        "contributor_limit": null,
+        "contributors": [],
+        "reported": false,
+        "experience_level": [],
+        "application": false,
+        "project_chat": "funny",
+        "createdAt": "2024-01-28T23:22:40.814Z",
+        "updatedAt": "2024-01-29T01:23:23.149Z",
+        "__typename": "PostsModel"
+      },
+      {
+        "id": "e15a8be8-2e25-46a0-824d-5436f3072d6d",
+        "post_title": "NotAirDrop",
+        "description": "This is a File sharing application built with the React Native JS framework.",
+        "long_description": "Based on the hackathonâ€™s themes, we decided to make a web application that also works on mobile devices because we were inspired by the problems of sharing files, and photos, between friends, and other people. Oftentimes we are limited by upload size, and the time it takes to transfer files because of this issue we decided to create our own application that allows us to send files without needing the same wifi connection through AWS servers.",
+        "project_link": "https://github.com/akumar282/NotAirDrop",
+        "image_link": "NewLogo.png",
+        "post_date": "2024-01-28T23:04:00.000Z",
+        "userID": "e3b7bc79-a71c-439c-b362-4ab9208fc7dc",
+        "creator_name": null,
+        "lang_tag": [
+          "JAVASCRIPT"
+        ],
+        "dev_type_tag": [
+          "FRONT_END",
+          "BACKEND"
+        ],
+        "interest_tag": [
+          "COMMUNICATION"
+        ],
+        "size_tag": [
+          "SMALL"
+        ],
+        "framework_tag": [
+          "EXPRESS"
+        ],
+        "difficulty_tag": [
+          "GOOD_FIRST_PROJECT"
+        ],
+        "cloud_provider_tag": [
+          "AMAZON_WEB_SERVICES"
+        ],
+        "likes": null,
+        "likes_users": [],
+        "saves": null,
+        "post_comments": {
+          "nextToken": null,
+          "__typename": "ModelCommentModelConnection"
+        },
+        "contributor_limit": null,
+        "contributors": [],
+        "reported": false,
+        "experience_level": [],
+        "application": false,
+        "project_chat": "funny",
+        "createdAt": "2024-01-28T23:18:43.334Z",
+        "updatedAt": "2024-01-29T01:23:35.571Z",
+        "__typename": "PostsModel"
+      },
+      {
+        "id": "1c9d65de-8e98-454d-8c26-74365e0d694e",
+        "post_title": "node-project-template",
+        "description": "This is a simple template for creating a node.js project that uses TypeScript.",
+        "long_description": "Will continued to be built upon. It will be kept simple as possible to allow for developers to easily add things for their own projects, and allow new developers to build projects and learn faster.",
+        "project_link": "https://github.com/akumar282/node-project-template",
+        "image_link": null,
+        "post_date": "2024-01-29T00:51:00.000Z",
+        "userID": "e3b7bc79-a71c-439c-b362-4ab9208fc7dc",
+        "creator_name": "Abhi",
+        "lang_tag": [
+          "TYPESCRIPT"
+        ],
+        "dev_type_tag": [
+          "FULL_STACK"
+        ],
+        "interest_tag": [
+          "COMMUNICATION"
+        ],
+        "size_tag": [
+          "SMALL"
+        ],
+        "framework_tag": [
+          "NEXT_JS"
+        ],
+        "difficulty_tag": [
+          "GOOD_FIRST_PROJECT"
+        ],
+        "cloud_provider_tag": [
+          "AMAZON_WEB_SERVICES"
+        ],
+        "likes": null,
+        "likes_users": [],
+        "saves": null,
+        "post_comments": {
+          "nextToken": null,
+          "__typename": "ModelCommentModelConnection"
+        },
+        "contributor_limit": null,
+        "contributors": [],
+        "reported": false,
+        "experience_level": [],
+        "application": false,
+        "project_chat": "funny",
+        "createdAt": "2024-01-29T00:53:27.837Z",
+        "updatedAt": "2024-01-29T01:22:54.171Z",
+        "__typename": "PostsModel"
+      },
+      {
+        "id": "bad370ad-4e7b-4964-999b-d0472e3fb22c",
+        "post_title": "DuckFish",
+        "description": "Chess Application written in C# using WPF",
+        "long_description": "Chess Application written in C# using WPF",
+        "project_link": "https://github.com/haylau/DuckFish",
+        "image_link": null,
+        "post_date": "2024-01-29T01:21:00.000Z",
+        "userID": "e3b7bc79-a71c-439c-b362-4ab9208fc7dc",
+        "creator_name": null,
+        "lang_tag": [
+          "C_SHARP"
+        ],
+        "dev_type_tag": [
+          "APPLICATION_PROGRAMMING"
+        ],
+        "interest_tag": [
+          "GAMING"
+        ],
+        "size_tag": [
+          "SMALL"
+        ],
+        "framework_tag": [
+          "GATSBY"
+        ],
+        "difficulty_tag": [
+          "EXPERIENCED_CONTRIBUTOR"
+        ],
+        "cloud_provider_tag": [],
+        "likes": null,
+        "likes_users": [],
+        "saves": null,
+        "post_comments": {
+          "nextToken": null,
+          "__typename": "ModelCommentModelConnection"
+        },
+        "contributor_limit": null,
+        "contributors": [],
+        "reported": false,
+        "experience_level": [],
+        "application": false,
+        "project_chat": "funny",
+        "createdAt": "2024-01-29T01:22:37.819Z",
+        "updatedAt": "2024-01-29T01:22:37.819Z",
+        "__typename": "PostsModel"
+      }
+    ],
+    "itemsLength": 4
+  }
+}

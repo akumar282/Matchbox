@@ -1,112 +1,273 @@
-import { Typography, Button, IconButton } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import HomeIcon from "@mui/icons-material/Home";
-import SettingsIcon from "@mui/icons-material/Settings";
-import AddIcon from "@mui/icons-material/Add";
-import SearchIcon from "@mui/icons-material/Search";
-import InboxIcon from "@mui/icons-material/Inbox";
-import "./NavBar.css";
-import { useNavigate } from "react-router-dom";
-import { getImage } from "../backend/storage/s3"; 
-export default function Navbar() {
-  const navigate = useNavigate();
-  function Logout() {
-    localStorage.clear();
-    navigate("/");
-    window.location.reload();
+import React, {useState, useEffect, useRef, useContext} from 'react'
+import textlogo from '../img/textlogo.png'
+import NewLogo from '../img/NewLogo.png'
+import { useNavigate, useLocation } from 'react-router-dom'
+import {imageOrDefault} from '../functions/helpers'
+import {AuthContext} from './AuthWrapper'
+import {Auth} from 'aws-amplify'
+
+export default function NavBar() {
+
+  const navigate = useNavigate()
+  const location = useLocation()
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  const [BurgerOpen, setBurgerOpen] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const userInfo = useContext(AuthContext)
+
+  const handleToggleDropdown = () => {
+    setIsDropdownOpen((prevIsDropdownOpen) => !prevIsDropdownOpen)
   }
 
-  
+  const toggleBurger = () => {
+    setBurgerOpen(false)
+  }
 
-  const [imageSrc, setImageSrc] = useState("");
-  // fetch image and comments
+  const handleNav = (_id: string) => {
+    navigate(`${_id}`)
+    toggleBurger()
+  }
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false)
+  }
+
+  const useSignOut = async () => {
+    localStorage.clear()
+    await Auth.signOut()
+    navigate('/')
+  }
+
   useEffect(() => {
-    const fetchImage = async () => {
-      const src = await getImage(localStorage.getItem("profileImage")!);
-      setImageSrc(src);
-    };
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        closeDropdown()
+      }
+    }
 
-    fetchImage();
+    document.addEventListener('click', handleClickOutside)
 
-  }, []);
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
 
   return (
-    <nav className="nav">
-      <div className="divNav">
-        <h1 className="SiteTitle" onClick={() => navigate("/home")}>
-          {" "}
-          Matchbox{" "}
-        </h1>
-        <div className="SearchBar">
-          <ul>
-            {/* <img src={LogoImg} width={130} height={50} alt="passedImg"/>
-                <CustomLink to= "/game"> Game </CustomLink>*/}
+    <nav className=' relative px-4 py-5 flex justify-start items-center bg-white'>
+      <button onClick={() => navigate('/home')}><img className='w-36 ml-2 max-w-screen-xl' style={{color: '#FF0000'}} src={textlogo}></img></button>
 
-            <CustomLink className="navElement" to="/home">
-              {" "}
-              <HomeIcon fontSize="large" /> Home{" "}
-            </CustomLink>
-            <CustomLink className="navElement" to="/discover">
-              {" "}
-              <SearchIcon fontSize="large" /> Discover{" "}
-            </CustomLink>
-            <CustomLink className="navElement" to="/create-project">
-              {" "}
-              <AddIcon sx={{ fontSize: 35 }} /> Create{" "}
-            </CustomLink>
-            <CustomLink className="navElement" to="/inbox">
-              {" "}
-              <InboxIcon fontSize="large" /> Inbox{" "}
-            </CustomLink>
-            <CustomLink className="navElement" to="/settings">
-              {" "}
-              <SettingsIcon fontSize="large" /> Settings{" "}
-            </CustomLink>
-
-            <IconButton
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                padding: "0.5rem 1rem",
-                mt: "1rem",
-                gap: 0,
-                fontWeight: "bold",
-                fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
-                color: "black",
-                fontSize: "1.2rem",
-                borderRadius: "0",
-                "&:hover": {
-                  color: "#715899",
-                },
-              }}
-              disableRipple
-              onClick={() => Logout()}
-            >
-              {" "}
-              <ExitToAppIcon fontSize="large" /> Logout
-            </IconButton>
-          </ul>
-          <div className="ProfilePicture">
-              <img src={imageSrc} alt="profile"  />
-          </div>
+      <section>
+        <div className='lg:hidden' onClick={() => setBurgerOpen((prev) => !prev)}>
+          <button className='navbar-burger flex items-center text-black absolute -right-2 transform -translate-y-1/2 -translate-x-1/2'>
+            {imageOrDefault(localStorage.getItem('profile_image')!)}
+          </button>
         </div>
-      </div>
-    </nav>
-  );
-}
+        <div className={BurgerOpen ? 'showMenuNav' : 'hideMenuNav'}>
+          <div className='absolute top-0 right-0 px-8 py-8' onClick={() => setBurgerOpen(false)} >
+            <svg
+              className='h-8 w-8 text-gray-600'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            >
+              <line x1='18' y1='6' x2='6' y2='18' />
+              <line x1='6' y1='6' x2='18' y2='18' />
+            </svg>
+          </div>
+          <div>
+            <img className='w-50 h-40' src={NewLogo} alt='' />
+          </div>
+          <ul className='flex flex-col items-center justify-between min-h-[250px]'>
+            <li className={` border-gray-400 mb-4 font-primary ${location.pathname === '/home' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/home')} >Home</button>
+            </li>
+            <li className={` border-gray-400 my-4 font-primary ${location.pathname === '/discover' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/discover')}>Discover</button>
+            </li>
+            <li className={` border-gray-400 my-4 font-primary ${location.pathname === '/create-project' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/create-project')}>Create</button>
+            </li>
+            <li className={` border-gray-400 my-4 font-primary ${location.pathname === '/inbox' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/inbox')}>Inbox</button>
+            </li>
+            <li className={` border-gray-400 my-4 font-primary ${location.pathname === '/profile' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/profile')}>Profile</button>
+            </li>
+            <li className={` border-gray-400 my-4 font-primary ${location.pathname === '/settings' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}>
+              <button onClick={() => handleNav('/settings')}>Settings</button>
+            </li>
+            <li className=' border-gray-400 my-4 font-primary flex flex-row items-center'>
+              <button className='mr-1 ' onClick={() => useSignOut()}>Logout</button>
+              <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' transform='scale (-1, 1)' strokeWidth={1.5} stroke='currentColor' className='w-6 h-6'>
+                <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75' />
+              </svg>
 
-function CustomLink({ to, children, ...props }) {
-  const resolvedPath = useResolvedPath(to);
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true });
-  return (
-    <li className={isActive ? "active" : ""}>
-      <Link to={to} {...props}>
-        {children}
-      </Link>
-    </li>
-  );
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <ul className='hidden absolute top-1/2 right-1 transform -translate-y-1/2 -translate-x-12 lg:mx-auto lg:flex lg:items-center lg:w-auto max-w-screen-xl z-50'>
+        <li>
+          <button 
+            className={`flex flex-col items-center font-primary px-4 py-1 ${location.pathname === '/home' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`} 
+            onClick={() => navigate('/home')}>
+            <svg 
+              xmlns='http://www.w3.org/2000/svg' 
+              fill='none' viewBox='0 0 24 24' 
+              strokeWidth={1.5} 
+              stroke='currentColor' 
+              className='w-7 h-7'>
+              <path 
+                strokeLinecap='round' 
+                strokeLinejoin='round' 
+                d='M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25' />
+            </svg>
+          Home
+          </button>
+        </li>
+        <li>
+          <button
+            className={`flex flex-col items-center font-primary px-4 py-1 ${location.pathname === '/discover' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}
+            onClick={() => navigate('/discover')}>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none' viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-7 h-7'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z' />
+            </svg>
+            Discover
+          </button>
+        </li>
+        <li>
+          <button
+            className={`flex flex-col items-center font-primary px-4 py-1 ${location.pathname === '/create-project' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}
+            onClick={() => navigate('/create-project')}>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none' viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-7 h-7'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z' />
+            </svg>
+            Create
+          </button>
+        </li>
+        <li>
+          <button
+            className={`flex flex-col items-center font-primary px-4 py-1 ${location.pathname === '/inbox' ? 'text-indigo-600' : 'hover:text-slate-500'
+            }`}
+            onClick={() => navigate('/inbox')}>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none' viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-7 h-7'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661z' />
+            </svg>
+            Inbox
+          </button>
+          
+        </li>
+        <li>
+          <div className='relative font-primary' ref={dropdownRef}>
+            <button
+              type='button'
+              className='flex text-sm rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 ml-6 mb-1'
+              id='user-menu-button'
+              aria-expanded={isDropdownOpen}
+              onClick={handleToggleDropdown}
+            >
+              <span className='sr-only'>Open user menu</span>
+              {imageOrDefault(localStorage.getItem('profile_image')!)}
+            </button>
+            {/* Dropdown menu */}
+            <div
+              className={`absolute right-0 ${isDropdownOpen ? 'block' : 'hidden'}
+               my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
+              id='user-dropdown'
+            >
+              <div className='px-4 py-3 whitespace-nowrap'>
+                {/*<span className='block text-sm text-gray-900 dark:text-white'>Full Name</span>*/}
+                <span className='block text-sm text-gray-500 dark:text-gray-400'>
+                  {userInfo ? '@' + userInfo.userName : 'No username'}
+                </span>
+              </div>
+              <ul className='py-2' aria-labelledby='user-menu-button'>
+                <li className='hover:bg-gray-100'>
+                  <button
+                    onClick={() => navigate('/profile')}
+                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'
+                  >
+                    Profile
+                  </button>
+                </li>
+                <li className='hover:bg-gray-100'>
+                  <button
+                    onClick={() => navigate('/settings')}
+                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'
+                  >
+                    Settings
+                  </button>
+                </li>
+                <li className='hover:bg-gray-100'>
+                  <button
+                    onClick={() => navigate('/')}
+                    className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'
+                  >
+                    Sign out
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </li>
+      </ul>
+      <style>{`
+        .hideMenuNav {
+          display: none;
+        }
+        .showMenuNav {
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 100vh;
+          top: 0;
+          left: 0;
+          background: white;
+          z-index: 100;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: center;
+        }
+      `}</style>
+    </nav>
+  )
 }

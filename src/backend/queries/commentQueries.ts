@@ -1,14 +1,26 @@
 import { API } from 'aws-amplify'
-import { ListCommentModelsQueryVariables } from '../../API'
-import { getCommentModel, listCommentModels } from '../../graphql/queries'
+import { getCommentModel } from '@graphql/queries'
+import {
+  GetCommentModelQuery,
+  ListCommentModelsQuery,
+  ListCommentModelsQueryVariables,
+  GetCommentModelQueryVariables
+} from '@api'
+import { GraphQLQuery } from '@aws-amplify/api'
+import {listCommentsCustom} from '../../customQueries/queries'
 
+export async function getComment(comment: { input: GetCommentModelQueryVariables}){
+  return await API.graphql<GraphQLQuery<GetCommentModelQuery>>({
+    query: getCommentModel,
+    variables: comment,
+    authMode: 'API_KEY'
+  })
+}
 
-export async function getAllComments(userID: ListCommentModelsQueryVariables) {
-  return await API.graphql(
-    {
-      authMode: 'API_KEY',
-      query: listCommentModels,
-      variables: userID
-    }
-  )
+export async function listComment(comment: ListCommentModelsQueryVariables){
+  return await API.graphql<GraphQLQuery<ListCommentModelsQuery>>({
+    query: listCommentsCustom,
+    variables: comment,
+    authMode: 'API_KEY'
+  })
 }

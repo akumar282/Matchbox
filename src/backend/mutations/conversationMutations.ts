@@ -1,33 +1,35 @@
 import { API } from 'aws-amplify'
-import { createConversationModel, deleteConversationModel, updateConversationModel } from "../../graphql/mutations"
-import { CreateConversationModelPayload, DeleteConversationModelPayload, UpdateConversationModelPayload } from "../types"
+import { createConversationModel, deleteConversationModel, updateConversationModel } from '@graphql/mutations'
+import {
+  CreateConversationModelInput,
+  CreateConversationModelMutation,
+  DeleteConversationModelInput,
+  DeleteConversationModelMutation,
+  UpdateConversationModelInput,
+  UpdateConversationModelMutation
+} from '@api'
+import {GraphQLQuery} from '@aws-amplify/api'
 
-export async function createConversation(conversation: CreateConversationModelPayload) {
-  return await API.graphql(
-    {
-      authMode: "API_KEY",
-      query: createConversationModel,
-      variables: conversation
-    }
-  )
+export async function createConversation(conversation: { input: CreateConversationModelInput}){
+  return await API.graphql<GraphQLQuery<CreateConversationModelMutation>>({
+    query: createConversationModel,
+    variables: conversation,
+    authMode: 'API_KEY'
+  })
 }
 
-export async function deleteConversation(conversation: DeleteConversationModelPayload) {
-  return await API.graphql(
-    {
-      authMode: 'API_KEY',
-      query: deleteConversationModel,
-      variables: conversation
-    }
-  )
+export async function deleteConversation(conversation: { input: DeleteConversationModelInput}) {
+  return await API.graphql<GraphQLQuery<DeleteConversationModelMutation>>({
+    query: deleteConversationModel,
+    variables: conversation,
+    authMode: 'API_KEY'
+  })
 }
 
-export async function updateConversation(conversation: UpdateConversationModelPayload) {
-  return await API.graphql(
-    {
-      authMode: 'API_KEY',
-      query: updateConversationModel,
-      variables: conversation
-    }
-  )
+export async function updateConversation(conversation: { input: UpdateConversationModelInput }) {
+  return await API.graphql<GraphQLQuery<UpdateConversationModelMutation>>({
+    query: updateConversationModel,
+    variables: conversation,
+    authMode: 'API_KEY'
+  })
 }

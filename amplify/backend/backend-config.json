@@ -1,22 +1,33 @@
 {
   "api": {
-    "Unhinged": {
-      "dependsOn": [],
-      "generateModels": {
-        "providerPlugin": "awscloudformation",
-        "service": "AppSync"
-      },
+    "unhinged": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "unhingedf9920fd0"
+        }
+      ],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authunhingedf9920fd0"
+              }
+            },
             {
               "authenticationType": "AWS_IAM"
             }
           ],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
+              "apiKeyExpirationDate": "2024-01-07T07:53:37.308Z",
+              "apiKeyExpirationDays": 60,
+              "description": ""
             },
             "authenticationType": "API_KEY"
           }
@@ -27,7 +38,7 @@
     }
   },
   "auth": {
-    "unhinged15d4ae3f": {
+    "unhingedf9920fd0": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -42,10 +53,10 @@
         "signupAttributes": [
           "EMAIL"
         ],
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
+        "socialProviders": [
+          "GOOGLE"
         ],
+        "usernameAttributes": [],
         "verificationMechanisms": [
           "EMAIL"
         ]
@@ -54,6 +65,24 @@
       "service": "Cognito"
     }
   },
+  "custom": {
+    "gitmatchcustomresolverrandomlist": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIKeyOutput",
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "unhinged"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "customCDK"
+    }
+  },
+  "function": {},
   "hosting": {
     "amplifyhosting": {
       "providerPlugin": "awscloudformation",

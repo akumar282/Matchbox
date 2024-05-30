@@ -1,0 +1,3 @@
+{
+  "adminRoleNames": ["arn:aws:iam::739292628626:user/matching-lambda-appsync-role"]
+}

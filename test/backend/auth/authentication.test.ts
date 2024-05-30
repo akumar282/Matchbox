@@ -1,22 +1,22 @@
-import { newUserSignUp } from '../../../src/backend/auth'
+import { newUserSignUp } from '@backend/auth'
 import { Amplify } from 'aws-amplify'
-import { Auth } from 'aws-amplify'
-import awsconfig from '../../../src/aws-exports'
+import awsconfig from '@aws-exports'
+import {describe ,test, expect} from '@jest/globals'
 Amplify.configure(awsconfig)
 
 
 
 
 describe('Authentication methods test', () => {
-  test.skip('Sign Up user test', async () => {
+  test('Sign Up user test', async () => {
     const userPackage = {
       username: 'actuallychowmein',
-      password: 'testtest',
-      email: 'test@appmatchbox.com',
+      password: 'T8#testtest',
+      email: 'actuallychowmein@gmail.com',
       userId: 'bx7g93n432bcws2'
     }
     const result = await newUserSignUp(
-      userPackage.email,
+      userPackage.username,
       userPackage.password,
       userPackage.email,
       userPackage.userId
@@ -24,11 +24,4 @@ describe('Authentication methods test', () => {
     expect(result).toEqual('Success')
   })
 
-  test.skip('change user test', async () => {
-    await Auth.forgotPassword('akumar28@uw.edu').then((data) => console.log(data)).catch((err) => console.log(err));
-  })
-
-  test.skip('change user test', async () => {
-    await Auth.forgotPasswordSubmit('akumar28@uw.edu', '082617', '87654321').then((data) => console.log(data)).catch((err) => console.log(err));
-  })
 })

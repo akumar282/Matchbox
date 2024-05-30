@@ -1,33 +1,35 @@
 import { API } from 'aws-amplify'
-import { createMessageModel, deleteMessageModel, updateMessageModel } from "../../graphql/mutations"
-import { CreateMessageModelPayload, DeleteMessageModelPayload, UpdateMessageModelPayload } from "../types"
+import { createMessageModel, deleteMessageModel, updateMessageModel } from '@graphql/mutations'
+import {
+  CreateMessageModelInput,
+  CreateMessageModelMutation,
+  DeleteMessageModelInput,
+  DeleteMessageModelMutation,
+  UpdateMessageModelInput,
+  UpdateMessageModelMutation
+} from '@api'
+import { GraphQLQuery } from '@aws-amplify/api'
 
-export async function createMessage(message: CreateMessageModelPayload) {
-  return await API.graphql(
-    {
-      authMode: "API_KEY",
-      query: createMessageModel,
-      variables: message
-    }
-  )
+export async function createMessage(message: { input: CreateMessageModelInput}){
+  return await API.graphql<GraphQLQuery<CreateMessageModelMutation>>({
+    query: createMessageModel,
+    variables: message,
+    authMode: 'API_KEY'
+  })
 }
 
-export async function deleteMessage(message: DeleteMessageModelPayload) {
-  return await API.graphql(
-    {
-      authMode: 'API_KEY',
-      query: deleteMessageModel,
-      variables: message
-    }
-  )
+export async function deleteMessage(message: { input: DeleteMessageModelInput}) {
+  return await API.graphql<GraphQLQuery<DeleteMessageModelMutation>>({
+    query: deleteMessageModel,
+    variables: message,
+    authMode: 'API_KEY'
+  })
 }
 
-export async function updateMessage(message: UpdateMessageModelPayload) {
-  return await API.graphql(
-    {
-      authMode: 'API_KEY',
-      query: updateMessageModel,
-      variables: message
-    }
-  )
+export async function updateMessage(message: { input: UpdateMessageModelInput }) {
+  return await API.graphql<GraphQLQuery<UpdateMessageModelMutation>>({
+    query: updateMessageModel,
+    variables: message,
+    authMode: 'API_KEY'
+  })
 }

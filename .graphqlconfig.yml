@@ -1,17 +1,16 @@
 projects:
-  Unhinged:
-    schemaPath: amplify/backend/api/Unhinged/build/schema.graphql
+  unhinged:
+    schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.ts
     excludes:
       - ./amplify/**
+      - src/API.ts
     extensions:
       amplify:
         codeGenTarget: typescript
         generatedFileName: src/API.ts
         docsFilePath: src/graphql
-        region: us-west-2
-        apiId: null
         maxDepth: 2
 extensions:
   amplify:

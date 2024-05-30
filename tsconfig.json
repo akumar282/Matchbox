@@ -6,16 +6,29 @@
     "outDir": "dist",
     "strict": true,
     "noImplicitAny": false,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@backend/*": ["src/backend/*"],
+      "@api": ["src/API.ts"],
+      "@graphql/*": ["src/graphql/*"],
+      "@aws-exports": ["src/aws-exports.ts"],
+      "@utils/*": ["src/functions/*"]
+    },
+    "typeRoots": [
+      "src/types"
+    ]
   },
   "include": [
     "src/backend/**/*",
     "test/backend/**/*",
     "src/backend/types.ts",
     "src/img/**/*.svg",
-    "src/svg.d.ts"
+    "src/types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules"
