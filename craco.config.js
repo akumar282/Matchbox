@@ -10,10 +10,14 @@ module.exports = {
       '@aws-exports': path.resolve(__dirname, 'src/aws-exports.ts'),
       '@utils': path.resolve(__dirname, 'src/functions')
     },
-    configure: {
-      experiments: {
+    configure: (webpackConfig, { env, paths }) => {
+      webpackConfig.experiments = {
         topLevelAwait: true,
-      },
+      }
+      if (env === 'production') {
+        webpackConfig.devtool = false
+      }
+      return webpackConfig
     },
   },
 };
