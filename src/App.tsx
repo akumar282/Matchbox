@@ -22,6 +22,7 @@ import CreatePost from './pages/CreatePost'
 import JoinedPosts from './pages/JoinedPosts'
 import awsconfig from './aws-exports'
 import {Amplify} from 'aws-amplify'
+import HelpPage from './pages/HelpPage'
 
 function App () {
 
@@ -58,6 +59,7 @@ function App () {
       <Routes>
         <Route path='/*' element={<NotFound />} />
         <Route path='/' element={<LandingPage />} />
+        <Route path='/help' element={<HelpPage />} />
         <Route path='/signup' element={<SignUpPage/>}/>
         <Route path='/login' element={<LoginPage />} />
         <Route path='/load' element={<LoadingScreen />} />

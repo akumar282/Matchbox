@@ -43,7 +43,7 @@ export default function ContributorNotes(props: NotesData) {
         setNotesData(data.listContributorNotesModels.items as ContributorNotesModel[])
       }
       if(data && data.listContributorNotesModels && data.listContributorNotesModels.nextToken){
-        setNextToken(data.listContributorNotesModels.nextToken && data.listContributorNotesModels.items.length === 0 ? null : data.listContributorNotesModels.nextToken)
+        setNextToken(data.listContributorNotesModels.nextToken ? data.listContributorNotesModels.nextToken : null)
 
       }
       setError(!errors)

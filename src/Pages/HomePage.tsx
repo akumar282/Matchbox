@@ -93,15 +93,24 @@ export default function HomePage() {
 
   return (
     <div className='flex flex-col min-h-screen'>
-      <NavBar />
+      <NavBar/>
       <div className='bg-primary-purple flex justify-center'>
         <div className='my-3 items-start'>
-          <h1 className='lg:text-3xl md:text-2xl font-secondary text-xl ml-4 mb-4 mt-2'>Welcome Back, {userInfo?.userName}!</h1>
+          <h1 className='lg:text-3xl md:text-2xl font-secondary text-xl ml-4 mb-4 mt-2'>Welcome
+            Back, {userInfo?.userName}!</h1>
           <div className='grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 auto-cols-max text-start'>
-            <CategoryButton bordercolor='border-r-rose-400' titleLabel='Trending Projects' onClick={() => navigate('/browse/trending')} imageIcon={() => <TrendIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
-            <CategoryButton bordercolor='border-r-violet-400' titleLabel='Open Source Frameworks' onClick={() => navigate('/browse/frameworks')} imageIcon={() => <FlaskIcon className='h-8 w-8 text-black' viewBox='0 0 24 24' />} />
-            <CategoryButton bordercolor='border-r-yellow-300' titleLabel='Machine Learning/AI&#8197;&#8197;&#8197;' onClick={() => navigate('/browse/ai_mach')} imageIcon={() => <MLIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
-            <CategoryButton bordercolor='border-r-green-300' titleLabel='Cloud Computing&#8197;' onClick={() => navigate('/browse/cloud_computing')} imageIcon={() => <CloudIcon className='h-8 w-8' viewBox='0 0 24 24' />} />
+            <CategoryButton bordercolor='border-r-rose-400' titleLabel='Trending Projects'
+              onClick={() => navigate('/browse/trending')}
+              imageIcon={() => <TrendIcon className='h-8 w-8' viewBox='0 0 24 24'/>}/>
+            <CategoryButton bordercolor='border-r-violet-400' titleLabel='Open Source Frameworks'
+              onClick={() => navigate('/browse/frameworks')}
+              imageIcon={() => <FlaskIcon className='h-8 w-8 text-black' viewBox='0 0 24 24'/>}/>
+            <CategoryButton bordercolor='border-r-yellow-300' titleLabel='Machine Learning/AI&#8197;&#8197;&#8197;'
+              onClick={() => navigate('/browse/ai_mach')}
+              imageIcon={() => <MLIcon className='h-8 w-8' viewBox='0 0 24 24'/>}/>
+            <CategoryButton bordercolor='border-r-green-300' titleLabel='Cloud Computing&#8197;'
+              onClick={() => navigate('/browse/cloud_computing')}
+              imageIcon={() => <CloudIcon className='h-8 w-8' viewBox='0 0 24 24'/>}/>
           </div>
         </div>
       </div>
@@ -110,7 +119,8 @@ export default function HomePage() {
           <h1 className='text-2xl font-primary ml-3 mt-3'>Get Started</h1>
           <h3 className='text-sm font-primary ml-3 mt-1'>Post your own project and build with community!</h3>
           <div className='w-full h-full flex items-center my-2 '>
-            <button onClick={() => navigate('/create-project')} className='border-4 shadow-lg border-dashed hover:bg-purple-300 border-purple-500 lg:h-44 h-28 rounded-[20px]  w-[97%] mx-auto flex flex-col items-center justify-center'>
+            <button onClick={() => navigate('/create-project')}
+              className='border-4 shadow-lg border-dashed hover:bg-purple-300 border-purple-500 lg:h-44 h-28 rounded-[20px]  w-[97%] mx-auto flex flex-col items-center justify-center'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none' viewBox='0 0 24 24'
@@ -120,7 +130,7 @@ export default function HomePage() {
                 <path
                   strokeLinecap='round'
                   strokeLinejoin='round'
-                  d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z' />
+                  d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'/>
               </svg>
               <h1 className='text-lg mt-1 font-primary'>Create Project</h1>
             </button>
@@ -146,10 +156,18 @@ export default function HomePage() {
         </div>
         <h1></h1>
       </div>
-      <div className='bg-secondary-blue flex flex-col static bottom-0 items-center justify-center'>
-        <div>
-          <h1 className='text-base font-primary text-center text-white py-4 px-5'>Copyright © 2023 GitMatch</h1>
-        </div>
+      <div className='bg-secondary-blue flex items-center text-white justify-center relative px-5 py-4'>
+        <h1 className='text-base font-primary text-center text-white z-10'>Copyright © 2024 GitMatch</h1>
+        <button
+          className='absolute right-4 top-1/2 transform -translate-y-1/2 p-2 focus:outline-none focus:ring-2 focus:ring-white'
+          onClick={() => navigate('/help')}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+            stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round"
+              d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"/>
+          </svg>
+        </button>
       </div>
     </div>
   )

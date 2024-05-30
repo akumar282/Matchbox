@@ -33,7 +33,7 @@ export default function CommentSection(props: CommentSectionData) {
         limit: 6
       })
       if(data && data.listCommentModels && data.listCommentModels.nextToken) {
-        setNextToken(data.listCommentModels.nextToken && data.listCommentModels.items.length === 0 ? null : data.listCommentModels.nextToken)
+        setNextToken(data.listCommentModels.nextToken ? data.listCommentModels.nextToken : null)
         setCommentsData(data.listCommentModels.items as CommentModel[])
       }
       setError(!errors)
