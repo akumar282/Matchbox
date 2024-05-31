@@ -12,6 +12,7 @@ interface MFAProps {
   setFunction: React.Dispatch<React.SetStateAction<boolean>>
   openModal: boolean
   user_name: string
+  email: string
 }
 
 export default function MFAModal(props: MFAProps){
@@ -62,7 +63,7 @@ export default function MFAModal(props: MFAProps){
         <Modal.Body>
           {showAlert && displayAlert(status)}
           <div className='space-y-6 flex flex-col items-center justify-center'>
-            <h3 className='text-center'>Enter the code sent to {props.user_name} here</h3>
+            <h3 className='text-center'>Enter the code sent to {props.email} here</h3>
             <input
               type='text'
               placeholder='Verification Code'
