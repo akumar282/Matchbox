@@ -226,6 +226,10 @@ export default function DiscoverComponent(props: DiscoverProps) {
   }
 
   const useLikedPost = async () => {
+    const isStagingOrLocalhost = window.location.href.includes('staging') || window.location.hostname === 'localhost'
+    const url = isStagingOrLocalhost
+      ? 'https://w1zlpbuw67.execute-api.us-west-2.amazonaws.com/prod/'
+      : 'https://tqi6t0y7fe.execute-api.us-west-2.amazonaws.com/prod/'
     if(userInfo && userInfo.id) {
       if(!liked) {
         await createLikedPost({
@@ -243,7 +247,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
         }
         await requestWithBody(
           `likes/${props.data.id}`,
-          'https://w1zlpbuw67.execute-api.us-west-2.amazonaws.com/prod/',
+          url,
           body,
           'POST'
         )
@@ -269,7 +273,7 @@ export default function DiscoverComponent(props: DiscoverProps) {
           }
           await requestWithBody(
             `likes/${props.data.id}`,
-            'https://w1zlpbuw67.execute-api.us-west-2.amazonaws.com/prod/',
+            url,
             body,
             'POST'
           )
