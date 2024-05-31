@@ -31,7 +31,11 @@ export default function DiscoverPage() {
       } else {
         try {
           const dynamoUserId = userInfo?.id
-          const responseJson = await (await fetch(`https://3q03neb3ig.execute-api.us-west-2.amazonaws.com/prod/matches/${dynamoUserId}`)).json()
+          const isStagingOrLocalhost = window.location.href.includes('staging') || window.location.hostname === 'localhost'
+          const url = isStagingOrLocalhost
+            ? 'https://3q03neb3ig.execute-api.us-west-2.amazonaws.com/prod/matches/'
+            : 'https://swhlykev1e.execute-api.us-west-2.amazonaws.com/prod/matches/'
+          const responseJson = await (await fetch(`${url}${dynamoUserId}`)).json()
           console.log(responseJson)
           const mappedItems = (responseJson.data.items as PostsModel[]).map(x => <DiscoverComponent key={x.id} data={x} editable={false} />)
           setProjects(mappedItems)
