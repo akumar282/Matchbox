@@ -31,5 +31,41 @@
         "gitmatchcustomresolverrandomlist": {}
       }
     }
+  },
+  "prod": {
+    "awscloudformation": {}
+  },
+  "prodnew": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-unhinged-prodnew-163640-authRole",
+      "UnauthRoleArn": "arn:aws:iam::739292628626:role/amplify-unhinged-prodnew-163640-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::739292628626:role/amplify-unhinged-prodnew-163640-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-unhinged-prodnew-163640-deployment",
+      "UnauthRoleName": "amplify-unhinged-prodnew-163640-unauthRole",
+      "StackName": "amplify-unhinged-prodnew-163640",
+      "StackId": "arn:aws:cloudformation:us-west-2:739292628626:stack/amplify-unhinged-prodnew-163640/7755c490-1edd-11ef-90bb-0630d4255fbd",
+      "AmplifyAppId": "dnpxlnk1ec683"
+    },
+    "categories": {
+      "api": {
+        "unhinged": {}
+      },
+      "auth": {
+        "unhingedf9920fd0": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dnpxlnk1ec683",
+          "type": "manual"
+        }
+      },
+      "custom": {
+        "gitmatchcustomresolverrandomlist": {}
+      },
+      "storage": {
+        "s3unhingedstorage98feb2cc": {}
+      }
+    }
   }
 }
