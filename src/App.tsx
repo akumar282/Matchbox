@@ -27,24 +27,30 @@ import HelpPage from './pages/HelpPage'
 function App () {
 
   useEffect(() => {
+    const hostname = window.location.hostname
     const isLocalhost = Boolean(
-      window.location.hostname === 'localhost' ||
-      window.location.hostname === '[::1]' ||
-      window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
+      hostname === 'localhost' ||
+      hostname === '[::1]' ||
+      hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
     )
 
-    const [localRedirectSignIn, productionRedirectSignIn] = awsconfig.oauth.redirectSignIn.split(',')
-    const [localRedirectSignOut, productionRedirectSignOut] = awsconfig.oauth.redirectSignOut.split(',')
+    // Destructure URLs from configuration
+    const [localRedirectSignIn, stagingRedirectSignIn, productionRedirectSignIn] = awsconfig.oauth.redirectSignIn.split(',')
+    const [localRedirectSignOut, stagingRedirectSignOut, productionRedirectSignOut] = awsconfig.oauth.redirectSignOut.split(',')
+
+    // Determine environment based on hostname
+    const isStaging = hostname.startsWith('staging.')
 
     const updatedAwsConfig = {
       ...awsconfig,
       oauth: {
         ...awsconfig.oauth,
-        redirectSignIn: isLocalhost ? localRedirectSignIn : productionRedirectSignIn,
-        redirectSignOut: isLocalhost ? localRedirectSignOut : productionRedirectSignOut,
+        redirectSignIn: isLocalhost ? localRedirectSignIn : (isStaging ? stagingRedirectSignIn : productionRedirectSignIn),
+        redirectSignOut: isLocalhost ? localRedirectSignOut : (isStaging ? stagingRedirectSignOut : productionRedirectSignOut),
       }
     }
 
+    // Configure Amplify with the updated settings
     Amplify.configure(updatedAwsConfig)
   }, [])
 
