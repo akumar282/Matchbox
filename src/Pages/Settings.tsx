@@ -223,7 +223,9 @@ export default function Settings() {
 
   function isDisabled(): boolean {
     if(userData){
-      return !!userData.oauth_id
+      if(userData.oauth_id === null || userData.oauth_id === undefined){
+        return false
+      }
     }
     return true
   }
