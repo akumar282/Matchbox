@@ -1,6 +1,7 @@
-import { newUserSignUp } from '@backend/auth'
-import { createUser } from '@backend/mutations/userMutations'
-import { v4 as uuidv4 } from 'uuid'
+import {newUserSignUp} from '@backend/auth'
+import {createUser} from '@backend/mutations/userMutations'
+import {v4 as uuidv4} from 'uuid'
+import {NotificationType} from '@api'
 
 export async function standardSignUp(username: string, email: string, password: string): Promise<string> {
   const uuidGen = uuidv4()
@@ -27,6 +28,7 @@ export async function standardSignUp(username: string, email: string, password: 
             saved_posts: [],
             experience_level: [],
             new_user: true,
+            notification_type: NotificationType.EMAIL_AND_NEWSLETTER
           }
         }
       )
